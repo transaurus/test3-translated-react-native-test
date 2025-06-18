@@ -1,0 +1,130 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/height-and-width.md",
+  "source_file_content_hash": "87a029c3be755f7ae13642148738b5ebb5baef7baad62935625402d9914e2cf6",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: height-and-width\ntitle: Height and Width\n---",
+      "source_content_hash": "1fbbd58868085abdc215e7dd104742db04f35e3f68c6c68a1ff7efaa532b092e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A component's height and width determine its size on the screen.",
+      "source_content_hash": "d9b14ab9b1620800663572b09bd5b91499df92f7092b95acb43673ab898ffa34",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Fixed Dimensions",
+      "source_content_hash": "25a82014765070a441a99b3fbd383058d92f457fcca280b824e3d7c4a214d2ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The general way to set the dimensions of a component is by adding a fixed `width` and `height` to style. All dimensions in React Native are unitless, and represent density-independent pixels.",
+      "source_content_hash": "ebe42ae794bcb1221711b44cad18b9a043aad13b5d8b5486635aa4acf648dda2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=Height%20and%20Width\nimport React from 'react';\nimport { View } from 'react-native';\n\nconst FixedDimensionsBasics = () => {\n  return (\n    <View>\n      <View style={{\n        width: 50, height: 50, backgroundColor: 'powderblue'\n      }} />\n      <View style={{\n        width: 100, height: 100, backgroundColor: 'skyblue'\n      }} />\n      <View style={{\n        width: 150, height: 150, backgroundColor: 'steelblue'\n      }} />\n    </View>\n  );\n};\n\nexport default FixedDimensionsBasics;\n```",
+      "source_content_hash": "e619747b91b9fbcedfb900da27ab6f64a236c948e6dcb94364d439c8f4c65db3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "Setting dimensions this way is common for components whose size should always be fixed to a number of points and not calculated based on screen size.",
+      "source_content_hash": "3c648ef1b1989cf47a39727dc6b1dd4c4b45dee50b499012d64def6d7707e556",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "26794fc5",
+      "source_content": ":::caution\nThere is no universal mapping from points to physical units of measurement. This means that a component with fixed dimensions might not have the same physical size, across different devices and screen sizes. However, this difference is unnoticeable for most use cases.\n:::",
+      "source_content_hash": "dd217630cea2e36e12b18bdd558292caaa66dcd67b4eed0f6e2520a02dbe69e6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9f9e64f5",
+      "source_content": "## Flex Dimensions",
+      "source_content_hash": "dfc8882d39d5cd1d06f8bc59a97d94fc544e7bf5392a0b1f724a14d591f3ff64",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "Use `flex` in a component's style to have the component expand and shrink dynamically based on available space. Normally you will use `flex: 1`, which tells a component to fill all available space, shared evenly amongst other components with the same parent. The larger the `flex` given, the higher the ratio of space a component will take compared to its siblings.",
+      "source_content_hash": "250443036f6e10179e5a4ec60ef1a65243d071b373658b99eb0e21de994a0e61",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b421e57",
+      "source_content": ":::info\nA component can only expand to fill available space if its parent has dimensions greater than `0`. If a parent does not have either a fixed `width` and `height` or `flex`, the parent will have dimensions of `0` and the `flex` children will not be visible.\n:::",
+      "source_content_hash": "dc23abd126a0a97c28c96743b75effa329914c96a3ec047695a7f30c03fc01bf",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "229d6705",
+      "source_content": "```SnackPlayer name=Flex%20Dimensions\nimport React from 'react';\nimport { View } from 'react-native';\n\nconst FlexDimensionsBasics = () => {\n  return (\n    // Try removing the `flex: 1` on the parent View.\n    // The parent will not have dimensions, so the children can't expand.\n    // What if you add `height: 300` instead of `flex: 1`?\n    <View style={{ flex: 1 }}>\n      <View style={{ flex: 1, backgroundColor: 'powderblue' }} />\n      <View style={{ flex: 2, backgroundColor: 'skyblue' }} />\n      <View style={{ flex: 3, backgroundColor: 'steelblue' }} />\n    </View>\n  );\n};\n\nexport default FlexDimensionsBasics;\n```",
+      "source_content_hash": "a21ef2242f3bfaafbbda37ba1c666f6d1a98edcabd53c6b1dd79afd77a981b6f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "657c2b20",
+      "source_content": "After you can control a component's size, the next step is to [learn how to lay it out on the screen](flexbox.md).",
+      "source_content_hash": "1c7a39d9352ac7063ff8a1e8c8c4e7954a7df4abb1dee5a9b9dd2ad99d501e76",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "## Percentage Dimensions",
+      "source_content_hash": "2f200cfa71d8556420c45e6dfb675b1c7c555cd50e47726819e47378933441f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "If you want to fill a certain portion of the screen, but you _don't_ want to use the `flex` layout, you _can_ use **percentage values** in the component's style. Similar to flex dimensions, percentage dimensions require parent with a defined size.",
+      "source_content_hash": "f4ba4d14d49c760b5d0cb16ce06acd243567fb462a4b0962985f2ec377f0eacf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9f3b4022",
+      "source_content": "```SnackPlayer name=Percentage%20Dimensions\nimport React from 'react';\nimport { View } from 'react-native';\n\nconst PercentageDimensionsBasics = () => {\n  // Try removing the `height: '100%'` on the parent View.\n  // The parent will not have dimensions, so the children can't expand.\n  return (\n    <View style={{ height: '100%' }}>\n      <View style={{\n        height: '15%', backgroundColor: 'powderblue'\n      }} />\n      <View style={{\n        width: '66%', height: '35%', backgroundColor: 'skyblue'\n      }} />\n      <View style={{\n        width: '33%', height: '50%', backgroundColor: 'steelblue'\n      }} />\n    </View>\n  );\n};\n\nexport default PercentageDimensionsBasics;\n```",
+      "source_content_hash": "a7310f06d88bc01837d2993ba2ba4b6583a7106a8ab0fc93ad7b01d07ee66239",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/height-and-width.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.803311+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

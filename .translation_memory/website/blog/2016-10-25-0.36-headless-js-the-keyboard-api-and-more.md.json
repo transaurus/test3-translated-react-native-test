@@ -1,0 +1,272 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2016-10-25-0.36-headless-js-the-keyboard-api-and-more.md",
+  "source_file_content_hash": "34cadb89906279153de54b559c17ff42f17915d83c010fb414e9f092df847d4e",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: '0.36: Headless JS, the Keyboard API, & more'\nauthors: [hectorramos]\ntags: [announcement]\n---",
+      "source_content_hash": "c1cfb406120bc2595dc350b81e7a64c91c3fc75a3b9c5a07bcd79903076b789e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Today we are releasing [React Native 0.36](https://github.com/facebook/react-native/releases/tag/v0.36.0). Read on to learn more about what's new.",
+      "source_content_hash": "3f8e5fbbf34724eaa93f2cb138d99fcdc676eb805a20b0f404d8ae7ef006557c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們今天發佈了 [React Native 0.36](https://github.com/facebook/react-native/releases/tag/v0.36.0)。繼續閱讀以了解更多新功能。"
+      }
+    },
+    {
+      "segment_id": "d912d376",
+      "source_content": "## Headless JS",
+      "source_content_hash": "a115fe724d941e78a4ef32e8e10dca3c177471765267b3e07bc775596a24050f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 無頭模式 JS (Headless JS)"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Headless JS is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music. It is only available on Android, for now.",
+      "source_content_hash": "c882d99d72190c2592cdb6c7c96b76cdce21c5981c7874b4878183d28ae80000",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無頭模式 JS 是一種在應用程式處於後台時運行 JavaScript 任務的方式。例如，可用於同步最新數據、處理推送通知或播放音樂。目前僅在 Android 平台上可用。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "To get started, define your async task in a dedicated file (e.g. `SomeTaskName.js`):",
+      "source_content_hash": "ab59387023ac3549e254d7dd1a555af6722248029065d6d6c11a83dda4d9210e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要開始使用，請在專用文件中定義您的異步任務（例如 `SomeTaskName.js`）："
+      }
+    },
+    {
+      "segment_id": "4b395385",
+      "source_content": "```jsx\nmodule.exports = async taskData => {\n  // Perform your task here.\n};\n```",
+      "source_content_hash": "43c8efe555f3acfbdd48ba4f78a1f8aea8ea7399a805a16ed93bbf85a68c2251",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b395385"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Next, register your task in on `AppRegistry`:",
+      "source_content_hash": "f6cc89b1b38299790c9b5bb12d5ae50157cd8321b12cde8ea08b6dfbc4108dff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著，在 `AppRegistry` 中註冊您的任務："
+      }
+    },
+    {
+      "segment_id": "41a8ae85",
+      "source_content": "```jsx\nAppRegistry.registerHeadlessTask('SomeTaskName', () =>\n  require('SomeTaskName'),\n);\n```",
+      "source_content_hash": "df9798fdd716ee4ad45bb034373b4e885c0100bda6e45665644b1b20e05f7efe",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41a8ae85"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "Using Headless JS does require some native Java code to be written in order to allow you to start up the service when needed. Take a look at our new [Headless JS docs](/docs/headless-js-android) to learn more!",
+      "source_content_hash": "aeaf7e3b7b21848c256fa0b98999a20fd2ccede78a31b661bb8334965c35d13c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用無頭模式 JS 需要編寫一些原生 Java 代碼，以便在需要時啟動服務。請查看我們新的 [無頭模式 JS 文檔](/docs/headless-js-android) 以了解更多！"
+      }
+    },
+    {
+      "segment_id": "48847fd4",
+      "source_content": "## The Keyboard API",
+      "source_content_hash": "515a7b1e119176d455194e264394d6b23e95d5eded0f92a15f32dcd9ff0eecfd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 鍵盤 API"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "Working with the on-screen keyboard is now easier with [`Keyboard`](/docs/keyboard). You can now listen for native keyboard events and react to them. For example, to dismiss the active keyboard, simply call `Keyboard.dismiss()`:",
+      "source_content_hash": "d32de27044c66363f7d2f3a559c41699ef6686da968aaa15aca47a946f42286f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在使用 [`Keyboard`](/docs/keyboard) 可以更輕鬆地處理屏幕鍵盤。您現在可以監聽原生鍵盤事件並對其作出反應。例如，要關閉當前活動的鍵盤，只需調用 `Keyboard.dismiss()`："
+      }
+    },
+    {
+      "segment_id": "ef6eebef",
+      "source_content": "```js\nimport {Keyboard} from 'react-native';\n\n// Hide that keyboard!\nKeyboard.dismiss();\n```",
+      "source_content_hash": "9b0bc1257329a6bdc38984872b437e1d062f32483b86e04d1db1402d8509f095",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ef6eebef"
+      }
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "## Animated Division",
+      "source_content_hash": "ad93045d85cfcb7cf9a68af3c69f2909c6f5e651ea27eb5feea9816b3960edba",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 動畫除法"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "Combining two animated values via addition, multiplication, and modulo are already supported by React Native. With version 0.36, combining two [animated values via division](/docs/animated#divide) is now possible. There are some cases where an animated value needs to invert another animated value for calculation. An example is inverting a scale (2x --> 0.5x):",
+      "source_content_hash": "2409def9c4411c9f24d3fbe84968e088070ea83833dffafe59395ff80fdcc851",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 已經支持通過加法、乘法和模運算結合兩個動畫值。在 0.36 版本中，現在可以通過除法結合兩個 [動畫值](/docs/animated#divide)。在某些情況下，動畫值需要反轉另一個動畫值進行計算。例如反轉縮放比例（2x --> 0.5x）："
+      }
+    },
+    {
+      "segment_id": "4ec2920d",
+      "source_content": "```\nconst a = Animated.Value(1);\nconst b = Animated.divide(1, a);\n\nAnimated.spring(a, {\n  toValue: 2,\n}).start();\n```",
+      "source_content_hash": "d06590adff98c257e32d73fcc75adc62d9e3d8f1e92f854888196f271c6ee477",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4ec2920d"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "`b` will then follow `a`'s spring animation and produce the value of `1 / a`.",
+      "source_content_hash": "2bc5b8c659a18db0a855f948bab717be0654111ed480fc95bc71f602011be22e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`b` 將跟隨 `a` 的彈簧動畫並產生 `1 / a` 的值。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "The basic usage is like this:",
+      "source_content_hash": "6f3e46bfcc017f393b1bdb552b5becf0901fa668935c415e0be7d835d1d71202",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基本用法如下："
+      }
+    },
+    {
+      "segment_id": "6d254e09",
+      "source_content": "```\n<Animated.View style={{transform: [{scale: a}]}}>\n  <Animated.Image style={{transform: [{scale: b}]}} />\n<Animated.View>\n```",
+      "source_content_hash": "075f4f73c185f8bd5e1e349a3ab4d0d6f12e67bd3286b64153e76a62cbc2c970",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6d254e09"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "In this example, the inner image won't get stretched at all because the parent's scaling gets cancelled out. If you'd like to learn more, check out the [Animations guide](/docs/animations).",
+      "source_content_hash": "a7f56d59233cfe5f25dd0042ef229858fccaf379f06a86bc0e22f153e4931b42",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在這個例子中，內部圖像完全不會被拉伸，因為父級的縮放被抵消了。如果您想了解更多，請查看 [動畫指南](/docs/animations)。"
+      }
+    },
+    {
+      "segment_id": "a5a4323e",
+      "source_content": "## Dark Status Bars",
+      "source_content_hash": "dde18a5415d0cbeac93d91da9dc7fc07b70d66ca1114e0fdf5b9de86ac984eef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 深色狀態欄"
+      }
+    },
+    {
+      "segment_id": "657c2b20",
+      "source_content": "A new `barStyle` value has been added to `StatusBar`: `dark-content`. With this addition, you can now use [`barStyle`](/docs/statusbar#barstyle) on both Android and iOS. The behavior will now be the following:",
+      "source_content_hash": "f892daa58bd9ec0a12edc1e94dfa41705275c819eb0e7f3c8a796ddce79be0f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`StatusBar` 新增了一個 `barStyle` 值：`dark-content`。通過這一新增功能，您現在可以在 Android 和 iOS 上使用 [`barStyle`](/docs/statusbar#barstyle)。行為現在如下："
+      }
+    },
+    {
+      "segment_id": "af6ca965",
+      "source_content": "- `default`: Use the platform default (light on iOS, dark on Android).\n- `light-content`: Use a light status bar with black text and icons.\n- `dark-content`: Use a dark status bar with white text and icons.",
+      "source_content_hash": "2852f915250945066e425602bb5953836bf9de0991d4b65502ee93febc6ad8b5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `default`：使用平台默認值（iOS 上為淺色，Android 上為深色）。\n- `light-content`：使用淺色狀態欄，帶有黑色文字和圖標。\n- `dark-content`：使用深色狀態欄，帶有白色文字和圖標。"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "## ...and more",
+      "source_content_hash": "cf7040533f66af34f02aa789b3e5418dffcce09ce521d2d9cd8ec14a43b32cc8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## ...以及更多"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "The above is just a sample of what has changed in 0.36. Check out the [release notes on GitHub](https://github.com/facebook/react-native/releases/tag/v0.36.0) to see the full list of new features, bug fixes, and breaking changes.",
+      "source_content_hash": "37b15b864398c15cfdc2eadd56463aee91f42b5948b8049a9986b78e2dae4212",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以上只是 0.36 版本中的部分變更。查看 [GitHub 上的發佈說明](https://github.com/facebook/react-native/releases/tag/v0.36.0) 以了解完整的新功能、錯誤修正和重大變更列表。"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "You can upgrade to 0.36 by running the following commands in a terminal:",
+      "source_content_hash": "2dcfce18b5219aeeda41611ed9bbec571d04998cfb851b36fee677ee8712fbbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以通過在終端中運行以下命令升級到 0.36："
+      }
+    },
+    {
+      "segment_id": "9f4336b3",
+      "source_content": "```bash\n$ npm install --save react-native@0.36\n$ react-native upgrade\n```",
+      "source_content_hash": "2dd53e1df73db0a50130abd959e90b74907b4afa5e20e4c711f3c638fca34439",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9f4336b3"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2016-10-25-0.36-headless-js-the-keyboard-api-and-more.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.239336+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "34cadb89906279153de54b559c17ff42f17915d83c010fb414e9f092df847d4e"
+  }
+}

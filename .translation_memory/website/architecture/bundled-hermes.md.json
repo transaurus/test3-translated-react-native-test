@@ -1,0 +1,672 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "architecture/bundled-hermes.md",
+  "source_file_content_hash": "67bea6fb16dd039cef0dc37d8c462ce92666a91bf5f75f7b8660f9cb46c726d7",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: bundled-hermes\ntitle: Bundled Hermes\n---",
+      "source_content_hash": "f4ae56e70c6b568c1334fc942b4d91d9ef6dffde26818a4a64aff9d63ea3ab89",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "This page gives an overview of **how** Hermes and React Native **are built**.",
+      "source_content_hash": "830999ef588bfbc2695ce338cdd620a2dd2ba7f09560583a02d755d3d565ffd8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本頁面概述了 **Hermes 與 React Native 的建置方式**。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "If you're looking into instructions on how to use Hermes in your app, you can find instructions on this other page: [using Hermes](/docs/hermes)",
+      "source_content_hash": "2977beaeaf53dfbd8f5a1e20f3faf152ca45c6efde13cdda9201ca7eb2b28a73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您需要關於如何在應用程式中使用 Hermes 的指引，請參閱另一頁面：[使用 Hermes](/docs/hermes)"
+      }
+    },
+    {
+      "segment_id": "6cae1da3",
+      "source_content": ":::caution\nPlease note that this page serves as a technical deep dive and is targeted for users which are building extensions on top of Hermes or React Native. General users of React Native should not need to know in-depth information on how React Native and Hermes interact.\n:::",
+      "source_content_hash": "49ece247054f9d22cca3c2d1b548e4d2e40691c0aaff0366f4d53b4cc595578f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution\n請注意，本頁面為技術深度解析，主要針對在 Hermes 或 React Native 之上開發擴充功能的用戶。一般 React Native 使用者無需深入了解 React Native 與 Hermes 的互動機制。\n:::"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## What is 'Bundled Hermes'",
+      "source_content_hash": "5f12bc088e8a2eb43a58107daa85aa3e6b29317a849c585c93af69974caa5551",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 何謂「捆綁式 Hermes」"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Starting with React Native 0.69.0, every version of React Native will be **built alongside** to a Hermes version. We call this distribution model **Bundled Hermes**.",
+      "source_content_hash": "26df4142e1bb20c41b3567d0341dadfbc8ce6a958c6b1f6a78dab5df567c542b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自 React Native 0.69.0 起，每個 React Native 版本都將 **同步建置** 對應的 Hermes 版本。我們稱此發佈模式為 **捆綁式 Hermes**。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "From 0.69 on, you will always have a JS engine that has been built and tested alongside each React Native version that you can use.",
+      "source_content_hash": "2ced640079102b4b8be7b0fb4220eebf880832ad9ba2c791dafbfa85746a0d6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 0.69 開始，您將始終獲得一個與 React Native 版本同步建置並測試過的 JavaScript 引擎。"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "## Why we moved to 'Bundled Hermes'",
+      "source_content_hash": "c2dfad912e52ca118fdb10d31e27d51798e0f295066986fc826bb0b795f9f7da",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 為何轉向「捆綁式 Hermes」"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "Historically, React Native and Hermes followed two **distinct release processes** with distinct versioning. Having distinct releases with distinct numbers created confusion in the OSS ecosystem, where it was not clear if a specific version of Hermes was compatible with a specific version of React Native (i.e. you needed to know that Hermes 0.11.0 was compatible only with React Native 0.68.0, etc.)",
+      "source_content_hash": "68e988d0961b5f81852701501f445e28addc4ef8a183692153776d52d32a47d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去，React Native 與 Hermes 採用 **兩套獨立的發佈流程** 與版本號機制。這種雙軌制導致開源生態系產生混淆，難以判斷特定 Hermes 版本是否相容特定 React Native 版本（例如需知曉 Hermes 0.11.0 僅相容 React Native 0.68.0 等）。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Both Hermes and React Native, share the JSI code ([Hermes here](https://github.com/facebook/hermes/tree/main/API/jsi/jsi) and [React Native here](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/jsi/jsi)). If the two JSI copies of JSI get out of sync, a build of Hermes won't be compatible with a build of React Native. You can read more about this [ABI incompatibility problem here](https://github.com/react-native-community/discussions-and-proposals/issues/257).",
+      "source_content_hash": "2d012771fce7298fd742b769582cdb1ea60d071c4363ac7d2edec7904cd14ca6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 與 React Native 共用 JSI 程式碼（[Hermes 端](https://github.com/facebook/hermes/tree/main/API/jsi/jsi) 與 [React Native 端](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/jsi/jsi)）。若兩者的 JSI 版本不同步，建置出的 Hermes 將無法與 React Native 相容。詳見 [ABI 相容性問題說明](https://github.com/react-native-community/discussions-and-proposals/issues/257)。"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "To overcome this problem, we've extended the React Native release process to download and build Hermes and made sure only one copy of JSI is used when building Hermes.",
+      "source_content_hash": "2fe6aefc2e4dc8a5a31221bf42cb8ac226fd648c90642a51278607ee703be467",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為解決此問題，我們擴展了 React Native 發佈流程，使其能下載並建置 Hermes，並確保建置 Hermes 時僅使用單一 JSI 版本。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Thanks to this, we can release a version of Hermes whenever we release a version of React Native, and be sure that the Hermes engine we built is **fully compatible** with the React Native version we're releasing. We're shipping this version of Hermes alongside the React Native version we're doing, hence the name _Bundled Hermes_.",
+      "source_content_hash": "42d2eed6cc5cbe1c87879ba385f622b71b7af00315cfa0d4ef6ebf447ec8669c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過此機制，我們可在發佈 React Native 版本時同步發佈對應的 Hermes 版本，並確保該 Hermes 引擎與當次 React Native 版本 **完全相容**。我們將此 Hermes 版本與 React Native 版本共同發佈，故稱之為 _捆綁式 Hermes_。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "## How this will impact app developers",
+      "source_content_hash": "c1ef46d08289bbfc4473291d24b7762244e119d159b9fe2332e471a27c161219",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 對應用程式開發者的影響"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "As mentioned in the introduction, if you're an app developer, this change **should not affect** you directly.",
+      "source_content_hash": "b0866003e3ab27e8764ec99efd23816f5c3c425434e7a4ebd113b92de7ea1b89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如前言所述，若您為應用程式開發者，此變更 **不會直接影響** 您的開發流程。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "The following paragraphs describe which changes we did under the hood and explains some of the rationales, for the sake of transparency.",
+      "source_content_hash": "87edb5bfc6a9ebce43183b017f8bf38a3b9ced952c0d1cd8fd25f03e11a05d4b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下段落將說明我們在底層進行的調整及其設計考量，以保持透明度。"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "### iOS Users",
+      "source_content_hash": "c135da2c22299dcb35832a6b9184cd63e2db65baf8dbc2bc00071e1521bb0097",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS 使用者"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "On iOS, we've moved the `hermes-engine` you're using.",
+      "source_content_hash": "3f9f016ecf5160b23053800956edc8c967b3c9a5b928e200f04dcc99bd8ded92",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 平台，我們已變更您所使用的 `hermes-engine` 來源。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "Prior to React Native 0.69, users would download a pod (here you can find the [podspec](https://github.com/CocoaPods/Specs/blob/master/Specs/5/d/0/hermes-engine/0.11.0/hermes-engine.podspec.json)).",
+      "source_content_hash": "eb5db9350592e847ed77d6669c26b1167849766aa9f3de417a697efa2a736106",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.69 之前，使用者需下載 CocoaPods 套件（參見 [podspec 檔案](https://github.com/CocoaPods/Specs/blob/master/Specs/5/d/0/hermes-engine/0.11.0/hermes-engine.podspec.json)）。"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "On React Native 0.69, users would instead use a podspec that is defined inside the `sdks/hermes-engine/hermes-engine.podspec` file in the `react-native` NPM package.\nThat podspec relies on a pre-built tarball of Hermes that we upload to Maven and to the React Native GitHub Release, as part of the React Native release process (i.e. [see the assets of this release](https://github.com/facebook/react-native/releases/tag/v0.70.4)).",
+      "source_content_hash": "ecfe078e6172518dea195fdea561b98bb540db1cac87f20683d41fe9880ad2dd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自 React Native 0.69 起，使用者將改用 `react-native` NPM 套件中 `sdks/hermes-engine/hermes-engine.podspec` 檔案定義的 podspec。該 podspec 依賴於我們在 React Native 發佈流程中上傳至 Maven 與 React Native GitHub Release 的 Hermes 預建壓縮檔（參見 [此版本附件](https://github.com/facebook/react-native/releases/tag/v0.70.4)）。"
+      }
+    },
+    {
+      "segment_id": "35a77014",
+      "source_content": "### Android Users",
+      "source_content_hash": "b7481f5395137c7c393180a2c633c3b747e80843e7215dea07ae4a9cce0f242d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android 使用者"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "On Android, we're going to update the [`android/app/build.gradle`](https://github.com/facebook/react-native/blob/main/template/android/app/build.gradle) file in the default template the following way:",
+      "source_content_hash": "de02793f12a19a641c2b12fdd76831dd61c8d049a3317974a2de86fac44f489a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 平台，我們將以下列方式更新預設範本中的 [`android/app/build.gradle`](https://github.com/facebook/react-native/blob/main/template/android/app/build.gradle) 檔案："
+      }
+    },
+    {
+      "segment_id": "229d6705",
+      "source_content": "```diff\ndependencies {\n    // ...\n\n    if (enableHermes) {\n+       implementation(\"com.facebook.react:hermes-engine:+\") {\n+           exclude group:'com.facebook.fbjni'\n+       }\n-       def hermesPath = \"../../node_modules/hermes-engine/android/\";\n-       debugImplementation files(hermesPath + \"hermes-debug.aar\")\n-       releaseImplementation files(hermesPath + \"hermes-release.aar\")\n    } else {\n        implementation jscFlavor\n    }\n}\n```",
+      "source_content_hash": "f203daa04aa27335d9a4c1cb5d14639b5205255b2be7f799d350f77e8b18140a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_229d6705"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "Prior to React Native 0.69, users will be consuming `hermes-debug.aar` and `hermes-release.aar` from the `hermes-engine` NPM package.",
+      "source_content_hash": "5632263562b83d811ad0537115a7b7c46606b31d65f86b5657f6c5976fe8c4d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.69 之前，使用者會從 `hermes-engine` NPM 套件中取得 `hermes-debug.aar` 和 `hermes-release.aar`。"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "On React Native 0.69, users will be consuming the Android multi-variant artifacts available inside the `android/com/facebook/react/hermes-engine/` folder in the `react-native` NPM package.\nPlease also note that we're going to [remove the dependency](https://github.com/facebook/react-native/blob/c418bf4c8fe8bf97273e3a64211eaa38d836e0a0/package.json#L105) on `hermes-engine` entirely in one of the future version of React Native.",
+      "source_content_hash": "f89866acfba1b98ab41ffd90dc61528a5031e0d9861947355c76e918e421324d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.69 中，使用者將從 `react-native` NPM 套件的 `android/com/facebook/react/hermes-engine/` 資料夾內取得 Android 多變體構件。\n請注意，我們將在未來的 React Native 版本中[完全移除](https://github.com/facebook/react-native/blob/c418bf4c8fe8bf97273e3a64211eaa38d836e0a0/package.json#L105)對 `hermes-engine` 的依賴。"
+      }
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "#### Android Users on New Architecture",
+      "source_content_hash": "40936b3cc85370f325c7484f5b5d14ee7be009098cf910109869669c1f5a11fd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 採用新架構的 Android 使用者"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "Due to the nature of our native code build setup (i.e. how we use the NDK), users on the New Architecture will be **building Hermes from source**.",
+      "source_content_hash": "885df032338dc6f3e314e66f74008a1e352bcbceff8a7e7861b6f47737de708b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於我們原生程式碼建置設定的特性（即我們如何使用 NDK），採用新架構的使用者將**從原始碼建置 Hermes**。"
+      }
+    },
+    {
+      "segment_id": "f01228d3",
+      "source_content": "This aligns the build mechanism of React Native and Hermes for users on the New Architecture (they will build both framework from source).\nThis means that such Android users might experience a performance hit at build time on their first build.",
+      "source_content_hash": "e633d65d579c9a6e8d7d6a0360f30ea51be69c184cab5a351f2b72b30c10c422",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這使得新架構使用者的 React Native 和 Hermes 建置機制保持一致（他們將從原始碼建置這兩個框架）。\n這意味著這類 Android 使用者在首次建置時可能會遇到建置時間增加的狀況。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "You can find instructions to optimize your build time and reduce the impact on your build on this page: [Speeding up your Build phase](/docs/next/build-speed).",
+      "source_content_hash": "f7a2fd2393df1ff6955e0bac5862034500a9cb6b018684dbff4a95ef4e255d7d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在以下頁面找到優化建置時間並減少對建置影響的指引：[加速建置階段](/docs/next/build-speed)。"
+      }
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "#### Android Users on New Architecture building on Windows",
+      "source_content_hash": "9e495378ca38f0c12b77f5df966eea58d6fa1c9209ef1a13b0a240aebbb5d624",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 在 Windows 上採用新架構的 Android 使用者"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "Users building React Native App, with the New Architecture, on Windows machines need to follow those extra steps to let the build work correctly:",
+      "source_content_hash": "c1b1b28d8472e350179a4aceb6df889dfa3039bcaff0c9d9faaa6d10793e2959",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Windows 機器上使用新架構建置 React Native 應用程式的使用者，需要遵循以下額外步驟以確保建置正常運作："
+      }
+    },
+    {
+      "segment_id": "c142abbb",
+      "source_content": "- Make sure the [environment is configured properly](https://reactnative.dev/docs/environment-setup), with Android SDK & node.\n- Install [cmake](https://community.chocolatey.org/packages/cmake) with Chocolatey\n- Install either:\n  - [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022).\n  - [Visual Studio 22 Community Edition](https://visualstudio.microsoft.com/vs/community/) - Picking only the C++ desktop development is sufficient.\n- Make sure the [Visual Studio Command Prompt](https://docs.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022) is configured correctly. This is required as the proper C++ compiler environment variable is configured in those command prompt.\n- Run the app with `npx react-native run-android` inside a Visual Studio Command Prompt.",
+      "source_content_hash": "b3e5ee101522c097425ee3e53714426c96531c1cd4c05d636ce60f9e4f22ef7e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 確保[環境已正確配置](https://reactnative.dev/docs/environment-setup)，包含 Android SDK 和 node。\n- 使用 Chocolatey 安裝 [cmake](https://community.chocolatey.org/packages/cmake)\n- 安裝以下任一項：\n  - [Visual Studio 2022 建置工具](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)。\n  - [Visual Studio 22 社群版](https://visualstudio.microsoft.com/vs/community/) - 僅選擇 C++ 桌面開發即可。\n- 確保[Visual Studio 命令提示字元](https://docs.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022)已正確配置。這是必要的，因為正確的 C++ 編譯器環境變數會在這些命令提示字元中配置。\n- 在 Visual Studio 命令提示字元中執行 `npx react-native run-android` 來運行應用程式。"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "### Can users still use another engine?",
+      "source_content_hash": "bf66f5690fceefc2b43d78f5ef4eace839130150bd497127cf8f9c3fe13eace3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用者是否仍可使用其他引擎？"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Yes, users are free to enable/disable Hermes (with the `enableHermes` variable on Android, `hermes_enabled` on iOS).\nThe 'Bundled Hermes' change will impact only **how Hermes is built and bundled** for you.",
+      "source_content_hash": "1d06c7303908c57689c02ed1f64d85a14872939b7e4a5633f3d8dd1fcc96c603",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "是的，使用者可以自由啟用/停用 Hermes（在 Android 上使用 `enableHermes` 變數，在 iOS 上使用 `hermes_enabled`）。\n「捆綁式 Hermes」的變更僅會影響 **Hermes 的建置和捆綁方式**。"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "Starting with React Native 0.70, the default for `enableHermes`/`hermes_enabled` is `true`.",
+      "source_content_hash": "03c1782efffb3f8fdd92e64cb7c46aa12ca241aee2184de6feec21f22be07f0b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 React Native 0.70 開始，`enableHermes`/`hermes_enabled` 的預設值為 `true`。"
+      }
+    },
+    {
+      "segment_id": "e06c002e",
+      "source_content": "## How this will impact contributor and extension developers",
+      "source_content_hash": "f1633f7d44841d76c8740b7878ba8c1e92ce9c5ad7641ea04ba4a08513c18f48",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 這將如何影響貢獻者和擴充功能開發者"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "If you're a React Native contributor or you're building an extension on top of React Native or Hermes, please read further as we explain how Bundled Hermes works.",
+      "source_content_hash": "309d7fb11ce9450a3a3a27b0070c908de98e3856f094373893b64316ee4d4e21",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您是 React Native 的貢獻者，或正在基於 React Native 或 Hermes 開發擴充功能，請繼續閱讀以了解捆綁式 Hermes 的運作方式。"
+      }
+    },
+    {
+      "segment_id": "94145a94",
+      "source_content": "### How is Bundled Hermes working under the hood?",
+      "source_content_hash": "e2aec54c16bf2c68182d613b5cae8648a49c95e00879e0daef75a570409f3822",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 捆綁式 Hermes 在底層是如何運作的？"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "This mechanism relies on **downloading a tarball** with the Hermes source code from the `facebook/hermes` repository inside the `facebook/react-native` repository. We have a similar mechanism in place for other native dependencies (Folly, Glog, etc.) and we aligned Hermes to follow the same setup.",
+      "source_content_hash": "9e87bb96324cf6f480d2be6b893ff5cd9931340ea30675343a02b67f09d8865a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此機制依賴於從 `facebook/hermes` 儲存庫**下載原始碼壓縮檔**到 `facebook/react-native` 儲存庫中。我們對其他原生依賴項（Folly、Glog 等）也有類似的機制，並將 Hermes 調整為遵循相同的設定。"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "When building React Native from `main`, we will be fetching a tarball of `main` of facebook/hermes and building it as part of the build process of React Native.",
+      "source_content_hash": "f930e6dc2f5dd3b1abcac129b392fe5b4458c85f84b14d271100458224bb7c64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當從 `main` 分支建置 React Native 時，我們將取得 `facebook/hermes` 的 `main` 分支壓縮檔，並將其作為 React Native 建置過程的一部分進行建置。"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "When building React Native from a release branch (say `0.69-stable`), we will instead use a **tag** on the Hermes repo to **synchronize the code** between the two repos. The specific tag name used will then be stored inside the `sdks/.hermesversion` file inside React Native in the release branch (e.g. [this is the file](https://github.com/facebook/react-native/blob/0.69-stable/sdks/.hermesversion) on the 0.69 release branch).",
+      "source_content_hash": "16683c0c915feccc696465866cdbb9da6e11d3fcefce28533e234133ab25e7c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當從發行分支（例如 `0.69-stable`）建置 React Native 時，我們將改為使用 Hermes 儲存庫中的**標籤**來**同步兩個儲存庫的程式碼**。所使用的特定標籤名稱將儲存在 React Native 發行分支的 `sdks/.hermesversion` 檔案中（例如，這是 [0.69 發行分支上的檔案](https://github.com/facebook/react-native/blob/0.69-stable/sdks/.hermesversion)）。"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "In a sense, you can think of this approach similarly to a **git submodule**.",
+      "source_content_hash": "1125e3aeb419f1a07121951d7b9f3ed8720d461d95be0e6584f2b11b5e13908f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "某種程度上，您可以將這種方法視為類似於 **git 子模組**。"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "If you're building on top of Hermes, you can rely on those tags to understand which version of Hermes was used when building React Native, as the version of React Native is specified in the tag name (e.g. `hermes-2022-05-20-RNv0.69.0-ee8941b8874132b8f83e4486b63ed5c19fc3f111`).",
+      "source_content_hash": "40bf15617c07e5376aa813490a99b94eb7123442ef21c10d9fb3e2e9671de27b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您基於 Hermes 進行開發，可以依賴這些標籤來理解建置 React Native 時所使用的 Hermes 版本，因為標籤名稱中會標明 React Native 的版本（例如 `hermes-2022-05-20-RNv0.69.0-ee8941b8874132b8f83e4486b63ed5c19fc3f111`）。"
+      }
+    },
+    {
+      "segment_id": "8172a0a5",
+      "source_content": "#### Android implementation details",
+      "source_content_hash": "e5ba45e3c81413efcf3ce867e0c595987e8d7b7a7918cf833dab25eb2ce19e9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android 實作細節"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "To implement this on Android, we've added a new build inside the `/ReactAndroid/hermes-engine` of React Native that will take care of building Hermes and packaging for consumption ([See here for more context](https://github.com/facebook/react-native/pull/33396)).",
+      "source_content_hash": "579973320258b2675624dcc383b39429621bfc74ce75bd4d6745f9addbd86425",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了在 Android 上實現這一點，我們在 React Native 的 `/ReactAndroid/hermes-engine` 中新增了一個建置任務，負責建置 Hermes 並打包以供使用（[更多背景請參閱此處](https://github.com/facebook/react-native/pull/33396)）。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "You can now trigger a build of Hermes engine by invoking:",
+      "source_content_hash": "db5debbfb54bbad63cf58964f74d31b95ce54421a30c9536878f26f65f8d6d5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您現在可以透過以下指令觸發 Hermes 引擎的建置："
+      }
+    },
+    {
+      "segment_id": "1a63b635",
+      "source_content": "```bash\n// Build a debug version of Hermes\n./gradlew :ReactAndroid:hermes-engine:assembleDebug\n// Build a release version of Hermes\n./gradlew :ReactAndroid:hermes-engine:assembleRelease\n```",
+      "source_content_hash": "90d7d06e4225ed61a5ab2850c3b76a15f25da626776c4a2228cfdc4ffe5990d4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a63b635"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "from the React Native `main` branch.",
+      "source_content_hash": "354cda3850e2a105946adade3ba41add73654a0d53adf812ef698ce38bb9228a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "（此指令適用於 React Native 的 `main` 分支）。"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "You won't need to install extra tools (such as `cmake`, `ninja` or `python3`) in your machine as we configured the build to use the NDK versions of those tools.",
+      "source_content_hash": "e3bd699a9b94611e31b7280d757fbff978de0db7fce635d137ad0dc297d280f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您無需在機器上安裝額外工具（如 `cmake`、`ninja` 或 `python3`），因為我們已將建置配置為使用 NDK 版本的這些工具。"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "On the Gradle consumer side, we also shipped a small improvement on the consumer side: we moved from `releaseImplementation` & `debugImplementation` to `implementation`. This is possible because the newer `hermes-engine` Android artifact is **variant aware** and will properly match a debug build of the engine with a debug build of your app. You don't need any custom configuration here (even if you use `staging` or other build types/flavors).",
+      "source_content_hash": "6a927299f2bbec6db9fe971b1675b262b82e8837313c927f07003ab85d9c5539",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Gradle 消費端，我們也對消費邏輯進行了小幅改進：從 `releaseImplementation` 和 `debugImplementation` 改為使用 `implementation`。這是可行的，因為新版 `hermes-engine` Android 套件具備**變體感知**能力，能正確將引擎的 debug 版本與應用程式的 debug 版本匹配。您無需在此進行任何自訂配置（即使您使用 `staging` 或其他建置類型/風味）。"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "However, this made this line necessary in the template:",
+      "source_content_hash": "136a6fc1a32650bcc62ec904dcd815954b36f40bdfb889811857c838aa098391",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，這使得模板中必須加入以下這行程式碼："
+      }
+    },
+    {
+      "segment_id": "601bdf38",
+      "source_content": "```\nexclude group:'com.facebook.fbjni'\n```",
+      "source_content_hash": "fa3578b19a9335f27fe0ddaefcdd577c3e86bad10065126cc8ea05977ed75544",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_601bdf38"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "This is needed as React Native is consuming `fbjni` using the non-prefab approach (i.e. unzipping the `.aar` and extracting `.so` files). Hermes-engine, and other libraries, are using prefab instead to consume fbjni. We're looking into [addressing this issue](https://github.com/facebook/react-native/pull/33397) in the future so the Hermes import will be a oneliner.",
+      "source_content_hash": "823eb112beb573d072679ddacfd76c562f03b61451dd438a279a834ed7c8aeb2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是必要的，因為 React Native 是透過非 prefab 的方式（即解壓 `.aar` 並提取 `.so` 檔案）來使用 `fbjni`。而 Hermes-engine 和其他函式庫則是使用 prefab 來消費 fbjni。我們正在研究[解決此問題](https://github.com/facebook/react-native/pull/33397)，未來將使 Hermes 的導入只需一行程式碼。"
+      }
+    },
+    {
+      "segment_id": "9c2ab4c8",
+      "source_content": "#### iOS implementation details",
+      "source_content_hash": "9cf6bd3eefef6e0799585a6754ba827cd2ddaa990d4cd8cad09634ef831e89d6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### iOS 實作細節"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "The iOS implementation relies on a series of scripts that lives in the following locations:",
+      "source_content_hash": "881ab6ff6480f3194e13d6198ee58fb3993af207b52b6d50566fa649457377d3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 的實作依賴於位於以下路徑的一系列腳本："
+      }
+    },
+    {
+      "segment_id": "17ca27eb",
+      "source_content": "- [`/scripts/hermes`](https://github.com/facebook/react-native/tree/main/scripts/hermes). Those scripts contain logic to download the Hermes tarball, unzip it, and configure the iOS build. They're invoked at `pod install` time if you have the `hermes_enabled` field set to `true`.\n- [`/sdks/hermes-engine`](https://github.com/facebook/react-native/tree/main/sdks/hermes-engine). Those scripts contain the build logic that is effectively building Hermes. They were copied and adapted from the `facebook/hermes` repo to properly work within React Native. Specifically, the scripts inside the `utils` folder are responsible of building Hermes for all the Mac platforms.",
+      "source_content_hash": "be87f0c346e8cb1cfd39525698bfda221c962a2d44af2907dddfece3545cdd12",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`/scripts/hermes`](https://github.com/facebook/react-native/tree/main/scripts/hermes)。這些腳本包含下載 Hermes tarball、解壓縮及配置 iOS 建置的邏輯。當 `hermes_enabled` 設為 `true` 時，它們會在 `pod install` 階段被呼叫。\n- [`/sdks/hermes-engine`](https://github.com/facebook/react-native/tree/main/sdks/hermes-engine)。這些腳本包含實際建置 Hermes 的邏輯。它們是從 `facebook/hermes` 倉庫複製並調整而來，以確保能在 React Native 中正常運作。具體而言，`utils` 資料夾中的腳本負責為所有 Mac 平台建置 Hermes。"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "Hermes is built as part of the `build_hermes_macos` Job on CircleCI. The job will produce as artifact a tarball which will be downloaded by the `hermes-engine` podspec when using a published React Native release ([here is an example of the artifacts created for React Native 0.69 in `build_hermes_macos`](https://app.circleci.com/pipelines/github/facebook/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)).",
+      "source_content_hash": "5a95355b5fb3848de923b3e5489a79c0b9f0300fcb928a0fc8327d0c8ccd7842",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 會作為 CircleCI 上 `build_hermes_macos` 任務的一部分進行建置。該任務會產生一個 tarball 作為產物，當使用已發布的 React Native 版本時，此 tarball 將由 `hermes-engine` podspec 下載（[這裡是 React Native 0.69 在 `build_hermes_macos` 中建立產物的範例](https://app.circleci.com/pipelines/github/facebook/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)）。"
+      }
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "##### Prebuilt Hermes",
+      "source_content_hash": "899765ae786a4c1d9f8a4687e8da7b6e8f1b5a022eb6003032afea0c6bede297",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 預先建置的 Hermes"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "If there are no prebuilt artifacts for the React Native version that is being used (i.e. you may be working with React Native from the `main` branch), then Hermes will need to be built from source. First, the Hermes compiler, `hermesc`, will be built for macOS during `pod install`, then Hermes itself will be built as part of the Xcode build pipeline using the `build-hermes-xcode.sh` script.",
+      "source_content_hash": "dc9ab142fff3dc6bafc4669645055b435ae91ac571d9ac76359d09c0ae3f3c63",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果當前使用的 React Native 版本沒有預先建置的產物（例如您可能正在使用 React Native 的 `main` 分支），則需要從原始碼建置 Hermes。首先，在 `pod install` 期間會為 macOS 建置 Hermes 編譯器 `hermesc`，接著 Hermes 本身會透過 `build-hermes-xcode.sh` 腳本作為 Xcode 建置流程的一部分進行建置。"
+      }
+    },
+    {
+      "segment_id": "55dc794c",
+      "source_content": "##### Building Hermes from source",
+      "source_content_hash": "9ae348c4db4c472b473942bc6238354d5b1c3cea5a1ac6db118c0a6bf90b685a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 從原始碼建置 Hermes"
+      }
+    },
+    {
+      "segment_id": "63565425",
+      "source_content": "Hermes is always built from source when using React Native from the `main` branch. If you are using a stable React Native version, you can force Hermes to be built from source by setting the `CI` envvar to `true` when using CocoaPods: `CI=true pod install`.",
+      "source_content_hash": "6c2d659912a06458c02d859b22f388fc76c3f5b54f73452078907165ae12b7ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當使用 React Native 的 `main` 分支時，Hermes 總是從原始碼建構。若您使用的是穩定版 React Native，可以透過在 CocoaPods 使用時設定環境變數 `CI=true` 來強制從原始碼建構 Hermes：`CI=true pod install`。"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "##### Debug symbols",
+      "source_content_hash": "6a4ac40a707a3dd377a62c6bb6d83359f190b43ea2c5e35c46bfdb18a3a56f2d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 除錯符號"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "The prebuilt artifacts for Hermes do not contain debug symbols (dSYMs) by default. We're planning on distributing these debug symbols for each release in the future. Until then, if you need the debug symbols for Hermes, you will need to build Hermes from source. A `hermes.framework.dSYM` will be created in the build directory alongside each of the Hermes frameworks.",
+      "source_content_hash": "b32dcbdf9ed539ceb2737c1e3151bdd85d8e9d1764f6497028b40ad56165466b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預先建構的 Hermes 成品預設不包含除錯符號 (dSYMs)。我們計劃在未來為每個版本提供這些除錯符號。在此之前，若您需要 Hermes 的除錯符號，必須從原始碼建構 Hermes。建置目錄中會生成 `hermes.framework.dSYM` 檔案，與各 Hermes 框架並存。"
+      }
+    },
+    {
+      "segment_id": "7312e69e",
+      "source_content": "### I'm afraid this change is impacting me",
+      "source_content_hash": "ff55f1b5b4a9649373bf09c5ad0f983e4d03facbd0ee5baf288d400e2dbe908d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 我擔心這項變更會影響到我"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "We'd like to stress that this is essentially an organizational change on _where_ Hermes is built and _how_ the code is syncronized between the two repositories. The change should be fully transparent to our users.",
+      "source_content_hash": "92a718c400a08d4933f55b0549793981cbf569e038cf1b737cdb38d03f4b6493",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們想強調，這本質上是關於 Hermes 建置位置及兩套件庫間程式碼同步方式的組織性變更。此變更對使用者應完全透明。"
+      }
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "Historically, we used to cut a release of Hermes for a specific version of React Native (e.g. [`v0.11.0 for RN0.68.x`](https://github.com/facebook/hermes/releases/tag/v0.11.0)).",
+      "source_content_hash": "c95e155a2717056868d7bd3f610f7b99329c7dd5bca536d782c93795c0c404fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去，我們會為特定 React Native 版本發布 Hermes 版本（例如 [`v0.11.0 for RN0.68.x`](https://github.com/facebook/hermes/releases/tag/v0.11.0)）。"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "With 'Bundled Hermes', you can instead rely on a tag that will represent the version used when a specific version of React Native was cut.",
+      "source_content_hash": "5c16c243e3fe3ad70e4373b38ae322fa028f66c7ec1decce71f8f92de60f3742",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "採用「捆綁式 Hermes」後，您可改為依賴標籤來識別特定 React Native 版本發布時所使用的 Hermes 版本。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-architecture/bundled-hermes.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.209531+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "67bea6fb16dd039cef0dc37d8c462ce92666a91bf5f75f7b8660f9cb46c726d7"
+  }
+}

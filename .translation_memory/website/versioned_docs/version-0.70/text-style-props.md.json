@@ -1,0 +1,672 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/text-style-props.md",
+  "source_file_content_hash": "df242e0bd42ce52828ba39ea4b94a80cae465228cbe2f95c06cef0e069fed351",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: text-style-props\ntitle: Text Style Props\n---",
+      "source_content_hash": "beede6fc187548e6c1b3c2881eb7afe28494c3c5a036c12ffcb175455973fa3a",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "b3de8742",
+      "source_content": "### Example",
+      "source_content_hash": "b9b5449b4e5cc2bf7390d309862a49a3dbf04030ec7257d36932125bd4e08256",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 範例"
+      }
+    },
+    {
+      "segment_id": "e6a5da7c",
+      "source_content": "```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&dependencies=@react-native-community/slider\nimport React, { useState } from \"react\";\nimport { FlatList, Platform, ScrollView, StatusBar, StyleSheet, Switch, Text, TouchableWithoutFeedback, View } from \"react-native\";\nimport Slider from '@react-native-community/slider';\n\nconst fontStyles = [\"normal\", \"italic\"];\nconst fontVariants = [\n  undefined,\n  \"small-caps\",\n  \"oldstyle-nums\",\n  \"lining-nums\",\n  \"tabular-nums\",\n  \"proportional-nums\"\n];\nconst fontWeights = [\n  \"normal\",\n  \"bold\",\n  \"100\",\n  \"200\",\n  \"300\",\n  \"400\",\n  \"500\",\n  \"600\",\n  \"700\",\n  \"800\",\n  \"900\"\n];\nconst textAlignments = [\"auto\", \"left\", \"right\", \"center\", \"justify\"];\nconst textDecorationLines = [\n  \"none\",\n  \"underline\",\n  \"line-through\",\n  \"underline line-through\"\n];\nconst textDecorationStyles = [\"solid\", \"double\", \"dotted\", \"dashed\"];\nconst textTransformations = [\"none\", \"uppercase\", \"lowercase\", \"capitalize\"];\nconst textAlignmentsVertical = [\"auto\", \"top\", \"bottom\", \"center\"];\nconst writingDirections = [\"auto\", \"ltr\", \"rtl\"];\n\nconst App = () => {\n  const [fontSize, setFontSize] = useState(10);\n  const [fontStyleIdx, setFontStyleIdx] = useState(0);\n  const [fontWeightIdx, setFontWeightIdx] = useState(0);\n  const [lineHeight, setLineHeight] = useState(10);\n  const [textAlignIdx, setTextAlignIdx] = useState(0);\n  const [textDecorationLineIdx, setTextDecorationLineIdx] = useState(0);\n  const [includeFontPadding, setIncludeFontPadding] = useState(false);\n  const [textVerticalAlignIdx, setTextVerticalAlignIdx] = useState(0);\n  const [fontVariantIdx, setFontVariantIdx] = useState(0);\n  const [letterSpacing, setLetterSpacing] = useState(0);\n  const [textDecorationStyleIdx, setTextDecorationStyleIdx] = useState(0);\n  const [textTransformIdx, setTextTransformIdx] = useState(0);\n  const [writingDirectionIdx, setWritingDirectionIdx] = useState(0);\n  const [textShadowRadius, setTextShadowRadius] = useState(0);\n  const [textShadowOffset, setTextShadowOffset] = useState({\n    height: 0,\n    width: 0\n  });\n\n  return (\n    <View style={styles.container}>\n      <Text\n        style={[\n          styles.paragraph,\n          {\n            fontSize,\n            fontStyle: fontStyles[fontStyleIdx],\n            fontWeight: fontWeights[fontWeightIdx],\n            lineHeight,\n            textAlign: textAlignments[textAlignIdx],\n            textDecorationLine: textDecorationLines[textDecorationLineIdx],\n            textTransform: textTransformations[textTransformIdx],\n            textAlignVertical: textAlignmentsVertical[textVerticalAlignIdx],\n            fontVariant: [fontVariants[fontVariantIdx]],\n            letterSpacing,\n            includeFontPadding,\n            textDecorationStyle: textDecorationStyles[textDecorationStyleIdx],\n            writingDirection: writingDirections[writingDirectionIdx],\n            textShadowOffset,\n            textShadowRadius\n          }\n        ]}\n      >\n        Lorem Ipsum is simply dummy text of the printing and typesetting\n        industry. 112 Likes\n      </Text>\n      <ScrollView>\n        <View>\n          <Text>Common platform properties</Text>\n          <CustomSlider\n            label=\"Text Shadow Offset - Height\"\n            value={textShadowOffset.height}\n            minimumValue={-40}\n            maximumValue={40}\n            handleValueChange={val =>\n              setTextShadowOffset(prev => ({ ...prev, height: val }))\n            }\n          />\n          <CustomSlider\n            label=\"Text Shadow Offset - Width\"\n            value={textShadowOffset.width}\n            minimumValue={-40}\n            maximumValue={40}\n            handleValueChange={val =>\n              setTextShadowOffset(prev => ({ ...prev, width: val }))\n            }\n          />\n          <CustomSlider\n            label=\"Font Size\"\n            value={fontSize}\n            maximumValue={40}\n            handleValueChange={setFontSize}\n          />\n          <CustomPicker\n            label=\"Font Style\"\n            data={fontStyles}\n            currentIndex={fontStyleIdx}\n            onSelected={setFontStyleIdx}\n          />\n          <CustomPicker\n            label=\"Font Weight\"\n            data={fontWeights}\n            currentIndex={fontWeightIdx}\n            onSelected={setFontWeightIdx}\n          />\n          <CustomSlider\n            label=\"Line Height\"\n            value={lineHeight}\n            minimumValue={10}\n            maximumValue={50}\n            handleValueChange={setLineHeight}\n          />\n          <CustomPicker\n            label=\"Text Align\"\n            data={textAlignments}\n            currentIndex={textAlignIdx}\n            onSelected={setTextAlignIdx}\n          />\n          <CustomPicker\n            label=\"Text Decoration Line\"\n            data={textDecorationLines}\n            currentIndex={textDecorationLineIdx}\n            onSelected={setTextDecorationLineIdx}\n          />\n          <CustomSlider\n            label=\"Text Shadow Radius\"\n            value={textShadowRadius}\n            handleValueChange={setTextShadowRadius}\n          />\n          <CustomPicker\n            label=\"Font Variant\"\n            data={fontVariants}\n            currentIndex={fontVariantIdx}\n            onSelected={setFontVariantIdx}\n          />\n          <CustomSlider\n            label=\"Letter Spacing\"\n            step={0.1}\n            value={letterSpacing}\n            handleValueChange={setLetterSpacing}\n          />\n          <CustomPicker\n            label=\"Text Transform\"\n            data={textTransformations}\n            currentIndex={textTransformIdx}\n            onSelected={setTextTransformIdx}\n          />\n        </View>\n        {Platform.OS === \"android\" && (\n          <View style={styles.platformContainer}>\n            <Text style={styles.platformContainerTitle}>\n              Android only properties\n            </Text>\n            <CustomPicker\n              label=\"Text Vertical Align\"\n              data={textAlignmentsVertical}\n              currentIndex={textVerticalAlignIdx}\n              onSelected={setTextVerticalAlignIdx}\n            />\n            <CustomSwitch\n              label=\"Include Font Padding\"\n              handleValueChange={setIncludeFontPadding}\n              value={includeFontPadding}\n            />\n          </View>\n        )}\n        {Platform.OS === \"ios\" && (\n          <View style={styles.platformContainer}>\n            <Text style={styles.platformContainerTitle}>\n              iOS only properties\n            </Text>\n            <CustomPicker\n              label=\"Text Decoration Style\"\n              data={textDecorationStyles}\n              currentIndex={textDecorationStyleIdx}\n              onSelected={setTextDecorationStyleIdx}\n            />\n            <CustomPicker\n              label=\"Writing Direction\"\n              data={writingDirections}\n              currentIndex={writingDirectionIdx}\n              onSelected={setWritingDirectionIdx}\n            />\n          </View>\n        )}\n      </ScrollView>\n    </View>\n  );\n}\n\nconst CustomSwitch = ({ label, handleValueChange, value }) => {\n  return (\n    <>\n      <Text style={styles.title}>{label}</Text>\n      <View style={{ alignItems: \"flex-start\" }}>\n        <Switch\n          trackColor={{ false: \"#767577\", true: \"#DAA520\" }}\n          thumbColor={value ? \"#DAA520\" : \"#f4f3f4\"}\n          onValueChange={handleValueChange}\n          value={value}\n        />\n      </View>\n    </>\n  );\n}\n\nconst CustomSlider = ({\n  label,\n  handleValueChange,\n  step = 1,\n  minimumValue = 0,\n  maximumValue = 10,\n  value\n}) => {\n  return (\n    <>\n      {label && (\n        <Text style={styles.title}>{`${label} (${value.toFixed(2)})`}</Text>\n      )}\n      <View style={styles.wrapperHorizontal}>\n        <Slider\n          thumbTintColor=\"#DAA520\"\n          minimumTrackTintColor=\"#DAA520\"\n          minimumValue={minimumValue}\n          maximumValue={maximumValue}\n          step={step}\n          onValueChange={handleValueChange}\n          value={value}\n        />\n      </View>\n    </>\n  );\n}\n\nconst CustomPicker = ({ label, data, currentIndex, onSelected }) => {\n  return (\n    <>\n      <Text style={styles.title}>{label}</Text>\n      <View style={styles.wrapperHorizontal}>\n        <FlatList\n          bounces\n          horizontal\n          data={data}\n          keyExtractor={(item, idx) => String(item)}\n          renderItem={({ item, index }) => {\n            const selected = index === currentIndex;\n            return (\n              <TouchableWithoutFeedback onPress={() => onSelected(index)}>\n                <View\n                  style={[\n                    styles.itemStyleHorizontal,\n                    selected && styles.itemSelectedStyleHorizontal\n                  ]}\n                >\n                  <Text\n                    style={{\n                      textAlign: \"center\",\n                      color: selected ? \"black\" : \"grey\",\n                      fontWeight: selected ? \"bold\" : \"normal\"\n                    }}\n                  >\n                    {item + \"\"}\n                  </Text>\n                </View>\n              </TouchableWithoutFeedback>\n            );\n          }}\n        />\n      </View>\n    </>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    paddingTop: StatusBar.currentHeight,\n    backgroundColor: \"#ecf0f1\",\n    padding: 8\n  },\n  paragraph: {\n    color: \"black\",\n    textDecorationColor: \"yellow\",\n    textShadowColor: \"red\",\n    textShadowRadius: 1,\n    margin: 24\n  },\n  wrapperHorizontal: {\n    height: 54,\n    justifyContent: \"center\",\n    color: \"black\",\n    marginBottom: 12\n  },\n  itemStyleHorizontal: {\n    marginRight: 10,\n    height: 50,\n    padding: 8,\n    borderWidth: 1,\n    borderColor: \"grey\",\n    borderRadius: 25,\n    textAlign: \"center\",\n    justifyContent: \"center\"\n  },\n  itemSelectedStyleHorizontal: {\n    borderWidth: 2,\n    borderColor: \"#DAA520\"\n  },\n  platformContainer: {\n    marginTop: 8,\n    borderTopWidth: 1\n  },\n  platformContainerTitle: {\n    marginTop: 8\n  },\n  title: {\n    fontWeight: \"bold\",\n    marginVertical: 4\n  }\n});\n\nexport default App;\n```",
+      "source_content_hash": "a8ec7684d8b811c0e617cc0a14ea4b03c2557152ca205ae747f67864705aab42",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6a5da7c"
+      }
+    },
+    {
+      "segment_id": "4e36860d",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "b8884e3b",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "7020a57c",
+      "source_content": "### `color`",
+      "source_content_hash": "9e1aeadceaaadb0564ebbd89d616566b9239eb8a09f50ff1b2ac494b2ccd64bc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `color`"
+      }
+    },
+    {
+      "segment_id": "b6a2624c",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b6a2624c"
+      }
+    },
+    {
+      "segment_id": "77b413c2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6558c87d",
+      "source_content": "### `fontFamily`",
+      "source_content_hash": "536fcba23ba08f34089ff9ba320b630eb31051041fa3e47a22c87e454e4f0afc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `fontFamily`"
+      }
+    },
+    {
+      "segment_id": "4b415736",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b415736"
+      }
+    },
+    {
+      "segment_id": "37772f05",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dbd99edb",
+      "source_content": "### `fontSize`",
+      "source_content_hash": "aca4f686ad1cf98fc40dc887bf19572f9cc7fc1bd50d05ba60e61392896ef30c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `fontSize`"
+      }
+    },
+    {
+      "segment_id": "48f8fd0a",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48f8fd0a"
+      }
+    },
+    {
+      "segment_id": "0f667929",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d1d75d19",
+      "source_content": "### `fontStyle`",
+      "source_content_hash": "b2947ba336524d2c02577e70ea3c812cb4ccad3948b8459deba28cd4f6850761",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `fontStyle`"
+      }
+    },
+    {
+      "segment_id": "1597a5ba",
+      "source_content": "| Type                         |\n| ---------------------------- |\n| enum(`'normal'`, `'italic'`) |",
+      "source_content_hash": "1a9df6d9e36d67672e25bbcb3c0405f5b5a1547b8284072ae215696ad863cd6e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1597a5ba"
+      }
+    },
+    {
+      "segment_id": "e3b17e2d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6b626c2c",
+      "source_content": "### `fontWeight`",
+      "source_content_hash": "2b00121184fc018a5dfa8effcd51c912d8120f3fce794ebacd6d85162e752a1f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `fontWeight`"
+      }
+    },
+    {
+      "segment_id": "fd40deab",
+      "source_content": "Specifies font weight. The values `'normal'` and `'bold'` are supported for most fonts. Not all fonts have a variant for each of the numeric values, in that case the closest one is chosen.",
+      "source_content_hash": "ec4b94b78ed94bac33493e7e88a0779b99a126bb3cb030806264f8640336f0ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定字體粗細。大多數字體支援 'normal' 和 'bold' 值。並非所有字體都具備每個數值對應的變體，此時會選擇最接近的數值。"
+      }
+    },
+    {
+      "segment_id": "f98645d7",
+      "source_content": "| Type                                                                                                        | Default    |\n| ----------------------------------------------------------------------------------------------------------- | ---------- |\n| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) | `'normal'` |",
+      "source_content_hash": "adbfffa69f533cc77fc0e3b9214bf17f91bea0fad17e15b21eb25cb878be7c1b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f98645d7"
+      }
+    },
+    {
+      "segment_id": "672ed619",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c489a644",
+      "source_content": "### `includeFontPadding` <div class=\"label android\">Android</div>",
+      "source_content_hash": "a7c6a4495faee32c71013a02dc3521ef50b60ea2d751c5f572f6839729f39c28",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `includeFontPadding` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "b63b9ccf",
+      "source_content": "Set to `false` to remove extra font padding intended to make space for certain ascenders / descenders. With some fonts, this padding can make text look slightly misaligned when centered vertically. For best results also set `textAlignVertical` to `center`.",
+      "source_content_hash": "13c8bcdff5f24540698b5aba619c46b34cff5501b718e54198614ab04b18af6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `false` 可移除為特定升部/降部預留的額外字體內邊距。某些字體使用此內邊距時，垂直置中的文字可能略微錯位。最佳實踐是同時將 `textAlignVertical` 設為 `center`。"
+      }
+    },
+    {
+      "segment_id": "d7272572",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7272572"
+      }
+    },
+    {
+      "segment_id": "db1cf4a5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0d14771f",
+      "source_content": "### `fontVariant`",
+      "source_content_hash": "46500178f2667fe10fa5777ed7587241a26486d16ebacc40ea2cd6842a4cab41",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `fontVariant`"
+      }
+    },
+    {
+      "segment_id": "1826bf4f",
+      "source_content": "| Type                                                                                                       | Default |\n| ---------------------------------------------------------------------------------------------------------- | ------- |\n| array of enum(`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) | `[]`    |",
+      "source_content_hash": "91a773c53ca4d1942c84426d02a866c2961557feb5a435fdb77552c6c85e0620",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1826bf4f"
+      }
+    },
+    {
+      "segment_id": "60b7cd79",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "babe18c8",
+      "source_content": "### `letterSpacing`",
+      "source_content_hash": "995f9d4c73e46dd9992ba7a9642aef8b2fb5ffa0886f5ca6fddb79709bb8583d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `letterSpacing`"
+      }
+    },
+    {
+      "segment_id": "e3448845",
+      "source_content": "Increase or decrease the spacing between characters. By default there is no extra letter spacing.",
+      "source_content_hash": "2a2ac60c055034aa3101b73f2f61dde69c7867cb4d553d98d52b359bd701efff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "增減字符間距。預設無額外字距。"
+      }
+    },
+    {
+      "segment_id": "ec4b11d1",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ec4b11d1"
+      }
+    },
+    {
+      "segment_id": "fa980521",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "407ddf18",
+      "source_content": "### `lineHeight`",
+      "source_content_hash": "ec4e0203e58460fd026b1c17886e4dd72e1eb6c044e3fd1eeba596aa16d33549",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `lineHeight`"
+      }
+    },
+    {
+      "segment_id": "a2532daf",
+      "source_content": "Numeric value that controls the vertical spacing between lines of text within a text element. It specifies the distance between the baselines of consecutive lines of text.",
+      "source_content_hash": "d30fce6717e8fa876d7d14719207d6985a4218dd941f70e8e747233563fc6dbc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制文本元素內行間垂直間距的數值，指定連續文本行基線之間的距離。"
+      }
+    },
+    {
+      "segment_id": "9214b729",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9214b729"
+      }
+    },
+    {
+      "segment_id": "d54e8f13",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4cde2a64",
+      "source_content": "### `textAlign`",
+      "source_content_hash": "102c4633cac3013c3a06641804be0699d9173a714e4f16d56ebaeba5c0e4c7a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textAlign`"
+      }
+    },
+    {
+      "segment_id": "ac7dd250",
+      "source_content": "Specifies text alignment. On Android, the value 'justify' is only supported on Oreo (8.0) or above (API level >= 26). The value will fallback to `left` on lower Android versions.",
+      "source_content_hash": "9b446d6fecd113fe18f7581ca986997796671891f19769f66c6697064f0663b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定文本對齊方式。Android 上 'justify' 值僅支援 Oreo (8.0) 或更高版本 (API level >= 26)，低版本會回退至 `left`。"
+      }
+    },
+    {
+      "segment_id": "980ef038",
+      "source_content": "| Type                                                         | Default  |\n| ------------------------------------------------------------ | -------- |\n| enum(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |",
+      "source_content_hash": "57793c1a2a0cdb706306fef2234cda77e4919d1c5d9704b13ce254e6489d0837",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_980ef038"
+      }
+    },
+    {
+      "segment_id": "a57b8803",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "634bf78c",
+      "source_content": "### `textAlignVertical` <div class=\"label android\">Android</div>",
+      "source_content_hash": "466ec8090e5199f4cd887b35584120aeed0eded960936ad5a1dc294cd687faac",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textAlignVertical` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "9ca71e68",
+      "source_content": "| Type                                            | Default  |\n| ----------------------------------------------- | -------- |\n| enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |",
+      "source_content_hash": "f476deb6aad3514be2a4c06375e353cc591728a14af5269c6ec3b065fe363b0e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9ca71e68"
+      }
+    },
+    {
+      "segment_id": "66bc07c8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "95a0af4d",
+      "source_content": "### `textDecorationColor` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "1ccd203c2624835245f5182060416920d2644c4fa8ece430cfa3c99166ed80c9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textDecorationColor` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "b2937a32",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b2937a32"
+      }
+    },
+    {
+      "segment_id": "3192babb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5651bec6",
+      "source_content": "### `textDecorationLine`",
+      "source_content_hash": "cdaf8954c6b7f00c2e87cafe621c94b484a1e2d49b8726b1ba0cd4495717c1f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textDecorationLine`"
+      }
+    },
+    {
+      "segment_id": "655a55d4",
+      "source_content": "| Type                                                                        | Default  |\n| --------------------------------------------------------------------------- | -------- |\n| enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |",
+      "source_content_hash": "ab946c57e1a89b469b3a6ca72c2f401535b38f905cb6106d016f265131873629",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_655a55d4"
+      }
+    },
+    {
+      "segment_id": "1ab826e8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "54b0eaca",
+      "source_content": "### `textDecorationStyle` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "c66624c7dbe5531d242c199f07f783f6e2cceb56d6701b0505c8b7aacfb81d6d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textDecorationStyle` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "9058bce3",
+      "source_content": "| Type                                                | Default   |\n| --------------------------------------------------- | --------- |\n| enum(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |",
+      "source_content_hash": "2992e9cca7c1056af8a3c8946bcfb6a08299e8352f2db09b85507978855800a1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9058bce3"
+      }
+    },
+    {
+      "segment_id": "2868a863",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8be68b91",
+      "source_content": "### `textShadowColor`",
+      "source_content_hash": "187a4b9e90a63b08dd26b43cc91e045599efe2d9067aca0c64da1e1a8a7d22a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textShadowColor`"
+      }
+    },
+    {
+      "segment_id": "a8cf921f",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a8cf921f"
+      }
+    },
+    {
+      "segment_id": "7b4974cb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c089b41f",
+      "source_content": "### `textShadowOffset`",
+      "source_content_hash": "aa750797af0f49f0cef3b72079039459c4fb91906247aed199ddb9d137125c09",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textShadowOffset`"
+      }
+    },
+    {
+      "segment_id": "817dae8d",
+      "source_content": "| Type                                        |\n| ------------------------------------------- |\n| object: `{width?: number, height?: number}` |",
+      "source_content_hash": "563ad95535496859208af503308447b27cb2e0eb95bf433fc0c4f8950fff2505",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_817dae8d"
+      }
+    },
+    {
+      "segment_id": "e082518b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "58e141d3",
+      "source_content": "### `textShadowRadius`",
+      "source_content_hash": "99587cfff0a7819337af560162699091cd5b9acd3bcacfe300807bb071b3eea3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textShadowRadius`"
+      }
+    },
+    {
+      "segment_id": "acddda14",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_acddda14"
+      }
+    },
+    {
+      "segment_id": "3f6b8216",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0b6179bc",
+      "source_content": "### `textTransform`",
+      "source_content_hash": "88aa6868b3ebca161f6a58df5666462267e63e63fc59ec3a56fd349e6259f9b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textTransform`"
+      }
+    },
+    {
+      "segment_id": "d95806d2",
+      "source_content": "| Type                                                         | Default  |\n| ------------------------------------------------------------ | -------- |\n| enum(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |",
+      "source_content_hash": "7fc4f14fc60dd7413078e6cd153480dbef19ea9e3aad114f44187dbc9cbfc358",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d95806d2"
+      }
+    },
+    {
+      "segment_id": "d2517a2b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4439f5f5",
+      "source_content": "### `writingDirection` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "6eebda679becbd1c037f6d43f3ff34251a4dd2c1ab55c53545e54ecfee5ea0d2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `writingDirection` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "52e5a71e",
+      "source_content": "| Type                             | Default  |\n| -------------------------------- | -------- |\n| enum(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |",
+      "source_content_hash": "1cfada65990da992f9ce78000087e846267e4a9cd6ec37f4148da61634b7f850",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_52e5a71e"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/text-style-props.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.383094+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "df242e0bd42ce52828ba39ea4b94a80cae465228cbe2f95c06cef0e069fed351"
+  }
+}

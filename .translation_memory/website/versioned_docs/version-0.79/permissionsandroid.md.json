@@ -1,0 +1,372 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/permissionsandroid.md",
+  "source_file_content_hash": "bb848c36fc0114cf8b613e62b8af2f55121fa1e3f8e1a6ce632cfa8597d3541f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: permissionsandroid\ntitle: PermissionsAndroid\n---",
+      "source_content_hash": "d04ef49e9298fffcb2deccd2a1071c0a9a4c0a19e259172c7a809b649c41869d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "c9ed38fc",
+      "source_content": "<div className=\"banner-native-code-required\">\n  <h3>Project with Native Code Required</h3>\n  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href=\"https://docs.expo.dev/guides/permissions/\">Permissions</a> in the Expo documentation for the appropriate alternative.</p>\n</div>",
+      "source_content_hash": "fd3b98d9dc4864afe35e6aea98b7cf8811663532a24cfa6b60ed19f96c3af14c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9ed38fc"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "`PermissionsAndroid` provides access to Android M's new permissions model. The so-called \"normal\" permissions are granted by default when the application is installed as long as they appear in `AndroidManifest.xml`. However, \"dangerous\" permissions require a dialog prompt. You should use this module for those permissions.",
+      "source_content_hash": "4dcb72641fa9653bea05af19f1df616b35055cab24806044b81456527f46b4fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`PermissionsAndroid` 提供對 Android M 新版權限模型的存取權限。所謂「一般」權限會在應用程式安裝時自動授予（只要它們出現在 `AndroidManifest.xml` 中）。但「危險」權限需要透過對話框向用戶請求。您應使用此模組來處理這類權限。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so `check` should always result to `true` and `request` should always resolve to `PermissionsAndroid.RESULTS.GRANTED`.",
+      "source_content_hash": "041e3539024467cd90ec5b1f3a6aefc553bb93e8f649cbd2b1a3abc09d9b25a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 SDK 版本 23 之前的裝置上，只要權限出現在清單中就會自動授予，因此 `check` 應始終返回 `true`，而 `request` 應始終解析為 `PermissionsAndroid.RESULTS.GRANTED`。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "If a user has previously turned off a permission that you prompt for, the OS will advise your app to show a rationale for needing the permission. The optional `rationale` argument will show a dialog prompt only if necessary - otherwise the normal permission prompt will appear.",
+      "source_content_hash": "008bec4d792e7c133248086fd31958e0e8886dac2c3281b26ae8fefaced81756",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若用戶先前已關閉某項權限，系統會建議應用程式說明需要該權限的理由。可選的 `rationale` 參數僅在必要時顯示說明對話框——否則將直接顯示標準權限請求提示。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### Example",
+      "source_content_hash": "b9b5449b4e5cc2bf7390d309862a49a3dbf04030ec7257d36932125bd4e08256",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 範例"
+      }
+    },
+    {
+      "segment_id": "940e34e3",
+      "source_content": "```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android\nimport React from 'react';\nimport {\n  Button,\n  PermissionsAndroid,\n  StatusBar,\n  StyleSheet,\n  Text,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst requestCameraPermission = async () => {\n  try {\n    const granted = await PermissionsAndroid.request(\n      PermissionsAndroid.PERMISSIONS.CAMERA,\n      {\n        title: 'Cool Photo App Camera Permission',\n        message:\n          'Cool Photo App needs access to your camera ' +\n          'so you can take awesome pictures.',\n        buttonNeutral: 'Ask Me Later',\n        buttonNegative: 'Cancel',\n        buttonPositive: 'OK',\n      },\n    );\n    if (granted === PermissionsAndroid.RESULTS.GRANTED) {\n      console.log('You can use the camera');\n    } else {\n      console.log('Camera permission denied');\n    }\n  } catch (err) {\n    console.warn(err);\n  }\n};\n\nconst App = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <Text style={styles.item}>Try permissions</Text>\n      <Button title=\"request permissions\" onPress={requestCameraPermission} />\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    paddingTop: StatusBar.currentHeight,\n    backgroundColor: '#ecf0f1',\n    padding: 8,\n  },\n  item: {\n    margin: 24,\n    fontSize: 18,\n    fontWeight: 'bold',\n    textAlign: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "420f2f045c4fe63108f6dd293fae97e2db38b74f8c36d6c8dca1474fbaa6b413",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_940e34e3"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### Permissions that require prompting the user",
+      "source_content_hash": "170f09490c0d4df8ea9aef5e93a9f7e46532273b0917fb6060e932f2a0290bc7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 需向用戶請求的權限"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Available as constants under `PermissionsAndroid.PERMISSIONS`:",
+      "source_content_hash": "8c8f62296fee3f0ae3286795fefc7bde5beea4d3b48d166d9690ace563d0cc28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可透過 `PermissionsAndroid.PERMISSIONS` 常數取得："
+      }
+    },
+    {
+      "segment_id": "cc9271fb",
+      "source_content": "- `READ_CALENDAR`: 'android.permission.READ_CALENDAR'\n- `WRITE_CALENDAR`: 'android.permission.WRITE_CALENDAR'\n- `CAMERA`: 'android.permission.CAMERA'\n- `READ_CONTACTS`: 'android.permission.READ_CONTACTS'\n- `WRITE_CONTACTS`: 'android.permission.WRITE_CONTACTS'\n- `GET_ACCOUNTS`: 'android.permission.GET_ACCOUNTS'\n- `ACCESS_FINE_LOCATION`: 'android.permission.ACCESS_FINE_LOCATION'\n- `ACCESS_COARSE_LOCATION`: 'android.permission.ACCESS_COARSE_LOCATION'\n- `ACCESS_BACKGROUND_LOCATION`: 'android.permission.ACCESS_BACKGROUND_LOCATION'\n- `RECORD_AUDIO`: 'android.permission.RECORD_AUDIO'\n- `READ_PHONE_STATE`: 'android.permission.READ_PHONE_STATE'\n- `CALL_PHONE`: 'android.permission.CALL_PHONE'\n- `READ_CALL_LOG`: 'android.permission.READ_CALL_LOG'\n- `WRITE_CALL_LOG`: 'android.permission.WRITE_CALL_LOG'\n- `ADD_VOICEMAIL`: 'com.android.voicemail.permission.ADD_VOICEMAIL'\n- `USE_SIP`: 'android.permission.USE_SIP'\n- `PROCESS_OUTGOING_CALLS`: 'android.permission.PROCESS_OUTGOING_CALLS'\n- `BODY_SENSORS`: 'android.permission.BODY_SENSORS'\n- `SEND_SMS`: 'android.permission.SEND_SMS'\n- `RECEIVE_SMS`: 'android.permission.RECEIVE_SMS'\n- `READ_SMS`: 'android.permission.READ_SMS'\n- `RECEIVE_WAP_PUSH`: 'android.permission.RECEIVE_WAP_PUSH'\n- `RECEIVE_MMS`: 'android.permission.RECEIVE_MMS'\n- `READ_EXTERNAL_STORAGE`: 'android.permission.READ_EXTERNAL_STORAGE'\n- `WRITE_EXTERNAL_STORAGE`: 'android.permission.WRITE_EXTERNAL_STORAGE'\n- `BLUETOOTH_CONNECT`: 'android.permission.BLUETOOTH_CONNECT'\n- `BLUETOOTH_SCAN`: 'android.permission.BLUETOOTH_SCAN'\n- `BLUETOOTH_ADVERTISE`: 'android.permission.BLUETOOTH_ADVERTISE'\n- `ACCESS_MEDIA_LOCATION`: 'android.permission.ACCESS_MEDIA_LOCATION'\n- `ACCEPT_HANDOVER`: 'android.permission.ACCEPT_HANDOVER'\n- `ACTIVITY_RECOGNITION`: 'android.permission.ACTIVITY_RECOGNITION'\n- `ANSWER_PHONE_CALLS`: 'android.permission.ANSWER_PHONE_CALLS'\n- `READ_PHONE_NUMBERS`: 'android.permission.READ_PHONE_NUMBERS'\n- `UWB_RANGING`: 'android.permission.UWB_RANGING'\n- `BODY_SENSORS_BACKGROUND`: 'android.permission.BODY_SENSORS_BACKGROUND'\n- `READ_MEDIA_IMAGES`: 'android.permission.READ_MEDIA_IMAGES'\n- `READ_MEDIA_VIDEO`: 'android.permission.READ_MEDIA_VIDEO'\n- `READ_MEDIA_AUDIO`: 'android.permission.READ_MEDIA_AUDIO'\n- `POST_NOTIFICATIONS`: 'android.permission.POST_NOTIFICATIONS'\n- `NEARBY_WIFI_DEVICES`: 'android.permission.NEARBY_WIFI_DEVICES'\n- `READ_VOICEMAIL`: 'com.android.voicemail.permission.READ_VOICEMAIL',\n- `WRITE_VOICEMAIL`: 'com.android.voicemail.permission.WRITE_VOICEMAIL',",
+      "source_content_hash": "0d1d0bd1ae6125c151c0afef0c588959b7648b3e9a07503ea574d338c6765b20",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `READ_CALENDAR`: 'android.permission.READ_CALENDAR'\n- `WRITE_CALENDAR`: 'android.permission.WRITE_CALENDAR'\n- `CAMERA`: 'android.permission.CAMERA'\n- `READ_CONTACTS`: 'android.permission.READ_CONTACTS'\n- `WRITE_CONTACTS`: 'android.permission.WRITE_CONTACTS'\n- `GET_ACCOUNTS`: 'android.permission.GET_ACCOUNTS'\n- `ACCESS_FINE_LOCATION`: 'android.permission.ACCESS_FINE_LOCATION'\n- `ACCESS_COARSE_LOCATION`: 'android.permission.ACCESS_COARSE_LOCATION'\n- `ACCESS_BACKGROUND_LOCATION`: 'android.permission.ACCESS_BACKGROUND_LOCATION'\n- `RECORD_AUDIO`: 'android.permission.RECORD_AUDIO'\n- `READ_PHONE_STATE`: 'android.permission.READ_PHONE_STATE'\n- `CALL_PHONE`: 'android.permission.CALL_PHONE'\n- `READ_CALL_LOG`: 'android.permission.READ_CALL_LOG'\n- `WRITE_CALL_LOG`: 'android.permission.WRITE_CALL_LOG'\n- `ADD_VOICEMAIL`: 'com.android.voicemail.permission.ADD_VOICEMAIL'\n- `USE_SIP`: 'android.permission.USE_SIP'\n- `PROCESS_OUTGOING_CALLS`: 'android.permission.PROCESS_OUTGOING_CALLS'\n- `BODY_SENSORS`: 'android.permission.BODY_SENSORS'\n- `SEND_SMS`: 'android.permission.SEND_SMS'\n- `RECEIVE_SMS`: 'android.permission.RECEIVE_SMS'\n- `READ_SMS`: 'android.permission.READ_SMS'\n- `RECEIVE_WAP_PUSH`: 'android.permission.RECEIVE_WAP_PUSH'\n- `RECEIVE_MMS`: 'android.permission.RECEIVE_MMS'\n- `READ_EXTERNAL_STORAGE`: 'android.permission.READ_EXTERNAL_STORAGE'\n- `WRITE_EXTERNAL_STORAGE`: 'android.permission.WRITE_EXTERNAL_STORAGE'\n- `BLUETOOTH_CONNECT`: 'android.permission.BLUETOOTH_CONNECT'\n- `BLUETOOTH_SCAN`: 'android.permission.BLUETOOTH_SCAN'\n- `BLUETOOTH_ADVERTISE`: 'android.permission.BLUETOOTH_ADVERTISE'\n- `ACCESS_MEDIA_LOCATION`: 'android.permission.ACCESS_MEDIA_LOCATION'\n- `ACCEPT_HANDOVER`: 'android.permission.ACCEPT_HANDOVER'\n- `ACTIVITY_RECOGNITION`: 'android.permission.ACTIVITY_RECOGNITION'\n- `ANSWER_PHONE_CALLS`: 'android.permission.ANSWER_PHONE_CALLS'\n- `READ_PHONE_NUMBERS`: 'android.permission.READ_PHONE_NUMBERS'\n- `UWB_RANGING`: 'android.permission.UWB_RANGING'\n- `BODY_SENSORS_BACKGROUND`: 'android.permission.BODY_SENSORS_BACKGROUND'\n- `READ_MEDIA_IMAGES`: 'android.permission.READ_MEDIA_IMAGES'\n- `READ_MEDIA_VIDEO`: 'android.permission.READ_MEDIA_VIDEO'\n- `READ_MEDIA_AUDIO`: 'android.permission.READ_MEDIA_AUDIO'\n- `POST_NOTIFICATIONS`: 'android.permission.POST_NOTIFICATIONS'\n- `NEARBY_WIFI_DEVICES`: 'android.permission.NEARBY_WIFI_DEVICES'\n- `READ_VOICEMAIL`: 'com.android.voicemail.permission.READ_VOICEMAIL',\n- `WRITE_VOICEMAIL`: 'com.android.voicemail.permission.WRITE_VOICEMAIL',"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "### Result strings for requesting permissions",
+      "source_content_hash": "98f91a6123220f68dbe41ab19f71187af0aa869953a11c67012e8f81053e0a7e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 權限請求的結果字串"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "Available as constants under `PermissionsAndroid.RESULTS`:",
+      "source_content_hash": "a7aa6e34624ecec540c089aee55a679c2e8e09ef3f0471049e872578855385ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可透過 `PermissionsAndroid.RESULTS` 常數取得："
+      }
+    },
+    {
+      "segment_id": "d8460b5b",
+      "source_content": "- `GRANTED`: 'granted'\n- `DENIED`: 'denied'\n- `NEVER_ASK_AGAIN`: 'never_ask_again'",
+      "source_content_hash": "c7b98b0e33edb3d75b44a2d036a64f5bef6416ec43d9bbd9346c95cbb3cc2ae7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `GRANTED`: 'granted'\n- `DENIED`: 'denied'\n- `NEVER_ASK_AGAIN`: 'never_ask_again'"
+      }
+    },
+    {
+      "segment_id": "efbc76b7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6868a9f",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "fff17ff8",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "734d40d8",
+      "source_content": "### `check()`",
+      "source_content_hash": "17524d457bd7ae1fc5a4afd1227c86458c47cc7666db5f19b5aee427d19fb1e2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `check()`"
+      }
+    },
+    {
+      "segment_id": "a6c3f55f",
+      "source_content": "```tsx\nstatic check(permission: Permission): Promise<boolean>;\n```",
+      "source_content_hash": "f3eb6a479c53da3f23c216fd2c7fa0ecf2cdbc22d665b3ec1beeeaf9e22ed3f7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a6c3f55f"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "Returns a promise resolving to a boolean value as to whether the specified permissions has been granted.",
+      "source_content_hash": "0da170f5c53b55c8958116dfc500714b3631a6ad20120aec738f7c89c39746b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回傳一個解析為布林值的 Promise，表示指定權限是否已被授予。"
+      }
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "b3651501",
+      "source_content": "| Name       | Type   | Required | Description                  |\n| ---------- | ------ | -------- | ---------------------------- |\n| permission | string | Yes      | The permission to check for. |",
+      "source_content_hash": "e8f9c6bd385d550bb68ea9966e698b93337e82f2f23e056aaf34f48887164ecf",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b3651501"
+      }
+    },
+    {
+      "segment_id": "c66a3543",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### `request()`",
+      "source_content_hash": "bde5537a36e1d7abfa2738a7fd86b413ac6ec96c6761db3f54794543417415d2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `request()`"
+      }
+    },
+    {
+      "segment_id": "b68d496b",
+      "source_content": "```tsx\nstatic request(\n  permission: Permission,\n  rationale?: Rationale,\n): Promise<PermissionStatus>;\n```",
+      "source_content_hash": "5266d5708e64aac9bc9ee6731a17ab009ef93f5561741dfcb28a6b2275921d88",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b68d496b"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "Prompts the user to enable a permission and returns a promise resolving to a string value (see result strings above) indicating whether the user allowed or denied the request or does not want to be asked again.",
+      "source_content_hash": "15d4322cd26fe650ceee2b7aeaedbe99bbe5b77866de4d82b89fe967210ae4e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "向使用者請求啟用權限，並回傳一個解析為字串值的 Promise（參見上方的結果字串），表示使用者是否允許、拒絕請求，或選擇不再詢問。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "If `rationale` is provided, this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (https://developer.android.com/training/permissions/requesting.html#explain) and then shows the system permission dialog.",
+      "source_content_hash": "c43654070682ff1da79c2b46ac85020db184cef0a1ca9fb6bc2c032a4336d6ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若提供 `rationale`，此函式會檢查作業系統是否需要顯示對話框說明為何需要該權限（https://developer.android.com/training/permissions/requesting.html#explain），隨後顯示系統權限對話框。"
+      }
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "28fc1cfd",
+      "source_content": "| Name       | Type   | Required | Description                |\n| ---------- | ------ | -------- | -------------------------- |\n| permission | string | Yes      | The permission to request. |\n| rationale  | object | No       | See `rationale` below.     |",
+      "source_content_hash": "87fa51efa99040d363315b01c10f36bcd540afffa016e722fd879343d5e1436f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_28fc1cfd"
+      }
+    },
+    {
+      "segment_id": "61a78cbe",
+      "source_content": "**Rationale:**",
+      "source_content_hash": "af2b4bd661321e61d23356d6b45a2b40705b225717840d18152b3022994c0eb1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**Rationale：**"
+      }
+    },
+    {
+      "segment_id": "dda3514e",
+      "source_content": "| Name           | Type   | Required | Description                      |\n| -------------- | ------ | -------- | -------------------------------- |\n| title          | string | Yes      | The title of the dialog.         |\n| message        | string | Yes      | The message of the dialog.       |\n| buttonPositive | string | Yes      | The text of the positive button. |\n| buttonNegative | string | No       | The text of the negative button. |\n| buttonNeutral  | string | No       | The text of the neutral button.  |",
+      "source_content_hash": "f5b89d3ffaf5acdc3b01580ed22e512f21f64853cfb66f577fddee32c58d4ded",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_dda3514e"
+      }
+    },
+    {
+      "segment_id": "ef9d3107",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "af250a10",
+      "source_content": "### `requestMultiple()`",
+      "source_content_hash": "8ae3d043536287c69e670b4d285373825e1d24576f175a0989dccec6d4f83f72",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `requestMultiple()`"
+      }
+    },
+    {
+      "segment_id": "54dd003b",
+      "source_content": "```tsx\nstatic requestMultiple(\n  permissions: Permission[],\n): Promise<{[key in Permission]: PermissionStatus}>;\n```",
+      "source_content_hash": "384afa1c253f775e22357aecd8f32cbd729a9201609cdef46af602a0d2b6644b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54dd003b"
+      }
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "Prompts the user to enable multiple permissions in the same dialog and returns an object with the permissions as keys and strings as values (see result strings above) indicating whether the user allowed or denied the request or does not want to be asked again.",
+      "source_content_hash": "7e5998dae00dbd9cb04707e338f5a7e2a9b713b179f1cbb31a94bb76b36bacb8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在同一個對話框中向使用者請求啟用多個權限，並回傳一個物件，其鍵為權限名稱，值為字串（參見上方的結果字串），表示使用者是否允許、拒絕請求，或選擇不再詢問。"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "afa10cea",
+      "source_content": "| Name        | Type  | Required | Description                      |\n| ----------- | ----- | -------- | -------------------------------- |\n| permissions | array | Yes      | Array of permissions to request. |",
+      "source_content_hash": "f17fb86aed3b8130f87b5850db9fadbb085c8e238acc8cfea0255b16c2c73f61",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_afa10cea"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/permissionsandroid.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.971066+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "bb848c36fc0114cf8b613e62b8af2f55121fa1e3f8e1a6ce632cfa8597d3541f"
+  }
+}

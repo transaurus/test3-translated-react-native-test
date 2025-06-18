@@ -1,0 +1,2388 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.75/text.md",
+  "source_file_content_hash": "ca6b6b574b9315750e1a398a316b51002dc2fbdbeeb88d3f05ad84dbfa678d27",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: text\ntitle: Text\n---",
+      "source_content_hash": "2db41be5928aadb53581763033266e66fd2ec810c67916d737a080dc88842442",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A React component for displaying text.",
+      "source_content_hash": "db453a6d099d216dbcc66ebc3fd71030a1c84422e7787bed43a64477f1c9ecda",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個用於顯示文字的 React 元件。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`Text` supports nesting, styling, and touch handling.",
+      "source_content_hash": "1bd41397cba5eaa2a91c9e67c0d0774f0a23a67cd1bbe9052040633cfd59ff32",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Text` 支援嵌套、樣式設定和觸控處理。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "In the following example, the nested title and body text will inherit the `fontFamily` from `styles.baseText`, but the title provides its own additional styles. The title and body will stack on top of each other on account of the literal newlines:",
+      "source_content_hash": "9df7a9cc13b48e5028fc8152d0f09e5f9fde9a9733833e86a0b34c1eebe93a9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在以下範例中，嵌套的標題和正文文字將繼承 `styles.baseText` 的 `fontFamily`，但標題提供了自己額外的樣式。由於文字中的換行符，標題和正文將垂直堆疊："
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=Text%20Functional%20Component%20Example\nimport React, {useState} from 'react';\nimport {Text, StyleSheet} from 'react-native';\n\nconst TextInANest = () => {\n  const [titleText, setTitleText] = useState(\"Bird's Nest\");\n  const bodyText = 'This is not really a bird nest.';\n\n  const onPressTitle = () => {\n    setTitleText(\"Bird's Nest [pressed]\");\n  };\n\n  return (\n    <Text style={styles.baseText}>\n      <Text style={styles.titleText} onPress={onPressTitle}>\n        {titleText}\n        {'\\n'}\n        {'\\n'}\n      </Text>\n      <Text numberOfLines={5}>{bodyText}</Text>\n    </Text>\n  );\n};\n\nconst styles = StyleSheet.create({\n  baseText: {\n    fontFamily: 'Cochin',\n  },\n  titleText: {\n    fontSize: 20,\n    fontWeight: 'bold',\n  },\n});\n\nexport default TextInANest;\n```",
+      "source_content_hash": "9710200d82b0c0de9d8cc8fbdb84dbc4d9b7281290319e98e206b49e9d21a99a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "## Nested text",
+      "source_content_hash": "c0c7a828f39f89f0cc7f7bb5c02fa0e32da7c34b498e28d80dd2e83f3792eba5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 嵌套文字"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Both Android and iOS allow you to display formatted text by annotating ranges of a string with specific formatting like bold or colored text (`NSAttributedString` on iOS, `SpannableString` on Android). In practice, this is very tedious. For React Native, we decided to use web paradigm for this where you can nest text to achieve the same effect.",
+      "source_content_hash": "5d5158feb08c39df1492583b87cc3ec5751b16cafecc517ef7559ec4acaac938",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 和 iOS 都允許通過為字串的特定範圍添加格式（如粗體或彩色文字）來顯示格式化文字（iOS 上使用 `NSAttributedString`，Android 上使用 `SpannableString`）。實際上，這非常繁瑣。對於 React Native，我們決定使用網頁的範式來實現相同的效果，即通過嵌套文字來達成。"
+      }
+    },
+    {
+      "segment_id": "ac961110",
+      "source_content": "```SnackPlayer name=Nested%20Text%20Example\nimport React from 'react';\nimport {Text, StyleSheet} from 'react-native';\n\nconst BoldAndBeautiful = () => {\n  return (\n    <Text style={styles.baseText}>\n      I am bold\n      <Text style={styles.innerText}> and red</Text>\n    </Text>\n  );\n};\n\nconst styles = StyleSheet.create({\n  baseText: {\n    fontWeight: 'bold',\n  },\n  innerText: {\n    color: 'red',\n  },\n});\n\nexport default BoldAndBeautiful;\n```",
+      "source_content_hash": "aecb80b284d4a4931a9f130677ca0df1d3d94514a5f674a2255317647db99c37",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ac961110"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Behind the scenes, React Native converts this to a flat `NSAttributedString` or `SpannableString` that contains the following information:",
+      "source_content_hash": "837b677947213d4863a9c8773179d794264547d44db73aeb6177a82097bc413a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在底層，React Native 會將其轉換為一個扁平的 `NSAttributedString` 或 `SpannableString`，其中包含以下資訊："
+      }
+    },
+    {
+      "segment_id": "7b2110d8",
+      "source_content": "```\n\"I am bold and red\"\n0-9: bold\n9-17: bold, red\n```",
+      "source_content_hash": "aa9c1e47abad6aff8596a6ee94f80e68dc67f245fdc56bd8c2bee5c9b846ce37",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7b2110d8"
+      }
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "## Containers",
+      "source_content_hash": "f05c6ac6714e087aaecbf01323a619896272dea2ef7544cb63b05e2ddc04914a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 容器"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "The `<Text>` element is unique relative to layout: everything inside is no longer using the Flexbox layout but using text layout. This means that elements inside of a `<Text>` are no longer rectangles, but wrap when they see the end of the line.",
+      "source_content_hash": "87e36de2c5e1f34391781c94c0c6ca64ae714cd876aac0103ff25dd29dab8332",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`<Text>` 元素在佈局上是獨特的：其內部不再使用 Flexbox 佈局，而是使用文字佈局。這意味著 `<Text>` 內部的元素不再是矩形，而是在行尾時自動換行。"
+      }
+    },
+    {
+      "segment_id": "7d898a0e",
+      "source_content": "```tsx\n<Text>\n  <Text>First part and </Text>\n  <Text>second part</Text>\n</Text>\n// Text container: the text will be inline if the space allowed it\n// |First part and second part|\n\n// otherwise, the text will flow as if it was one\n// |First part |\n// |and second |\n// |part       |\n\n<View>\n  <Text>First part and </Text>\n  <Text>second part</Text>\n</View>\n// View container: each text is its own block\n// |First part and|\n// |second part   |\n\n// otherwise, the text will flow in its own block\n// |First part |\n// |and        |\n// |second part|\n```",
+      "source_content_hash": "99fd6e1babbcaca69f631614be4588990f3854dd2081c6f56457921cefab7676",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d898a0e"
+      }
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "## Limited Style Inheritance",
+      "source_content_hash": "69766353e490eb738634e0534b533522b7e5c05be63f9f0eecfb604f6a1081bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 有限的樣式繼承"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "On the web, the usual way to set a font family and size for the entire document is to take advantage of inherited CSS properties like so:",
+      "source_content_hash": "be298feadc0010c0f232bba574defc3f9e8a2d9958c547333819dc24f48e41fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在網頁上，通常為整個文件設置字體家族和大小的方式是利用繼承的 CSS 屬性，如下所示："
+      }
+    },
+    {
+      "segment_id": "1a63b635",
+      "source_content": "```css\nhtml {\n  font-family:\n    'lucida grande', tahoma, verdana, arial, sans-serif;\n  font-size: 11px;\n  color: #141823;\n}\n```",
+      "source_content_hash": "c4c7b2f31998fafe2a064743a6a90a93c65840be6c4456cb3d94359f2c888200",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a63b635"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "All elements in the document will inherit this font unless they or one of their parents specifies a new rule.",
+      "source_content_hash": "2a9af98cee5c827f9eabd38b905e1a5f3a356e9402eeb6d58cea77fa2374b061",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "文件中的所有元素都將繼承此字體，除非它們或其父元素指定了新規則。"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "In React Native, we are more strict about it: **you must wrap all the text nodes inside of a `<Text>` component**. You cannot have a text node directly under a `<View>`.",
+      "source_content_hash": "59437a4e94802379432217c32927208beb001c1845d713772f338628e9ccc04c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 中，我們對此更加嚴格：**必須將所有文字節點包裹在 `<Text>` 元件中**。不能直接在 `<View>` 下放置文字節點。"
+      }
+    },
+    {
+      "segment_id": "136818ce",
+      "source_content": "```tsx\n// BAD: will raise exception, can't have a text node as child of a <View>\n<View>\n  Some text\n</View>\n\n// GOOD\n<View>\n  <Text>\n    Some text\n  </Text>\n</View>\n```",
+      "source_content_hash": "b2e22c24040d75ef8789ea8f99058e3c8cebbf1bb7d17452ee5b2988bff7ec7d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_136818ce"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "You also lose the ability to set up a default font for an entire subtree. Meanwhile, `fontFamily` only accepts a single font name, which is different from `font-family` in CSS. The recommended way to use consistent fonts and sizes across your application is to create a component `MyAppText` that includes them and use this component across your app. You can also use this component to make more specific components like `MyAppHeaderText` for other kinds of text.",
+      "source_content_hash": "edee851cca3ba2033a27040e807ba42f90fc02402d8f489dddb38158e9336d9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您也無法為整個子樹設置默認字體。同時，`fontFamily` 只接受單一字體名稱，這與 CSS 中的 `font-family` 不同。建議在應用程式中使用一致的字體和大小的方式是創建一個包含這些樣式的元件 `MyAppText`，並在整個應用程式中使用該元件。您還可以使用此元件來創建更具體的元件，如 `MyAppHeaderText`，用於其他類型的文字。"
+      }
+    },
+    {
+      "segment_id": "ad3cd2f7",
+      "source_content": "```tsx\n<View>\n  <MyAppText>\n    Text styled with the default font for the entire application\n  </MyAppText>\n  <MyAppHeaderText>Text styled as a header</MyAppHeaderText>\n</View>\n```",
+      "source_content_hash": "c18a01a67363139d0554f5811a33211a963f21dcd1dbcfbc9ad93d4ea633dcbd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ad3cd2f7"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "Assuming that `MyAppText` is a component that only renders out its children into a `Text` component with styling, then `MyAppHeaderText` can be defined as follows:",
+      "source_content_hash": "f071403d19444feb18ce5707016c422c6d7df5ec48bbe66217ba31f0d860d008",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設 `MyAppText` 是一個僅將其子元素渲染為帶有樣式的 `Text` 元件的元件，那麼 `MyAppHeaderText` 可以定義如下："
+      }
+    },
+    {
+      "segment_id": "b68d496b",
+      "source_content": "```tsx\nconst MyAppHeaderText = ({children}) => {\n  return (\n    <MyAppText>\n      <Text style={{fontSize: 20}}>{children}</Text>\n    </MyAppText>\n  );\n};\n```",
+      "source_content_hash": "12f7bbc6249b0b8deb80c36959d3121bedb2e34d9d8bae0315cff5044392244a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b68d496b"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "Composing `MyAppText` in this way ensures that we get the styles from a top-level component, but leaves us the ability to add / override them in specific use cases.",
+      "source_content_hash": "eb44124af060a9fbe9fe985284b05f6df5a920f1860cef4276f7c8610d07a15f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以這種方式組合 `MyAppText` 確保我們從頂層元件獲取樣式，同時保留了在特定用例中添加/覆蓋樣式的能力。"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "React Native still has the concept of style inheritance, but limited to text subtrees. In this case, the second part will be both bold and red.",
+      "source_content_hash": "0a259ebe6af8e4ffb19d14546ee034fa50a812d960974412758562490924d6ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 仍然有樣式繼承的概念，但僅限於文字子樹。在這種情況下，第二部分將同時是粗體和紅色。"
+      }
+    },
+    {
+      "segment_id": "7eccd6ba",
+      "source_content": "```tsx\n<Text style={{fontWeight: 'bold'}}>\n  I am bold\n  <Text style={{color: 'red'}}>and red</Text>\n</Text>\n```",
+      "source_content_hash": "95e53c0417840dfdf56f0c56f08281c64e9c220f8bf73883a08fbbb4c9e1567a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7eccd6ba"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "We believe that this more constrained way to style text will yield better apps:",
+      "source_content_hash": "dbc0bc422134ed49d78588ef92c989ae7911a2d4659403399710db4f0431e95c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們相信這種更受限的文字樣式設定方式將產生更好的應用程式："
+      }
+    },
+    {
+      "segment_id": "d0f2205c",
+      "source_content": "- (Developer) React components are designed with strong isolation in mind: You should be able to drop a component anywhere in your application, trusting that as long as the props are the same, it will look and behave the same way. Text properties that could inherit from outside of the props would break this isolation.\n\n- (Implementor) The implementation of React Native is also simplified. We do not need to have a `fontFamily` field on every single element, and we do not need to potentially traverse the tree up to the root every time we display a text node. The style inheritance is only encoded inside of the native Text component and doesn't leak to other components or the system itself.",
+      "source_content_hash": "eb74b87bb8ee15ff90cbbaf45e83d8aa19209dadbd45b3da7d8ce3537342b476",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- （開發者）React 元件設計時考慮了強隔離性：您應該能夠將元件放置在應用程式的任何位置，並相信只要屬性相同，它的外觀和行為就會相同。可以從屬性外部繼承的文字屬性將破壞這種隔離性。\n\n- （實現者）React Native 的實現也得到了簡化。我們不需要在每個元素上都有一個 `fontFamily` 字段，也不需要每次顯示文字節點時都遍歷樹直到根節點。樣式繼承僅編碼在原生 Text 元件內部，不會洩漏到其他元件或系統本身。"
+      }
+    },
+    {
+      "segment_id": "a5c10d06",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4b62f7d8",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "be4b1cbf",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "### `accessibilityHint`",
+      "source_content_hash": "bedd0a5bcd9baf72a419279154a2810f95389d1831588606f607037dbc93a9c3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityHint`"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.",
+      "source_content_hash": "a28e86300fde49260b1d879c349bbc48a31ed8492169472d6997c74c3c686cd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e9e27db3",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2663a629",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "3dc0369a4635cd2313255713560a12e19a44f4ce4fde6140a6d2611dd0e6277d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).",
+      "source_content_hash": "30d5b47298f6a63225a0c59bf266ad065d26e09236f44289899f9e6efbba48ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e563909",
+      "source_content": "See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.",
+      "source_content_hash": "d68609535930b1a80996cf1b5fb093608182de99a22cb49da46805464549191d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6c96eac5",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e5e9c06a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "49007f24",
+      "source_content": "### `accessibilityLabel`",
+      "source_content_hash": "4f55de35ce0c561187344a423b6279d22ada7d874f880caef84af52c16646758",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be0f7233",
+      "source_content": "Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.",
+      "source_content_hash": "1fe23ddffef265929fbb351e955236a65e9e36826519eac34bfbf70bcc254ae9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7fba24f0",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "783a74c3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dae9676f",
+      "source_content": "### `accessibilityRole`",
+      "source_content_hash": "caaf5bfb084952597e44b24f22d7d856e62e4f400b44dea56540dda8a44ce327",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "18ca7861",
+      "source_content": "Tells the screen reader to treat the currently focused on element as having a specific role.",
+      "source_content_hash": "3650fcd165ded7953bec190018840a4ca9bcb7a63457dca4d6962a3b0c96af0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "85821ad3",
+      "source_content": "On iOS, these roles map to corresponding Accessibility Traits. Image button has the same functionality as if the trait was set to both 'image' and 'button'. See the [Accessibility guide](accessibility.md#accessibilitytraits-ios) for more information.",
+      "source_content_hash": "bc0baace59d652040746e03b745a4d897bc7aa46d974170b226a45dafe0635ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "228d01d5",
+      "source_content": "On Android, these roles have similar functionality on TalkBack as adding Accessibility Traits does on Voiceover in iOS",
+      "source_content_hash": "16e5d98dd230ae337b2b6d441eca9e5549da3c47da3c8c8dacde05d2ae39f96c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "427ca3fc",
+      "source_content": "| Type                                                 |\n| ---------------------------------------------------- |\n| [AccessibilityRole](accessibility#accessibilityrole) |",
+      "source_content_hash": "922a37043d3d140811d9ce0dfcf54ca669717cb15b2d409309e3fbd3a691a37c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b45c59d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ad8a5f54",
+      "source_content": "### `accessibilityState`",
+      "source_content_hash": "0bdd4e063a84d12800f47b3af7a48f24aa490be3f0a319e622aaed8a851fab2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4033c370",
+      "source_content": "Tells the screen reader to treat the currently focused on element as being in a specific state.",
+      "source_content_hash": "e33b1d4d64d7f1571e974d13a1a28f9cd32bf33bf578e10fe354d54b72fe98f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dfb6fc67",
+      "source_content": "You can provide one state, no state, or multiple states. The states must be passed in through an object. Ex: `{selected: true, disabled: true}`.",
+      "source_content_hash": "fa824b36eef2855cccbb3fe643c69d55c0d0a244d0605bf13a1d82ae9400e5f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "083734fe",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| [AccessibilityState](accessibility#accessibilitystate) |",
+      "source_content_hash": "6c55b08e5ec76ffb97920c79b8a3267b5eaaedbf7d0b3db7275b017d3c275ae3",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "470854fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "34bbfe56",
+      "source_content": "### `accessibilityActions`",
+      "source_content_hash": "65ef3575ce8d838b086a5c2fd4b1081092142981debde17f9be061924f735a04",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "318fb07e",
+      "source_content": "Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.",
+      "source_content_hash": "54644c08572ef7e56bb3faee5c6bfecc2df56951e35195bb534e8886d86941e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "13440cd7",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.",
+      "source_content_hash": "1ecfd1939abbd0b9fbbf4aca4dc411e396b37a95ea49c57fc68dbd30ca09d3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "64f8d7b6",
+      "source_content": "| Type  | Required |\n| ----- | -------- |\n| array | No       |",
+      "source_content_hash": "3eb9b37d8ec34256192c7d6324a254b8b0d3ad5df0571d089c6731f185e78c8f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "0f91012f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e5878bb6",
+      "source_content": "### `onAccessibilityAction`",
+      "source_content_hash": "dc1fa5441c72b99fa55a0422042b127dc29f5dd2504f564005575aac5f2ced8d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "12bc7444",
+      "source_content": "Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.",
+      "source_content_hash": "697cf8f7f183845f1281ba73335775299a1c74a3ef55ce41be43edc49c2c5c8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f50056c0",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.",
+      "source_content_hash": "1ecfd1939abbd0b9fbbf4aca4dc411e396b37a95ea49c57fc68dbd30ca09d3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8cb8e346",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d0188f6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d59d3f3c",
+      "source_content": "### `accessible`",
+      "source_content_hash": "7e2f45d1c536354ff4e8f949668ed0b63fc433f315af4147b029c19a8259c830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b632973a",
+      "source_content": "When set to `true`, indicates that the view is an accessibility element.",
+      "source_content_hash": "2ac738357982a0358bca8abad2fb46f0ac1d9f7404e88c335eff132075937011",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2f8456b2",
+      "source_content": "See the [Accessibility guide](accessibility#accessible-ios-android) for more information.",
+      "source_content_hash": "39653f45a696aee5fb208e5ed16044e27c86570aeeee0e589b1eda1a54a8a695",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d5a1a2f0",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `true`  |",
+      "source_content_hash": "9b33ea33bebceeb9fc1a046094f80b4a2dea3c73da77173c612910b9ae75bba7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "67ad3f40",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bea5d450",
+      "source_content": "### `adjustsFontSizeToFit`",
+      "source_content_hash": "a2ee4ab588c44d0560d0c473cc63cb3aae15a21df2eff4f2e91beabddd73f1b5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "aa705b4d",
+      "source_content": "Specifies whether fonts should be scaled down automatically to fit given style constraints.",
+      "source_content_hash": "8e7328d4ebcc8d43e65783bb4acd892f98b1359fec570a6c54be6d88a3d66820",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5348e32b",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "75448b5e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e93ab8a6",
+      "source_content": "### `allowFontScaling`",
+      "source_content_hash": "cd3aaaa5104322d70f08c73bcfcb70cc71e4f0c002ce8291a5ca30e6d525a79e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9e08343",
+      "source_content": "Specifies whether fonts should scale to respect Text Size accessibility settings.",
+      "source_content_hash": "1a67ec204afdb3773dd76640f1c5fe98f771fc857dd9e8e7d1c2ee4bbf78fb71",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2b6d6f41",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `true`  |",
+      "source_content_hash": "9b33ea33bebceeb9fc1a046094f80b4a2dea3c73da77173c612910b9ae75bba7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1864a9c0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b8925cfb",
+      "source_content": "### `android_hyphenationFrequency` <div class=\"label android\">Android</div>",
+      "source_content_hash": "159c280a2948be766e5e405b471342c1fb52b42907303521947ab356ecfa3078",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "95b3e282",
+      "source_content": "Sets the frequency of automatic hyphenation to use when determining word breaks on Android API Level 23+.",
+      "source_content_hash": "2c2ea005e4d62689863646184a3b5c79c7260b6f2f9baa0fbbb5adeb9639fb14",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定在 Android API 23+ 上決定斷字時使用的自動連字號頻率。"
+      }
+    },
+    {
+      "segment_id": "d01dc4cd",
+      "source_content": "| Type                                | Default  |\n| ----------------------------------- | -------- |\n| enum(`'none'`, `'normal'`,`'full'`) | `'none'` |",
+      "source_content_hash": "f9a53ceaa2e969f55bdd14dd84b66b492a47f0d84938d31b896af57cfaa86446",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d01dc4cd"
+      }
+    },
+    {
+      "segment_id": "f6da3fad",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8e437dbf",
+      "source_content": "### `aria-busy`",
+      "source_content_hash": "2d7129d4b1ef33f5fb6834bebc39064f979bb22c9bc9b432d1ffa601bfefff8b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-busy`"
+      }
+    },
+    {
+      "segment_id": "c9f6a516",
+      "source_content": "Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.",
+      "source_content_hash": "9def7a899263ea015f97bf76a19b3117a2428cfbc7774a4282235a04d4019b9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素正在被修改，輔助技術可能需要等待變更完成後才通知使用者更新。"
+      }
+    },
+    {
+      "segment_id": "151606e1",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_151606e1"
+      }
+    },
+    {
+      "segment_id": "c4da5fd2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "28d66ee4",
+      "source_content": "### `aria-checked`",
+      "source_content_hash": "1ddb4bac483133b13df7ffe6a86f8c816c15f58317a05c6dee8e7f6727d4ae29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-checked`"
+      }
+    },
+    {
+      "segment_id": "0974dfbb",
+      "source_content": "Indicates the state of a checkable element. This field can either take a boolean or the \"mixed\" string to represent mixed checkboxes.",
+      "source_content_hash": "ee00810ca9f60817dfa81860d77c913a25c1592c90cdf81625831248bece7011",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可勾選元素的狀態。此欄位可接受布林值或「mixed」字串來代表混合勾選框。"
+      }
+    },
+    {
+      "segment_id": "2f4a2def",
+      "source_content": "| Type             | Default |\n| ---------------- | ------- |\n| boolean, 'mixed' | false   |",
+      "source_content_hash": "35b713c4cc986c8b8e7daf0a70768426bc9f94663f227376941544b0bdd30e2d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2f4a2def"
+      }
+    },
+    {
+      "segment_id": "3d9b49ef",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "40a24bf2",
+      "source_content": "### `aria-disabled`",
+      "source_content_hash": "8f594923bce023c64d4fc2aee2a4c42ab34f87bdf7415694cb7ad9c12af72aa9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-disabled`"
+      }
+    },
+    {
+      "segment_id": "a30b7214",
+      "source_content": "Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.",
+      "source_content_hash": "1e3ab9d887f87e2c70b2de3b929d2b081abf17a414c68440a3b6e9ffaa05ad16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素可感知但已被禁用，因此無法編輯或操作。"
+      }
+    },
+    {
+      "segment_id": "caa7d816",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_caa7d816"
+      }
+    },
+    {
+      "segment_id": "12b8efbb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fe45329d",
+      "source_content": "### `aria-expanded`",
+      "source_content_hash": "81570a1ec92ab2059c46a439c874fa3f93ee6f66baf451ea9c6aa69ca5e98e20",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-expanded`"
+      }
+    },
+    {
+      "segment_id": "e17d0554",
+      "source_content": "Indicates whether an expandable element is currently expanded or collapsed.",
+      "source_content_hash": "2ab2df61a604dfe4bc68b1ebd36184ebc1de1bce603f5c9ce5e00d563309e8fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可展開元素目前處於展開或折疊狀態。"
+      }
+    },
+    {
+      "segment_id": "b7c15396",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7c15396"
+      }
+    },
+    {
+      "segment_id": "c43686a1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fb79182e",
+      "source_content": "### `aria-label`",
+      "source_content_hash": "a00fb48b33ddc9a416be3c695411699edb748552c762cabf3a218884fefccd94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-label`"
+      }
+    },
+    {
+      "segment_id": "4667c154",
+      "source_content": "Defines a string value that labels an interactive element.",
+      "source_content_hash": "833b7b7f2013c4efe8f0db65c63e6d4cfb1ff08cf03b33a641e54d5f17f9dffb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義標記互動元素的字串值。"
+      }
+    },
+    {
+      "segment_id": "98dbe8a0",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_98dbe8a0"
+      }
+    },
+    {
+      "segment_id": "eb288a1a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "99e44af3",
+      "source_content": "### `aria-selected`",
+      "source_content_hash": "326fe630abddf06fe498f4b493ea8e9261d66db3bfa8efffa30fa552d22d6d9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-selected`"
+      }
+    },
+    {
+      "segment_id": "dd78ef80",
+      "source_content": "Indicates whether a selectable element is currently selected or not.",
+      "source_content_hash": "b454a16cf5dc03042d2fe609cc3ba01bec5a1a44d18fd14c1bc66a587d206836",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可選元素目前是否被選中。"
+      }
+    },
+    {
+      "segment_id": "efc5991c",
+      "source_content": "| Type    |\n| ------- |\n| boolean |",
+      "source_content_hash": "afc5252fe97c3b4645cc839e72fb23555baeef211698715abd6b5ac8ee57a841",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_efc5991c"
+      }
+    },
+    {
+      "segment_id": "f7420cb5",
+      "source_content": "### `dataDetectorType` <div class=\"label android\">Android</div>",
+      "source_content_hash": "62762e32d11da74eaf96644f3e58506b7618577148f8e0d4c651579042b5d2f5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `dataDetectorType` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "dbea1fe8",
+      "source_content": "Determines the types of data converted to clickable URLs in the text element. By default, no data types are detected.",
+      "source_content_hash": "551b9bdf53df7e65eb0107915b4bd20ee94b4394cfbfff307cdf40e3a6c83ca2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定文字元素中哪些類型的資料會被轉換為可點擊的連結。預設不偵測任何資料類型。"
+      }
+    },
+    {
+      "segment_id": "ebea2db8",
+      "source_content": "You can provide only one type.",
+      "source_content_hash": "12291750271535a042c527a498ce83e1abbaf9a1b15abfc52add667090d2d00c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "只能提供一種類型。"
+      }
+    },
+    {
+      "segment_id": "7b3a7aa0",
+      "source_content": "| Type                                                          | Default  |\n| ------------------------------------------------------------- | -------- |\n| enum(`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |",
+      "source_content_hash": "8d7d8a4458d4001ddd31ce6b00c3ef0740d91afea4ee28f34abb5c168623be01",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7b3a7aa0"
+      }
+    },
+    {
+      "segment_id": "8cd63218",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "99b95415",
+      "source_content": "### `disabled` <div class=\"label android\">Android</div>",
+      "source_content_hash": "a4de98a239502e47472d361d5ae4133cb12e331ec2c2d09b6303fa7445e4ec0a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `disabled` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "860eb645",
+      "source_content": "Specifies the disabled state of the text view for testing purposes.",
+      "source_content_hash": "5905a093bd8a098b658f1f9c4a055ed43ce5540c710960afe24f9e9e3c050582",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為測試目的指定文字視圖的禁用狀態。"
+      }
+    },
+    {
+      "segment_id": "d29b5cbe",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d29b5cbe"
+      }
+    },
+    {
+      "segment_id": "c5dbf015",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dfa57bae",
+      "source_content": "### `dynamicTypeRamp` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "786d03605eab701aa5eb5b028391650132a5ce99132a1caffae5f1140e4dd010",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `dynamicTypeRamp` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "85f6fcdd",
+      "source_content": "The [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) ramp to apply to this element on iOS.",
+      "source_content_hash": "36d74423c4164e61047f878041ccc742201d723e732bf990977397c5b81d8252",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在 iOS 上套用至此元素的[動態字型](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically)級別。"
+      }
+    },
+    {
+      "segment_id": "42ba4f20",
+      "source_content": "| Type                                                                                                                                                     | Default  |\n| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |\n| enum(`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |",
+      "source_content_hash": "5554b7d313de4f0cfe8170d041d4fab0677fdf61f08bba93b9d487cbe4d520cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_42ba4f20"
+      }
+    },
+    {
+      "segment_id": "4f13b5ed",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "453cd509",
+      "source_content": "### `ellipsizeMode`",
+      "source_content_hash": "2a2e528092205f5c7f8dc9715c91d457bd72086f00865de1152913aa30e4795e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `ellipsizeMode`"
+      }
+    },
+    {
+      "segment_id": "80b10d5a",
+      "source_content": "When `numberOfLines` is set, this prop defines how the text will be truncated. `numberOfLines` must be set in conjunction with this prop.",
+      "source_content_hash": "449b06455abc3c6b8afadf4288ef627193fa4696270105f0df531f2732eb0a0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設定 `numberOfLines` 時，此屬性定義文字如何被截斷。必須與 `numberOfLines` 搭配使用。"
+      }
+    },
+    {
+      "segment_id": "ce99c217",
+      "source_content": "This can be one of the following values:",
+      "source_content_hash": "065c321a51e1b93e9dd1395a32adc6354b06dec33a34056642cc06233cb66716",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可為下列值之一："
+      }
+    },
+    {
+      "segment_id": "c8184508",
+      "source_content": "- `head` - The line is displayed so that the end fits in the container and the missing text at the beginning of the line is indicated by an ellipsis glyph. e.g., \"...wxyz\"\n- `middle` - The line is displayed so that the beginning and end fit in the container and the missing text in the middle is indicated by an ellipsis glyph. \"ab...yz\"\n- `tail` - The line is displayed so that the beginning fits in the container and the missing text at the end of the line is indicated by an ellipsis glyph. e.g., \"abcd...\"\n- `clip` - Lines are not drawn past the edge of the text container.",
+      "source_content_hash": "d15aa6583392e81549fdc7d5bc295dbfd087de3ee02585301db359394e26818a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `head` - 行尾顯示在容器內，行首缺失文字以省略號表示。例如：「...wxyz」\n- `middle` - 行首行尾顯示在容器內，中間缺失文字以省略號表示。例如：「ab...yz」\n- `tail` - 行首顯示在容器內，行尾缺失文字以省略號表示。例如：「abcd...」\n- `clip` - 不繪製超出文字容器邊界的行。"
+      }
+    },
+    {
+      "segment_id": "fb09f8e1",
+      "source_content": "> On Android, when `numberOfLines` is set to a value higher than `1`, only `tail` value will work correctly.",
+      "source_content_hash": "4938284d6bc263f7e9464de5a99e19436ad2dbae19ef2cfd2bc65258ff54d271",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 在 Android 上，當 `numberOfLines` 設定為大於 `1` 的值時，只有 `tail` 值能正常運作。"
+      }
+    },
+    {
+      "segment_id": "fc1805a0",
+      "source_content": "| Type                                           | Default |\n| ---------------------------------------------- | ------- |\n| enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |",
+      "source_content_hash": "f9336ee7085cca1779d683c53859fa035c55d83a05f853975259946bd32481b5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fc1805a0"
+      }
+    },
+    {
+      "segment_id": "29fc9ffd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8afa0643",
+      "source_content": "### `id`",
+      "source_content_hash": "6fa10ecc5949d933365af59824901f344e8a5ed1c7d28cb9c17847fab685f567",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `id`"
+      }
+    },
+    {
+      "segment_id": "7e0b49a3",
+      "source_content": "Used to locate this view from native code. Has precedence over `nativeID` prop.",
+      "source_content_hash": "d64f0d7280e09f430c7a414c496924de65d20cc4b3a0b1889727782e22e2c56f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於從原生程式碼定位此視圖。優先級高於 `nativeID` 屬性。"
+      }
+    },
+    {
+      "segment_id": "9736b904",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9736b904"
+      }
+    },
+    {
+      "segment_id": "06929df1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4692a8bd",
+      "source_content": "### `maxFontSizeMultiplier`",
+      "source_content_hash": "f690dc4a694b9e09fcc4fe1b120bd1ad9d95e75dc23dca70e40c79a2cc242bdb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maxFontSizeMultiplier`"
+      }
+    },
+    {
+      "segment_id": "a5a5c34e",
+      "source_content": "Specifies the largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:",
+      "source_content_hash": "2d8c88fde20ce5cd3a2a7d17d4a49adef982ec27a723e366c3e58b13a4635d31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定當 `allowFontScaling` 啟用時，字體可達到的最大縮放比例。可能的值："
+      }
+    },
+    {
+      "segment_id": "4593c310",
+      "source_content": "- `null/undefined`: inherit from the parent node or the global default (0)\n- `0`: no max, ignore parent/global default\n- `>= 1`: sets the `maxFontSizeMultiplier` of this node to this value",
+      "source_content_hash": "646624a9c735ed504c405abdd3b70fcaad3bd081cf67b7c001952d0bad3d62ce",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `null/undefined`：繼承父節點或全域預設值 (0)\n- `0`：無上限，忽略父級/全域預設值\n- `>= 1`：將此節點的 `maxFontSizeMultiplier` 設為此值"
+      }
+    },
+    {
+      "segment_id": "78e1b364",
+      "source_content": "| Type   | Default     |\n| ------ | ----------- |\n| number | `undefined` |",
+      "source_content_hash": "12455cb601f5cfa5a46087a72be1ab45bacd3c56ce4306d0628206056e7a9861",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_78e1b364"
+      }
+    },
+    {
+      "segment_id": "1044043d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0c760a60",
+      "source_content": "### `minimumFontScale` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "cfa4a80d0edfdad111438f34845e5c95b1e5830a3a11411aa52246d224720bdc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `minimumFontScale` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "9b52f634",
+      "source_content": "Specifies the smallest possible scale a font can reach when `adjustsFontSizeToFit` is enabled. (values 0.01-1.0).",
+      "source_content_hash": "1e1a0c963e4fabe3fbf3bb9384ea1cbaa9e5d18a5bf3800e972cf56fd27652c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定當 `adjustsFontSizeToFit` 啟用時，字體可縮減的最小比例 (值範圍 0.01-1.0)。"
+      }
+    },
+    {
+      "segment_id": "b2937a32",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b2937a32"
+      }
+    },
+    {
+      "segment_id": "3192babb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5651bec6",
+      "source_content": "### `nativeID`",
+      "source_content_hash": "157dbabe7da1e6477d223af8aea3d0045181cfaad08511e049648be26c80d1c8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nativeID`"
+      }
+    },
+    {
+      "segment_id": "0dcd0a42",
+      "source_content": "Used to locate this view from native code.",
+      "source_content_hash": "cebf4d073f5cbe12c1f5781b83c72b34b9925b4262e30359eb085f8684f19ba4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於從原生程式碼定位此視圖。"
+      }
+    },
+    {
+      "segment_id": "f50ac5cd",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f50ac5cd"
+      }
+    },
+    {
+      "segment_id": "c4024334",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3551e936",
+      "source_content": "### `numberOfLines`",
+      "source_content_hash": "b6bd9d883bfbe46d017c6cf884fcefbc3f1aa25292dbc2940bc746d3e9dec635",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `numberOfLines`"
+      }
+    },
+    {
+      "segment_id": "ebe19e6f",
+      "source_content": "Used to truncate the text with an ellipsis after computing the text layout, including line wrapping, such that the total number of lines does not exceed this number. Setting this property to `0` will result in unsetting this value, which means that no lines restriction will be applied.",
+      "source_content_hash": "5a0aa0351e10b18b6c57dd8bc617a16712866df87ba163968c30e0de403d8895",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於在計算文字佈局（包括自動換行）後，以省略號截斷文字，使總行數不超過此數值。將此屬性設為 `0` 會取消此限制，表示不應用任何行數限制。"
+      }
+    },
+    {
+      "segment_id": "b4098d8a",
+      "source_content": "This prop is commonly used with `ellipsizeMode`.",
+      "source_content_hash": "5e1121d2e4e32329a88fcf11ce25982259d8f9823b0265088dacf657302c7c03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此屬性通常與 `ellipsizeMode` 一起使用。"
+      }
+    },
+    {
+      "segment_id": "5abd4a57",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `0`     |",
+      "source_content_hash": "83458482732eb55b223c31c4441b5e732f7b43832d88f094b44c374ebad3e557",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5abd4a57"
+      }
+    },
+    {
+      "segment_id": "aa4cdf41",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c5ae9e2c",
+      "source_content": "### `onLayout`",
+      "source_content_hash": "4003ab8e4c09c2b682ab13f81e81b2827452db77e43f86621b1c3c7107f873ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLayout`"
+      }
+    },
+    {
+      "segment_id": "bc1752c9",
+      "source_content": "Invoked on mount and on layout changes.",
+      "source_content_hash": "290f35b58ac09874c73cf9c19bd00bc7285f2b644910877c66249e1c5fe2aa8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在掛載時和佈局變更時觸發。"
+      }
+    },
+    {
+      "segment_id": "817dae8d",
+      "source_content": "| Type                                                     |\n| -------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |",
+      "source_content_hash": "53882e7a75b7789bb4eca313c0bfd12b1d730533fe194f44b12dee8209224cb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_817dae8d"
+      }
+    },
+    {
+      "segment_id": "e082518b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "58e141d3",
+      "source_content": "### `onLongPress`",
+      "source_content_hash": "6b1d8d3032b300badd63943086152b8e0894f22f57c2723599d35a8f7b19d3cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLongPress`"
+      }
+    },
+    {
+      "segment_id": "de7b71a3",
+      "source_content": "This function is called on long press.",
+      "source_content_hash": "e8deb3f5244d5654771b36315879277c70f10404c80e91145201c439540e590c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此函式在長按時呼叫。"
+      }
+    },
+    {
+      "segment_id": "593608d7",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_593608d7"
+      }
+    },
+    {
+      "segment_id": "a23eced3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "df371c55",
+      "source_content": "### `onMoveShouldSetResponder`",
+      "source_content_hash": "5858e40f5992d3eb08bf5fcfe350f288edb6984f729337fcd64b68e161445fc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMoveShouldSetResponder`"
+      }
+    },
+    {
+      "segment_id": "11a78230",
+      "source_content": "Does this view want to \"claim\" touch responsiveness? This is called for every touch move on the `View` when it is not the responder.",
+      "source_content_hash": "1a5a0b77d1869f52708184db61b70aa1d2322849ef2fcc110bc18e077cfbc4cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此視圖是否要「聲明」觸控回應？當此 `View` 不是響應者時，每次觸控移動都會呼叫此函式。"
+      }
+    },
+    {
+      "segment_id": "1d8f789d",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1d8f789d"
+      }
+    },
+    {
+      "segment_id": "b36cff2a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "60b1b4a0",
+      "source_content": "### `onPress`",
+      "source_content_hash": "96ba311564eedff48b1fd9456762bcb4cf878275d059cfc91daef1956dc3b970",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPress`"
+      }
+    },
+    {
+      "segment_id": "cee5aad9",
+      "source_content": "Function called on user press, triggered after `onPressOut`.",
+      "source_content_hash": "1c82fc3cd084366e3f3b11e57aa5fa4b129ea0e35592d77777a84835c23308ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用者按壓時呼叫的函式，在 `onPressOut` 之後觸發。"
+      }
+    },
+    {
+      "segment_id": "a25897a0",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a25897a0"
+      }
+    },
+    {
+      "segment_id": "4de138e4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "923bccf9",
+      "source_content": "### `onPressIn`",
+      "source_content_hash": "ae65497c18a5296604bb4cfba2740bf13b9312197cdc31bf92aa808a5e62628f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressIn`"
+      }
+    },
+    {
+      "segment_id": "50cd4f87",
+      "source_content": "Called immediately when a touch is engaged, before `onPressOut` and `onPress`.",
+      "source_content_hash": "e3d1ad06cc9f162fcb7428c379ca3a2546de2ac88d85645af49fea0cdedde109",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "觸控開始時立即呼叫，在 `onPressOut` 和 `onPress` 之前。"
+      }
+    },
+    {
+      "segment_id": "282b322e",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_282b322e"
+      }
+    },
+    {
+      "segment_id": "acc9cb6f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e9a726de",
+      "source_content": "### `onPressOut`",
+      "source_content_hash": "ffc349eda93250705960dc02d87ba3d2a94f9465be883d516060a2eca5c7643f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressOut`"
+      }
+    },
+    {
+      "segment_id": "71c1aac0",
+      "source_content": "Called when a touch is released.",
+      "source_content_hash": "db69def24e8f42f0705db1fc2ba88cbf366308b7e9bd71663196a41623b37c14",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "觸控結束時呼叫。"
+      }
+    },
+    {
+      "segment_id": "9444bc5f",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9444bc5f"
+      }
+    },
+    {
+      "segment_id": "816617cb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "11e4b3f0",
+      "source_content": "### `onResponderGrant`",
+      "source_content_hash": "1e5b237268a2d87bfba9fb9638d2c3b7347450faa4204a487f9731187f943d9b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderGrant`"
+      }
+    },
+    {
+      "segment_id": "6ba1041f",
+      "source_content": "The View is now responding to touch events. This is the time to highlight and show the user what is happening.",
+      "source_content_hash": "1d1687c6917a947357905c28e55b330697e75cb59daedab72bf057708602a92c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "視圖現在開始響應觸控事件。此時應高亮顯示並向使用者展示正在發生的操作。"
+      }
+    },
+    {
+      "segment_id": "8f554a02",
+      "source_content": "On Android, return true from this callback to prevent any other native components from becoming responder until this responder terminates.",
+      "source_content_hash": "c43e5c561df4e0519bba0586ce2b8ebf9f38953c04955588ffa7e450e7d6cce2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，從此回調返回 true 可阻止其他原生元件在此響應者終止前成為響應者。"
+      }
+    },
+    {
+      "segment_id": "e2174865",
+      "source_content": "| Type                                                              |\n| ----------------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void ｜ boolean` |",
+      "source_content_hash": "28cab019b186e2cf81a133f3e4a9e7b0f11f1cb2f8dab85fb1ff8d55ca303806",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e2174865"
+      }
+    },
+    {
+      "segment_id": "9bd7b59c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "758b872b",
+      "source_content": "### `onResponderMove`",
+      "source_content_hash": "c30bc4e92ced71cb1e3dafbb8f8d3096430bc6b3880608fd83410b812ab59e08",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderMove`"
+      }
+    },
+    {
+      "segment_id": "298a32fc",
+      "source_content": "The user is moving their finger.",
+      "source_content_hash": "6a912d0eb46e8514f0bd9ec7bb1185c15c2b1a91995989f0028746eb62799322",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用者正在移動手指。"
+      }
+    },
+    {
+      "segment_id": "03e1770c",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03e1770c"
+      }
+    },
+    {
+      "segment_id": "ad51c7cf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e04097ef",
+      "source_content": "### `onResponderRelease`",
+      "source_content_hash": "db004f2c97ad9f28b12c3f3674094d904f00b4a9a8eb0b91e3a340ab6327e6ba",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderRelease`"
+      }
+    },
+    {
+      "segment_id": "e4db19e2",
+      "source_content": "Fired at the end of the touch.",
+      "source_content_hash": "47680ffe52b65e4a91bb9df19ba98122bc50e52291f5f058285cbb9fd9b1fd31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "觸控結束時觸發。"
+      }
+    },
+    {
+      "segment_id": "dbb83567",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_dbb83567"
+      }
+    },
+    {
+      "segment_id": "cae8eb4b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "261891c2",
+      "source_content": "### `onResponderTerminate`",
+      "source_content_hash": "a56719ae413f87f4c557e3766e52ee5885355619d0cd1fdf7cc6451e676b5c40",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderTerminate`"
+      }
+    },
+    {
+      "segment_id": "14d50a1d",
+      "source_content": "The responder has been taken from the `View`. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (e.g., happens with control center/ notification center on iOS)",
+      "source_content_hash": "5e5214bcd9786577bcb0afb376e454a354f24b3b2fd26453eb3609b3e404f335",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "響應者權限已從 `View` 被奪取。可能因呼叫 `onResponderTerminationRequest` 後被其他視圖奪取，也可能被系統未經詢問直接奪取（例如 iOS 上的控制中心/通知中心）"
+      }
+    },
+    {
+      "segment_id": "d916c88b",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d916c88b"
+      }
+    },
+    {
+      "segment_id": "1167e065",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c39bedef",
+      "source_content": "### `onResponderTerminationRequest`",
+      "source_content_hash": "c61a8cac6f5a112b417de355746345d66eba0619744daaf0cb778b231f93242e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderTerminationRequest`"
+      }
+    },
+    {
+      "segment_id": "56ca860f",
+      "source_content": "Some other `View` wants to become a responder and is asking this `View` to release its responder. Returning `true` allows its release.",
+      "source_content_hash": "e890f97ea4048fdf4a025e9f5ce386c6965b7ce50bd676c427b69e3f48344e93",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當其他 `View` 試圖成為響應者並要求當前 `View` 釋放響應權時觸發。返回 `true` 表示允許釋放。"
+      }
+    },
+    {
+      "segment_id": "6de5a794",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6de5a794"
+      }
+    },
+    {
+      "segment_id": "d2350012",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7f7d0ca9",
+      "source_content": "### `onStartShouldSetResponderCapture`",
+      "source_content_hash": "8f80d1b54de1a035f8ee55996990ff176e3ec1715b3811be15f6b8c0cdcb471b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onStartShouldSetResponderCapture`"
+      }
+    },
+    {
+      "segment_id": "7753928b",
+      "source_content": "If a parent `View` wants to prevent a child `View` from becoming a responder on a touch start, it should have this handler which returns `true`.",
+      "source_content_hash": "f6c73032379b2245b2fbd34a5b9f1f3c0673355d31a25ba19481bbc49e9c8120",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若父級 `View` 需阻止子級 `View` 在觸碰開始時成為響應者，應設置此處理函數並返回 `true`。"
+      }
+    },
+    {
+      "segment_id": "6651e1ba",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6651e1ba"
+      }
+    },
+    {
+      "segment_id": "49f5a5b1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4d0a3f70",
+      "source_content": "### `onTextLayout`",
+      "source_content_hash": "9d2a1a4ec6d5ff6e6685357427f426782f5e610088c879d0bdae614b1eca7212",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onTextLayout`"
+      }
+    },
+    {
+      "segment_id": "616a56d6",
+      "source_content": "Invoked on Text layout change.",
+      "source_content_hash": "20e94934df7a1bf5015603a98bb7eef3c390da59290294741fe687f7bb7cf46f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在文字佈局變更時觸發。"
+      }
+    },
+    {
+      "segment_id": "97805dfe",
+      "source_content": "| Type                                                 |\n| ---------------------------------------------------- |\n| ([`TextLayoutEvent`](text#textlayoutevent)) => mixed |",
+      "source_content_hash": "209c4860446178ad183064eada36b9e82e3ce1051ac23be2bce9dd74317f200e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_97805dfe"
+      }
+    },
+    {
+      "segment_id": "5a8f389e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3652952e",
+      "source_content": "### `pressRetentionOffset`",
+      "source_content_hash": "d20a68973df1490b6b22c1e707dfffb6df43b8deaba16ee1d79c685f8fa65dd2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pressRetentionOffset`"
+      }
+    },
+    {
+      "segment_id": "de1c61f2",
+      "source_content": "When the scroll view is disabled, this defines how far your touch may move off of the button, before deactivating the button. Once deactivated, try moving it back and you'll see that the button is once again reactivated! Move it back and forth several times while the scroll view is disabled. Ensure you pass in a constant to reduce memory allocations.",
+      "source_content_hash": "380e98136b640f5dbe2d15d8da680c10d301c02bead10ee96a12f85e3d2522be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當滾動視圖禁用時，此屬性定義觸碰點可偏離按鈕多遠才會停用按鈕。停用後若移回範圍內會重新激活。建議傳入常數以減少記憶體分配。"
+      }
+    },
+    {
+      "segment_id": "865b2b6b",
+      "source_content": "| Type                 |\n| -------------------- |\n| [Rect](rect), number |",
+      "source_content_hash": "885ec837d8e7931668a873e7c469f8384b43b9c90afa5e5ef22ce319a45cb0eb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_865b2b6b"
+      }
+    },
+    {
+      "segment_id": "9341eb99",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "97a6ee36",
+      "source_content": "### `role`",
+      "source_content_hash": "3463b610032512464093b5c5733eee15f95cb5e1b5a4a8c84895aa293f5c1937",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `role`"
+      }
+    },
+    {
+      "segment_id": "01c67364",
+      "source_content": "`role` communicates the purpose of a component to the user of an assistive technology. Has precedence over the [`accessibilityRole`](text#accessibilityrole) prop.",
+      "source_content_hash": "084fc2c58e07dccbc7efb018a94632531c26544e9c133f6a5a4def4c9149140a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`role` 向輔助技術使用者傳達組件用途，其優先級高於 [`accessibilityRole`](text#accessibilityrole) 屬性。"
+      }
+    },
+    {
+      "segment_id": "331c75cc",
+      "source_content": "| Type                       |\n| -------------------------- |\n| [Role](accessibility#role) |",
+      "source_content_hash": "7176a0fd87b8c1b1a63103667fd3ad1d4150680e301afa9a3defd16c8dd653ac",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_331c75cc"
+      }
+    },
+    {
+      "segment_id": "37a3467a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "535800c1",
+      "source_content": "### `selectable`",
+      "source_content_hash": "5274fc9ee8194b56f3a221fdf558c2921acb23046b89604a8504393611767b65",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `selectable`"
+      }
+    },
+    {
+      "segment_id": "639b6949",
+      "source_content": "Lets the user select text, to use the native copy and paste functionality.",
+      "source_content_hash": "4b0654c89b0102c7ff24ed0d7403d5d61c9c65f0259c93972bff839c40f2a081",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "允許用戶選取文字以使用原生複製貼上功能。"
+      }
+    },
+    {
+      "segment_id": "7ef82f84",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7ef82f84"
+      }
+    },
+    {
+      "segment_id": "9d6ecab1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7173bf1f",
+      "source_content": "### `selectionColor` <div class=\"label android\">Android</div>",
+      "source_content_hash": "bd785c40fba244250244ebe197456d488f9aad66351611267e95bb06f5899b2b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `selectionColor` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "ee5fbf67",
+      "source_content": "The highlight color of the text.",
+      "source_content_hash": "e3a3e59fae988dd2d0ea33fa3aa3a2dcc6e76647fc9b5f63d7e7996636c10e18",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "文字選取時的高亮顏色。"
+      }
+    },
+    {
+      "segment_id": "a432e532",
+      "source_content": "| Type            |\n| --------------- |\n| [color](colors) |",
+      "source_content_hash": "5e0948d1063eb18700fbd0d2233d4c0a54ac9a0604eee32dfce0e00099c2fc3d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a432e532"
+      }
+    },
+    {
+      "segment_id": "271c66a1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f03db46c",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `style`"
+      }
+    },
+    {
+      "segment_id": "2a61c54e",
+      "source_content": "| Type                                                                 |\n| -------------------------------------------------------------------- |\n| [Text Style](text-style-props), [View Style Props](view-style-props) |",
+      "source_content_hash": "7343f948edc4f8f121d0f19ed0df44fc190d5a439ba47764d5c4699d094832fd",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2a61c54e"
+      }
+    },
+    {
+      "segment_id": "6582b4a6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3ffae646",
+      "source_content": "### `suppressHighlighting` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "6a5dfeb036fd2210668a4936d73601afea7d1e959f0cdb40ba0c62f7d7afd172",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `suppressHighlighting` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "0df213ce",
+      "source_content": "When `true`, no visual change is made when text is pressed down. By default, a gray oval highlights the text on press down.",
+      "source_content_hash": "b3ab5356d3274341695b85c5a7eff2f5b3a343ed63ef41ed6d0159e74f9b23e2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `true` 時，文字被按壓時不會顯示視覺變化（預設會顯示灰色橢圓高亮）。"
+      }
+    },
+    {
+      "segment_id": "6d58032e",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6d58032e"
+      }
+    },
+    {
+      "segment_id": "d2649584",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1dc9f519",
+      "source_content": "### `testID`",
+      "source_content_hash": "83bb1ecc3bce9cf38987403cbf0eee8440f9d30cfdf54fe124a9fc8228f9b47c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `testID`"
+      }
+    },
+    {
+      "segment_id": "664ad775",
+      "source_content": "Used to locate this view in end-to-end tests.",
+      "source_content_hash": "8358f089947ad586b55fd43eb0645023a4374ab9abb17f363cae443734b4a16e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於在端對端測試中定位此視圖。"
+      }
+    },
+    {
+      "segment_id": "361ce1ce",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_361ce1ce"
+      }
+    },
+    {
+      "segment_id": "2fb86f6f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "da66ef8b",
+      "source_content": "### `textBreakStrategy` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1b2a667c372a20754547fc04c96117f70c596af311b374a1a10108ef85396947",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textBreakStrategy` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "cc33a01a",
+      "source_content": "Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced`.",
+      "source_content_hash": "687b1114f569cbf1d6e68a4eb3cb51288e9f558ea2ac32a18782bc730654a784",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android API 23+ 設定文字斷行策略，可選值為 `simple`、`highQuality`、`balanced`。"
+      }
+    },
+    {
+      "segment_id": "137b23cc",
+      "source_content": "| Type                                            | Default       |\n| ----------------------------------------------- | ------------- |\n| enum(`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |",
+      "source_content_hash": "130813cd290163783c5bb30f1237f4c069ea76f928c1f81fb2fd6f7af1632b77",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_137b23cc"
+      }
+    },
+    {
+      "segment_id": "07003cb3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "40d62bc1",
+      "source_content": "### `lineBreakStrategyIOS` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "6a18c4706d1537d8c1c8b75746ac5fcb9c82905d60239024873d6e49376aec76",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `lineBreakStrategyIOS` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "68d479f0",
+      "source_content": "Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `hangul-word` and `push-out`.",
+      "source_content_hash": "e6d4974ac443a3c362dc19673cdeaa6e93e3a835df0a6e76ffb641b6dc417832",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 14+ 設定換行策略，可選值為 `none`、`standard`、`hangul-word` 和 `push-out`。"
+      }
+    },
+    {
+      "segment_id": "9a949c3e",
+      "source_content": "| Type                                                        | Default  |\n| ----------------------------------------------------------- | -------- |\n| enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |",
+      "source_content_hash": "b9a532b273a626231976e54b0ca6a00c9dddb2b99bc29156c80725466aa8ae87",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9a949c3e"
+      }
+    },
+    {
+      "segment_id": "51a8b27f",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 類型定義"
+      }
+    },
+    {
+      "segment_id": "f88a1fd5",
+      "source_content": "### TextLayout",
+      "source_content_hash": "119a00b457d7c8def0de46b1aded23635bcd26da6af4f2ae992a0eb50e6de70a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### TextLayout"
+      }
+    },
+    {
+      "segment_id": "7c5ccba4",
+      "source_content": "`TextLayout` object is a part of [`TextLayoutEvent`](text#textlayoutevent) callback and contains the measurement data for `Text` line.",
+      "source_content_hash": "69780e523812ec1740ceaf382b35bcddb111e0f6f510af665a70475a7b00a24c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TextLayout` 物件是 [`TextLayoutEvent`](text#textlayoutevent) 回調的一部分，包含 `Text` 行測量數據。"
+      }
+    },
+    {
+      "segment_id": "6eaef1ee",
+      "source_content": "#### Example",
+      "source_content_hash": "1e720ea2922f5b6373e42d9ca218cbcb1e44639aa4d384b8f07731c2e4e14edf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 範例"
+      }
+    },
+    {
+      "segment_id": "3ac736c9",
+      "source_content": "```js\n{\n    capHeight: 10.496,\n    ascender: 14.624,\n    descender: 4,\n    width: 28.224,\n    height: 18.624,\n    xHeight: 6.048,\n    x: 0,\n    y: 0\n}\n```",
+      "source_content_hash": "4876ee51623a7a4f56b7bc3b47bf1c8152f98629050a7dba35444a796ff8e476",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ac736c9"
+      }
+    },
+    {
+      "segment_id": "e359c69a",
+      "source_content": "#### Properties",
+      "source_content_hash": "b8cb7eceade19338bef8d05cddffd363165b7542072b49420f430027915188fc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 屬性"
+      }
+    },
+    {
+      "segment_id": "9d3d0eee",
+      "source_content": "| Name      | Type   | Optional | Description                                                         |\n| --------- | ------ | -------- | ------------------------------------------------------------------- |\n| ascender  | number | No       | The line ascender height after the text layout changes.             |\n| capHeight | number | No       | Height of capital letter above the baseline.                        |\n| descender | number | No       | The line descender height after the text layout changes.            |\n| height    | number | No       | Height of the line after the text layout changes.                   |\n| width     | number | No       | Width of the line after the text layout changes.                    |\n| x         | number | No       | Line X coordinate inside the Text component.                        |\n| xHeight   | number | No       | Distance between the baseline and median of the line (corpus size). |\n| y         | number | No       | Line Y coordinate inside the Text component.                        |",
+      "source_content_hash": "aa29f76eeebae6c34a52b3c8dd92da091991ef880032c3494ddc2149dd7e65e8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9d3d0eee"
+      }
+    },
+    {
+      "segment_id": "ad565a3c",
+      "source_content": "### TextLayoutEvent",
+      "source_content_hash": "afdf31347f15d74a6c78905dc378c2d89ac11ccaa04a06fef59977ab7696a803",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### TextLayoutEvent"
+      }
+    },
+    {
+      "segment_id": "f3bed9df",
+      "source_content": "`TextLayoutEvent` object is returned in the callback as a result of a component layout change. It contains a key called `lines` with a value which is an array containing [`TextLayout`](text#textlayout) object corresponded to every rendered text line.",
+      "source_content_hash": "7073d1ed695dfa20f4cfe2a7de984a1565d6fc0530d3a2be10e34a4205951d99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TextLayoutEvent` 物件會在元件佈局變更時的回調函數中返回。它包含一個名為 `lines` 的鍵，其值是一個陣列，內含對應每行渲染文字的 [`TextLayout`](text#textlayout) 物件。"
+      }
+    },
+    {
+      "segment_id": "1837c34a",
+      "source_content": "#### Example",
+      "source_content_hash": "1e720ea2922f5b6373e42d9ca218cbcb1e44639aa4d384b8f07731c2e4e14edf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 範例"
+      }
+    },
+    {
+      "segment_id": "2cac0c6e",
+      "source_content": "```js\n{\n  lines: [\n    TextLayout,\n    TextLayout,\n    // ...\n  ];\n  target: 1127;\n}\n```",
+      "source_content_hash": "d366813144577ac3bcf5d7b47d590f5f6b2641f1c94584d39fb72a3c6e68cca7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2cac0c6e"
+      }
+    },
+    {
+      "segment_id": "b57057db",
+      "source_content": "#### Properties",
+      "source_content_hash": "b8cb7eceade19338bef8d05cddffd363165b7542072b49420f430027915188fc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 屬性"
+      }
+    },
+    {
+      "segment_id": "bbc651bf",
+      "source_content": "| Name   | Type                                    | Optional | Description                                           |\n| ------ | --------------------------------------- | -------- | ----------------------------------------------------- |\n| lines  | array of [TextLayout](text#textlayout)s | No       | Provides the TextLayout data for every rendered line. |\n| target | number                                  | No       | The node id of the element.                           |",
+      "source_content_hash": "b5aec8211ca6368ead24164371fe5a58c00aa65f7130d58c7ebb9983e780040b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bbc651bf"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.75/text.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.617207+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ca6b6b574b9315750e1a398a316b51002dc2fbdbeeb88d3f05ad84dbfa678d27"
+  }
+}

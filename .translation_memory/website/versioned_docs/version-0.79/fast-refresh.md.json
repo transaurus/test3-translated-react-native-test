@@ -1,0 +1,212 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/fast-refresh.md",
+  "source_file_content_hash": "5ab4ef50d053af36f516e94ca5ccfd56db72be617502a0c2e507139f8e7f4a32",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: fast-refresh\ntitle: Fast Refresh\n---",
+      "source_content_hash": "f2117893e08d9a5e4622a50899550f6f3d34f244dda0a952de6d0ba5d228835f",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Fast Refresh is a React Native feature that allows you to get near-instant feedback for changes in your React components. Fast Refresh is enabled by default, and you can toggle \"Enable Fast Refresh\" in the [React Native Dev Menu](/docs/debugging#accessing-the-in-app-developer-menu). With Fast Refresh enabled, most edits should be visible within a second or two.",
+      "source_content_hash": "3325d9934779b80d3f528a2ba8aacf63666a06588438b75acf9574c8566fd115",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Fast Refresh 是 React Native 的一項功能，可讓您即時獲得 React 元件變更的反饋。Fast Refresh 預設為啟用狀態，您可以在 [React Native 開發者選單](/docs/debugging#accessing-the-in-app-developer-menu) 中切換「啟用 Fast Refresh」。啟用後，大多數編輯應能在一兩秒內顯示變更。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## How It Works",
+      "source_content_hash": "f029fb0d33f0802e53458729c7a20710b671d86867fd9cb957609a4af8aee229",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 運作原理"
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- If you edit a module that **only exports React component(s)**, Fast Refresh will update the code only for that module, and re-render your component. You can edit anything in that file, including styles, rendering logic, event handlers, or effects.\n- If you edit a module with exports that _aren't_ React components, Fast Refresh will re-run both that module, and the other modules importing it. So if both `Button.js` and `Modal.js` import `Theme.js`, editing `Theme.js` will update both components.\n- Finally, if you **edit a file** that's **imported by modules outside of the React tree**, Fast Refresh **will fall back to doing a full reload**. You might have a file which renders a React component but also exports a value that is imported by a **non-React component**. For example, maybe your component also exports a constant, and a non-React utility module imports it. In that case, consider migrating the constant to a separate file and importing it into both files. This will re-enable Fast Refresh to work. Other cases can usually be solved in a similar way.",
+      "source_content_hash": "113e75dc5e7f8b7101b56f482df536c86d99924cf2b7e42542e4a4188ac07c11",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 若您編輯的模組**僅導出 React 元件**，Fast Refresh 僅會更新該模組的程式碼，並重新渲染您的元件。您可以編輯該檔案中的任何內容，包括樣式、渲染邏輯、事件處理程序或副作用。\n- 若您編輯的模組導出內容包含_非_ React 元件，Fast Refresh 會重新執行該模組及其導入模組。例如若 `Button.js` 和 `Modal.js` 都導入 `Theme.js`，編輯 `Theme.js` 將同時更新兩個元件。\n- 最後，若您編輯的檔案被**React 樹之外的模組導入**，Fast Refresh **將退回完整重新載入**。您可能有個檔案既渲染 React 元件，又導出被**非 React 元件**導入的值。例如您的元件可能同時導出一個常數，而某個非 React 工具模組導入該常數。此時可考慮將常數移至獨立檔案，並讓兩個檔案分別導入，這樣就能重新啟用 Fast Refresh。其他情況通常也能用類似方式解決。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Error Resilience",
+      "source_content_hash": "1288012d62a8fb41d0f2356764c3d31784e427e69fab72eeb9775d727e6f123a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 錯誤恢復能力"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "If you make a **syntax error** during a Fast Refresh session, you can fix it and save the file again. The redbox will disappear. Modules with syntax errors are prevented from running, so you won't need to reload the app.",
+      "source_content_hash": "d2bfd86770c705239e028f332893f15466f26878d18a7407ea89161b527db6db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若在 Fast Refresh 過程中發生**語法錯誤**，修正後再次儲存檔案即可。紅色錯誤框會消失。系統會阻止執行含語法錯誤的模組，因此您無需重新載入應用程式。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "If you make a **runtime error during the module initialization** (for example, typing `Style.create` instead of `StyleSheet.create`), the Fast Refresh session will continue once you fix the error. The redbox will disappear, and the module will be updated.",
+      "source_content_hash": "c2ef391bbba5e06d5d645a5670af7e43623d4582c9376a30a3d748a5742dc6b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若在**模組初始化時發生運行時錯誤**（例如誤將 `StyleSheet.create` 打成 `Style.create`），修正錯誤後 Fast Refresh 會繼續運作。紅色錯誤框會消失，模組將被更新。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "If you make a mistake that leads to a **runtime error inside your component**, the Fast Refresh session will _also_ continue after you fix the error. In that case, React will remount your application using the updated code.",
+      "source_content_hash": "1fbe20395360a5133a209dd9e635cda9b2b514b3a29631afaa13bb9b8dd1e525",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若錯誤導致**元件內部發生運行時錯誤**，修正後 Fast Refresh 仍會繼續運作。此時 React 會使用更新後的程式碼重新掛載您的應用程式。"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "If you have [error boundaries](https://reactjs.org/docs/error-boundaries.html) in your app (which is a good idea for graceful failures in production), they will retry rendering on the next edit after a redbox. In that sense, having an error boundary can prevent you from always getting kicked out to the root app screen. However, keep in mind that error boundaries shouldn't be _too_ granular. They are used by React in production, and should always be designed intentionally.",
+      "source_content_hash": "374a4ac15d4ed837c23dba17627dc823f70834defb212a188ea159f1e50fbc0d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若應用程式中設有[錯誤邊界](https://reactjs.org/docs/error-boundaries.html)（這對生產環境的優雅降級是個好做法），下次編輯時會重新嘗試渲染。從這個角度來說，錯誤邊界能避免您總是被踢回應用程式根畫面。但請注意錯誤邊界不應_過於_細碎。React 在生產環境會使用這些邊界，應始終有意識地設計它們。"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "## Limitations",
+      "source_content_hash": "639d5ea4c0ebc26cff8d87ece75a70c8e899a2690feafaa3debe78c91fccbe9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 限制"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "Fast Refresh tries to preserve local React state in the component you're editing, but only if it's safe to do so. Here's a few reasons why you might see local state being reset on every edit to a file:",
+      "source_content_hash": "b337abc4b7eed3d3c8742c98a5b11bdea4274ec31610d8a708a5741eb3506230",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Fast Refresh 會嘗試保留您正在編輯的元件中的 React 本地狀態，但僅在安全情況下進行。以下是您可能發現每次編輯檔案時本地狀態被重置的原因："
+      }
+    },
+    {
+      "segment_id": "1d13125b",
+      "source_content": "- Local state is not preserved for class components (only function components and Hooks preserve state).\n- The module you're editing might have _other_ exports in addition to a React component.\n- Sometimes, a module would export the result of calling higher-order component like `createNavigationContainer(MyScreen)`. If the returned component is a class, state will be reset.",
+      "source_content_hash": "37061dec78e029f7fcdb16cb41de12ef020851c417362533404f957cc4648fea",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 類別元件的本地狀態不會被保留（僅函式元件和 Hooks 能保留狀態）。\n- 您編輯的模組可能_除了_ React 元件外還導出其他內容。\n- 有時模組會導出高階元件的調用結果，例如 `createNavigationContainer(MyScreen)`。若返回的元件是類別，狀態將被重置。"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "In the longer term, as more of your codebase moves to function components and Hooks, you can expect state to be preserved in more cases.",
+      "source_content_hash": "9b03363e961af33aacb84c586e160be4701473ee2a8b0bd6454fc383d87f54ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "長期來看，隨著更多程式碼改用函式元件和 Hooks，預期會有更多情況能保留狀態。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "## Tips",
+      "source_content_hash": "5cc4c828c52ddb8d62a0d0f78916a0b1d3b4c7335318bac7a428598824ab3d93",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 技巧"
+      }
+    },
+    {
+      "segment_id": "7a2e981c",
+      "source_content": "- Fast Refresh preserves React local state in function components (and Hooks) by default.\n- Sometimes you might want to _force_ the state to be reset, and a component to be remounted. For example, this can be handy if you're tweaking an animation that only happens on mount. To do this, you can add `// @refresh reset` anywhere in the file you're editing. This directive is local to the file, and instructs Fast Refresh to remount components defined in that file on every edit.",
+      "source_content_hash": "375be8ea4eb1eed308fbe76fb4a4f3afe088c8bc2d635c1cc2afdb7448131c9b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- Fast Refresh 預設會保留函式元件（及 Hooks）中的 React 本地狀態。\n- 有時您可能想_強制_重置狀態並重新掛載元件。例如在調整僅在掛載時執行的動畫時就很實用。要做到這點，可在編輯的檔案中任意位置加入 `// @refresh reset`。此指令僅作用於該檔案，會指示 Fast Refresh 在每次編輯時重新掛載該檔案定義的元件。"
+      }
+    },
+    {
+      "segment_id": "62a6890b",
+      "source_content": "## Fast Refresh and Hooks",
+      "source_content_hash": "689c10bf208bfc6eb4ad0b1657883a4c07d32fdac5405bc6bfa760087172db53",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Fast Refresh 與 Hooks"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "When possible, Fast Refresh attempts to preserve the state of your component between edits. In particular, `useState` and `useRef` preserve their previous values as long as you don't change their arguments or the order of the Hook calls.",
+      "source_content_hash": "359a1dfd5b7a05973665349dd0c3332f97b711cbb5ae1f8894bfdf436d8552a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在可能的情況下，Fast Refresh 會嘗試保留元件在編輯之間的狀態。特別是 `useState` 和 `useRef`，只要你不改變它們的參數或 Hook 調用的順序，它們就會保留先前的值。"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "Hooks with dependencies—such as `useEffect`, `useMemo`, and `useCallback`—will _always_ update during Fast Refresh. Their list of dependencies will be ignored while Fast Refresh is happening.",
+      "source_content_hash": "9630fcb0ffb55655e1b40878a3a7ca737dcd57a934307ffb724837c0e01dfdbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "具有依賴項的 Hook——例如 `useEffect`、`useMemo` 和 `useCallback`——在 Fast Refresh 期間總是會更新。在 Fast Refresh 進行時，它們的依賴項列表會被忽略。"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "For example, when you edit `useMemo(() => x * 2, [x])` to `useMemo(() => x * 10, [x])`, it will re-run even though `x` (the dependency) has not changed. If React didn't do that, your edit wouldn't reflect on the screen!",
+      "source_content_hash": "93e112fc4a654a7c143dbd75a69fed8e26b84c7277a54ccee0a8fd5a981dff28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，當你將 `useMemo(() => x * 2, [x])` 編輯為 `useMemo(() => x * 10, [x])` 時，即使 `x`（依賴項）沒有改變，它也會重新運行。如果 React 不這樣做，你的編輯就不會反映在螢幕上！"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "Sometimes, this can lead to unexpected results. For example, even a `useEffect` with an empty array of dependencies would still re-run once during Fast Refresh. However, writing code resilient to an occasional re-running of `useEffect` is a good practice even without Fast Refresh. This makes it easier for you to later introduce new dependencies to it.",
+      "source_content_hash": "2e43cd2b6555b15b2e8e8e77eb4796028e5dcfa77308713b2144c40da66b4671",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時，這可能會導致意想不到的結果。例如，即使是一個具有空依賴項數組的 `useEffect` 也會在 Fast Refresh 期間重新運行一次。然而，即使沒有 Fast Refresh，編寫能夠偶爾重新運行 `useEffect` 的彈性程式碼也是一個好習慣。這使得你以後更容易為它引入新的依賴項。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/fast-refresh.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.941964+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "5ab4ef50d053af36f516e94ca5ccfd56db72be617502a0c2e507139f8e7f4a32"
+  }
+}

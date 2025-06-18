@@ -1,0 +1,502 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/communication-ios.md",
+  "source_file_content_hash": "73e7a2370efdb55100ac1b4d385c1ff742d3ac5182b3ce047a9f3049508ce613",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: communication-ios\ntitle: Communication between native and React Native\n---",
+      "source_content_hash": "7742d43aa665d608bec674de933e2430a984a436986ce9eae123a6372b25701f",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "In [Integrating with Existing Apps guide](integration-with-existing-apps) and [Native UI Components guide](legacy/native-components-ios) we learn how to embed React Native in a native component and vice versa. When we mix native and React Native components, we'll eventually find a need to communicate between these two worlds. Some ways to achieve that have been already mentioned in other guides. This article summarizes available techniques.",
+      "source_content_hash": "803751aba1b26f6d884ebce22359c3fdb5e695abffdf3edf1f57069f25e39540",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Introduction",
+      "source_content_hash": "d753efbab681fa4da82470d9a83b1c202de58f92fd498e77a269c1163bc4714b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "React Native is inspired by React, so the basic idea of the information flow is similar. The flow in React is one-directional. We maintain a hierarchy of components, in which each component depends only on its parent and its own internal state. We do this with properties: data is passed from a parent to its children in a top-down manner. If an ancestor component relies on the state of its descendant, one should pass down a callback to be used by the descendant to update the ancestor.",
+      "source_content_hash": "ed8300d70df5a1fd10a4a889a649a0cd58887806063f94c0cc24a8eaa8841497",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The same concept applies to React Native. As long as we are building our application purely within the framework, we can drive our app with properties and callbacks. But, when we mix React Native and native components, we need some specific, cross-language mechanisms that would allow us to pass information between them.",
+      "source_content_hash": "d170d52b61872abb245d41624d19628dc8b13d4337181d0594eaed162592a2f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Properties are the most straightforward way of cross-component communication. So we need a way to pass properties both from native to React Native, and from React Native to native.",
+      "source_content_hash": "84ace4e590b710986f2340cdb7b199d294433fc038376d8482f940813aa5078e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### Passing properties from native to React Native",
+      "source_content_hash": "2aca5459a124d0c06f5148a4866117d80769dcc86c258bf26c43053c8da1f743",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "In order to embed a React Native view in a native component, we use `RCTRootView`. `RCTRootView` is a `UIView` that holds a React Native app. It also provides an interface between native side and the hosted app.",
+      "source_content_hash": "0ee148e0fc9ea4762a02b09d32144d5924e9207d888abeb03eaf0183f67b388a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "`RCTRootView` has an initializer that allows you to pass arbitrary properties down to the React Native app. The `initialProperties` parameter has to be an instance of `NSDictionary`. The dictionary is internally converted into a JSON object that the top-level JS component can reference.",
+      "source_content_hash": "97a574d980114ba73011e860ecb51038849d94398637a5ba54f524a11df18c58",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```objectivec\nNSArray *imageList = @[@\"https://dummyimage.com/600x400/ffffff/000000.png\",\n                       @\"https://dummyimage.com/600x400/000000/ffffff.png\"];\n\nNSDictionary *props = @{@\"images\" : imageList};\n\nRCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge\n                                                 moduleName:@\"ImageBrowserApp\"\n                                          initialProperties:props];\n```",
+      "source_content_hash": "70bd3c056b35b15c2a5e42bb6a2dbf6137e5dba5401779f61cce0e8d613ea323",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ef6eebef",
+      "source_content": "```tsx\nimport React from 'react';\nimport {View, Image} from 'react-native';\n\nexport default class ImageBrowserApp extends React.Component {\n  renderImage(imgURI) {\n    return <Image source={{uri: imgURI}} />;\n  }\n  render() {\n    return <View>{this.props.images.map(this.renderImage)}</View>;\n  }\n}\n```",
+      "source_content_hash": "75b9f3cb21d1bddc8ddb07bd4a27d0ee61fbe95474e3a5e9a592221f051899e1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "`RCTRootView` also provides a read-write property `appProperties`. After `appProperties` is set, the React Native app is re-rendered with new properties. The update is only performed when the new updated properties differ from the previous ones.",
+      "source_content_hash": "136bf0e225c8001a18cf2b8a11474541501eec874d93d6d7ec33010fa597d259",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4795a13d",
+      "source_content": "```objectivec\nNSArray *imageList = @[@\"https://dummyimage.com/600x400/ff0000/000000.png\",\n                       @\"https://dummyimage.com/600x400/ffffff/ff0000.png\"];\n\nrootView.appProperties = @{@\"images\" : imageList};\n```",
+      "source_content_hash": "33d4b9e5cb67191f283a66acda9ee39215654cbb3933f1c88bad3608a0e9443d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "It is fine to update properties anytime. However, updates have to be performed on the main thread. You use the getter on any thread.",
+      "source_content_hash": "a61e1c9f75aacd89a933ea1c95f5029f04f2c4883de6cc85233d87ecd618e489",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d82460ed",
+      "source_content": ":::note\nCurrently, there is a known issue where setting appProperties during the bridge startup, the change can be lost. See https://github.com/facebook/react-native/issues/20115 for more information.\n:::",
+      "source_content_hash": "f7f5118fd9c1a1692b36ff05312450df32d8d66aed3012272b38156483800d3a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "There is no way to update only a few properties at a time. We suggest that you build it into your own wrapper instead.",
+      "source_content_hash": "e24b1b892b0a2501592829f8c83ad32d6fc35c56cb9d3eaae45828356cfc53fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### Passing properties from React Native to native",
+      "source_content_hash": "f7eccf47a5993074d60b79a013767e95d971acd06e71563b3f6ec7ff8363dcbe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "The problem exposing properties of native components is covered in detail in [this article](legacy/native-components-ios#properties). In short, export properties with `RCT_CUSTOM_VIEW_PROPERTY` macro in your custom native component, then use them in React Native as if the component was an ordinary React Native component.",
+      "source_content_hash": "45803e2972c8f215a12f4a8a5e832ad84939288eda986b9b788ff5ed7c0b2f03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ee8401db",
+      "source_content": "### Limits of properties",
+      "source_content_hash": "40d326ca4d8ca30e46d82048f457edf59888a434018ccb3801915f7aad57d6bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "The main drawback of cross-language properties is that they do not support callbacks, which would allow us to handle bottom-up data bindings. Imagine you have a small RN view that you want to be removed from the native parent view as a result of a JS action. There is no way to do that with props, as the information would need to go bottom-up.",
+      "source_content_hash": "f2a6eb9b1ca4375c6e72a1a8a3967fd41c983e01933064f74694dbce71c04072",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Although we have a flavor of cross-language callbacks ([described here](legacy/native-modules-ios#callbacks)), these callbacks are not always the thing we need. The main problem is that they are not intended to be passed as properties. Rather, this mechanism allows us to trigger a native action from JS, and handle the result of that action in JS.",
+      "source_content_hash": "b27a8a172bfdbc1d24d022ab7e2355ff770447509e367b6f968e6c2a1bdfbe07",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "## Other ways of cross-language interaction (events and native modules)",
+      "source_content_hash": "6d653e8ae16608fbc120ed10a2b418257dad6fcb73eb3eb56d6336c6f21e9678",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "As stated in the previous chapter, using properties comes with some limitations. Sometimes properties are not enough to drive the logic of our app and we need a solution that gives more flexibility. This chapter covers other communication techniques available in React Native. They can be used for internal communication (between JS and native layers in RN) as well as for external communication (between RN and the 'pure native' part of your app).",
+      "source_content_hash": "2b652ba496b1c5cd8e544a71474499bec8159cdcae65c396383bdd2064697caf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "React Native enables you to perform cross-language function calls. You can execute custom native code from JS and vice versa. Unfortunately, depending on the side we are working on, we achieve the same goal in different ways. For native - we use events mechanism to schedule an execution of a handler function in JS, while for React Native we directly call methods exported by native modules.",
+      "source_content_hash": "cedd7a88eebf35d616c66718ef4c8956dd4661ea623986f455367ef6e313e2ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### Calling React Native functions from native (events)",
+      "source_content_hash": "19a747a85a6b3c9760fc6d707a0857149d8e409cfe5c846789338a5c7cf8506e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Events are described in detail in [this article](legacy/native-components-ios#events). Note that using events gives us no guarantees about execution time, as the event is handled on a separate thread.",
+      "source_content_hash": "402d5d299092072aa77ef6cdebac6a6861985c03ddc405da5ef21209a31f2119",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "Events are powerful, because they allow us to change React Native components without needing a reference to them. However, there are some pitfalls that you can fall into while using them:",
+      "source_content_hash": "5f26335f5dbae7b331a65215bd1aae305c9c0bc9c542102d9c08df4994c31276",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "887c863e",
+      "source_content": "- As events can be sent from anywhere, they can introduce spaghetti-style dependencies into your project.\n- Events share namespace, which means that you may encounter some name collisions. Collisions will not be detected statically, which makes them hard to debug.\n- If you use several instances of the same React Native component and you want to distinguish them from the perspective of your event, you'll likely need to introduce identifiers and pass them along with events (you can use the native view's `reactTag` as an identifier).",
+      "source_content_hash": "ff2df102229a28d232b8413c90fadc65ae55267bb84d2f1f1e56410c0462940a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "The common pattern we use when embedding native in React Native is to make the native component's RCTViewManager a delegate for the views, sending events back to JavaScript via the bridge. This keeps related event calls in one place.",
+      "source_content_hash": "cc5ae3ffc68704ad3b70c5e7aa9887485110115fb5ddfa4609a96c1bb76bc031",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### Calling native functions from React Native (native modules)",
+      "source_content_hash": "d7f1d5537da1ec954352358be2354e3b39ae1ef6d251f2c24cafe0a81263e5fe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "Native modules are Objective-C classes that are available in JS. Typically one instance of each module is created per JS bridge. They can export arbitrary functions and constants to React Native. They have been covered in detail in [this article](legacy/native-modules-ios#content).",
+      "source_content_hash": "6de2fca448d082b37da66df58422993c4566f0e671d7333a83fac646f960b81f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "The fact that native modules are singletons limits the mechanism in the context of embedding. Let's say we have a React Native component embedded in a native view and we want to update the native, parent view. Using the native module mechanism, we would export a function that not only takes expected arguments, but also an identifier of the parent native view. The identifier would be used to retrieve a reference to the parent view to update. That said, we would need to keep a mapping from identifiers to native views in the module.",
+      "source_content_hash": "7e1b6565818ef432bbec9ecb468de34d4f8d7bac3979ed89aa20b42bab414d4c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "Although this solution is complex, it is used in `RCTUIManager`, which is an internal React Native class that manages all React Native views.",
+      "source_content_hash": "8160358b7049fb49de444639c4f9793b1e75ea12520dd393278c42d4b7c269cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "Native modules can also be used to expose existing native libraries to JS. The [Geolocation library](https://github.com/michalchudziak/react-native-geolocation) is a living example of the idea.",
+      "source_content_hash": "facc1af2fd3626a232fda50abd3a75532767456da1e0062882d61d440e912ad2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f4746b27",
+      "source_content": ":::caution\nAll native modules share the same namespace. Watch out for name collisions when creating new ones.\n:::",
+      "source_content_hash": "477dd29e5833bc829ac3956d989e180b20a5b84c8662ce27a368e388ac5a69ce",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "## Layout computation flow",
+      "source_content_hash": "56224616848ff6160b9ed0d9508598ac2367dc4f3dbe23eaf45aa06e69120808",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "When integrating native and React Native, we also need a way to consolidate two different layout systems. This section covers common layout problems and provides a brief description of mechanisms to address them.",
+      "source_content_hash": "233ac9ba25e816075f76af571cddceb6b6fc3b2612e57d3e25aaec4c74917a77",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "### Layout of a native component embedded in React Native",
+      "source_content_hash": "26be7513163b5d682d2cf4a0ebbf9658e0d8c55540f108d2e1ed40166629e497",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "This case is covered in [this article](legacy/native-components-ios#styles). To summarize, since all our native react views are subclasses of `UIView`, most style and size attributes will work like you would expect out of the box.",
+      "source_content_hash": "83cde9fa0b5aa7ce44e065bf8148a39044a6b8ccc7fb8a7ba667ec16f9d5bbc9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "### Layout of a React Native component embedded in native",
+      "source_content_hash": "8b80990bde865235ad4d290bcc6b509433f5c9be68b42b3a7b7b91010698b78c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "#### React Native content with fixed size",
+      "source_content_hash": "2ec636a001f8a745f55bb28febc715bd039970edb014f6187487e2c351bb5e9b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "The general scenario is when we have a React Native app with a fixed size, which is known to the native side. In particular, a full-screen React Native view falls into this case. If we want a smaller root view, we can explicitly set RCTRootView's frame.",
+      "source_content_hash": "00106de975ad8a9b5dc21ef3fba0e0b83001c9a3482d09532e20225b9c2ce4a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "For instance, to make an RN app 200 (logical) pixels high, and the hosting view's width wide, we could do:",
+      "source_content_hash": "63e461c5dea0f72ab76a0ae0ab5ad6b2904d7af5c5dd277203e80287658d345e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6f605d92",
+      "source_content": "```objectivec title='SomeViewController.m'\n- (void)viewDidLoad\n{\n  [...]\n  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge\n                                                   moduleName:appName\n                                            initialProperties:props];\n  rootView.frame = CGRectMake(0, 0, self.view.width, 200);\n  [self.view addSubview:rootView];\n}\n```",
+      "source_content_hash": "45a4ad5cf32ad0518c2c74856418c9660b654c8fd8060ef99bd0545d3faf39cb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "When we have a fixed size root view, we need to respect its bounds on the JS side. In other words, we need to ensure that the React Native content can be contained within the fixed-size root view. The easiest way to ensure this is to use Flexbox layout. If you use absolute positioning, and React components are visible outside the root view's bounds, you'll get overlap with native views, causing some features to behave unexpectedly. For instance, 'TouchableHighlight' will not highlight your touches outside the root view's bounds.",
+      "source_content_hash": "5edea6d25006b0c6cd460a2ebf6b1885c0e2a2044fdfa943d6077acf59ec8b01",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "It's totally fine to update root view's size dynamically by re-setting its frame property. React Native will take care of the content's layout.",
+      "source_content_hash": "28fb77ccac75021e7aae0267d8adc421469d1464598b61ac25181093dcccfc0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "#### React Native content with flexible size",
+      "source_content_hash": "ec61012ebc90be792f34d494d1663199ac067adf093a804289723354fc70682c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "In some cases we'd like to render content of initially unknown size. Let's say the size will be defined dynamically in JS. We have two solutions to this problem.",
+      "source_content_hash": "d70e463cb39f8180e6ea606818fc3344953756041db4ee9d30a05567b6b0e023",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "31bf14c2",
+      "source_content": "1. You can wrap your React Native view in a `ScrollView` component. This guarantees that your content will always be available and it won't overlap with native views.\n2. React Native allows you to determine, in JS, the size of the RN app and provide it to the owner of the hosting `RCTRootView`. The owner is then responsible for re-laying out the subviews and keeping the UI consistent. We achieve this with `RCTRootView`'s flexibility modes.",
+      "source_content_hash": "d6f5891c48791c492a84cdfce0e9551a1480c6b45b6c868155248823621a8417",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "`RCTRootView` supports 4 different size flexibility modes:",
+      "source_content_hash": "3afeb8f293fe71df1ddac9c2b3e36516b78ebb88688ebe4b898c90d933c3f387",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "eb25bb8c",
+      "source_content": "```objectivec title='RCTRootView.h'\ntypedef NS_ENUM(NSInteger, RCTRootViewSizeFlexibility) {\n  RCTRootViewSizeFlexibilityNone = 0,\n  RCTRootViewSizeFlexibilityWidth,\n  RCTRootViewSizeFlexibilityHeight,\n  RCTRootViewSizeFlexibilityWidthAndHeight,\n};\n```",
+      "source_content_hash": "ec9f5391d70c88cfe81519d5b0deb6fc121246127375be8852dab9e99914d753",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "`RCTRootViewSizeFlexibilityNone` is the default value, which makes a root view's size fixed (but it still can be updated with `setFrame:`). The other three modes allow us to track React Native content's size updates. For instance, setting mode to `RCTRootViewSizeFlexibilityHeight` will cause React Native to measure the content's height and pass that information back to `RCTRootView`'s delegate. An arbitrary action can be performed within the delegate, including setting the root view's frame, so the content fits. The delegate is called only when the size of the content has changed.",
+      "source_content_hash": "be9743233564abed3578e4a7ff9b5b1b56a05a9bd8d1c42f0ae667b937d926bb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8830d530",
+      "source_content": ":::caution\nMaking a dimension flexible in both JS and native leads to undefined behavior. For example - don't make a top-level React component's width flexible (with `flexbox`) while you're using `RCTRootViewSizeFlexibilityWidth` on the hosting `RCTRootView`.\n:::",
+      "source_content_hash": "f209beac4255af5aac9803d2d3d3d3e40c1fe8ed3742de07dbb33d436f64036a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "Let's look at an example.",
+      "source_content_hash": "2e61c93a47dc1cadeefa5cb93acd46c23bb490bd2aa16e57d176e97076a21246",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71779666",
+      "source_content": "```objectivec title='FlexibleSizeExampleView.m'\n- (instancetype)initWithFrame:(CGRect)frame\n{\n  [...]\n\n  _rootView = [[RCTRootView alloc] initWithBridge:bridge\n  moduleName:@\"FlexibilityExampleApp\"\n  initialProperties:@{}];\n\n  _rootView.delegate = self;\n  _rootView.sizeFlexibility = RCTRootViewSizeFlexibilityHeight;\n  _rootView.frame = CGRectMake(0, 0, self.frame.size.width, 0);\n}\n\n#pragma mark - RCTRootViewDelegate\n- (void)rootViewDidChangeIntrinsicSize:(RCTRootView *)rootView\n{\n  CGRect newFrame = rootView.frame;\n  newFrame.size = rootView.intrinsicContentSize;\n\n  rootView.frame = newFrame;\n}\n```",
+      "source_content_hash": "eededa341e0e69f8c253a4e4ecf069d7595ea2d65c6bc843c1f0809a0f8691a6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "In the example we have a `FlexibleSizeExampleView` view that holds a root view. We create the root view, initialize it and set the delegate. The delegate will handle size updates. Then, we set the root view's size flexibility to `RCTRootViewSizeFlexibilityHeight`, which means that `rootViewDidChangeIntrinsicSize:` method will be called every time the React Native content changes its height. Finally, we set the root view's width and position. Note that we set there height as well, but it has no effect as we made the height RN-dependent.",
+      "source_content_hash": "39e010257abc417ed7382d8cf8b159a46b129dc54cf050af32ef1f691f5e2358",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "You can checkout full source code of the example [here](https://github.com/facebook/react-native/blob/main/packages/rn-tester/RNTester/NativeExampleViews/FlexibleSizeExampleView.mm).",
+      "source_content_hash": "03c24f819fe0723d211f1c3d67f82cd46d3a45ceebb2c6c4ad39a982586f83db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "It's fine to change root view's size flexibility mode dynamically. Changing flexibility mode of a root view will schedule a layout recalculation and the delegate `rootViewDidChangeIntrinsicSize:` method will be called once the content size is known.",
+      "source_content_hash": "cefe0b0bd14726edfcf93511f4b9474de01aea39e978d9de0dfeff93dde4293c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8fa54d9a",
+      "source_content": ":::note\nReact Native layout calculation is performed on a separate thread, while native UI view updates are done on the main thread.\nThis may cause temporary UI inconsistencies between native and React Native. This is a known problem and our team is working on synchronizing UI updates coming from different sources.\n:::",
+      "source_content_hash": "ad59467a4093abe2e7e411868c60a3360cf332536846f9190513217a2e038230",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e53b773f",
+      "source_content": ":::note\nReact Native does not perform any layout calculations until the root view becomes a subview of some other views.\nIf you want to hide React Native view until its dimensions are known, add the root view as a subview and make it initially hidden (use `UIView`'s `hidden` property). Then change its visibility in the delegate method.\n:::",
+      "source_content_hash": "e0c7aa3e8ecb782437c2fea3b66a11a6deba44b25d304a70fb6c9cea21bdf9d7",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\nReact Native 在根視圖成為其他視圖的子視圖之前，不會執行任何佈局計算。\n如果您想在知道尺寸前隱藏 React Native 視圖，請將根視圖添加為子視圖並使其初始狀態為隱藏（使用 `UIView` 的 `hidden` 屬性）。然後在委派方法中更改其可見性。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/communication-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.175149+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "73e7a2370efdb55100ac1b4d385c1ff742d3ac5182b3ce047a9f3049508ce613"
+  }
+}

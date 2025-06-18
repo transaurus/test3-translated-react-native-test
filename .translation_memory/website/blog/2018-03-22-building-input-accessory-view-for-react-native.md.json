@@ -1,0 +1,374 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2018-03-22-building-input-accessory-view-for-react-native.md",
+  "source_file_content_hash": "05643d7f8b8c6f11fb2ced630723ccaaf257e6599844d2ced755b566af6a72be",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'Building <InputAccessoryView> For React Native'\nauthor: Peter Argany\nauthorTitle: Software Engineer at Facebook\nauthorURL: 'https://github.com/PeteTheHeat'\nauthorImageURL: 'https://avatars3.githubusercontent.com/u/6011080?s=400&u=028e28081107d0ab16a5cb22baca43c080f5fa50&v=4'\nauthorTwitter: peterargany\ntags: [engineering]\n---",
+      "source_content_hash": "73a90f212bb62267ef3db0933e46043623d6439e2355a6dde2a7933b40a566c8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "## Motivation",
+      "source_content_hash": "5e48e63bc199c3e34f96ab6c288cfde215e8082492c6299f9852ab2c762c6762",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Three years ago, a GitHub issue was opened to support input accessory view from React Native.",
+      "source_content_hash": "12f4dd21c9399b9b7e3edad07953457fa84d3830181a852279984904b8634e27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b7cc23c",
+      "source_content": "<img src=\"/blog/assets/input-accessory-1.png\" />",
+      "source_content_hash": "b72656dce2594177cea47e9741cd9ad86ce0e379b2c9ff42f3eec33afeb4b7f2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "In the ensuing years, there have been countless '+1s', various workarounds, and zero concrete changes to RN on this issue - until today. Starting with iOS, [we're exposing an API](/docs/inputaccessoryview) for accessing the native input accessory view and we are excited to share how we built it.",
+      "source_content_hash": "5d85044a8ee91514e58ba1ca13b469a00a9606ed6b114c07e786ef2c231f2038",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "## Background",
+      "source_content_hash": "9e644d899762f4766b529be2738b476459f7324a17156ee974382f440b47aae5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "What exactly is an input accessory view? Reading [Apple's developer documentation](https://developer.apple.com/documentation/uikit/uiresponder/1621119-inputaccessoryview?language=objc), we learn that it's a custom view which can be anchored to the top of the system keyboard whenever a receiver becomes the first responder. Anything that inherits from `UIResponder` can redeclare the `.inputAccessoryView` property as read-write, and manage a custom view here. The responder infrastructure mounts the view, and keeps it in sync with the system keyboard. Gestures which dismiss the keyboard, like a drag or tap, are applied to the input accessory view at the framework level. This allows us to build content with interactive keyboard dismissal, an integral feature in top-tier messaging apps like iMessage and WhatsApp.",
+      "source_content_hash": "9c1ad12291e215854c1a3058bac0b5d4df9b21f59b557762b853e3a611d5a970",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "There are two common use cases for anchoring a view to the top of the keyboard. The first is creating a keyboard toolbar, like the Facebook composer background picker.",
+      "source_content_hash": "d08b1335ac42ac0fa03df5624d0c10f1b2d1481c9f7305a3bac495443491461c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0dc46dba",
+      "source_content": "<img src=\"/blog/assets/input-accessory-2.gif\" style={{float: 'left', paddingRight: 70, paddingTop: 20}} />",
+      "source_content_hash": "5a19647336e90cabe33b82584bbb78abe876b8d0d055f4a3d2b6ec94f29ea2d4",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "In this scenario, the keyboard is focused on a text input field, and the input accessory view is used to provide additional keyboard functionality. This functionality is contextual to the type of input field. In a mapping application it could be address suggestions, or in a text editor, it could be rich text formatting tools.",
+      "source_content_hash": "7412aec522c2427dc545b14bb1ab87346f3d88610f4afb473e0f745496593044",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9329e3e0",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 20}} />",
+      "source_content_hash": "f527822f268623a11eb2e62e00a1862a8bee1e3517fb84689881c35a9069e4e8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "The Objective-C UIResponder who owns the `<InputAccessoryView>` in this scenario should be clear. The `<TextInput>` has become first responder, and under the hood this becomes an instance of `UITextView` or `UITextField`.",
+      "source_content_hash": "8de709ebe915baca7789de4f91b88aea65b25012c23d50851041fc7db377c98a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "The second common scenario is sticky text inputs:",
+      "source_content_hash": "bcad28f9f4dfdcb980eeceadc2a739e88ef8d2e4a44a80277b0059c307c136f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "74d049c6",
+      "source_content": "<img src=\"/blog/assets/input-accessory-3.gif\" style={{float: 'left', paddingRight: 70, paddingTop: 20}} />",
+      "source_content_hash": "f9a2541ac8e0d80a24200321e1171fdf73a73f8ad5e90ccd49abdb7211942e5f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "Here, the text input is actually part of the input accessory view itself. This is commonly used in messaging applications, where a message can be composed while scrolling through a thread of previous messages.",
+      "source_content_hash": "68a81d0eae0f7c784961bcb5c8e718c1de5c67147c4d765f0c0b5339df9187ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "100eac36",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 20}} />",
+      "source_content_hash": "f527822f268623a11eb2e62e00a1862a8bee1e3517fb84689881c35a9069e4e8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "Who owns the `<InputAccessoryView>` in this example? Can it be the `UITextView` or `UITextField` again? The text input is _inside_ the input accessory view, this sounds like a circular dependency. Solving this issue alone is [another blog post](https://derpturkey.com/uitextfield-docked-like-ios-messenger/) in itself. Spoilers: the owner is a generic `UIView` subclass who we manually tell to [becomeFirstResponder](https://developer.apple.com/documentation/uikit/uiresponder/1621113-becomefirstresponder?language=objc).",
+      "source_content_hash": "da0d011ea65483f8898d7f6c07a77ad755a0ce7fa30c4da7898eb2b4e94709fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "06c0f776",
+      "source_content": "## API Design",
+      "source_content_hash": "49a0915508a873ee7c6b904b4a1ea1ff9bd7141ccdc846d2e187ad2a549d1c16",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "We now know what an `<InputAccessoryView>` is, and how we want to use it. The next step is designing an API that makes sense for both use cases, and works well with existing React Native components like `<TextInput>`.",
+      "source_content_hash": "629c60a3d893e2fe09f805017ec97adfabb86fe76dccb67ba71d852d69576d19",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "For keyboard toolbars, there are a few things we want to consider:",
+      "source_content_hash": "355ea61d9e33d35727e5b1e67ca85e8eb4946410547e5bfca1488941c5662c81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6773b78b",
+      "source_content": "1. We want to be able to hoist any generic React Native view hierarchy into the `<InputAccessoryView>`.\n2. We want this generic and detached view hierarchy to accept touches and be able to manipulate application state.\n3. We want to link an `<InputAccessoryView>` to a particular `<TextInput>`.\n4. We want to be able to share an `<InputAccessoryView>` across multiple text inputs, without duplicating any code.",
+      "source_content_hash": "cbd37a5d661232c7f42ae074022ac10fe7db26b05145bf11f4b723cddd9451e3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "We can achieve #1 using a concept similar to [React portals](https://reactjs.org/docs/portals.html). In this design, we portal React Native views to a `UIView` hierarchy managed by the responder infrastructure. Since React Native views render as UIViews, this is actually quite straightforward - we can just override:",
+      "source_content_hash": "da6a44146d74739dae3bfeeea115d7be453097599e24d268a8b14966fef5ab23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "`- (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex`",
+      "source_content_hash": "f2deb002504d84616173268e569feffa4d7b95fb6437ecc5332b26212e790614",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`- (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex`"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "and pipe all the subviews to a new UIView hierarchy. For #2, we set up a new [RCTTouchHandler](https://github.com/facebook/react-native/blob/master/React/Base/RCTTouchHandler.h) for the `<InputAccessoryView>`. State updates are achieved by using regular event callbacks. For #3 and #4, we use the [nativeID](https://github.com/facebook/react-native/blob/master/React/Views/UIView%2BReact.h#L28) field to locate the accessory view UIView hierarchy in native code during the creation of a `<TextInput>` component. This function uses the `.inputAccessoryView` property of the underlying native text input. Doing this effectively links `<InputAccessoryView>` to `<TextInput>` in their ObjC implementations.",
+      "source_content_hash": "a0de335edc940caeb1709cc27a187827f72d5d7feca83ea58d167f255132f03a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "並將所有子視圖傳輸到一個新的 UIView 層次結構中。對於 #2，我們為 `<InputAccessoryView>` 設置了一個新的 [RCTTouchHandler](https://github.com/facebook/react-native/blob/master/React/Base/RCTTouchHandler.h)。狀態更新通過常規的事件回調來實現。對於 #3 和 #4，我們使用 [nativeID](https://github.com/facebook/react-native/blob/master/React/Views/UIView%2BReact.h#L28) 字段在原生代碼中創建 `<TextInput>` 組件時定位附件視圖的 UIView 層次結構。此函數使用底層原生文本輸入的 `.inputAccessoryView` 屬性。這樣做有效地在它們的 ObjC 實現中將 `<InputAccessoryView>` 與 `<TextInput>` 連結起來。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "Supporting sticky text inputs (scenario 2) adds a few more constraints. For this design, the input accessory view has a text input as a child, so linking via nativeID is not an option. Instead, we set the `.inputAccessoryView` of a generic off-screen `UIView` to our native `<InputAccessoryView>` hierarchy. By manually telling this generic `UIView` to become first responder, the hierarchy is mounted by responder infrastructure. This concept is explained thoroughly in the aforementioned blog post.",
+      "source_content_hash": "97aabbdc6d4c97bb8ee9db72ff6c07b64091b7c99c6949cc17144b6e6be1a78c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支持粘性文本輸入（情景 2）增加了更多的限制。對於這種設計，輸入附件視圖有一個文本輸入作為子視圖，因此通過 nativeID 連結是不可行的。相反，我們將一個通用的離屏 `UIView` 的 `.inputAccessoryView` 設置為我們的原生 `<InputAccessoryView>` 層次結構。通過手動告訴這個通用的 `UIView` 成為第一響應者，該層次結構由響應者基礎設施掛載。這個概念在前述的博客文章中有詳細解釋。"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "## Pitfalls",
+      "source_content_hash": "8f78fb2ecb723af254ccd55736e85bff59c9247b93468785e2d4fcd4b7bf4c5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 陷阱"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "Of course not everything was smooth sailing while building this API. Here are a few pitfalls we encountered, along with how we fixed them.",
+      "source_content_hash": "5470f1711e0eb1f719afcb12ddcb86278b9ce4dc94909192cc5d721455c89618",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當然，在構建這個 API 的過程中並非一帆風順。以下是我們遇到的一些陷阱，以及我們如何解決它們。"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "An initial idea for building this API involved listening to `NSNotificationCenter` for UIKeyboardWill(Show/Hide/ChangeFrame) events. This pattern is used in some open-sourced libraries, and internally in some parts of the Facebook app. Unfortunately, `UIKeyboardDidChangeFrame` events were not being called in time to update the `<InputAccessoryView>` frame on swipes. Also, changes in keyboard height are not captured by these events. This creates a class of bugs that manifest like this:",
+      "source_content_hash": "788e59515973edfc294ca64967d5f83f7cc68a9fb5c16d5ec8230bdd4df9cef1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "構建這個 API 的初始想法涉及監聽 `NSNotificationCenter` 的 UIKeyboardWill(Show/Hide/ChangeFrame) 事件。這種模式在一些開源庫和 Facebook 應用內部的一些部分中使用。不幸的是，`UIKeyboardDidChangeFrame` 事件沒有及時被調用來更新 `<InputAccessoryView>` 的框架在滑動時。此外，鍵盤高度的變化未被這些事件捕獲。這導致了一類錯誤，表現如下："
+      }
+    },
+    {
+      "segment_id": "c537a3d3",
+      "source_content": "<img src=\"/blog/assets/input-accessory-4.gif\" style={{float: 'left', paddingRight: 70, paddingTop: 20}} />",
+      "source_content_hash": "910e7e3154aec4d25ec951fd5a177b85515248b84199909a89a21733e90f8840",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c537a3d3"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "On iPhone X, text and emoji keyboard are different heights. Most applications using keyboard events to manipulate text input frames had to fix the above bug. Our solution was to commit to using the `.inputAccessoryView` property, which meant that the responder infrastructure handles frame updates like this.",
+      "source_content_hash": "7fca502e011290ff4830a067eac26b277d5904f4d02e1d38346c21b11876b6e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iPhone X 上，文本和表情鍵盤的高度不同。大多數使用鍵盤事件來操作文本輸入框架的應用程序都必須修復上述錯誤。我們的解決方案是承諾使用 `.inputAccessoryView` 屬性，這意味著響應者基礎設施會處理這樣的框架更新。"
+      }
+    },
+    {
+      "segment_id": "5b035b90",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 20}} />",
+      "source_content_hash": "f527822f268623a11eb2e62e00a1862a8bee1e3517fb84689881c35a9069e4e8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5b035b90"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Another tricky bug we encountered was avoiding the home pill on iPhone X. You may be thinking, “Apple developed [safeAreaLayoutGuide](https://developer.apple.com/documentation/uikit/uiview/2891102-safearealayoutguide?language=objc) for this very reason, this is trivial!”. We were just as naive. The first issue is that the native `<InputAccessoryView>` implementation has no window to anchor to until the moment it is about to appear. That's alright, we can override `-(BOOL)becomeFirstResponder` and enforce layout constraints there. Adhering to these constraints bumps the accessory view up, but another bug arises: <img src=\"/blog/assets/input-accessory-5.gif\" style={{float: 'left', paddingRight: 70, paddingTop: 20}} />",
+      "source_content_hash": "118884344ad0cb6c41e4159c0c41749943fdb65ab8a9563692306645ef683513",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們遇到的另一個棘手的錯誤是避免 iPhone X 上的主頁指示條。你可能會想，“Apple 開發了 [safeAreaLayoutGuide](https://developer.apple.com/documentation/uikit/uiview/2891102-safearealayoutguide?language=objc) 正是為此，這很簡單！”。我們也曾如此天真。第一個問題是原生的 `<InputAccessoryView>` 實現沒有窗口可以錨定，直到它即將出現的那一刻。這沒關係，我們可以覆蓋 `-(BOOL)becomeFirstResponder` 並在那裡強制執行佈局約束。遵守這些約束會將附件視圖向上推，但另一個錯誤出現了：<img src=\"/blog/assets/input-accessory-5.gif\" style={{float: 'left', paddingRight: 70, paddingTop: 20}} />"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "The input accessory view successfully avoids the home pill, but now content behind the unsafe area is visible. The solution lies in this [radar](https://www.openradar.me/34411433). I wrapped the native `<InputAccessoryView>` hierarchy in a container which doesn't conform to the `safeAreaLayoutGuide` constraints. The native container covers the content in the unsafe area, while the `<InputAccessoryView>` stays within the safe area boundaries.",
+      "source_content_hash": "e22e8b4a26d8af79bcc3eec9bbcb44e57ebba65a73f448058cdb90a71237ee6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "輸入附件視圖成功避開了主頁指示條，但現在不安全區域後面的內容可見。解決方案在於這個 [radar](https://www.openradar.me/34411433)。我將原生的 `<InputAccessoryView>` 層次結構包裹在一個不遵守 `safeAreaLayoutGuide` 約束的容器中。原生容器覆蓋了不安全區域的內容，而 `<InputAccessoryView>` 保持在安全區域的邊界內。"
+      }
+    },
+    {
+      "segment_id": "95729a46",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 20}} />",
+      "source_content_hash": "f527822f268623a11eb2e62e00a1862a8bee1e3517fb84689881c35a9069e4e8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95729a46"
+      }
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "## Example Usage",
+      "source_content_hash": "9c2311a8bfb3d912c0898f3f6eca4f89304790206fe37a9034617dee9d03e41a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 示例用法"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "Here's an example which builds a keyboard toolbar button to reset `<TextInput>` state.",
+      "source_content_hash": "bf6a08f885a333700ae315cbffb056d017b4118efe2732cb1af4f6c3876434c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是一個構建鍵盤工具欄按鈕以重置 `<TextInput>` 狀態的示例。"
+      }
+    },
+    {
+      "segment_id": "d8159289",
+      "source_content": "```jsx\nclass TextInputAccessoryViewExample extends React.Component<\n  {},\n  *,\n> {\n  constructor(props) {\n    super(props);\n    this.state = {text: 'Placeholder Text'};\n  }\n\n  render() {\n    const inputAccessoryViewID = 'inputAccessoryView1';\n    return (\n      <View>\n        <TextInput\n          style={styles.default}\n          inputAccessoryViewID={inputAccessoryViewID}\n          onChangeText={text => this.setState({text})}\n          value={this.state.text}\n        />\n        <InputAccessoryView nativeID={inputAccessoryViewID}>\n          <View style={{backgroundColor: 'white'}}>\n            <Button\n              onPress={() =>\n                this.setState({text: 'Placeholder Text'})\n              }\n              title=\"Reset Text\"\n            />\n          </View>\n        </InputAccessoryView>\n      </View>\n    );\n  }\n}\n```",
+      "source_content_hash": "664f8bfc903f953ae140d672611a72e5c7ffe2b45fbbb7a12419fcb7bc732f02",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d8159289"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "Another example for [Sticky Text Inputs can be found in the repository](https://github.com/facebook/react-native/blob/84ef7bc372ad870127b3e1fb8c13399fe09ecd4d/RNTester/js/InputAccessoryViewExample.js).",
+      "source_content_hash": "855550c9e65bdbb2a29156b8ba5990ae4d188f2d639438b25dffda47d55096f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個 [粘性文本輸入的示例可以在存儲庫中找到](https://github.com/facebook/react-native/blob/84ef7bc372ad870127b3e1fb8c13399fe09ecd4d/RNTester/js/InputAccessoryViewExample.js)。"
+      }
+    },
+    {
+      "segment_id": "cbd60296",
+      "source_content": "## When will I be able to use this?",
+      "source_content_hash": "06a0c3d61a5a3ed817181f584eb43e944ad24915d0f256051d0b610a074916e0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 我什麼時候可以使用這個？"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "The full commit for this feature implementation is [here](https://github.com/facebook/react-native/commit/38197c8230657d567170cdaf8ff4bbb4aee732b8). [`<InputAccessoryView>`](/docs/next/inputaccessoryview) will be available in the upcoming v0.55.0 release.",
+      "source_content_hash": "ca0241b80e92e9224a01eeb035d0ddf2803056f0bf46f45d10243e65121150c3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "Happy keyboarding :)",
+      "source_content_hash": "9a1f544d8a09577af954227fbe1d2b699452a6f5fa7c452864ac0e610173210a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2018-03-22-building-input-accessory-view-for-react-native.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.254302+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "05643d7f8b8c6f11fb2ced630723ccaaf257e6599844d2ced755b566af6a72be"
+  }
+}

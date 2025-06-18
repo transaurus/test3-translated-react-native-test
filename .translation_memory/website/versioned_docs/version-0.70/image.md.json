@@ -1,0 +1,1322 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/image.md",
+  "source_file_content_hash": "5c6093091f4355cabd39d5d9c0cf28d754c87b69e956b6c6dc9c4a424697caab",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: image\ntitle: Image\n---",
+      "source_content_hash": "14f3cc82027a6dbb29e7ab1868973c66ec63299b3069478ebe237b44415666c5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.",
+      "source_content_hash": "545eec4d6e882ef042ffce63fd0305b15ade0b61ff4d2adf0cce51136984cc37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "This example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the `'data:'` uri scheme.",
+      "source_content_hash": "cacf32e9558e288d6bfa1ccbc172ccbb2df618227000831259722be3b51adf41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "47214e06",
+      "source_content": "> Note that for network and data images, you will need to manually specify the dimensions of your image!",
+      "source_content_hash": "e987ad771f85f06ce74255cca8eb33d5834ffa6d30c159482f5cb619725be4a7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Examples",
+      "source_content_hash": "0d19ab46319785768005536313f02bd3b9b779aaed82eeac5bf7a7f796ad3ef1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3676fa",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=Function%20Component%20Example\n\nimport React from 'react';\nimport { View, Image, StyleSheet } from 'react-native';\n\nconst styles = StyleSheet.create({\n  container: {\n    paddingTop: 50,\n  },\n  tinyLogo: {\n    width: 50,\n    height: 50,\n  },\n  logo: {\n    width: 66,\n    height: 58,\n  },\n});\n\nconst DisplayAnImage = () => {\n  return (\n    <View style={styles.container}>\n      <Image\n        style={styles.tinyLogo}\n        source={require('@expo/snack-static/react-native-logo.png')}\n      />\n      <Image\n        style={styles.tinyLogo}\n        source={{\n          uri: 'https://reactnative.dev/img/tiny_logo.png',\n        }}\n      />\n      <Image\n        style={styles.logo}\n        source={{\n          uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',\n        }}\n      />\n    </View>\n  );\n}\n\nexport default DisplayAnImage;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=Class%20Component%20Example\n\nimport React, { Component } from 'react';\nimport { AppRegistry, View, Image, StyleSheet } from 'react-native';\n\nconst styles = StyleSheet.create({\n  container: {\n    paddingTop: 50,\n  },\n  tinyLogo: {\n    width: 50,\n    height: 50,\n  },\n  logo: {\n    width: 66,\n    height: 58,\n  },\n});\n\nclass DisplayAnImage extends Component {\n  render() {\n    return (\n      <View style={styles.container}>\n        <Image\n          style={styles.tinyLogo}\n          source={require('@expo/snack-static/react-native-logo.png')}\n        />\n        <Image\n          style={styles.tinyLogo}\n          source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}\n        />\n        <Image\n          style={styles.logo}\n          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}\n        />\n      </View>\n    );\n  }\n}\n\nexport default DisplayAnImage;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "6a5202c7bba9a49e9e81d0276e6a1a147f2e04c846d02e327bcaf6825cb9a8d5",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "You can also add `style` to an image:",
+      "source_content_hash": "0e8093d35daae3722d5eb8db3750725d5ced00c4dba8e0bfe201dd8da1be58f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f018dbb4",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=Function%20Component%20Example\n\nimport React from 'react';\nimport { View, Image, StyleSheet } from 'react-native';\n\nconst styles = StyleSheet.create({\n  container: {\n    paddingTop: 50,\n  },\n  stretch: {\n    width: 50,\n    height: 200,\n    resizeMode: 'stretch',\n  },\n});\n\nconst DisplayAnImageWithStyle = () => {\n  return (\n    <View style={styles.container}>\n      <Image\n        style={styles.stretch}\n        source={require('@expo/snack-static/react-native-logo.png')}\n      />\n    </View>\n  );\n}\n\nexport default DisplayAnImageWithStyle;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=Class%20Component%20Example\n\nimport React, { Component } from 'react';\nimport { View, Image, StyleSheet } from 'react-native';\n\nconst styles = StyleSheet.create({\n  stretch: {\n    width: 50,\n    height: 200,\n    resizeMode: 'stretch'\n  }\n});\n\nclass DisplayAnImageWithStyle extends Component {\n  render() {\n    return (\n      <View>\n        <Image\n          style={styles.stretch}\n          source={require('@expo/snack-static/react-native-logo.png')}\n        />\n      </View>\n    );\n  }\n}\n\nexport default DisplayAnImageWithStyle;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b91339bb5804977ff33c775f04c08498b09ea2b28db1d2af1fbb661952a0e95f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d279c43",
+      "source_content": "## GIF and WebP support on Android",
+      "source_content_hash": "afe372f063bcf0379c6b36f13eecb13d916b91efd3c8e6ed29ac8ddc2a9e87e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e5821418",
+      "source_content": "When building your own native code, GIF and WebP are not supported by default on Android.",
+      "source_content_hash": "15d271ef401b1fd6cb5c59e84a3db740243cc15186132c5f5131004e6c4ac48c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.",
+      "source_content_hash": "09e41f71057b782d81232ec2e0e4603d8b1802458fcab99cd7b1663d7d435fbf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bea1601a",
+      "source_content": "```groovy\ndependencies {\n  // If your app supports Android versions before Ice Cream Sandwich (API level 14)\n  implementation 'com.facebook.fresco:animated-base-support:1.3.0'\n\n  // For animated GIF support\n  implementation 'com.facebook.fresco:animated-gif:2.5.0'\n\n  // For WebP support, including animated WebP\n  implementation 'com.facebook.fresco:animated-webp:2.5.0'\n  implementation 'com.facebook.fresco:webpsupport:2.5.0'\n\n  // For WebP support, without animations\n  implementation 'com.facebook.fresco:webpsupport:2.5.0'\n}\n```",
+      "source_content_hash": "9490a769b2432acbf5d3f38f9d531f089e6102260d04f2d0e889257422d21735",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "def577f2",
+      "source_content": "> Note: the version listed above may not be updated in time. Please check [`ReactAndroid/gradle.properties`](https://github.com/facebook/react-native/blob/0.70-stable/ReactAndroid/gradle.properties) in the main repo to see which fresco version is being used in a specific tagged version.",
+      "source_content_hash": "d12d4c56594db44878ab3b201c9e0630c5a33f8cc742a157b5065107243c9355",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ba014c2d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bf3eb388",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "197e1a1b",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dd21637d",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "09f901c3",
+      "source_content": "Inherits [View Props](view#props).",
+      "source_content_hash": "728a59ec5a33ce4be2ffcbe3e86d44eb0b94d3f535bae6f8a1e98376c99bd5ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c60fccc8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dc825187",
+      "source_content": "### `accessible`",
+      "source_content_hash": "7e2f45d1c536354ff4e8f949668ed0b63fc433f315af4147b029c19a8259c830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "When true, indicates the image is an accessibility element.",
+      "source_content_hash": "c50df184de93ff3f15ab9d232afa04cef2535f11480865a3853e0d6cdefeca37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f41bd436",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "fd182f8e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "63daebc9",
+      "source_content": "### `accessibilityLabel`",
+      "source_content_hash": "4f55de35ce0c561187344a423b6279d22ada7d874f880caef84af52c16646758",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "228d01d5",
+      "source_content": "The text that's read by the screen reader when the user interacts with the image.",
+      "source_content_hash": "21edaa4af062134766017e9c8a84526437e4c51a1e47ddc1377676d3a0a7582b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "427ca3fc",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b45c59d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ad8a5f54",
+      "source_content": "### `blurRadius`",
+      "source_content_hash": "2b7ca5233868551569352d34b9b4e9e5df11c75e3e4501c2ce3418e42e1c040f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4033c370",
+      "source_content": "blurRadius: the blur radius of the blur filter added to the image.",
+      "source_content_hash": "b992bce351385f612a03662840b84eaedf6dae6c80ba3bb4e4e281ef1c6af7cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6c82acb3",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f0cd68ce",
+      "source_content": "> Tip: On IOS, you will need to increase `blurRadius` by more than `5`.",
+      "source_content_hash": "87c42420f96c8f0d204b8e2e47bcb224237bee749d3e4e27a018e776e1955cc7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "470854fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "34bbfe56",
+      "source_content": "### `capInsets` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "21d023a68a8fc25e45ff3725964a9a909a59217cc413ca6c0d8bbd50ea9b2ee3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "318fb07e",
+      "source_content": "When the image is resized, the corners of the size specified by `capInsets` will stay a fixed size, but the center content and borders of the image will be stretched. This is useful for creating resizable rounded buttons, shadows, and other resizable assets. More info in the [official Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets).",
+      "source_content_hash": "5794799d58bb286e3c3265a875c085b90aeae8e739db69eb322cce4dbb94f73a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0106ebe9",
+      "source_content": "| Type         |\n| ------------ |\n| [Rect](rect) |",
+      "source_content_hash": "beeb10fe08e4805d4b3691149c48772d9a56a072363ad00afef11e2a4413f03a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2e5df244",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99e592b0",
+      "source_content": "### `defaultSource`",
+      "source_content_hash": "b679c69acfcd6aa6063dbc57bcabed64ba46e8ad1640797b132bd2f760060f14",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "93f7c834",
+      "source_content": "A static image to display while loading the image source.",
+      "source_content_hash": "a5b833552585a8f67c730218f17506468947061d3b6e4e7202baabf347be8144",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "36ad9691",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| [ImageSource](image#imagesource) |",
+      "source_content_hash": "17c6021b7f1c1636a02898d4ba71bfbd9f835b99f5f2941b29554fa903bf1a7c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "cdfc2b0c",
+      "source_content": "> **Note:** On Android, the default source prop is ignored on debug builds.",
+      "source_content_hash": "90755c62a2cb087e32c59986066df9ecd34edb9d4e199ef005362b53263e3627",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1fbbc73e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "16efe6ee",
+      "source_content": "### `fadeDuration` <div class=\"label android\">Android</div>",
+      "source_content_hash": "78340f77dbc6e7f2295d4cca6680fc0ebc2bdc446f76a44d6110abb46167a91c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Fade animation duration in milliseconds.",
+      "source_content_hash": "5de69cb690ba9e5fb01004ff21946d33e15322817f6e69da4350a5fbd232a206",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "53f1f452",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `300`   |",
+      "source_content_hash": "ddd358620bef0dbc6ac9e96b894ffdf8ee6ecbfec5762d17da682137620e98e4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1e4fb8ad",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "38115c9a",
+      "source_content": "### `loadingIndicatorSource`",
+      "source_content_hash": "c9652afeec1125f4f05ff4d25b75676fe9dac7698dd5f51bcfaa5061ad567e29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "46e586a3",
+      "source_content": "Similarly to `source`, this property represents the resource used to render the loading indicator for the image. The loading indicator is displayed until image is ready to be displayed, typically after the image is downloaded.",
+      "source_content_hash": "5676feec5d16f4209caecea66f85ef370788066ad2994c9e541420a81168443d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bbaaf77a",
+      "source_content": "| Type                                                  |\n| ----------------------------------------------------- |\n| [ImageSource](image#imagesource) (`uri` only), number |",
+      "source_content_hash": "18fdaba6599296f61e705aac8788716f4fa2597ca49a11faf0d342bdda9c5dc1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "516c4835",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f3fc8281",
+      "source_content": "### `onError`",
+      "source_content_hash": "d026a423d593a4494f7f735253f5a2cbfc8c246d6649216994ed1bf8ed157afa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "60e22db4",
+      "source_content": "Invoked on load error.",
+      "source_content_hash": "d7df7a71bfb82b5a5013b77f690c50f571d96761364009957f9c7a8a8f4ec24a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "20c5b733",
+      "source_content": "| Type                                   |\n| -------------------------------------- |\n| (`{ nativeEvent: { error } }`) => void |",
+      "source_content_hash": "c6806490acf438ca830e6cfb86630dda82e6ba5dda8d57925e3cdd80be17e35a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "59ff3fde",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9cdf9229",
+      "source_content": "### `onLayout`",
+      "source_content_hash": "4003ab8e4c09c2b682ab13f81e81b2827452db77e43f86621b1c3c7107f873ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5e0ab881",
+      "source_content": "Invoked on mount and on layout changes.",
+      "source_content_hash": "290f35b58ac09874c73cf9c19bd00bc7285f2b644910877c66249e1c5fe2aa8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "beee08cc",
+      "source_content": "| Type                                                    |\n| ------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)} => void` |",
+      "source_content_hash": "7cd488b1e21f4000a342f831c01fa7a2e4125429454bec6443c84c7a017d54e1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d88796ca",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "92d715c2",
+      "source_content": "### `onLoad`",
+      "source_content_hash": "311772bceb35d6312e2ec0a7bcf762fc80305cda2c30f5f268111955824a8b7c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "83d7d3bc",
+      "source_content": "Invoked when load completes successfully.",
+      "source_content_hash": "1afc9a853ee023edecd7aa2ff35b0733f4f3304e46e7cddecd06f9f256a2fcd1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2e76bd58",
+      "source_content": "**Example:** `onLoad={({nativeEvent: {source: {width, height}}}) => setImageRealSize({width, height})}`",
+      "source_content_hash": "27b935eb7badb8437a05f5d1cb41e1ed50a55f10a2a9af72f792cc67a8bb8217",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e622dd58",
+      "source_content": "| Type                                                                |\n| ------------------------------------------------------------------- |\n| `md ({nativeEvent: [ImageLoadEvent](image#imageloadevent)} => void` |",
+      "source_content_hash": "0ebf18bf7b5fe86a9b955ec83e5e3e7f4ac63779159780b23f586a031b823a86",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f875b13d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### `onLoadEnd`",
+      "source_content_hash": "315c566bd941b6b403722fc256d8959a1a1d4eff919c96c352d81958addd8627",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71e7acda",
+      "source_content": "Invoked when load either succeeds or fails.",
+      "source_content_hash": "dadd109f43b6f3a7afacca4c6600beaeb00ff4e6d5c5cd13f3f4a105512afdde",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d025145",
+      "source_content": "| Type       |\n| ---------- |\n| () => void |",
+      "source_content_hash": "be2856fa963da4b6dd0caf659a430afc19f2a9b9aa1390a603043fccb937ca8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "705d5eb7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c7737b8a",
+      "source_content": "### `onLoadStart`",
+      "source_content_hash": "fcdd30d949c28593c614e10a9514a0be26a91582ae9ba8a5fe5b5649f32b4105",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7441a9ec",
+      "source_content": "Invoked on load start.",
+      "source_content_hash": "c714f6e4dbdfc55895547d57d1e1ea046db647332d643851288ce317513e7d3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a30b7214",
+      "source_content": "**Example:** `onLoadStart={() => this.setState({loading: true})}`",
+      "source_content_hash": "f6388c3152995890b554752b3da9b2c1965542c5d222edfc6112571e3189dd5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "caa7d816",
+      "source_content": "| Type       |\n| ---------- |\n| () => void |",
+      "source_content_hash": "be2856fa963da4b6dd0caf659a430afc19f2a9b9aa1390a603043fccb937ca8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "12b8efbb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe45329d",
+      "source_content": "### `onPartialLoad` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "8a4aaec6487f8306848f2ed755c6415a499b431b89e38d7b53a136c28080879c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e17d0554",
+      "source_content": "Invoked when a partial load of the image is complete. The definition of what constitutes a \"partial load\" is loader specific though this is meant for progressive JPEG loads.",
+      "source_content_hash": "3bea75c9c77153735c174c24b896a814c90903d62e8a60e8d8de650d2431fb61",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b7c15396",
+      "source_content": "| Type       |\n| ---------- |\n| () => void |",
+      "source_content_hash": "be2856fa963da4b6dd0caf659a430afc19f2a9b9aa1390a603043fccb937ca8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c43686a1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fb79182e",
+      "source_content": "### `onProgress`",
+      "source_content_hash": "35d63bfefa9b9f0ae9b95b1cd6c6cf8e275d59c19de3cd67bf2ff3068ace2b84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4667c154",
+      "source_content": "Invoked on download progress.",
+      "source_content_hash": "21905e53dbac38ed16cd1c04acd894e15c1bf926eb8d1d66f7aa80c8ed61a51a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "98dbe8a0",
+      "source_content": "| Type                                           |\n| ---------------------------------------------- |\n| (`{ nativeEvent: { loaded, total } }`) => void |",
+      "source_content_hash": "d401c1936b0a2e32558f2c055a87b1371d5ceada8ff6a9b5715de8bd5bebf1e9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "eb288a1a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99e44af3",
+      "source_content": "### `progressiveRenderingEnabled` <div class=\"label android\">Android</div>",
+      "source_content_hash": "90a54e6e7a422ebee418dd1922fc6948d985e5dc0db4d0360b756fd9216200a6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dd78ef80",
+      "source_content": "When `true`, enables progressive jpeg streaming - https://frescolib.org/docs/progressive-jpegs.",
+      "source_content_hash": "ae267cffdd67560a0df325bddd82d16b37dd33b176de12b127b9f911474ad25a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "efc5991c",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c45efcd8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c713fcdf",
+      "source_content": "### `resizeMethod` <div class=\"label android\">Android</div>",
+      "source_content_hash": "64a66eeb9fb3cc091344e37a98252f29ba3b5fe81b62c36dde21aa8dbd7b3c0f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ebea2db8",
+      "source_content": "The mechanism that should be used to resize the image when the image's dimensions differ from the image view's dimensions. Defaults to `auto`.",
+      "source_content_hash": "16f50533208fc4d5cd0d91de1afa7e0d2ff773bb3e1438403bf9506a03741b04",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9f5db52",
+      "source_content": "- `auto`: Use heuristics to pick between `resize` and `scale`.\n\n- `resize`: A software operation which changes the encoded image in memory before it gets decoded. This should be used instead of `scale` when the image is much larger than the view.\n\n- `scale`: The image gets drawn downscaled or upscaled. Compared to `resize`, `scale` is faster (usually hardware accelerated) and produces higher quality images. This should be used if the image is smaller than the view. It should also be used if the image is slightly bigger than the view.",
+      "source_content_hash": "9f99079bb31001c6f6a1aace42453de7e1ff9357ca291208555862fa9b772807",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing.",
+      "source_content_hash": "420379e10648011aa611a8b3df9e133a379163cecac5040c1eac0ecbfae05ce9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7c1adbed",
+      "source_content": "| Type                                  | Default  |\n| ------------------------------------- | -------- |\n| enum(`'auto'`, `'resize'`, `'scale'`) | `'auto'` |",
+      "source_content_hash": "7bcc37087bbe912cb1ee58df614f72e4aea7619aa33716e3ada496ebbed2ce71",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2b9eaaff",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "811ba0cd",
+      "source_content": "### `resizeMode`",
+      "source_content_hash": "572a9ddddaa7cf46e74b642534b3139e12c5e694ccdf79183611e92c2f57db77",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "639926e9",
+      "source_content": "Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.",
+      "source_content_hash": "b4c2283f4bd5cf91c092a120cec32b877b85cb5b4bf59b53766d531c758b3c89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3b55edd2",
+      "source_content": "- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that\n\n  - both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding)\n  - at least one dimension of the scaled image will be equal to the corresponding dimension of the view (minus padding)\n\n- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).\n\n- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.\n\n- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.\n\n- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.",
+      "source_content_hash": "b1fd924c78c717566bae5291ec65411689c32df9a3f260782347e276a1282b35",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cca3ae12",
+      "source_content": "| Type                                                              | Default   |\n| ----------------------------------------------------------------- | --------- |\n| enum(`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |",
+      "source_content_hash": "1d19caf563e1a2fd421f639a412d0f48350d39f968e0689bfb76271162ea8ec1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "65c15b77",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "548b3ae8",
+      "source_content": "### `source`",
+      "source_content_hash": "51edcd6e84be2af26bfbdbec4f911a8bc1ba8b51f2d26768918e09748f0eef15",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9f46c1b6",
+      "source_content": "The image source (either a remote URL or a local file resource).",
+      "source_content_hash": "37904ea92d601e5d8ae7922d4ec2cab8254c2c354f8f9e8ccfa09874b6f33a9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ca714988",
+      "source_content": "This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache. (For more information see [Cache Control for Images](images#cache-control-ios-only)).",
+      "source_content_hash": "b4facf2f1088a9c7668225e73885ba7f2f7742ae290796dc399e34b15a2e80bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fc2d2cf",
+      "source_content": "The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp`, `psd` (iOS only). In addition, iOS supports several RAW image formats. Refer to Apple's documentation for the current list of supported camera models (for iOS 12, see https://support.apple.com/en-ca/HT208967).",
+      "source_content_hash": "9ca7fae2fec2ac87c6fe21757c65aa1bca0aaf7c893c9bf71b06112877b1dd56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c07ea623",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| [ImageSource](image#imagesource) |",
+      "source_content_hash": "17c6021b7f1c1636a02898d4ba71bfbd9f835b99f5f2941b29554fa903bf1a7c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e8ba3209",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ff14ba36",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5e57cf71",
+      "source_content": "| Type                                                                                                                                                 |\n| ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| [Image Style Props](image-style-props#props), [Layout Props](layout-props#props), [Shadow Props](shadow-props#props), [Transforms](transforms#props) |",
+      "source_content_hash": "e48dbc36cb4e88c9df45970f03f8a9e163c3f3c6befd3b4e173fda27b6d86b49",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c18bd29f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ccaaddaa",
+      "source_content": "### `testID`",
+      "source_content_hash": "83bb1ecc3bce9cf38987403cbf0eee8440f9d30cfdf54fe124a9fc8228f9b47c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e99b1eb5",
+      "source_content": "A unique identifier for this element to be used in UI Automation testing scripts.",
+      "source_content_hash": "c2841f5a0533fd323b24e478755bd3ddd3c1107b46dda65ea13602b801c7b29f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "78e1b364",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c300008c",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0c760a60",
+      "source_content": "### `abortPrefetch()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "059907f2caa036d23e9fd78a9b3774f9981b9c43d5e03252e5bbbd0b8c9b2cbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9b3691d",
+      "source_content": "```jsx\nImage.abortPrefetch(requestId);\n```",
+      "source_content_hash": "1a9cfce0f13301fdd97fbddaa893f74049975eb093a2850d78a468f30c12dba7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "b13a021c",
+      "source_content": "Abort prefetch request.",
+      "source_content_hash": "903bba572bb886f02007733f0bb93a3b254f5d8ec7cd8cc4bee532f956502acb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "46a44d60",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2564eae6",
+      "source_content": "| Name                                                       | Type   | Description                             |\n| ---------------------------------------------------------- | ------ | --------------------------------------- |\n| requestId <div class=\"label basic required\">Required</div> | number | Request id as returned by `prefetch()`. |",
+      "source_content_hash": "338a832b84d3c798bc5c582884b0984dcda64ea66ea9f68accc0f7a091038646",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e0574ff6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e67fe646",
+      "source_content": "### `getSize()`",
+      "source_content_hash": "4c6fcac54960fcf04de7edc6d7244948b0ea54b6f475a851e67647507196dd8c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a9640887",
+      "source_content": "```jsx\nImage.getSize(uri, success, [failure]);\n```",
+      "source_content_hash": "e8452a1cbe0436d998656faa1b944b236c36d8434d408905dd9ec3e8a6fb581b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ebe19e6f",
+      "source_content": "Retrieve the width and height (in pixels) of an image prior to displaying it. This method can fail if the image cannot be found, or fails to download.",
+      "source_content_hash": "ba09bd166e2bdecfb0ac5f672be7196e515d0bd71d16fa7a7d1c5cfb7ba46b66",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b4098d8a",
+      "source_content": "In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.",
+      "source_content_hash": "f277a78a29752ea8b46911527664f64113ee98aed839cba16f1210c48e4301a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "57450780",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a8cf921f",
+      "source_content": "| <div className=\"wideColumn\">Name</div>                   | Type     | Description                                                                                          |\n| -------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------- |\n| uri <div class=\"label basic required\">Required</div>     | string   | The location of the image.                                                                           |\n| success <div class=\"label basic required\">Required</div> | function | The function that will be called if the image was successfully found and width and height retrieved. |\n| failure                                                  | function | The function that will be called if there was an error, such as failing to retrieve the image.       |",
+      "source_content_hash": "dee612c761a53c5072cb1a8aaa83cf9beb8334abfa0e904e5245c341c8cd8347",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "5b6a266d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3b03bf1f",
+      "source_content": "### `getSizeWithHeaders()`",
+      "source_content_hash": "093e73783ef83b8eddb74dd8025e1798a3df801236f2caefd40957d220051327",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2aca546a",
+      "source_content": "```jsx\nImage.getSizeWithHeaders(uri, headers, success, [failure]);\n```",
+      "source_content_hash": "064083fbcde653f98dfe20cab0677f638a08664fd0e24ced7c8dc74ac12c372e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e548f48f",
+      "source_content": "Retrieve the width and height (in pixels) of an image prior to displaying it with the ability to provide the headers for the request. This method can fail if the image cannot be found, or fails to download. It also does not work for static image resources.",
+      "source_content_hash": "d35dc55c8d2341f187e209ea4034886cd815ee65b1366a66cb5cccfeb4c271c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "de7b71a3",
+      "source_content": "In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.",
+      "source_content_hash": "f277a78a29752ea8b46911527664f64113ee98aed839cba16f1210c48e4301a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "865bbe8d",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6daad168",
+      "source_content": "| <div className=\"wideColumn\">Name</div>                   | Type     | Description                                                                                          |\n| -------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------- |\n| uri <div class=\"label basic required\">Required</div>     | string   | The location of the image.                                                                           |\n| headers <div class=\"label basic required\">Required</div> | object   | The headers for the request.                                                                         |\n| success <div class=\"label basic required\">Required</div> | function | The function that will be called if the image was successfully found and width and height retrieved. |\n| failure                                                  | function | The function that will be called if there was an error, such as failing to retrieve the image.       |",
+      "source_content_hash": "760a75a576912a148ea831deedcff25d0c94bf168fa5dfff883418cef77cffea",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "052e47c7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "22e907f5",
+      "source_content": "### `prefetch()`",
+      "source_content_hash": "19da34ef1ea06127acecc90b0d59531bc2e35a9f7c5ef876e0c4542de623e6e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0a30e212",
+      "source_content": "```jsx\nawait Image.prefetch(url);\n```",
+      "source_content_hash": "28e628059b10879b72e81401fb925c16e7548e8ef94f4c86c286c63194ebe4f9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3adcb0ad",
+      "source_content": "Prefetches a remote image for later use by downloading it to the disk cache. Returns a promise which resolves to a boolean.",
+      "source_content_hash": "502dcfc488d2035dbd7dcde7ecce52f22b82cb192b68d6357f385c7238d6664b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1e1ccc8c",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b3677e9",
+      "source_content": "| Name                                                 | Type                                              | Description                                            |\n| ---------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------ |\n| url <div class=\"label basic required\">Required</div> | string                                            | The remote location of the image.                      |\n| callback                                             | function <div class=\"label android\">Android</div> | The function that will be called with the `requestId`. |",
+      "source_content_hash": "a35ac87b0d42e3def3da21928450672dd1e19548b70fb77179f9b3a84cadba78",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4fe039e5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f1232e34",
+      "source_content": "### `queryCache()`",
+      "source_content_hash": "4273df5b0631c459a77afba41be972d68bf2ab29ff992a712d5e4a2247f3bdb5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "36a72079",
+      "source_content": "```jsx\nawait Image.queryCache(urls);\n```",
+      "source_content_hash": "8957b74db40f4527c6d3611555d7342060137d355f20e7608db33e17b88dea3e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "b5bd7d92",
+      "source_content": "Perform cache interrogation. Returns a promise which resolves to a mapping from URL to cache status, such as \"disk\", \"memory\" or \"disk/memory\". If a requested URL is not in the mapping, it means it's not in the cache.",
+      "source_content_hash": "b144b20553aeda704493e157b39140ef6071f3cce049b27cac0d9a7535897fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "eed7cff5",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c4877236",
+      "source_content": "| Name                                                  | Type  | Description                                |\n| ----------------------------------------------------- | ----- | ------------------------------------------ |\n| urls <div class=\"label basic required\">Required</div> | array | List of image URLs to check the cache for. |",
+      "source_content_hash": "0c1bf9c2a7d4d6aaf61da3400119f43526e39b7fb9454e588d08c9d13c2e8774",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a2457fd3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9f84e5e",
+      "source_content": "### `resolveAssetSource()`",
+      "source_content_hash": "cfe8272b5f2c71bca9738270f507e3ebbc24c59116f4c584088fad3d63724748",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "61b0ee0d",
+      "source_content": "```jsx\nImage.resolveAssetSource(source);\n```",
+      "source_content_hash": "e5f74e8524085e9544c3c045d6d584800792295fe4d5d2ca9fe9eab8bf97d0cb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8f554a02",
+      "source_content": "Resolves an asset reference into an object which has the properties `uri`, `width`, and `height`.",
+      "source_content_hash": "ea71938e49e711d5735a6163ae80cdd7976e27edb7545ac2af0e1ec9e16614c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99cb8892",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4f3b876c",
+      "source_content": "| <div className=\"wideColumn\">Name</div>                  | Type                                     | Description                                                                  |\n| ------------------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |\n| source <div class=\"label basic required\">Required</div> | [ImageSource](image#imagesource), number | A number (opaque type returned by `require('./foo.png')`) or an ImageSource. |",
+      "source_content_hash": "ce3d56d02dec6f00e8fa195d2b6e6f0f38666057df260098b455999388b58d9f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "758b872b",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "caf3ec9d",
+      "source_content": "### ImageCacheEnum <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "02391d43636de71bd5f5254cd6440332559466d2654233edb643d5493d1d484e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9bf300ec",
+      "source_content": "Enum which can be used to set the cache handling or strategy for the potentially cached responses.",
+      "source_content_hash": "0d72993163a8141e32a4db3a079bfeffa72782cc83592291147714444357a1b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1c60eca2",
+      "source_content": "| Type                                                               | Default     |\n| ------------------------------------------------------------------ | ----------- |\n| enum(`'default'`, `'reload'`, `'force-cache'`, `'only-if-cached'`) | `'default'` |",
+      "source_content_hash": "abd21c72ff83e44e967669b478bcefb103dd4771036ad1005cc6b2948632028a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3bbb6637",
+      "source_content": "- `default`: Use the native platforms default strategy.\n- `reload`: The data for the URL will be loaded from the originating source. No existing cache data should be used to satisfy a URL load request.\n- `force-cache`: The existing cached data will be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is loaded from the originating source.\n- `only-if-cached`: The existing cache data will be used to satisfy a request, regardless of its age or expiration date. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed.",
+      "source_content_hash": "654dca59699f1cc97c84cc0d49c7a81beb3e636f67ae9170fa0dfdaa049cad18",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8744c122",
+      "source_content": "### ImageLoadEvent",
+      "source_content_hash": "3f66057c987973d3ddb8994468cd7b8bc44ad3dfd1444e27f66d83126eae68ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e776de2",
+      "source_content": "Object returned in the `onLoad` callback.",
+      "source_content_hash": "bb814bd1b42ec3860e89178d07826c1b31edc589dd541f6efd07757fda4003b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "05719abd",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ab9fb328",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ecd275c9",
+      "source_content": "| Name   | Type   | Description                         |\n| ------ | ------ | ----------------------------------- |\n| source | object | The [source object](#source-object) |",
+      "source_content_hash": "9161b91bf89308e05e962036ca044d26b24c9349b33423406c3ef3435c08102d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "480b6486",
+      "source_content": "#### Source Object",
+      "source_content_hash": "5d52551d117c87d3f56b23bec1713962681b690f61022be2f3fa4ca8871467a8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6bd1adf4",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a8f72759",
+      "source_content": "| Name   | Type   | Description                                                  |\n| ------ | ------ | ------------------------------------------------------------ |\n| width  | number | The width of loaded image.                                   |\n| height | number | The height of loaded image.                                  |\n| uri    | string | A string representing the resource identifier for the image. |",
+      "source_content_hash": "9b61b9785afc9c18a0717f23c42456056ceff8606d881a750f4755b088f63739",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c73a7e79",
+      "source_content": "### ImageSource",
+      "source_content_hash": "d9be35c9f5088ef2dbfd8b1888e4be33b28c7dca26731382112fc2746059e027",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6276cfb9",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| object, array of objects, number |",
+      "source_content_hash": "9d06d3e4c7174a80631d596a15f31b0f977487b598dfed37fb8d2a4469690d2e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "efd1b767",
+      "source_content": "**Properties (if passing as object or array of objects):**",
+      "source_content_hash": "b44670f8b3efca312a28f690e11126236771772bc5dc225d31de9c448cedc3b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d35523a8",
+      "source_content": "| <div className=\"wideColumn\">Name</div> | Type                                       | Description                                                                                                                                                                          |\n| -------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| uri                                    | string                                     | A string representing the resource identifier for the image, which could be an http address, a local file path, or the name of a static image resource.                              |\n| width                                  | number                                     | Can be specified if known at build time, in which case the value will be used to set the default `<Image/>` component dimension.                                                     |\n| height                                 | number                                     | Can be specified if known at build time, in which case the value will be used to set the default `<Image/>` component dimension.                                                     |\n| scale                                  | number                                     | Used to indicate the scale factor of the image. Defaults to `1.0` if unspecified, meaning that one image pixel equates to one display point / DIP.                                   |\n| bundle<div class=\"label ios\">iOS</div> | string                                     | The iOS asset bundle which the image is included in. This will default to `[NSBundle mainBundle]` if not set.                                                                        |\n| method                                 | string                                     | The HTTP Method to use. Defaults to `'GET'` if not specified.                                                                                                                        |\n| headers                                | object                                     | An object representing the HTTP headers to send along with the request for a remote image.                                                                                           |\n| body                                   | string                                     | The HTTP body to send with the request. This must be a valid UTF-8 string, and will be sent exactly as specified, with no additional encoding (e.g. URL-escaping or base64) applied. |\n| cache<div class=\"label ios\">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | Determines how the requests handles potentially cached responses.                                                                                                                    |",
+      "source_content_hash": "155074ca4a7d66f07b55d7e142d96f50db73f38d8a46950dbe4879234169d8ca",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "505b6495",
+      "source_content": "**If passing a number:**",
+      "source_content_hash": "b332471581b4d86641b45854d170c8c1690c5ec5ea3b057bba6b93fa4afcc391",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4f246248",
+      "source_content": "- `number` - opaque type returned by something like `require('./image.jpg')`.",
+      "source_content_hash": "8913c032e83d491a500f55a7dc5c70a85ee64fc23b64b61fd21b0062e7110eb7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/image.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.768800+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

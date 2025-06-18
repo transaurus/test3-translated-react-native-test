@@ -1,0 +1,112 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/props.md",
+  "source_file_content_hash": "5c21eb5dfce7a839eb10a726ad9c4e4bfd5cc30be33292daf275db1ccf043c02",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: props\ntitle: Props\n---",
+      "source_content_hash": "f4417eacbb67fcdfe40d9a1c0a7b0d357e7089f6cbf4a21a26e036c0eec6611d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Most components can be customized when they are created, with different parameters. These created parameters are called `props`, short for properties.",
+      "source_content_hash": "e1b0cf6f0f609a351dd5b419064a5e7e9ccb8859d4cfe589c2b2ed4fc62e6ea5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "大多數元件在創建時可透過不同參數進行客製化，這些創建參數稱為「props」（屬性的簡稱）。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "For example, one basic React Native component is the `Image`. When you create an image, you can use a prop named `source` to control what image it shows.",
+      "source_content_hash": "6a06aeab8d95f1eddd1df9a94f426a1d9c8647ab3fcf8c903dd33ac9d81771aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "舉例來說，React Native 的基本元件之一為 `Image`。創建圖片時，您可以使用名為 `source` 的 prop 來控制顯示的圖像。"
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=Props\nimport React from 'react';\nimport { Image } from 'react-native';\n\nconst Bananas = () => {\n    let pic = {\n      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'\n    };\n    return (\n      <Image source={pic} style={{width: 193, height: 110, marginTop:50}}/>\n    );\n}\n\nexport default Bananas;\n```",
+      "source_content_hash": "64840ce25dc42ef2d72370ba86d8c4c813c8c2e0e541207afccd93016bd8e193",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "Notice the braces surrounding `{pic}` - these embed the variable `pic` into JSX. You can put any JavaScript expression inside braces in JSX.",
+      "source_content_hash": "b6017cff78d3cb1c4d4323cc11b0f4447f94886ccda3e849fc9dd6c2d48c2a6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意包圍 `{pic}` 的大括號——這會將變數 `pic` 嵌入 JSX 中。您可以在 JSX 的大括號內放入任何 JavaScript 表達式。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Your own components can also use `props`. This lets you make a single component that is used in many different places in your app, with slightly different properties in each place by referring to `props` in your `render` function. Here's an example:",
+      "source_content_hash": "3e7a47a0e3d5d26fefc42b8cd73b7854feb580582a3d34feb43e8de50e98fe9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您自訂的元件同樣可以使用 `props`。這讓您能創建單一元件並在應用程式的多處使用，只需在 `render` 函式中引用 `props` 即可微調各處屬性。範例如下："
+      }
+    },
+    {
+      "segment_id": "b7c3dbd1",
+      "source_content": "```SnackPlayer name=Props\nimport React from 'react';\nimport { Text, View } from 'react-native';\n\nconst Greeting = (props) => {\n    return (\n      <View style={{alignItems: 'center'}}>\n        <Text>Hello {props.name}!</Text>\n      </View>\n    );\n}\n\nexport default LotsOfGreetings = () => {\n    return (\n      <View style={{alignItems: 'center', top: 50}}>\n        <Greeting name='Rexxar' />\n        <Greeting name='Jaina' />\n        <Greeting name='Valeera' />\n      </View>\n    );\n}\n```",
+      "source_content_hash": "a7156d9edb98744d7fd42d42b56f2bfd39562ec194e53b81d50e36d6ef40743e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7c3dbd1"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "Using `name` as a prop lets us customize the `Greeting` component, so we can reuse that component for each of our greetings. This example also uses the `Greeting` component in JSX, similar to the [Core Components](intro-react-native-components). The power to do this is what makes React so cool - if you find yourself wishing that you had a different set of UI primitives to work with, you can invent new ones.",
+      "source_content_hash": "33ce13ff4367f4cd20795458e39b21badf3b865f3ce0c214cc00bfe8b9f3a553",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過將 `name` 作為 prop 使用，我們能客製化 `Greeting` 元件，從而重複利用該元件來顯示不同問候語。此範例亦在 JSX 中使用 `Greeting` 元件，類似於[核心元件](intro-react-native-components)的用法。這正是 React 的強大之處——若您希望使用不同的 UI 原始元件，完全可以自行創建新的元件。"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "The other new thing going on here is the [`View`](view.md) component. A [`View`](view.md) is useful as a container for other components, to help control style and layout.",
+      "source_content_hash": "cecf47726ce32fe579986446f5fc0f25ac64d0551832f2951eeb3feb90509d6d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這裡另一個重點是 [`View`](view.md) 元件。[`View`](view.md) 可作為其他元件的容器，有助於控制樣式與佈局。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "With `props` and the basic [`Text`](text.md), [`Image`](image.md), and [`View`](view.md) components, you can build a wide variety of static screens. To learn how to make your app change over time, you need to [learn about State](state.md).",
+      "source_content_hash": "c9f30ae7fe9cd04a59ccaadf6031df5799c5b5845150fcc66190e283eaf4d93c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "結合 `props` 與基礎的 [`Text`](text.md)、[`Image`](image.md) 和 [`View`](view.md) 元件，您便能建構各式靜態畫面。若要讓應用程式隨時間變化，請繼續[學習 State 的用法](state.md)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/props.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.341060+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "5c21eb5dfce7a839eb10a726ad9c4e4bfd5cc30be33292daf275db1ccf043c02"
+  }
+}

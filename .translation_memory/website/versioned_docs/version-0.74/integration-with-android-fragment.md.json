@@ -1,0 +1,412 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/integration-with-android-fragment.md",
+  "source_file_content_hash": "6a3e97e0371ca0a71d2fd545e0d0b2afbc831c2e0d0bada840b94e289eec896c",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: integration-with-android-fragment\ntitle: Integration with an Android Fragment\n---",
+      "source_content_hash": "a55ba392c8b33eb99a4e31bce7abc4884a8525fa738417ddd0611298fc50276f",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The guide for [Integration with Existing Apps](https://reactnative.dev/docs/integration-with-existing-apps) details how to integrate a full-screen React Native app into an existing Android app as an Activity. To use React Native components within Fragments in an existing app requires some additional setup. The benefit of this is that it allows for a native app to integrate React Native components alongside native fragments in an Activity.",
+      "source_content_hash": "a482383516c5dce5781c26c989b552d48ac1774c2dbe2a6781f35150564fc80c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[與現有應用整合](https://reactnative.dev/docs/integration-with-existing-apps)指南詳細說明了如何將全螢幕的React Native應用作為Activity整合到現有的Android應用中。若要在現有應用中以Fragment形式使用React Native元件，則需要進行一些額外設定。這種方式的好處是允許原生應用在Activity中同時整合React Native元件與原生Fragment。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### 1. Add React Native to your app",
+      "source_content_hash": "17fcfcc4e4e56b773d0c19bd42052b3b56950fd8f3ad9294b7ddaf0774d81305",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 將React Native加入您的應用"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Follow the guide for [Integration with Existing Apps](https://reactnative.dev/docs/integration-with-existing-apps) until the Code integration section. Continue to follow Step 1. Create an `index.android.js` file and Step 2. Add your React Native code from this section.",
+      "source_content_hash": "c146aac633a0bbdfa5702c25efc13724c102c55fdb477ed4f3107e8ef56e31e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "按照[與現有應用整合](https://reactnative.dev/docs/integration-with-existing-apps)指南操作，直到「程式碼整合」章節。繼續遵循該章節的步驟1：建立`index.android.js`檔案和步驟2：加入您的React Native程式碼。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "### 2. Integrating your App with a React Native Fragment",
+      "source_content_hash": "5fd90561897f67c99d7f395a3a0c5463e56e468449d5d96b1d41437854acd769",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 將您的應用與React Native Fragment整合"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "You can render your React Native component into a Fragment instead of a full screen React Native Activity. The component may be termed a \"screen\" or \"fragment\" and it will function in the same manner as an Android fragment, likely containing child components. These components can be placed in a `/fragments` folder and the child components used to compose the fragment can be placed in a `/components` folder.",
+      "source_content_hash": "a7c5c5ef98598544892ba25ae7c8f401ba9a312c1938feeee91a00fde5731517",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以將React Native元件渲染到Fragment中，而非全螢幕的React Native Activity。該元件可稱為「畫面」或「片段」，其功能與Android fragment相同，可能包含子元件。這些元件可放置在`/fragments`資料夾中，而用於組成片段的子元件則可放在`/components`資料夾中。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "You will need to implement the `ReactApplication` interface in your main Application Java/Kotlin class. If you have created a new project from Android Studio with a default activity, you will need to create a new class (e.g. `MyReactApplication.java` or `MyReactApplication.kt`). If it is an existing class you can find this main class in your `AndroidManifest.xml` file. Under the `<application />` tag you should see a property `android:name` e.g. `android:name=\".MyReactApplication\"`. This value is the class you want to implement and provide the required methods to.",
+      "source_content_hash": "c8e13dc2a205455dfe01ca1d35775804148bc0dc1e459e50f899a65e13ee5907",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您需要在主要的Application Java/Kotlin類別中實作`ReactApplication`介面。如果是透過Android Studio建立的新專案並帶有預設Activity，則需要建立新類別（例如`MyReactApplication.java`或`MyReactApplication.kt`）。若是現有類別，您可以在`AndroidManifest.xml`檔案中找到此主類別。在`<application />`標籤下，您會看到`android:name`屬性，例如`android:name=\".MyReactApplication\"`。此值即為您需要實作並提供必要方法的類別。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "Ensure your main Application class implements ReactApplication:",
+      "source_content_hash": "d6121f79a1f800b507fa68c84410daaa60f7347c439ef84bd1d1bd7a52302f2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "確保您的主要Application類別實作ReactApplication："
+      }
+    },
+    {
+      "segment_id": "5dfba1c3",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass MyReactApplication: Application(), ReactApplication {...}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\npublic class MyReactApplication extends Application implements ReactApplication {...}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "0979ff948a83c8e02511440f77222ca2ee5487897c9483d6ca6d8aca4f6e22e6",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5dfba1c3"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "Override the required methods `getUseDeveloperSupport`, `getPackages` and `getReactNativeHost`:",
+      "source_content_hash": "8517be1c3f0e79f197cece6657c1873a9fe5f1fdafd95a714d886d77e4901b1d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "覆寫必要方法`getUseDeveloperSupport`、`getPackages`和`getReactNativeHost`："
+      }
+    },
+    {
+      "segment_id": "d1ce550c",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass MyReactApplication : Application(), ReactApplication {\n    override fun onCreate() {\n        super.onCreate()\n        SoLoader.init(this, false)\n    }\n    private val reactNativeHost =\n        object : DefaultReactNativeHost(this) {\n            override fun getUseDeveloperSupport() = BuildConfig.DEBUG\n            override fun getPackages(): List<ReactPackage> {\n                val packages = PackageList(this).getPackages().toMutableList()\n                // Packages that cannot be autolinked yet can be added manually here\n                return packages\n            }\n        }\n    override fun getReactNativeHost(): ReactNativeHost = reactNativeHost\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\npublic class MyReactApplication extends Application implements ReactApplication {\n    @Override\n    public void onCreate() {\n        super.onCreate();\n        SoLoader.init(this, false);\n    }\n\n    private final ReactNativeHost mReactNativeHost = new DefaultReactNativeHost(this) {\n        @Override\n        public boolean getUseDeveloperSupport() {\n            return BuildConfig.DEBUG;\n        }\n\n        protected List<ReactPackage> getPackages() {\n            List<ReactPackage> packages = new PackageList(this).getPackages();\n            // Packages that cannot be autolinked yet can be added manually here\n            return packages;\n        }\n    };\n\n    @Override\n    public ReactNativeHost getReactNativeHost() {\n        return mReactNativeHost;\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "27cf5ea7914d642cb605d3daec34a551e5391860225a3302be4d9ba7c62af51c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d1ce550c"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "If you are using Android Studio, use Alt + Enter to add all missing imports in your class. Alternatively these are the required imports to include manually:",
+      "source_content_hash": "e4e6520402b9c14c9a90b2ac8717bc61c40180b3224fa67848fdde79376b085c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若使用Android Studio，請使用Alt + Enter加入類別中所有缺少的import。或者，以下是需要手動加入的必要import："
+      }
+    },
+    {
+      "segment_id": "c2059547",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nimport android.app.Application\n\nimport com.facebook.react.PackageList\nimport com.facebook.react.ReactApplication\nimport com.facebook.react.ReactNativeHost\nimport com.facebook.react.ReactPackage\nimport com.facebook.react.defaults.DefaultReactNativeHost\nimport com.facebook.soloader.SoLoader\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\nimport android.app.Application;\n\nimport com.facebook.react.PackageList;\nimport com.facebook.react.ReactApplication;\nimport com.facebook.react.ReactNativeHost;\nimport com.facebook.react.ReactPackage;\nimport com.facebook.react.defaults.DefaultReactNativeHost;\nimport com.facebook.soloader.SoLoader;\n\nimport java.util.List;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "a2f012d60a453e2afda1cbf466b73618b1c938a656866d3552b004dc18e440ba",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c2059547"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "Perform a \"Sync Project files with Gradle\" operation.",
+      "source_content_hash": "16a9ff3d2d729fe34ddb2f9342af10436d20dc2877c8cb6392d39c5c614ee8cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行「Sync Project files with Gradle」操作。"
+      }
+    },
+    {
+      "segment_id": "8f1c1cd6",
+      "source_content": "### Step 3. Add a FrameLayout for the React Native Fragment",
+      "source_content_hash": "2eecf2f2c495fa1ab2c3a3ae6da505b92ba0239103f227c27015a61b51cab819",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 步驟3. 為React Native Fragment加入FrameLayout"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "You will now add your React Native Fragment to an Activity. For a new project this Activity will be `MainActivity` but it could be any Activity and more fragments can be added to additional Activities as you integrate more React Native components into your app.",
+      "source_content_hash": "b8bd62136949dfe55c5eb3f1a3a1f9cf1d857f11107be41a28866b79b4a5cc97",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您需要將React Native Fragment加入Activity中。對於新專案，此Activity會是`MainActivity`，但也可以是任何Activity，並且隨著您在應用中整合更多React Native元件，可以將更多Fragment加入其他Activity中。"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "First add the React Native Fragment to your Activity's layout. For example `main_activity.xml` in the `res/layouts` folder.",
+      "source_content_hash": "05557123d754418bbd9c773b4d4e5477a2fafe93d62d25bca8801541791ef1fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先將React Native Fragment加入Activity的佈局中。例如`res/layouts`資料夾中的`main_activity.xml`。"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "Add a `<FrameLayout>` with an id, width and height. This is the layout you will find and render your React Native Fragment into.",
+      "source_content_hash": "0fcb0077abcbcd55070571f358c7eec3e054e22f2260767cb1b5b9b3aa388b69",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "加入一個帶有id、寬度和高度的`<FrameLayout>`。這是您將尋找並渲染React Native Fragment的佈局。"
+      }
+    },
+    {
+      "segment_id": "e908327f",
+      "source_content": "```xml\n<FrameLayout\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:id=\"@+id/reactNativeFragment\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />\n```",
+      "source_content_hash": "8d27e86f80a73b4f6a8a471f18718479683b83b022ed2ce3924b433506bbb61d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e908327f"
+      }
+    },
+    {
+      "segment_id": "35353302",
+      "source_content": "### Step 4. Add a React Native Fragment to the FrameLayout",
+      "source_content_hash": "4c2bc9153465fe584a8afe17dee97ab0c03038f98cd4135117f6d37aeb0c1348",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 步驟4. 將React Native Fragment加入FrameLayout"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "To add your React Native Fragment to your layout you need to have an Activity. As mentioned in a new project this will be `MainActivity`. In this Activity add a button and an event listener. On button click you will render your React Native Fragment.",
+      "source_content_hash": "e2cf626bd5a43b9ba559d97313806fbde11e94736aa2f8f7adf5ff18dc731a1f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要將React Native Fragment加入佈局中，您需要有一個Activity。如前所述，在新專案中這會是`MainActivity`。在此Activity中加入一個按鈕和事件監聽器。點擊按鈕時，您將渲染React Native Fragment。"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "Modify your Activity layout to add the button:",
+      "source_content_hash": "6548a979ca66a70613cf612fe8c6c9f91933fb227cbc3380ab5c91b01dc52e87",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "修改Activity佈局以加入按鈕："
+      }
+    },
+    {
+      "segment_id": "68d4860d",
+      "source_content": "```xml\n<Button\n    android:layout_margin=\"10dp\"\n    android:id=\"@+id/button\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Show react fragment\" />\n```",
+      "source_content_hash": "f093e4ee67c807b91f7c2b8c1dc9f41d6ddd85ce9620a1261868e4e38e161728",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_68d4860d"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "Now in your Activity class (e.g. `MainActivity.java` or `MainActivity.kt`) you need to add an `OnClickListener` for the button, instantiate your `ReactFragment` and add it to the frame layout.",
+      "source_content_hash": "da7e93816f59a24c996db1af0d3668accd6587ca7a4903a34c0fe899ace101a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在在您的Activity類別（例如`MainActivity.java`或`MainActivity.kt`）中，您需要為按鈕加入`OnClickListener`，實例化`ReactFragment`並將其加入frame layout中。"
+      }
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "Add the button field to the top of your Activity:",
+      "source_content_hash": "004fd3537b0d69d1c052e1636751e13c85d222c24e93107fa4ddf0641f62440a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Activity頂部加入按鈕欄位："
+      }
+    },
+    {
+      "segment_id": "99b5b1ae",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nprivate lateinit var button: Button\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\nprivate Button mButton;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "f352837f1077e491139a8e9ad349599dbb64da665f353fe88fd0864552dba058",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99b5b1ae"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "Update your Activity's `onCreate` method as follows:",
+      "source_content_hash": "bab6f69ee8ccfddb4d54690a8101fc46e8e5ae672e84427c14eef3297ce43d4a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更新Activity的`onCreate`方法如下："
+      }
+    },
+    {
+      "segment_id": "b8c004ac",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\noverride fun onCreate(savedInstanceState: Bundle) {\n    super.onCreate(savedInstanceState)\n    setContentView(R.layout.main_activity)\n    button = findViewById<Button>(R.id.button)\n    button.setOnClickListener {\n        val reactNativeFragment = ReactFragment.Builder()\n                .setComponentName(\"HelloWorld\")\n                .setLaunchOptions(getLaunchOptions(\"test message\"))\n                .build()\n        getSupportFragmentManager()\n                .beginTransaction()\n                .add(R.id.reactNativeFragment, reactNativeFragment)\n                .commit()\n    }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\n@Override\nprotected void onCreate(Bundle savedInstanceState) {\n    super.onCreate(savedInstanceState);\n    setContentView(R.layout.main_activity);\n\n    mButton = findViewById(R.id.button);\n    mButton.setOnClickListener(new View.OnClickListener() {\n        public void onClick(View v) {\n            Fragment reactNativeFragment = new ReactFragment.Builder()\n                    .setComponentName(\"HelloWorld\")\n                    .setLaunchOptions(getLaunchOptions(\"test message\"))\n                    .build();\n\n            getSupportFragmentManager()\n                    .beginTransaction()\n                    .add(R.id.reactNativeFragment, reactNativeFragment)\n                    .commit();\n\n        }\n    });\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "54c1628bc149995c99809886f5f3462240130d613a043c4dca2de2312fa278e3",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b8c004ac"
+      }
+    },
+    {
+      "segment_id": "d119b75c",
+      "source_content": "In the code above `Fragment reactNativeFragment = new ReactFragment.Builder()` creates the ReactFragment and `getSupportFragmentManager().beginTransaction().add()` adds the Fragment to the Frame Layout.",
+      "source_content_hash": "eab843075af98790aa078d30e805f0b02ec94f011af95a9e7fe5d43f7c7ab14b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上述程式碼中，`Fragment reactNativeFragment = new ReactFragment.Builder()` 會建立 ReactFragment，而 `getSupportFragmentManager().beginTransaction().add()` 則會將該 Fragment 加入至 Frame Layout 中。"
+      }
+    },
+    {
+      "segment_id": "8f4e752e",
+      "source_content": "If you are using a starter kit for React Native, replace the \"HelloWorld\" string with the one in your `index.js` or `index.android.js` file (it’s the first argument to the AppRegistry.registerComponent() method).",
+      "source_content_hash": "bef9bd84788dc9a5a8c2245aadbd7fcda5cc24c9d4cfa76fe3ef1eb39d8f8f06",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用的是 React Native 入門套件，請將 \"HelloWorld\" 字串替換為您 `index.js` 或 `index.android.js` 檔案中的字串（即 AppRegistry.registerComponent() 方法的第一個參數）。"
+      }
+    },
+    {
+      "segment_id": "f211c69a",
+      "source_content": "Add the `getLaunchOptions` method which will allow you to pass props through to your component. This is optional and you can remove `setLaunchOptions` if you don't need to pass any props.",
+      "source_content_hash": "bb7b078acaf39d6f0abb0dc139fbf617cc12e3baa26156e413d72d4695e5e71f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "新增 `getLaunchOptions` 方法，該方法可讓您將 props 傳遞至元件中。此為選用項目，若您不需要傳遞任何 props，可移除 `setLaunchOptions`。"
+      }
+    },
+    {
+      "segment_id": "f8ba1091",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nprivate fun getLaunchOptions(message: String) = Bundle().apply {\n    putString(\"message\", message)\n}\n\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\nprivate Bundle getLaunchOptions(String message) {\n    Bundle initialProperties = new Bundle();\n    initialProperties.putString(\"message\", message);\n    return initialProperties;\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "859e295d35834491f8f8797660dbf4175266deb138a4f874b653a1e27189dd84",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f8ba1091"
+      }
+    },
+    {
+      "segment_id": "bb5297fc",
+      "source_content": "Add all missing imports in your Activity class. Be careful to use your package’s BuildConfig and not the one from the facebook package! Alternatively these are the required imports to include manually:",
+      "source_content_hash": "0888a48ece00923a0c3c719c5fae734cc0cfbc8c1641ac5eada90c1dc0f94eaf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 Activity 類別中加入所有缺少的 imports。請注意使用您套件的 BuildConfig，而非來自 facebook 套件的！或者，您也可以手動加入以下必要的 imports："
+      }
+    },
+    {
+      "segment_id": "5f6e81e7",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nimport android.app.Application\n\nimport com.facebook.react.ReactApplication\nimport com.facebook.react.ReactNativeHost\nimport com.facebook.react.ReactPackage\nimport com.facebook.react.shell.MainReactPackage\nimport com.facebook.soloader.SoLoader\n\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\nimport android.app.Application;\n\nimport com.facebook.react.ReactApplication;\nimport com.facebook.react.ReactNativeHost;\nimport com.facebook.react.ReactPackage;\nimport com.facebook.react.shell.MainReactPackage;\nimport com.facebook.soloader.SoLoader;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "55de27b6fadd330b02ab615aeeae3315619b631674e7d3e47e9aef1001c130f8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5f6e81e7"
+      }
+    },
+    {
+      "segment_id": "a5a28988",
+      "source_content": "Perform a \"Sync Project files with Gradle\" operation.",
+      "source_content_hash": "16a9ff3d2d729fe34ddb2f9342af10436d20dc2877c8cb6392d39c5c614ee8cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行「Sync Project files with Gradle」操作。"
+      }
+    },
+    {
+      "segment_id": "052c158b",
+      "source_content": "### Step 5. Test your integration",
+      "source_content_hash": "34157f577ff9e1288448d230eb0dfebdad374bdc17998bd9afa358c31c0f34da",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 步驟 5. 測試您的整合"
+      }
+    },
+    {
+      "segment_id": "a01e2096",
+      "source_content": "Make sure you run `yarn` to install your react-native dependencies and run `yarn native` to start the metro bundler. Run your android app in Android Studio and it should load the JavaScript code from the development server and display it in your React Native Fragment in the Activity.",
+      "source_content_hash": "b771c2d3742a6332794c996524cb0deb66f167fa39332ab45594541e25e4382b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請確保執行 `yarn` 以安裝您的 react-native 相依套件，並執行 `yarn native` 以啟動 metro bundler。在 Android Studio 中執行您的 Android 應用程式，它應會從開發伺服器載入 JavaScript 程式碼，並在 Activity 中的 React Native Fragment 顯示。"
+      }
+    },
+    {
+      "segment_id": "fd59095d",
+      "source_content": "### Step 6. Additional setup - Native modules",
+      "source_content_hash": "d103f008780280e383617d814215e7ec67cdc0f40b22f6d850bae0dcaf2e1974",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 步驟 6. 額外設定 - 原生模組"
+      }
+    },
+    {
+      "segment_id": "c2a9a004",
+      "source_content": "You may need to call out to existing Java/Kotlin code from your react component. Native modules allow you to call out to native code and run methods in your native app. Follow the setup here [native-modules-android](/docs/0.74/native-modules-android)",
+      "source_content_hash": "32a037e0b5b1b50f2a7f5d4282cd6dc75e966d55251c4a738709bca0a04fb190",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可能需要從您的 react 元件呼叫現有的 Java/Kotlin 程式碼。原生模組可讓您呼叫原生程式碼，並在您的原生應用程式中執行方法。請依照此處的設定進行操作 [native-modules-android](/docs/0.74/native-modules-android)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/integration-with-android-fragment.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.563722+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6a3e97e0371ca0a71d2fd545e0d0b2afbc831c2e0d0bada840b94e289eec896c"
+  }
+}

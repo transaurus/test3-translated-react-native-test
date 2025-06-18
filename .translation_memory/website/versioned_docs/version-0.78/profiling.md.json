@@ -1,0 +1,562 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.78/profiling.md",
+  "source_file_content_hash": "ab59fdee5be626c13ebd2018db77158f508e4758dfdf78f70d2c45d55b2d1e14",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: profiling\ntitle: Profiling\n---",
+      "source_content_hash": "c9d662f6d07010d60a35582dde7c6c4b79deb75e2491c08e0dcc3da3e08d96c8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Profiling is the process of analyzing an app's performance, resource usage, and behavior to identify potential bottlenecks or inefficiencies. It's worth making use of profiling tools to ensure your app works smoothly across different devices and conditions.",
+      "source_content_hash": "b30da63a84adb23f582085440cede4d2353823e3eaf94c658ba5a28c86bf189b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "效能分析是透過檢測應用程式的效能、資源使用情況和行為來識別潛在瓶頸或低效問題的過程。善用效能分析工具能確保您的應用在不同裝置和條件下流暢運作。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "For iOS, Instruments is an invaluable tool, and on Android you should learn to use the [Android Studio Profiler](profiling.md#profiling-android-ui-performance-with-system-tracing).",
+      "source_content_hash": "027adafb43ce233dc028d57d964bd425313bcb2e54ea96bcab8174d65d6ae9ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在iOS上，Instruments是不可或缺的工具；而在Android平台，您應該學習使用[Android Studio Profiler](profiling.md#profiling-android-ui-performance-with-system-tracing)。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "But first, [**make sure that Development Mode is OFF!**](performance.md#running-in-development-mode-devtrue) You should see `__DEV__ === false, development-level warning are OFF, performance optimizations are ON` in your application logs.",
+      "source_content_hash": "60ad5789e85ae4dde43e0bbb4f6dadb4911abfb7603e6869c071e44285a104e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但首先，[**請務必關閉開發者模式！**](performance.md#running-in-development-mode-devtrue) 您應在應用日誌中看到`__DEV__ === false, development-level warning are OFF, performance optimizations are ON`的提示。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Profiling Android UI Performance with System Tracing",
+      "source_content_hash": "3626901a7bda62144c87d77a9a13f69deb823814481ddd0a04c68c90d973f7e2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用系統追蹤分析Android UI效能"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "Android supports 10k+ different phones and is generalized to support software rendering: the framework architecture and need to generalize across many hardware targets unfortunately means you get less for free relative to iOS. But sometimes, there are things you can improve -- and many times it's not native code's fault at all!",
+      "source_content_hash": "12546cddd3fdaa7a5f90d21aba2774c620a1b75f99b48fc71102b340e5976988",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android支援上萬種不同手機型號，其框架架構需通用於各種硬體規格，這意味著相較iOS，開發者需自行處理更多效能優化工作——但許多時候問題根源並非原生程式碼！"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "The first step for debugging this jank is to answer the fundamental question of where your time is being spent during each 16ms frame. For that, we'll be using the [built-in System Tracing profiler in the Android Studio](https://developer.android.com/studio/profile).",
+      "source_content_hash": "b8aa356dce64e3a2011ffe92de0aa9548569cad3f64aaf7dfcad43f1f04934d8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "偵測卡頓的第一步是釐清每個16毫秒幀的時間消耗分佈。我們將使用[Android Studio內建的System Tracing分析工具](https://developer.android.com/studio/profile)。"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### 1. Collecting a trace",
+      "source_content_hash": "34b749242bc328500f138a5c4399886231a17573de09171b2bdefd70649e5fd0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 收集追蹤資料"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "First, connect a device that exhibits the stuttering you want to investigate to your computer via USB. Open your project's `android` folder in Android Studio, select your device in the top right pane, and [run your project as profileable](https://developer.android.com/studio/profile#build-and-run).",
+      "source_content_hash": "0a9ae731e84fbd1210651d12ea038c4e1df2d4659c1961178134dd457e035085",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先透過USB連接出現卡頓問題的裝置。在Android Studio中開啟專案的`android`資料夾，於右上角面板選擇裝置，並[以可分析模式執行專案](https://developer.android.com/studio/profile#build-and-run)。"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "When your app is built as profileable and is running on the device, get your app to the point right before the navigation/animation you want to profile and start the [\"Capture System Activities\" task](https://developer.android.com/studio/profile#start-profiling) in the Android Studio Profiler pane.",
+      "source_content_hash": "dff73de68e2dfcefa2db035c1ced53e78a4aa4edcf580068a4dd267c028d4234",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當應用以可分析模式在裝置上運行後，導航至欲分析的互動場景前，點擊Android Studio Profiler面板中的[\"Capture System Activities\"按鈕](https://developer.android.com/studio/profile#start-profiling)開始記錄。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Once the trace starts collecting, perform the animation or interaction you care about. Then press \"Stop recording\". You can now [inspect the trace directly in the Android Studio](https://developer.android.com/studio/profile/jank-detection). Alternatively, you can select it in the \"Past Recordings\" pane, press \"Export recording\", and open it in a tool like [Perfetto](https://perfetto.dev/).",
+      "source_content_hash": "0fbb8dbdafd1078eac3873042122a3a8dce5a0e63fa05d9da71594bdb37b1c5c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開始記錄後執行目標動畫或互動操作，完成後點擊\"Stop recording\"。您可[直接在Android Studio檢視追蹤資料](https://developer.android.com/studio/profile/jank-detection)，或於\"Past Recordings\"面板選擇記錄檔後點擊\"Export recording\"，用[Perfetto](https://perfetto.dev/)等工具開啟。"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "### 2. Reading the trace",
+      "source_content_hash": "9351e22393e97b451e211a5db06d4d46228769b3cefbecee6bce63299fac3ea8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 解讀追蹤資料"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "After opening the trace in Android Studio or Perfetto, you should see something like this:",
+      "source_content_hash": "45d743914bbacf64e70eeb8077ffae96bc05149d24483fb839e6fd53e35a2a37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Android Studio或Perfetto中開啟追蹤檔後，您會看到類似以下畫面："
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "![Example](/docs/assets/SystraceExample.png)",
+      "source_content_hash": "32283acbb921f6cdb1467958317c5d59dac532984997e568563c35103d25737b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![範例](/docs/assets/SystraceExample.png)"
+      }
+    },
+    {
+      "segment_id": "0d170438",
+      "source_content": ":::note[Hint]\nUse the WASD keys to strafe and zoom.\n:::",
+      "source_content_hash": "107e2d2da458b04ce9a3f7384f8df5c747fafa557c0cae4f5ad38d6b20618c0f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[提示]\n使用WASD鍵進行平移和縮放。\n:::"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "The exact UI might be different but the instructions below will apply regardless of the tool you're using.",
+      "source_content_hash": "4cbaa9fd325fbe8efef50d536fe47d2c0103444b07da6331b6cb7d6ff9920a44",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "不同工具的介面可能略有差異，但下列說明均適用。"
+      }
+    },
+    {
+      "segment_id": "214ab298",
+      "source_content": ":::info[Enable VSync highlighting]\nCheck this checkbox at the top right of the screen to highlight the 16ms frame boundaries:\n\n![Enable VSync Highlighting](/docs/assets/SystraceHighlightVSync.png)\n\nYou should see zebra stripes as in the screenshot above. If you don't, try profiling on a different device: Samsung has been known to have issues displaying vsyncs while the Nexus series is generally pretty reliable.\n:::",
+      "source_content_hash": "929f69671b07d514e486eeb4d8b43b8e526b57d17698d7e3531b514bb9117c44",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info[啟用垂直同步高亮顯示]\n勾選畫面右上角的此選項以標記16毫秒幀邊界：\n\n![啟用垂直同步高亮](/docs/assets/SystraceHighlightVSync.png)\n\n您應看到如上圖的斑馬條紋。若未顯示，請嘗試在其他裝置上分析：三星裝置已知可能無法正常顯示垂直同步標記，而Nexus系列通常較可靠。\n:::"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "### 3. Find your process",
+      "source_content_hash": "15867e7572b1502d336cb5ff6b0400b3da5858c8f624ad6429578c67c10cb1cc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 定位您的進程"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Scroll until you see (part of) the name of your package. In this case, I was profiling `com.facebook.adsmanager`, which shows up as `book.adsmanager` because of silly thread name limits in the kernel.",
+      "source_content_hash": "e714d0873dd6095274851f9ffe439ab6f0eaf18e9b2e1cabf344f36d86fac2ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動直至看見您的套件名稱（部分顯示）。本例中分析的`com.facebook.adsmanager`因系統執行緒名稱長度限制顯示為`book.adsmanager`。"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "On the left side, you'll see a set of threads which correspond to the timeline rows on the right. There are a few threads we care about for our purposes: the UI thread (which has your package name or the name UI Thread), `mqt_js`, and `mqt_native_modules`. If you're running on Android 5+, we also care about the Render Thread.",
+      "source_content_hash": "6ba31173c3e9af51b6759395a91180948034d8dc3b1e3be51cb225ec7a0b0e6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "左側面板顯示的執行緒列表對應右側時間軸。我們需關注以下執行緒：UI執行緒（顯示套件名稱或UI Thread）、`mqt_js`和`mqt_native_modules`。若在Android 5+裝置上運行，還需關注Render Thread。"
+      }
+    },
+    {
+      "segment_id": "b4ef1e56",
+      "source_content": "- **UI Thread.** This is where standard android measure/layout/draw happens. The thread name on the right will be your package name (in my case book.adsmanager) or UI Thread. The events that you see on this thread should look something like this and have to do with `Choreographer`, `traversals`, and `DispatchUI`:\n\n  ![UI Thread Example](/docs/assets/SystraceUIThreadExample.png)\n\n- **JS Thread.** This is where JavaScript is executed. The thread name will be either `mqt_js` or `<...>` depending on how cooperative the kernel on your device is being. To identify it if it doesn't have a name, look for things like `JSCall`, `Bridge.executeJSCall`, etc:\n\n  ![JS Thread Example](/docs/assets/SystraceJSThreadExample.png)\n\n- **Native Modules Thread.** This is where native module calls (e.g. the `UIManager`) are executed. The thread name will be either `mqt_native_modules` or `<...>`. To identify it in the latter case, look for things like `NativeCall`, `callJavaModuleMethod`, and `onBatchComplete`:\n\n  ![Native Modules Thread Example](/docs/assets/SystraceNativeModulesThreadExample.png)\n\n- **Bonus: Render Thread.** If you're using Android L (5.0) and up, you will also have a render thread in your application. This thread generates the actual OpenGL commands used to draw your UI. The thread name will be either `RenderThread` or `<...>`. To identify it in the latter case, look for things like `DrawFrame` and `queueBuffer`:\n\n  ![Render Thread Example](/docs/assets/SystraceRenderThreadExample.png)",
+      "source_content_hash": "5c50798273c4107a9b7da05e65d2fa2bb029cb239e10f96e2967bdb0d30f5995",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **UI 執行緒。** 這是標準 Android 測量/佈局/繪製發生的地方。右側的執行緒名稱會是你的套件名稱（在我的例子中是 book.adsmanager）或 UI Thread。你在這個執行緒上看到的事件應該類似以下內容，並與 `Choreographer`、`traversals` 和 `DispatchUI` 相關：\n\n  ![UI 執行緒範例](/docs/assets/SystraceUIThreadExample.png)\n\n- **JS 執行緒。** 這是 JavaScript 執行的地方。執行緒名稱會是 `mqt_js` 或 `<...>`，取決於你設備上的核心是否配合。如果沒有名稱，可以透過尋找 `JSCall`、`Bridge.executeJSCall` 等內容來識別：\n\n  ![JS 執行緒範例](/docs/assets/SystraceJSThreadExample.png)\n\n- **原生模組執行緒。** 這是原生模組呼叫（例如 `UIManager`）執行的地方。執行緒名稱會是 `mqt_native_modules` 或 `<...>`。在後者的情況下，可以透過尋找 `NativeCall`、`callJavaModuleMethod` 和 `onBatchComplete` 等內容來識別：\n\n  ![原生模組執行緒範例](/docs/assets/SystraceNativeModulesThreadExample.png)\n\n- **額外：渲染執行緒。** 如果你使用的是 Android L（5.0）及以上版本，你的應用中還會有一個渲染執行緒。這個執行緒生成用於繪製 UI 的實際 OpenGL 指令。執行緒名稱會是 `RenderThread` 或 `<...>`。在後者的情況下，可以透過尋找 `DrawFrame` 和 `queueBuffer` 等內容來識別：\n\n  ![渲染執行緒範例](/docs/assets/SystraceRenderThreadExample.png)"
+      }
+    },
+    {
+      "segment_id": "bd92edfc",
+      "source_content": "## Identifying a culprit",
+      "source_content_hash": "5ae3d5eb153ae9bfb8536f22b815c17856390eac1d317abb17fd8f7cc9a572c1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 識別問題根源"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "A smooth animation should look something like the following:",
+      "source_content_hash": "535e8f59d95895af4af7c3df31723d255c340842ebd4e52c0ed77d30bc2de53a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "流暢的動畫應該看起來像以下這樣："
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "![Smooth Animation](/docs/assets/SystraceWellBehaved.png)",
+      "source_content_hash": "8423d3aadaea737a63d275558d3b2656c908fcbe9d121d0f241474bdf7e98f53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![流暢的動畫](/docs/assets/SystraceWellBehaved.png)"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Each change in color is a frame -- remember that in order to display a frame, all our UI work needs to be done by the end of that 16ms period. Notice that no thread is working close to the frame boundary. An application rendering like this is rendering at 60 FPS.",
+      "source_content_hash": "a1f7e4650334818cf6b2bb1a5a94d45020d5dcb8f8c641c8994391e9c9087dbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個顏色的變化代表一個影格——記住，為了顯示一個影格，我們所有的 UI 工作需要在 16 毫秒的週期內完成。注意，沒有任何執行緒的工作接近影格邊界。這樣渲染的應用是以 60 FPS 運行的。"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "If you noticed chop, however, you might see something like this:",
+      "source_content_hash": "dabcd1472b5877f66fe6c9bbae2d7e7f3b6f76fbf147aa0894d3af7284afd27e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，如果你注意到卡頓，可能會看到類似以下的內容："
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "![Choppy Animation from JS](/docs/assets/SystraceBadJS.png)",
+      "source_content_hash": "d791fef74cf2d5bdae6aea3f4a73ce6f387fabfdc87a769e238d68eb7d912aa2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![來自 JS 的卡頓動畫](/docs/assets/SystraceBadJS.png)"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "Notice that the JS thread is executing almost all the time, and across frame boundaries! This app is not rendering at 60 FPS. In this case, **the problem lies in JS**.",
+      "source_content_hash": "15d3e97d62379f9cfdca095866a11cf339a67b34d7ad32bbe90ba36534ebad11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意，JS 執行緒幾乎一直在執行，並且跨越影格邊界！這個應用沒有以 60 FPS 渲染。在這種情況下，**問題出在 JS 上**。"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "You might also see something like this:",
+      "source_content_hash": "d28c59eb479b6ca7dd2e80f37590e37a01364bc7bf2cacb050c3007a02857956",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可能還會看到類似以下的內容："
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "![Choppy Animation from UI](/docs/assets/SystraceBadUI.png)",
+      "source_content_hash": "32815d264cc45fa3847835f9f56cdc92c6024e50fa47393da4f2bb95bf912b06",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![來自 UI 的卡頓動畫](/docs/assets/SystraceBadUI.png)"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "In this case, the UI and render threads are the ones that have work crossing frame boundaries. The UI that we're trying to render on each frame is requiring too much work to be done. In this case, **the problem lies in the native views being rendered**.",
+      "source_content_hash": "10c0132a343bd0b37dbdff362ccbbaae0deb4f383052bad140c015776f9e5d30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在這種情況下，UI 和渲染執行緒的工作跨越了影格邊界。我們試圖在每個影格上渲染的 UI 需要完成太多工作。在這種情況下，**問題出於正在渲染的原生視圖**。"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "At this point, you'll have some very helpful information to inform your next steps.",
+      "source_content_hash": "eb0dcc25b301fc77dfe7b181fb2ab77580590aa9a1cd931af8729322e3bde080",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時，你將獲得一些非常有用的資訊來指導你的下一步。"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "## Resolving JavaScript issues",
+      "source_content_hash": "fdb72062e93ccc3992d64a070ae4c2bc3d5d237bd9bd603f34034eba8e7cfd17",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 解決 JavaScript 問題"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "If you identified a JS problem, look for clues in the specific JS that you're executing. In the scenario above, we see `RCTEventEmitter` being called multiple times per frame. Here's a zoom-in of the JS thread from the trace above:",
+      "source_content_hash": "91ae7103d0bd65fe875c104f19d0b52a3ac0e04493849edc55c929f4b57f86c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你識別出一個 JS 問題，請在你執行的具體 JS 中尋找線索。在上面的情境中，我們看到 `RCTEventEmitter` 在每個影格中被多次呼叫。以下是從上述追蹤中放大 JS 執行緒的內容："
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "![Too much JS](/docs/assets/SystraceBadJS2.png)",
+      "source_content_hash": "6b12f759d7c77611e52ee3305eb9a0dc6a1a9320455f41d5eb5cafbf0b073d3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![過多的 JS](/docs/assets/SystraceBadJS2.png)"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "This doesn't seem right. Why is it being called so often? Are they actually different events? The answers to these questions will probably depend on your product code. And many times, you'll want to look into [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate).",
+      "source_content_hash": "4972800eb6dbd9e70fe17ad211160b3cf28a449272245d43277124c08020c2ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這看起來不太對。為什麼它被呼叫得如此頻繁？它們實際上是不同的事件嗎？這些問題的答案可能會取決於你的產品代碼。很多時候，你會想要查看 [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)。"
+      }
+    },
+    {
+      "segment_id": "f8edb6d2",
+      "source_content": "## Resolving native UI Issues",
+      "source_content_hash": "efc6c61bb563d7aa9a33d416fc26ae46e75c138d90be6064ca938100c6f20021",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 解決原生 UI 問題"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "If you identified a native UI problem, there are usually two scenarios:",
+      "source_content_hash": "570c14628f0e695a1239fb87a22494083ec77a1b7c10b2cbbcb2d3438f36ace9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你識別出一個原生 UI 問題，通常有兩種情境："
+      }
+    },
+    {
+      "segment_id": "2d15468d",
+      "source_content": "1. the UI you're trying to draw each frame involves too much work on the GPU, or\n2. You're constructing new UI during the animation/interaction (e.g. loading in new content during a scroll).",
+      "source_content_hash": "3c64001c8f587db170765642c1e8ec804441b76ee11279c2113b71d72ce0bec6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 你試圖在每個影格中繪製的 UI 在 GPU 上涉及太多工作，或者\n2. 你在動畫/互動期間構建了新的 UI（例如在滾動期間載入新內容）。"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "### Too much GPU work",
+      "source_content_hash": "899d075b69db03cb8bc0bced362c3d680a5e26d4b4a5e905e7b348d4fbfa8831",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### GPU 工作負載過高"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "In the first scenario, you'll see a trace that has the UI thread and/or Render Thread looking like this:",
+      "source_content_hash": "ad15d74f034bc541acad936841b7c9c9f264a7b60f9d26ae3b132a1d7f657dc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在第一種情境中，您會看到追蹤記錄顯示 UI 執行緒和/或渲染執行緒呈現如下狀態："
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "![Overloaded GPU](/docs/assets/SystraceBadUI.png)",
+      "source_content_hash": "5c376602cfbd23a6ba3bd735e62adbaa60a42139d7d658b735ff593a61a234d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![GPU 過載](/docs/assets/SystraceBadUI.png)"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Notice the long amount of time spent in `DrawFrame` that crosses frame boundaries. This is time spent waiting for the GPU to drain its command buffer from the previous frame.",
+      "source_content_hash": "08246d54507c21b9fe3ca74b4e11ae0191543eb9bf2866f240b67c5653172380",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意跨越影格邊界的 `DrawFrame` 耗費了大量時間。這表示 GPU 正在等待排空前一影格的指令緩衝區。"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "To mitigate this, you should:",
+      "source_content_hash": "fa2a34625022454c725970ae106b284dc2eba7de4ef98f91a49ba6393049ba31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "緩解方法包括："
+      }
+    },
+    {
+      "segment_id": "0422e2e2",
+      "source_content": "- investigate using `renderToHardwareTextureAndroid` for complex, static content that is being animated/transformed (e.g. the `Navigator` slide/alpha animations)\n- make sure that you are **not** using `needsOffscreenAlphaCompositing`, which is disabled by default, as it greatly increases the per-frame load on the GPU in most cases.",
+      "source_content_hash": "0e3656c26e4b115016b81262839fe45636031a9197805070d0e69893bc843818",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 對複雜且靜態但需動畫/變形處理的內容（如 `Navigator` 的滑動/透明度動畫）使用 `renderToHardwareTextureAndroid`\n- 確認**未**啟用預設關閉的 `needsOffscreenAlphaCompositing`，此功能在多數情況下會大幅增加 GPU 每影格負載"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "### Creating new views on the UI thread",
+      "source_content_hash": "1b2fa5deef0ae500ee8c6543a540f0b74f37574447e4f6e349ecc24b3bd02331",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 UI 執行緒建立新視圖"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "In the second scenario, you'll see something more like this:",
+      "source_content_hash": "91e268d5291405f73efc69f8046069aa7af7dc3b2ab28106ce7b2ec00829ed2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第二種情境的追蹤記錄會類似這樣："
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "![Creating Views](/docs/assets/SystraceBadCreateUI.png)",
+      "source_content_hash": "018ec175d9fc7710562f140b56c811b8961163cdb3159e648d4504c79be0db8c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![建立視圖](/docs/assets/SystraceBadCreateUI.png)"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "Notice that first the JS thread thinks for a bit, then you see some work done on the native modules thread, followed by an expensive traversal on the UI thread.",
+      "source_content_hash": "adf9016fd3717365c77b8a651bfd69fae34a55152912c3af7151dd99af9462a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可觀察到 JS 執行緒先運算一段時間，接著原生模組執行緒處理工作，最後 UI 執行緒進行昂貴的遍歷操作"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "There isn't a quick way to mitigate this unless you're able to postpone creating new UI until after the interaction, or you are able to simplify the UI you're creating. The react native team is working on an infrastructure level solution for this that will allow new UI to be created and configured off the main thread, allowing the interaction to continue smoothly.",
+      "source_content_hash": "9935982fa189cb62602c2a5139300b49b23a761919e10d4331af0fdec84899a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除非能延後建立新 UI 至互動結束後，或簡化建立的 UI 結構，否則無快速解決方案。React Native 團隊正在開發基礎架構層級的解決方案，將允許在非主執行緒建立與配置新 UI，確保互動流暢性"
+      }
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "### Finding native CPU hotspots",
+      "source_content_hash": "2d0880c2977c1c397c1c3a6c32950e942d060fa85da0e9b545505c0562fd27a2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 找出原生 CPU 熱點"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "If the problem seems to be on the native side, you can use the [CPU hotspot profiler](https://developer.android.com/studio/profile/record-java-kotlin-methods) to get more details on what's happening. Open the Android Studio Profiler panel and select \"Find CPU Hotspots (Java/Kotlin Method Recording)\".",
+      "source_content_hash": "b60815db528cd2b10f75d08c48723dfa445554e3b4e5fce53033ddcc87fab3d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若問題疑似源自原生端，可使用 [CPU 熱點分析器](https://developer.android.com/studio/profile/record-java-kotlin-methods)獲取詳細資訊。開啟 Android Studio Profiler 面板並選擇「Find CPU Hotspots (Java/Kotlin Method Recording)」"
+      }
+    },
+    {
+      "segment_id": "f5974367",
+      "source_content": ":::info[Choose the Java/Kotlin recording]\n\nMake sure you select \"Find CPU Hotspots **(Java/Kotlin Recording)**\" rather than \"Find CPU Hotspots (Callstack Sample)\". They have similar icons but do different things.\n:::",
+      "source_content_hash": "c865501d18ac708545dfceb7873c55e98d1be0c0fcad1f03a3f8bc63f6d247fe",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info[選擇 Java/Kotlin 記錄]\n\n務必選擇「Find CPU Hotspots **(Java/Kotlin Recording)**」而非「Find CPU Hotspots (Callstack Sample)」。兩者圖示相似但功能不同\n:::"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "Perform the interactions and press \"Stop recording\". Recording is resource-intensive, so keep the interaction short. You can then either inspect the resulting trace in the Android Studio or export it and open it in an online tool like [Firefox Profiler](https://profiler.firefox.com/).",
+      "source_content_hash": "fecca172fc8673fc39ed795531bfba6bdc61b128fac3d33fde27dc3e1e809663",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行互動後點擊「Stop recording」。記錄過程耗費資源，請保持互動簡短。結果追蹤可在 Android Studio 檢視，或匯出至 [Firefox Profiler](https://profiler.firefox.com/) 等線上工具分析"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Unlike System Trace, CPU hotspot profiling is slow so it won't give you accurate measurements. However, it should give you an idea of what native methods are being called, and where the time is being spent proportionally during each frame.",
+      "source_content_hash": "73e88123654729866d9cec24395ab1f1316e66b22fe2a60055e9fb8b32c8235f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與系統追蹤不同，CPU 熱點分析速度較慢且無法提供精確測量值，但能顯示原生方法呼叫狀況及各影格時間佔比分布"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.78/profiling.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.831264+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ab59fdee5be626c13ebd2018db77158f508e4758dfdf78f70d2c45d55b2d1e14"
+  }
+}

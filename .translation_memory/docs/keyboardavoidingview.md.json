@@ -1,0 +1,218 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/keyboardavoidingview.md",
+  "source_file_content_hash": "cc1faa73fac18854b67cd181e3be34bd8a7fc500657a6ffb728df589e3dca1a2",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: keyboardavoidingview\ntitle: KeyboardAvoidingView\n---",
+      "source_content_hash": "11672d42b1ad1ca10119c90bdde3de4357e9ca6ffe1c67aad97515ac9924c0e7",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "This component will automatically adjust its height, position, or bottom padding based on the keyboard height to remain visible while the virtual keyboard is displayed.",
+      "source_content_hash": "9d384bfc63f63382abd533edcb56cdbe57250ec0b59394d06eea3ea74e1c0e02",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios\nimport React from 'react';\nimport {\n  View,\n  KeyboardAvoidingView,\n  TextInput,\n  StyleSheet,\n  Text,\n  Platform,\n  TouchableWithoutFeedback,\n  Button,\n  Keyboard,\n} from 'react-native';\n\nconst KeyboardAvoidingComponent = () => {\n  return (\n    <KeyboardAvoidingView\n      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}\n      style={styles.container}>\n      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>\n        <View style={styles.inner}>\n          <Text style={styles.header}>Header</Text>\n          <TextInput placeholder=\"Username\" style={styles.textInput} />\n          <View style={styles.btnContainer}>\n            <Button title=\"Submit\" onPress={() => null} />\n          </View>\n        </View>\n      </TouchableWithoutFeedback>\n    </KeyboardAvoidingView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  inner: {\n    padding: 24,\n    flex: 1,\n    justifyContent: 'space-around',\n  },\n  header: {\n    fontSize: 36,\n    marginBottom: 48,\n  },\n  textInput: {\n    height: 40,\n    borderColor: '#000000',\n    borderBottomWidth: 1,\n    marginBottom: 36,\n  },\n  btnContainer: {\n    backgroundColor: 'white',\n    marginTop: 12,\n  },\n});\n\nexport default KeyboardAvoidingComponent;\n```",
+      "source_content_hash": "c7bf31a332b250f962aa163e2a520280fe4e26583bb69ad1edbb5508bfeacee7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a635fada",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "047c2395",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0170c674",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### `behavior`",
+      "source_content_hash": "2d39d851abe46534d2591382e3911fc940197c09bc23db492250f4674059fac4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Specify how to react to the presence of the keyboard.",
+      "source_content_hash": "284e7c5472c17c668e06c0a881fd1a65f0ba5aba778676175ba407061602a1a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe7364bf",
+      "source_content": "> Android and iOS both interact with this prop differently. On both iOS and Android, setting `behavior` is recommended.",
+      "source_content_hash": "11c4910a0fb846c8751a009440ede8ff27d9811bdcfdd29c84aafb7597827456",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "917cc3d5",
+      "source_content": "| Type                                        |\n| ------------------------------------------- |\n| enum(`'height'`, `'position'`, `'padding'`) |",
+      "source_content_hash": "2c0a7d2d5bbc60affb6ae2afe18a02c3ce6166e0aa36f133a0b4f5d19791962e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "9006437d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### `contentContainerStyle`",
+      "source_content_hash": "98f0087ec9fd5a84ccab3d619569b264ff88d152a8cf8fa7264a609c42a0a278",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "The style of the content container (View) when behavior is `'position'`.",
+      "source_content_hash": "f63942b69f83c0a84a334deda91d193737ab327d646fb929bae0612b2d37019d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4661feaa",
+      "source_content": "| Type                              |\n| --------------------------------- |\n| [View Style](view-style-props.md) |",
+      "source_content_hash": "f4fb06d2318f9f111d5e287541c887f93cd3442a49effd8d1079893305c5ced4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "647304fd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71169a2d",
+      "source_content": "### `enabled`",
+      "source_content_hash": "53dc35915f964c117cfb5dcc5feb6f2122f98d4148824b613829874a50ce7a8f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "Enabled or disabled KeyboardAvoidingView.",
+      "source_content_hash": "38145d0ddf43f0e095cef02de2d681b064b490b761982138b4a4fad66a895a3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99cd240c",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `true`  |",
+      "source_content_hash": "9b33ea33bebceeb9fc1a046094f80b4a2dea3c73da77173c612910b9ae75bba7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "0c6c4220",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ab39e8a7",
+      "source_content": "### `keyboardVerticalOffset`",
+      "source_content_hash": "b7293b67c93212c43e5d28fc11a5cf6cf22f85278f3f9d05d7dea0241039692f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "This is the distance between the top of the user screen and the react native view, may be non-zero in some use cases.",
+      "source_content_hash": "426d83da536d95c1d90c6e4393aa051019c91e6ea874d41dcb9e9bc7cb21055b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5d7070ce",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `0`     |",
+      "source_content_hash": "83458482732eb55b223c31c4441b5e732f7b43832d88f094b44c374ebad3e557",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/keyboardavoidingview.md",
+  "last_updated_timestamp": "2025-06-18T17:57:11.475949+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

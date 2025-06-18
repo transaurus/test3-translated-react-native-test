@@ -1,0 +1,1412 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/accessibility.md",
+  "source_file_content_hash": "2bed7e7058981a122fe81829102bfb1580549b7d03df52a781d755f23f4521c1",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: accessibility\ntitle: Accessibility\ndescription: Create mobile apps accessible to assistive technology with React Native's suite of APIs designed to work with Android and iOS.\n---",
+      "source_content_hash": "d3e2cc955a9683b5e863775c90342b5d1cfa5debea8fc004bbe20921e7aac68c",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Both Android and iOS provide APIs for integrating apps with assistive technologies like the bundled screen readers VoiceOver (iOS) and TalkBack (Android). React Native has complementary APIs that let your app accommodate all users.",
+      "source_content_hash": "261d5938519cb3a310cd1d77fe255fbb8f8363f6f8d9fc6b99387018c4cf72a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 和 iOS 都提供 API 讓應用程式能與輔助技術（如內建的螢幕閱讀器 VoiceOver（iOS）和 TalkBack（Android））整合。React Native 提供互補的 API，讓您的應用程式能服務所有使用者。"
+      }
+    },
+    {
+      "segment_id": "0d5e1c45",
+      "source_content": ":::info\nAndroid and iOS differ slightly in their approaches, and thus the React Native implementations may vary by platform.\n:::",
+      "source_content_hash": "40d9d4197b3e3c7630b64a17f122b5d77bedead99eaddc161ba659482f4f82eb",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\nAndroid 和 iOS 的方法略有不同，因此 React Native 的實作可能會因平台而異。\n:::"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Accessibility properties",
+      "source_content_hash": "b45a76c604be4bb1882f297306b3ed46df6d82226b735b28b108a1d41016dfc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 無障礙屬性"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "### `accessible`",
+      "source_content_hash": "7e2f45d1c536354ff4e8f949668ed0b63fc433f315af4147b029c19a8259c830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessible`"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "When `true`, indicates that the view is an accessibility element. When a view is an accessibility element, it groups its children into a single selectable component. By default, all touchable elements are accessible.",
+      "source_content_hash": "b53bf83f868b939017c4f79351a44aa2373bc3634235721c6ddafa49b6e4445c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為 `true` 時，表示該視圖是一個無障礙元素。當視圖是無障礙元素時，它會將其子元素分組為一個可選取的元件。預設情況下，所有可觸碰元素都是可無障礙的。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "On Android, `accessible={true}` property for a react-native View will be translated into native `focusable={true}`.",
+      "source_content_hash": "0e37ee39c40be57b722f01694db89392225b7233fc207962882061bebfad657d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，React Native View 的 `accessible={true}` 屬性會被轉換為原生的 `focusable={true}`。"
+      }
+    },
+    {
+      "segment_id": "cbbebf8e",
+      "source_content": "```tsx\n<View accessible={true}>\n  <Text>text one</Text>\n  <Text>text two</Text>\n</View>\n```",
+      "source_content_hash": "c956cfc62f6ddc7c70ffcf209004f331ed83afb62a5fffa0191ca5d6abb25695",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cbbebf8e"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "In the above example, accessibility focus is only available on the parent view with the `accessible` property, and not individually for 'text one' and 'text two'.",
+      "source_content_hash": "a9cdc3aedcfd7e60f095c89627dee9223232d3830c317b63cd398f4fe28cd03b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上面的例子中，無障礙焦點僅適用於具有 `accessible` 屬性的父視圖，而不適用於「text one」和「text two」這兩個單獨的視圖。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### `accessibilityLabel`",
+      "source_content_hash": "4f55de35ce0c561187344a423b6279d22ada7d874f880caef84af52c16646758",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLabel`"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "When a view is marked as accessible, it is a good practice to set an `accessibilityLabel` on the view, so that people who use VoiceOver or TalkBack know what element they have selected. A screen reader will verbalize this string when the associated element is selected.",
+      "source_content_hash": "265206c4c2871d0452d2bbd1c73b9e24454ba1c1002ad79c7532040c26c018b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當視圖被標記為可無障礙時，最好在視圖上設置一個 `accessibilityLabel`，這樣使用 VoiceOver 或 TalkBack 的人就知道他們選擇了什麼元素。螢幕閱讀器會在相關元素被選中時朗讀這個字串。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "To use, set the `accessibilityLabel` property to a custom string on your View, Text, or Touchable:",
+      "source_content_hash": "10ac70ff7a45eec00dd1b24492fef45fca3b609fe84cc2806d761c5c5033f505",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要使用此功能，請在您的 View、Text 或 Touchable 上將 `accessibilityLabel` 屬性設置為自定義字串："
+      }
+    },
+    {
+      "segment_id": "076d64d1",
+      "source_content": "```tsx\n<TouchableOpacity\n  accessible={true}\n  accessibilityLabel=\"Tap me!\"\n  onPress={onPress}>\n  <View style={styles.button}>\n    <Text style={styles.buttonText}>Press me!</Text>\n  </View>\n</TouchableOpacity>\n```",
+      "source_content_hash": "908fe67bcea855f3439c3afeb4fb2d2a56ff84c2832069c5ad9af1853380bd51",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_076d64d1"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "In the above example, the `accessibilityLabel` on the TouchableOpacity element would default to \"Press me!\". The label is constructed by concatenating all Text node children separated by spaces.",
+      "source_content_hash": "881a873e65937f86a18f5efe38b614e65147ae3ed6c6ead8ee194f490b31ca52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上面的例子中，TouchableOpacity 元素上的 `accessibilityLabel` 預設為「Press me!」。該標籤是通過將所有 Text 節點子元素以空格分隔連接起來構建的。"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "### `accessibilityLabelledBy` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1e15b75b5d225a879f31c96b4bddfe8b6891095e7e97c08af6e6a57ae10ce1e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLabelledBy` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "A reference to another element [nativeID](view.md#nativeid) used to build complex forms.\nThe value of `accessibilityLabelledBy` should match the `nativeID` of the related element:",
+      "source_content_hash": "c524de301e9ffbeb3f70589565c559e64e6905dfa295b7a399239c8a604c541f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於構建複雜表單的對其他元素 [nativeID](view.md#nativeid) 的引用。`accessibilityLabelledBy` 的值應與相關元素的 `nativeID` 匹配："
+      }
+    },
+    {
+      "segment_id": "3ce8f045",
+      "source_content": "```tsx\n<View>\n  <Text nativeID=\"formLabel\">Label for Input Field</Text>\n  <TextInput\n    accessibilityLabel=\"input\"\n    accessibilityLabelledBy=\"formLabel\"\n  />\n</View>\n```",
+      "source_content_hash": "f34ebd5aeb5a7379018420b037db7f6017912df4faacba12667c2b8930e8947e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ce8f045"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "In the above example, the screen reader announces `Input, Edit Box for Label for Input Field` when focusing on the TextInput.",
+      "source_content_hash": "d75819155bf1832f1016d95f715917e4efcdb4e698a740e2f9ee1d0f9199c0e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上面的例子中，當焦點位於 TextInput 上時，螢幕閱讀器會朗讀「Input, Edit Box for Label for Input Field」。"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### `accessibilityHint`",
+      "source_content_hash": "bedd0a5bcd9baf72a419279154a2810f95389d1831588606f607037dbc93a9c3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityHint`"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "An accessibility hint can be used to provide additional context to the user on the result of the action when it is not clear from the accessibility label alone.",
+      "source_content_hash": "4bb460ba8a938bb21f7f030ef8928909b80aac335163fabca09eeb681e1b5dbc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當僅從無障礙標籤無法清楚了解操作結果時，可以使用無障礙提示為用戶提供額外的上下文。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "Provide the `accessibilityHint` property a custom string on your View, Text, or Touchable:",
+      "source_content_hash": "7fda2ab5f1cd06e91f52fc6a4ea6f48f81b18bc6511e67e6dea244d1fa179718",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 View、Text 或 Touchable 上提供 `accessibilityHint` 屬性一個自定義字串："
+      }
+    },
+    {
+      "segment_id": "4fb3ded8",
+      "source_content": "```tsx\n<TouchableOpacity\n  accessible={true}\n  accessibilityLabel=\"Go back\"\n  accessibilityHint=\"Navigates to the previous screen\"\n  onPress={onPress}>\n  <View style={styles.button}>\n    <Text style={styles.buttonText}>Back</Text>\n  </View>\n</TouchableOpacity>\n```",
+      "source_content_hash": "57df0e6b3c0f156521e830927cbfbc25fd0c2e8cdbf1b284b9d3e0f8a48a4879",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fb3ded8"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "<div class=\"label ios basic\">iOS</div>",
+      "source_content_hash": "d12cd64d57e131141051e3f6f759bb4d0997d9ff1aa7744f41970c0dc1491c5f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<div class=\"label ios basic\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "In the above example, VoiceOver will read the hint after the label, if the user has hints enabled in the device's VoiceOver settings. Read more about guidelines for `accessibilityHint` in the [iOS Developer Docs](https://developer.apple.com/documentation/objectivec/nsobject/1615093-accessibilityhint)",
+      "source_content_hash": "fc47f2bdc80f43c44f0d4aec7990112bc29b91c31f07e1920dd988dc99661ec6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上面的例子中，如果用戶在設備的 VoiceOver 設置中啟用了提示，VoiceOver 會在標籤後朗讀提示。有關 `accessibilityHint` 的指南，請參閱 [iOS 開發者文檔](https://developer.apple.com/documentation/objectivec/nsobject/1615093-accessibilityhint)。"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "<div class=\"label android basic\">Android</div>",
+      "source_content_hash": "0504290da27a4b6fe2bacace04d519346b6419ebfc0d4b5a397e6f2e4b928e5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<div class=\"label android basic\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "In the above example, TalkBack will read the hint after the label. At this time, hints cannot be turned off on Android.",
+      "source_content_hash": "a4078d33033461e03e008bd19755884a6e42eef6813848a7d1a788c4eb11b043",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上面的例子中，TalkBack 會在標籤後朗讀提示。目前，Android 上的提示無法關閉。"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "3dc0369a4635cd2313255713560a12e19a44f4ce4fde6140a6d2611dd0e6277d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "By using the `accessibilityLanguage` property, the screen reader will understand which language to use while reading the element's **label**, **value**, and **hint**. The provided string value must follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).",
+      "source_content_hash": "922dfa336b95124a2ccba49857f82b891b7f67d3b239f462023568d4a67ca2e2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通過使用 `accessibilityLanguage` 屬性，螢幕閱讀器會理解在朗讀元素的**標籤**、**值**和**提示**時應使用哪種語言。提供的字串值必須遵循 [BCP 47 規範](https://www.rfc-editor.org/info/bcp47)。"
+      }
+    },
+    {
+      "segment_id": "19913a56",
+      "source_content": "```tsx\n<View\n  accessible={true}\n  accessibilityLabel=\"Pizza\"\n  accessibilityLanguage=\"it-IT\">\n  <Text>🍕</Text>\n</View>\n```",
+      "source_content_hash": "90faffdb053bd1f92983c82cfb74d1912f00515845f111063d51e9f0e6363d3e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_19913a56"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "### `accessibilityIgnoresInvertColors` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "5a4ecceada547eee228617a551914cf78b1fd79d85367a9e6767e48b3a929fd5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityIgnoresInvertColors` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Inverting screen colors is an accessibility feature available in iOS and iPadOS for people with color blindness, low vision, or vision impairment. If there's a view you don't want to invert when this setting is on, possibly a photo, set this property to `true`.",
+      "source_content_hash": "5d20f51f1c71d70a0a835be49f16e4b3394b4cc9cd29447914c2f93363093971",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "反轉螢幕顏色是 iOS 和 iPadOS 中為色盲、低視力或視力障礙人士提供的無障礙功能。如果有一個視圖您不希望在此設置開啟時反轉（可能是照片），請將此屬性設為 `true`。"
+      }
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "### `accessibilityLiveRegion` <div class=\"label android\">Android</div>",
+      "source_content_hash": "5cdda930550e62093ac02f62d2f09c98464e5030fd777081629f5a9567e1095a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLiveRegion` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "When components dynamically change, we want TalkBack to alert the end user. This is made possible by the `accessibilityLiveRegion` property. It can be set to `none`, `polite`, and `assertive`:",
+      "source_content_hash": "d37d59e58548bc24cbafeda05a2223b943e7235b90f0dcd57193116cd5aade0a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當元件動態變化時，我們希望 TalkBack 能通知終端使用者。這可透過 `accessibilityLiveRegion` 屬性實現，其可設為 `none`、`polite` 和 `assertive`："
+      }
+    },
+    {
+      "segment_id": "b0465fca",
+      "source_content": "- **none** Accessibility services should not announce changes to this view.\n- **polite** Accessibility services should announce changes to this view.\n- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.",
+      "source_content_hash": "52382c27785c286ec15eecbea04537a1d858366b74f1a12b5d24d471dafe7e74",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **none** 輔助服務不應宣讀此視圖的變更。\n- **polite** 輔助服務應宣讀此視圖的變更。\n- **assertive** 輔助服務應中斷當前語音以立即宣讀此視圖的變更。"
+      }
+    },
+    {
+      "segment_id": "342e4d80",
+      "source_content": "```tsx\n<TouchableWithoutFeedback onPress={addOne}>\n  <View style={styles.embedded}>\n    <Text>Click me</Text>\n  </View>\n</TouchableWithoutFeedback>\n<Text accessibilityLiveRegion=\"polite\">\n  Clicked {count} times\n</Text>\n```",
+      "source_content_hash": "2bbe23c83372f3ef3c281f9eb88c14ab24a7ba3fae20e860841350998e09cb45",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_342e4d80"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "In the above example method `addOne` changes the state variable `count`. When the TouchableWithoutFeedback is triggered, TalkBack reads the text in the Text view because of its `accessibilityLiveRegion=\"polite\"` property.",
+      "source_content_hash": "c9e0099328ec8762c1c3d52b29cabbc811cb544f7b5a8e615caf6e24e9207a48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "上述範例中，方法 `addOne` 會改變狀態變數 `count`。當觸發 TouchableWithoutFeedback 時，由於 Text 視圖設有 `accessibilityLiveRegion=\"polite\"` 屬性，TalkBack 會朗讀其中的文字。"
+      }
+    },
+    {
+      "segment_id": "4dd6a631",
+      "source_content": "### `accessibilityRole`",
+      "source_content_hash": "caaf5bfb084952597e44b24f22d7d856e62e4f400b44dea56540dda8a44ce327",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityRole`"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "`accessibilityRole` communicates the purpose of a component to the user of assistive technology.",
+      "source_content_hash": "93e4c9e26e944d4bf1be337d04203cc032d7b9bca86d9e77ac15402f66e6ff2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityRole` 向輔助技術使用者傳達元件的用途。"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "`accessibilityRole` can be one of the following:",
+      "source_content_hash": "ccd1687fa3de1781f489ea29d5281a6e2eca88bc1df0037fba2d4a0f69a7609b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityRole` 可為下列值之一："
+      }
+    },
+    {
+      "segment_id": "c7ff42af",
+      "source_content": "- **adjustable** Used when an element can be \"adjusted\" (e.g. a slider).\n- **alert** Used when an element contains important text to be presented to the user.\n- **button** Used when the element should be treated as a button.\n- **checkbox** Used when an element represents a checkbox that can be checked, unchecked, or have a mixed checked state.\n- **combobox** Used when an element represents a combo box, which allows the user to select among several choices.\n- **header** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).\n- **image** Used when the element should be treated as an image. Can be combined with a button or link.\n- **imagebutton** Used when the element should be treated as a button and is also an image.\n- **keyboardkey** Used when the element acts as a keyboard key.\n- **link** Used when the element should be treated as a link.\n- **menu** Used when the component is a menu of choices.\n- **menubar** Used when a component is a container of multiple menus.\n- **menuitem** Used to represent an item within a menu.\n- **none** Used when the element has no role.\n- **progressbar** Used to represent a component that indicates the progress of a task.\n- **radio** Used to represent a radio button.\n- **radiogroup** Used to represent a group of radio buttons.\n- **scrollbar** Used to represent a scroll bar.\n- **search** Used when a text field element should also be treated as a search field.\n- **spinbutton** Used to represent a button that opens a list of choices.\n- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.\n- **switch** Used to represent a switch that can be turned on and off.\n- **tab** Used to represent a tab.\n- **tablist** Used to represent a list of tabs.\n- **text** Used when the element should be treated as static text that cannot change.\n- **timer** Used to represent a timer.\n- **togglebutton** Used to represent a toggle button. Should be used with accessibilityState checked to indicate if the button is toggled on or off.\n- **toolbar** Used to represent a toolbar (a container of action buttons or components).\n- **grid** Used with ScrollView, VirtualizedList, FlatList, or SectionList to represent a grid. Adds the in/out of grid announcements to Android's GridView.",
+      "source_content_hash": "4218dcb5b92ffd349dff47b472ebb723182b36707d47e1b80268b2fb475b180a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **adjustable** 用於可「調整」的元件（如滑桿）。\n- **alert** 用於包含需向使用者呈現重要文字的元件。\n- **button** 用於應被視為按鈕的元件。\n- **checkbox** 用於代表可勾選、取消勾選或混合勾選狀態的核取方塊。\n- **combobox** 用於代表允許使用者從多個選項中選擇的組合框。\n- **header** 用於作為內容區段標題的元件（如導覽列標題）。\n- **image** 用於應被視為圖像的元件，可與按鈕或連結結合使用。\n- **imagebutton** 用於應被視為按鈕且同時是圖像的元件。\n- **keyboardkey** 用於作為鍵盤按鍵的元件。\n- **link** 用於應被視為連結的元件。\n- **menu** 用於作為選單的元件。\n- **menubar** 用於作為多個選單容器的元件。\n- **menuitem** 用於代表選單中的項目。\n- **none** 用於無角色的元件。\n- **progressbar** 用於代表任務進度指示器的元件。\n- **radio** 用於代表單選按鈕。\n- **radiogroup** 用於代表單選按鈕群組。\n- **scrollbar** 用於代表捲軸。\n- **search** 用於應同時被視為搜尋欄位的文字欄位元件。\n- **spinbutton** 用於代表可開啟選項清單的按鈕。\n- **summary** 用於應用程式首次啟動時可提供當前狀態快速摘要的元件。\n- **switch** 用於代表可開關的切換開關。\n- **tab** 用於代表分頁標籤。\n- **tablist** 用於代表分頁標籤清單。\n- **text** 用於應被視為靜態不可變文字的元件。\n- **timer** 用於代表計時器。\n- **togglebutton** 用於代表切換按鈕，需搭配 accessibilityState 的 checked 屬性指示按鈕是否處於切換狀態。\n- **toolbar** 用於代表工具列（動作按鈕或元件的容器）。\n- **grid** 與 ScrollView、VirtualizedList、FlatList 或 SectionList 搭配使用以代表網格，會為 Android 的 GridView 添加網格內/外公告。"
+      }
+    },
+    {
+      "segment_id": "a5905b07",
+      "source_content": "### `accessibilityState`",
+      "source_content_hash": "0bdd4e063a84d12800f47b3af7a48f24aa490be3f0a319e622aaed8a851fab2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityState`"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "Describes the current state of a component to the assistive technology user.",
+      "source_content_hash": "74c9fa45b1fd6b99eb99adc5a9ea7beaebddd2b1b631e1b801e4720b8301789e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "向輔助技術使用者描述元件的當前狀態。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "`accessibilityState` is an object. It contains the following fields:",
+      "source_content_hash": "7159e52e088b355f7d09050204a14182a683836105ee6961bb9073e40af1938f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityState` 是一個物件，包含以下欄位："
+      }
+    },
+    {
+      "segment_id": "12cc36d2",
+      "source_content": "| Name     | Description                                                                                                                           | Type               | Required |\n| -------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------- |\n| disabled | Indicates whether the element is disabled or not.                                                                                     | boolean            | No       |\n| selected | Indicates whether a selectable element is currently selected or not.                                                                  | boolean            | No       |\n| checked  | Indicates the state of a checkable element. This field can either take a boolean or the \"mixed\" string to represent mixed checkboxes. | boolean or 'mixed' | No       |\n| busy     | Indicates whether an element is currently busy or not.                                                                                | boolean            | No       |\n| expanded | Indicates whether an expandable element is currently expanded or collapsed.                                                           | boolean            | No       |",
+      "source_content_hash": "f7a5319e576dec9b58ccd45342e8da4342b4b0c2c361aca90b3e2ac406583d28",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12cc36d2"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "To use, set the `accessibilityState` to an object with a specific definition.",
+      "source_content_hash": "13504de1ca5180246375cd64d8304bfa103ca2cae7253594a645f1c057f136f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用時，將 `accessibilityState` 設為具有特定定義的物件。"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "### `accessibilityValue`",
+      "source_content_hash": "cbedf783dfb2e42529ea0760cf4fb5081d51852d680f7c8d8dc08d4608313921",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityValue`"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).",
+      "source_content_hash": "61fa1e8e3b29a12c60a6750ced40d31b0b56fc0a3d1887b52febb19c162c04fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "代表元件的當前值。可以是元件值的文字描述，或針對範圍型元件（如滑桿和進度條）包含範圍資訊（最小值、當前值和最大值）。"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "`accessibilityValue` is an object. It contains the following fields:",
+      "source_content_hash": "afeaab85f4c3c090614491dc3e4ddc6306644fb1bb8347d72d01b1f6cf793490",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityValue` 是一個物件，包含以下欄位："
+      }
+    },
+    {
+      "segment_id": "12f67ca2",
+      "source_content": "| Name | Description                                                                                    | Type    | Required                  |\n| ---- | ---------------------------------------------------------------------------------------------- | ------- | ------------------------- |\n| min  | The minimum value of this component's range.                                                   | integer | Required if `now` is set. |\n| max  | The maximum value of this component's range.                                                   | integer | Required if `now` is set. |\n| now  | The current value of this component's range.                                                   | integer | No                        |\n| text | A textual description of this component's value. Will override `min`, `now`, and `max` if set. | string  | No                        |",
+      "source_content_hash": "6106910a3639d430857b0e125fe155797f90f3f5f11ef280189fd6f263066d2e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12f67ca2"
+      }
+    },
+    {
+      "segment_id": "c6d75762",
+      "source_content": "### `accessibilityViewIsModal` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "9d761bcca9428aa4ecee978774f821177f7a41d1911e9dc98835f4b30b572737",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityViewIsModal` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "A boolean value that indicates whether VoiceOver should ignore the elements within views that are siblings of the receiver.",
+      "source_content_hash": "efdf0dac2f6c766e67321c14cc2c8cfb9e16c8280af9a4a838fcf47476396cca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個布林值，用於指示 VoiceOver 是否應忽略接收者同層級視圖中的元素。"
+      }
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "For example, in a window that contains sibling views `A` and `B`, setting `accessibilityViewIsModal` to `true` on view `B` causes VoiceOver to ignore the elements in view `A`. On the other hand, if view `B` contains a child view `C` and you set `accessibilityViewIsModal` to `true` on view `C`, VoiceOver does not ignore the elements in view `A`.",
+      "source_content_hash": "ff747bf8fa58082cbde5d03e06e0a790f4dee7233c3e08b7c74d30652a7b3a11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在包含同層級視圖 `A` 和 `B` 的視窗中，將視圖 `B` 的 `accessibilityViewIsModal` 設為 `true` 會導致 VoiceOver 忽略視圖 `A` 中的元素。另一方面，如果視圖 `B` 包含子視圖 `C` 且你將視圖 `C` 的 `accessibilityViewIsModal` 設為 `true`，VoiceOver 則不會忽略視圖 `A` 中的元素。"
+      }
+    },
+    {
+      "segment_id": "4d7a4554",
+      "source_content": "### `accessibilityElementsHidden` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "8b639791d045d475b38fd218fc6159abd881965f18aaa0c7823d80e6e38eeeaa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityElementsHidden` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "A boolean value indicating whether the accessibility elements contained within this accessibility element are hidden.",
+      "source_content_hash": "87d2bd3bb064bd2c48253bb5d00e0c5d3adb3cfa7b3fc4b631d546efb3657258",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個布林值，用於指示此無障礙元素內包含的元素是否隱藏。"
+      }
+    },
+    {
+      "segment_id": "b4204c03",
+      "source_content": "For example, in a window that contains sibling views `A` and `B`, setting `accessibilityElementsHidden` to `true` on view `B` causes VoiceOver to ignore the elements in view `B`. This is similar to the Android property `importantForAccessibility=\"no-hide-descendants\"`.",
+      "source_content_hash": "5d81243e1315a15ac04afd5c3d3a19a558fd44723f55b2fe0f3310d1089d822b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在包含同層級視圖 `A` 和 `B` 的視窗中，將視圖 `B` 的 `accessibilityElementsHidden` 設為 `true` 會導致 VoiceOver 忽略視圖 `B` 中的元素。這類似於 Android 的屬性 `importantForAccessibility=\"no-hide-descendants\"`。"
+      }
+    },
+    {
+      "segment_id": "428f235a",
+      "source_content": "### `aria-valuemax`",
+      "source_content_hash": "268b14b5873da3a2ac33edc44653ce7676fe0fbfa2e4570e4691a715c3daec34",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuemax`"
+      }
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "Represents the maximum value for range-based components, such as sliders and progress bars.",
+      "source_content_hash": "9b1045b09bbbfb7da2fd1b43e51343cd2a4cf2330103b14f59992e99e3930986",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示範圍型元件（如滑塊和進度條）的最大值。"
+      }
+    },
+    {
+      "segment_id": "4e8f71c1",
+      "source_content": "### `aria-valuemin`",
+      "source_content_hash": "fb609f8a26b7b2db2702e6b1d5c22b47611f76e14338579d02042e8a807e7849",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuemin`"
+      }
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "Represents the minimum value for range-based components, such as sliders and progress bars.",
+      "source_content_hash": "ed873a0e36e6e15e9164d0eca2cb01d790c322d97433c0c6c771c56c0ac7ba3a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示範圍型元件（如滑塊和進度條）的最小值。"
+      }
+    },
+    {
+      "segment_id": "ba4aa94e",
+      "source_content": "### `aria-valuenow`",
+      "source_content_hash": "7665766428ab6cf85136a07811d232bded83d8a46ba7ead882db0b0e4c7052e7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuenow`"
+      }
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "Represents the current value for range-based components, such as sliders and progress bars.",
+      "source_content_hash": "11931defe1a54a06cd89a4caca3b892d74869e0e2c5d8db2adfbe227bacb6719",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示範圍型元件（如滑塊和進度條）的當前值。"
+      }
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "### `aria-valuetext`",
+      "source_content_hash": "dcace833d7618c1dc715194f717363e7d44fe1fe6906b36433799e44fb375dbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuetext`"
+      }
+    },
+    {
+      "segment_id": "5eedf0a1",
+      "source_content": "Represents the textual description of the component.",
+      "source_content_hash": "b6662d03f09fbe921bbf4f677880526b6c1e816bf4abe0013bde71c2fd6ee70a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元件的文字描述。"
+      }
+    },
+    {
+      "segment_id": "c7ab93a8",
+      "source_content": "### `aria-busy`",
+      "source_content_hash": "2d7129d4b1ef33f5fb6834bebc39064f979bb22c9bc9b432d1ffa601bfefff8b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-busy`"
+      }
+    },
+    {
+      "segment_id": "9ede513a",
+      "source_content": "Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.",
+      "source_content_hash": "9def7a899263ea015f97bf76a19b3117a2428cfbc7774a4282235a04d4019b9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素正在被修改，輔助技術可能需要等待修改完成後再通知使用者更新。"
+      }
+    },
+    {
+      "segment_id": "73f4cc36",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_73f4cc36"
+      }
+    },
+    {
+      "segment_id": "200685d4",
+      "source_content": "### `aria-checked`",
+      "source_content_hash": "1ddb4bac483133b13df7ffe6a86f8c816c15f58317a05c6dee8e7f6727d4ae29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-checked`"
+      }
+    },
+    {
+      "segment_id": "09d52457",
+      "source_content": "Indicates the state of a checkable element. This field can either take a boolean or the \"mixed\" string to represent mixed checkboxes.",
+      "source_content_hash": "ee00810ca9f60817dfa81860d77c913a25c1592c90cdf81625831248bece7011",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可勾選元素的狀態。此欄位可以接受布林值或字串 \"mixed\" 來表示混合狀態的核取方塊。"
+      }
+    },
+    {
+      "segment_id": "759a3d15",
+      "source_content": "| Type             | Default |\n| ---------------- | ------- |\n| boolean, 'mixed' | false   |",
+      "source_content_hash": "35b713c4cc986c8b8e7daf0a70768426bc9f94663f227376941544b0bdd30e2d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_759a3d15"
+      }
+    },
+    {
+      "segment_id": "7eac7922",
+      "source_content": "### `aria-disabled`",
+      "source_content_hash": "8f594923bce023c64d4fc2aee2a4c42ab34f87bdf7415694cb7ad9c12af72aa9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-disabled`"
+      }
+    },
+    {
+      "segment_id": "8f4e752e",
+      "source_content": "Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.",
+      "source_content_hash": "1e3ab9d887f87e2c70b2de3b929d2b081abf17a414c68440a3b6e9ffaa05ad16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素是可感知的但已被禁用，因此不可編輯或操作。"
+      }
+    },
+    {
+      "segment_id": "0faad314",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0faad314"
+      }
+    },
+    {
+      "segment_id": "936707a1",
+      "source_content": "### `aria-expanded`",
+      "source_content_hash": "81570a1ec92ab2059c46a439c874fa3f93ee6f66baf451ea9c6aa69ca5e98e20",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-expanded`"
+      }
+    },
+    {
+      "segment_id": "6dc3e423",
+      "source_content": "Indicates whether an expandable element is currently expanded or collapsed.",
+      "source_content_hash": "2ab2df61a604dfe4bc68b1ebd36184ebc1de1bce603f5c9ce5e00d563309e8fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可展開元素當前是展開還是折疊狀態。"
+      }
+    },
+    {
+      "segment_id": "ced7184f",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ced7184f"
+      }
+    },
+    {
+      "segment_id": "6beaa586",
+      "source_content": "### `aria-hidden`",
+      "source_content_hash": "d4c26b2e1464907f95cce749168fccf41fc5dadf72126e6ef7f2dbb323854798",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-hidden`"
+      }
+    },
+    {
+      "segment_id": "41e7f712",
+      "source_content": "Indicates whether the accessibility elements contained within this accessibility element are hidden.",
+      "source_content_hash": "1e97043f98e2a14fd64bbc6e6ff804be4e39b6ed0f817070ba6b595a1c9004b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示此無障礙元素內包含的元素是否隱藏。"
+      }
+    },
+    {
+      "segment_id": "15d5abf0",
+      "source_content": "For example, in a window that contains sibling views `A` and `B`, setting `aria-hidden` to `true` on view `B` causes VoiceOver to ignore the elements in view `B`.",
+      "source_content_hash": "7fea160c58fba9212244062b2f991ff4663bb045e7506d806c6caaf38e757437",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在包含同層級視圖 `A` 和 `B` 的視窗中，將視圖 `B` 的 `aria-hidden` 設為 `true` 會導致 VoiceOver 忽略視圖 `B` 中的元素。"
+      }
+    },
+    {
+      "segment_id": "8f6a7793",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f6a7793"
+      }
+    },
+    {
+      "segment_id": "4cb3b0aa",
+      "source_content": "### `aria-label`",
+      "source_content_hash": "a00fb48b33ddc9a416be3c695411699edb748552c762cabf3a218884fefccd94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-label`"
+      }
+    },
+    {
+      "segment_id": "2153a2fa",
+      "source_content": "Defines a string value that labels an interactive element.",
+      "source_content_hash": "833b7b7f2013c4efe8f0db65c63e6d4cfb1ff08cf03b33a641e54d5f17f9dffb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義一個字串值，用於標記互動式元素。"
+      }
+    },
+    {
+      "segment_id": "68caee40",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_68caee40"
+      }
+    },
+    {
+      "segment_id": "519c654d",
+      "source_content": "### `aria-labelledby` <div class=\"label android\">Android</div>",
+      "source_content_hash": "5499c13496fe4a3557abb9db1e97ecbed645d76a3f01694fcfdbdcaf6ab2a077",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-labelledby` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "2d5a3f2f",
+      "source_content": "Identifies the element that labels the element it is applied to. The value of `aria-labelledby` should match the [`nativeID`](view.md#nativeid) of the related element:",
+      "source_content_hash": "77075d4aa1a3431c837448a7baaec7bfc3caefcc2a728f19459d3c1370dc34fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "標識用於標記應用此屬性的元素的元素。`aria-labelledby` 的值應與相關元素的 [`nativeID`](view.md#nativeid) 匹配："
+      }
+    },
+    {
+      "segment_id": "f5128628",
+      "source_content": "```tsx\n<View>\n  <Text nativeID=\"formLabel\">Label for Input Field</Text>\n  <TextInput aria-label=\"input\" aria-labelledby=\"formLabel\" />\n</View>\n```",
+      "source_content_hash": "aba19bc1dbd23c461440ff7e22dea0e3555072691187b520bd542278a1fc310b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f5128628"
+      }
+    },
+    {
+      "segment_id": "95a47993",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95a47993"
+      }
+    },
+    {
+      "segment_id": "bea5d450",
+      "source_content": "### `aria-live` <div class=\"label android\">Android</div>",
+      "source_content_hash": "f3312596850f0827d3fdf53dfd4a95697596454838b31d16a1febf1da3121199",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-live` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "aa705b4d",
+      "source_content": "Indicates that an element will be updated and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.",
+      "source_content_hash": "77ae6e675b44becb94432a71dbd1fe6e2ab5c29a9015371369319e140b867d31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素將被更新，並描述使用者代理、輔助技術和使用者可以從即時區域期待的更新類型。"
+      }
+    },
+    {
+      "segment_id": "942db948",
+      "source_content": "- **off** Accessibility services should not announce changes to this view.\n- **polite** Accessibility services should announce changes to this view.\n- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.",
+      "source_content_hash": "882da3a0dee3132a4ba00ff12a4c11adf6f959862f7f55b263c736938fc43de2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **off** 無障礙服務不應宣讀此視圖的變更。\n- **polite** 無障礙服務應宣讀此視圖的變更。\n- **assertive** 無障礙服務應中斷當前語音，立即宣讀此視圖的變更。"
+      }
+    },
+    {
+      "segment_id": "22492613",
+      "source_content": "| Type                                     | Default |\n| ---------------------------------------- | ------- |\n| enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |",
+      "source_content_hash": "9e10cf9f97d738bb2a59906cd28b1029beeb84caf7305cc24ec051b828ddff09",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_22492613"
+      }
+    },
+    {
+      "segment_id": "f520e64b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0b7ed806",
+      "source_content": "### `aria-modal` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "fd30cd3cb003f3b9bc19dbb07333c9989bdd5fbeb01277c1c64d7da833f00d46",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-modal` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "8517ac25",
+      "source_content": "Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.",
+      "source_content_hash": "632d4dbb1c22a1d1287a6623d230ffd86c6820892c0b35010c655cc89923cef0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "布林值，指示 VoiceOver 是否應忽略接收者同層級視圖中的元素。"
+      }
+    },
+    {
+      "segment_id": "a22d2e7b",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a22d2e7b"
+      }
+    },
+    {
+      "segment_id": "d087570f",
+      "source_content": "### `aria-selected`",
+      "source_content_hash": "326fe630abddf06fe498f4b493ea8e9261d66db3bfa8efffa30fa552d22d6d9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-selected`"
+      }
+    },
+    {
+      "segment_id": "1f92e934",
+      "source_content": "Indicates whether a selectable element is currently selected or not.",
+      "source_content_hash": "b454a16cf5dc03042d2fe609cc3ba01bec5a1a44d18fd14c1bc66a587d206836",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指示可選元素當前是否被選中。"
+      }
+    },
+    {
+      "segment_id": "242cb257",
+      "source_content": "| Type    |\n| ------- |\n| boolean |",
+      "source_content_hash": "afc5252fe97c3b4645cc839e72fb23555baeef211698715abd6b5ac8ee57a841",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_242cb257"
+      }
+    },
+    {
+      "segment_id": "8e437dbf",
+      "source_content": "### `importantForAccessibility` <div class=\"label android\">Android</div>",
+      "source_content_hash": "f413cedbdd567de916fc5bcb2191d96efb53743cb0ea6a3bc872cc6ac6f6696c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `importantForAccessibility` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "c9f6a516",
+      "source_content": "In the case of two overlapping UI components with the same parent, default accessibility focus can have unpredictable behavior. The `importantForAccessibility` property will resolve this by controlling if a view fires accessibility events and if it is reported to accessibility services. It can be set to `auto`, `yes`, `no` and `no-hide-descendants` (the last value will force accessibility services to ignore the component and all of its children).",
+      "source_content_hash": "a1d491bea41c8626f5796e3efae77fe5fd33fc627d14b9877d857a8bf9c2450d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當兩個重疊的 UI 組件擁有相同父元素時，預設的無障礙焦點可能會有不可預測的行為。`importantForAccessibility` 屬性可透過控制視圖是否觸發無障礙事件及是否向無障礙服務報告來解決此問題。可設置為 `auto`、`yes`、`no` 或 `no-hide-descendants`（最後一個值會強制無障礙服務忽略該組件及其所有子組件）。"
+      }
+    },
+    {
+      "segment_id": "4aede6b2",
+      "source_content": "```tsx\n<View style={styles.container}>\n  <View\n    style={[styles.layout, {backgroundColor: 'green'}]}\n    importantForAccessibility=\"yes\">\n    <Text>First layout</Text>\n  </View>\n  <View\n    style={[styles.layout, {backgroundColor: 'yellow'}]}\n    importantForAccessibility=\"no-hide-descendants\">\n    <Text>Second layout</Text>\n  </View>\n</View>\n```",
+      "source_content_hash": "bd767d9946cf102e5e05484ec1963cf2df908901843d0df52c3c1d2a85a8c9c1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4aede6b2"
+      }
+    },
+    {
+      "segment_id": "a6efb0d1",
+      "source_content": "In the above example, the `yellow` layout and its descendants are completely invisible to TalkBack and all other accessibility services. So we can use overlapping views with the same parent without confusing TalkBack.",
+      "source_content_hash": "738f742abc1946383de9337cc39ddce8032bf1f3e012de7f89e3006287b8b5ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上述範例中，`yellow` 佈局及其子元素對 TalkBack 和其他所有無障礙服務完全不可見。因此我們可以使用同父元素的重疊視圖而不會混淆 TalkBack。"
+      }
+    },
+    {
+      "segment_id": "42a9e250",
+      "source_content": "### `onAccessibilityEscape` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "9db7c462cb9fd4a93d355e29e1ade46b6574b8d1e2f1fc1b18cf2bf05f13e886",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onAccessibilityEscape` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "e4ab192a",
+      "source_content": "Assign this property to a custom function which will be called when someone performs the \"escape\" gesture, which is a two finger Z shaped gesture. An escape function should move back hierarchically in the user interface. This can mean moving up or back in a navigation hierarchy or dismissing a modal user interface. If the selected element does not have an `onAccessibilityEscape` function, the system will attempt to traverse up the view hierarchy until it finds a view that does or bonk to indicate it was unable to find one.",
+      "source_content_hash": "9aad6e19140c84884363ba9a84a2e103e6904b76340f1ed5b8f5f56fd8dc87c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將此屬性賦予一個自訂函數，當有人執行「escape」手勢（雙指 Z 形手勢）時會呼叫該函數。escape 函數應在用戶界面中按層級後退，這可能意味著在導航層級中向上或返回，或關閉模態用戶界面。如果選定元素沒有 `onAccessibilityEscape` 函數，系統將嘗試向上遍歷視圖層級，直到找到具有該函數的視圖，或發出提示音表示找不到。"
+      }
+    },
+    {
+      "segment_id": "5bc50701",
+      "source_content": "### `onAccessibilityTap` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "f65dac607f9f4ca4b0269f998b74e40da3c5abc6880ea84e8685e2619c804474",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onAccessibilityTap` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "d70ad719",
+      "source_content": "Use this property to assign a custom function to be called when someone activates an accessible element by double tapping on it while it's selected.",
+      "source_content_hash": "5209bd818597aa49d18f2f28ea5986c2806875c724e1cec9faea96d9a5503142",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用此屬性賦予一個自訂函數，當有人在選中可訪問元素時雙擊它來激活時會呼叫該函數。"
+      }
+    },
+    {
+      "segment_id": "fb020fb7",
+      "source_content": "### `onMagicTap` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "a271f4e5397b5f2522fc34f1e2f19d58dfa9407ced57bf7bbaa56c6ea5187c84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMagicTap` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "dbd18971",
+      "source_content": "Assign this property to a custom function which will be called when someone performs the \"magic tap\" gesture, which is a double-tap with two fingers. A magic tap function should perform the most relevant action a user could take on a component. In the Phone app on iPhone, a magic tap answers a phone call or ends the current one. If the selected element does not have an `onMagicTap` function, the system will traverse up the view hierarchy until it finds a view that does.",
+      "source_content_hash": "e2f1f48d360319e81a2cb69a418bde9fc6bae5b03779f55050811caaaca81113",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將此屬性賦予一個自訂函數，當有人執行「magic tap」手勢（雙指雙擊）時會呼叫該函數。magic tap 函數應執行用戶在組件上最相關的操作。在 iPhone 的電話應用中，magic tap 接聽電話或結束當前通話。如果選定元素沒有 `onMagicTap` 函數，系統將向上遍歷視圖層級，直到找到具有該函數的視圖。"
+      }
+    },
+    {
+      "segment_id": "4e36860d",
+      "source_content": "### `role`",
+      "source_content_hash": "3463b610032512464093b5c5733eee15f95cb5e1b5a4a8c84895aa293f5c1937",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `role`"
+      }
+    },
+    {
+      "segment_id": "4cba7b8e",
+      "source_content": "`role` communicates the purpose of a component and has precedence over the [`accessibilityRole`](accessibility#accessibilityrole) prop.",
+      "source_content_hash": "cf4b57459b0c3259b435a9b8a9ba1204543b56516276f500b63e13fb5d288cc3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`role` 傳達組件的用途，並優先於 [`accessibilityRole`](accessibility#accessibilityrole) 屬性。"
+      }
+    },
+    {
+      "segment_id": "c419a086",
+      "source_content": "`role` can be one of the following:",
+      "source_content_hash": "76ff308742200c0077554403c2e4199e8a85a34315f47601527dffc5eedc8ddd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`role` 可以是以下之一："
+      }
+    },
+    {
+      "segment_id": "b60d3a33",
+      "source_content": "- **alert** Used when an element contains important text to be presented to the user.\n- **button** Used when the element should be treated as a button.\n- **checkbox** Used when an element represents a checkbox that can be checked, unchecked, or have a mixed checked state.\n- **combobox** Used when an element represents a combo box, which allows the user to select among several choices.\n- **grid** Used with ScrollView, VirtualizedList, FlatList, or SectionList to represent a grid. Adds the in/out of grid announcements to the android GridView.\n- **heading** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).\n- **img** Used when the element should be treated as an image. Can be combined with a button or link, for example.\n- **link** Used when the element should be treated as a link.\n- **list** Used to identify a list of items.\n- **listitem** Used to itentify an item in a list.\n- **menu** Used when the component is a menu of choices.\n- **menubar** Used when a component is a container of multiple menus.\n- **menuitem** Used to represent an item within a menu.\n- **none** Used when the element has no role.\n- **presentation** Used when the element has no role.\n- **progressbar** Used to represent a component that indicates the progress of a task.\n- **radio** Used to represent a radio button.\n- **radiogroup** Used to represent a group of radio buttons.\n- **scrollbar** Used to represent a scroll bar.\n- **searchbox** Used when the text field element should also be treated as a search field.\n- **slider** Used when an element can be \"adjusted\" (e.g. a slider).\n- **spinbutton** Used to represent a button that opens a list of choices.\n- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.\n- **switch** Used to represent a switch that can be turned on and off.\n- **tab** Used to represent a tab.\n- **tablist** Used to represent a list of tabs.\n- **timer** Used to represent a timer.\n- **toolbar** Used to represent a toolbar (a container of action buttons or components).",
+      "source_content_hash": "b7a0d045e4d0bf7fba82e24dd54268d25fbd144e1a139c21a2529ae3a18447ae",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **alert** 當元素包含需要向用戶展示的重要文字時使用。\n- **button** 當元素應被視為按鈕時使用。\n- **checkbox** 當元素代表可勾選、取消勾選或處於混合勾選狀態的核取方塊時使用。\n- **combobox** 當元素代表可讓用戶從多個選項中選擇的組合框時使用。\n- **grid** 與 ScrollView、VirtualizedList、FlatList 或 SectionList 一起使用時，表示網格。為 Android 的 GridView 添加網格內/外公告功能。\n- **heading** 當元素作為內容區段的標題時使用（例如導覽列的標題）。\n- **img** 當元素應被視為圖片時使用。可與按鈕或連結等組合使用。\n- **link** 當元素應被視為連結時使用。\n- **list** 用於識別項目清單。\n- **listitem** 用於識別清單中的單一項目。\n- **menu** 當元件是選單選項時使用。\n- **menubar** 當元件是多個選單的容器時使用。\n- **menuitem** 用於表示選單內的項目。\n- **none** 當元素沒有任何角色時使用。\n- **presentation** 當元素沒有任何角色時使用。\n- **progressbar** 用於表示顯示任務進度的元件。\n- **radio** 用於表示單選按鈕。\n- **radiogroup** 用於表示一組單選按鈕。\n- **scrollbar** 用於表示捲軸。\n- **searchbox** 當文字輸入框元素也應被視為搜尋欄位時使用。\n- **slider** 當元素可被「調整」時使用（例如滑桿）。\n- **spinbutton** 用於表示可開啟選項清單的按鈕。\n- **summary** 當元素可用於在應用程式首次啟動時提供當前條件的快速摘要時使用。\n- **switch** 用於表示可開啟或關閉的開關。\n- **tab** 用於表示標籤頁。\n- **tablist** 用於表示標籤頁清單。\n- **timer** 用於表示計時器。\n- **toolbar** 用於表示工具列（動作按鈕或元件的容器）。"
+      }
+    },
+    {
+      "segment_id": "b98aff93",
+      "source_content": "## Accessibility Actions",
+      "source_content_hash": "031b32b932944db63cd9e5aea94644235dd200e4f680513f2394f6e014aabcbe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 無障礙操作"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "Accessibility actions allow assistive technology to programmatically invoke the action(s) of a component. To support accessibility actions, a component must do two things:",
+      "source_content_hash": "8fc9452cb5134fd17a90201c4fe75b92bcff6179efee21e0abd889f2c07f564b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無障礙操作允許輔助技術以程式化方式呼叫元件的操作。要支援無障礙操作，元件必須完成兩件事："
+      }
+    },
+    {
+      "segment_id": "84c2bceb",
+      "source_content": "- Define the list of actions it supports via the `accessibilityActions` property.\n- Implement an `onAccessibilityAction` function to handle action requests.",
+      "source_content_hash": "7e0b39a04bdcec677ef4f35820febcc67b60b9d8b8602fbb2843b8a16c24a359",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 透過 `accessibilityActions` 屬性定義其支援的操作清單。\n- 實作 `onAccessibilityAction` 函數來處理操作請求。"
+      }
+    },
+    {
+      "segment_id": "991164fd",
+      "source_content": "The `accessibilityActions` property should contain a list of action objects. Each action object should contain the following fields:",
+      "source_content_hash": "b920e363a61365b4fbe7b06f84faeda3b2acb3fda683a8a3e48277c920f4c349",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityActions` 屬性應包含操作物件的清單。每個操作物件應包含以下欄位："
+      }
+    },
+    {
+      "segment_id": "764f5d67",
+      "source_content": "| Name  | Type   | Required |\n| ----- | ------ | -------- |\n| name  | string | Yes      |\n| label | string | No       |",
+      "source_content_hash": "a83c245edcbf0c30d05b90e1cfcb5796536602adbc312096efc90b20db78d3f0",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_764f5d67"
+      }
+    },
+    {
+      "segment_id": "85f6fcdd",
+      "source_content": "Actions either represent standard actions, such as clicking a button or adjusting a slider, or custom actions specific to a given component such as deleting an email message. The `name` field is required for both standard and custom actions, but `label` is optional for standard actions.",
+      "source_content_hash": "cebd31b5d259370da44bad8e820d17d57ae3ab3b97fe123be1c97e4fbbb1a673",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "操作可以是標準操作（例如點擊按鈕或調整滑桿），也可以是特定元件的自訂操作（例如刪除電子郵件）。標準和自訂操作都必須提供 `name` 欄位，但標準操作的 `label` 欄位是選填的。"
+      }
+    },
+    {
+      "segment_id": "9150ec12",
+      "source_content": "When adding support for standard actions, `name` must be one of the following:",
+      "source_content_hash": "903c1bd2e02785f16d61a93e4bc135e870802e37168ecd6714e5a3ebff6fc615",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當添加對標準操作的支援時，`name` 必須是以下之一："
+      }
+    },
+    {
+      "segment_id": "de56c492",
+      "source_content": "- `'magicTap'` - iOS only - While VoiceOver focus is on or inside the component, the user double tapped with two fingers.\n- `'escape'` - iOS only - While VoiceOver focus is on or inside the component, the user performed a two-finger scrub gesture (left, right, left).\n- `'activate'` - Activate the component. This should perform the same action with, or without, assistive technology. Engaged when a screen reader user double taps the component.\n- `'increment'` - Increment an adjustable component. On iOS, VoiceOver generates this action when the component has a role of `'adjustable'` and the user places focus on it and swipes upward. On Android, TalkBack generates this action when the user places accessibility focus on the component and presses the volume-up button.\n- `'decrement'` - Decrement an adjustable component. On iOS, VoiceOver generates this action when the component has a role of `'adjustable'` and the user places focus on it and swipes downward. On Android, TalkBack generates this action when the user places accessibility focus on the component and presses the volume-down button.\n- `'longpress'` - Android only - This action is generated when the user places accessibility focus on the component, then double-taps and holds one finger on the screen. This should perform the same action with, or without, assistive technology.",
+      "source_content_hash": "eaeb13da3bfbadcb0d97fb112171e2d1b92c7348bb87418f8d8e4f8085f5cac7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'magicTap'` - 僅限 iOS - 當 VoiceOver 焦點位於元件內或元件上時，使用者用兩指雙擊。\n- `'escape'` - 僅限 iOS - 當 VoiceOver 焦點位於元件內或元件上時，使用者執行兩指擦除手勢（左、右、左）。\n- `'activate'` - 啟動元件。無論是否使用輔助技術，此動作應執行相同操作。當螢幕閱讀器使用者雙擊元件時觸發。\n- `'increment'` - 增加可調整元件值。在 iOS 上，當元件角色為 `'adjustable'` 且使用者聚焦後向上滑動時，VoiceOver 會產生此動作。在 Android 上，當使用者將輔助功能焦點放在元件上並按下音量增加鍵時，TalkBack 會產生此動作。\n- `'decrement'` - 減少可調整元件值。在 iOS 上，當元件角色為 `'adjustable'` 且使用者聚焦後向下滑動時，VoiceOver 會產生此動作。在 Android 上，當使用者將輔助功能焦點放在元件上並按下音量減少鍵時，TalkBack 會產生此動作。\n- `'longpress'` - 僅限 Android - 當使用者將輔助功能焦點放在元件上，然後雙擊並按住螢幕時會產生此動作。無論是否使用輔助技術，此動作應執行相同操作。"
+      }
+    },
+    {
+      "segment_id": "1b707117",
+      "source_content": "The `label` field is optional for standard actions and is often unused by assistive technologies. For custom actions, it is a localized string containing a description of the action to be presented to the user.",
+      "source_content_hash": "f27550cfc828a92485ced6de5ed04f29c912654ac95212bed1f18c9874ab2fda",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`label` 欄位對標準動作是選填的，且通常不會被輔助技術使用。對於自訂動作，它是一個本地化字串，包含要向使用者顯示的動作描述。"
+      }
+    },
+    {
+      "segment_id": "a24efd7d",
+      "source_content": "To handle action requests, a component must implement an `onAccessibilityAction` function. The only argument to this function is an event containing the name of the action to perform. The below example from RNTester shows how to create a component that defines and handles several custom actions.",
+      "source_content_hash": "dc3394ae853f1836edbeaf5612d3dae7ecf813a91a41a06c06b7c9968b18a9c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要處理動作請求，元件必須實作 `onAccessibilityAction` 函式。此函式的唯一參數是一個包含要執行動作名稱的事件。以下來自 RNTester 的範例展示如何建立一個定義並處理多個自訂動作的元件。"
+      }
+    },
+    {
+      "segment_id": "fc15fc0c",
+      "source_content": "```tsx\n<View\n  accessible={true}\n  accessibilityActions={[\n    {name: 'cut', label: 'cut'},\n    {name: 'copy', label: 'copy'},\n    {name: 'paste', label: 'paste'},\n  ]}\n  onAccessibilityAction={event => {\n    switch (event.nativeEvent.actionName) {\n      case 'cut':\n        Alert.alert('Alert', 'cut action success');\n        break;\n      case 'copy':\n        Alert.alert('Alert', 'copy action success');\n        break;\n      case 'paste':\n        Alert.alert('Alert', 'paste action success');\n        break;\n    }\n  }}\n/>\n```",
+      "source_content_hash": "a3cd283e065bb45ee480a80147da9a7a531df74f638fd36358ee0f2737d2fc63",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fc15fc0c"
+      }
+    },
+    {
+      "segment_id": "489e5683",
+      "source_content": "## Checking if a Screen Reader is Enabled",
+      "source_content_hash": "b3bad41c5cc7514188192d97f3628344b367adf2f1abaf6c192f90eb4211487b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 檢查螢幕閱讀器是否啟用"
+      }
+    },
+    {
+      "segment_id": "a1cac8e0",
+      "source_content": "The `AccessibilityInfo` API allows you to determine whether or not a screen reader is currently active. See the [AccessibilityInfo documentation](accessibilityinfo) for details.",
+      "source_content_hash": "46685e34ee0d4d69860ed9ec642c9ce08a8834bfaee28bca5a8531575cfa3ced",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`AccessibilityInfo` API 可讓您判斷當前是否有螢幕閱讀器處於活動狀態。詳情請參閱 [AccessibilityInfo 文件](accessibilityinfo)。"
+      }
+    },
+    {
+      "segment_id": "625dc480",
+      "source_content": "## Sending Accessibility Events <div class=\"label android\">Android</div>",
+      "source_content_hash": "fc75734f6a64c38b1f2f46a41cf585d06a46eb1420f5f4b1db5fa41055f22937",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 發送輔助功能事件 <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "f894b163",
+      "source_content": "Sometimes it is useful to trigger an accessibility event on a UI component (i.e. when a custom view appears on a screen or set accessibility focus to a view). Native UIManager module exposes a method ‘sendAccessibilityEvent’ for this purpose. It takes two arguments: a view tag and a type of event. The supported event types are `typeWindowStateChanged`, `typeViewFocused`, and `typeViewClicked`.",
+      "source_content_hash": "e61683ad852851db78cc5be86bd38b417a5642720e5d518d156a66f11db6418c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時需要在 UI 元件上觸發輔助功能事件（例如自訂視圖出現在螢幕上時，或將輔助功能焦點設定到某視圖）。原生 UIManager 模組為此提供了一個方法 `sendAccessibilityEvent`。它接受兩個參數：視圖標籤和事件類型。支援的事件類型包括 `typeWindowStateChanged`、`typeViewFocused` 和 `typeViewClicked`。"
+      }
+    },
+    {
+      "segment_id": "8ea5b4e4",
+      "source_content": "```tsx\nimport {Platform, UIManager, findNodeHandle} from 'react-native';\n\nif (Platform.OS === 'android') {\n  UIManager.sendAccessibilityEvent(\n    findNodeHandle(this),\n    UIManager.AccessibilityEventTypes.typeViewFocused,\n  );\n}\n```",
+      "source_content_hash": "1d12c1d725c6ab888aada57dfc1420489369577da53fffe4c772215e3be97cb9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8ea5b4e4"
+      }
+    },
+    {
+      "segment_id": "afdec47c",
+      "source_content": "## Testing TalkBack Support <div class=\"label android\">Android</div>",
+      "source_content_hash": "61760b8b9f9b2a8e9fd5d900faf88915aefc4a4d37c5a3c0f1dac67954aac5f7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 測試 TalkBack 支援 <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "04bb83ba",
+      "source_content": "To enable TalkBack, go to the Settings app on your Android device or emulator. Tap Accessibility, then TalkBack. Toggle the \"Use service\" switch to enable or disable it.",
+      "source_content_hash": "785ca03d3d6ae64529299440f3a479969d77d11fef6cb71b9be5c1aba48b16eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要啟用 TalkBack，請前往 Android 裝置或模擬器上的「設定」應用程式。點擊「輔助功能」，然後選擇「TalkBack」。切換「使用服務」開關以啟用或停用。"
+      }
+    },
+    {
+      "segment_id": "9bc9e142",
+      "source_content": "Android emulators don't have TalkBack installed by default. You can install TalkBack on your emulator via the Google Play Store. Make sure to choose an emulator with the Google Play store installed. These are available in Android Studio.",
+      "source_content_hash": "b0adce50ee76a77b9de18ca52948d8b3ad8f53a14cda5cdd87f5c63e83c310ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 模擬器預設未安裝 TalkBack。您可以透過 Google Play 商店在模擬器上安裝 TalkBack。請確保選擇已安裝 Google Play 商店的模擬器。這些模擬器可在 Android Studio 中找到。"
+      }
+    },
+    {
+      "segment_id": "76356197",
+      "source_content": "You can use the volume key shortcut to toggle TalkBack. To turn on the volume key shortcut, go to the Settings app, then Accessibility. At the top, turn on the volume key shortcut.",
+      "source_content_hash": "67ac42ac356f3f4d0b72fef2c110b3905d5f03c10981616cd00d90b43a48ccb6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以使用音量鍵快捷鍵來切換 TalkBack。要開啟音量鍵快捷鍵，請前往「設定」應用程式中的「輔助功能」。在最上方開啟音量鍵快捷功能。"
+      }
+    },
+    {
+      "segment_id": "4dd62f5c",
+      "source_content": "To use the volume key shortcut, press both volume keys for 3 seconds to start an accessibility tool.",
+      "source_content_hash": "b49c00a6d647319b70d5fa45e92afd2531be1c5828c63cd70404883b7daccb0d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用音量鍵快捷鍵時，同時按住兩個音量鍵 3 秒即可啟動輔助工具。"
+      }
+    },
+    {
+      "segment_id": "74bfaf8c",
+      "source_content": "Additionally, if you prefer, you can toggle TalkBack via the command line with:",
+      "source_content_hash": "1505c389295cc2f830f07635ae42932d0b1d2e9fa73872e88f664ccc2067b32f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，如果您偏好，也可以透過命令列切換 TalkBack："
+      }
+    },
+    {
+      "segment_id": "c97b2475",
+      "source_content": "```shell\n# disable\nadb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService\n\n# enable\nadb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService\n```",
+      "source_content_hash": "0392348f38d304ddaa85c4d5b91888ba17020bb069132e1f6815ce3572c12ac9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c97b2475"
+      }
+    },
+    {
+      "segment_id": "ed6c5f16",
+      "source_content": "## Testing VoiceOver Support <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "50f54953f9745cdda5edd9885c3fbcfd247e6d8dba0eb43e2921c6d582db0183",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 測試 VoiceOver 支援 <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "9cfda36e",
+      "source_content": "To enable VoiceOver on your iOS or iPadOS device, go to the Settings app, tap General, then Accessibility. There you will find many tools available for people to enable their devices to be more usable, including VoiceOver. To enable VoiceOver, tap on VoiceOver under \"Vision\" and toggle the switch that appears at the top.",
+      "source_content_hash": "2440c3f14b7b2853d726cdcffc14ca038704c88e5a05255d1409615589c52f2b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在 iOS 或 iPadOS 裝置上啟用 VoiceOver，請前往「設定」應用程式，點擊「一般」，然後選擇「輔助功能」。您會在此找到許多工具，包括 VoiceOver。要啟用 VoiceOver，請在「視覺」下方點擊「VoiceOver」，並切換頂部的開關。"
+      }
+    },
+    {
+      "segment_id": "f49fce49",
+      "source_content": "At the very bottom of the Accessibility settings, there is an \"Accessibility Shortcut\". You can use this to toggle VoiceOver by triple-clicking the Home button.",
+      "source_content_hash": "84ebadbf7403b52f805081ec601b675c891b866143f6d0a07572118934497b03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在輔助功能設定的最底部有一個「輔助功能快速鍵」。您可以使用此功能透過三擊主畫面按鈕來切換 VoiceOver。"
+      }
+    },
+    {
+      "segment_id": "6cf42755",
+      "source_content": "VoiceOver isn't available via the simulator, but you can use Accessibility Inspector from Xcode to use the macOS VoiceOver through an application. Note it's always best to test with a device as macOS's VoiceOver may result in varied experiences.",
+      "source_content_hash": "2c21532829beddd92daccb610e4b60f13a7111058a71098720acffb52c01b263",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "VoiceOver 無法透過模擬器使用，但您可以使用 Xcode 的「輔助功能檢查器」來透過應用程式使用 macOS 的 VoiceOver。請注意，最佳做法始終是使用實體裝置進行測試，因為 macOS 的 VoiceOver 可能會導致不同的體驗。"
+      }
+    },
+    {
+      "segment_id": "76f5fa2a",
+      "source_content": "## Additional Resources",
+      "source_content_hash": "10f87178f164c035ecfa7770143db68c2c8a7dfbbddfd5278bdeb0733b121288",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他資源"
+      }
+    },
+    {
+      "segment_id": "95d0fde6",
+      "source_content": "- [Making React Native Apps Accessible](https://engineering.fb.com/ios/making-react-native-apps-accessible/)",
+      "source_content_hash": "0895995388ca42d2d0e63125b50bf343b5048031c2d1d39c43843046d10f3666",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [打造無障礙的 React Native 應用程式](https://engineering.fb.com/ios/making-react-native-apps-accessible/)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/accessibility.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.500045+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "2bed7e7058981a122fe81829102bfb1580549b7d03df52a781d755f23f4521c1"
+  }
+}

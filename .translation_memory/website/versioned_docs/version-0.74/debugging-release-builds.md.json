@@ -1,0 +1,162 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/debugging-release-builds.md",
+  "source_file_content_hash": "a390c062152f1acf3aa227315b9a4da600c6789a83bdec6c6ea417404c0ff258",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: debugging-release-builds\ntitle: Debugging Release Builds\n---",
+      "source_content_hash": "e13f3ae817d4af3ee3f6cdad563d4e2966cf4ed7a98d28fa2db1fb85edd5b7c1",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Symbolicating a stack trace",
+      "source_content_hash": "ebbf9c7fc8667b3d0350a1b6bb929024db8a59c0ad1c48f033a97f5d563dad07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 符號化堆疊追蹤"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "If a React Native app throws an unhandled exception in a release build, the output may be obfuscated and hard to read.",
+      "source_content_hash": "cc1403a9ccf0ca7eb77a1d8f6b26a73b6bbe3fdefd0b249a66aeee44ec0ea0a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若 React Native 應用程式在正式版建置中拋出未處理的例外，其輸出可能經過混淆而難以閱讀。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```shell\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: FATAL EXCEPTION: mqt_native_modules\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: Process: com.awesomeproject, PID: 18979 07-15 10:58:25.820 18979 18998 E AndroidRuntime: com.facebook.react.common.JavascriptException: Failed, js engine: hermes, stack:\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: p@1:132161\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: p@1:132084\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: f@1:131854\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: anonymous@1:131119\n```",
+      "source_content_hash": "c0a1e958df9d8848859375934dfd2fb31e9ef0b55612678135611518fab6b428",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "In the above stack trace, entries like `p@1:132161` are minified function names and bytecode offsets. To debug these calls, we want to translate these into file, line, and function name, e.g. `AwesomeProject/App.js:54:initializeMap`. This is known as **symbolication.**",
+      "source_content_hash": "21fcef6fd7a33839cec3c12e97c3c4207e13e360dc2c09b66355f2835af23dec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在上述堆疊追蹤中，類似 `p@1:132161` 的條目代表經過最小化的函式名稱與位元組碼偏移量。要除錯這些呼叫，我們需將其轉換為檔案名稱、行號與函式名稱，例如 `AwesomeProject/App.js:54:initializeMap`。此過程稱為**符號化**。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "You can symbolicate minified function names and bytecode like the above by passing the stack trace and a generated source map to [`metro-symbolicate`](http://npmjs.com/package/metro-symbolicate).",
+      "source_content_hash": "566324cb625aa8937df0830e05ab7151c932297e022b186b8c063cfd89b7accb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可透過將堆疊追蹤與產生的原始碼對應檔傳遞至 [`metro-symbolicate`](http://npmjs.com/package/metro-symbolicate)，來符號化上述最小化函式名稱與位元組碼。"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "### Enabling source maps",
+      "source_content_hash": "48f6c6ed42a7976560f6a18af1a1ac42741a43dd63af3d8f47a44e699069e2f2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 啟用原始碼對應檔"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "Source maps are required to symbolicate stack traces. Make sure that source maps are enabled within the build config for the target platform.",
+      "source_content_hash": "1fd2c5916f2efa4990ccbae09be7674a2acbf8d10d7d5bb4fd9629fa59987fd1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "符號化堆疊追蹤需使用原始碼對應檔。請確認目標平台的建置配置中已啟用原始碼對應檔生成功能。"
+      }
+    },
+    {
+      "segment_id": "9329e3e0",
+      "source_content": "<Tabs groupId=\"platform\" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className=\"pill-tabs\">\n<TabItem value=\"android\">\n\n:::info\nOn Android, source maps are **enabled** by default.\n:::\n\nTo enable source map generation, ensure the following `hermesFlags` are present in `android/app/build.gradle`.\n\n```groovy\nreact {\n    hermesFlags = [\"-O\", \"-output-source-map\"]\n}\n```\n\nIf done correctly you should see the output location of the source map during Metro build output.\n\n```text\nWriting bundle output to:, android/app/build/generated/assets/react/release/index.android.bundle\nWriting sourcemap output to:, android/app/build/intermediates/sourcemaps/react/release/index.android.bundle.packager.map\n```\n\n</TabItem>\n<TabItem value=\"ios\">\n\n:::info\nOn iOS, source maps are **disabled** by default. Use the following instructions to enable them.\n:::\n\nTo enable source map generation:\n\n- Open Xcode and edit the build phase \"Bundle React Native code and images\".\n- Above the other exports, add a `SOURCEMAP_FILE` entry with the desired output path.\n\n```diff\n+ SOURCEMAP_FILE=\"$(pwd)/../main.jsbundle.map\";\n  WITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\n```\n\nIf done correctly you should see the output location of the source map during Metro build output.\n\n```text\nWriting bundle output to:, Build/Intermediates.noindex/ArchiveIntermediates/application/BuildProductsPath/Release-iphoneos/main.jsbundle\nWriting sourcemap output to:, Build/Intermediates.noindex/ArchiveIntermediates/application/BuildProductsPath/Release-iphoneos/main.jsbundle.map\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ad64acf681cc85509315de7e0a29e89f158feab675c08949ae8155eda16bfda3",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9329e3e0"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "### Using `metro-symbolicate`",
+      "source_content_hash": "535f335bab0d1aa5aa331f6df6bd5a000c10ccdb0bdce20ad905654293ae2ba4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用 `metro-symbolicate`"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "With source maps being generated, we can now translate our stack traces.",
+      "source_content_hash": "e6bfb1994d03cc45b3fa19a49c15c978c6e9976417765f647bc67028f49cd83c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當原始碼對應檔生成後，即可開始轉譯堆疊追蹤內容。"
+      }
+    },
+    {
+      "segment_id": "a716abf2",
+      "source_content": "```shell\n# Print usage instructions\nnpx metro-symbolicate\n\n# From a file containing the stack trace\nnpx metro-symbolicate android/app/build/generated/sourcemaps/react/release/index.android.bundle.map < stacktrace.txt\n\n# From adb logcat (Android)\nadb logcat -d | npx metro-symbolicate android/app/build/generated/sourcemaps/react/release/index.android.bundle.map\n```",
+      "source_content_hash": "d4c393b4d306c9651ef20602f2b71dd3ab46add8ad8e1b599c4dd70dbd814499",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a716abf2"
+      }
+    },
+    {
+      "segment_id": "39db08de",
+      "source_content": "### Notes on source maps",
+      "source_content_hash": "7474cbeff13e190b3a728c8f3a34adc7728c8874222a5e90d53ade5f98210a53",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 原始碼對應檔注意事項"
+      }
+    },
+    {
+      "segment_id": "b0dbe2f3",
+      "source_content": "- Multiple source maps may be generated by the build process. Make sure to use the one in the location shown in the examples.\n- Make sure that the source map you use corresponds to the exact commit of the crashing app. Small changes in source code can cause large differences in offsets.\n- If `metro-symbolicate` exits immediately with success, make sure the input comes from a pipe or redirection and not from a terminal.",
+      "source_content_hash": "4164e97d1dd05194812898a604da2a6f564e7a3935ad97bd82c0686e46408d24",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 建置過程可能產生多份原始碼對應檔，請確保使用範例所示路徑的對應檔。\n- 使用的原始碼對應檔必須與當機應用程式的提交版本完全匹配，原始碼的微小變動可能導致偏移量大幅差異。\n- 若 `metro-symbolicate` 立即成功退出，請確認輸入來源為管道或重定向而非終端機直接輸入。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/debugging-release-builds.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.527940+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a390c062152f1acf3aa227315b9a4da600c6789a83bdec6c6ea417404c0ff258"
+  }
+}

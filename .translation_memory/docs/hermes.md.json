@@ -1,0 +1,202 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/hermes.md",
+  "source_file_content_hash": "b6edda90a18c28c651e588e6a99a297f443926927cdc3c1e8293dc6f15430d05",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: hermes\ntitle: Using Hermes\n---",
+      "source_content_hash": "7c75742db0a6bb1f2fa1e4c18f18cdeccd600fd6c29aec4df04f2c8c87ccbaa9",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<a href=\"https://hermesengine.dev\">\n  <img width={300} height={300} className=\"hermes-logo\" src=\"/docs/assets/HermesLogo.svg\" style={{height: \"auto\"}}/>\n</a>",
+      "source_content_hash": "7ae61bc02724f2fdc9cdcf6a5a0773d2b0e69afdb54072b2004604386b188ce7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "[Hermes](https://hermesengine.dev) is an open-source JavaScript engine optimized for React Native. For many apps, using Hermes will result in improved start-up time, decreased memory usage, and smaller app size when compared to JavaScriptCore.\nHermes is used by default by React Native and no additional configuration is required to enable it.",
+      "source_content_hash": "f11121fb942534094b6a87d3f58dfd9a0e32092adb105f3e38b88120eec75098",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## Bundled Hermes",
+      "source_content_hash": "d11372e733303bcbd7dca8d9b6064c19b56266aec74294d4e2807010da4e1d6c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "React Native comes with a **bundled version** of Hermes.\nWe are building a version of Hermes for you whenever we release a new version of React Native. This will make sure you're consuming a version of Hermes which is fully compatible with the version of React Native you're using.",
+      "source_content_hash": "d5ac7d6eb12296e4aef61d7b4b921542cc8fbe76330b1ded2e1b49166ec8d7c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "This change is fully transparent to users of React Native. You can still disable Hermes using the command described in this page.\nYou can [read more about the technical implementation on this page](/architecture/bundled-hermes).",
+      "source_content_hash": "47c2677e0f67c00289e7f005a9f1e0397c7954f16ebca4e76e7af0da43a817ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## Confirming Hermes is in use",
+      "source_content_hash": "6f7835bba11326ae6f47802b06ec5b3d7717bf004d473d9d9a640b2910f31eef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "If you've recently created a new app from scratch, you should see if Hermes is enabled in the welcome view:",
+      "source_content_hash": "f27b92a6616a0c5c2d3872b63e302ca35d9b6f8e29a93f3764856e714c1d9718",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "![Where to find JS engine status in AwesomeProject](/docs/assets/HermesApp.jpg)",
+      "source_content_hash": "43346d9971b491652aa7b210672e2aebf58ebc65bd457285c0e0e8f42eadf369",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "A `HermesInternal` global variable will be available in JavaScript that can be used to verify that Hermes is in use:",
+      "source_content_hash": "b0d412598a492a7b5fa658b6d398900a3cfb540edfcbdceadef175c5c3cfae8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```jsx\nconst isHermes = () => !!global.HermesInternal;\n```",
+      "source_content_hash": "2fce161aa284ecf57427cbfc72998df6abbe1d155d0db84d3648af4c7d27b349",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "26b47687",
+      "source_content": ":::caution\nIf you are using a non-standard way of loading the JS bundle, it is possible that the `HermesInternal` variable is available but you aren't using the highly optimised pre-compiled bytecode.\nConfirm that you are using the `.hbc` file and also benchmark the before/after as detailed below.\n:::",
+      "source_content_hash": "b3025ef7340abf31e10da2be49179ae7d2d5bd5073f2159ca8790c430538662c",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "To see the benefits of Hermes, try making a release build/deployment of your app to compare. For example; from the root of your project:",
+      "source_content_hash": "56963519cc560ca965321b098fd52883975343eed12a64103f1f05214ded1b5b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ff6ab177",
+      "source_content": "<Tabs groupId=\"platform\" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className=\"pill-tabs\">\n<TabItem value=\"android\">\n\n[//]: # 'Android'\n\n<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm run android -- --mode=\"release\"\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn android --mode release\n```\n\n</TabItem>\n</Tabs>\n\n</TabItem>\n<TabItem value=\"ios\">\n\n[//]: # 'iOS'\n\n<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm run ios -- --mode=\"Release\"\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn ios --mode Release\n```\n\n</TabItem>\n</Tabs>\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "bdec443bee8b5d1a519fc7e3360ec6eccb92d09d41ffd165a1e62b61dced82e0",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "This will compile JavaScript to Hermes Bytecode during build time which will improve your app's startup speed on device.",
+      "source_content_hash": "c6536ce6d2b35ade743034c1aba623268248047d2179f42b2b3567caf6e4c216",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "## Switching back to JavaScriptCore",
+      "source_content_hash": "1125f31d5d8851117112cf498ebc2a43938d041a284fba74cb6bc388c18651a9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "React Native also supports using JavaScriptCore as the [JavaScript engine](javascript-environment). Follow these instructions to opt-out of Hermes.",
+      "source_content_hash": "310a456da565ec7b00b92cabfe67aa467bccb7586375bcb82a93f56b700a5930",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "### Android",
+      "source_content_hash": "18508687aedd8506ac08685625c58c973d94225f52d4abdd8fc62e581c6da653",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "Edit your `android/gradle.properties` file and flip `hermesEnabled` back to false:",
+      "source_content_hash": "0c2c5520f085f5841b18856ceec761d10c9ddf4c74965f48a6c772fbd89cf6df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "890e01bc",
+      "source_content": "```diff\n# Use this property to enable or disable the Hermes JS engine.\n# If set to false, you will be using JSC instead.\nhermesEnabled=false\n```",
+      "source_content_hash": "08ee95f450f41b6c1eb517a412b56f29d4fd510d1852e5b97621245a61b8bbf3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "### iOS",
+      "source_content_hash": "b646a613d3c8a9a4ca1214eed895ef4f31b195bbc5c8456c23cc55e60cc49c95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Edit your `ios/Podfile` file and make the change illustrated below:",
+      "source_content_hash": "7b33c56d927b23547e0a230e84dd27fd05c67c040e53150d4a6bef91d0bd74e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9873cf8",
+      "source_content": "```diff\n   use_react_native!(\n     :path => config[:reactNativePath],\n+    :hermes_enabled => false,\n     # An absolute path to your application root.\n     :app_path => \"#{Pod::Config.instance.installation_root}/..\"\n   )\n```",
+      "source_content_hash": "4a617e1e049d5223cd2bc52b8e17e33f862570bc2dee06c3ed287c3cff6926d0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/hermes.md",
+  "last_updated_timestamp": "2025-06-18T17:57:11.470844+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

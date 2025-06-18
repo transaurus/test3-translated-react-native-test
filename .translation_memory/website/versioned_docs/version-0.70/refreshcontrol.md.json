@@ -1,0 +1,512 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/refreshcontrol.md",
+  "source_file_content_hash": "6a9223ccb9bb9e98e1fb7f6c70ff487f05fec2c712c2d23abf3e079a3e778f51",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: refreshcontrol\ntitle: RefreshControl\n---",
+      "source_content_hash": "4e346e28c8a01a6982001f9bddea82ba5f561f7273431ba9420234d5d1f183d5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "This component is used inside a ScrollView or ListView to add pull to refresh functionality. When the ScrollView is at `scrollY: 0`, swiping down triggers an `onRefresh` event.",
+      "source_content_hash": "646a259a6dc39a5726297a9518d6827b0f1527f07c4d6686a2b6023df15c7aac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此元件用於 ScrollView 或 ListView 內部，以實現下拉刷新功能。當 ScrollView 處於 `scrollY: 0` 時，向下滑動會觸發 `onRefresh` 事件。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=RefreshControl&supportedPlatforms=ios,android\nimport React from 'react';\nimport { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native';\n\nconst wait = (timeout) => {\n  return new Promise(resolve => setTimeout(resolve, timeout));\n}\n\nconst App = () => {\n  const [refreshing, setRefreshing] = React.useState(false);\n\n  const onRefresh = React.useCallback(() => {\n    setRefreshing(true);\n    wait(2000).then(() => setRefreshing(false));\n  }, []);\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <ScrollView\n        contentContainerStyle={styles.scrollView}\n        refreshControl={\n          <RefreshControl\n            refreshing={refreshing}\n            onRefresh={onRefresh}\n          />\n        }\n      >\n        <Text>Pull down to see RefreshControl indicator</Text>\n      </ScrollView>\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  scrollView: {\n    flex: 1,\n    backgroundColor: 'pink',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "c29ca3a90839209c498ee7161a716873bb8e9f4bddfbfb0356820ff209c23c10",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "219071b4",
+      "source_content": "> Note: `refreshing` is a controlled prop, this is why it needs to be set to `true` in the `onRefresh` function otherwise the refresh indicator will stop immediately.",
+      "source_content_hash": "17c91f371a1dbd0e8ea635270f151e73ac638ff5ed57af05ddf856dad74055c3",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：`refreshing` 是一個受控屬性，這就是為什麼需要在 `onRefresh` 函數中將其設置為 `true`，否則刷新指示器會立即停止。"
+      }
+    },
+    {
+      "segment_id": "b760ab3f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "c315c636",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [View 屬性](view.md#props)"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [View 屬性](view.md#props)。"
+      }
+    },
+    {
+      "segment_id": "a635fada",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "047c2395",
+      "source_content": "### <div class=\"label required basic\">Required</div>**`refreshing`**",
+      "source_content_hash": "1c7d25575869e68a7acb44f953fa6de572943994e171252e543be53758373504",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### <div class=\"label required basic\">必填</div>**`refreshing`**"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Whether the view should be indicating an active refresh.",
+      "source_content_hash": "0c991d64a460327870ed66db72155114ef73b55ba40697dd81b0d1ca941a43a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "是否應顯示正在進行刷新的指示。"
+      }
+    },
+    {
+      "segment_id": "04d947b2",
+      "source_content": "| Type    |\n| ------- |\n| boolean |",
+      "source_content_hash": "afc5252fe97c3b4645cc839e72fb23555baeef211698715abd6b5ac8ee57a841",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_04d947b2"
+      }
+    },
+    {
+      "segment_id": "0170c674",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### `colors` <div class=\"label android\">Android</div>",
+      "source_content_hash": "90e35526d36c7bc119aac30578b1f3b9af74e05857d5fbe07bd54f1d25d8688d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `colors` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "The colors (at least one) that will be used to draw the refresh indicator.",
+      "source_content_hash": "3f61ba28cb75c91f44e8e76fb5f8abeeb90006ce6e3cfae39ddaa69217b4fa98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於繪製刷新指示器的顏色（至少一種）。"
+      }
+    },
+    {
+      "segment_id": "0d9b3b59",
+      "source_content": "| Type                         |\n| ---------------------------- |\n| array of [colors](colors.md) |",
+      "source_content_hash": "14b4c96d3b19c59b104fa1531973df5e22b6f75359293b68c06ee0d4db61d625",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0d9b3b59"
+      }
+    },
+    {
+      "segment_id": "233bb60e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "### `enabled` <div class=\"label android\">Android</div>",
+      "source_content_hash": "5b033b10e996f7613723f1724f136e7a26eb26d7f736faf917da40d3587c790a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `enabled` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Whether the pull to refresh functionality is enabled.",
+      "source_content_hash": "f987ca5d3eb8accc194d1581aa3f5b16402e42622e50bec1a6eb62627372f909",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "是否啟用下拉刷新功能。"
+      }
+    },
+    {
+      "segment_id": "ae037701",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `true`  |",
+      "source_content_hash": "9b33ea33bebceeb9fc1a046094f80b4a2dea3c73da77173c612910b9ae75bba7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ae037701"
+      }
+    },
+    {
+      "segment_id": "7fc4bca5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "### `onRefresh`",
+      "source_content_hash": "dd02ac7b8c18a4504e015b27f0629f01c4a2e59ba05618b34e5ecaf124280856",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onRefresh`"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "Called when the view starts refreshing.",
+      "source_content_hash": "61d0fc94a40a438e814b2a2f6c6e15ed2f1d724a5cfb4abd9b2b8e7c62d7329e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當視圖開始刷新時調用。"
+      }
+    },
+    {
+      "segment_id": "6dcde01a",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6dcde01a"
+      }
+    },
+    {
+      "segment_id": "bc8bc928",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "### `progressBackgroundColor` <div class=\"label android\">Android</div>",
+      "source_content_hash": "9e98d664805d3d2a617d65b864ff14b3006d2368082d3c4126f9f8843175cfa0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `progressBackgroundColor` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "The background color of the refresh indicator.",
+      "source_content_hash": "c96a0240ed93f9415d0901e4ef00da3f8ba7ab83251409a1a04fb3d643ab9257",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "刷新指示器的背景顏色。"
+      }
+    },
+    {
+      "segment_id": "df0a9188",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_df0a9188"
+      }
+    },
+    {
+      "segment_id": "513f3dff",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cbd60296",
+      "source_content": "### `progressViewOffset`",
+      "source_content_hash": "39fd2a8f1930d64fa3e0f2ca9d4a48651440554497b88d10348cba8f1430d540",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `progressViewOffset`"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "Progress view top offset.",
+      "source_content_hash": "ee94a9211ad684800bb38ee2656d6e9e5e83880c0716e518ce9fa20b920ca3b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進度視圖的頂部偏移量。"
+      }
+    },
+    {
+      "segment_id": "260aa786",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `0`     |",
+      "source_content_hash": "83458482732eb55b223c31c4441b5e732f7b43832d88f094b44c374ebad3e557",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_260aa786"
+      }
+    },
+    {
+      "segment_id": "714b728f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "47cd8dd6",
+      "source_content": "### `size` <div class=\"label android\">Android</div>",
+      "source_content_hash": "7c3f5d53169feda46e477ab6475416aefa460aeabc2dbc8cc41d9d7c6b00dda4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `size` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "Size of the refresh indicator.",
+      "source_content_hash": "18500bbe18da457ae88fa7e98aaf23d57e67480e34e801dec5b377f4164b2f16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "刷新指示器的大小。"
+      }
+    },
+    {
+      "segment_id": "584eb487",
+      "source_content": "| Type                         | Default     |\n| ---------------------------- | ----------- |\n| enum(`'default'`, `'large'`) | `'default'` |",
+      "source_content_hash": "9aa69e26159251dbfce65f4282f3904fc559dde5ff4ea685ce5e5c0a9ca4a852",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_584eb487"
+      }
+    },
+    {
+      "segment_id": "7f523b45",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9c2ab4c8",
+      "source_content": "### `tintColor` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "14a95f933a515ab43f4faed519d1736005d94e0a4a8e8689194609759ecc9a80",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `tintColor` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "The color of the refresh indicator.",
+      "source_content_hash": "68d188e847237f728621234efdd9de0f192ebfcbd3aca9139d20be2fd35f537d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "刷新指示器的顏色。"
+      }
+    },
+    {
+      "segment_id": "60361e2c",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_60361e2c"
+      }
+    },
+    {
+      "segment_id": "0bed0da6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6ab1b234",
+      "source_content": "### `title` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "9dabded6ebb80c678afb9c40ea225eb998c9e139947d75bf63359df00e7662fc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `title` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "The title displayed under the refresh indicator.",
+      "source_content_hash": "c10684a979d4164c0187cdd41d3872408847338e2682fea729f32e06ba59d70a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯示在刷新指示器下方的標題。"
+      }
+    },
+    {
+      "segment_id": "51c5cf39",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_51c5cf39"
+      }
+    },
+    {
+      "segment_id": "b6796530",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ee213c98",
+      "source_content": "### `titleColor` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "b6ac4e9f924141a0077c9e91f192cda26d18385c71718e135aed52703290c1e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `titleColor` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "The color of the refresh indicator title.",
+      "source_content_hash": "9762aecaaac85c0f64ad7df5bbe1426e609d8d46563f69deaa6a203309f46135",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "刷新指示器標題的顏色。"
+      }
+    },
+    {
+      "segment_id": "affefa6f",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_affefa6f"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/refreshcontrol.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.274678+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6a9223ccb9bb9e98e1fb7f6c70ff487f05fec2c712c2d23abf3e079a3e778f51"
+  }
+}

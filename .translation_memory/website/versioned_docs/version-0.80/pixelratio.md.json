@@ -1,0 +1,352 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/pixelratio.md",
+  "source_file_content_hash": "cbacacf0f90b4fdb9104af528d19daf6d04ec1aa5b7b617611999e3a67314164",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: pixelratio\ntitle: PixelRatio\n---",
+      "source_content_hash": "82fabab156c0f54640f246e901ddefefacf779c4601f6e7ebd56414ca01799c5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "`PixelRatio` gives you access to the device's pixel density and font scale.",
+      "source_content_hash": "03f2179ba5571e7ff096bb985383a7f494a3eb8ffafd9f63d23cac239c0ed455",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`PixelRatio` 提供對設備像素密度和字體縮放比例的存取權限。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Fetching a correctly sized image",
+      "source_content_hash": "61f4a46be4bafe9c3e5bbaea31ceb291767ae92fafa7804bf70e67da2e21b6d7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 獲取正確尺寸的圖片"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "You should get a higher resolution image if you are on a high pixel density device. A good rule of thumb is to multiply the size of the image you display by the pixel ratio.",
+      "source_content_hash": "937143c9e64730aa9eb0c554b4b810caac232a7b3bae417a45be9f53a249ed6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用高像素密度的設備，應獲取更高解析度的圖片。一個實用的經驗法則是將顯示的圖片尺寸乘以像素比例。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```tsx\nconst image = getImage({\n  width: PixelRatio.getPixelSizeForLayoutSize(200),\n  height: PixelRatio.getPixelSizeForLayoutSize(100),\n});\n<Image source={image} style={{width: 200, height: 100}} />;\n```",
+      "source_content_hash": "5ce48fd1579f22d8067d37e56280532366bfb89a3cf28b6ff033328829d2d9d6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "## Pixel grid snapping",
+      "source_content_hash": "4200eedf89be0e6a59fb2542d0d30e84f75a9a8260b416789e5bc09638598a04",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 像素網格對齊"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "In iOS, you can specify positions and dimensions for elements with arbitrary precision, for example 29.674825. But, ultimately the physical display only have a fixed number of pixels, for example 640×1136 for iPhone SE (1st generation) or 828×1792 for iPhone 11. iOS tries to be as faithful as possible to the user value by spreading one original pixel into multiple ones to trick the eye. The downside of this technique is that it makes the resulting element look blurry.",
+      "source_content_hash": "fa64a567806e79728816f27e9c6eacb36f0f8063dd55637e37e762bb6061ee41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 中，您可以為元素指定任意精確度的位置和尺寸，例如 29.674825。但最終實體顯示器僅有固定數量的像素，例如 iPhone SE（第一代）的 640×1136 或 iPhone 11 的 828×1792。iOS 會盡可能忠實於使用者設定的數值，透過將一個原始像素擴展為多個像素來欺騙視覺。此技術的缺點是會使元素看起來模糊。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "In practice, we found out that developers do not want this feature and they have to work around it by doing manual rounding in order to avoid having blurry elements. In React Native, we are rounding all the pixels automatically.",
+      "source_content_hash": "63ff89044b71de4adf298353128a3ce9d8c975d592664a6fdb8fbbc11e30ebe7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實務上，我們發現開發者並不希望有此功能，因此必須手動進行四捨五入以避免元素模糊。在 React Native 中，我們會自動對所有像素進行四捨五入。"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "We have to be careful when to do this rounding. You never want to work with rounded and unrounded values at the same time as you're going to accumulate rounding errors. Having even one rounding error is deadly because a one pixel border may vanish or be twice as big.",
+      "source_content_hash": "880e65d8aa90583ec9226c9adbd64f5ab7efd14d943530c4da9ef2af169f0b49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進行此四捨五入時必須謹慎。您絕不希望同時處理已四捨五入和未四捨五入的數值，因為這會累積捨入誤差。即使只有一個捨入誤差也可能造成嚴重後果，例如一像素的邊框可能消失或變成兩倍大。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "In React Native, everything in JavaScript and within the layout engine works with arbitrary precision numbers. It's only when we set the position and dimensions of the native element on the main thread that we round. Also, rounding is done relative to the root rather than the parent, again to avoid accumulating rounding errors.",
+      "source_content_hash": "7788b2333bbfcd1104bb8a65d0b7ec6e67608eec585148bb55f201e1fc57510b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 中，JavaScript 和佈局引擎中的所有運算都使用任意精確度的數字。只有在主執行緒上設定原生元素的位置和尺寸時才會進行四捨五入。此外，捨入是相對於根元素而非父元素進行，以避免累積捨入誤差。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "b017063d",
+      "source_content": "```SnackPlayer name=PixelRatio%20Example\nimport React from 'react';\nimport {\n  Image,\n  PixelRatio,\n  ScrollView,\n  StyleSheet,\n  Text,\n  View,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst size = 50;\nconst cat = {\n  uri: 'https://reactnative.dev/docs/assets/p_cat1.png',\n  width: size,\n  height: size,\n};\n\nconst App = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <ScrollView style={styles.scrollContainer}>\n        <View style={styles.container}>\n          <Text>Current Pixel Ratio is:</Text>\n          <Text style={styles.value}>{PixelRatio.get()}</Text>\n        </View>\n        <View style={styles.container}>\n          <Text>Current Font Scale is:</Text>\n          <Text style={styles.value}>{PixelRatio.getFontScale()}</Text>\n        </View>\n        <View style={styles.container}>\n          <Text>On this device images with a layout width of</Text>\n          <Text style={styles.value}>{size} px</Text>\n          <Image source={cat} />\n        </View>\n        <View style={styles.container}>\n          <Text>require images with a pixel width of</Text>\n          <Text style={styles.value}>\n            {PixelRatio.getPixelSizeForLayoutSize(size)} px\n          </Text>\n          <Image\n            source={cat}\n            style={{\n              width: PixelRatio.getPixelSizeForLayoutSize(size),\n              height: PixelRatio.getPixelSizeForLayoutSize(size),\n            }}\n          />\n        </View>\n      </ScrollView>\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  scrollContainer: {\n    flex: 1,\n  },\n  container: {\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  value: {\n    fontSize: 24,\n    marginBottom: 12,\n    marginTop: 4,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "1c9c0962e4a45844fc44f0a59cb9c5d70e3f65320f0a8faf588e582937c55743",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b017063d"
+      }
+    },
+    {
+      "segment_id": "dd8754e7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7c92a79",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "### `get()`",
+      "source_content_hash": "04407c6234a6dbf551a10247fba76eec5a5be79af34783fe2ca41892cc035956",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `get()`"
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```tsx\nstatic get(): number;\n```",
+      "source_content_hash": "a80d7d48d708b8a4473ce748a7d381f78026e526a0b4961c8b58bac6028cbd3f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "Returns the device pixel density. Some examples:",
+      "source_content_hash": "1d100e263ce4b36737b4c4a071f221d01f35fa98b9a13df1676448b4d9c20f90",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "返回設備的像素密度。範例如下："
+      }
+    },
+    {
+      "segment_id": "2979d081",
+      "source_content": "- `PixelRatio.get() === 1`\n  - [mdpi Android devices](https://material.io/tools/devices/)\n- `PixelRatio.get() === 1.5`\n  - [hdpi Android devices](https://material.io/tools/devices/)\n- `PixelRatio.get() === 2`\n  - iPhone SE, 6S, 7, 8\n  - iPhone XR\n  - iPhone 11\n  - [xhdpi Android devices](https://material.io/tools/devices/)\n- `PixelRatio.get() === 3`\n  - iPhone 6S Plus, 7 Plus, 8 Plus\n  - iPhone X, XS, XS Max\n  - iPhone 11 Pro, 11 Pro Max\n  - Pixel, Pixel 2\n  - [xxhdpi Android devices](https://material.io/tools/devices/)\n- `PixelRatio.get() === 3.5`\n  - Nexus 6\n  - Pixel XL, Pixel 2 XL\n  - [xxxhdpi Android devices](https://material.io/tools/devices/)",
+      "source_content_hash": "0d6ed2f2e4d942c0c153a4c5cc1892c6a40ad18402a5ccd78835aaf8f5ec294b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `PixelRatio.get() === 1`\n  - [mdpi Android 設備](https://material.io/tools/devices/)\n- `PixelRatio.get() === 1.5`\n  - [hdpi Android 設備](https://material.io/tools/devices/)\n- `PixelRatio.get() === 2`\n  - iPhone SE、6S、7、8\n  - iPhone XR\n  - iPhone 11\n  - [xhdpi Android 設備](https://material.io/tools/devices/)\n- `PixelRatio.get() === 3`\n  - iPhone 6S Plus、7 Plus、8 Plus\n  - iPhone X、XS、XS Max\n  - iPhone 11 Pro、11 Pro Max\n  - Pixel、Pixel 2\n  - [xxhdpi Android 設備](https://material.io/tools/devices/)\n- `PixelRatio.get() === 3.5`\n  - Nexus 6\n  - Pixel XL、Pixel 2 XL\n  - [xxxhdpi Android 設備](https://material.io/tools/devices/)"
+      }
+    },
+    {
+      "segment_id": "b99d2cf6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "### `getFontScale()`",
+      "source_content_hash": "d699b7a6cc2224c42eb58d6776df6d95be49a052427c37084c51b02a82116fdb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getFontScale()`"
+      }
+    },
+    {
+      "segment_id": "e908327f",
+      "source_content": "```tsx\nstatic getFontScale(): number;\n```",
+      "source_content_hash": "44a1ba9d2b3b019963c7e31cf32477735bd78d5e55e920a6198f340bb4236f20",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e908327f"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "Returns the scaling factor for font sizes. This is the ratio that is used to calculate the absolute font size, so any elements that heavily depend on that should use this to do calculations.",
+      "source_content_hash": "55f8d23120c0ede5d2734e7e0cc6bd0735a050e8f4fdaeaa87e166913a38f264",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "返回字體大小的縮放比例。此比例用於計算絕對字體大小，因此任何高度依賴此值的元素應使用此方法進行計算。"
+      }
+    },
+    {
+      "segment_id": "6b304caa",
+      "source_content": "- on Android value reflects the user preference set in **Settings > Display > Font size**\n- on iOS value reflects the user preference set in **Settings > Display & Brightness > Text Size**, value can also be updated in **Settings > Accessibility > Display & Text Size > Larger Text**",
+      "source_content_hash": "8f63ce2a259c945b03ebcfd83f2b0657406de9521915f73c1d66166f00a5b53a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在 Android 上，此值反映使用者在**設定 > 顯示 > 字型大小**中的偏好設定\n- 在 iOS 上，此值反映使用者在**設定 > 顯示與亮度 > 文字大小**中的偏好設定，也可在**設定 > 輔助使用 > 顯示與文字大小 > 較大文字**中更新"
+      }
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "If a font scale is not set, this returns the device pixel ratio.",
+      "source_content_hash": "f24063428ff39b0d63e996db87e236de52631c8523a92f5ca51b326e2672de27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若未設定字體縮放比例，則返回設備像素比例。"
+      }
+    },
+    {
+      "segment_id": "d4b679d6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "55dc794c",
+      "source_content": "### `getPixelSizeForLayoutSize()`",
+      "source_content_hash": "2afa6a3a96a6456dc92f345f651849207d3ed45cf9f3c753207cc805537111dd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getPixelSizeForLayoutSize()`"
+      }
+    },
+    {
+      "segment_id": "520cfa65",
+      "source_content": "```tsx\nstatic getPixelSizeForLayoutSize(layoutSize: number): number;\n```",
+      "source_content_hash": "27d6a3a89fa7b3bde0520381256638292e0e6ddcec9595bc81ee479a3d8b1599",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_520cfa65"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "Converts a layout size (dp) to pixel size (px).",
+      "source_content_hash": "29c732beb451eecfa1379bd95857e4072819064f6c39fd8fa1f41d72f480783e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將佈局尺寸 (dp) 轉換為像素尺寸 (px)。"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "Guaranteed to return an integer number.",
+      "source_content_hash": "d66fef1291ab59af7012fe460a0db82bc8db04cc813ebafd81766120c5167e03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "保證返回整數值。"
+      }
+    },
+    {
+      "segment_id": "1af652fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "### `roundToNearestPixel()`",
+      "source_content_hash": "5be1e18af5fd12c17f7c90d44df4d1875a2790433a425d8dfbb6944f18d6db01",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `roundToNearestPixel()`"
+      }
+    },
+    {
+      "segment_id": "71969be5",
+      "source_content": "```tsx\nstatic roundToNearestPixel(layoutSize: number): number;\n```",
+      "source_content_hash": "da4666a8b2ba9e6fd890b5ceead88e4012d0a55072a1beb26b2fa0ec9acac032",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71969be5"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "Rounds a layout size (dp) to the nearest layout size that corresponds to an integer number of pixels. For example, on a device with a PixelRatio of 3, `PixelRatio.roundToNearestPixel(8.4) = 8.33`, which corresponds to exactly (8.33 \\* 3) = 25 pixels.",
+      "source_content_hash": "4b286d067593a29140de8a3517470c1afbc1549fe47bde6df982785b2ebbead5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將佈局尺寸(dp)四捨五入至最接近的整數像素對應值。例如，在 PixelRatio 為 3 的裝置上，`PixelRatio.roundToNearestPixel(8.4) = 8.33`，這正好對應 (8.33 * 3) = 25 像素。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/pixelratio.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.025180+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "cbacacf0f90b4fdb9104af528d19daf6d04ec1aa5b7b617611999e3a67314164"
+  }
+}

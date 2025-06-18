@@ -1,0 +1,614 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2018-05-07-using-typescript-with-react-native.md",
+  "source_file_content_hash": "e2bc4c103b94e9d5a3f17b9644023363c570c571bf78172460f5344432511aa0",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Using TypeScript with React Native\nauthor: Ash Furrow\nauthorTitle: Software Engineer at Artsy\nauthorURL: 'https://github.com/ashfurrow'\nauthorImageURL: 'https://avatars2.githubusercontent.com/u/498212?s=460&v=4'\nauthorTwitter: ashfurrow\ntags: [engineering]\n---",
+      "source_content_hash": "9ad93f0bff4efda9483f45ef8b46098ceb2c2401e4c40c5075520daa7f851abb",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "JavaScript! We all love it. But some of us also love [types](https://en.wikipedia.org/wiki/Data_type). Luckily, options exist to add stronger types to JavaScript. My favourite is [TypeScript](https://www.typescriptlang.org), but React Native supports [Flow](https://flow.org) out of the box. Which you prefer is a matter of preference, they each have their own approach on how to add the magic of types to JavaScript. Today, we're going to look at how to use TypeScript in React Native apps.",
+      "source_content_hash": "80d0b5956a14b55e657a4dee3ccdf220b4c84640e2e707ae026bf43a6ed3ad30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "JavaScript！我們都愛它。但有些人也熱愛[型別系統](https://en.wikipedia.org/wiki/Data_type)。幸運的是，我們有方法可以為JavaScript添加更嚴格的型別檢查。我最喜歡的是[TypeScript](https://www.typescriptlang.org)，但React Native原生支援[Flow](https://flow.org)。選擇哪種取決於個人偏好，它們各自有不同的方式為JavaScript添加型別魔法。今天，我們將探討如何在React Native應用中使用TypeScript。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "This post uses Microsoft's [TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter) repo as a guide.",
+      "source_content_hash": "f4454207813d2fd10e5d7916db9df15dceaf02d3432d2ae9e38471a45a5d0b26",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本文以微軟的[TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter)倉庫作為指南。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "**Update**: Since this blog post was written, things have gotten even easier. You can replace all the set up described in this blog post by running just one command:",
+      "source_content_hash": "7831746db0fc1c3f67f0eba7c63abadbd76096ffb33d0c8e1004e46894006982",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**更新**：自本文撰寫以來，流程已變得更簡單。您只需執行以下命令即可替代本文描述的所有設定步驟："
+      }
+    },
+    {
+      "segment_id": "93be3c14",
+      "source_content": "```sh\nnpx react-native init MyAwesomeProject --template react-native-template-typescript\n```",
+      "source_content_hash": "f4de8b47168c7d2bab805515a17d7374a133460e67bb1a6c196074724e0e2987",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93be3c14"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "However, there _are_ some limitations to Babel's TypeScript support, which the blog post above goes into in detail. The steps outlined in _this_ post still work, and Artsy is still using [react-native-typescript-transformer](https://github.com/ds300/react-native-typescript-transformer) in production, but the fastest way to get up and running with React Native and TypeScript is using the above command. You can always switch later if you have to.",
+      "source_content_hash": "9363ba3599ca8b52cf45d8e06efaee5e6f6d7255f86e6e6468948a91ded93dac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但Babel的TypeScript支援存在一些限制，上文連結的部落格有詳細說明。本文所述步驟仍然有效，且Artsy在生產環境仍使用[react-native-typescript-transformer](https://github.com/ds300/react-native-typescript-transformer)，但最快開始使用React Native與TypeScript的方式是執行上述命令。您之後仍可隨時切換方案。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "In any case, have fun! The original blog post continues below.",
+      "source_content_hash": "592e293aa874ef9ab5ea74a5189abca74632f70d36c5d1f214aa77e647476f12",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無論如何，祝您使用愉快！原始部落格文章繼續如下。"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "## Prerequisites",
+      "source_content_hash": "bbd3d4949a6f237efd8d4ff5c7c5f30d968e7a989ad12f3d7dcef69c98053912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 必要條件"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "Because you might be developing on one of several different platforms, targeting several different types of devices, basic setup can be involved. You should first ensure that you can run a plain React Native app without TypeScript. Follow [the instructions on the React Native website to get started](/docs/getting-started). When you've managed to deploy to a device or emulator, you'll be ready to start a TypeScript React Native app.",
+      "source_content_hash": "7d10b4bb1c29976c2fbf0b1f77fd20f6388878b21a9a12a63bea64abd828d95c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於您可能在不同的平台開發，目標裝置類型也各異，基礎設定可能較複雜。您應先確保能在不使用TypeScript的情況下運行普通React Native應用。請依照[React Native官方網站指示](/docs/getting-started)開始。當您成功部署到裝置或模擬器後，即可開始建立TypeScript React Native應用。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "You will also need [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com), and [Yarn](https://yarnpkg.com/lang/en).",
+      "source_content_hash": "90787956648be9f7e1852653acff40271420c22c7ab982ce750a06a1e513da7a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您還需要安裝[Node.js](https://nodejs.org/en/)、[npm](https://www.npmjs.com)和[Yarn](https://yarnpkg.com/lang/en)。"
+      }
+    },
+    {
+      "segment_id": "48847fd4",
+      "source_content": "## Initializing",
+      "source_content_hash": "6737b004bc779dca01672137974434cf96b2f1c8d3aa5a32a8ac46149d21abfd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 初始化"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "Once you've tried scaffolding out an ordinary React Native project, you'll be ready to start adding TypeScript. Let's go ahead and do that.",
+      "source_content_hash": "483f2926f994420bd002fb48302eaa008373e9b04f531cbe6f00fb442d5257f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當您嘗試建立普通React Native專案後，即可開始添加TypeScript。讓我們開始吧。"
+      }
+    },
+    {
+      "segment_id": "ef6eebef",
+      "source_content": "```sh\nreact-native init MyAwesomeProject\ncd MyAwesomeProject\n```",
+      "source_content_hash": "5d9e67c316a0eeacd7201022319895495efbe6892a1c0e0b02a6003e49811709",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ef6eebef"
+      }
+    },
+    {
+      "segment_id": "782c902a",
+      "source_content": "## Adding TypeScript",
+      "source_content_hash": "4366f40fff507c5491e27141faa0a9573a77b7e7e5bc9316063236dba771b621",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 添加TypeScript"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "The next step is to add TypeScript to your project. The following commands will:",
+      "source_content_hash": "cac16e0477dcde35ce7cd5a0551bc705278a4cf42c5ff38f84a5467dd18ffe56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "下一步是將TypeScript加入您的專案。以下指令將："
+      }
+    },
+    {
+      "segment_id": "aa83231c",
+      "source_content": "- add TypeScript to your project\n- add [React Native TypeScript Transformer](https://github.com/ds300/react-native-typescript-transformer) to your project\n- initialize an empty TypeScript config file, which we'll configure next\n- add an empty React Native TypeScript Transformer config file, which we'll configure next\n- adds [typings](https://github.com/DefinitelyTyped/DefinitelyTyped) for React and React Native",
+      "source_content_hash": "5dfe9733e84075e3381a17528ac0c829e814eb3ff61944ff28b69d9e01b151bb",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 為專案添加TypeScript\n- 添加[React Native TypeScript轉換器](https://github.com/ds300/react-native-typescript-transformer)\n- 初始化空的TypeScript設定檔（我們稍後將進行配置）\n- 添加空的React Native TypeScript轉換器設定檔（我們稍後將進行配置）\n- 添加React和React Native的[型別定義](https://github.com/DefinitelyTyped/DefinitelyTyped)"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "Okay, let's go ahead and run these.",
+      "source_content_hash": "e284ea17b384e2593530d73d2fde7baf25d1869ec6d16703dda8e0c51822f42f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "好的，讓我們執行這些指令。"
+      }
+    },
+    {
+      "segment_id": "64b6f348",
+      "source_content": "```sh\nyarn add --dev typescript\nyarn add --dev react-native-typescript-transformer\nyarn tsc --init --pretty --jsx react\ntouch rn-cli.config.js\nyarn add --dev @types/react @types/react-native\n```",
+      "source_content_hash": "5a7977cefdfe26ef8916aea4fd5287c6f431e79d2e3775ecea2d80b54e41b920",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_64b6f348"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "The `tsconfig.json` file contains all the settings for the TypeScript compiler. The defaults created by the command above are mostly fine, but open the file and uncomment the following line:",
+      "source_content_hash": "e208ad82e80998fec6beeccb028ce6788e37475feba8c84a66d74bf4f7998b4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`tsconfig.json`檔案包含TypeScript編譯器的所有設定。上述指令建立的預設值大多沒問題，但請打開檔案並取消註解以下行："
+      }
+    },
+    {
+      "segment_id": "3adc0ceb",
+      "source_content": "```js\n{\n  /* Search the config file for the following line and uncomment it. */\n  // \"allowSyntheticDefaultImports\": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */\n}\n```",
+      "source_content_hash": "afc55250a0cfd23770e9b393a90839f4e64b943f671ed75ac339bc6f370dfc9e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3adc0ceb"
+      }
+    },
+    {
+      "segment_id": "657c2b20",
+      "source_content": "The `rn-cli.config.js` contains the settings for the React Native TypeScript Transformer. Open it and add the following:",
+      "source_content_hash": "1c17309260921d21b84f6f079e225cbcd11cca83cbfb72c1eea138871d0b4f98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`rn-cli.config.js`包含React Native TypeScript轉換器的設定。打開它並添加以下內容："
+      }
+    },
+    {
+      "segment_id": "17c579d2",
+      "source_content": "```js\nmodule.exports = {\n  getTransformModulePath() {\n    return require.resolve('react-native-typescript-transformer');\n  },\n  getSourceExts() {\n    return ['ts', 'tsx'];\n  },\n};\n```",
+      "source_content_hash": "8b6b94f95728075e75fb71697dd57a04a62f00e374b2cdfa569b3d5d91cb26db",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_17c579d2"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "## Migrating to TypeScript",
+      "source_content_hash": "46438cf518a4d59586e958b24f04e02b18f9ccb4bd6cd05788139342f7f56757",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 遷移至TypeScript"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Rename the generated `App.js` and `__tests_/App.js` files to `App.tsx`. `index.js` needs to use the `.js` extension. All new files should use the `.tsx` extension (or `.ts` if the file doesn't contain any JSX).",
+      "source_content_hash": "57b6710140c8814d0c96f98a544d609ba2687cd9ff79778620b44d3693deb753",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將生成的`App.js`和`__tests_/App.js`檔案重新命名為`App.tsx`。`index.js`需保留`.js`副檔名。所有新檔案應使用`.tsx`副檔名（若檔案不含JSX則使用`.ts`）。"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "If you tried to run the app now, you'd get an error like `object prototype may only be an object or null`. This is caused by a failure to import the default export from React as well as a named export on the same line. Open `App.tsx` and modify the import at the top of the file:",
+      "source_content_hash": "9e2fd45c2e03dcc91b5b2634d7b904aea20782b8a1665354ebc8fa4b09ee1beb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您現在嘗試運行應用，可能會遇到`object prototype may only be an object or null`錯誤。這是因為在同一行同時導入React的默認導出和命名導出所致。請打開`App.tsx`並修改檔案頂部的導入語句："
+      }
+    },
+    {
+      "segment_id": "26f7c825",
+      "source_content": "```diff\n-import React, { Component } from 'react';\n+import React from 'react'\n+import { Component } from 'react';\n```",
+      "source_content_hash": "c41ed3b31f98d084370964cf4a5659950446bd5f5ed990d0962a1b9da2ec917c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_26f7c825"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Some of this has to do with differences in how Babel and TypeScript interoperate with CommonJS modules. In the future, the two will stabilize on the same behaviour.",
+      "source_content_hash": "b02798d472dfe8cc9737fa8d9ea2134cdd9f35e5c698557ef79c4c427fc25a60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這部分與 Babel 和 TypeScript 如何與 CommonJS 模組交互的差異有關。未來兩者將穩定採用相同的行為模式。"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "At this point, you should be able to run the React Native app.",
+      "source_content_hash": "3bd0136f78b3864b9e1d24ab0925c3df11280882001330a28c22c5cc98270d38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時，您應該能夠運行 React Native 應用程式。"
+      }
+    },
+    {
+      "segment_id": "f8edb6d2",
+      "source_content": "## Adding TypeScript Testing Infrastructure",
+      "source_content_hash": "34a9a4abb8321ab954e27cee00bdf401e6b1bc7b2e12dfd825e76bc674ca08e9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 添加 TypeScript 測試基礎設施"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "React Native ships with [Jest](https://github.com/facebook/jest), so for testing a React Native app with TypeScript, we'll want to add [ts-jest](https://www.npmjs.com/package/ts-jest) to our `devDependencies`.",
+      "source_content_hash": "4a6504cca723f8460bc3150f74d0e63073e03607d2dfbaa96653995dbe1baf28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 內建 [Jest](https://github.com/facebook/jest)，因此要在 TypeScript 環境中測試 React Native 應用程式，我們需將 [ts-jest](https://www.npmjs.com/package/ts-jest) 加入 `devDependencies`。"
+      }
+    },
+    {
+      "segment_id": "a476a172",
+      "source_content": "```sh\nyarn add --dev ts-jest\n```",
+      "source_content_hash": "096fa7743c2166b009968c970a0d2eea13f9e2845c245496144afee34bcd3685",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a476a172"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "Then, we'll open up our `package.json` and replace the `jest` field with the following:",
+      "source_content_hash": "0b8440791ffa6086b0ded55868fe784e8d13c0774f94ea1ad3472543f4da7f0f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著開啟 `package.json` 並將 `jest` 欄位替換為以下內容："
+      }
+    },
+    {
+      "segment_id": "c4c0fc07",
+      "source_content": "```js\n{\n  \"jest\": {\n    \"preset\": \"react-native\",\n    \"moduleFileExtensions\": [\n      \"ts\",\n      \"tsx\",\n      \"js\"\n    ],\n    \"transform\": {\n      \"^.+\\\\.(js)$\": \"<rootDir>/node_modules/babel-jest\",\n      \"\\\\.(ts|tsx)$\": \"<rootDir>/node_modules/ts-jest/preprocessor.js\"\n    },\n    \"testRegex\": \"(/__tests__/.*|\\\\.(test|spec))\\\\.(ts|tsx|js)$\",\n    \"testPathIgnorePatterns\": [\n      \"\\\\.snap$\",\n      \"<rootDir>/node_modules/\"\n    ],\n    \"cacheDirectory\": \".jest/cache\"\n  }\n}\n```",
+      "source_content_hash": "8aa359454677c97fc747187494be6b9eb352aadd4a6841a95fa358de80712f5a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c4c0fc07"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "This will configure Jest to run `.ts` and `.tsx` files with `ts-jest`.",
+      "source_content_hash": "1fb282f690170fe0919c5c69183db395b3351b1bb41b756d5ba2bacfc5011039",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這會配置 Jest 使用 `ts-jest` 來處理 `.ts` 和 `.tsx` 檔案。"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "## Installing Dependency Type Declarations",
+      "source_content_hash": "6f2c425713c98f286fb271a5d5449a800aa1949e90c9c1155ea5a35f5afbe64b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 安裝依賴項的型別宣告"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "To get the best experience in TypeScript, we want the type-checker to understand the shape and API of our dependencies. Some libraries will publish their packages with `.d.ts` files (type declaration/type definition files), which can describe the shape of the underlying JavaScript. For other libraries, we'll need to explicitly install the appropriate package in the `@types/` npm scope.",
+      "source_content_hash": "416a31d5dcdce290551ad0e7efd2888fbe9f1a94e5861f119407dd01dc0b2d43",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了獲得最佳的 TypeScript 開發體驗，我們需要讓型別檢查器理解依賴套件的結構與 API。有些函式庫會在發佈套件時包含 `.d.ts` 檔案（型別宣告/型別定義檔案），這些檔案能描述底層 JavaScript 的結構。對於其他函式庫，我們需明確安裝 `@types/` npm 範圍內的對應套件。"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "For example, here we'll need types for Jest, React, and React Native, and React Test Renderer.",
+      "source_content_hash": "f77386b55f375c94d556ccf58af647ca2ed74a120db0765fa277120acbfa7538",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，此處我們需要 Jest、React、React Native 和 React Test Renderer 的型別定義。"
+      }
+    },
+    {
+      "segment_id": "4c6754b2",
+      "source_content": "```ts\nyarn add --dev @types/jest @types/react @types/react-native @types/react-test-renderer\n```",
+      "source_content_hash": "cafdd0d716927b4abb2b263fdbb3726001dde77083b1ae5607039bd94a71a9de",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4c6754b2"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "We saved these declaration file packages to our _dev_ dependencies because this is a React Native _app_ that only uses these dependencies during development and not during runtime. If we were publishing a library to NPM, we might have to add some of these type dependencies as regular dependencies.",
+      "source_content_hash": "76ed1c512fbc010da6ccd81b03e1de847076cf2f4b0620cac3b5fe7813909d21",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們將這些宣告檔案套件保存為 _開發_ 依賴項，因為這是個僅在開發階段使用這些依賴項的 React Native _應用程式_。如果我們要發佈函式庫到 NPM，可能需要將部分型別依賴項設為常規依賴項。"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "You can read more [here about getting `.d.ts` files](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).",
+      "source_content_hash": "2ba1e4414a94d699f40db5384aac6e52326d6f91458bf5ba2b5d7c35e3a6eff8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可參閱[此處了解更多關於取得 `.d.ts` 檔案的資訊](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)。"
+      }
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "## Ignoring More Files",
+      "source_content_hash": "1e03a9d52f04602d1af9311b34e2cbf1dd6dea5e8a944c07756da5794ef5ad09",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 忽略更多檔案"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "For your source control, you'll want to start ignoring the `.jest` folder. If you're using git, we can just add entries to our `.gitignore` file.",
+      "source_content_hash": "0932d0abd91f7fb247d09f6672e39fb977263197cda23bd19918f540f97fdd67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了版本控制，您需要開始忽略 `.jest` 資料夾。若使用 git，只需在 `.gitignore` 檔案中新增條目。"
+      }
+    },
+    {
+      "segment_id": "7d56fc4b",
+      "source_content": "```config\n# Jest\n#\n.jest/\n```",
+      "source_content_hash": "be3bba0452e31da3f67dceb4b5189ff48d378a28e1725b592f41d30222c966f5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d56fc4b"
+      }
+    },
+    {
+      "segment_id": "63565425",
+      "source_content": "As a checkpoint, consider committing your files into version control.",
+      "source_content_hash": "b32b95aa46f3f7c1bea94a40260e1aaa0ca72733eaf3fcf4ba48479466adfd8d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "作為檢查點，建議將檔案提交至版本控制系統。"
+      }
+    },
+    {
+      "segment_id": "e9921a93",
+      "source_content": "```sh\ngit init\ngit add .gitignore # import to do this first, to ignore our files\ngit add .\ngit commit -am \"Initial commit.\"\n```",
+      "source_content_hash": "9af292a6938c1393ff5d0cf7984a8acbc3e0d982916514b5c74e928928cfaf6e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e9921a93"
+      }
+    },
+    {
+      "segment_id": "a5905b07",
+      "source_content": "## Adding a Component",
+      "source_content_hash": "747fd228a9dd968d80b78372a543a0425d7d159eb4dacca293550e8faa110ca3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 添加元件"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "Let's add a component to our app. Let's go ahead and create a `Hello.tsx` component. It's a pedagogical component, not something that you'd actually write in an app, but something nontrivial that shows off how to use TypeScript in React Native.",
+      "source_content_hash": "b11229ac4123a58096e0abaa78c55499a3ebca1669efb5ea52ee3f4b73f8d704",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓我們在應用程式中添加一個元件。現在建立一個 `Hello.tsx` 元件。這是個教學用元件，並非實際開發中會寫的內容，但能展示如何在 React Native 中使用 TypeScript 處理非簡單案例。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "Create a `components` directory and add the following example.",
+      "source_content_hash": "ce9ad0c7d03317f9062ae55c0e51c5b58e0d7fcccb7dbf910d4632245b9e739c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立 `components` 目錄並加入以下範例。"
+      }
+    },
+    {
+      "segment_id": "90c0aa8a",
+      "source_content": "```ts\n// components/Hello.tsx\nimport React from 'react';\nimport {Button, StyleSheet, Text, View} from 'react-native';\n\nexport interface Props {\n  name: string;\n  enthusiasmLevel?: number;\n}\n\ninterface State {\n  enthusiasmLevel: number;\n}\n\nexport class Hello extends React.Component<Props, State> {\n  constructor(props: Props) {\n    super(props);\n\n    if ((props.enthusiasmLevel || 0) <= 0) {\n      throw new Error(\n        'You could be a little more enthusiastic. :D',\n      );\n    }\n\n    this.state = {\n      enthusiasmLevel: props.enthusiasmLevel || 1,\n    };\n  }\n\n  onIncrement = () =>\n    this.setState({\n      enthusiasmLevel: this.state.enthusiasmLevel + 1,\n    });\n  onDecrement = () =>\n    this.setState({\n      enthusiasmLevel: this.state.enthusiasmLevel - 1,\n    });\n  getExclamationMarks = (numChars: number) =>\n    Array(numChars + 1).join('!');\n\n  render() {\n    return (\n      <View style={styles.root}>\n        <Text style={styles.greeting}>\n          Hello{' '}\n          {this.props.name +\n            this.getExclamationMarks(this.state.enthusiasmLevel)}\n        </Text>\n\n        <View style={styles.buttons}>\n          <View style={styles.button}>\n            <Button\n              title=\"-\"\n              onPress={this.onDecrement}\n              accessibilityLabel=\"decrement\"\n              color=\"red\"\n            />\n          </View>\n\n          <View style={styles.button}>\n            <Button\n              title=\"+\"\n              onPress={this.onIncrement}\n              accessibilityLabel=\"increment\"\n              color=\"blue\"\n            />\n          </View>\n        </View>\n      </View>\n    );\n  }\n}\n\n// styles\nconst styles = StyleSheet.create({\n  root: {\n    alignItems: 'center',\n    alignSelf: 'center',\n  },\n  buttons: {\n    flexDirection: 'row',\n    minHeight: 70,\n    alignItems: 'stretch',\n    alignSelf: 'center',\n    borderWidth: 5,\n  },\n  button: {\n    flex: 1,\n    paddingVertical: 0,\n  },\n  greeting: {\n    color: '#999',\n    fontWeight: 'bold',\n  },\n});\n```",
+      "source_content_hash": "7bfb18b26960b47469fde978843ea672fbb4c5ecdf8893b7d3e3d927c536b668",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_90c0aa8a"
+      }
+    },
+    {
+      "segment_id": "bb5297fc",
+      "source_content": "Whoa! That's a lot, but let's break it down:",
+      "source_content_hash": "2f7962ec5edb755255a80444cd808cc8c8bb39dff21dc4c62dc9a839f25f8566",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "哇！內容很多，讓我們分解說明："
+      }
+    },
+    {
+      "segment_id": "50e5a678",
+      "source_content": "- Instead of rendering HTML elements like `div`, `span`, `h1`, etc., we're rendering components like `View` and `Button`. These are native components that work across different platforms.\n- Styling is specified using the `StyleSheet.create` function that React Native gives us. React's stylesheets allow us to control our layout using Flexbox, and style using other constructs similar to those in CSS.",
+      "source_content_hash": "2d85d6bd78e5e4830072e3a48fbb311dd7b296cad3c7321137cf9b5ef80d0a46",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 我們渲染的是 `View` 和 `Button` 等元件，而非 `div`、`span`、`h1` 等 HTML 元素。這些是能跨平台運作的原生元件。\n- 樣式是透過 React Native 提供的 `StyleSheet.create` 函式定義。React 的樣式表讓我們能用 Flexbox 控制佈局，並使用類似 CSS 的結構進行樣式設定。"
+      }
+    },
+    {
+      "segment_id": "16efe6ee",
+      "source_content": "## Adding a Component Test",
+      "source_content_hash": "fa5c4822e379e3aa23829ef5b59778e6d95299f1d07f655a9a92f699278d20ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 添加元件測試"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Now that we've got a component, let's try testing it.",
+      "source_content_hash": "392b9c1ed033c4979ef91369fb2987744ce3e84772340b20a5940d164e3fff64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們有了元件，來試著測試它。"
+      }
+    },
+    {
+      "segment_id": "b632973a",
+      "source_content": "We already have Jest installed as a test runner. We're going to write snapshot tests for our components, let's add the required add-on for snapshot tests:",
+      "source_content_hash": "a83ca8fd9a89b3189daa37ba8ec7f842d768d18d030fd4c3837b6076d254362a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已安裝 Jest 作為測試執行器。接下來要為元件編寫快照測試，先添加快照測試所需的附加套件："
+      }
+    },
+    {
+      "segment_id": "e6da31bf",
+      "source_content": "```sh\nyarn add --dev react-addons-test-utils\n```",
+      "source_content_hash": "31e9b2c97e960b336a2c977132d66396a2da40ac64587475d4aae4925a649bf4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6da31bf"
+      }
+    },
+    {
+      "segment_id": "bed77f05",
+      "source_content": "Now let's create a `__tests__` folder in the `components` directory and add a test for `Hello.tsx`:",
+      "source_content_hash": "0673c85d91cf50176e0cfb4e9f14d77470ab7afc06cca564af21cd5ea807fbaf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在於 `components` 目錄中建立 `__tests__` 資料夾，並為 `Hello.tsx` 添加測試："
+      }
+    },
+    {
+      "segment_id": "34dd1969",
+      "source_content": "```ts\n// components/__tests__/Hello.tsx\nimport React from 'react';\nimport renderer from 'react-test-renderer';\n\nimport {Hello} from '@site/Hello';\n\nit('renders correctly with defaults', () => {\n  const button = renderer\n    .create(<Hello name=\"World\" enthusiasmLevel={1} />)\n    .toJSON();\n  expect(button).toMatchSnapshot();\n});\n```",
+      "source_content_hash": "d3bda13576678aa370b7b0d2f97d36a61f1e3d250066a6d360a01aeaaf7bef22",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_34dd1969"
+      }
+    },
+    {
+      "segment_id": "a5a28988",
+      "source_content": "The first time the test is run, it will create a snapshot of the rendered component and store it in the `components/__tests__/__snapshots__/Hello.tsx.snap` file. When you modify your component, you'll need to update the snapshots and review the update for inadvertent changes. You can read more about testing React Native components [here](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).",
+      "source_content_hash": "212fe10f6dd3464506fdf96cec2c01bfc57d6ccf4f0fc1aa6141454ea2231725",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "052c158b",
+      "source_content": "## Next Steps",
+      "source_content_hash": "94792dd5969e771cc2c3d1210355ca64b0d1b19f0b908b4aec6b19ca3dbde26a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a01e2096",
+      "source_content": "Check out the official [React tutorial](https://reactjs.org/tutorial/tutorial.html) and state-management library [Redux](https://redux.js.org). These resources can be helpful when writing React Native apps. Additionally, you may want to look at [ReactXP](https://microsoft.github.io/reactxp/), a component library written entirely in TypeScript that supports both React on the web as well as React Native.",
+      "source_content_hash": "a569a084462f8e680e4eaa26ad34abe7b2bd16fc82319ae7bda41e5143eefc1c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "130e2dfb",
+      "source_content": "Have fun in a more type-safe React Native development environment!",
+      "source_content_hash": "6b15cd3e69a742b825fbaa00738e66775d801139eee966a02b4265a67bde93a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2018-05-07-using-typescript-with-react-native.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.216435+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "e2bc4c103b94e9d5a3f17b9644023363c570c571bf78172460f5344432511aa0"
+  }
+}

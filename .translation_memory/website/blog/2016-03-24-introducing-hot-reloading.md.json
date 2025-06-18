@@ -1,0 +1,564 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2016-03-24-introducing-hot-reloading.md",
+  "source_file_content_hash": "cd1c63b06bed8ffeb88be89c2cb4433fe8a576be66022632c908b5f81cecce6a",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Introducing Hot Reloading\nauthor: Martín Bigio\nauthorTitle: Software Engineer at Instagram\nauthorURL: 'https://twitter.com/martinbigio'\nauthorImageURL: 'https://avatars3.githubusercontent.com/u/535661?v=3&s=128'\nauthorTwitter: martinbigio\ntags: [engineering]\n---",
+      "source_content_hash": "3803fda76616408afb8c62cb0bf88b427586ecbf9663c47b6ea384106c4f618b",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "React Native's goal is to give you the best possible developer experience. A big part of it is the time it takes between you save a file and be able to see the changes. Our goal is to get this feedback loop to be under 1 second, even as your app grows.",
+      "source_content_hash": "6272d52886725bc923ec6b38ff07872516484dcc5d5739151c6b1f3a51d89df0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 的目標是為開發者提供最佳的開發體驗。其中關鍵部分在於從保存檔案到看到變更所需的時間。我們的目標是將這個反饋循環縮短至 1 秒內，即使您的應用程式不斷成長。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "We got close to this ideal via three main features:",
+      "source_content_hash": "e0d735639d7bccd2e0fc22c86a71b05c904b6b6c8496b1f092b8af8b7a422b73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們透過三大主要功能接近這個理想："
+      }
+    },
+    {
+      "segment_id": "4269e691",
+      "source_content": "- Use JavaScript as the language doesn't have a long compilation cycle time.\n- Implement a tool called Packager that transforms es6/flow/jsx files into normal JavaScript that the VM can understand. It was designed as a server that keeps intermediate state in memory to enable fast incremental changes and uses multiple cores.\n- Build a feature called Live Reload that reloads the app on save.",
+      "source_content_hash": "86316b069de22440de50df115170d50387b519cfcf1a268e2f2a1ec5b20a8f1e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用 JavaScript 作為開發語言，因其不需耗時的編譯週期。\n- 實作名為 Packager 的工具，將 es6/flow/jsx 檔案轉換為虛擬機器可理解的標準 JavaScript。其設計為伺服器模式，將中間狀態保留在記憶體中以實現快速增量更新，並充分利用多核心運算。\n- 建立稱為 Live Reload 的功能，可在保存時重新載入應用程式。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "At this point, the bottleneck for developers is no longer the time it takes to reload the app but losing the state of your app. A common scenario is to work on a feature that is multiple screens away from the launch screen. Every time you reload, you've got to click on the same path again and again to get back to your feature, making the cycle multiple-seconds long.",
+      "source_content_hash": "5e80ed47ad8dd053f6a4370585ba4656050b20e307e80bac7c94ee905465849b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "至此，開發者的瓶頸不再是重新載入應用程式的時間，而是應用程式狀態的遺失。常見情境是開發一個需要多次點擊才能到達的功能頁面。每次重新載入後，您必須重複相同的操作路徑才能回到開發中的功能，導致整個循環耗時數秒。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## Hot Reloading",
+      "source_content_hash": "576f1b1de43fdd24bba993982dd478a1468e48c5740ebc7d89be5563b920aac9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 熱重載"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "The idea behind hot reloading is to keep the app running and to inject new versions of the files that you edited at runtime. This way, you don't lose any of your state which is especially useful if you are tweaking the UI.",
+      "source_content_hash": "090303678a3b6026284b7a33c83762695b60cacd9e040148afdbbc1152f852da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "熱重載的核心概念是保持應用程式運行狀態，並在執行時期注入您編輯過的新版檔案。這種方式能保留所有狀態，對於調整使用者介面特別有用。"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "A video is worth a thousand words. Check out the difference between Live Reload (current) and Hot Reload (new).",
+      "source_content_hash": "0c67ffc9dd399299bfd2fcd823fcb0f9132b6af9712ab0512a8331cde9d96b85",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "影片勝過千言萬語。請觀看 Live Reload（現有）與 Hot Reload（新增）的實際差異。"
+      }
+    },
+    {
+      "segment_id": "358a309f",
+      "source_content": "<iframe\n  width=\"100%\"\n  height=\"315\"\n  src=\"https://www.youtube.com/embed/2uQzVi-KFuc\"\n  frameborder=\"0\"\n  allowfullscreen></iframe>",
+      "source_content_hash": "647f90f9a445d26c52b62a1cfe894fc7f76bdc8587d274095c3ea3741274d2b0",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_358a309f"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "If you look closely, you can notice that it is possible to recover from a red box and you can also start importing modules that were not previously there without having to do a full reload.",
+      "source_content_hash": "4b0b1def4a510453571b8cd5d41de04edec6300383742af4ed9aa3a4cd4de4d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "仔細觀察可發現，系統能從紅屏錯誤中恢復，也能開始導入先前不存在的模組，而無需完整重新載入。"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "**Word of warning:** because JavaScript is a very stateful language, hot reloading cannot be perfectly implemented. In practice, we found out that the current setup is working well for a large amount of usual use cases and a full reload is always available in case something gets messed up.",
+      "source_content_hash": "b81ef54b71758b7a8669bb03012fc6a9cfb611491602a8e5d158f0af2cfa131a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**重要提醒：** 由於 JavaScript 是高度狀態化的語言，熱重載無法完美實作。實務上我們發現當前設定能妥善處理多數常見使用情境，若發生問題隨時可進行完整重新載入。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Hot reloading is available as of 0.22, you can enable it:",
+      "source_content_hash": "545a30c5597b0de5f34cd9689ed89265c5a2e3f0bcd96a19d36a89e73d42bd0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "熱重載功能自 0.22 版起提供，啟用方式如下："
+      }
+    },
+    {
+      "segment_id": "e7bc8c38",
+      "source_content": "- Open the developer menu\n- Tap on \"Enable Hot Reloading\"",
+      "source_content_hash": "1c1a597efb5112d6a18b64cf7cc465e644fe1482b28821f6deefd7459b0228f4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 開啟開發者選單\n- 點選「啟用熱重載」"
+      }
+    },
+    {
+      "segment_id": "06c0f776",
+      "source_content": "## Implementation in a nutshell",
+      "source_content_hash": "c09168f8cc7580f30ec227739d1afa53d3f75b60d59fd626661beec2ebc59548",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 實作原理簡述"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "Now that we've seen why we want it and how to use it, the fun part begins: how it actually works.",
+      "source_content_hash": "a1891b026518edcc1b2f6612eba0fe028aabed5092dc08ea496180566300ca28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "瞭解其價值與使用方法後，現在進入最有趣的部分：實際運作原理。"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "Hot Reloading is built on top of a feature [Hot Module Replacement](https://webpack.js.org/guides/hot-module-replacement/), or HMR. It was first introduced by webpack and we implemented it inside of React Native Packager. HMR makes the Packager watch for file changes and send HMR updates to a thin HMR runtime included on the app.",
+      "source_content_hash": "fb59bef94e36233b203e63f0da579579f9ca2ccf0ebbf6cc3a4b0431dc3c3192",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "熱重載建構於 [Hot Module Replacement](https://webpack.js.org/guides/hot-module-replacement/)（HMR）功能之上，該技術最初由 webpack 提出，我們在 React Native Packager 中實作了相同機制。HMR 會監控檔案變更，並將更新內容發送至應用程式中內建的輕量 HMR 執行環境。"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "In a nutshell, the HMR update contains the new code of the JS modules that changed. When the runtime receives them, it replaces the old modules' code with the new one:",
+      "source_content_hash": "1ef3991d5d884d624ee5f48f605fcd8d403594bc8cb82cc11da0e0c3050d4b20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "簡而言之，HMR 更新包含已變更 JS 模組的新程式碼。當執行環境接收後，會用新程式碼替換舊模組："
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "![](/blog/assets/hmr-architecture.png)",
+      "source_content_hash": "d068c37f4f0c78b872576423be853b80183522851b1f38e32e52994402b1939e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/hmr-architecture.png)"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "The HMR update contains a bit more than just the module's code we want to change because replacing it, it's not enough for the runtime to pick up the changes. The problem is that the module system may have already cached the _exports_ of the module we want to update. For instance, say you have an app composed of these two modules:",
+      "source_content_hash": "84b43bfc518052617a26371062f842983d844d0cba48eb0d959b887a7c5838a4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "HMR 更新內容不僅包含欲變更的模組程式碼，因為單純替換並不足以讓執行環境獲取變更。問題在於模組系統可能已快取我們欲更新模組的_匯出內容_。例如，假設您的應用程式由以下兩個模組組成："
+      }
+    },
+    {
+      "segment_id": "f275f5fd",
+      "source_content": "```\n// log.js\nfunction log(message) {\n  const time = require('./time');\n  console.log(`[${time()}] ${message}`);\n}\n\nmodule.exports = log;\n```",
+      "source_content_hash": "9b39dd83c966345bfd9f991ee3cd11851f59bae8a85e3494c8f4d68749a85c80",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f275f5fd"
+      }
+    },
+    {
+      "segment_id": "7a577a50",
+      "source_content": "```\n// time.js\nfunction time() {\n  return new Date().getTime();\n}\n\nmodule.exports = time;\n```",
+      "source_content_hash": "53527f2bff57bde6a4c89d3d33f24b0e5a06cac74125c064f3aa827e1d568f20",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7a577a50"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "The module `log`, prints out the provided message including the current date provided by the module `time`.",
+      "source_content_hash": "d05a22224e0b86a84c5d1dcb16760e89363082ae4357dbc978cb5189b28ea0a4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "模組 `log` 會輸出包含 `time` 模組提供之當前日期的訊息。"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "When the app is bundled, React Native registers each module on the module system using the `__d` function. For this app, among many `__d` definitions, there will one for `log`:",
+      "source_content_hash": "7e8ac3ea7e2141205e5c5aca9f74c2aa68ce8c4b248550e733a58dbc53dbfde2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當應用程式打包時，React Native 會使用 `__d` 函式在模組系統中註冊每個模組。在此應用中，眾多 `__d` 定義裡會包含 `log` 的定義："
+      }
+    },
+    {
+      "segment_id": "8a9e710a",
+      "source_content": "```\n__d('log', function() {\n  ... // module's code\n});\n```",
+      "source_content_hash": "028ac40d472b1c0c210e6efe00c174e243cb625dca1019e59db1aa65cbd90b27",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a9e710a"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "This invocation wraps each module's code into an anonymous function which we generally refer to as the factory function. The module system runtime keeps track of each module's factory function, whether it has already been executed, and the result of such execution (exports). When a module is required, the module system either provides the already cached exports or executes the module's factory function for the first time and saves the result.",
+      "source_content_hash": "d3d24d9d0c764fbe337225f1086157ab57ffbaa9f03c2e7319446344f9d11309",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此調用將每個模組的代碼封裝到一個匿名函數中，我們通常稱之為工廠函數。模組系統運行時會追蹤每個模組的工廠函數、是否已執行過，以及執行結果（導出內容）。當需要某個模組時，模組系統會提供已緩存的導出內容，或首次執行該模組的工廠函數並保存結果。"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "So say you start your app and require `log`. At this point, neither `log` nor `time`'s factory functions have been executed so no exports have been cached. Then, the user modifies `time` to return the date in `MM/DD`:",
+      "source_content_hash": "0320be9ea9cc6377cd5facd4a4a3a7190c4f10d8475dc7a022d5987cd65769e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設你啟動應用並引入 `log`。此時，`log` 和 `time` 的工廠函數均未執行，因此沒有導出內容被緩存。接著，用戶修改 `time` 使其返回 `MM/DD` 格式的日期："
+      }
+    },
+    {
+      "segment_id": "26f7c825",
+      "source_content": "```js\n// time.js\nfunction bar() {\n  const date = new Date();\n  return `${date.getMonth() + 1}/${date.getDate()}`;\n}\n\nmodule.exports = bar;\n```",
+      "source_content_hash": "433741e1141a6d2da40aa9d6e02e2e7c36d1a69f449fd0156421370b25b9a362",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "The Packager will send time's new code to the runtime (step 1), and when `log` gets eventually required the exported function gets executed it will do so with `time`'s changes (step 2):",
+      "source_content_hash": "6c0fd14e433f9cb459e584bdfe46d55ea2b266f598a58cbafab9fd85c90e9ac1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "打包工具會將 `time` 的新代碼發送給運行時（步驟1），當 `log` 最終被引入時，其導出的函數會執行並應用 `time` 的變更（步驟2）："
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "![](/blog/assets/hmr-step.png)",
+      "source_content_hash": "aadebbacabd9898f466e62d829698ca5b63ffab0c13e73f281cddc1c94ca13ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/hmr-step.png)"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "Now say the code of `log` requires `time` as a top level require:",
+      "source_content_hash": "5b7543d2b4776f4d185f3145aaff32a0e0300a477a172234940fb39db9db5fa3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在假設 `log` 的代碼在頂層引入 `time`："
+      }
+    },
+    {
+      "segment_id": "1cf51900",
+      "source_content": "```\nconst time = require('./time'); // top level require\n\n// log.js\nfunction log(message) {\n  console.log(`[${time()}] ${message}`);\n}\n\nmodule.exports = log;\n```",
+      "source_content_hash": "417c3e44a22bca4cc5481ac99713e01cab5e5f6ea03c1b4b9998fb564d89392a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "When `log` is required, the runtime will cache its exports and `time`'s one. (step 1). Then, when `time` is modified, the HMR process cannot simply finish after replacing `time`'s code. If it did, when `log` gets executed, it would do so with a cached copy of `time` (old code).",
+      "source_content_hash": "6e12ad119cf67e13ff9e38aa0e3a35ed7e5ebdba2750b22b4c12a190efc6076b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `log` 被引入時，運行時會緩存其導出內容及 `time` 的導出內容（步驟1）。之後若 `time` 被修改，HMR 流程不能僅替換 `time` 的代碼就結束。如果這樣做，當 `log` 執行時，會使用緩存的 `time`（舊代碼）。"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "For `log` to pick up `time` changes, we'll need to clear its cached exports because one of the modules it depends on was hot swapped (step 3). Finally, when `log` gets required again, its factory function will get executed requiring `time` and getting its new code.",
+      "source_content_hash": "744701691fa85125d8ecab3dd0fbd20fb74086536698c98aa8200a0811b13644",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了讓 `log` 獲取 `time` 的變更，我們需要清除其緩存的導出內容，因為它依賴的模組之一已被熱替換（步驟3）。最終，當 `log` 再次被引入時，其工廠函數會執行並引入 `time`，從而獲取新代碼。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "![](/blog/assets/hmr-log.png)",
+      "source_content_hash": "2f65ae88ec725e5bd15f4f4f1bf568ec9b844f19ddb6705094f4bf19f0b9cfb6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/hmr-log.png)"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "## HMR API",
+      "source_content_hash": "69c5a97bf625cb3936d104707da39728b5f6092de8e4e6e42ab775f16a24cf2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## HMR API"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "HMR in React Native extends the module system by introducing the `hot` object. This API is based on [webpack](https://webpack.github.io/hot-module-replacement.md)'s one. The `hot` object exposes a function called `accept` which allows you to define a callback that will be executed when the module needs to be hot swapped. For instance, if we would change `time`'s code as follows, every time we save time, we'll see “time changed” in the console:",
+      "source_content_hash": "bb293f5ade1a9e88a2f8408435c59b827127ee47e892bc82e53666eb867ce180",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 中的 HMR 通過引入 `hot` 物件擴展了模組系統。此 API 基於 [webpack](https://webpack.github.io/hot-module-replacement.md) 的同名 API。`hot` 物件公開了一個名為 `accept` 的函數，允許你定義一個回調函數，當模組需要熱替換時執行。例如，如果我們將 `time` 的代碼修改如下，每次保存時都會在控制台看到「time changed」："
+      }
+    },
+    {
+      "segment_id": "3917a88d",
+      "source_content": "```\n// time.js\nfunction time() {\n  ... // new code\n}\n\nmodule.hot.accept(() => {\n  console.log('time changed');\n});\n\nmodule.exports = time;\n```",
+      "source_content_hash": "4e250a9fdcb51b0cd621a573b05b3ab03d57871b3d46eb6908bbcbe7f333ac0e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "Note that only in rare cases you would need to use this API manually. Hot Reloading should work out of the box for the most common use cases.",
+      "source_content_hash": "f1642d385cd451ff88a79d903f2dedc5f70d6bc6c6e57c946bf38d6e4c82eff9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意，僅在極少數情況下需要手動使用此 API。熱重載在大多數常見用例中應能直接使用。"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "## HMR Runtime",
+      "source_content_hash": "3ea5e2ba1d773201a535a8af61954c08088556dff48fc5ed1fb66e1cd28b9c7a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## HMR 運行時"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "As we've seen before, sometimes it's not enough only accepting the HMR update because a module that uses the one being hot swapped may have been already executed and its imports cached. For instance, suppose the dependency tree for the movies app example had a top-level `MovieRouter` that depended on the `MovieSearch` and `MovieScreen` views, which depended on the `log` and `time` modules from the previous examples:",
+      "source_content_hash": "ef746508056fb4be0f65e6e7664d8a741689b07dc6da2020def0b8a5545a264c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如前所述，有時僅接受 HMR 更新是不夠的，因為使用被熱替換模組的其他模組可能已執行且其引入內容已被緩存。例如，假設電影應用範例的依賴樹中有一個頂層 `MovieRouter`，它依賴於 `MovieSearch` 和 `MovieScreen` 視圖，而這些視圖又依賴於前述範例中的 `log` 和 `time` 模組："
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "![](/blog/assets/hmr-diamond.png)",
+      "source_content_hash": "f47ed8641334530aa17fc5b387ed7dc0e1195775eb009ce7baa240ff35df4c30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/hmr-diamond.png)"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "If the user accesses the movies' search view but not the other one, all the modules except for `MovieScreen` would have cached exports. If a change is made to module `time`, the runtime will have to clear the exports of `log` for it to pick up `time`'s changes. The process wouldn't finish there: the runtime will repeat this process recursively up until all the parents have been accepted. So, it'll grab the modules that depend on `log` and try to accept them. For `MovieScreen` it can bail, as it hasn't been required yet. For `MovieSearch`, it will have to clear its exports and process its parents recursively. Finally, it will do the same thing for `MovieRouter` and finish there as no modules depends on it.",
+      "source_content_hash": "89c4f0310e9c8ae45a8c267eeef7f8a1cfc171aa8816ceb1363953524902e45f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果用戶訪問了電影搜索視圖但未訪問其他視圖，除 `MovieScreen` 外的所有模組都會有緩存的導出內容。若對 `time` 模組進行修改，運行時需清除 `log` 的導出內容以使其獲取 `time` 的變更。流程不會就此結束：運行時會遞歸向上重複此過程，直到所有父模組都被接受。因此，它會抓取依賴 `log` 的模組並嘗試接受它們。對於 `MovieScreen`，可以跳過，因為它尚未被引入。對於 `MovieSearch`，則需清除其導出內容並遞歸處理其父模組。最終，對 `MovieRouter` 執行相同操作並結束，因為沒有模組依賴於它。"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "In order to walk the dependency tree, the runtime receives the inverse dependency tree from the Packager on the HMR update. For this example the runtime will receive a JSON object like this one:",
+      "source_content_hash": "6d40177329fd9ce73452b5cbf597b0f76ec85121a654a78861282e8fac913ed0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了遍歷依賴樹，運行時會在 HMR 更新中從打包工具接收逆依賴樹。對於此範例，運行時會收到如下 JSON 物件："
+      }
+    },
+    {
+      "segment_id": "ad3cd2f7",
+      "source_content": "```\n{\n  modules: [\n    {\n      name: 'time',\n      code: /* time's new code */\n    }\n  ],\n  inverseDependencies: {\n    MovieRouter: [],\n    MovieScreen: ['MovieRouter'],\n    MovieSearch: ['MovieRouter'],\n    log: ['MovieScreen', 'MovieSearch'],\n    time: ['log'],\n  }\n}\n```",
+      "source_content_hash": "7b5b3ddbe429ef75dbbb465b6b6d96ecefc5ade75b9051a8329879c44adb6d16",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "08f73f73",
+      "source_content": "## React Components",
+      "source_content_hash": "2d55a32fc496f9e50fdff81f0f5e3669d869a7a6b8ebfbaf486f40a0566f48d9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## React 元件"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "React components are a bit harder to get to work with Hot Reloading. The problem is that we can't simply replace the old code with the new one as we'd loose the component's state. For React web applications, [Dan Abramov](https://twitter.com/dan_abramov) implemented a babel [transform](https://gaearon.github.io/react-hot-loader/) that uses webpack's HMR API to solve this issue. In a nutshell, his solution works by creating a proxy for every single React component on _transform time_. The proxies hold the component's state and delegate the lifecycle methods to the actual components, which are the ones we hot reload:",
+      "source_content_hash": "ecfabb38cc269d8427380b0bd06a7a3aab0797d938a18181b8682466c80a380b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React 元件要實現熱重載（Hot Reloading）會稍微困難一些。問題在於我們無法單純替換舊程式碼，否則會遺失元件的狀態。針對 React 網頁應用，[Dan Abramov](https://twitter.com/dan_abramov) 實作了一個 Babel [轉換器](https://gaearon.github.io/react-hot-loader/)，透過 webpack 的 HMR API 來解決此問題。簡而言之，他的解決方案是在「轉換階段」為每個 React 元件建立代理（proxy）。這些代理會保存元件狀態，並將生命週期方法委派給實際的元件（即我們要熱重載的目標）："
+      }
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "![](/blog/assets/hmr-proxy.png)",
+      "source_content_hash": "bab51e35be00e659ed529925dc103239362bde637e647c10d40b1556db31f301",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/hmr-proxy.png)"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Besides creating the proxy component, the transform also defines the `accept` function with a piece of code to force React to re-render the component. This way, we can hot reload rendering code without losing any of the app's state.",
+      "source_content_hash": "78738682a61b33d5e0a8644a17080b0c40528a193de67b7f48b1147b3395e2bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了建立代理元件外，此轉換器還會定義 `accept` 函數，其中包含強制 React 重新渲染元件的程式碼。如此一來，我們就能在保留應用程式狀態的前提下，熱重載渲染相關的程式碼。"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "The default [transformer](https://github.com/facebook/react-native/blob/master/packager/transformer.js#L92-L95) that comes with React Native uses the `babel-preset-react-native`, which is [configured](https://github.com/facebook/react-native/blob/master/babel-preset/configs/hmr.js#L24-L31) to use `react-transform` the same way you'd use it on a React web project that uses webpack.",
+      "source_content_hash": "833fd46503af773ac3872254fb821b872faebda1a530e3238aeb3ac7696d7d02",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 內建的[轉換器](https://github.com/facebook/react-native/blob/master/packager/transformer.js#L92-L95)使用 `babel-preset-react-native`，其[配置](https://github.com/facebook/react-native/blob/master/babel-preset/configs/hmr.js#L24-L31)會啟用 `react-transform`，用法與在基於 webpack 的 React 網頁專案中相同。"
+      }
+    },
+    {
+      "segment_id": "e1642ab4",
+      "source_content": "## Redux Stores",
+      "source_content_hash": "b9b568eaeaf394e6280ab4bbd9e45bb8ed2258cefbd172e92f35e31eb48f2269",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Redux Stores"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "To enable Hot Reloading on [Redux](https://redux.js.org/) stores you will just need to use the HMR API similarly to what you'd do on a web project that uses webpack:",
+      "source_content_hash": "af2d2e314cec460196ad3eb2f802b072fa0a38861610e55c0aad7d68e44b34e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要為 [Redux](https://redux.js.org/) store 啟用熱重載，只需像在基於 webpack 的網頁專案中那樣使用 HMR API："
+      }
+    },
+    {
+      "segment_id": "ebc385af",
+      "source_content": "```\n// configureStore.js\nimport { createStore, applyMiddleware, compose } from 'redux';\nimport thunk from 'redux-thunk';\nimport reducer from '@site/reducers';\n\nexport default function configureStore(initialState) {\n  const store = createStore(\n    reducer,\n    initialState,\n    applyMiddleware(thunk),\n  );\n\n  if (module.hot) {\n    module.hot.accept(() => {\n      const nextRootReducer = require('../reducers/index').default;\n      store.replaceReducer(nextRootReducer);\n    });\n  }\n\n  return store;\n};\n```",
+      "source_content_hash": "185188c0c31512f3346713c836ec3cb0c6b16cbc991bc9744133516b4e8b60c8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ebc385af"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "When you change a reducer, the code to accept that reducer will be sent to the client. Then the client will realize that the reducer doesn't know how to accept itself, so it will look for all the modules that refer it and try to accept them. Eventually, the flow will get to the single store, the `configureStore` module, which will accept the HMR update.",
+      "source_content_hash": "de32abfbaac2a165c96024f807d9be30d2d85c2416dc46c8f35ba62caa4b7cf8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當你修改 reducer 時，接受該 reducer 的程式碼會被傳送至用戶端。用戶端會發現該 reducer 本身無法處理熱更新，因此會查找所有引用它的模組並嘗試接受更新。最終，流程會抵達單一的 store 模組（即 `configureStore`），該模組將接受此次 HMR 更新。"
+      }
+    },
+    {
+      "segment_id": "778e087a",
+      "source_content": "## Conclusion",
+      "source_content_hash": "be031d37bb75d96ef08ca9ec5b0e83bb6f91172f60d3c31a78feae8d7dc4a0b0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 結論"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "If you are interested in helping making hot reloading better, I encourage you to read [Dan Abramov's post around the future of hot reloading](https://medium.com/@dan_abramov/hot-reloading-in-react-1140438583bf#.jmivpvmz4) and to contribute. For example, Johny Days is going to [make it work with multiple connected clients](https://github.com/facebook/react-native/pull/6179). We're relying on you all to maintain and improve this feature.",
+      "source_content_hash": "373e53eb345717fe00fa5e2b8f4821900e48e723e184b4729e648a32f5a92f9d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若你有興趣協助改進熱重載功能，建議閱讀 [Dan Abramov 關於熱重載未來的文章](https://medium.com/@dan_abramov/hot-reloading-in-react-1140438583bf#.jmivpvmz4)並參與貢獻。例如，Johny Days 正著手[實現多客戶端同步熱重載](https://github.com/facebook/react-native/pull/6179)。我們需要大家共同維護與改進此功能。"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "With React Native, we have the opportunity to rethink the way we build apps in order to make it a great developer experience. Hot reloading is only one piece of the puzzle, what other crazy hacks can we do to make it better?",
+      "source_content_hash": "9d211695fcafa1c110bcceb33b849979051f3db458173cf380b3f78b14f21658",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 讓我們能重新思考應用程式的開發方式，以打造更優異的開發者體驗。熱重載只是其中一環，我們還能運用哪些創新技巧來讓它更完善？"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2016-03-24-introducing-hot-reloading.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.206384+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "cd1c63b06bed8ffeb88be89c2cb4433fe8a576be66022632c908b5f81cecce6a"
+  }
+}

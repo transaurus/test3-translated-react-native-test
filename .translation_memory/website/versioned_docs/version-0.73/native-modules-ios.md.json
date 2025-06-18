@@ -1,0 +1,1390 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/native-modules-ios.md",
+  "source_file_content_hash": "afcee8053da609dd813f7a812e4725694980651543bbb64706f0b0238e272e6c",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: native-modules-ios\ntitle: iOS Native Modules\n---",
+      "source_content_hash": "7ad1d0ab96ec950062f6c119a10884b4fb9a7d54635a812738f6c40abe0b119e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import NativeDeprecated from './the-new-architecture/\\_markdown_native_deprecation.mdx'\nimport Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "f03087d0e1065cd1bd636c99d1efc3380d6ae01c1d538342694a3ce8867ccec0",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "efb379d7",
+      "source_content": "<NativeDeprecated />",
+      "source_content_hash": "1680a0727658899157f198b9f9f0a950c884554cdfaa045c2229262db270638c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_efb379d7"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Welcome to Native Modules for iOS. Please start by reading the [Native Modules Intro](native-modules-intro) for an intro to what native modules are.",
+      "source_content_hash": "bdb769e4420058c4dbedf1fbdd34cab383313293a5c380d54b5ea3365b80e2d1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "歡迎來到 iOS 原生模組開發。請先閱讀 [原生模組簡介](native-modules-intro) 了解原生模組的基本概念。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Create a Calendar Native Module",
+      "source_content_hash": "97c3c41ec1481e8f2efc837967c6740843b2f448b96ac6bb2671d0f4f4168108",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 建立日曆原生模組"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "In the following guide you will create a native module, `CalendarModule`, that will allow you to access Apple's calendar APIs from JavaScript. By the end you will be able to call `CalendarModule.createCalendarEvent('Dinner Party', 'My House');` from JavaScript, invoking a native method that creates a calendar event.",
+      "source_content_hash": "8b873242f5c7411458ce763abd9262b4ba1c12446ec3e22623fc7877e4f859cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將帶您建立一個名為 `CalendarModule` 的原生模組，該模組可讓您從 JavaScript 存取蘋果的日曆 API。最終您將能透過 JavaScript 呼叫 `CalendarModule.createCalendarEvent('晚餐派對', '我家');` 來觸發建立日曆事件的原生方法。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### Setup",
+      "source_content_hash": "8896b8d3db53502f4fd604d42db230e8aa1df8a01474b979920665ef08680a11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 環境設定"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "To get started, open up the iOS project within your React Native application in Xcode. You can find your iOS project here within a React Native app:",
+      "source_content_hash": "0ec6a253ab02176f0f93106116b57b60531e0aabbb084aa7c01839074e0e3a2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先，請在 Xcode 中開啟您 React Native 應用程式的 iOS 專案。React Native 應用中的 iOS 專案路徑如下："
+      }
+    },
+    {
+      "segment_id": "1485a88b",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-ios-open-project.png\" width=\"500\" alt=\"Image of opening up an iOS project within a React Native app inside of xCode.\" />\n  <figcaption>Image of where you can find your iOS project</figcaption>\n</figure>",
+      "source_content_hash": "dc16b755704f2abb93b81e98fd2a42ca6b8ba4f3eb33d4f8659fe36110232e66",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1485a88b"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "We recommend using Xcode to write your native code. Xcode is built for iOS development, and using it will help you to quickly resolve smaller errors like code syntax.",
+      "source_content_hash": "547d6cd463eed60cda148b5c0365515be48634d22baefacb129d54a8653c1905",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們建議使用 Xcode 來編寫原生程式碼。Xcode 專為 iOS 開發設計，能幫助您快速解決程式碼語法等小錯誤。"
+      }
+    },
+    {
+      "segment_id": "3c36424c",
+      "source_content": "### Create Custom Native Module Files",
+      "source_content_hash": "9b2fbe3c48b65d5e26286b9b29c284f99ee4fca9deb80b5ff11c1e2c200476e9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 建立自訂原生模組檔案"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "The first step is to create our main custom native module header and implementation files. Create a new file called `RCTCalendarModule.h`",
+      "source_content_hash": "63dd68625405c20e01d6dfb3e60b7230e13810b5437a8ecac87f87dca2053f8c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一步是建立主要的自訂原生模組標頭檔與實作檔。請建立一個名為 `RCTCalendarModule.h` 的新檔案："
+      }
+    },
+    {
+      "segment_id": "99d14dfd",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-ios-add-class.png\" width=\"500\" alt=\"Image of creating a class called  RCTCalendarModule.h.\" />\n  <figcaption>Image of creating a custom native module file within the same folder as AppDelegate</figcaption>\n</figure>",
+      "source_content_hash": "b15f500b2b471a3b64c89a59bdd16c0c450393a44fad05f9fbad49fe3c6a74fd",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99d14dfd"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "and add the following to it:",
+      "source_content_hash": "756a41e37f8e8b2205f4dd739c5d16286f20b7819d2ebcde8c6987ead24be8f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "並加入以下內容："
+      }
+    },
+    {
+      "segment_id": "de8f60af",
+      "source_content": "```objectivec\n//  RCTCalendarModule.h\n#import <React/RCTBridgeModule.h>\n@interface RCTCalendarModule : NSObject <RCTBridgeModule>\n@end\n\n```",
+      "source_content_hash": "90a1c2aba8034f52268425e29cd9737aeda073412a5099a5857b3b938dc03769",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de8f60af"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "You can use any name that fits the native module you are building. Name the class `RCTCalendarModule` since you are creating a calendar native module. Since ObjC does not have language-level support for namespaces like Java or C++, convention is to prepend the class name with a substring. This could be an abbreviation of your application name or your infra name. RCT, in this example, refers to React.",
+      "source_content_hash": "d928e28713b8bc11bfb39dc6b6b36ffc5fc190f7f0b38968b2fbc2e852b3718e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以根據開發的原生模組特性自由命名。此處命名為 `RCTCalendarModule` 是因為要建立日曆原生模組。由於 Objective-C 不像 Java 或 C++ 具有語言層級的命名空間支援，慣例是在類別名稱前加上前綴字串（例如應用程式名稱或基礎架構名稱的縮寫）。本例中的 RCT 代表 React。"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "As you can see below, the CalendarModule class implements the `RCTBridgeModule` protocol. A native module is an Objective-C class that implements the `RCTBridgeModule` protocol.",
+      "source_content_hash": "e5161c29ba476bf198320adcf4b81ef1dd41386db77d3dd1feec6cd7f543f1f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如下所示，CalendarModule 類別實現了 `RCTBridgeModule` 協議。原生模組就是一個實現 `RCTBridgeModule` 協議的 Objective-C 類別。"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Next up, let’s start implementing the native module. Create the corresponding implementation file, `RCTCalendarModule.m`, in the same folder and include the following content:",
+      "source_content_hash": "40dbd60eed9c91734c281b5146e41b00e49c235ccdf8ca892d52541e9e9d8aff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著開始實作原生模組。請在同一個資料夾中建立對應的實作檔 `RCTCalendarModule.m`，並包含以下內容："
+      }
+    },
+    {
+      "segment_id": "ac961110",
+      "source_content": "```objectivec\n// RCTCalendarModule.m\n#import \"RCTCalendarModule.h\"\n\n@implementation RCTCalendarModule\n\n// To export a module named RCTCalendarModule\nRCT_EXPORT_MODULE();\n\n@end\n\n```",
+      "source_content_hash": "300c64868aeaf6539abc1b8767285a2af8368ea689fba24b0e586735dae73bf0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ac961110"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### Module Name",
+      "source_content_hash": "535e22a3cee7c1631af0bbe2b975b5b3919ea4d0e8297e269353bf08531eeea1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 模組名稱"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "For now, your `RCTCalendarModule.m` native module only includes a `RCT_EXPORT_MODULE` macro, which exports and registers the native module class with React Native. The `RCT_EXPORT_MODULE` macro also takes an optional argument that specifies the name that the module will be accessible as in your JavaScript code.",
+      "source_content_hash": "5ec3c5c129f4a18228a28e46cb2961deac85356edead5628f2cf4a7ed4c631d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前您的 `RCTCalendarModule.m` 原生模組僅包含 `RCT_EXPORT_MODULE` 宏，該宏會將原生模組類別導出並註冊到 React Native。`RCT_EXPORT_MODULE` 宏還可接受一個可選參數，用於指定模組在 JavaScript 程式碼中的存取名稱。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "This argument is not a string literal. In the example below `RCT_EXPORT_MODULE(CalendarModuleFoo)` is passed, not `RCT_EXPORT_MODULE(\"CalendarModuleFoo\")`.",
+      "source_content_hash": "21d0fc43460510553cff630dc6c185b651948802318d2d32ece62b50b2c6a198",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意此參數不是字串常值。下方範例中傳遞的是 `RCT_EXPORT_MODULE(CalendarModuleFoo)`，而非 `RCT_EXPORT_MODULE(\"CalendarModuleFoo\")`。"
+      }
+    },
+    {
+      "segment_id": "4fb3ded8",
+      "source_content": "```objectivec\n// To export a module named CalendarModuleFoo\nRCT_EXPORT_MODULE(CalendarModuleFoo);\n```",
+      "source_content_hash": "fd8fea3819a47df589bcc9a48720495d28ccdd3f3391af560644ed9b2cc418fc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fb3ded8"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "The native module can then be accessed in JS like this:",
+      "source_content_hash": "11a5586eff83af4e4903fba2504166652331e1ce7a8c3024a3f68f8cbaa59d41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著在 JavaScript 中可這樣存取該原生模組："
+      }
+    },
+    {
+      "segment_id": "a89f84e1",
+      "source_content": "```tsx\nconst {CalendarModuleFoo} = ReactNative.NativeModules;\n```",
+      "source_content_hash": "49f72eaa7602dfe1d1d1a00350e75c2ffb0d192dc1b4cf4452558814af6b7654",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a89f84e1"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "If you do not specify a name, the JavaScript module name will match the Objective-C class name, with any \"RCT\" or \"RK\" prefixes removed.",
+      "source_content_hash": "abb095ea5be5eed460d74d72758c7e384dcbc8d21c4c9f63976572f85349179b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若未指定名稱，JavaScript 模組名稱會與 Objective-C 類別名稱相同（但會移除 \"RCT\" 或 \"RK\" 前綴）。"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "Let's follow the example below and call `RCT_EXPORT_MODULE` without any arguments. As a result, the module will be exposed to React Native using the name `CalendarModule`, since that is the Objective-C class name, with RCT removed.",
+      "source_content_hash": "7f65a808d1c300f91a74be447b8ecf823834d2e86adbeabd16a59bc669def605",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓我們遵循下方範例，不帶任何參數呼叫 `RCT_EXPORT_MODULE`。如此一來，模組將以 `CalendarModule` 名稱暴露給 React Native，因為這是移除 RCT 前綴後的 Objective-C 類別名稱。"
+      }
+    },
+    {
+      "segment_id": "b73a4a7a",
+      "source_content": "```objectivec\n// Without passing in a name this will export the native module name as the Objective-C class name with “RCT” removed\nRCT_EXPORT_MODULE();\n```",
+      "source_content_hash": "2ffe0dbfb5bbc7460e73fc60a9068f6b056edeee6295c74fc49cb9c798efa55c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b73a4a7a"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "The native module can then be accessed in JS like this:",
+      "source_content_hash": "11a5586eff83af4e4903fba2504166652331e1ce7a8c3024a3f68f8cbaa59d41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著在 JavaScript 中可這樣存取該原生模組："
+      }
+    },
+    {
+      "segment_id": "daa16011",
+      "source_content": "```tsx\nconst {CalendarModule} = ReactNative.NativeModules;\n```",
+      "source_content_hash": "92648fcb3428dd61c85f39f81f5343689f6a7163f1967f31da60cc5ea097634a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_daa16011"
+      }
+    },
+    {
+      "segment_id": "f8edb6d2",
+      "source_content": "### Export a Native Method to JavaScript",
+      "source_content_hash": "864ba940629abb5df2dd11a3969e53bf2fa778778da537d82267c199aa9cc1e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 將原生方法導出至 JavaScript"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "React Native will not expose any methods in a native module to JavaScript unless explicitly told to. This can be done using the `RCT_EXPORT_METHOD` macro. Methods written in the `RCT_EXPORT_METHOD` macro are asynchronous and the return type is therefore always void. In order to pass a result from a `RCT_EXPORT_METHOD` method to JavaScript you can use callbacks or emit events (covered below). Let’s go ahead and set up a native method for our `CalendarModule` native module using the `RCT_EXPORT_METHOD` macro. Call it `createCalendarEvent()` and for now have it take in name and location arguments as strings. Argument type options will be covered shortly.",
+      "source_content_hash": "1a108e0a24b4b2befc82108eb74b9b71376cd7339a767e200b987380fe595600",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 不會自動將原生模組中的方法暴露給 JavaScript，除非明確使用 `RCT_EXPORT_METHOD` 宏來宣告。透過 `RCT_EXPORT_METHOD` 編寫的方法都是非同步的，因此回傳類型永遠是 void。若要將 `RCT_EXPORT_METHOD` 方法的結果傳遞給 JavaScript，可以使用回調函數或發送事件（後續會說明）。現在我們使用 `RCT_EXPORT_METHOD` 宏為 `CalendarModule` 原生模組建立一個原生方法，命名為 `createCalendarEvent()`，暫時讓它接收名稱和位置兩個字串參數。參數類型的選項稍後會詳細說明。"
+      }
+    },
+    {
+      "segment_id": "a476a172",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)location)\n{\n}\n```",
+      "source_content_hash": "c406a1e84ef310ba0954c84aab92f623439fe41077da3e43ab8eb570c9d68755",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a476a172"
+      }
+    },
+    {
+      "segment_id": "ceb1ddd1",
+      "source_content": "> Please note that the `RCT_EXPORT_METHOD` macro will not be necessary with TurboModules unless your method relies on RCT argument conversion (see argument types below). Ultimately, React Native will remove `RCT_EXPORT_MACRO,` so we discourage people from using `RCTConvert`. Instead, you can do the argument conversion within the method body.",
+      "source_content_hash": "5e5a7df20113870c77a6907ed2731b7171b13748d9ba2ecb74e6ef4501ff2c8d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意，除非你的方法依賴 RCT 參數轉換（參見下方的參數類型說明），否則 TurboModules 將不需要使用 `RCT_EXPORT_METHOD` 宏。最終，React Native 會移除 `RCT_EXPORT_MACRO`，因此我們不建議使用 `RCTConvert`。相反，你可以在方法體內進行參數轉換。"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "Before you build out the `createCalendarEvent()` method’s functionality, add a console log in the method so you can confirm it has been invoked from JavaScript in your React Native application. Use the `RCTLog` APIs from React. Let’s import that header at the top of your file and then add the log call.",
+      "source_content_hash": "1e049be96ea94d5899ff2e28e7b1d616724c9cd2c7b23b7d210bcfc3c768c3ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在完善 `createCalendarEvent()` 方法的功能之前，先在方法中添加一個控制台日誌，以便確認它已從 JavaScript 調用。使用 React 提供的 `RCTLog` API。首先在文件頂部導入該標頭文件，然後添加日誌調用。"
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```objectivec\n#import <React/RCTLog.h>\nRCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)location)\n{\n RCTLogInfo(@\"Pretending to create an event %@ at %@\", name, location);\n}\n```",
+      "source_content_hash": "8232051b02922f4587f73d98c682b3482bf596b6cb10d2a90495895415c77cbc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    },
+    {
+      "segment_id": "638efb88",
+      "source_content": "### Synchronous Methods",
+      "source_content_hash": "6f28ad99495bf5215a6bcbb07f2e1b39d6b79a78f221e767c63a9f028a441d6e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 同步方法"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "You can use the `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD` to create a synchronous native method.",
+      "source_content_hash": "eac16a8acfa09c690705cd41263b43e399528738ac0b8788a942c1cac907224c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以使用 `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD` 來創建一個同步的原生方法。"
+      }
+    },
+    {
+      "segment_id": "6f605d92",
+      "source_content": "```objectivec\nRCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getName)\n{\nreturn [[UIDevice currentDevice] name];\n}\n```",
+      "source_content_hash": "5b3e09f6e44f7d672a4c88b1d5f894a843bea04f870fdad7033e593a33bc1ecd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6f605d92"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "The return type of this method must be of object type (id) and should be serializable to JSON. This means that the hook can only return nil or JSON values (e.g. NSNumber, NSString, NSArray, NSDictionary).",
+      "source_content_hash": "1780cac14fffc1c4017bba9f099e481bbda73518c8c5b061952bec6bdff09624",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該方法的回傳類型必須是物件類型（id），並且應該可序列化為 JSON。這意味著該方法只能回傳 nil 或 JSON 值（例如 NSNumber、NSString、NSArray、NSDictionary）。"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "At the moment, we do not recommend using synchronous methods, since calling methods synchronously can have strong performance penalties and introduce threading-related bugs to your native modules. Additionally, please note that if you choose to use `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD`, your app can no longer use the Google Chrome debugger. This is because synchronous methods require the JS VM to share memory with the app. For the Google Chrome debugger, React Native runs inside the JS VM in Google Chrome, and communicates asynchronously with the mobile devices via WebSockets.",
+      "source_content_hash": "2c1fc4f1dac302ac57e0d79cb7fd3a153ab1e0e722c778f821bf535ac46dc4f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前，我們不建議使用同步方法，因為同步調用方法可能會嚴重影響性能，並為你的原生模組引入線程相關的錯誤。此外，請注意，如果你選擇使用 `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD`，你的應用將無法再使用 Google Chrome 調試器。這是因為同步方法要求 JS 虛擬機與應用共享記憶體。對於 Google Chrome 調試器，React Native 運行在 Google Chrome 的 JS 虛擬機中，並通過 WebSockets 與移動設備進行非同步通信。"
+      }
+    },
+    {
+      "segment_id": "d53c8ed4",
+      "source_content": "### Test What You Have Built",
+      "source_content_hash": "3f0c4f1fc52afff46cfc52dffc7acf3c521bd37cda9420d3121127b52cfdd941",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試你構建的內容"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "At this point you have set up the basic scaffolding for your native module in iOS. Test that out by accessing the native module and invoking it’s exported method in JavaScript.",
+      "source_content_hash": "d235694c340ae8aad5de5aca9e8864434662ee9143a8f07b88e61accf6f2d259",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "至此，你已經在 iOS 中為原生模組搭建了基本框架。現在通過訪問原生模組並在 JavaScript 中調用其導出的方法來測試它。"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Find a place in your application where you would like to add a call to the native module’s `createCalendarEvent()` method. Below is an example of a component, `NewModuleButton` you can add in your app. You can invoke the native module inside `NewModuleButton`'s `onPress()` function.",
+      "source_content_hash": "f05b6ec11d48d4446a712ebc464146f360d1a07762c3a7908d68c81aab17428c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在你的應用中找到一個合適的位置，添加對原生模組 `createCalendarEvent()` 方法的調用。以下是一個示例組件 `NewModuleButton`，你可以在應用中添加它。你可以在 `NewModuleButton` 的 `onPress()` 函數中調用原生模組。"
+      }
+    },
+    {
+      "segment_id": "6e57b94c",
+      "source_content": "```tsx\nimport React from 'react';\nimport {NativeModules, Button} from 'react-native';\n\nconst NewModuleButton = () => {\n  const onPress = () => {\n    console.log('We will invoke the native module here!');\n  };\n\n  return (\n    <Button\n      title=\"Click to invoke your native module!\"\n      color=\"#841584\"\n      onPress={onPress}\n    />\n  );\n};\n\nexport default NewModuleButton;\n```",
+      "source_content_hash": "5037818d596e58ffc48bf629b4929448abe2805fea309e60a3604c98d332a20a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6e57b94c"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "In order to access your native module from JavaScript you need to first import `NativeModules` from React Native:",
+      "source_content_hash": "c5bb7523528cce1783372b5827d37efba60e85b4e11ebcede92543a47e112066",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了從 JavaScript 訪問你的原生模組，首先需要從 React Native 導入 `NativeModules`："
+      }
+    },
+    {
+      "segment_id": "75daf40d",
+      "source_content": "```tsx\nimport {NativeModules} from 'react-native';\n```",
+      "source_content_hash": "c18416dd4cb5159434e6e8d68908d0643248b0f813567fc319148fdd078e02fa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_75daf40d"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "You can then access the `CalendarModule` native module off of `NativeModules`.",
+      "source_content_hash": "b0d5c05b785a38b266814f38124e8e71e4e6fd79553c840042687652e65e60f9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後，你可以從 `NativeModules` 中獲取 `CalendarModule` 原生模組。"
+      }
+    },
+    {
+      "segment_id": "dddc2d3c",
+      "source_content": "```tsx\nconst {CalendarModule} = NativeModules;\n```",
+      "source_content_hash": "3850d7ebec19964abaeff2e48e32f9956736e1a7639a98681befa67c013155db",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_dddc2d3c"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Now that you have the CalendarModule native module available, you can invoke your native method `createCalendarEvent()`. Below it is added to the `onPress()` method in `NewModuleButton`:",
+      "source_content_hash": "ec877e303da618b24e0a91d587ed3807cd84465ab1dac11926309f572a3df234",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在你已經可以訪問 CalendarModule 原生模組，可以調用你的原生方法 `createCalendarEvent()`。以下是將其添加到 `NewModuleButton` 的 `onPress()` 方法中的示例："
+      }
+    },
+    {
+      "segment_id": "5010ec34",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEvent('testName', 'testLocation');\n};\n```",
+      "source_content_hash": "2ad59890fbce19a243fa4b8eb1805e98e135a4a5659c31ab6d1cb2d8e3d30f18",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5010ec34"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "The final step is to rebuild the React Native app so that you can have the latest native code (with your new native module!) available. In your command line, where the react native application is located, run the following :",
+      "source_content_hash": "546da4dad9fd255aaae24e635bf78786e8410b01ec00709d82d592243eee7fc7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是重新構建 React Native 應用，以便獲取最新的原生代碼（包含你的新原生模組！）。在 React Native 應用所在的命令行中，運行以下命令："
+      }
+    },
+    {
+      "segment_id": "8d82168b",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm run ios\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn ios\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "72f78212fd7670762e60810d13a3344ac1006fbf825c05208f15f91bef917357",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8d82168b"
+      }
+    },
+    {
+      "segment_id": "4d7a4554",
+      "source_content": "### Building as You Iterate",
+      "source_content_hash": "023694aebbf85105acf692f14bd437f086879afcdf126bd4524d8fed34148618",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 迭代開發時的構建"
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "As you work through these guides and iterate on your native module, you will need to do a native rebuild of your application to access your most recent changes from JavaScript. This is because the code that you are writing sits within the native part of your application. While React Native’s metro bundler can watch for changes in JavaScript and rebuild JS bundle on the fly for you, it will not do so for native code. So if you want to test your latest native changes you need to rebuild by using the above command.",
+      "source_content_hash": "81e741692a9fb461f7d03cf036230dcd77c3659a6f8bb2e70380c59acc5f1547",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當你依照這些指南進行開發並迭代原生模組時，需要重新建置應用程式才能讓JavaScript端取得最新的更動。這是因為你所編寫的程式碼屬於應用程式的原生部分。雖然React Native的Metro打包工具能監控JavaScript變動並即時重建JS套件包，但不會自動處理原生程式碼。因此若要測試最新的原生端修改，必須使用上述指令手動重建。"
+      }
+    },
+    {
+      "segment_id": "a9de5d69",
+      "source_content": "### Recap✨",
+      "source_content_hash": "54a95b8ff951707f63d5b3ee0373787b585205c0e960fd7544f1de8cc8ed53b1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點回顧✨"
+      }
+    },
+    {
+      "segment_id": "e6ac016e",
+      "source_content": "You should now be able to invoke your `createCalendarEvent()` method on your native module in JavaScript. Since you are using `RCTLog` in the function, you can confirm your native method is being invoked by [enabling debug mode in your app](https://reactnative.dev/docs/debugging#chrome-developer-tools) and looking at the JS console in Chrome or the mobile app debugger Flipper. You should see your `RCTLogInfo(@\"Pretending to create an event %@ at %@\", name, location);` message each time you invoke the native module method.",
+      "source_content_hash": "a12ecec52ef80e59c309b37ffa50794001cb5962918e32bbfeddffd3a892819b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你現在應該能透過JavaScript呼叫原生模組中的`createCalendarEvent()`方法。由於函式中使用了`RCTLog`，可透過[啟用應用程式的除錯模式](https://reactnative.dev/docs/debugging#chrome-developer-tools)，在Chrome的JS控制台或行動端除錯工具Flipper中確認原生方法是否被觸發。每次呼叫原生模組方法時，都應該會看到`RCTLogInfo(@\"Pretending to create an event %@ at %@\", name, location);`的日誌訊息。"
+      }
+    },
+    {
+      "segment_id": "d14e33c1",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-ios-logs.png\" width=\"1000\" alt=\"Image of logs.\" />\n  <figcaption>Image of iOS logs in Flipper</figcaption>\n</figure>",
+      "source_content_hash": "304ab43a3d841ec22eed96cb1df800823f8b704dd6ec40aef9c83f194886b2a5",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "At this point you have created an iOS native module and invoked a method on it from JavaScript in your React Native application. You can read on to learn more about things like what argument types your native module method takes and how to setup callbacks and promises within your native module.",
+      "source_content_hash": "c7ae597e0f5f43b5b55cf2583526f54612cf0ab50a4dc16409472b87900e670b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "至此你已建立iOS原生模組，並從React Native應用的JavaScript端成功呼叫其方法。接下來可進一步了解原生模組方法的參數類型設定，以及如何在原生模組中配置回調函式與Promise。"
+      }
+    },
+    {
+      "segment_id": "49007f24",
+      "source_content": "## Beyond a Calendar Native Module",
+      "source_content_hash": "492204cf2514a418a3520f39a76da9d65ea49f19499cf3849aadd4c9aa772344",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 日曆原生模組的進階應用"
+      }
+    },
+    {
+      "segment_id": "e594a4f9",
+      "source_content": "### Better Native Module Export",
+      "source_content_hash": "59ca05bfa2a6e9ba68a290e975dbf9af7af91269bd76d9136ba13c739f9852e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 優化模組導出方式"
+      }
+    },
+    {
+      "segment_id": "d8c366cc",
+      "source_content": "Importing your native module by pulling it off of `NativeModules` like above is a bit clunky.",
+      "source_content_hash": "e8680bcf2221d1c0b95ed0a7a03c2033db79708ed35b24d72446b90e26367e57",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過`NativeModules`提取原生模組的現行方式稍顯笨拙。"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "To save consumers of your native module from needing to do that each time they want to access your native module, you can create a JavaScript wrapper for the module. Create a new JavaScript file named NativeCalendarModule.js with the following content:",
+      "source_content_hash": "da91a02bab77057e6a64537653a71d65ba58cc5028f513dda284fc3a08d87672",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為避免使用者每次存取模組時都需重複此操作，可為模組建立JavaScript封裝層。新建名為NativeCalendarModule.js的檔案，內容如下："
+      }
+    },
+    {
+      "segment_id": "3d4d9546",
+      "source_content": "```tsx\n/**\n* This exposes the native CalendarModule module as a JS module. This has a\n* function 'createCalendarEvent' which takes the following parameters:\n\n* 1. String name: A string representing the name of the event\n* 2. String location: A string representing the location of the event\n*/\nimport {NativeModules} from 'react-native';\nconst {CalendarModule} = NativeModules;\nexport default CalendarModule;\n```",
+      "source_content_hash": "d71b8bdf0f4cebe9b37e424119729a1c48d234723e2fbbf0b49e7ed49da5f116",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "This JavaScript file also becomes a good location for you to add any JavaScript side functionality. For example, if you use a type system like TypeScript you can add type annotations for your native module here. While React Native does not yet support Native to JS type safety, with these type annotations, all your JS code will be type safe. These annotations will also make it easier for you to switch to type-safe native modules down the line. Below is an example of adding type safety to the Calendar Module:",
+      "source_content_hash": "ea7254681bef09eae75ba7bb22bf540b042198732271fe91e435a1d5247e35b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此JavaScript檔案同時也是添加JavaScript端功能的理想位置。例如若使用TypeScript等類型系統，可在此為原生模組添加類型註解。雖然React Native尚未支援原生到JS的類型安全，這些註解能確保所有JS程式碼具備類型安全，也利於未來遷移至類型安全的原生模組。以下是為日曆模組添加類型安全的範例："
+      }
+    },
+    {
+      "segment_id": "0883e35a",
+      "source_content": "```tsx\n/**\n * This exposes the native CalendarModule module as a JS module. This has a\n * function 'createCalendarEvent' which takes the following parameters:\n *\n * 1. String name: A string representing the name of the event\n * 2. String location: A string representing the location of the event\n */\nimport {NativeModules} from 'react-native';\nconst {CalendarModule} = NativeModules;\ninterface CalendarInterface {\n  createCalendarEvent(name: string, location: string): void;\n}\nexport default CalendarModule as CalendarInterface;\n```",
+      "source_content_hash": "fa20e7a24d29eae1cae3fc9728480a5e6a01205320a2cec46a19edec2cc00a7c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "32fb7230",
+      "source_content": "In your other JavaScript files you can access the native module and invoke its method like this:",
+      "source_content_hash": "9637b438efa41a306771fe33c09ad9b50fad124596511080680554364ee9e22a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在其他JavaScript檔案中，可透過以下方式存取原生模組並呼叫其方法："
+      }
+    },
+    {
+      "segment_id": "868a2ef9",
+      "source_content": "```tsx\nimport NativeCalendarModule from './NativeCalendarModule';\nNativeCalendarModule.createCalendarEvent('foo', 'bar');\n```",
+      "source_content_hash": "cbdd50c2f6db5a3d85fc2d439d09f03a7fcea679fc1800d4cd64d8ae1173d637",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe52769e",
+      "source_content": "> Note this assumes that the place you are importing `CalendarModule` is in the same hierarchy as `NativeCalendarModule.js`. Please update the relative import as necessary.",
+      "source_content_hash": "043e85a9b344ec1984053f02cfb2d9f5175d0fc7d75ef303c2a8b5479642ea70",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意此處假設導入`CalendarModule`的位置與`NativeCalendarModule.js`處於相同目錄層級，請根據實際情況調整相對路徑。"
+      }
+    },
+    {
+      "segment_id": "e5878bb6",
+      "source_content": "### Argument Types",
+      "source_content_hash": "40bd87407b8ee98e082e5d23479cbfc7847ec40786ccecdc762ff9e6302e2fec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 參數類型"
+      }
+    },
+    {
+      "segment_id": "12bc7444",
+      "source_content": "When a native module method is invoked in JavaScript, React Native converts the arguments from JS objects to their Objective-C/Swift object analogues. So for example, if your Objective-C Native Module method accepts a NSNumber, in JS you need to call the method with a number. React Native will handle the conversion for you. Below is a list of the argument types supported for native module methods and the JavaScript equivalents they map to.",
+      "source_content_hash": "b14d840f3d7fb0b6b9cba201da693796f4824304c50f9b9181388d71117f625d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當JavaScript呼叫原生模組方法時，React Native會將參數從JS物件轉換為對應的Objective-C/Swift物件。例如若Objective-C原生模組方法接受NSNumber，在JS端需傳入數字類型。以下是原生模組方法支援的參數類型與JS對應型態清單："
+      }
+    },
+    {
+      "segment_id": "07c91b9a",
+      "source_content": "| Objective-C                                   | JavaScript         |\n| --------------------------------------------- | ------------------ |\n| NSString                                      | string, ?string    |\n| BOOL                                          | boolean            |\n| double                                        | number             |\n| NSNumber                                      | ?number            |\n| NSArray                                       | Array, ?Array      |\n| NSDictionary                                  | Object, ?Object    |\n| RCTResponseSenderBlock                        | Function (success) |\n| RCTResponseSenderBlock, RCTResponseErrorBlock | Function (failure) |\n| RCTPromiseResolveBlock, RCTPromiseRejectBlock | Promise            |",
+      "source_content_hash": "444ef4ea90352bda393f26914aa839a169de6ec86eee35df5dc9e52f392c3df1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "89d24322",
+      "source_content": "> The following types are currently supported but will not be supported in TurboModules. Please avoid using them.\n>\n> - Function (failure) -> RCTResponseErrorBlock\n> - Number -> NSInteger\n> - Number -> CGFloat\n> - Number -> float",
+      "source_content_hash": "e92909754f7f158f08b89de57350ea82bf25235ae9ba74be4f136adabde179ec",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 以下類型目前雖受支援，但TurboModules將不再相容，建議避免使用：\n>\n> - Function (failure) -> RCTResponseErrorBlock\n> - Number -> NSInteger\n> - Number -> CGFloat\n> - Number -> float"
+      }
+    },
+    {
+      "segment_id": "e3bf03eb",
+      "source_content": "For iOS, you can also write native module methods with any argument type that is supported by the `RCTConvert` class (see [RCTConvert](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTConvert.h) for details about what is supported). The RCTConvert helper functions all accept a JSON value as input and map it to a native Objective-C type or class.",
+      "source_content_hash": "736f2ee9e67adb5cac5168bd23ec4ecf77e3ff5f05c16c1f9f35fcd880c39510",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS端還可使用任何受`RCTConvert`類別支援的參數類型（詳見[RCTConvert](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTConvert.h)）。RCTConvert輔助方法皆接受JSON值作為輸入，並將其映射至原生Objective-C類型或類別。"
+      }
+    },
+    {
+      "segment_id": "c2db81f5",
+      "source_content": "### Exporting Constants",
+      "source_content_hash": "4d42b2cda7ed644a929f1c7e1dd1606fbaaa3e68e9a000c7d416a03658c87078",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 導出常數"
+      }
+    },
+    {
+      "segment_id": "7eb5b32d",
+      "source_content": "A native module can export constants by overriding the native method `constantsToExport()`. Below `constantsToExport()` is overridden, and returns a Dictionary that contains a default event name property you can access in JavaScript like so:",
+      "source_content_hash": "11959c41f43121d3f61006c91efd0cf50c3b37799edf10490e4a7ea1a8c78110",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組可透過覆寫`constantsToExport()`方法導出常數。以下範例覆寫該方法並返回包含預設事件名稱的字典，在JavaScript端可如此存取："
+      }
+    },
+    {
+      "segment_id": "00c94fa3",
+      "source_content": "```objectivec\n- (NSDictionary *)constantsToExport\n{\n return @{ @\"DEFAULT_EVENT_NAME\": @\"New Event\" };\n}\n```",
+      "source_content_hash": "3421d26c59d3c328800d652033e541014e53c89a41fdb06098ff9d6a0c2d9bb6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9e08343",
+      "source_content": "The constant can then be accessed by invoking `getConstants()` on the native module in JS like so:",
+      "source_content_hash": "358c08c7a4c9a5c4573acd7739bbb4cbd2e90728c59626cb4f03c08f000df26a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著可以透過在 JavaScript 中呼叫原生模組的 `getConstants()` 方法來存取這個常數："
+      }
+    },
+    {
+      "segment_id": "be1986a6",
+      "source_content": "```tsx\nconst {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();\nconsole.log(DEFAULT_EVENT_NAME);\n```",
+      "source_content_hash": "91bbde8ddec29d3097e966bf200780dec41b64799046cdfb208974558d4a2016",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_be1986a6"
+      }
+    },
+    {
+      "segment_id": "130e2dfb",
+      "source_content": "Technically, it is possible to access constants exported in `constantsToExport()` directly off the `NativeModule` object. This will no longer be supported with TurboModules, so we encourage the community to switch to the above approach to avoid necessary migration down the line.",
+      "source_content_hash": "67a75659af7cf5caf94dd0056e72c367948094c4df11a6ce1168bbe350ca4a3d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "技術上來說，可以直接從 `NativeModule` 物件存取透過 `constantsToExport()` 匯出的常數。但這種做法在 TurboModules 中將不再支援，因此我們鼓勵開發社群改用上述方法，以避免未來不必要的遷移工作。"
+      }
+    },
+    {
+      "segment_id": "9076bf9b",
+      "source_content": "> Note that the constants are exported only at initialization time, so if you change `constantsToExport()` values at runtime it won't affect the JavaScript environment.",
+      "source_content_hash": "4412029c872d649656ad738467f6bb6fc0964901002fcb4669f0cfc47e9bbffb",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意，常數僅在初始化時匯出，因此若在執行階段變更 `constantsToExport()` 的值，將不會影響 JavaScript 環境。"
+      }
+    },
+    {
+      "segment_id": "b2ffb658",
+      "source_content": "For iOS, if you override `constantsToExport()` then you should also implement `+ requiresMainQueueSetup` to let React Native know if your module needs to be initialized on the main thread, before any JavaScript code executes. Otherwise you will see a warning that in the future your module may be initialized on a background thread unless you explicitly opt out with `+ requiresMainQueueSetup:`. If your module does not require access to UIKit, then you should respond to `+ requiresMainQueueSetup` with NO.",
+      "source_content_hash": "e8b20a732a60a1c5615d27982cb39ccc8c4051e86dea03473670fc0f8026bcf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 上，若您覆寫了 `constantsToExport()` 方法，則應同時實作 `+ requiresMainQueueSetup` 來告知 React Native 您的模組是否需要先於任何 JavaScript 程式碼執行前，在主執行緒上初始化。否則您會看到警告，提示未來您的模組可能會在背景執行緒初始化，除非您明確透過 `+ requiresMainQueueSetup:` 選擇退出。若您的模組不需要存取 UIKit，則應對 `+ requiresMainQueueSetup` 回傳 NO。"
+      }
+    },
+    {
+      "segment_id": "becb5987",
+      "source_content": "### Callbacks",
+      "source_content_hash": "4cc466bab636a8f5da822ff96924fc13ddef00e02129dac068cee7f16c16ab84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 回呼函式"
+      }
+    },
+    {
+      "segment_id": "d83b50df",
+      "source_content": "Native modules also support a unique kind of argument - a callback. Callbacks are used to pass data from Objective-C to JavaScript for asynchronous methods. They can also be used to asynchronously execute JS from the native side.",
+      "source_content_hash": "cd7c506f3d87330ee27e161f60c2bd0a2f4bad06435960017d3fa5e99d72497e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組還支援一種特殊的參數類型——回呼函式(callback)。回呼函式用於在非同步方法中將資料從 Objective-C 傳遞到 JavaScript，也可用於從原生端非同步執行 JavaScript 程式碼。"
+      }
+    },
+    {
+      "segment_id": "b16b56a2",
+      "source_content": "For iOS, callbacks are implemented using the type `RCTResponseSenderBlock`. Below the callback parameter `myCallBack` is added to the `createCalendarEventMethod()`:",
+      "source_content_hash": "733508f04d72d937570d9ad9b2230d6a9b62a7ee96cb00cc7bce08cf5c7df143",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 中，回呼函式是透過 `RCTResponseSenderBlock` 類型實現的。以下範例在 `createCalendarEventMethod()` 中新增了回呼參數 `myCallBack`："
+      }
+    },
+    {
+      "segment_id": "9a01bde3",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title\n                location:(NSString *)location\n                myCallback:(RCTResponseSenderBlock)callback)\n\n```",
+      "source_content_hash": "d507635d187f6dc7227151c3c52b852fc5313f668312c691d53f8710c860e0f4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9a01bde3"
+      }
+    },
+    {
+      "segment_id": "7e031d10",
+      "source_content": "You can then invoke the callback in your native function, providing whatever result you want to pass to JavaScript in an array. Note that `RCTResponseSenderBlock` accepts only one argument - an array of parameters to pass to the JavaScript callback. Below you will pass back the ID of an event created in an earlier call.",
+      "source_content_hash": "32ebabb70042aa2715271ed1ac4ad35180a02b189bbaf492ab1d369c5ca503f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著您可以在原生函式中呼叫這個回呼，並透過陣列傳遞任何想要給 JavaScript 的結果。請注意，`RCTResponseSenderBlock` 僅接受一個參數——要傳遞給 JavaScript 回呼的參數陣列。以下範例將回傳先前呼叫中建立的事件 ID。"
+      }
+    },
+    {
+      "segment_id": "e6533cf0",
+      "source_content": "> It is important to highlight that the callback is not invoked immediately after the native function completes—remember the communication is asynchronous.",
+      "source_content_hash": "ca3661c3a7f0850ebde6d11a45202df64a10479e24b45bac962ea182a2a79519",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 重點在於回呼函式並非在原生函式完成後立即被呼叫——請記住這種通訊是非同步的。"
+      }
+    },
+    {
+      "segment_id": "9b899126",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title location:(NSString *)location callback: (RCTResponseSenderBlock)callback)\n{\n NSInteger eventId = ...\n callback(@[@(eventId)]);\n\n RCTLogInfo(@\"Pretending to create an event %@ at %@\", title, location);\n}\n\n```",
+      "source_content_hash": "26b6b0fc9636f0dcd414becf4b268ce4409fb14135f1ae99e110c467595e5de2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9b899126"
+      }
+    },
+    {
+      "segment_id": "e4ab192a",
+      "source_content": "This method could then be accessed in JavaScript using the following:",
+      "source_content_hash": "def401ba901179d580dae5c1ca7b82131e6c3315f0f153c0dfa6a53ba8729c91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後可以透過以下方式在 JavaScript 中存取這個方法："
+      }
+    },
+    {
+      "segment_id": "3dc11e28",
+      "source_content": "```tsx\nconst onSubmit = () => {\n  CalendarModule.createCalendarEvent(\n    'Party',\n    '04-12-2020',\n    eventId => {\n      console.log(`Created a new event with id ${eventId}`);\n    },\n  );\n};\n```",
+      "source_content_hash": "009b61a6adb36b2408eee1f9702b2b93242e1f4f9c709b5e6d87706eebf92f19",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3dc11e28"
+      }
+    },
+    {
+      "segment_id": "c419a086",
+      "source_content": "A native module is supposed to invoke its callback only once. It can, however, store the callback and invoke it later. This pattern is often used to wrap iOS APIs that require delegates— see [`RCTAlertManager`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/CoreModules/RCTAlertManager.mm) for an example. If the callback is never invoked, some memory is leaked.",
+      "source_content_hash": "1695dd48d0fa4167e2e5b61be5cd5f42a1250adc3389d4c6c9e8de7e4748e15e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組應該只呼叫其回呼函式一次。不過，它可以儲存回呼並稍後再呼叫。這種模式常用於封裝需要委派(delegate)的 iOS API——可參考 [`RCTAlertManager`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/CoreModules/RCTAlertManager.mm) 的範例。若回呼從未被呼叫，將會導致部分記憶體洩漏。"
+      }
+    },
+    {
+      "segment_id": "d58af824",
+      "source_content": "There are two approaches to error handling with callbacks. The first is to follow Node’s convention and treat the first argument passed to the callback array as an error object.",
+      "source_content_hash": "03b8c75cecbfd18d11fac4c72937ce96e407a6d7dcc6ff47feae1adef8a99265",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用回呼函式進行錯誤處理有兩種方式。第一種是遵循 Node 的慣例，將傳遞給回呼陣列的第一個參數視為錯誤物件。"
+      }
+    },
+    {
+      "segment_id": "c887f5e6",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title location:(NSString *)location callback: (RCTResponseSenderBlock)callback)\n{\n  NSNumber *eventId = [NSNumber numberWithInt:123];\n  callback(@[[NSNull null], eventId]);\n}\n```",
+      "source_content_hash": "a2a7ea791cc0f17e57a488930342bba280cd64956718eb9640981a597bc320fa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c887f5e6"
+      }
+    },
+    {
+      "segment_id": "227b5df5",
+      "source_content": "In JavaScript, you can then check the first argument to see if an error was passed through:",
+      "source_content_hash": "89a74f5b431b98bdea0aff8ad6eb38f38dca28752dc5824dbed3e1bc00a41725",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 JavaScript 中，您可以檢查第一個參數來判斷是否有錯誤被傳遞："
+      }
+    },
+    {
+      "segment_id": "4770f21e",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEventCallback(\n    'testName',\n    'testLocation',\n    (error, eventId) => {\n      if (error) {\n        console.error(`Error found! ${error}`);\n      }\n      console.log(`event id ${eventId} returned`);\n    },\n  );\n};\n```",
+      "source_content_hash": "6c524e2c763925c87ad0166d821ab4167f0e5e59cf5f7caf356773fbe1c8436f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4770f21e"
+      }
+    },
+    {
+      "segment_id": "d14a9e24",
+      "source_content": "Another option is to use two separate callbacks: onFailure and onSuccess.",
+      "source_content_hash": "c0c61569fefb05d4f978a58d8d4d6d83b00a9564f0e25177e925f1899d0bd52d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一種選項是使用兩個獨立的回呼函式：onFailure 和 onSuccess。"
+      }
+    },
+    {
+      "segment_id": "0a6336a7",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title\n                  location:(NSString *)location\n                  errorCallback: (RCTResponseSenderBlock)errorCallback\n                  successCallback: (RCTResponseSenderBlock)successCallback)\n{\n  @try {\n    NSNumber *eventId = [NSNumber numberWithInt:123];\n    successCallback(@[eventId]);\n  }\n\n  @catch ( NSException *e ) {\n    errorCallback(@[e]);\n  }\n}\n```",
+      "source_content_hash": "0c5191f922c25bd1617c5920e3301249935bfa14212e558379a6be28ce808b27",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0a6336a7"
+      }
+    },
+    {
+      "segment_id": "26b95748",
+      "source_content": "Then in JavaScript you can add a separate callback for error and success responses:",
+      "source_content_hash": "3bbee119c5f101832cabc187311219aa4de74e70a4fdb35c3e0a465944d81481",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後在 JavaScript 中，您可以為錯誤和成功回應分別添加回呼："
+      }
+    },
+    {
+      "segment_id": "947da5d7",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEventCallback(\n    'testName',\n    'testLocation',\n    error => {\n      console.error(`Error found! ${error}`);\n    },\n    eventId => {\n      console.log(`event id ${eventId} returned`);\n    },\n  );\n};\n```",
+      "source_content_hash": "bee47ab6c79f8c09d058e5244d2472dae837b54f88d97db5d9bc9f65844ff059",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_947da5d7"
+      }
+    },
+    {
+      "segment_id": "3bb26da2",
+      "source_content": "If you want to pass error-like objects to JavaScript, use `RCTMakeError` from [`RCTUtils.h.`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTUtils.h) Right now this only passes an Error-shaped dictionary to JavaScript, but React Native aims to automatically generate real JavaScript Error objects in the future. You can also provide a `RCTResponseErrorBlock` argument, which is used for error callbacks and accepts an `NSError \\* object`. Please note that this argument type will not be supported with TurboModules.",
+      "source_content_hash": "3ce9dc856a9c4afba6f83ee4d173c8cbbdceba9eae98f0f91244c5384f552bb2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要將類錯誤物件傳遞給 JavaScript，請使用 [`RCTUtils.h`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTUtils.h) 中的 `RCTMakeError`。目前這只會將一個 Error 形狀的字典傳遞給 JavaScript，但 React Native 的目標是在未來自動生成真正的 JavaScript Error 物件。您也可以提供 `RCTResponseErrorBlock` 參數，用於錯誤回呼並接受 `NSError *` 物件。請注意，這種參數類型在 TurboModules 中將不受支援。"
+      }
+    },
+    {
+      "segment_id": "52c6a5e7",
+      "source_content": "### Promises",
+      "source_content_hash": "8a88424a61003ba7aed1aafe60c95d8cff33b622390be28d59d2d5d0a8d09b5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Promise"
+      }
+    },
+    {
+      "segment_id": "a279d6f8",
+      "source_content": "Native modules can also fulfill a promise, which can simplify your JavaScript, especially when using ES2016's `async/await` syntax. When the last parameter of a native module method is a `RCTPromiseResolveBlock` and `RCTPromiseRejectBlock`, its corresponding JS method will return a JS Promise object.",
+      "source_content_hash": "e4dc20495effe47279560c9619b951093b6c8f9b75c484dae6992d12bcbdb205",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組也可以實現 Promise，這能簡化您的 JavaScript 程式碼，特別是在使用 ES2016 的 `async/await` 語法時。當原生模組方法的最後一個參數是 `RCTPromiseResolveBlock` 和 `RCTPromiseRejectBlock` 時，其對應的 JS 方法將回傳一個 JS Promise 物件。"
+      }
+    },
+    {
+      "segment_id": "033308da",
+      "source_content": "Refactoring the above code to use a promise instead of callbacks looks like this:",
+      "source_content_hash": "a8b089a1e8e253f053b237f5cef56bd20ca06e6da66318533accce3cf1842c3a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將上述程式碼重構為使用 Promise 而非回呼函式的範例如下："
+      }
+    },
+    {
+      "segment_id": "0e8f4883",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title\n                 location:(NSString *)location\n                 resolver:(RCTPromiseResolveBlock)resolve\n                 rejecter:(RCTPromiseRejectBlock)reject)\n{\n NSInteger eventId = createCalendarEvent();\n if (eventId) {\n    resolve(@(eventId));\n  } else {\n    reject(@\"event_failure\", @\"no event id returned\", nil);\n  }\n}\n\n```",
+      "source_content_hash": "2033e47256dac75a9f6b7e7617c8d148cedb9f1dd1aae8886e04edefc212b95d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0e8f4883"
+      }
+    },
+    {
+      "segment_id": "13c7706c",
+      "source_content": "The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:",
+      "source_content_hash": "ae8e05cb99e731d66d7994116580ef4c9eb076a0bb2c49c4429af1f22a587380",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該方法的 JavaScript 對應部分會返回一個 Promise。這意味著您可以在 async 函數中使用 `await` 關鍵字來調用它並等待其結果："
+      }
+    },
+    {
+      "segment_id": "2294a59b",
+      "source_content": "```tsx\nconst onSubmit = async () => {\n  try {\n    const eventId = await CalendarModule.createCalendarEvent(\n      'Party',\n      'my house',\n    );\n    console.log(`Created a new event with id ${eventId}`);\n  } catch (e) {\n    console.error(e);\n  }\n};\n```",
+      "source_content_hash": "b1c4505f90c53c18198c5135156c72f1177695aa3da6017ee615f32b6e85c639",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2294a59b"
+      }
+    },
+    {
+      "segment_id": "6ff5a621",
+      "source_content": "### Sending Events to JavaScript",
+      "source_content_hash": "712b1fde653207eba21d9c96f9ff49f503c7560fb7fcda23554b9b041197474f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 向 JavaScript 發送事件"
+      }
+    },
+    {
+      "segment_id": "9bc9e142",
+      "source_content": "Native modules can signal events to JavaScript without being invoked directly. For example, you might want to signal to JavaScript a reminder that a calendar event from the native iOS calendar app will occur soon. The preferred way to do this is to subclass `RCTEventEmitter`, implement `supportedEvents` and call self `sendEventWithName`:",
+      "source_content_hash": "3acdf8fdbc160278bdd100cfe5d9fa50da7b00044c43a13e8224e2d9c760c5fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組可以直接向 JavaScript 發出事件信號而無需被直接調用。例如，您可能希望向 JavaScript 發出信號，提醒原生 iOS 日曆應用中的某個日曆事件即將發生。首選方式是繼承 `RCTEventEmitter`，實現 `supportedEvents` 並調用 `self sendEventWithName`："
+      }
+    },
+    {
+      "segment_id": "76356197",
+      "source_content": "Update your header class to import `RCTEventEmitter` and subclass `RCTEventEmitter`:",
+      "source_content_hash": "94f8b0a4d13d0cb71cbc90abc11ba87eeb1b84cc24eacb510da2601f30c7194b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更新您的頭文件類以導入 `RCTEventEmitter` 並繼承 `RCTEventEmitter`："
+      }
+    },
+    {
+      "segment_id": "e434bfaf",
+      "source_content": "```objectivec\n//  CalendarModule.h\n\n#import <React/RCTBridgeModule.h>\n#import <React/RCTEventEmitter.h>\n\n@interface CalendarModule : RCTEventEmitter <RCTBridgeModule>\n@end\n\n```",
+      "source_content_hash": "3fc096cc95d506c6fa5b23a28f5884f991ca54a3dcdd476ccd113daa57945da6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e434bfaf"
+      }
+    },
+    {
+      "segment_id": "57450780",
+      "source_content": "JavaScript code can subscribe to these events by creating a new `NativeEventEmitter` instance around your module.",
+      "source_content_hash": "1ac670be01fc2ff5fb22712d2ba0e665b8ef7d538512201d40336b42ccd2b0dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "JavaScript 代碼可以通過在您的模組周圍創建一個新的 `NativeEventEmitter` 實例來訂閱這些事件。"
+      }
+    },
+    {
+      "segment_id": "cb857be4",
+      "source_content": "You will receive a warning if you expend resources unnecessarily by emitting an event while there are no listeners. To avoid this, and to optimize your module's workload (e.g. by unsubscribing from upstream notifications or pausing background tasks), you can override `startObserving` and `stopObserving` in your `RCTEventEmitter` subclass.",
+      "source_content_hash": "de54a5f17699e34c7ca1811144967894da3e628d5b50f337de27a00386985c0f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果在沒有監聽器的情況下發出事件，您將收到警告。為了避免這種情況並優化模組的工作負載（例如通過取消訂閱上游通知或暫停後台任務），您可以在 `RCTEventEmitter` 子類中覆寫 `startObserving` 和 `stopObserving`。"
+      }
+    },
+    {
+      "segment_id": "91d00e6b",
+      "source_content": "```objectivec\n@implementation CalendarManager\n{\n  bool hasListeners;\n}\n\n// Will be called when this module's first listener is added.\n-(void)startObserving {\n    hasListeners = YES;\n    // Set up any upstream listeners or background tasks as necessary\n}\n\n// Will be called when this module's last listener is removed, or on dealloc.\n-(void)stopObserving {\n    hasListeners = NO;\n    // Remove upstream listeners, stop unnecessary background tasks\n}\n\n- (void)calendarEventReminderReceived:(NSNotification *)notification\n{\n  NSString *eventName = notification.userInfo[@\"name\"];\n  if (hasListeners) {// Only send events if anyone is listening\n    [self sendEventWithName:@\"EventReminder\" body:@{@\"name\": eventName}];\n  }\n}\n\n```",
+      "source_content_hash": "bad214e6a393db85c6eead9e0d97f20767b6336412259fdff698a52ac9da9a55",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_91d00e6b"
+      }
+    },
+    {
+      "segment_id": "4439f5f5",
+      "source_content": "### Threading",
+      "source_content_hash": "9aae4255ed6ac7efaa3db4ed4d34fec1866e777d8a297655c52c6b6bcaf99609",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 線程處理"
+      }
+    },
+    {
+      "segment_id": "d82906fc",
+      "source_content": "Unless the native module provides its own method queue, it shouldn't make any assumptions about what thread it's being called on. Currently, if a native module doesn't provide a method queue, React Native will create a separate GCD queue for it and invoke its methods there. Please note that this is an implementation detail and might change. If you want to explicitly provide a method queue for a native module, override the `(dispatch_queue_t) methodQueue` method in the native module. For example, if it needs to use a main-thread-only iOS API, it should specify this via:",
+      "source_content_hash": "796a3ef32fa3ad623aab8cf80aa0bd8fc8288eb43accacfdaaa7096f6d6e579a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除非原生模組提供自己的方法隊列，否則不應對其被調用的線程做出任何假設。目前，如果原生模組未提供方法隊列，React Native 會為其創建一個單獨的 GCD 隊列並在那裡調用其方法。請注意，這是一個實現細節，可能會發生變化。如果您想為原生模組明確提供一個方法隊列，請在原生模組中覆寫 `(dispatch_queue_t) methodQueue` 方法。例如，如果需要使用僅限主線程的 iOS API，則應通過以下方式指定："
+      }
+    },
+    {
+      "segment_id": "1a51fda5",
+      "source_content": "```objectivec\n- (dispatch_queue_t)methodQueue\n{\n  return dispatch_get_main_queue();\n}\n```",
+      "source_content_hash": "c960883389fa3290c99d81d6d4800cb37a9bed3363c84a4c6be4f5c00c671e59",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a51fda5"
+      }
+    },
+    {
+      "segment_id": "6dbe7a7e",
+      "source_content": "Similarly, if an operation may take a long time to complete, the native module can specify its own queue to run operations on. Again, currently React Native will provide a separate method queue for your native module, but this is an implementation detail you should not rely on. If you don't provide your own method queue, in the future, your native module's long running operations may end up blocking async calls being executed on other unrelated native modules. The `RCTAsyncLocalStorage` module here, for example, creates its own queue so the React queue isn't blocked waiting on potentially slow disk access.",
+      "source_content_hash": "c0e5e43dc17a55e6d949a67c6f24cfd8aae1ff78fe396b5fc2420cb4a0ab1463",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同樣，如果某個操作可能需要很長時間才能完成，原生模組可以指定自己的隊列來運行操作。再次強調，目前 React Native 會為您的原生模組提供一個單獨的方法隊列，但這是一個不應依賴的實現細節。如果您不提供自己的方法隊列，將來您的原生模組的長時間運行操作可能會阻塞在其他不相關原生模組上執行的異步調用。例如，這裡的 `RCTAsyncLocalStorage` 模組創建了自己的隊列，這樣 React 隊列就不會被潛在的慢速磁盤訪問阻塞。"
+      }
+    },
+    {
+      "segment_id": "65df932e",
+      "source_content": "```objectivec\n- (dispatch_queue_t)methodQueue\n{\n return dispatch_queue_create(\"com.facebook.React.AsyncLocalStorageQueue\", DISPATCH_QUEUE_SERIAL);\n}\n```",
+      "source_content_hash": "eb3d43e87825c2dd1bd31b3c12687fc7a28575c8a9113e5aefc2374299b2dffa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65df932e"
+      }
+    },
+    {
+      "segment_id": "b20523b9",
+      "source_content": "The specified `methodQueue` will be shared by all of the methods in your module. If only one of your methods is long-running (or needs to be run on a different queue than the others for some reason), you can use `dispatch_async` inside the method to perform that particular method's code on another queue, without affecting the others:",
+      "source_content_hash": "0d16804ffd107cadd43a745cc1ec0ad351a2b474a1f197903fe9f45e14c19627",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定的 `methodQueue` 將由模組中的所有方法共享。如果只有一個方法是長時間運行的（或由於某種原因需要在與其他方法不同的隊列上運行），您可以在方法內部使用 `dispatch_async` 將該特定方法的代碼放在另一個隊列上執行，而不影響其他方法："
+      }
+    },
+    {
+      "segment_id": "3ea84404",
+      "source_content": "```objectivec\nRCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSenderBlock)callback)\n{\n dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{\n   // Call long-running code on background thread\n   ...\n   // You can invoke callback from any thread/queue\n   callback(@[...]);\n });\n}\n\n```",
+      "source_content_hash": "93d2e84055df88ca3b33063a8c62217f1b1544f51968946e9462bab6246f4ab7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ea84404"
+      }
+    },
+    {
+      "segment_id": "ee657dd7",
+      "source_content": "> Sharing dispatch queues between modules\n>\n> The `methodQueue` method will be called once when the module is initialized, and then retained by React Native, so there is no need to keep a reference to the queue yourself, unless you wish to make use of it within your module. However, if you wish to share the same queue between multiple modules then you will need to ensure that you retain and return the same queue instance for each of them.",
+      "source_content_hash": "e67d1625a3b4bf80a26fdb65ea355c03b149839281eb62f5ad1a44d293f8cd65",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 在模組之間共享調度隊列\n>\n> `methodQueue` 方法將在模組初始化時調用一次，然後由 React Native 保留，因此除非您希望在模組內部使用它，否則無需自己保留對隊列的引用。但是，如果您希望在多個模組之間共享同一個隊列，則需要確保為每個模組保留並返回相同的隊列實例。"
+      }
+    },
+    {
+      "segment_id": "e8e93efb",
+      "source_content": "### Dependency Injection",
+      "source_content_hash": "d1713f1b13f721c74d07343a5dc66d1348fb1dba3b5cea6cea114a6d00ae6701",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 依賴注入"
+      }
+    },
+    {
+      "segment_id": "0ba09731",
+      "source_content": "React Native will create and initialize any registered native modules automatically. However, you may wish to create and initialize your own module instances to, for example, inject dependencies.",
+      "source_content_hash": "017cff4347908121861903d5167afe05d3df409b5c048332a7269674fc04f511",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 會自動創建並初始化任何已註冊的原生模組。但是，您可能希望創建並初始化自己的模組實例，例如注入依賴項。"
+      }
+    },
+    {
+      "segment_id": "2e4be0ab",
+      "source_content": "You can do this by creating a class that implements the `RCTBridgeDelegate` Protocol, initializing an `RCTBridge` with the delegate as an argument and initialising a `RCTRootView` with the initialized bridge.",
+      "source_content_hash": "93c5178cea3ff37cf397ddd5ded41046cccbe78b2d555c4bfcccf0615150191e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以通過創建一個實現 `RCTBridgeDelegate` 協議的類，使用該委託作為參數初始化一個 `RCTBridge`，然後使用初始化的橋接器初始化一個 `RCTRootView` 來實現這一點。"
+      }
+    },
+    {
+      "segment_id": "c1701137",
+      "source_content": "```objectivec\nid<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRCTBridgeDelegate alloc] init];\n\nRCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:moduleInitialiser launchOptions:nil];\n\nRCTRootView *rootView = [[RCTRootView alloc]\n                        initWithBridge:bridge\n                            moduleName:kModuleName\n                     initialProperties:nil];\n```",
+      "source_content_hash": "24690bbae3354be5b762f8872109631e22384aa9fd4b154d2ecd46df67bfbeb8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c1701137"
+      }
+    },
+    {
+      "segment_id": "e04097ef",
+      "source_content": "### Exporting Swift",
+      "source_content_hash": "a6db01c5c94fcda59aebd1978d5e6fcdacc809678daec4f320f9a1093285d991",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 導出 Swift"
+      }
+    },
+    {
+      "segment_id": "e4db19e2",
+      "source_content": "Swift doesn't have support for macros, so exposing native modules and their methods to JavaScript inside React Native requires a bit more setup. However, it works relatively the same. Let's say you have the same `CalendarModule` but as a Swift class:",
+      "source_content_hash": "e0630d4dd6a418a8758628b730665744c3206cbddac240c4a67452783cf7f8a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Swift 不支持宏，因此將原生模組及其方法暴露給 React Native 中的 JavaScript 需要更多的設置。不過，它的工作方式相對相同。假設您有一個相同的 `CalendarModule`，但作為 Swift 類："
+      }
+    },
+    {
+      "segment_id": "9a9e03c3",
+      "source_content": "```swift\n// CalendarManager.swift\n\n@objc(CalendarManager)\nclass CalendarManager: NSObject {\n\n @objc(addEvent:location:date:)\n func addEvent(_ name: String, location: String, date: NSNumber) -> Void {\n   // Date is ready to use!\n }\n\n @objc\n func constantsToExport() -> [String: Any]! {\n   return [\"someKey\": \"someValue\"]\n }\n\n}\n```",
+      "source_content_hash": "0d45ee230f14fe12f3207f5f2e7571bcefa795abbe6559ecfbb87b2db0f078dc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9a9e03c3"
+      }
+    },
+    {
+      "segment_id": "e420843f",
+      "source_content": "> It is important to use the `@objc` modifiers to ensure the class and functions are exported properly to the Objective-C runtime.",
+      "source_content_hash": "69fea418098278d02060afbfb2082cd81720e08946feee3dc2c7f0bc92fe89c1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 使用 `@objc` 修飾符至關重要，以確保類別和函式能正確導出至 Objective-C 運行環境。"
+      }
+    },
+    {
+      "segment_id": "c6dee347",
+      "source_content": "Then create a private implementation file that will register the required information with React Native:",
+      "source_content_hash": "9f545c657c6bc75202b86eb5b463a3ade1df892870eab4587860795692a00c2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著建立一個私有實作檔案，用於向 React Native 註冊必要資訊："
+      }
+    },
+    {
+      "segment_id": "050e4316",
+      "source_content": "```objectivec\n// CalendarManagerBridge.m\n#import <React/RCTBridgeModule.h>\n\n@interface RCT_EXTERN_MODULE(CalendarManager, NSObject)\n\nRCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)date)\n\n@end\n```",
+      "source_content_hash": "75c135be894c1102b13d8ce429c56c84bba8628e138aad9410354e11f99d6116",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_050e4316"
+      }
+    },
+    {
+      "segment_id": "9623a9ba",
+      "source_content": "For those of you new to Swift and Objective-C, whenever you [mix the two languages in an iOS project](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), you will also need an additional bridging file, known as a bridging header, to expose the Objective-C files to Swift. Xcode will offer to create this header file for you if you add your Swift file to your app through the Xcode `File>New File` menu option. You will need to import `RCTBridgeModule.h` in this header file.",
+      "source_content_hash": "be7111ba3b0ffcd5a3f93bbf8261acfeb71ff060d3bbf1f1d765662b8f8e65a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於剛接觸 Swift 和 Objective-C 的開發者，當您在 iOS 專案中[混合使用這兩種語言](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)時，還需要一個額外的橋接檔案（稱為橋接標頭檔）來將 Objective-C 檔案暴露給 Swift。若您透過 Xcode 的「檔案>新增檔案」選單將 Swift 檔案加入專案，Xcode 會提示您建立此標頭檔。您需要在該標頭檔中導入 `RCTBridgeModule.h`。"
+      }
+    },
+    {
+      "segment_id": "70609ff7",
+      "source_content": "```objectivec\n// CalendarManager-Bridging-Header.h\n#import <React/RCTBridgeModule.h>\n```",
+      "source_content_hash": "a028a49cf69503155a9417a850c282ad9702da6fe4c7d529d3fe2fe8626b8093",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_70609ff7"
+      }
+    },
+    {
+      "segment_id": "52e54b91",
+      "source_content": "You can also use `RCT_EXTERN_REMAP_MODULE` and `_RCT_EXTERN_REMAP_METHOD` to alter the JavaScript name of the module or methods you are exporting. For more information see [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTBridgeModule.h).",
+      "source_content_hash": "0f3d8313e88a68e2fa72f389150967f2aaf737201a61ca1f9ae50873484e56f9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您也可以使用 `RCT_EXTERN_REMAP_MODULE` 和 `_RCT_EXTERN_REMAP_METHOD` 來調整導出模組或方法在 JavaScript 中的名稱。更多資訊請參閱 [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTBridgeModule.h)。"
+      }
+    },
+    {
+      "segment_id": "a25fc5b9",
+      "source_content": "> Important when making third party modules: Static libraries with Swift are only supported in Xcode 9 and later. In order for the Xcode project to build when you use Swift in the iOS static library you include in the module, your main app project must contain Swift code and a bridging header itself. If your app project does not contain any Swift code, a workaround can be a single empty .swift file and an empty bridging header.",
+      "source_content_hash": "e9bd0452635d042cda462f2d85b8938ded5312df9e776f6492223f8eed6e3390",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 開發第三方模組時的重要注意事項：僅 Xcode 9 及以上版本支援包含 Swift 的靜態函式庫。若您在模組的 iOS 靜態函式庫中使用 Swift，主應用程式專案必須包含 Swift 程式碼和自身的橋接標頭檔才能成功建置 Xcode 專案。若應用程式專案不含任何 Swift 程式碼，可暫時以單一空白 .swift 檔案和空白橋接標頭檔作為解決方案。"
+      }
+    },
+    {
+      "segment_id": "e8863fbb",
+      "source_content": "### Reserved Method Names",
+      "source_content_hash": "d2ddf820374b569b7cd0bfe19049a31ba2601dc385aa0ad9fa30473c3a044e28",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 保留方法名稱"
+      }
+    },
+    {
+      "segment_id": "2de98247",
+      "source_content": "#### invalidate()",
+      "source_content_hash": "bfee2489cae821122e4e911fff56f74b430c9b4ef8a8765d770ac8b635c63dc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### invalidate()"
+      }
+    },
+    {
+      "segment_id": "09aeeb39",
+      "source_content": "Native modules can conform to the [RCTInvalidating](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTInvalidating.h) protocol on iOS by implementing the `invalidate()` method. This method [can be invoked](https://github.com/facebook/react-native/blob/0.62-stable/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm#L456) when the native bridge is invalidated (ie: on devmode reload). Please use this mechanism as necessary to do the required cleanup for your native module.",
+      "source_content_hash": "b656977a1438584c16532c06ef7c44606d1088f0f48682ab5b6143503275f310",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 端的原生模組可透過實作 `invalidate()` 方法來遵循 [RCTInvalidating](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTInvalidating.h) 協議。當原生橋接失效時（例如：開發模式重新載入），[系統可能調用](https://github.com/facebook/react-native/blob/0.62-stable/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm#L456)此方法。請視需求使用此機制執行原生模組所需的清理工作。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/native-modules-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.478696+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "afcee8053da609dd813f7a812e4725694980651543bbb64706f0b0238e272e6c"
+  }
+}

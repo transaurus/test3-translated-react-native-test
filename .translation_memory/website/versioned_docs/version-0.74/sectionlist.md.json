@@ -1,0 +1,1122 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/sectionlist.md",
+  "source_file_content_hash": "c35d7337ab3bd01852307b684f9d3cfd3316c9f3e5b98292aa703ef2d1ce5ff0",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: sectionlist\ntitle: SectionList\n---",
+      "source_content_hash": "5330760f35f7eb6278cc42a8121f57496f4e7516a97c671f4be486502a54e356",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A performant interface for rendering sectioned lists, supporting the most handy features:",
+      "source_content_hash": "72aeaf1878bf58a2a488960231844966b7c8560b8f9b70ae1138f73c4a450a21",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個高效能的介面，用於渲染分區列表，支援最實用的功能："
+      }
+    },
+    {
+      "segment_id": "df80d009",
+      "source_content": "- Fully cross-platform.\n- Configurable viewability callbacks.\n- List header support.\n- List footer support.\n- Item separator support.\n- Section header support.\n- Section separator support.\n- Heterogeneous data and item rendering support.\n- Pull to Refresh.\n- Scroll loading.",
+      "source_content_hash": "0f487edf392943553bf38c2d24db65b60f59f9eb51041b5a17bf9a01322f3d4d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 完全跨平台。\n- 可配置的可見性回調。\n- 列表標頭支援。\n- 列表頁尾支援。\n- 項目分隔線支援。\n- 分區標頭支援。\n- 分區分隔線支援。\n- 異質數據和項目渲染支援。\n- 下拉刷新。\n- 滾動載入。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "If you don't need section support and want a simpler interface, use [`<FlatList>`](flatlist.md).",
+      "source_content_hash": "1c8a13dba8633567592a7eb50e44f36d985939dd53947157df355d7e4fa20b96",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您不需要分區支援且希望更簡單的介面，請使用 [`<FlatList>`](flatlist.md)。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "41a8ae85",
+      "source_content": "```SnackPlayer name=SectionList%20Example\nimport React from 'react';\nimport {\n  StyleSheet,\n  Text,\n  View,\n  SafeAreaView,\n  SectionList,\n  StatusBar,\n} from 'react-native';\n\nconst DATA = [\n  {\n    title: 'Main dishes',\n    data: ['Pizza', 'Burger', 'Risotto'],\n  },\n  {\n    title: 'Sides',\n    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],\n  },\n  {\n    title: 'Drinks',\n    data: ['Water', 'Coke', 'Beer'],\n  },\n  {\n    title: 'Desserts',\n    data: ['Cheese Cake', 'Ice Cream'],\n  },\n];\n\nconst App = () => (\n  <SafeAreaView style={styles.container}>\n    <SectionList\n      sections={DATA}\n      keyExtractor={(item, index) => item + index}\n      renderItem={({item}) => (\n        <View style={styles.item}>\n          <Text style={styles.title}>{item}</Text>\n        </View>\n      )}\n      renderSectionHeader={({section: {title}}) => (\n        <Text style={styles.header}>{title}</Text>\n      )}\n    />\n  </SafeAreaView>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    paddingTop: StatusBar.currentHeight,\n    marginHorizontal: 16,\n  },\n  item: {\n    backgroundColor: '#f9c2ff',\n    padding: 20,\n    marginVertical: 8,\n  },\n  header: {\n    fontSize: 32,\n    backgroundColor: '#fff',\n  },\n  title: {\n    fontSize: 24,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "fb6b82dac0a844b75252fdf2c87302a8e5c0be0f33601a25f8160cd3f3cf3fce",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41a8ae85"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "This is a convenience wrapper around [`<VirtualizedList>`](virtualizedlist.md), and thus inherits its props (as well as those of [`<ScrollView>`](scrollview.md)) that aren't explicitly listed here, along with the following caveats:",
+      "source_content_hash": "3abd10fedf6459b5d1849f3c0133d9179c14cf7dd18144ba1e986d29acda65f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是 [`<VirtualizedList>`](virtualizedlist.md) 的便利封裝，因此繼承了其未在此明確列出的屬性（以及 [`<ScrollView>`](scrollview.md) 的屬性），並有以下注意事項："
+      }
+    },
+    {
+      "segment_id": "b0dbe2f3",
+      "source_content": "- Internal state is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.\n- This is a `PureComponent` which means that it will not re-render if `props` remain shallow-equal. Make sure that everything your `renderItem` function depends on is passed as a prop (e.g. `extraData`) that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state.\n- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate and momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.\n- By default, the list looks for a `key` prop on each item and uses that for the React key. Alternatively, you can provide a custom `keyExtractor` prop.",
+      "source_content_hash": "f7ac61e51de79aa31c67e98e89716e325de509d4ad4e8463cef0aaf04639d5d8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 當內容滾動出渲染視窗時，內部狀態不會保留。請確保所有數據都捕獲在項目數據或外部存儲（如 Flux、Redux 或 Relay）中。\n- 這是一個 `PureComponent`，意味著如果 `props` 保持淺層相等，它不會重新渲染。確保您的 `renderItem` 函數依賴的所有內容都作為 prop 傳遞（例如 `extraData`），且在更新後不會 `===`，否則您的 UI 可能不會更新。這包括 `data` prop 和父組件狀態。\n- 為了限制內存使用並實現平滑滾動，內容會異步渲染到屏幕外。這意味著可能會滾動得比填充速率快，並暫時看到空白內容。這是一個可以根據每個應用需求調整的權衡，我們正在幕後努力改進它。\n- 默認情況下，列表會查找每個項目上的 `key` prop 並將其用作 React key。或者，您可以提供自定義的 `keyExtractor` prop。"
+      }
+    },
+    {
+      "segment_id": "7fc4bca5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "71169a2d",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "c7c92a79",
+      "source_content": "### [VirtualizedList Props](virtualizedlist.md#props)",
+      "source_content_hash": "a989651ad5d5cf3711d9507009b9b28466e831d1afe8b6997cdc53dddeff77ce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [VirtualizedList 屬性](virtualizedlist.md#props)"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "Inherits [VirtualizedList Props](virtualizedlist.md#props).",
+      "source_content_hash": "ec7acf9b258437680cb83b7526ab2e2a83e1be204a37f36e8e238f8a80b0297c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [VirtualizedList 屬性](virtualizedlist.md#props)。"
+      }
+    },
+    {
+      "segment_id": "bc8bc928",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "### <div class=\"label required basic\">Required</div>**`renderItem`**",
+      "source_content_hash": "3a34afbc0e8136210cfd13841054c85629fe227918576d1032b34bb118d123a1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### <div class=\"label required basic\">必填</div>**`renderItem`**"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "Default renderer for every item in every section. Can be over-ridden on a per-section basis. Should return a React element.",
+      "source_content_hash": "a8339ba9688efa3fe87a9ee983e75c8eaeeb3ba4693e41c8e059d4b8406487e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個分區中每個項目的默認渲染器。可以按分區覆蓋。應返回一個 React 元素。"
+      }
+    },
+    {
+      "segment_id": "df0a9188",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_df0a9188"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "The render function will be passed an object with the following keys:",
+      "source_content_hash": "387cdee9105b965ac8e2f45d3438ad16cb1e2f43212fb7830e982497ecaa43c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "渲染函數將傳入一個包含以下鍵的對象："
+      }
+    },
+    {
+      "segment_id": "10e4f9ca",
+      "source_content": "- 'item' (object) - the item object as specified in this section's `data` key\n- 'index' (number) - Item's index within the section.\n- 'section' (object) - The full section object as specified in `sections`.\n- 'separators' (object) - An object with the following keys:\n  - 'highlight' (function) - `() => void`\n  - 'unhighlight' (function) - `() => void`\n  - 'updateProps' (function) - `(select, newProps) => void`\n    - 'select' (enum) - possible values are 'leading', 'trailing'\n    - 'newProps' (object)",
+      "source_content_hash": "86b645ad0bf7f397c0d8d5da66c92a145d75d38eaeea545d2ab34a418ee96212",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 'item' (object) - 該分區 `data` 鍵中指定的項目對象\n- 'index' (number) - 項目在分區中的索引。\n- 'section' (object) - `sections` 中指定的完整分區對象。\n- 'separators' (object) - 包含以下鍵的對象：\n  - 'highlight' (function) - `() => void`\n  - 'unhighlight' (function) - `() => void`\n  - 'updateProps' (function) - `(select, newProps) => void`\n    - 'select' (enum) - 可能的值為 'leading', 'trailing'\n    - 'newProps' (object)"
+      }
+    },
+    {
+      "segment_id": "44f53186",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8f1c1cd6",
+      "source_content": "### <div class=\"label required basic\">Required</div>**`sections`**",
+      "source_content_hash": "542b8cf4558ee4febce16211dfe248686db799af9ec57bb80e65d7443a0493f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### <div class=\"label required basic\">必填</div>**`sections`**"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "The actual data to render, akin to the `data` prop in [`FlatList`](flatlist.md).",
+      "source_content_hash": "c90125eb874e37a3a8aa886a9d84f77be6f2669e1ca63c25878920144674e244",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實際要渲染的數據，類似於 [`FlatList`](flatlist.md) 中的 `data` prop。"
+      }
+    },
+    {
+      "segment_id": "b5b5da74",
+      "source_content": "| Type                                        |\n| ------------------------------------------- |\n| array of [Section](sectionlist.md#section)s |",
+      "source_content_hash": "99660bb1de703b489aec16ab5e1f2bc7d395284e679b2e9231b1af4db834d5b4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b5b5da74"
+      }
+    },
+    {
+      "segment_id": "8144f6e8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0d5321b7",
+      "source_content": "### `extraData`",
+      "source_content_hash": "428a428fbe21448b8fb390f01a1b0a65cbcb88fa2972abb7d5143b962f1754f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `extraData`"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "A marker property for telling the list to re-render (since it implements `PureComponent`). If any of your `renderItem`, Header, Footer, etc. functions depend on anything outside of the `data` prop, stick it here and treat it immutably.",
+      "source_content_hash": "e7bcc29ce4555057bd9876cae145f33a35a84ea27d45f0582b3062eefeed75d3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個標記屬性，用於告訴列表重新渲染（因為它實現了 `PureComponent`）。如果您的 `renderItem`、標頭、頁尾等函數依賴於 `data` prop 之外的任何內容，請將其放在這裡並視為不可變。"
+      }
+    },
+    {
+      "segment_id": "c9fc9c02",
+      "source_content": "| Type |\n| ---- |\n| any  |",
+      "source_content_hash": "a501fd64a4634e7eb5eb96b5d3bf9a7d04f3c5db069ef98e370d294238d75e92",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9fc9c02"
+      }
+    },
+    {
+      "segment_id": "74a488b8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b77e7669",
+      "source_content": "### `initialNumToRender`",
+      "source_content_hash": "f68dffca60078bc985094813abb5c2f213e9f31c842839f6d9f9f1d1203a8060",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `initialNumToRender`"
+      }
+    },
+    {
+      "segment_id": "619c3209",
+      "source_content": "How many items to render in the initial batch. This should be enough to fill the screen but not much more. Note these items will never be unmounted as part of the windowed rendering in order to improve perceived performance of scroll-to-top actions.",
+      "source_content_hash": "73b56a16e5221fe31b606129c67a4ebe9d9e4f623f94fd3cdf118d46e95db071",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "初始批次中要渲染的項目數量。這個數量應該足以填滿螢幕，但不宜過多。請注意，這些項目作為視窗化渲染的一部分，永遠不會被卸載，以提升滾動至頂部操作的感知性能。"
+      }
+    },
+    {
+      "segment_id": "7c8086c4",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `10`    |",
+      "source_content_hash": "a96c1a3c92e9b5be076a1dd9b27b0dad30f1d3cb39e6ee796c61fb71ea5a42aa",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7c8086c4"
+      }
+    },
+    {
+      "segment_id": "c7daeccd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d4eab4a6",
+      "source_content": "### `inverted`",
+      "source_content_hash": "f8b1b2a3f4429a5ab8b4b4b7407cbba217215f7e99b4c10a3f6621d26ffbbe1a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `inverted`"
+      }
+    },
+    {
+      "segment_id": "0ddaa835",
+      "source_content": "Reverses the direction of scroll. Uses scale transforms of -1.",
+      "source_content_hash": "e62a0592c21d45060d37409356b293dc6a0f77a8742df2b0a370bbc473cf83c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "反轉滾動方向。使用 -1 的縮放變換。"
+      }
+    },
+    {
+      "segment_id": "62c9412b",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_62c9412b"
+      }
+    },
+    {
+      "segment_id": "d7603b33",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "191265da",
+      "source_content": "### `ItemSeparatorComponent`",
+      "source_content_hash": "c01bcb774f1b0233475a2dfb3e30cb2b8eac655b4d46836cd4630b72c41f6570",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `ItemSeparatorComponent`"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "Rendered in between each item, but not at the top or bottom. By default, `highlighted`, `section`, and `[leading/trailing][Item/Section]` props are provided. `renderItem` provides `separators.highlight`/`unhighlight` which will update the `highlighted` prop, but you can also add custom props with `separators.updateProps`. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).",
+      "source_content_hash": "9f362b1b8fb94f31c42f1f5daac4ce2b630d00e269c945d6f1c04c9f5030e7d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在每個項目之間渲染，但不在頂部或底部渲染。預設情況下，會提供 `highlighted`、`section` 和 `[leading/trailing][Item/Section]` 屬性。`renderItem` 提供 `separators.highlight`/`unhighlight` 來更新 `highlighted` 屬性，但您也可以透過 `separators.updateProps` 添加自訂屬性。可以是 React 組件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。"
+      }
+    },
+    {
+      "segment_id": "bddedd57",
+      "source_content": "| Type                         |\n| ---------------------------- |\n| component, function, element |",
+      "source_content_hash": "b40bfb78778bee147e0727424be5b269e55295be0901ccb3c116fdf51f12d70c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bddedd57"
+      }
+    },
+    {
+      "segment_id": "62d5dc64",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "### `keyExtractor`",
+      "source_content_hash": "2716fa5d92409804f4eb857234d14a4a69d270b6e4c253c710317108d643d2b9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `keyExtractor`"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "Used to extract a unique key for a given item at the specified index. Key is used for caching and as the React key to track item re-ordering. The default extractor checks `item.key`, then falls back to using the index, like React does. Note that this sets keys for each item, but each overall section still needs its own key.",
+      "source_content_hash": "5295481bb4684236d620272c13fc0feb5bb5a65f34a5126f37944f60662604a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於在指定索引處為給定項目提取唯一鍵。鍵用於快取和作為 React 鍵來追蹤項目重新排序。預設提取器檢查 `item.key`，然後回退到使用索引，就像 React 所做的那樣。請注意，這為每個項目設置了鍵，但每個整體部分仍然需要自己的鍵。"
+      }
+    },
+    {
+      "segment_id": "12f67ca2",
+      "source_content": "| Type                                    |\n| --------------------------------------- |\n| (item: object, index: number) => string |",
+      "source_content_hash": "d295f8e2aaf89af343ddcb3e75910ba535d5659f5444a4e1d0fa363d542c292d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12f67ca2"
+      }
+    },
+    {
+      "segment_id": "44ffe19e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "### `ListEmptyComponent`",
+      "source_content_hash": "42feebf6caf9b4d0c6d479b28651905eaa05b6d7e3392cf400bcc0655bf1a48d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `ListEmptyComponent`"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "Rendered when the list is empty. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).",
+      "source_content_hash": "74e94392a7f4e8235e47653c155df16a43a2460788abfe30ea0291fb0e0ac5ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當列表為空時渲染。可以是 React 組件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。"
+      }
+    },
+    {
+      "segment_id": "e9e27db3",
+      "source_content": "| Type               |\n| ------------------ |\n| component, element |",
+      "source_content_hash": "df5a548ec49cf7f31dddedda745586f85a7e4d4cfb0b31e087357232f1ab8b4a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e9e27db3"
+      }
+    },
+    {
+      "segment_id": "2663a629",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### `ListFooterComponent`",
+      "source_content_hash": "276a308660e88f918f554cd3ec3a439457a0a9555ff5b423b0e06093f5d30d55",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `ListFooterComponent`"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "Rendered at the very end of the list. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).",
+      "source_content_hash": "f504c68ae658138fc2d97050ebdc6bb706c82d35e848eba5bfb23230f99e15f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在列表的最末端渲染。可以是 React 組件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。"
+      }
+    },
+    {
+      "segment_id": "0542488c",
+      "source_content": "| Type               |\n| ------------------ |\n| component, element |",
+      "source_content_hash": "df5a548ec49cf7f31dddedda745586f85a7e4d4cfb0b31e087357232f1ab8b4a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0542488c"
+      }
+    },
+    {
+      "segment_id": "dc651f09",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dd21637d",
+      "source_content": "### `ListHeaderComponent`",
+      "source_content_hash": "552fe951b17d8172907781c2da3ecd98144868df8b5d52cf67663c52271de7e0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `ListHeaderComponent`"
+      }
+    },
+    {
+      "segment_id": "09f901c3",
+      "source_content": "Rendered at the very beginning of the list. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).",
+      "source_content_hash": "5be186c8253db5b7808a49c35786e9f9d595a8d0987ffc5153741e1c1794ac88",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在列表的最開頭渲染。可以是 React 組件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。"
+      }
+    },
+    {
+      "segment_id": "3a00ac07",
+      "source_content": "| Type               |\n| ------------------ |\n| component, element |",
+      "source_content_hash": "df5a548ec49cf7f31dddedda745586f85a7e4d4cfb0b31e087357232f1ab8b4a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3a00ac07"
+      }
+    },
+    {
+      "segment_id": "6c489d9e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2c3ad447",
+      "source_content": "### `onRefresh`",
+      "source_content_hash": "dd02ac7b8c18a4504e015b27f0629f01c4a2e59ba05618b34e5ecaf124280856",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onRefresh`"
+      }
+    },
+    {
+      "segment_id": "61e5dad6",
+      "source_content": "If provided, a standard RefreshControl will be added for \"Pull to Refresh\" functionality. Make sure to also set the `refreshing` prop correctly. To offset the RefreshControl from the top (e.g. by 100 pts), use `progressViewOffset={100}`.",
+      "source_content_hash": "666bbb00e7fe156847e326ca777da4cfbb0ee8fcd2f291b8c2e1073ccd3b624d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果提供，將添加標準的 RefreshControl 以實現「下拉刷新」功能。確保同時正確設置 `refreshing` 屬性。要將 RefreshControl 從頂部偏移（例如 100 點），請使用 `progressViewOffset={100}`。"
+      }
+    },
+    {
+      "segment_id": "c8d4c06e",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c8d4c06e"
+      }
+    },
+    {
+      "segment_id": "b19b3a49",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fbdb880f",
+      "source_content": "### `onViewableItemsChanged`",
+      "source_content_hash": "7bd3f2da1d7b35dbd00ed88b2cc3a916125e6f3149d7984f39c6b5470bfd8319",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onViewableItemsChanged`"
+      }
+    },
+    {
+      "segment_id": "d3912b2e",
+      "source_content": "Called when the viewability of rows changes, as defined by the `viewabilityConfig` prop.",
+      "source_content_hash": "6def93913222051cae593c97429a06af9b800be6e78877a137884a0a3d43e99b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當行的可見性發生變化時調用，由 `viewabilityConfig` 屬性定義。"
+      }
+    },
+    {
+      "segment_id": "4e844e8c",
+      "source_content": "| Type                                                                                                  |\n| ----------------------------------------------------------------------------------------------------- |\n| `md (callback: {changed: [ViewToken](viewtoken)[], viewableItems: [ViewToken](viewtoken)[]}) => void` |",
+      "source_content_hash": "6cafc4df8d5945abb111fb499ea2305d7ff67469d1b8c86f7b357b890a53b59d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e844e8c"
+      }
+    },
+    {
+      "segment_id": "56f3dd31",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5f4381f8",
+      "source_content": "### `refreshing`",
+      "source_content_hash": "1bc2b55a5da9a24a73ceb6606770e04084d1cc586e025e8f640f63878cb5deb6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `refreshing`"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "Set this true while waiting for new data from a refresh.",
+      "source_content_hash": "f4a9731dac1a6070d089c160fb6b6ff270d14bb5d9936f06dd90ce04781370f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在等待刷新數據時將其設置為 true。"
+      }
+    },
+    {
+      "segment_id": "47f1ba32",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_47f1ba32"
+      }
+    },
+    {
+      "segment_id": "e3991db6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f7d4d765",
+      "source_content": "### `removeClippedSubviews`",
+      "source_content_hash": "d2b01d5ab6351cea3ad1de31e0a03694c1e6f6ced6db1eea925e53d9c6a9c545",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeClippedSubviews`"
+      }
+    },
+    {
+      "segment_id": "004022ba",
+      "source_content": "> Note: may have bugs (missing content) in some circumstances - use at your own risk.",
+      "source_content_hash": "26de227fcb6d88d0efc70d02609f50f3df0eb1c338b9b8051e59862d3a2bd594",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：在某些情況下可能存在錯誤（內容缺失）— 使用時請自行承擔風險。"
+      }
+    },
+    {
+      "segment_id": "5d3138c7",
+      "source_content": "This may improve scroll performance for large lists.",
+      "source_content_hash": "4bef19f9726c3c3c4cc816aa50efd90146e0bc8bcd88727b54c8652073242cc5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這可能會提升大型列表的滾動性能。"
+      }
+    },
+    {
+      "segment_id": "a177dca5",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a177dca5"
+      }
+    },
+    {
+      "segment_id": "874468e6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fe3afe38",
+      "source_content": "### `renderSectionFooter`",
+      "source_content_hash": "dfeaf177feef5a0f8f0aba2ac51dd5185d7e219c7ab2b171425e6cd5c6e6819e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `renderSectionFooter`"
+      }
+    },
+    {
+      "segment_id": "f50056c0",
+      "source_content": "Rendered at the bottom of each section.",
+      "source_content_hash": "b7b0c8b862d42c52485d62f260461328d7fc34f2605a0e53f86c507d0fb421df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在每個部分的底部渲染。"
+      }
+    },
+    {
+      "segment_id": "8cb8e346",
+      "source_content": "| Type                                                                      |\n| ------------------------------------------------------------------------- |\n| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null` |",
+      "source_content_hash": "f28788b10185a43141f66ecd849fe1f4f6f2c226a28f1ab0b98202b61554a28d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8cb8e346"
+      }
+    },
+    {
+      "segment_id": "8d0188f6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d59d3f3c",
+      "source_content": "### `renderSectionHeader`",
+      "source_content_hash": "2f4dd29590590e12d1b1b4ac1bb1b42c5ca6c5a078652cfd09e0e774a6f3522d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `renderSectionHeader`"
+      }
+    },
+    {
+      "segment_id": "b632973a",
+      "source_content": "Rendered at the top of each section. These stick to the top of the `ScrollView` by default on iOS. See `stickySectionHeadersEnabled`.",
+      "source_content_hash": "3a98fd248ee02af581a2d51e15c64c6bcc4bb037197ad65191442c6f99ba964e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在每個區段的頂部渲染。在 iOS 上預設會固定在 `ScrollView` 頂部。詳見 `stickySectionHeadersEnabled`。"
+      }
+    },
+    {
+      "segment_id": "ebe5dbb8",
+      "source_content": "| Type                                                                      |\n| ------------------------------------------------------------------------- |\n| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null` |",
+      "source_content_hash": "f28788b10185a43141f66ecd849fe1f4f6f2c226a28f1ab0b98202b61554a28d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ebe5dbb8"
+      }
+    },
+    {
+      "segment_id": "1685fa07",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cc33bff5",
+      "source_content": "### `SectionSeparatorComponent`",
+      "source_content_hash": "53bd83800bfb7daf6e679f24934181d628e0d915d793c82dfa9eac81854bdda3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `SectionSeparatorComponent`"
+      }
+    },
+    {
+      "segment_id": "66e62938",
+      "source_content": "Rendered at the top and bottom of each section (note this is different from `ItemSeparatorComponent` which is only rendered between items). These are intended to separate sections from the headers above and below and typically have the same highlight response as `ItemSeparatorComponent`. Also receives `highlighted`, `[leading/trailing][Item/Section]`, and any custom props from `separators.updateProps`.",
+      "source_content_hash": "cf3869cf07aedc95439890a3da4914257327310e5dba8a931949a08349b8e9ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在每個區段的頂部和底部渲染（注意這與 `ItemSeparatorComponent` 不同，後者僅在項目之間渲染）。這些組件旨在將區段與上方和下方的標頭分隔開，通常具有與 `ItemSeparatorComponent` 相同的高亮響應。也會接收 `highlighted`、`[leading/trailing][Item/Section]` 以及來自 `separators.updateProps` 的任何自定義屬性。"
+      }
+    },
+    {
+      "segment_id": "181ae0e1",
+      "source_content": "| Type               |\n| ------------------ |\n| component, element |",
+      "source_content_hash": "df5a548ec49cf7f31dddedda745586f85a7e4d4cfb0b31e087357232f1ab8b4a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_181ae0e1"
+      }
+    },
+    {
+      "segment_id": "f3f517b3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a99db0f6",
+      "source_content": "### `stickySectionHeadersEnabled`",
+      "source_content_hash": "067caf1a878df55187e33f37c7f8a5c3fba35bad808e1e00c0866d3725098e98",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `stickySectionHeadersEnabled`"
+      }
+    },
+    {
+      "segment_id": "2ab62b74",
+      "source_content": "Makes section headers stick to the top of the screen until the next one pushes it off. Only enabled by default on iOS because that is the platform standard there.",
+      "source_content_hash": "c053576086f51965f2a7845cf6f4d04bfd1c048265292a9c3b97015b8545f335",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓區段標頭固定在螢幕頂部，直到下一個標頭將其推離。預設僅在 iOS 上啟用，因為這是該平台的標準行為。"
+      }
+    },
+    {
+      "segment_id": "93ab5198",
+      "source_content": "| Type    | Default                                                                                          |\n| ------- | ------------------------------------------------------------------------------------------------ |\n| boolean | `false` <div class=\"label android\">Android</div><hr/>`true` <div className=\"label ios\">iOS</div> |",
+      "source_content_hash": "d1a1366bb480188412145e49d05dc9bf3f041e4d72db819fe1f1aed9c5181af3",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93ab5198"
+      }
+    },
+    {
+      "segment_id": "9cdf9229",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "ca32a808",
+      "source_content": "### `flashScrollIndicators()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "04b09b47ee8dbdd4d1568fc177f8849c83ee50cf2a48a12844cd3e8e375d7c2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flashScrollIndicators()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "7a5ad31f",
+      "source_content": "```tsx\nflashScrollIndicators();\n```",
+      "source_content_hash": "a047294486a7ea7f6d43d35f66429435ae71c714ad4266f3b02cf5e588bb87f5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7a5ad31f"
+      }
+    },
+    {
+      "segment_id": "1f92e934",
+      "source_content": "Displays the scroll indicators momentarily.",
+      "source_content_hash": "eb9be2699dbaddecf1162ff5bbaec42a0104d6766322e67f7233a52b7b734282",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "短暫顯示滾動指示器。"
+      }
+    },
+    {
+      "segment_id": "883ad9ea",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e0e9d747",
+      "source_content": "### `recordInteraction()`",
+      "source_content_hash": "7022612590be9be5bd1d2e5f965628e9d69bffbb94e2e76528e0e94b7513cd84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `recordInteraction()`"
+      }
+    },
+    {
+      "segment_id": "f24a5721",
+      "source_content": "```tsx\nrecordInteraction();\n```",
+      "source_content_hash": "1e1bececed22a784a5ae91223f51b7ace87d7964ab29e51aa1066e51be4bc57f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f24a5721"
+      }
+    },
+    {
+      "segment_id": "b8954ec9",
+      "source_content": "Tells the list an interaction has occurred, which should trigger viewability calculations, e.g. if `waitForInteractions` is true and the user has not scrolled. This is typically called by taps on items or by navigation actions.",
+      "source_content_hash": "d69f43486420c2fff2d508316013ec19fb02007bd593654fec06cdc78a97c9ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通知列表發生了互動，這應觸發可見性計算，例如當 `waitForInteractions` 為 true 且用戶尚未滾動時。通常由點擊項目或導航操作調用。"
+      }
+    },
+    {
+      "segment_id": "f875b13d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### `scrollToLocation()`",
+      "source_content_hash": "fce5ac5d5bdeab208c6fcd73df989d01966f1a13d27646a39b9171628a506445",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollToLocation()`"
+      }
+    },
+    {
+      "segment_id": "31df1954",
+      "source_content": "```tsx\nscrollToLocation(params: SectionListScrollParams);\n```",
+      "source_content_hash": "fab7de86b247445612d901f4f4961d5c9291fae58ca5ad2e056dc45af35cad81",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_31df1954"
+      }
+    },
+    {
+      "segment_id": "a6c4ab41",
+      "source_content": "Scrolls to the item at the specified `sectionIndex` and `itemIndex` (within the section) positioned in the viewable area such that `viewPosition` 0 places it at the top (and may be covered by a sticky header), 1 at the bottom, and 0.5 centered in the middle.",
+      "source_content_hash": "d1049bd54e9769858cae8dadb04aef759d4e45592902167d5cf1c89fece2be22",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動到指定 `sectionIndex` 和 `itemIndex`（區段內）的項目，並將其定位在可見區域中，其中 `viewPosition` 為 0 時將其置於頂部（可能被固定標頭覆蓋），1 時置於底部，0.5 時置於中間。"
+      }
+    },
+    {
+      "segment_id": "e62a8227",
+      "source_content": "> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` or `onScrollToIndexFailed` prop.",
+      "source_content_hash": "856a014573f53fd88d3b25047b6ad94e392d62627650103b9888166dc8b15108",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：若未指定 `getItemLayout` 或 `onScrollToIndexFailed` 屬性，則無法滾動到渲染窗口外的位置。"
+      }
+    },
+    {
+      "segment_id": "4443801b",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "54bf46fb",
+      "source_content": "| Name                                                    | Type   |\n| ------------------------------------------------------- | ------ |\n| params <div class=\"label basic required\">Required</div> | object |",
+      "source_content_hash": "f3888e7920dd10002fb09a7f179f6fe85890029024db3f2de3c1bdf323e037e0",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54bf46fb"
+      }
+    },
+    {
+      "segment_id": "647ea627",
+      "source_content": "Valid `params` keys are:",
+      "source_content_hash": "3a47ff88af562cb637f5a1c62778f1acf49b126f92fd66c8bc4952c6c7ba3f50",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有效的 `params` 鍵為："
+      }
+    },
+    {
+      "segment_id": "a4af67f9",
+      "source_content": "- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.\n- 'itemIndex' (number) - Index within section for the item to scroll to. Required.\n- 'sectionIndex' (number) - Index for section that contains the item to scroll to. Required.\n- 'viewOffset' (number) - A fixed number of pixels to offset the final target position, e.g. to compensate for sticky headers.\n- 'viewPosition' (number) - A value of `0` places the item specified by index at the top, `1` at the bottom, and `0.5` centered in the middle.",
+      "source_content_hash": "d754b407fe81189312b64767777bc4e366f59fef8c3dfeeb95c4bf6ca1d67f02",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 'animated' (boolean) - 列表滾動時是否執行動畫。預設為 `true`。\n- 'itemIndex' (number) - 要滾動到的項目在區段內的索引。必填。\n- 'sectionIndex' (number) - 包含要滾動到項目的區段索引。必填。\n- 'viewOffset' (number) - 固定像素數以偏移最終目標位置，例如用於補償固定標頭。\n- 'viewPosition' (number) - 值為 `0` 時將指定索引的項目置於頂部，`1` 時置於底部，`0.5` 時置於中間。"
+      }
+    },
+    {
+      "segment_id": "acfd6cd9",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 類型定義"
+      }
+    },
+    {
+      "segment_id": "cb0acec9",
+      "source_content": "### Section",
+      "source_content_hash": "9bf8c015315cbb9cb03a5db81dcb087ee8fb5bbd643a8a760a239cb8e4a85532",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Section"
+      }
+    },
+    {
+      "segment_id": "eb398072",
+      "source_content": "An object that identifies the data to be rendered for a given section.",
+      "source_content_hash": "ecfded42b33e9cc9f2b397db8be7d15d71b486e9b5d45e2d49d74e8366080409",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "標識要為特定區段渲染的數據的對象。"
+      }
+    },
+    {
+      "segment_id": "b893c8fb",
+      "source_content": "| Type |\n| ---- |\n| any  |",
+      "source_content_hash": "a501fd64a4634e7eb5eb96b5d3bf9a7d04f3c5db069ef98e370d294238d75e92",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b893c8fb"
+      }
+    },
+    {
+      "segment_id": "4667c154",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "98dbe8a0",
+      "source_content": "| Name                                                  | Type               | Description                                                                                                                                                         |\n| ----------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| data <div class=\"label basic required\">Required</div> | array              | The data for rendering items in this section. Array of objects, much like [`FlatList`'s data prop](flatlist#required-data).                                         |\n| key                                                   | string             | Optional key to keep track of section re-ordering. If you don't plan on re-ordering sections, the array index will be used by default.                              |\n| renderItem                                            | function           | Optionally define an arbitrary item renderer for this section, overriding the default [`renderItem`](sectionlist#renderitem) for the list.                          |\n| ItemSeparatorComponent                                | component, element | Optionally define an arbitrary item separator for this section, overriding the default [`ItemSeparatorComponent`](sectionlist#itemseparatorcomponent) for the list. |\n| keyExtractor                                          | function           | Optionally define an arbitrary key extractor for this section, overriding the default [`keyExtractor`](sectionlist#keyextractor).                                   |",
+      "source_content_hash": "2e070f473777ee3a036217266467ac12740afaf31073c26bba35f1097df50f24",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_98dbe8a0"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/sectionlist.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.572637+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "c35d7337ab3bd01852307b684f9d3cfd3316c9f3e5b98292aa703ef2d1ce5ff0"
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2022-06-16-resources-migrating-your-react-native-library-to-the-new-architecture.md",
+  "source_file_content_hash": "5c78ea78b7311e99c16016f7e39365be9fd6583b7ec20be2044e8e6f72de7221",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Helping migrate React Native libraries to the New Architecture\nauthors: [cipolleschi]\ntags: [announcement]\ndate: 2022-06-16\n---",
+      "source_content_hash": "03ec5d5c118d4988132051f5f2d3091d00c01edaac92492a010367b9dd14e0b2",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "**tl; dr**: We are working on improving the resources supporting the React Native New Architecture. We have already released a repository to help migrate your app ([RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)) and one for your libraries ([RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)). We are also revamping the [New Architecture guide](https://github.com/facebook/react-native-website/pull/3037) on the Website and we created a [GitHub Working Group](https://github.com/reactwg/react-native-new-architecture/discussions) to answer questions related to the New Architecture.",
+      "source_content_hash": "dad0dde6d02f7edaca4c6a0a5ef93e37e5ab0355a781abb6e748227ad163dedf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**簡而言之**：我們正在完善支援 React Native 新架構的資源。我們已發布兩個儲存庫來協助遷移應用程式（[RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)）和函式庫（[RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)）。同時我們正在更新官網的[新架構指南](https://github.com/facebook/react-native-website/pull/3037)，並創建了[GitHub 工作小組](https://github.com/reactwg/react-native-new-architecture/discussions)來解答新架構相關問題。"
+      }
+    },
+    {
+      "segment_id": "fc91ee08",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fc91ee08"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Introduction",
+      "source_content_hash": "d753efbab681fa4da82470d9a83b1c202de58f92fd498e77a269c1163bc4714b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 引言"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "In this post we are sharing an update on tools and resources to help you migrate your **Native Modules** and **Native Components** to their **New Architecture** equivalents, **TurboModule** and **Fabric Components**.",
+      "source_content_hash": "0221fba24097e2748dd333d1763a8ed385e6bc28ecc9e217707cfaad7c940a05",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本文將分享關於遷移工具和資源的最新進展，協助您將**原生模組**和**原生元件**升級為新架構對應的**TurboModule**與**Fabric 元件**。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "React Native users leverage vast number of open source libraries for building apps. For a complete and consistent ecosystem, it is necessary that these libraries migrate such that everyone can benefit from the unlocked capabilities and performance improvements of the New Architecture.",
+      "source_content_hash": "ca0cafd84552c01019efb801eb58840a654fa24470f251a9b494424bad3958a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 開發者廣泛使用開源函式庫來構建應用程式。為建立完整且一致的生態系統，這些函式庫必須完成遷移，才能讓所有人受益於新架構帶來的效能提升與新功能。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Here is what we’re working on to support library developers in migrating to the New Architecture:",
+      "source_content_hash": "bc05b700ce6c2c0a978f1b84bb0375c3bb0102476477f0495f27deeefaebeb70",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是我們為支援函式庫開發者遷移至新架構所進行的措施："
+      }
+    },
+    {
+      "segment_id": "3b695c37",
+      "source_content": "- **Documentation:** We are expanding the [New Architecture guide](https://github.com/facebook/react-native-website/pull/3037) on the website to cover more concepts of the New Architecture and how to develop your components.\n- **Example Migrations:** We’ve set up two repositories to demonstrate how to migrate a React Native app to the New Architecture ([RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)) and how to create a **Fabric Component** and a **TurboModule** that work with both architectures ([RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)).\n- **Support:** Earlier this year, we created a [GitHub Working Group](https://github.com/reactwg/react-native-new-architecture/discussions) dedicated to discussion and questions around the New Architecture.",
+      "source_content_hash": "046c68224efc85be121b85028db12e5ce5ffe56aee6b6da43c838f30f0dd999c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **文件**：我們正在擴充官網的[新架構指南](https://github.com/facebook/react-native-website/pull/3037)，涵蓋更多新架構概念與元件開發方法。\n- **遷移範例**：我們建立了兩個示範儲存庫，分別展示如何將 React Native 應用遷移至新架構（[RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)），以及如何開發同時兼容兩種架構的**Fabric 元件**和**TurboModule**（[RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)）。\n- **支援**：今年初我們成立了專屬的[GitHub 工作小組](https://github.com/reactwg/react-native-new-architecture/discussions)，用於討論新架構相關問題。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "In this post, we will dig deeper into these resources and explain in more detail how you can use them most efficiently. Finally, we will provide a snapshot of the current migration state for the most used React Native libraries.",
+      "source_content_hash": "8ef0ed82cccdc381f43724434f502ec9338d86dd59d6a6ea61f2b65fe19a0f77",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本文將深入解析這些資源，並詳細說明如何有效運用。最後我們將提供當前主流 React Native 函式庫的遷移狀態概覽。"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "### Documentation",
+      "source_content_hash": "da631487f5813f13478d451ef192611dc59c4fbec31e852c3c3fa769277dd17d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 文件"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "In the past 6 months, we’ve added a [guide on adopting the New Architecture](https://github.com/reactwg/react-native-new-architecture#guides) and an [architecture deep-dive](/architecture/overview) on Fabric. We plan to expand this to include more guides and documentation around creating TurboModules, understanding CodeGen, and more. We plan to have updates to share by the 0.70 release.",
+      "source_content_hash": "dc0ce7d8d117df2b06aecb7424e056ea7eba5ba28af280b955b02e63c565697b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去六個月，我們新增了[採用新架構指南](https://github.com/reactwg/react-native-new-architecture#guides)與[Fabric 架構深度解析](/architecture/overview)。未來計劃擴充內容，包含 TurboModule 開發、CodeGen 解析等主題，預計在 0.70 版本發布時更新。"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "Currently, the **New Architecture** guide covers how to [migrate your app](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-apps.md) and [your libraries](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-libraries-prerequisites.md) to support the New Architecture properly.",
+      "source_content_hash": "2624ef1da8a8362db45e7656c902a4e938b7a6587a6d571e9c882146df7b3ad5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當前**新架構指南**涵蓋如何正確遷移[應用程式](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-apps.md)與[函式庫](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-libraries-prerequisites.md)以支援新架構。"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "If you are interested in the evolution of this guide, or have feedback, you can follow along on [this](https://github.com/facebook/react-native-website/pull/3037) pull request.",
+      "source_content_hash": "f286c53be22df730bcbf5ea257092de15fa845b13c32670cfb1b8939bb986632",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您想追蹤指南進展或提供反饋，可關注[此](https://github.com/facebook/react-native-website/pull/3037)拉取請求。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "### Example Migrations",
+      "source_content_hash": "29b8b6aee64a22d83668bfd90ee9414aa2a5a640bb5ce946d94c944cc399816b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 遷移範例"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "For developers who may want to follow along in code, we’ve prepared two example repositories.",
+      "source_content_hash": "db917f91ef02a98e1532e79d05aa2507b2c79a58d580c5cffe0dc0bc76345b46",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為方便開發者參照實作，我們準備了兩個範例儲存庫。"
+      }
+    },
+    {
+      "segment_id": "80d9e13c",
+      "source_content": "#### RNNewArchitectureApp",
+      "source_content_hash": "71d1b8c259eb325b976ccb4e66b525c6c3e9405e43d586bcbbe7e900bbdbb42c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### RNNewArchitectureApp"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "[This repo](https://github.com/react-native-community/RNNewArchitectureApp) was created to demonstrate how to migrate an app, the native modules and the native components from the legacy architecture on the React Native version 0.67 to the New Architecture and the most recent version of React Native. Each commit corresponds to an isolated migration step.",
+      "source_content_hash": "19cb78bce6485d45bd05ad38626dd4d8239ad38ab50e8559ae9e16033f694baf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[此儲存庫](https://github.com/react-native-community/RNNewArchitectureApp)展示如何將 React Native 0.67 版本的應用程式、原生模組與原生元件從舊架構遷移至新架構的最新版本。每個提交對應一個獨立的遷移步驟。"
+      }
+    },
+    {
+      "segment_id": "ff6ab177",
+      "source_content": "<figure>\n    <img src=\"/blog/assets/new-arch-example-steps-to-migrate-an-app.png\" alt=\"Example steps to migrate an app\" />\n    <figcaption>Commit list for a migration in the RNNewArchitectureApp repository</figcaption>\n</figure>",
+      "source_content_hash": "f9ed74187b2eabf7230d0d65c8f4e3da8afeed97f32efb5af3d4911a3598c69e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ff6ab177"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "The repo is organized as follows:",
+      "source_content_hash": "6cecc019c4788b30dc33c428170a5d10cb00f944641e8da176c07adcd721a385",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "儲存庫結構如下："
+      }
+    },
+    {
+      "segment_id": "6773b78b",
+      "source_content": "- A **main** branch has no code but a README.md which advertises other branches.\n- Several migration branches which show a migration from a specific version of RN to another.",
+      "source_content_hash": "e809f1cc5e568a8d05a7bbde8490a9a0db36c9b5714e506ce347e0d90bb30488",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **main**分支僅包含 README.md 文件，用於導覽其他分支。\n- 多個遷移分支展示從特定 RN 版本到另一版本的遷移過程。"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "Some of the migration branches also have a **RUN.md** file which describes in a more human-readable fashion the exact steps that have been applied in every commit.",
+      "source_content_hash": "68cfbdb3079576c907b706149becbc2e2a9f04030078133019e910a01d8114bb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "部分遷移分支還包含一個 **RUN.md** 文件，以更易讀的方式描述每個提交中應用的具體步驟。"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "We plan to keep this example up to date with the most recent stable releases, adding migrations to any minor release of React Native we are going to release. If you notice issue with any of the steps, please file an issue in the repository. This will hold until we have the reasonable feeling that most of the React Native users have migrated to the New Architecture.",
+      "source_content_hash": "d81d95b8ae8a97c45af27d327ee23be8cacc9371ef724fe5546ab1b9a84bc437",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們計劃讓這個範例與最新的穩定版本保持同步，針對每個即將發布的 React Native 小版本新增遷移步驟。如果您發現任何步驟存在問題，請在該存儲庫中提交 issue。這種做法將持續到我們合理認為大多數 React Native 用戶已遷移至新架構為止。"
+      }
+    },
+    {
+      "segment_id": "2c1b51df",
+      "source_content": "#### RNNewArchitectureLibraries",
+      "source_content_hash": "93906733b90b4500388d5551c4bf077aa77336ad82d065d88e17a6169babb487",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### RNNewArchitectureLibraries"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "Similarly, [this repo](https://github.com/react-native-community/RNNewArchitectureLibraries) provides a step-by-step guide on how to create a **TurboModule** and a **Fabric Component**. It has a focus on ensuring backward compatibility between the New Architecture and the legacy one.",
+      "source_content_hash": "48c08f9c833ab7951fd9a1fb39d1b91a90ec7e08c4b73aa49070eb20f521dd8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "類似地，[這個存儲庫](https://github.com/react-native-community/RNNewArchitectureLibraries)提供了逐步指南，說明如何創建 **TurboModule** 和 **Fabric 組件**，重點在於確保新架構與舊架構之間的向後兼容性。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "The repository is organized in a similar way to the previous one:",
+      "source_content_hash": "a2f995b75102a0782cc02eb19ee8fe2d299d53d9a94d53e867be6133694e3b28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該存儲庫的組織方式與前一個類似："
+      }
+    },
+    {
+      "segment_id": "24c174ca",
+      "source_content": "- A **main** branch has no code but a README.md which advertises other branches.\n- Other branches to show how to develop **TurboModules** and **Fabric Components**.",
+      "source_content_hash": "743a31a982eb384fcf0d18a2a875e83a2c8a5faff2c5f4d5ef7c800c99faf455",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **main** 分支沒有代碼，僅包含一個 README.md 文件，用於宣傳其他分支。\n- 其他分支展示如何開發 **TurboModules** 和 **Fabric Components**。"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "We plan to keep this example updated onto new releases of React Native, especially releases that affect library development, as well as add more examples on how to use advanced features (for example: implementing commands, event emitters, custom state). If you notice errors, please file an issue in the example repository.",
+      "source_content_hash": "900e206fce79420f9cf2c979e48e23446de5f8c62f7ff85ed8e8a1ba1ecda5ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們計劃讓這個範例隨著 React Native 的新版本更新，特別是影響庫開發的版本，並新增更多關於如何使用高級功能的範例（例如：實現命令、事件發射器、自定義狀態）。如果您發現錯誤，請在範例存儲庫中提交 issue。"
+      }
+    },
+    {
+      "segment_id": "a5a4323e",
+      "source_content": "### Support",
+      "source_content_hash": "3e57a62e66c9cf8978c247efe296eb9b3372ee226c7e308b8e1e5a242f3a0c7d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 支持"
+      }
+    },
+    {
+      "segment_id": "657c2b20",
+      "source_content": "We’ve created a dedicated [working group](https://github.com/reactwg/react-native-new-architecture) to give the community space to ask questions and get updates on the New Architecture. If you are a library maintainer, this is a valuable resource to find answers to your questions, and for us to know about your requirements. To join, please follow [these instructions](https://github.com/reactwg/react-native-new-architecture#how-to-join-the-working-group). Everyone is welcome.",
+      "source_content_hash": "6c784c8a312651e9bc9d99a885f871cb8371dd22a57c472be6a0fc8d3106a975",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們創建了一個專用的[工作組](https://github.com/reactwg/react-native-new-architecture)，為社區提供提問和獲取新架構更新的空間。如果您是庫維護者，這是一個寶貴的資源，可以找到問題的答案，並讓我們了解您的需求。要加入，請遵循[這些說明](https://github.com/reactwg/react-native-new-architecture#how-to-join-the-working-group)。歡迎所有人參與。"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "The working group is organized into several sections:",
+      "source_content_hash": "0d1a200bb1d4ff33bcf8f506e4568baaa3e0b5a194a46f844e1fdb9c4b1e2bee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "工作組分為以下幾個部分："
+      }
+    },
+    {
+      "segment_id": "69c1f590",
+      "source_content": "- [Announcements](https://github.com/reactwg/react-native-new-architecture/discussions/categories/announcements): A place to share milestones and significant updates on the RN New Architecture Rollout\n- [Deep Dive](https://github.com/reactwg/react-native-new-architecture/discussions/categories/deep-dive): A place to chat about deep dives and technical-specific topics\n- [Documentation](https://github.com/reactwg/react-native-new-architecture/discussions/categories/documentation): A place to chat about the New Architecture documentation and migration material\n- [Libraries](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries): A place to chat about 3rd party libraries and their migration story to the New Architecture\n- [Q&A](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a): A place to ask the community for help on the New Architecture topics\n- [Releases](https://github.com/reactwg/react-native-new-architecture/discussions/categories/releases): A place to chat about release specific bugs & build problems",
+      "source_content_hash": "ebc8e2c11e49998ec58dd0ca397c6f2f5f33831dea5bd8557e8ffe1cb7333fbf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [公告](https://github.com/reactwg/react-native-new-architecture/discussions/categories/announcements)：分享 RN 新架構推出的里程碑和重要更新的地方\n- [深度探討](https://github.com/reactwg/react-native-new-architecture/discussions/categories/deep-dive)：討論深度探討和技術特定主題的地方\n- [文檔](https://github.com/reactwg/react-native-new-architecture/discussions/categories/documentation)：討論新架構文檔和遷移材料的地方\n- [庫](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)：討論第三方庫及其遷移至新架構的故事的地方\n- [問答](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a)：向社區尋求新架構主題幫助的地方\n- [發布](https://github.com/reactwg/react-native-new-architecture/discussions/categories/releases)：討論特定版本的錯誤和構建問題的地方"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "To use this group effectively:",
+      "source_content_hash": "dfe18bbc04265d91f7903791245574be3877d4e368c598876eee0d8ac6d7c151",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要有效使用這個工作組："
+      }
+    },
+    {
+      "segment_id": "c0ea80dd",
+      "source_content": "- **Make sure your library is listed inside the [Libraries](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries) section**. This will help us share a status update on the migration of your library and will help us understand which struggles library authors are facing to support you better.\n- **Leverage the Q&A [section](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a) if you face a blocker and need support**. Our team and community experts are monitoring and will support at our best effort.\n- **Keep an eye on the other sections for topics that may affect you**. A new release may introduce exactly the API that you were looking for. You can subscribe to particular discussions via GitHub.",
+      "source_content_hash": "15db8c8328f8bf4c3d783d75aed17cd1968377643c3afaff37670441ec59bf8a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **確保您的庫列在[庫](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)部分**。這將幫助我們分享您的庫遷移的狀態更新，並幫助我們了解庫作者面臨的困難，以便更好地支持您。\n- **如果您遇到阻礙並需要支持，請利用[問答](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a)部分**。我們的團隊和社區專家會監控並盡力提供支持。\n- **關注其他部分可能影響您的主題**。新版本可能正好引入了您需要的 API。您可以通過 GitHub 訂閱特定討論。"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "We plan to support this group until the **New Architecture** is enabled by default and all the major libraries have been migrated to it.",
+      "source_content_hash": "51d2f5bc9bfb5b6af87ee32ad8aea37ef0628ba71c37d0ec19e41e8d0c5d5716",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們計劃支持這個工作組，直到**新架構**默認啟用且所有主要庫都已遷移至該架構為止。"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "### Migration Status of Popular Libraries",
+      "source_content_hash": "591d49dde8a6a921a64355ba4cbda43d56e4c115788ce3d0776121594abdb3fb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 熱門庫的遷移狀態"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "Libraries maintainers have been sharing with us [in the working group](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries) the status of their migration effort, and we wanted to provide you with a quick overview:",
+      "source_content_hash": "77a5ead3312315afd7b96864c237f2ff03f8f45558041a4a9f70861492bf929c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "庫維護者一直在[工作組中](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)與我們分享他們的遷移進展，我們希望為您提供一個快速概覽："
+      }
+    },
+    {
+      "segment_id": "2fc7ec55",
+      "source_content": "- [react-native-gesture-handler](https://github.com/reactwg/react-native-new-architecture/discussions/15): ✅ Migrated\n- [react-native-navigation](https://github.com/reactwg/react-native-new-architecture/discussions/17): 🏃‍♂️ Ongoing\n- [react-native-pager-view](https://github.com/reactwg/react-native-new-architecture/discussions/16): 🏃‍♂️ Ongoing\n- [react-native-reanimated](https://github.com/reactwg/react-native-new-architecture/discussions/14): ✅ Migrated. In the process of testing and profiling for performances\n- [react-native-screens](https://github.com/reactwg/react-native-new-architecture/discussions/13): 🏃‍♂️ Ongoing\n- [react-native-slider](https://github.com/reactwg/react-native-new-architecture/discussions/38): 🎬 Started\n- [react-native-template-new-architecture](https://github.com/reactwg/react-native-new-architecture/discussions/21): ✅ Migrated. Gradually adopting/testing more companion Libraries\n- [react-native-template-typescript](https://github.com/reactwg/react-native-new-architecture/discussions/22): ✅ Migrated\n- [react-native-webview](https://github.com/reactwg/react-native-new-architecture/discussions/19): 🎬 Started",
+      "source_content_hash": "3b937993a1415f9d7360a76e4903cf352a6db1aeafeb6835b750690d31ca341e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [react-native-gesture-handler](https://github.com/reactwg/react-native-new-architecture/discussions/15): ✅ 已完成遷移\n- [react-native-navigation](https://github.com/reactwg/react-native-new-architecture/discussions/17): 🏃‍♂️ 進行中\n- [react-native-pager-view](https://github.com/reactwg/react-native-new-architecture/discussions/16): 🏃‍♂️ 進行中\n- [react-native-reanimated](https://github.com/reactwg/react-native-new-architecture/discussions/14): ✅ 已完成遷移。正在進行效能測試與分析\n- [react-native-screens](https://github.com/reactwg/react-native-new-architecture/discussions/13): 🏃‍♂️ 進行中\n- [react-native-slider](https://github.com/reactwg/react-native-new-architecture/discussions/38): 🎬 已開始\n- [react-native-template-new-architecture](https://github.com/reactwg/react-native-new-architecture/discussions/21): ✅ 已完成遷移。逐步採用/測試更多配套函式庫\n- [react-native-template-typescript](https://github.com/reactwg/react-native-new-architecture/discussions/22): ✅ 已完成遷移\n- [react-native-webview](https://github.com/reactwg/react-native-new-architecture/discussions/19): 🎬 已開始"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "## Next Steps",
+      "source_content_hash": "94792dd5969e771cc2c3d1210355ca64b0d1b19f0b908b4aec6b19ca3dbde26a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 後續步驟"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "We are invested in supporting the React Native community’s adoption of the New Architecture. Concretely, we will continue to:",
+      "source_content_hash": "fd8e1c164d6597deea6012bfae5fe56e1c30cdbf3b2b322e42a7bd9e1fc080f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們致力於支持 React Native 社群採用新架構。具體而言，我們將持續："
+      }
+    },
+    {
+      "segment_id": "cd1d0fe2",
+      "source_content": "- Offer best-effort support in the **Working Group.**\n- Provide more examples about how to achieve amazing results with the New Architecture in the **RNNewArchitecture** repositories.\n- Provide clear and up-to-date documentation on the **New Architecture**.\n- Track the migration status of essential React Native libraries in the **Working Group**.\n- Simplify the migration path for developers",
+      "source_content_hash": "b08fa8fa2396ad08be95cba28de7558e9b4946ba7671bc732ed0c12ab5fcf38c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在**工作小組**中提供最大程度的支援\n- 在 **RNNewArchitecture** 儲存庫中提供更多關於如何透過新架構實現卓越成果的範例\n- 提供清晰且最新的**新架構**文件\n- 在**工作小組**中追蹤重要 React Native 函式庫的遷移狀態\n- 簡化開發者的遷移路徑"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "In addition, React Native 0.69 will ship with improved devX for app and library developers for New Architecture adoption. You can find more information about the 0.69.0 release [here](https://github.com/reactwg/react-native-releases/discussions/21).",
+      "source_content_hash": "f4a1473cbec0dac4f8d5cd573887a45d2dd91dba047769eab009acf5ed7d4d81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，React Native 0.69 將為採用新架構的應用程式和函式庫開發者帶來改進的開發者體驗。您可以在[此處](https://github.com/reactwg/react-native-releases/discussions/21)找到更多關於 0.69.0 版本的資訊。"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "We are excited about what we will build together with the **New Architecture**!",
+      "source_content_hash": "89be14323f1d1f98d8fe3c6ea8425bb12d26403ac3130bcae8221d6b1ad976f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們對於將與**新架構**共同建構的未來感到興奮！"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2022-06-16-resources-migrating-your-react-native-library-to-the-new-architecture.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.223107+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "5c78ea78b7311e99c16016f7e39365be9fd6583b7ec20be2044e8e6f72de7221"
+  }
+}

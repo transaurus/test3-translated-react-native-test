@@ -1,0 +1,262 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/the-new-architecture/native-modules-lifecycle.md",
+  "source_file_content_hash": "959bdf537f15bd73c5d12e2c9b32ce60d78e3162e13c07129537ce4b5d98ebbc",
+  "segments": [
+    {
+      "segment_id": "a9b642df",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9b642df"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "# Native Modules Lifecycle",
+      "source_content_hash": "2f3c0643a2c4a66fad1a88236a2726e632451746635a33b6fef4d7e82d20a350",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# Native Modules 生命週期"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "In React Native, Native Modules are singleton. The Native Module infrastructure lazily creates a Native Modules the first time it is accessed and it keeps it around whenever the app requires it. This is a performance optimization that allows us to avoid the overhead of creating Native Modules eagerly, at app start, and it ensure faster startup times.",
+      "source_content_hash": "88465f7dcf6815084db3a4d91d9667b4d81b00a5bc59893adf24017f2fe8ee3a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 中，Native Modules 是單例模式。Native Module 基礎設施會在首次被存取時惰性創建一個 Native Module，並在應用程式需要時保持其存在。這是一種性能優化，可避免在應用程式啟動時急切創建 Native Modules 的開銷，從而確保更快的啟動時間。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "In a pure React Native app, the Native Modules are created once and they are never destroyed. However, in more complex apps, there might be use cases where the Native Modules are destroyed and recreated. Imagine, for example, a brownfield app that mixes some native views with some React Native surfaces, as presented in the [Integrating with Existing App guide](/docs/integration-with-existing-apps). In that case it might make sense to destroy a React Native instance when the user navigates away from a React Native surface and recreate it when the user navigates back to that surface.",
+      "source_content_hash": "e433cc8d474d10e94ccb8c90cb938c25b245c539a0808b05e89af40ee0407f79",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在純 React Native 應用程式中，Native Modules 只會被創建一次且永遠不會被銷毀。然而，在更複雜的應用程式中，可能會出現需要銷毀並重新創建 Native Modules 的使用情境。例如，想像一個混合了部分原生視圖與 React Native 介面的棕地應用程式，如[與現有應用程式整合指南](/docs/integration-with-existing-apps)所述。在這種情況下，當用戶導航離開 React Native 介面時銷毀 React Native 實例，並在用戶返回該介面時重新創建，可能是合理的做法。"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "When this happens, Native Module that are stateless won't cause any issues. However, for stateful Native Modules it might be necessary to properly invalidate the Native Module to ensure that the state is reset and the resources released.",
+      "source_content_hash": "c3ec7415002eb1cebb74ca84596bb26e2d89c34904dec2f65f18fb140638ab74",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當這種情況發生時，無狀態的 Native Modules 不會造成任何問題。但對於有狀態的 Native Modules，可能需要正確地使其失效，以確保狀態被重置且資源被釋放。"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "In this guide, you will explore how to initialize and invalidate a Native Module properly. This guide assumes that you are familiar with how to write a Native Modules and you are comfortable writing native code. If you are not familiar with Native Modules, please read the [Native Modules guide](/docs/next/turbo-native-modules-introduction) first.",
+      "source_content_hash": "75ae7ee2db185b25e41501ac0ce7be02b7e2f13e406d1564e12b6647c8faaac1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將探討如何正確初始化與使 Native Module 失效。本指南假設您已熟悉如何編寫 Native Module 並能自如地編寫原生代碼。若您不熟悉 Native Modules，請先閱讀 [Native Modules 指南](/docs/next/turbo-native-modules-introduction)。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Android",
+      "source_content_hash": "316e75861152fcfa906997e1907c00f2f5d4b433627b3e340e68a8123ad35991",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Android"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "When it comes to Android, all the Native Modules already implements a [TurboModule](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/interfaces/TurboModule.kt) interface that defines two methods: `initialize()` and `invalidate()`.",
+      "source_content_hash": "3352e9bbcc399a203efd99c5873b3641c324a5022007db2e4d4d1c4b84d4ffa9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 平台上，所有 Native Modules 都已實作了 [TurboModule](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/interfaces/TurboModule.kt) 介面，該介面定義了兩個方法：`initialize()` 和 `invalidate()`。"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "The `initialize()` method is called by the Native Module infrastructure when the Native Module is created. This is the best place to put all the initialization code that needs access to the ReactApplicationContext, for example. These are some Native Modules from core that implements the `initialize()` method: [BlobModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java#L155-L157), [NetworkingModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L193-L197).",
+      "source_content_hash": "7769752a1e5948c2d1aec0cc2b4e68394907c1f664caa5140506a89994201ed3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`initialize()` 方法會在 Native Module 被創建時由 Native Module 基礎設施調用。這是放置所有需要存取 ReactApplicationContext 的初始化代碼的最佳位置。以下是核心中實作 `initialize()` 方法的一些 Native Modules 範例：[BlobModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java#L155-L157)、[NetworkingModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L193-L197)。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "The `invalidate()` method is called by the Native Module infrastructure when the Native Module is destroyed. This is the best place to put all the cleanup code, resetting the Native Module state and release resources that are no longer needed, such as memory and files. These are some Native Modules from core that implements the `invalidate()` method: [DeviceInfoModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/deviceinfo/DeviceInfoModule.kt#L72-L76), [NetworkModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L200-L212)",
+      "source_content_hash": "7a67dd7e06b7f6dbf2e584395dab035896a4adf9b22a43ada4941d6a69901bab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`invalidate()` 方法會在 Native Module 被銷毀時由 Native Module 基礎設施調用。這是放置所有清理代碼、重置 Native Module 狀態以及釋放不再需要的資源（如記憶體和檔案）的最佳位置。以下是核心中實作 `invalidate()` 方法的一些 Native Modules 範例：[DeviceInfoModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/deviceinfo/DeviceInfoModule.kt#L72-L76)、[NetworkModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L200-L212)。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## iOS",
+      "source_content_hash": "ed38fffe0d0b2913784d94a7ab0a8b8a1f7832745f9877a145c934c2fad120c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## iOS"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "On iOS, Native Modules conforms to the [`RCTTurboModule`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.h#L196-L200) protocol. However, this protocol does not expose the `initialize` and `invalidate` method that are exposed by the Android's `TurboModule` class.",
+      "source_content_hash": "23ca9434757cc364dd99415f79134abcdf76d19d1308da3799e73060f01cf95a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 平台上，Native Modules 遵循 [`RCTTurboModule`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.h#L196-L200) 協議。然而，該協議並未公開 Android 的 `TurboModule` 類別中所公開的 `initialize` 和 `invalidate` 方法。"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "Instead, on iOS, there are two additional protocols: [`RCTInitializing`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInitializing.h) and [`RCTInvalidating`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInvalidating.h). These protocols are used to define the `initialize` and `invalidate` methods, respectively.",
+      "source_content_hash": "d29380fc4a29c2991b708243c86637f866b5169c59ccd6c2ee182b5d19584fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "相反地，在 iOS 上，有兩個額外的協定：[`RCTInitializing`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInitializing.h) 和 [`RCTInvalidating`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInvalidating.h)。這些協定分別用於定義 `initialize` 和 `invalidate` 方法。"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "If your module needs to run some initialization code, then you can conform to the `RCTInitializing` protocol and implement the `initialize` method. To do so, you have to:",
+      "source_content_hash": "9c4dfec244f3bac03e502cb25ef905793f1caef41314f0a02ab15f753f8d2004",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你的模組需要執行一些初始化代碼，那麼你可以遵循 `RCTInitializing` 協定並實現 `initialize` 方法。要做到這一點，你必須："
+      }
+    },
+    {
+      "segment_id": "77bf3ec9",
+      "source_content": "1. Moduify the `NativeModule.h` file by adding the following lines:",
+      "source_content_hash": "cb4d76ab5426eaa3369a936a951e7e5748eeecd2083145cc3773c8f43e5f9d62",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 修改 `NativeModule.h` 文件，添加以下行："
+      }
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```diff title=\"NativeModule.h\"\n+ #import <React/RCTInitializing.h>\n\n//...\n\n- @interface NativeModule : NSObject <NativeModuleSpec>\n+ @interface NativeModule : NSObject <NativeModuleSpec, RCTInitializing>\n//...\n@end\n```",
+      "source_content_hash": "f8089052f89a12b5abe3c87d7aac0dc486d747c82d2f4dc8044f01cfa8313129",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cb57d798"
+      }
+    },
+    {
+      "segment_id": "8612da05",
+      "source_content": "2. Implement the `initialize` method in the `NativeModule.mm` file:",
+      "source_content_hash": "8e0c69163ed9ba5efb2602f5d417c321f937c93ac111b398786446a6cd579d7f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 在 `NativeModule.mm` 文件中實現 `initialize` 方法："
+      }
+    },
+    {
+      "segment_id": "45022e4f",
+      "source_content": "```diff title=\"NativeModule.mm\"\n// ...\n\n@implementation NativeModule\n\n+- (void)initialize {\n+ // add the initialization code here\n+}\n\n@end\n```",
+      "source_content_hash": "5d89b62c1f00bd247fd4b5e53350d19ba2e77f82edf8225b7622f85084d85278",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45022e4f"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "These are some Native Modules from core that implements the `initialize` method: [RCTBlobManager](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/Libraries/Blob/RCTBlobManager.mm#L58-L68), [RCTTiming](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTTiming.mm#L121-L124).",
+      "source_content_hash": "7a04057a2b56276e4372edd71ff457bf654f8b16b676b92dd4eb4c9440bcfd43",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是一些核心 Native Modules 實現 `initialize` 方法的例子：[RCTBlobManager](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/Libraries/Blob/RCTBlobManager.mm#L58-L68)、[RCTTiming](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTTiming.mm#L121-L124)。"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "If your module needs to run some cleanup code, then you can conform to the `RCTInvalidating` protocol and implement the `invalidate` method. To do so, you have to:",
+      "source_content_hash": "7b1590fc06068ebb72e39ca8ac098c314bb5b6766739263d78e026b9cd012ef6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你的模組需要執行一些清理代碼，那麼你可以遵循 `RCTInvalidating` 協定並實現 `invalidate` 方法。要做到這一點，你必須："
+      }
+    },
+    {
+      "segment_id": "a0e887c2",
+      "source_content": "1. Moduify the `NativeModule.h` file by adding the following lines:",
+      "source_content_hash": "cb4d76ab5426eaa3369a936a951e7e5748eeecd2083145cc3773c8f43e5f9d62",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 修改 `NativeModule.h` 文件，添加以下行："
+      }
+    },
+    {
+      "segment_id": "3adc0ceb",
+      "source_content": "```diff title=\"NativeModule.h\"\n+ #import <React/RCTInvalidating.h>\n\n//...\n\n- @interface NativeModule : NSObject <NativeModuleSpec>\n+ @interface NativeModule : NSObject <NativeModuleSpec, RCTInvalidating>\n\n//...\n\n@end\n```",
+      "source_content_hash": "c2abff70062a1d5e5e6912675f386ad3acb963061b6dc59c43eea91ab1087810",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3adc0ceb"
+      }
+    },
+    {
+      "segment_id": "aa0bd54f",
+      "source_content": "2. Implement the `invalidate` method in the `NativeModule.mm` file:",
+      "source_content_hash": "9f077dbbe21311eff0d250ce75fedf25d4b9068dbe13e0c41d8e42c1b438e53d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 在 `NativeModule.mm` 文件中實現 `invalidate` 方法："
+      }
+    },
+    {
+      "segment_id": "c808e01e",
+      "source_content": "```diff title=\"NativeModule.mm\"\n\n// ...\n\n@implementation NativeModule\n\n+- (void)invalidate {\n+ // add the cleanup code here\n+}\n\n@end\n```",
+      "source_content_hash": "9a30e905c49cdbcda225535ecb4a21c7664587e40c0183fe7fa95549768655e0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c808e01e"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "These are some Native Modules from core that implements the `invalidate` method: [RCTAppearance](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTAppearance.mm#L151-L155), [RCTDeviceInfo](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTDeviceInfo.mm#L127-L133).",
+      "source_content_hash": "e3f4b4e68717105b7078f04ff5f8fec5e2505eaf8aab757087ce8f9aadd7a82f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是一些核心 Native Modules 實現 `invalidate` 方法的例子：[RCTAppearance](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTAppearance.mm#L151-L155)、[RCTDeviceInfo](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTDeviceInfo.mm#L127-L133)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/the-new-architecture/native-modules-lifecycle.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.074441+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "959bdf537f15bd73c5d12e2c9b32ce60d78e3162e13c07129537ce4b5d98ebbc"
+  }
+}

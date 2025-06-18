@@ -1,0 +1,312 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2021-03-12-version-0.64.md",
+  "source_file_content_hash": "6c28f356ba70905450cfb73a1c2fe4ad90158268bda6f3540a83ca37084a8c1b",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Announcing React Native 0.64 with Hermes on iOS\nauthors: [grabbou]\ntags: [announcement, release]\n---",
+      "source_content_hash": "9761d3a18b4be058bcf0f8696b306127ba6c82d0920e08189bcf41e3fa49c76e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Today we’re releasing React Native 0.64 that ships with support for Hermes on iOS.",
+      "source_content_hash": "cfa5a21ee3e1137359263527253ec5eb68fb68c42c60bebaca208b77f4e56cd0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們發佈了 React Native 0.64 版本，其中包含對 iOS 上 Hermes 的支援。"
+      }
+    },
+    {
+      "segment_id": "d912d376",
+      "source_content": "## Hermes opt-in on iOS",
+      "source_content_hash": "cd3fd9fae0ccb3399b42b1e7f258cac329d160e3ed3d632f481be352b86da468",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## iOS 上的 Hermes 選擇啟用"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "[Hermes](https://hermesengine.dev) is an open source JavaScript engine optimized for running React Native. It improves performance by decreasing memory utilization, reducing download size and decreasing the time it takes for the app to become usable or “time to interactive” (TTI).",
+      "source_content_hash": "a48b40ba89439239a6dd8cf37cc05ddce19bbbe4e2712fc3239df7a7f49db743",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Hermes](https://hermesengine.dev) 是一個專為運行 React Native 而優化的開源 JavaScript 引擎。它通過減少記憶體使用量、縮小下載大小以及縮短應用程式達到可用狀態或「互動時間」（TTI）來提升性能。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "With this release, we are happy to announce that you can now use Hermes to build on iOS as well. To enable Hermes on iOS, set `hermes_enabled` to `true` in your `Podfile` and run `pod install`.",
+      "source_content_hash": "cfcc2467b71c360d53c389434cd9983bc51f533c4249412aa10e69dfc0f7e90a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著此版本的發佈，我們很高興地宣布，您現在也可以在 iOS 上使用 Hermes 進行開發。要在 iOS 上啟用 Hermes，請在您的 `Podfile` 中將 `hermes_enabled` 設為 `true` 並執行 `pod install`。"
+      }
+    },
+    {
+      "segment_id": "4b395385",
+      "source_content": "```ruby\nuse_react_native!(\n   :path => config[:reactNativePath],\n   # to enable hermes on iOS, change `false` to `true` and then install pods\n   :hermes_enabled => true\n)\n```",
+      "source_content_hash": "c4fc76b6568139b4bb4767d0673f87444d0ca83170ca61ea8af999c0ab0f2480",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b395385"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Please keep in mind that Hermes support on iOS is still early stage. We are keeping it as an opt-in as we are running further benchmarking. We encourage you to try it on your own applications and let us know how it is working out for you!",
+      "source_content_hash": "a28e95f87f2906a75c0a7e2a1abeac10d78ad885d5623501d8826744bc671436",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，iOS 上的 Hermes 支援仍處於早期階段。由於我們正在進行進一步的基準測試，因此將其保留為選擇啟用。我們鼓勵您在自己的應用程式中嘗試，並告訴我們它的運行情況！"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "## Inline Requires enabled by default",
+      "source_content_hash": "ec322059fded008f36627fca9ba81592f600529a7461c90f23f383ec4efce29a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 預設啟用內聯需求"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "Inline Requires is a Metro configuration option that improves startup time by delaying execution of JavaScript modules until they are used, instead of at startup.",
+      "source_content_hash": "d5a9c7ac1ed91090e34d0c98f94dea21123891057799762aa7e69e360793a8f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "內聯需求是一個 Metro 配置選項，通過延遲執行 JavaScript 模組直到它們被使用，而不是在啟動時執行，從而改善啟動時間。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "This feature has existed and been recommended for a few years as an opt-in configuration option, listed in the [Performance section of our documentation](/docs/performance). We are now enabling this option by default for new applications to help people have fast React Native applications without extra configuration.",
+      "source_content_hash": "9ec104617d6b3d4a341c5cc1e486ba98225e7fb4d3e2b8bcfba92d3e87e2ec0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此功能已存在並作為選擇啟用的配置選項推薦了幾年，列在我們的[效能文件](/docs/performance)中。我們現在預設為新應用程式啟用此選項，以幫助人們無需額外配置即可擁有快速的 React Native 應用程式。"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "Inline Requires is a Babel transform that takes module imports and converts them to be inline. As an example, Inline Requires transforms this module import call from being at the top of the file to where it is used.",
+      "source_content_hash": "fe7ee7581d81ffbcf197c4488a61bff3587a88bd46f146e633a296262c122fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "內聯需求是一個 Babel 轉換，它將模組導入轉換為內聯。例如，內聯需求將模組導入調用從文件頂部轉換到使用它的位置。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "**Before:**",
+      "source_content_hash": "8ca0ff2a71cc56e14890752056cd630a8ef85a8983e0dd1efdf8e615df4ba661",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**之前：**"
+      }
+    },
+    {
+      "segment_id": "ef6eebef",
+      "source_content": "```jsx\nimport {MyFunction} from 'my-module';\n\nconst MyComponent = props => {\n  const result = MyFunction();\n\n  return <Text>{result}</Text>;\n};\n```",
+      "source_content_hash": "5d1034fdcec23dee8ffe49b5b9305f90ea9ff95612e951492bbd3401d353906b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ef6eebef"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "**After:**",
+      "source_content_hash": "9e4f81244a1bbec2a610e96093d1c05673fee3b8ac68e570271ef91c25d32860",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**之後：**"
+      }
+    },
+    {
+      "segment_id": "b75ddc12",
+      "source_content": "```jsx\nconst MyComponent = props => {\n  const result = require('my-module').MyFunction();\n\n  return <Text>{result}</Text>;\n};\n```",
+      "source_content_hash": "d426907b62a294cfe6b4d4bf2b73f358b871e70b3b95f2f104956e54f4e9c221",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b75ddc12"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "More information about Inline Requires is available in the [Performance documentation](https://reactnative.dev/docs/0.74/ram-bundles-inline-requires#inline-requires).",
+      "source_content_hash": "16738dc11c8325bb9cb1640059ccdd6d082aba2d75800d24b2f701f80ae9068b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有關內聯需求的更多信息，請參閱[效能文件](https://reactnative.dev/docs/0.74/ram-bundles-inline-requires#inline-requires)。"
+      }
+    },
+    {
+      "segment_id": "e50bebbf",
+      "source_content": "## View Hermes traces with Chrome",
+      "source_content_hash": "9c6a3530704105cb3668978fd3866209265afae7e3c38f005877eb059a013124",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 Chrome 查看 Hermes 追蹤"
+      }
+    },
+    {
+      "segment_id": "0692ffa9",
+      "source_content": "<!--alex ignore fellowship-->",
+      "source_content_hash": "d60bc1247650679aa3f9f9c6254490297f2d9d32a002a0d6073e2b908b30fd3c",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0692ffa9"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "Over the last year Facebook has sponsored the [Major League Hacking fellowship](https://fellowship.mlh.io/), supporting contributions to React Native. [Jessie Nguyen](https://twitter.com/jessie_anh_ng) and [Saphal Patro](https://twitter.com/saphalinsaan) added the ability to use the Performance tab on Chrome DevTools to visualize the execution of your application when it is using Hermes.",
+      "source_content_hash": "85d57285710f0f9af2cd9122368f7bec959e007f0cfffd5e89f281b10562c1c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去一年，Facebook 贊助了 [Major League Hacking 獎學金](https://fellowship.mlh.io/)，支持對 React Native 的貢獻。[Jessie Nguyen](https://twitter.com/jessie_anh_ng) 和 [Saphal Patro](https://twitter.com/saphalinsaan) 添加了使用 Chrome DevTools 的效能選項卡來可視化應用程式在使用 Hermes 時的執行情況的功能。"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "For more information, check out the [new documentation page](https://reactnative-archive-august-2023.netlify.app/docs/0.64/profile-hermes#record-a-hermes-sampling-profile).",
+      "source_content_hash": "033ef88cad6d6386eda2b48bf7e9ab2abc23f43cac369ce52974805e2bd81f9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多信息，請查看[新的文件頁面](https://reactnative-archive-august-2023.netlify.app/docs/0.64/profile-hermes#record-a-hermes-sampling-profile)。"
+      }
+    },
+    {
+      "segment_id": "126950d7",
+      "source_content": "## Hermes with Proxy Support",
+      "source_content_hash": "51f47c6482e902873ad5025629448e4c96204c0292ec91047384e1260f1c03a4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 支援 Proxy 的 Hermes"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "We have added Proxy support to Hermes, enabling compatibility with popular community projects like react-native-firebase and mobx. If you have been using these packages you can now migrate to Hermes for your project.",
+      "source_content_hash": "c8311d840de02a0d868ca2b82a5843fd7834dc63a028b5aaede9029e62cd55c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已將 Proxy 支援添加到 Hermes 中，從而實現與 react-native-firebase 和 mobx 等流行社區項目的兼容性。如果您一直在使用這些套件，現在可以將您的項目遷移到 Hermes。"
+      }
+    },
+    {
+      "segment_id": "657c2b20",
+      "source_content": "We plan to make Hermes the default JavaScript engine for Android in a coming release so we are working to resolve the remaining issues people have when using Hermes. Please open an issue on the [Hermes GitHub repo](https://github.com/facebook/hermes) if there are remaining issues holding back your app from adopting Hermes.",
+      "source_content_hash": "361f31e5d261c2df80685b3fbf873e18ea5b031c45b195dba4d79fcfdbf3f42f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們計劃在未來的版本中將 Hermes 設為 Android 的預設 JavaScript 引擎，因此我們正在解決人們在使用 Hermes 時遇到的剩餘問題。如果您的應用程式在採用 Hermes 時仍有問題，請在 [Hermes GitHub 存儲庫](https://github.com/facebook/hermes) 上開一個問題。"
+      }
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "## React 17",
+      "source_content_hash": "5498e0c0140fcbdddf8b6e50b21238ee40fd411760914ae15495ece7d38e7788",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## React 17"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "React 17 does not include new developer-facing features or major breaking changes. For React Native applications, the main change is a [new JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) enabling files to no longer need to import React to be able to use JSX.",
+      "source_content_hash": "c4db3d9773cc35988d1260cf3f6c1ed94944e2027aaafe53bc19803db35c9dc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React 17 不包含新的開發者面向功能或重大破壞性變更。對於 React Native 應用程式，主要的變化是[新的 JSX 轉換](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)，使文件不再需要導入 React 即可使用 JSX。"
+      }
+    },
+    {
+      "segment_id": "f01228d3",
+      "source_content": "More information about React 17 is available [on the React blog](https://reactjs.org/blog/2020/10/20/react-v17.html).",
+      "source_content_hash": "b73957831a93d984ace70b36e4b0b91f43eb61cda4f2cd65bc59ad1d885646bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有關 React 17 的更多信息，請參閱 [React 博客](https://reactjs.org/blog/2020/10/20/react-v17.html)。"
+      }
+    },
+    {
+      "segment_id": "93028a4e",
+      "source_content": "## Major Dependency Version Changes",
+      "source_content_hash": "691e108c670f7c2b05a8284eb05dc04e0e61feb4fa7e8261d00f8e534865ab85",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 主要依賴版本變更"
+      }
+    },
+    {
+      "segment_id": "1316cb90",
+      "source_content": "- Dropped Android API levels 16-20. The Facebook app consistently drops support for Android versions with sufficiently low usage. As the Facebook app no longer supports these versions and is React Native’s main testing surface, React Native is dropping support as well.\n- Xcode 12 and CocoaPods 1.10 are required\n- Minimum Node support bumped from 10 to Node 12\n- Flipper bumped to 0.75.1",
+      "source_content_hash": "b1fd6ed80b0cb0d28b1c87ee44199823fc23f13ef383a3b689a48f8c2c560cec",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 移除了 Android API 等級 16-20 的支援。Facebook 應用程式會定期停止支援使用率過低的 Android 版本。由於 Facebook 應用程式已不再支援這些版本，且該應用程式是 React Native 的主要測試平台，因此 React Native 也將停止支援這些版本。\n- 現在需要 Xcode 12 和 CocoaPods 1.10\n- 最低 Node 支援版本從 10 升級至 12\n- Flipper 升級至 0.75.1 版本"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "## Thanks",
+      "source_content_hash": "1e57366f4f2b8342ce1186455878164e2c099d41b453de456c1a921520e0df59",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "Thank you to the hundreds of contributors that helped make 0.64 possible! The [0.64 changelog](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0640) includes all of the changes included in this release.",
+      "source_content_hash": "33fe3a38340ca2cf8a9133f6da586b42d92f7313d15e1d68adf3cb698ddc9191",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝數百位貢獻者協助實現 0.64 版本！[0.64 更新日誌](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0640) 包含了此版本的所有變更內容。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2021-03-12-version-0.64.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.225615+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6c28f356ba70905450cfb73a1c2fe4ad90158268bda6f3540a83ca37084a8c1b"
+  }
+}

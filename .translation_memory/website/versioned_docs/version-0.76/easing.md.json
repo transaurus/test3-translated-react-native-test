@@ -1,0 +1,914 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.76/easing.md",
+  "source_file_content_hash": "99d33eba453c5aabbcb343fc797ed5d4781c27851777a37c384c6bdfbac1add1",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: easing\ntitle: Easing\n---",
+      "source_content_hash": "e410d0be0663c47823910be4335eec68157440a778e1ee683431d89f4cc1fc15",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The `Easing` module implements common easing functions. This module is used by [`Animated.timing()`](animated.md#timing) to convey physically believable motion in animations.",
+      "source_content_hash": "0f158397d61a991762e306bb54f8c7532a512e1419e42539ea91aeef10780bf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "You can find a visualization of some common easing functions at https://easings.net/",
+      "source_content_hash": "d8a5eff51102cb7a91ff8e4356dd3611abab19710402fa9b123d4711196edf35",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### Predefined animations",
+      "source_content_hash": "44ee22a285b905593e4e6ee5bd376aab347d79117e4d81f4a9aa21be9acfdcc8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The `Easing` module provides several predefined animations through the following methods:",
+      "source_content_hash": "4446ef85aacd6f423cc9c2f881f6469319ec81876e0a291d24816525d4bb6554",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4ddf6ae7",
+      "source_content": "- [`back`](easing.md#back) provides a basic animation where the object goes slightly back before moving forward\n- [`bounce`](easing.md#bounce) provides a bouncing animation\n- [`ease`](easing.md#ease) provides a basic inertial animation\n- [`elastic`](easing.md#elastic) provides a basic spring interaction",
+      "source_content_hash": "886ffd7ae307bff085a683c34ff7f54a1282afeba7b5e6473df54e988c23e99d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "### Standard functions",
+      "source_content_hash": "b6b4408be62a79f575a94bdf0a78bca48e24385ffdf541275955a712a01128c7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Three standard easing functions are provided:",
+      "source_content_hash": "884eda7b77e33c3f9d99161b519b6a9aaa7fe30e066597ef9115a932894d846d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44d89370",
+      "source_content": "- [`linear`](easing.md#linear)\n- [`quad`](easing.md#quad)\n- [`cubic`](easing.md#cubic)",
+      "source_content_hash": "410cae9d1880306a0105261bf9815b4a637291ec6c23fe1b4b08079322a67613",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "The [`poly`](easing.md#poly) function can be used to implement quartic, quintic, and other higher power functions.",
+      "source_content_hash": "948fa8a8b619a37d3c46247ab412274b849b7facd427e9bc3e2b6907ee725e2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "48847fd4",
+      "source_content": "### Additional functions",
+      "source_content_hash": "3f9380c9445c96bd5d29eaf8f2e25ccbf41f28908bdd52a6598a8ff06bef2d9a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "Additional mathematical functions are provided by the following methods:",
+      "source_content_hash": "69412f02442c21bc58c710e107667f05dc2fc7e2a556813d1f90d35a26ac6ed1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fc8eadc3",
+      "source_content": "- [`bezier`](easing.md#bezier) provides a cubic bezier curve\n- [`circle`](easing.md#circle) provides a circular function\n- [`sin`](easing.md#sin) provides a sinusoidal function\n- [`exp`](easing.md#exp) provides an exponential function",
+      "source_content_hash": "8db45d52a1e8bfd0ae402c76914e160e1b10c4032d29446f954dab31ec090dc4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "The following helpers are used to modify other easing functions.",
+      "source_content_hash": "1c382cd91de1c960a5fc598d7dfcc9603b77859b0f61a2b83dbf080f20931268",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8612da05",
+      "source_content": "- [`in`](easing.md#in) runs an easing function forwards\n- [`inOut`](easing.md#inout) makes any easing function symmetrical\n- [`out`](easing.md#out) runs an easing function backwards",
+      "source_content_hash": "6bb1a442504748c2aac5f6804d36eb83cdd25ae1e904e9a0c72727687d38a2f8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2f83a0f4",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Easing%20Demo&ext=js\nimport React from 'react';\nimport {\n  Animated,\n  Easing,\n  SectionList,\n  StatusBar,\n  StyleSheet,\n  Text,\n  TouchableOpacity,\n  View,\n  useAnimatedValue,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  let opacity = useAnimatedValue(0);\n\n  const animate = easing => {\n    opacity.setValue(0);\n    Animated.timing(opacity, {\n      toValue: 1,\n      duration: 1200,\n      easing,\n      useNativeDriver: false,\n    }).start();\n  };\n\n  const size = opacity.interpolate({\n    inputRange: [0, 1],\n    outputRange: [0, 80],\n  });\n\n  const animatedStyles = [\n    styles.box,\n    {\n      opacity,\n      width: size,\n      height: size,\n    },\n  ];\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>\n        <StatusBar hidden={true} />\n        <Text style={styles.title}>\n          Press rows below to preview the Easing!\n        </Text>\n        <View style={styles.boxContainer}>\n          <Animated.View style={animatedStyles} />\n        </View>\n        <SectionList\n          style={styles.list}\n          sections={SECTIONS}\n          keyExtractor={item => item.title}\n          renderItem={({item}) => (\n            <TouchableOpacity\n              onPress={() => animate(item.easing)}\n              style={styles.listRow}>\n              <Text>{item.title}</Text>\n            </TouchableOpacity>\n          )}\n          renderSectionHeader={({section: {title}}) => (\n            <Text style={styles.listHeader}>{title}</Text>\n          )}\n        />\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst SECTIONS = [\n  {\n    title: 'Predefined animations',\n    data: [\n      {title: 'Bounce', easing: Easing.bounce},\n      {title: 'Ease', easing: Easing.ease},\n      {title: 'Elastic', easing: Easing.elastic(4)},\n    ],\n  },\n  {\n    title: 'Standard functions',\n    data: [\n      {title: 'Linear', easing: Easing.linear},\n      {title: 'Quad', easing: Easing.quad},\n      {title: 'Cubic', easing: Easing.cubic},\n    ],\n  },\n  {\n    title: 'Additional functions',\n    data: [\n      {\n        title: 'Bezier',\n        easing: Easing.bezier(0, 2, 1, -1),\n      },\n      {title: 'Circle', easing: Easing.circle},\n      {title: 'Sin', easing: Easing.sin},\n      {title: 'Exp', easing: Easing.exp},\n    ],\n  },\n  {\n    title: 'Combinations',\n    data: [\n      {\n        title: 'In + Bounce',\n        easing: Easing.in(Easing.bounce),\n      },\n      {\n        title: 'Out + Exp',\n        easing: Easing.out(Easing.exp),\n      },\n      {\n        title: 'InOut + Elastic',\n        easing: Easing.inOut(Easing.elastic(1)),\n      },\n    ],\n  },\n];\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#20232a',\n  },\n  title: {\n    marginTop: 10,\n    textAlign: 'center',\n    color: '#61dafb',\n  },\n  boxContainer: {\n    height: 160,\n    alignItems: 'center',\n  },\n  box: {\n    marginTop: 32,\n    borderRadius: 4,\n    backgroundColor: '#61dafb',\n  },\n  list: {\n    backgroundColor: '#fff',\n  },\n  listHeader: {\n    paddingHorizontal: 8,\n    paddingVertical: 4,\n    backgroundColor: '#f4f4f4',\n    color: '#999',\n    fontSize: 12,\n    textTransform: 'uppercase',\n  },\n  listRow: {\n    padding: 8,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Easing%20Demo&ext=tsx&supportedPlatforms=ios,android\nimport React from 'react';\nimport {\n  Animated,\n  Easing,\n  SectionList,\n  StatusBar,\n  StyleSheet,\n  Text,\n  TouchableOpacity,\n  View,\n  useAnimatedValue,\n  type EasingFunction,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  let opacity = useAnimatedValue(0);\n\n  const animate = (easing: EasingFunction) => {\n    opacity.setValue(0);\n    Animated.timing(opacity, {\n      toValue: 1,\n      duration: 1200,\n      easing,\n      useNativeDriver: false,\n    }).start();\n  };\n\n  const size = opacity.interpolate({\n    inputRange: [0, 1],\n    outputRange: [0, 80],\n  });\n\n  const animatedStyles = [\n    styles.box,\n    {\n      opacity,\n      width: size,\n      height: size,\n    },\n  ];\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>\n        <StatusBar hidden={true} />\n        <Text style={styles.title}>\n          Press rows below to preview the Easing!\n        </Text>\n        <View style={styles.boxContainer}>\n          <Animated.View style={animatedStyles} />\n        </View>\n        <SectionList\n          style={styles.list}\n          sections={SECTIONS}\n          keyExtractor={item => item.title}\n          renderItem={({item}) => (\n            <TouchableOpacity\n              onPress={() => animate(item.easing)}\n              style={styles.listRow}>\n              <Text>{item.title}</Text>\n            </TouchableOpacity>\n          )}\n          renderSectionHeader={({section: {title}}) => (\n            <Text style={styles.listHeader}>{title}</Text>\n          )}\n        />\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst SECTIONS = [\n  {\n    title: 'Predefined animations',\n    data: [\n      {title: 'Bounce', easing: Easing.bounce},\n      {title: 'Ease', easing: Easing.ease},\n      {title: 'Elastic', easing: Easing.elastic(4)},\n    ],\n  },\n  {\n    title: 'Standard functions',\n    data: [\n      {title: 'Linear', easing: Easing.linear},\n      {title: 'Quad', easing: Easing.quad},\n      {title: 'Cubic', easing: Easing.cubic},\n    ],\n  },\n  {\n    title: 'Additional functions',\n    data: [\n      {\n        title: 'Bezier',\n        easing: Easing.bezier(0, 2, 1, -1),\n      },\n      {title: 'Circle', easing: Easing.circle},\n      {title: 'Sin', easing: Easing.sin},\n      {title: 'Exp', easing: Easing.exp},\n    ],\n  },\n  {\n    title: 'Combinations',\n    data: [\n      {\n        title: 'In + Bounce',\n        easing: Easing.in(Easing.bounce),\n      },\n      {\n        title: 'Out + Exp',\n        easing: Easing.out(Easing.exp),\n      },\n      {\n        title: 'InOut + Elastic',\n        easing: Easing.inOut(Easing.elastic(1)),\n      },\n    ],\n  },\n];\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#20232a',\n  },\n  title: {\n    marginTop: 10,\n    textAlign: 'center',\n    color: '#61dafb',\n  },\n  boxContainer: {\n    height: 160,\n    alignItems: 'center',\n  },\n  box: {\n    marginTop: 32,\n    borderRadius: 4,\n    backgroundColor: '#61dafb',\n  },\n  list: {\n    backgroundColor: '#fff',\n  },\n  listHeader: {\n    paddingHorizontal: 8,\n    paddingVertical: 4,\n    backgroundColor: '#f4f4f4',\n    color: '#999',\n    fontSize: 12,\n    textTransform: 'uppercase',\n  },\n  listRow: {\n    padding: 8,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "a04911f905b88041670731d57c738776ad16abb277b10f72abdbcf1efc7be850",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "561c22a6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f7420cb5",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c713fcdf",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5ce48008",
+      "source_content": "### `step0()`",
+      "source_content_hash": "e69e5ca222d35693554448b6db305e81f3de625cc79ba82d2a68eaa867fc65fe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8e7e8fe4",
+      "source_content": "```tsx\nstatic step0(n: number);\n```",
+      "source_content_hash": "f12a492cd7bc200b770aa96490a0551f3195e23f0cd2c1298a20ed8a03cd2500",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe2c7f95",
+      "source_content": "A stepping function, returns 1 for any positive value of `n`.",
+      "source_content_hash": "3b79b59a7d25d775bb10c09f511bd6e935cde3c52ed04a415445dc90b5bda137",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4821d6da",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1e46ce2f",
+      "source_content": "### `step1()`",
+      "source_content_hash": "9f4b8123634de795ec3351fd9c805c8da438daedf21239521a8467b55ed2d0b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "92fa9171",
+      "source_content": "```tsx\nstatic step1(n: number);\n```",
+      "source_content_hash": "6dae1cccadf4c4bc1582e59e20f43eacbd728cd395179df7708d255d89e1a473",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7acce358",
+      "source_content": "A stepping function, returns 1 if `n` is greater than or equal to 1.",
+      "source_content_hash": "3804e30e0190661ba288c3dbabad426f7000158a1b9171b8c4dcb34cd4dfac01",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d6b837d6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ea37528d",
+      "source_content": "### `linear()`",
+      "source_content_hash": "1c2e93c1b71e2c4cc5bc1da1768e981fa2a254e47a70f3d283d1dd846d35ec05",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "92e959fe",
+      "source_content": "```tsx\nstatic linear(t: number);\n```",
+      "source_content_hash": "416baf012df1411cad35760cda8cbee8ebea76d974441ae3e8e641fc52cb2b89",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6c8bbba",
+      "source_content": "A linear function, `f(t) = t`. Position correlates to elapsed time one to one.",
+      "source_content_hash": "3847f2c20626b8ee19367c64126e061f58d509a2bbe2293294e3ff8c07d0d347",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ff95ec03",
+      "source_content": "https://cubic-bezier.com/#0,0,1,1",
+      "source_content_hash": "b1b338f49945ac54a7256970b103111a2aaaad7d1429b4d5f6c5bef9cfb43a5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8b3ac7c7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "086e47bd",
+      "source_content": "### `ease()`",
+      "source_content_hash": "62417d3a1861e7641fc379ae96821df0e81a093d79632596233686391a233ebc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e9d8c567",
+      "source_content": "```tsx\nstatic ease(t: number);\n```",
+      "source_content_hash": "7380647065e3aad625320b0605c05214cae133550eab2cd3f0132028a3293661",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7a210168",
+      "source_content": "A basic inertial interaction, similar to an object slowly accelerating to speed.",
+      "source_content_hash": "9c94cf1612229e1770f988b98fba5ca6c6cda3a01d21c22ac7ea206322125f5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3bb26da2",
+      "source_content": "https://cubic-bezier.com/#.42,0,1,1",
+      "source_content_hash": "9bce82e6906a320a836b06a4040296fc31da3903dc9e97ee393f7e1053eca6b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6e4c66c8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a29cafe0",
+      "source_content": "### `quad()`",
+      "source_content_hash": "ea32ea9fabd2c84a5cc268fdfbdaa7f273427e6e15e81f0b94c73ceaaa518406",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d8b7afcb",
+      "source_content": "```tsx\nstatic quad(t: number);\n```",
+      "source_content_hash": "55dcee4c421f124a5f19c98470c39fbb31e3f818a0a748529e80dc5137c22094",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bab6f28b",
+      "source_content": "A quadratic function, `f(t) = t * t`. Position equals the square of elapsed time.",
+      "source_content_hash": "65b67165e6773615682f5dab647d0e8911ae62da05ca0ece4a6e6715ed13345e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ac91a2d7",
+      "source_content": "https://easings.net/#easeInQuad",
+      "source_content_hash": "34cfae6f119d901ad36617b922dfe180bb16dde5c455a9cf1bae755c54017dcb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a299ee82",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "381a5950",
+      "source_content": "### `cubic()`",
+      "source_content_hash": "6913773d3916dcc21db1e3e406f40dd28646da4b12b26629ee1a5d76aff831f4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bf952824",
+      "source_content": "```tsx\nstatic cubic(t: number);\n```",
+      "source_content_hash": "b02d05902c3ab4f7cb59a4bc27a3d8e8d6dea162da86a5f28fd862647b521b7b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4e26c9f",
+      "source_content": "A cubic function, `f(t) = t * t * t`. Position equals the cube of elapsed time.",
+      "source_content_hash": "64d0af4322aa27b321b303d483197e6b853e40f076734cd63151274657e6fbbd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "13c7706c",
+      "source_content": "https://easings.net/#easeInCubic",
+      "source_content_hash": "3fcab7c17577212b05dcd593e3dca1001dd7ca9fa136ec0443894db7539b75c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0b0f3095",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "db274ff9",
+      "source_content": "### `poly()`",
+      "source_content_hash": "4b3d7de020328004afa7ebe453ad0cf11153ff590952972a2ef7ac8fbba39ef8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `poly()`"
+      }
+    },
+    {
+      "segment_id": "8aed897e",
+      "source_content": "```tsx\nstatic poly(n: number);\n```",
+      "source_content_hash": "7da1369e43f43175ec989154d59e93b3a87d1bbc6b5475db612afb7adbf887a9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8aed897e"
+      }
+    },
+    {
+      "segment_id": "69d6e4be",
+      "source_content": "A power function. Position is equal to the Nth power of elapsed time.",
+      "source_content_hash": "97218106566685c65044cfd24c55e6871385d0c3c566ea6c3cb25846ab121a7c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "冪次函數。位置等於經過時間的N次方。"
+      }
+    },
+    {
+      "segment_id": "5e15188a",
+      "source_content": "n = 4: https://easings.net/#easeInQuart n = 5: https://easings.net/#easeInQuint",
+      "source_content_hash": "8c92ea6c5b6b104b86163d24d0a0da2ddb34f46b94e4cfafafb3c3300e811602",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "n = 4: https://easings.net/#easeInQuart n = 5: https://easings.net/#easeInQuint"
+      }
+    },
+    {
+      "segment_id": "d5bb9720",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6ff5a621",
+      "source_content": "### `sin()`",
+      "source_content_hash": "cfbe64eeeae444374ca59c6e78c0c7382eae5169ab49e3e847cbe1c59d0ab9dd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `sin()`"
+      }
+    },
+    {
+      "segment_id": "44d75a33",
+      "source_content": "```tsx\nstatic sin(t: number);\n```",
+      "source_content_hash": "b16ad6b2536bdd3545ef7352d852025704adb282cf9bc5c7e1597e5326bcb795",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_44d75a33"
+      }
+    },
+    {
+      "segment_id": "4dd62f5c",
+      "source_content": "A sinusoidal function.",
+      "source_content_hash": "51acea83e44955ab32f276a9547cd9a24933d8216ba89560d542c1fd9ba23fa6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "正弦函數。"
+      }
+    },
+    {
+      "segment_id": "74bfaf8c",
+      "source_content": "https://easings.net/#easeInSine",
+      "source_content_hash": "427906194a1e54d39a455d9836adea506709acc32548b81b658709f3b8777169",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "https://easings.net/#easeInSine"
+      }
+    },
+    {
+      "segment_id": "22b726d5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2f9a305c",
+      "source_content": "### `circle()`",
+      "source_content_hash": "3c5a1079e590b46cd11d5d3a9208e6bdc94475ef55530b223a22c7ba48f173dd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `circle()`"
+      }
+    },
+    {
+      "segment_id": "7584896b",
+      "source_content": "```tsx\nstatic circle(t: number);\n```",
+      "source_content_hash": "40aacd920bab617d99e60f154d7fb34f500cb5a8f53f714260f3d0551cbb46f4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7584896b"
+      }
+    },
+    {
+      "segment_id": "96bae975",
+      "source_content": "A circular function.",
+      "source_content_hash": "1403a27495941efe66d0dd6719b6e49877a583a9a3168cca724f5d288e9be1b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "圓形函數。"
+      }
+    },
+    {
+      "segment_id": "9cfda36e",
+      "source_content": "https://easings.net/#easeInCirc",
+      "source_content_hash": "80b8bea4405032319f1964d94a255755ce31bde04c61181d1927ab48ff411fad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "https://easings.net/#easeInCirc"
+      }
+    },
+    {
+      "segment_id": "10b7b5b9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fb037688",
+      "source_content": "### `exp()`",
+      "source_content_hash": "e9795597de59562fa9712b84ebeca58854fb4d51a4bb2418684338c20eae0d83",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `exp()`"
+      }
+    },
+    {
+      "segment_id": "684c7294",
+      "source_content": "```tsx\nstatic exp(t: number);\n```",
+      "source_content_hash": "ec95699a2f0c174d8856ec0751cc818680a1bb6f517ed2cc3e362423260b38c7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_684c7294"
+      }
+    },
+    {
+      "segment_id": "a1988152",
+      "source_content": "An exponential function.",
+      "source_content_hash": "7b5b5b5328f6159ad63d233ca604d93202b928613cdba3c817d21f27fb52015a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指數函數。"
+      }
+    },
+    {
+      "segment_id": "d85a747f",
+      "source_content": "https://easings.net/#easeInExpo",
+      "source_content_hash": "de1407b42107a9acfa35e4e7326478bfb40f5f47ee14ba9032db6679fdf150b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "https://easings.net/#easeInExpo"
+      }
+    },
+    {
+      "segment_id": "32e68869",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d88d3485",
+      "source_content": "### `elastic()`",
+      "source_content_hash": "af9e2bf7c162ee5472ef002e2ca352710fc89982917a893a7f51f5a25b5f177c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `elastic()`"
+      }
+    },
+    {
+      "segment_id": "2195b9b7",
+      "source_content": "```tsx\nstatic elastic(bounciness: number);\n```",
+      "source_content_hash": "1c2f2ef286145265772d92f58fe1e735d161abca64ec9d8d99bdaba803354fd6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2195b9b7"
+      }
+    },
+    {
+      "segment_id": "44314141",
+      "source_content": "A basic elastic interaction, similar to a spring oscillating back and forth.",
+      "source_content_hash": "4159aafe2e13251a630ed5a1c4483dfb8b0f2a49a5e68f7cb2203fc2944a9d71",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基礎彈性互動效果，類似彈簧來回振盪。"
+      }
+    },
+    {
+      "segment_id": "81ed2b45",
+      "source_content": "Default bounciness is 1, which overshoots a little bit once. 0 bounciness doesn't overshoot at all, and bounciness of N > 1 will overshoot about N times.",
+      "source_content_hash": "f99acc3b6d9ac46b5096f60068820af96ec9ee823c98715dd9a8b89afff1a90c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設彈性係數為1，會略微過衝一次。係數0完全不產生過衝，係數N>1時會過衝約N次。"
+      }
+    },
+    {
+      "segment_id": "7f0cded5",
+      "source_content": "https://easings.net/#easeInElastic",
+      "source_content_hash": "0717104250d26b52885e69238bcb6188292bc830d4268598371dd6e6d5964037",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "https://easings.net/#easeInElastic"
+      }
+    },
+    {
+      "segment_id": "2d0c4d8d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c27cc457",
+      "source_content": "### `back()`",
+      "source_content_hash": "db19ae82226e05701f28efd7cb33d14fa57ae2e59e61853d8c98f2113597cd73",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `back()`"
+      }
+    },
+    {
+      "segment_id": "0e49382f",
+      "source_content": "```tsx\nstatic back(s)\n```",
+      "source_content_hash": "6b748210a721f57e94ef48b285bb4506ff6415960c386c7ed847538f31628243",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0e49382f"
+      }
+    },
+    {
+      "segment_id": "1e1ccc8c",
+      "source_content": "Use with `Animated.parallel()` to create a basic effect where the object animates back slightly as the animation starts.",
+      "source_content_hash": "aad42d3fc64f5454729eeaed37d75d86ee1f1a5f6f63beb6c3541dcb33321373",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需搭配`Animated.parallel()`使用，創造物件在動畫開始時略微回縮的基礎效果。"
+      }
+    },
+    {
+      "segment_id": "228c5f3e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fffa1891",
+      "source_content": "### `bounce()`",
+      "source_content_hash": "700d9a666c68f093f33cd2aea89dd291d594b73e514c54437e4bef262652469f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bounce()`"
+      }
+    },
+    {
+      "segment_id": "65df932e",
+      "source_content": "```tsx\nstatic bounce(t: number);\n```",
+      "source_content_hash": "aa6efcae040b952fcbc2c683eb5ded4e75df3836991094e812ed696b8d70d3d1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65df932e"
+      }
+    },
+    {
+      "segment_id": "7b046f1b",
+      "source_content": "Provides a basic bouncing effect.",
+      "source_content_hash": "50b6e4324d506eeaa1edcaad8166db2e0adedf91a6c94c85b86eaadaa04c1f43",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提供基礎彈跳效果。"
+      }
+    },
+    {
+      "segment_id": "61a57ead",
+      "source_content": "https://easings.net/#easeInBounce",
+      "source_content_hash": "8906d406f77c0d10eeb915189bb18e191ebd0b4e94d26e77334fe6b22e986164",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "https://easings.net/#easeInBounce"
+      }
+    },
+    {
+      "segment_id": "3dd74e5e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "41e20c06",
+      "source_content": "### `bezier()`",
+      "source_content_hash": "0837832afa4405ebffc5241ddc70a6ea6bbd75113a84d5b37fb753895675bc15",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bezier()`"
+      }
+    },
+    {
+      "segment_id": "b26710a2",
+      "source_content": "```tsx\nstatic bezier(x1: number, y1: number, x2: number, y2: number);\n```",
+      "source_content_hash": "297137d5b77a160554dcb14bf88f71becc52ef30635e75acc52568d5d6ccf665",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b26710a2"
+      }
+    },
+    {
+      "segment_id": "8856ba44",
+      "source_content": "Provides a cubic bezier curve, equivalent to CSS Transitions' `transition-timing-function`.",
+      "source_content_hash": "4a728d7712055dfc47ea7f5f7ff7da3f3bdf71bdcae27873135eccfe71f5c26b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提供三次貝茲曲線，等同於CSS Transitions的`transition-timing-function`。"
+      }
+    },
+    {
+      "segment_id": "6f54fd35",
+      "source_content": "A useful tool to visualize cubic bezier curves can be found at https://cubic-bezier.com/",
+      "source_content_hash": "ca408a955ba28d49d58a06cc18905b360ab988cb6ac959d9f979f2be784bcf1f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可透過https://cubic-bezier.com/視覺化曲線效果"
+      }
+    },
+    {
+      "segment_id": "da5fdd71",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d7ca1d9e",
+      "source_content": "### `in()`",
+      "source_content_hash": "3560730e0e63b954311cbb07afe9b7d91fc5e32710509cfab2e19b531e0474b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `in()`"
+      }
+    },
+    {
+      "segment_id": "af14a6ad",
+      "source_content": "```tsx\nstatic in(easing: number);\n```",
+      "source_content_hash": "0dbe0c89374a45d6d690f10b4b0bba8e1d798c1f81a053c2fa2f7400daf9592a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af14a6ad"
+      }
+    },
+    {
+      "segment_id": "0ba09731",
+      "source_content": "Runs an easing function forwards.",
+      "source_content_hash": "c3d3740b67335587d8e4109125312b5997fa78aac454a592de8f07c7af38ea9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "正向執行緩動函數。"
+      }
+    },
+    {
+      "segment_id": "4ea44654",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6f6d8f52",
+      "source_content": "### `out()`",
+      "source_content_hash": "f5e2588100d8bbddd967d7439240c7e97b5b5ca73b937873e51e91e79cb43b02",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `out()`"
+      }
+    },
+    {
+      "segment_id": "d7f1274b",
+      "source_content": "```tsx\nstatic out(easing: number);\n```",
+      "source_content_hash": "3d26f121763df105a115f23e6642e4847495f6c7458903089327e074c1d0f973",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7f1274b"
+      }
+    },
+    {
+      "segment_id": "75f427fc",
+      "source_content": "Runs an easing function backwards.",
+      "source_content_hash": "4f781721bc7f291a0fad801e4007f36e0faa3c28436bdb8c7fd28535b48019bf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "反向執行緩動函數。"
+      }
+    },
+    {
+      "segment_id": "b62b5436",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "75e008c1",
+      "source_content": "### `inOut()`",
+      "source_content_hash": "980fac4fc29bcb45ddce51b3f9a858244901a85ccfc5554af73e26016faf65ee",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `inOut()`"
+      }
+    },
+    {
+      "segment_id": "77b670b1",
+      "source_content": "```tsx\nstatic inOut(easing: number);\n```",
+      "source_content_hash": "51c7af04afd5fbb88e3b1628a9b143ad4fd491c9f8705debd0e6433751bcb67d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_77b670b1"
+      }
+    },
+    {
+      "segment_id": "5591470c",
+      "source_content": "Makes any easing function symmetrical. The easing function will run forwards for half of the duration, then backwards for the rest of the duration.",
+      "source_content_hash": "b5b7b00eff27baacbbfb92518e2f2a7028e1bf4284c4ee7fe41faddd29ec4235",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使緩動函數對稱執行。前半段時間正向運行，後半段時間反向運行。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.76/easing.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.718459+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "99d33eba453c5aabbcb343fc797ed5d4781c27851777a37c384c6bdfbac1add1"
+  }
+}

@@ -1,0 +1,1002 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/_integration-with-existing-apps-swift.md",
+  "source_file_content_hash": "a02f3c26e128dd5601e90c74f00b8e5603c2f3775ffb758f6f8d15047bfd340f",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "## Key Concepts",
+      "source_content_hash": "dfa7c52d142437bb74c4b7713c923cc1f67dda7d1ce85a63282198e6bf1e47b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 核心概念"
+      }
+    },
+    {
+      "segment_id": "faebdc62",
+      "source_content": "The keys to integrating React Native components into your iOS application are to:",
+      "source_content_hash": "f710f71fd03f4d21f7f880954c1d9404919bca1340ea5a22a19d3b0740229482",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 React Native 元件整合至 iOS 應用的關鍵步驟如下："
+      }
+    },
+    {
+      "segment_id": "17ded777",
+      "source_content": "1. Set up React Native dependencies and directory structure.\n2. Understand what React Native components you will use in your app.\n3. Add these components as dependencies using CocoaPods.\n4. Develop your React Native components in JavaScript.\n5. Add a `RCTRootView` to your iOS app. This view will serve as the container for your React Native component.\n6. Start the React Native server and run your native application.\n7. Verify that the React Native aspect of your application works as expected.",
+      "source_content_hash": "32fa1fe45efbe7546bb4c6d0451e0491a2cb8acba2a9f27508047e4e8122b01d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 設定 React Native 依賴項與目錄結構\n2. 確認應用中將使用的 React Native 元件\n3. 透過 CocoaPods 添加這些元件作為依賴項\n4. 使用 JavaScript 開發 React Native 元件\n5. 在 iOS 應用中添加 `RCTRootView`，此視圖將作為 React Native 元件的容器\n6. 啟動 React Native 伺服器並運行原生應用\n7. 驗證 React Native 功能是否正常運作"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Prerequisites",
+      "source_content_hash": "bbd3d4949a6f237efd8d4ff5c7c5f30d968e7a989ad12f3d7dcef69c98053912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 必要條件"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "Follow the React Native CLI Quickstart in the [environment setup guide](environment-setup) to configure your development environment for building React Native apps for iOS.",
+      "source_content_hash": "c3b103a7d636fa183a47d565d7eca3e38ca8a86570ffd4aa55da436454342ce3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請依照[環境設定指南](environment-setup)中的 React Native CLI 快速入門，配置 iOS 版 React Native 應用的開發環境。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### 1. Set up directory structure",
+      "source_content_hash": "608eaf807b2dd9f81ca43051d95d088da7edcc2a1ca245bc360838dcfda12ec5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 設定目錄結構"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "To ensure a smooth experience, create a new folder for your integrated React Native project, then copy your existing iOS project to a `/ios` subfolder.",
+      "source_content_hash": "7378d34e70c96856494c22ccba1926ee43ef27eb4452f1f13c878699808a2eb0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為確保流程順暢，請為整合專案新建資料夾，並將現有 iOS 專案複製至 `/ios` 子資料夾。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "### 2. Install JavaScript dependencies",
+      "source_content_hash": "4615207b16af1c40cf80956f54472ff45aba578dab75bea9864abeef62596026",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 安裝 JavaScript 依賴項"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Go to the root directory for your project and create a new `package.json` file with the following contents:",
+      "source_content_hash": "432177b1d6a1b80705670ca96cda3489a06b7bd256bcd4202df4599b5a556818",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進入專案根目錄，建立包含以下內容的 `package.json` 檔案："
+      }
+    },
+    {
+      "segment_id": "3569d545",
+      "source_content": "```\n{\n  \"name\": \"MyReactNativeApp\",\n  \"version\": \"0.0.1\",\n  \"private\": true,\n  \"scripts\": {\n    \"start\": \"yarn react-native start\"\n  }\n}\n```",
+      "source_content_hash": "a1392b7f0734b707a40880fdef946131ec5ace3152468097a35a5a193d56d84b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3569d545"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "Next, make sure you have [installed the yarn package manager](https://yarnpkg.com/lang/en/docs/install/).",
+      "source_content_hash": "8919a7bab4fb150294c7cf002e99226820b512d98289f78cd34e4dbbc74a637f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著請確認已[安裝 yarn 套件管理工具](https://yarnpkg.com/lang/en/docs/install/)。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Install the `react` and `react-native` packages. Open a terminal or command prompt, then navigate to the directory with your `package.json` file and run:",
+      "source_content_hash": "0fd5b3a8db29ba4abad56df9bb97cc175035e84d6c74750b275c5a87b14b97cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "安裝 `react` 與 `react-native` 套件。開啟終端機並導航至含 `package.json` 的目錄，執行："
+      }
+    },
+    {
+      "segment_id": "a11df754",
+      "source_content": "```shell\n$ yarn add react-native\n```",
+      "source_content_hash": "7b3aaa62e897e9caa32b63bc42de129ca81b0c7721087c605a1e6a6a044657bd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a11df754"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "This will print a message similar to the following (scroll up in the yarn output to see it):",
+      "source_content_hash": "25e81d591147d4144e5d9be767fe5719c46eaa0e10aabd291fb5f0ef625656a4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此指令將輸出類似以下訊息（請向上滾動 yarn 輸出以查看）："
+      }
+    },
+    {
+      "segment_id": "9d8ff988",
+      "source_content": "> warning \"react-native@0.52.2\" has unmet peer dependency \"react@16.2.0\".",
+      "source_content_hash": "611808dc093accbad913ffdf8e5b3e026209267c10a10990e68846cb9f4e9480",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 警告：\"react-native@0.52.2\" 缺少必要依賴項 \"react@16.2.0\"。"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "This is OK, it means we also need to install React:",
+      "source_content_hash": "c7f2d0d66dc987353a5833f04de7e8df91ee17837f4a32070978db7d009108dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為正常現象，表示我們需額外安裝 React："
+      }
+    },
+    {
+      "segment_id": "95318d95",
+      "source_content": "```shell\n$ yarn add react@version_printed_above\n```",
+      "source_content_hash": "807176367c5a51689f1027587e7827577a45410449469a0d351127a1f9a2d6d3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95318d95"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "Yarn has created a new `/node_modules` folder. This folder stores all the JavaScript dependencies required to build your project.",
+      "source_content_hash": "0d3fae8d25f0f4fe073626574ee946f0ed603a9815849c4b91154da22ef4894f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Yarn 會建立新的 `/node_modules` 資料夾，此目錄存放專案建置所需的所有 JavaScript 依賴項。"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "Add `node_modules/` to your `.gitignore` file.",
+      "source_content_hash": "cfbc32f52d174acd68deb40e5e900a0d5f97afb5a0c6f291ce53f97da7ce143d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請將 `node_modules/` 加入 `.gitignore` 檔案。"
+      }
+    },
+    {
+      "segment_id": "1a316f80",
+      "source_content": "### 3. Install CocoaPods",
+      "source_content_hash": "6344fcdc6007baa7095146a8a850f1e1eba690ee3de24313be7608299689defa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 安裝 CocoaPods"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "[CocoaPods](http://cocoapods.org) is a package management tool for iOS and macOS development. We use it to add the actual React Native framework code locally into your current project.",
+      "source_content_hash": "6b06f353ecd8351ce759d3ec0f8f88cd68ba2355709391ec3c1bac8b32dbb166",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[CocoaPods](http://cocoapods.org) 是 iOS 與 macOS 開發的套件管理工具，我們透過它將 React Native 框架程式碼本地化至當前專案。"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "We recommend installing CocoaPods using [Homebrew](http://brew.sh/).",
+      "source_content_hash": "d94bd3d42feb09694bb2990dbb16af3c7cd5babba03b9b37fccce10952df91b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議使用 [Homebrew](http://brew.sh/) 安裝 CocoaPods："
+      }
+    },
+    {
+      "segment_id": "5a41b4fb",
+      "source_content": "```shell\n$ brew install cocoapods\n```",
+      "source_content_hash": "c016568fc1c46785532b55e7af22f1b28e56250e6eaa8fafdb3d973a5869043c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5a41b4fb"
+      }
+    },
+    {
+      "segment_id": "01f0fa9f",
+      "source_content": "> It is technically possible not to use CocoaPods, but that would require manual library and linker additions that would overly complicate this process.",
+      "source_content_hash": "7b7a03e1440929ba7c1cffdabc3128d169f6b830706ea2dde24a0485a7d36e9f",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 技術上雖可不使用 CocoaPods，但這將導致需手動添加函式庫與連結器設定，大幅增加流程複雜度。"
+      }
+    },
+    {
+      "segment_id": "ee8401db",
+      "source_content": "## Adding React Native to your app",
+      "source_content_hash": "97ba33aa5260008be04afb92970426fc31206ed01100d193512acdd1760605b5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將 React Native 添加至應用"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "Assume the [app for integration](https://github.com/JoelMarcey/swift-2048) is a [2048](https://en.wikipedia.org/wiki/2048_%28video_game%29) game. Here is what the main menu of the native application looks like without React Native.",
+      "source_content_hash": "1a09f07b0f5bd683050a1dcfed995ce81c8b3423d0511e2230da0f4e95bffd0a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設[待整合應用](https://github.com/JoelMarcey/swift-2048)為 [2048](https://en.wikipedia.org/wiki/2048_%28video_game%29) 遊戲。下圖為未整合 React Native 時的原生應用主選單畫面。"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "![Before RN Integration](/docs/assets/react-native-existing-app-integration-ios-before.png)",
+      "source_content_hash": "ffb5434053d97480b9499c5e899e2c667d05a8dc33b6f9c023dd85a793105fff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![整合前的畫面](/docs/assets/react-native-existing-app-integration-ios-before.png)"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "### Command Line Tools for Xcode",
+      "source_content_hash": "9e992d35b198c9fb3ac07a95ff8712e4d0a7bc76f99f8d5ea50f4094fbae714e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Xcode 指令列工具"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Install the Command Line Tools. Choose \"Preferences...\" in the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.",
+      "source_content_hash": "6b5e09ef208e23d6cad584c28d30297d5b2bbe69d41927eba81ff6173981edd3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請安裝指令列工具。於 Xcode 選單中選擇「Preferences...」，進入 Locations 面板後，從 Command Line Tools 下拉選單中選取最新版本進行安裝。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "![Xcode Command Line Tools](/docs/assets/GettingStartedXcodeCommandLineTools.png)",
+      "source_content_hash": "788b2f7f494fc9118f26914cd3b6a6e12fdad2c885474356f820d4aa1540f40d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Xcode 指令列工具](/docs/assets/GettingStartedXcodeCommandLineTools.png)"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### Configuring CocoaPods dependencies",
+      "source_content_hash": "89d359d37d0d56371599a3103aa70ecd25f099fed0809b26f19329d26eedfc7e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 配置 CocoaPods 依賴項"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Before you integrate React Native into your application, you will want to decide what parts of the React Native framework you would like to integrate. We will use CocoaPods to specify which of these \"subspecs\" your app will depend on.",
+      "source_content_hash": "4603f460b5aa7143b273c6678a779c14d56729f9c83d1b17769398a5d12b1529",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在整合 React Native 前，需先決定要整合框架中的哪些部分。我們將使用 CocoaPods 來指定應用依賴的「子規格」(subspecs)。"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "The list of supported `subspec`s is available in [`/node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/0.71-stable/React.podspec). They are generally named by functionality. For example, you will generally always want the `Core` `subspec`. That will get you the `AppRegistry`, `StyleSheet`, `View` and other core React Native libraries. If you want to add the React Native `Text` library (e.g., for `<Text>` elements), then you will need the `RCTText` `subspec`. If you want the `Image` library (e.g., for `<Image>` elements), then you will need the `RCTImage` `subspec`.",
+      "source_content_hash": "b0fc48645158b0e48b00a251245ee8d1059b0f4f900acaa34aae2f55402fbfb3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支援的 `subspec` 清單可在 [`/node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/0.71-stable/React.podspec) 中找到。這些子規格通常以功能命名。例如，您通常會需要 `Core` 子規格，它包含了 `AppRegistry`、`StyleSheet`、`View` 和其他 React Native 核心函式庫。如果您想加入 React Native 的 `Text` 函式庫（例如用於 `<Text>` 元素），則需要 `RCTText` 子規格。若需要 `Image` 函式庫（例如用於 `<Image>` 元素），則需 `RCTImage` 子規格。"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "You can specify which `subspec`s your app will depend on in a `Podfile` file. The easiest way to create a `Podfile` is by running the CocoaPods `init` command in the `/ios` subfolder of your project:",
+      "source_content_hash": "e1260d3012c8b1297a1fcc706e4b24c0cbe2ada0779cf1e558418fb073999707",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 `Podfile` 檔案中指定應用程式依賴哪些子規格。建立 `Podfile` 最簡單的方式是在專案的 `/ios` 子資料夾中執行 CocoaPods 的 `init` 指令："
+      }
+    },
+    {
+      "segment_id": "7d898a0e",
+      "source_content": "```shell\n$ pod init\n```",
+      "source_content_hash": "370a62698d3b3abe65e808306e9888c5b82c61a6c00c5be40d03e4b71380ef87",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d898a0e"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "The `Podfile` will contain a boilerplate setup that you will tweak for your integration purposes.",
+      "source_content_hash": "c7ebdb7cc043524f8778168b305403aa1886113518348d6a6f184369dd08ca20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Podfile` 會包含一個預設設定，您可根據整合需求進行調整。"
+      }
+    },
+    {
+      "segment_id": "799d1bf5",
+      "source_content": "> The `Podfile` version changes depending on your version of `react-native`. Refer to https://react-native-community.github.io/upgrade-helper/ for the specific version of `Podfile` you should be using.",
+      "source_content_hash": "bafb5c1ef00d8d3e810013b34ebfe7a15690c569c06cbd7bfbe03fd5216b2bca",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> `Podfile` 的版本會根據您使用的 `react-native` 版本而異。請參考 https://react-native-community.github.io/upgrade-helper/ 以確認應使用的特定 `Podfile` 版本。"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "Ultimately, your `Podfile` should look something similar to this:\n[Podfile Template](https://github.com/facebook/react-native/blob/0.71-stable/template/ios/Podfile)",
+      "source_content_hash": "004a5b5ce8ee56aaf70d7ee63d9446476957fe3552fdfb69dd26ff10150be013",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最終，您的 `Podfile` 應類似以下範例：\n[Podfile 範本](https://github.com/facebook/react-native/blob/0.71-stable/template/ios/Podfile)"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "After you have created your `Podfile`, you are ready to install the React Native pod.",
+      "source_content_hash": "f84ff17379fa4f5c79fe8de55d327cf69522e3ff101ae4f6cfe1b5e287e30506",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立 `Podfile` 後，即可安裝 React Native pod。"
+      }
+    },
+    {
+      "segment_id": "cae897fb",
+      "source_content": "```shell\n$ pod install\n```",
+      "source_content_hash": "43b5334a5cec4e01ff6dba5facba1f46508b8498c933b67f36b1c616c23a7aea",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cae897fb"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "You should see output such as:",
+      "source_content_hash": "070f9c0f1cc02cd268830269885063f73549ac46f3bb4b6f67c3d605e2c1d275",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您應會看到類似以下的輸出："
+      }
+    },
+    {
+      "segment_id": "c9873cf8",
+      "source_content": "```\nAnalyzing dependencies\nFetching podspec for `React` from `../node_modules/react-native`\nDownloading dependencies\nInstalling React (0.62.0)\nGenerating Pods project\nIntegrating client project\nSending stats\nPod installation complete! There are 3 dependencies from the Podfile and 1 total pod installed.\n```",
+      "source_content_hash": "2c24d22ef5f2fe5e895466dd64c858fc057044574fc0a7c6ab9337d46f650a2d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9873cf8"
+      }
+    },
+    {
+      "segment_id": "aaa20101",
+      "source_content": "> If this fails with errors mentioning `xcrun`, make sure that in Xcode in **Preferences > Locations** the Command Line Tools are assigned.",
+      "source_content_hash": "8516195cc46030dbb3949e6e31e79eee2ba0675b9147e5c9f092fceb6a6455a2",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 若因提及 `xcrun` 的錯誤而失敗，請確認在 Xcode 的 **偏好設定 > 位置** 中已指定命令列工具。"
+      }
+    },
+    {
+      "segment_id": "1e8039e1",
+      "source_content": "> If you get a warning such as \"_The `swift-2048 [Debug]` target overrides the `FRAMEWORK_SEARCH_PATHS` build setting defined in `Pods/Target Support Files/Pods-swift-2048/Pods-swift-2048.debug.xcconfig`. This can lead to problems with the CocoaPods installation_\", then make sure the `Framework Search Paths` in `Build Settings` for both `Debug` and `Release` only contain `$(inherited)`.",
+      "source_content_hash": "74cd2b2f714292ff597a8ff231b1baa3812e3322a924f24971707c0876f894e9",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 若收到警告如「_`swift-2048 [Debug]` 目標覆寫了 `Pods/Target Support Files/Pods-swift-2048/Pods-swift-2048.debug.xcconfig` 中定義的 `FRAMEWORK_SEARCH_PATHS` 建置設定。這可能導致 CocoaPods 安裝問題_」，請確認 `建置設定` 中的 `Framework Search Paths` 在 `Debug` 和 `Release` 下僅包含 `$(inherited)`。"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### Code integration",
+      "source_content_hash": "747649fde456f22e0e918af188b18638342af1002cb270b066d1308dfcc35862",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 程式碼整合"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "Now we will actually modify the native iOS application to integrate React Native. For our 2048 sample app, we will add a \"High Score\" screen in React Native.",
+      "source_content_hash": "9f9847ca7a2aefe39789ed42602425f3a7ca0ea1eb6dee3022479c125ac6c073",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們將實際修改原生 iOS 應用程式以整合 React Native。針對我們的 2048 範例應用，我們將加入一個以 React Native 實作的「高分」畫面。"
+      }
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "#### The React Native component",
+      "source_content_hash": "b9cf3e6b64a50f7c632f948ff3c4df5c43a10a1f521628df446ea7e83c2d24ec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### React Native 元件"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "The first bit of code we will write is the actual React Native code for the new \"High Score\" screen that will be integrated into our application.",
+      "source_content_hash": "d42f23f8f5d535d0661ee5b3f2217faa662458c1123c5e7c33d86f58306d0834",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們要編寫的第一段程式碼是新「高分」畫面的實際 React Native 程式碼，它將被整合到我們的應用程式中。"
+      }
+    },
+    {
+      "segment_id": "47cd8dd6",
+      "source_content": "##### 1. Create a `index.js` file",
+      "source_content_hash": "a3ce4e104f66a67d8efcde3a4a37fd49ca50c9d8f542823a5c4ee3b149aea103",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 1. 建立 `index.js` 檔案"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "First, create an empty `index.js` file in the root of your React Native project.",
+      "source_content_hash": "222b302ac1b091af71896a3a39045a87eef629b8f8bcc827cc344dfed4e22814",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先，在 React Native 專案的根目錄建立一個空的 `index.js` 檔案。"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "`index.js` is the starting point for React Native applications, and it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will put everything in `index.js`.",
+      "source_content_hash": "d579fa561dab2da1034d1c16dd03e9c4f396dfd3ceb9a5743a5cdb7b42aea3af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`index.js` 是 React Native 應用程式的起點，且為必要檔案。它可以是一個小檔案，僅 `require` 其他屬於 React Native 元件或應用程式的檔案，也可以包含所需的所有程式碼。在本例中，我們會將所有內容放在 `index.js` 中。"
+      }
+    },
+    {
+      "segment_id": "13292277",
+      "source_content": "##### 2. Add your React Native code",
+      "source_content_hash": "4c82570928ce247c39d426b9ac434a75fdf6380906f4e2a93ae64fb81ae6e205",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 2. 加入您的 React Native 程式碼"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "In your `index.js`, create your component. In our sample here, we will add a `<Text>` component within a styled `<View>`",
+      "source_content_hash": "d5c660565cd7a51027c03d9a224c13382292545b404d416c8b3e219c1ba197ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 `index.js` 中建立您的元件。在此範例中，我們將在一個帶樣式的 `<View>` 中加入一個 `<Text>` 元件。"
+      }
+    },
+    {
+      "segment_id": "e908327f",
+      "source_content": "```jsx\nimport React from 'react';\nimport {AppRegistry, StyleSheet, Text, View} from 'react-native';\n\nconst RNHighScores = ({scores}) => {\n  const contents = scores.map(score => (\n    <Text key={score.name}>\n      {score.name}:{score.value}\n      {'\\n'}\n    </Text>\n  ));\n  return (\n    <View style={styles.container}>\n      <Text style={styles.highScoresTitle}>\n        2048 High Scores!\n      </Text>\n      <Text style={styles.scores}>{contents}</Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n    backgroundColor: '#FFFFFF',\n  },\n  highScoresTitle: {\n    fontSize: 20,\n    textAlign: 'center',\n    margin: 10,\n  },\n  scores: {\n    textAlign: 'center',\n    color: '#333333',\n    marginBottom: 5,\n  },\n});\n\n// Module name\nAppRegistry.registerComponent('RNHighScores', () => RNHighScores);\n```",
+      "source_content_hash": "063be3f88d28f6f5cf4273eb07c809ef3f55cc077243a036e7ad32446533ea78",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e908327f"
+      }
+    },
+    {
+      "segment_id": "86f43d60",
+      "source_content": "> `RNHighScores` is the name of your module that will be used when you add a view to React Native from within your iOS application.",
+      "source_content_hash": "bb26e97feeb202488062c0ffb8ab3745dc52964f86b83a2c003f01b78f1db157",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> `RNHighScores` 是您的模組名稱，當您從 iOS 應用程式中加入一個視圖到 React Native 時會使用此名稱。"
+      }
+    },
+    {
+      "segment_id": "e63d69ef",
+      "source_content": "#### The Magic: `RCTRootView`",
+      "source_content_hash": "cd6cd733abeab3165415eb0d4526a12c41d1741ed5b82ca5208b90dc8a3b27d6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 魔法所在：`RCTRootView`"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "Now that your React Native component is created via `index.js`, you need to add that component to a new or existing `ViewController`. The easiest path to take is to optionally create an event path to your component and then add that component to an existing `ViewController`.",
+      "source_content_hash": "9868bda4dc0039dc22bdf5b1cc43f8b28329c064c19b95fa476c4e656757932f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您的 React Native 元件已透過 `index.js` 建立，您需要將該元件加入新的或現有的 `ViewController` 中。最簡單的方式是選擇性地建立一個通往元件的路徑，然後將該元件加入現有的 `ViewController`。"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "We will tie our React Native component with a new native view in the `ViewController` that will actually contain it called `RCTRootView` .",
+      "source_content_hash": "6f277b168c61d53a124f83fe1325d672453db23f02cb5b4601b962500f7e59d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們將把 React Native 元件與 `ViewController` 中的新原生視圖綁定，該視圖將實際包含稱為 `RCTRootView` 的元件。"
+      }
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "##### 1. Create an Event Path",
+      "source_content_hash": "4401857f1a24b729d8ac316a06624879838faa2b022824aa5afbdf72b3b7307c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 1. 建立事件路徑"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "You can add a new link on the main game menu to go to the \"High Score\" React Native page.",
+      "source_content_hash": "7d8a0c12b467fddc16c88b99dd89326bec3f297d26d0d0cd8393951788180159",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在主遊戲選單中添加一個新連結，以跳轉至「高分」React Native 頁面。"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "![Event Path](/docs/assets/react-native-add-react-native-integration-link.png)",
+      "source_content_hash": "0c385961fa7859f151a492dbc41263d2e6323d297c1b07f3806ef8ea3a3ef3c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![事件路徑](/docs/assets/react-native-add-react-native-integration-link.png)"
+      }
+    },
+    {
+      "segment_id": "8159e12a",
+      "source_content": "##### 2. Event Handler",
+      "source_content_hash": "3dc3be9b7d112aff6c2b4440c8a2ec2f187fc6df90b7847877132a342864a883",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 2. 事件處理器"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "We will now add an event handler from the menu link. A method will be added to the main `ViewController` of your application. This is where `RCTRootView` comes into play.",
+      "source_content_hash": "9db2f2a00901c0f7a0d3eb4eb45dea53e3161a8b546d33c6ab77a26fe7570338",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們現在將從選單連結添加一個事件處理器。一個方法將被添加到您應用程式的主要 `ViewController` 中。這就是 `RCTRootView` 發揮作用的地方。"
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "When you build a React Native application, you use the [Metro bundler][metro] to create an `index.bundle` that will be served by the React Native server. Inside `index.bundle` will be our `RNHighScore` module. So, we need to point our `RCTRootView` to the location of the `index.bundle` resource (via `NSURL`) and tie it to the module.",
+      "source_content_hash": "a34d42af9734dc29473b470fa2c049b128cbab14c84c627cb0cff9c6b3d6d0a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當您構建 React Native 應用程式時，您會使用 [Metro 打包工具][metro] 來創建一個 `index.bundle`，該文件將由 React Native 伺服器提供。在 `index.bundle` 內部將是我們的 `RNHighScore` 模組。因此，我們需要將 `RCTRootView` 指向 `index.bundle` 資源的位置（透過 `NSURL`）並將其與模組綁定。"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "We will, for debugging purposes, log that the event handler was invoked. Then, we will create a string with the location of our React Native code that exists inside the `index.bundle`. Finally, we will create the main `RCTRootView`. Notice how we provide `RNHighScores` as the `moduleName` that we created [above](#the-react-native-component) when writing the code for our React Native component.",
+      "source_content_hash": "9f08206f6ef0a4338596eb743ac8f72d81d6193c5dd33febfbc0b7ea624143d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了調試目的，我們將記錄事件處理器被調用的情況。然後，我們將創建一個字符串，其中包含存在於 `index.bundle` 內的 React Native 代碼的位置。最後，我們將創建主要的 `RCTRootView`。請注意，我們提供了 `RNHighScores` 作為 `moduleName`，這是我們在編寫 React Native 元件的代碼時[上面](#the-react-native-component)創建的。"
+      }
+    },
+    {
+      "segment_id": "7e563909",
+      "source_content": "First `import` the `React` library.",
+      "source_content_hash": "53ca5bcd415305585edfbd5e20535a0dbdf96aa763ee95f4c880ad8a2cab7e38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先 `import` `React` 庫。"
+      }
+    },
+    {
+      "segment_id": "7079d2d5",
+      "source_content": "```jsx\nimport React\n```",
+      "source_content_hash": "4e4065ce0ccb446ec3505a1e2bb4a8bba83bd3287dcfdfd1f384cd54c35d72a2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7079d2d5"
+      }
+    },
+    {
+      "segment_id": "c58c052a",
+      "source_content": "> The `initialProperties` are here for illustration purposes so we have some data for our high score screen. In our React Native component, we will use `this.props` to get access to that data.",
+      "source_content_hash": "ee6effd8b899dd7b3dd9011a80d4db4c6bd3b56478719b29d7da39f30de43258",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> `initialProperties` 在這裡是為了說明目的，以便我們有一些數據用於我們的高分屏幕。在我們的 React Native 元件中，我們將使用 `this.props` 來訪問這些數據。"
+      }
+    },
+    {
+      "segment_id": "af7c5c4e",
+      "source_content": "```swift\n@IBAction func highScoreButtonTapped(sender : UIButton) {\n  NSLog(\"Hello\")\n  let jsCodeLocation = URL(string: \"http://localhost:8081/index.bundle?platform=ios\")\n  let mockData:NSDictionary = [\"scores\":\n      [\n          [\"name\":\"Alex\", \"value\":\"42\"],\n          [\"name\":\"Joel\", \"value\":\"10\"]\n      ]\n  ]\n\n  let rootView = RCTRootView(\n      bundleURL: jsCodeLocation,\n      moduleName: \"RNHighScores\",\n      initialProperties: mockData as [NSObject : AnyObject],\n      launchOptions: nil\n  )\n  let vc = UIViewController()\n  vc.view = rootView\n  self.present(vc, animated: true, completion: nil)\n}\n```",
+      "source_content_hash": "66e8aeb5195d6e590e907d6331b22be5423921f3b79c6f07fac711d3a790f50b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af7c5c4e"
+      }
+    },
+    {
+      "segment_id": "c4ae7396",
+      "source_content": "> Note that `RCTRootView bundleURL` starts up a new JSC VM. To save resources and simplify the communication between RN views in different parts of your native app, you can have multiple views powered by React Native that are associated with a single JS runtime. To do that, instead of using `RCTRootView bundleURL`, use [`RCTBridge initWithBundleURL`](https://github.com/facebook/react-native/blob/0.71-stable/React/Base/RCTBridge.h#L89) to create a bridge and then use `RCTRootView initWithBridge`.",
+      "source_content_hash": "6771e34e4e351d4ab71c8ee00e8519ce1684bb351eb91b875e19725e6477c640",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意，`RCTRootView bundleURL` 會啟動一個新的 JSC 虛擬機。為了節省資源並簡化原生應用中不同部分的 RN 視圖之間的通信，您可以擁有多個由 React Native 驅動的視圖，這些視圖與單個 JS 運行時關聯。要做到這一點，可以使用 [`RCTBridge initWithBundleURL`](https://github.com/facebook/react-native/blob/0.71-stable/React/Base/RCTBridge.h#L89) 來創建一個橋接器，然後使用 `RCTRootView initWithBridge`，而不是使用 `RCTRootView bundleURL`。"
+      }
+    },
+    {
+      "segment_id": "47db64f2",
+      "source_content": "> When moving your app to production, the `NSURL` can point to a pre-bundled file on disk via something like `let mainBundle = NSBundle(URLForResource: \"main\" withExtension:\"jsbundle\")`. You can use the `react-native-xcode.sh` script in `node_modules/react-native/scripts/` to generate that pre-bundled file.",
+      "source_content_hash": "5063fe7c7998ca19ddef5944951d5d332f08959c83527378d00623238956f96d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 當將您的應用程式移至生產環境時，`NSURL` 可以指向磁盤上的預打包文件，例如 `let mainBundle = NSBundle(URLForResource: \"main\" withExtension:\"jsbundle\")`。您可以使用 `node_modules/react-native/scripts/` 中的 `react-native-xcode.sh` 腳本來生成該預打包文件。"
+      }
+    },
+    {
+      "segment_id": "61d0a6d1",
+      "source_content": "##### 3. Wire Up",
+      "source_content_hash": "96f10dc4b319793760b448486142f79b3a62c908022fb5861fd0f1b413a63953",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 3. 連接"
+      }
+    },
+    {
+      "segment_id": "face5559",
+      "source_content": "Wire up the new link in the main menu to the newly added event handler method.",
+      "source_content_hash": "18a22e386082b6afff6d28d9e85df5d3055de45155beaa2f913da7f4425ae12e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將主選單中的新連結與新添加的事件處理器方法連接起來。"
+      }
+    },
+    {
+      "segment_id": "43287462",
+      "source_content": "![Event Path](/docs/assets/react-native-add-react-native-integration-wire-up.png)",
+      "source_content_hash": "a7623a05bd9bb537235b8d8d499e1e0500b330041cf284c4043c5be28c3e08a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![事件路徑](/docs/assets/react-native-add-react-native-integration-wire-up.png)"
+      }
+    },
+    {
+      "segment_id": "3945cfd3",
+      "source_content": "> One of the easier ways to do this is to open the view in the storyboard and right click on the new link. Select something such as the `Touch Up Inside` event, drag that to the storyboard and then select the created method from the list provided.",
+      "source_content_hash": "0e4a9ac308d6935e6112c2854bcde8e159af3577051d5d466a9380fff054a343",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 其中一種較簡單的方法是打開故事板中的視圖，然後右鍵單擊新連結。選擇類似 `Touch Up Inside` 的事件，將其拖到故事板中，然後從提供的列表中選擇創建的方法。"
+      }
+    },
+    {
+      "segment_id": "accb07e1",
+      "source_content": "##### 3. Window Reference",
+      "source_content_hash": "f53beaf0e792ca285f82ce12b020ce2df1648aa3546562a465e4a433405d3ced",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 3. 窗口引用"
+      }
+    },
+    {
+      "segment_id": "65be34cb",
+      "source_content": "Add a window reference to your AppDelegate.swift file. Ultimately, your AppDelegate should look something similar to this:",
+      "source_content_hash": "6fa702619d9da18f62fbb3235b074144a2b3a701bff8ab34d752fb6a1e986743",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 AppDelegate.swift 文件中添加一個窗口引用。最終，您的 AppDelegate 應該看起來類似這樣："
+      }
+    },
+    {
+      "segment_id": "f4341a93",
+      "source_content": "```swift\nimport UIKit\n\n@main\nclass AppDelegate: UIResponder, UIApplicationDelegate {\n\n    // Add window reference\n    var window: UIWindow?\n\n    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n        // Override point for customization after application launch.\n        return true\n    }\n\n    ....\n}\n```",
+      "source_content_hash": "cac0984bfbe5133d7828b1e8ad01f14619fa13770231a1fb42a2226e93f93da6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f4341a93"
+      }
+    },
+    {
+      "segment_id": "519c654d",
+      "source_content": "### Test your integration",
+      "source_content_hash": "fffaf65d7a20d5038ac87ff2638541e80a41aeeb40cb3100cdc72ba6567441cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試您的整合"
+      }
+    },
+    {
+      "segment_id": "2d5a3f2f",
+      "source_content": "You have now done all the basic steps to integrate React Native with your current application. Now we will start the [Metro bundler][metro] to build the `index.bundle` package and the server running on `localhost` to serve it.",
+      "source_content_hash": "b9a9b575326b0628f2d07a638988414f92f0a474cad5e1980d83f4369cf03328",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您現在已經完成了將 React Native 與當前應用程式整合的所有基本步驟。現在我們將啟動 [Metro 打包工具][metro] 來構建 `index.bundle` 包，並啟動運行在 `localhost` 上的伺服器來提供它。"
+      }
+    },
+    {
+      "segment_id": "846134ef",
+      "source_content": "##### 1. Add App Transport Security exception",
+      "source_content_hash": "2a032fcc8a17999b82565f1d0f0a574f51f4684ef51ad09830ef3ce4cea90fe4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 1. 添加應用程式傳輸安全性例外"
+      }
+    },
+    {
+      "segment_id": "53e725dc",
+      "source_content": "Apple has blocked implicit cleartext HTTP resource loading. So we need to add the following our project's `Info.plist` (or equivalent) file.",
+      "source_content_hash": "0df692a3162f032e6f3ca97a662b7e508ab4a9ed0a20363c5ded8b1f47a776c3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Apple 已阻止隱式的明文 HTTP 資源加載。因此，我們需要在項目的 `Info.plist`（或等效）文件中添加以下內容。"
+      }
+    },
+    {
+      "segment_id": "79d8cec2",
+      "source_content": "```xml\n<key>NSAppTransportSecurity</key>\n<dict>\n    <key>NSExceptionDomains</key>\n    <dict>\n        <key>localhost</key>\n        <dict>\n            <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>\n            <true/>\n        </dict>\n    </dict>\n</dict>\n```",
+      "source_content_hash": "0c0e4b7133e406df4b89858b9ddf408b314c285e403954c258d6cf14243b5fd5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_79d8cec2"
+      }
+    },
+    {
+      "segment_id": "8faae792",
+      "source_content": "> App Transport Security is good for your users. Make sure to re-enable it prior to releasing your app for production.",
+      "source_content_hash": "35f5a4988c4b62ca360f908bf2d0e7ecf952547b76bcac14e37a55244663d875",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 應用程式傳輸安全性對您的用戶有益。請確保在發佈應用程式前重新啟用它。"
+      }
+    },
+    {
+      "segment_id": "18b30a5c",
+      "source_content": "##### 2. Run the packager",
+      "source_content_hash": "b1c76dc74eed270cf0bbe6fa0ee53daef64bed75fb76db0637ce138100440459",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 2. 執行打包器"
+      }
+    },
+    {
+      "segment_id": "7ed923ee",
+      "source_content": "To run your app, you need to first start the development server. To do this, run the following command in the root directory of your React Native project:",
+      "source_content_hash": "175dd853e25493af4ccd0714158ea622ad815c192c70cd8b5bb0d71a9698eff8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要運行您的應用程式，首先需要啟動開發伺服器。為此，請在 React Native 專案的根目錄中執行以下命令："
+      }
+    },
+    {
+      "segment_id": "a85d7a64",
+      "source_content": "```shell\n$ npm start\n```",
+      "source_content_hash": "785c96652ccb99a259cca116e77a514d75713b4e880a398d13f223498a469e6a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a85d7a64"
+      }
+    },
+    {
+      "segment_id": "7f0accbb",
+      "source_content": "##### 3. Run the app",
+      "source_content_hash": "83c2cc83d21b338e4c4a50163c163e841ef507392b70d56320f51ac9f2fd23aa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 3. 運行應用程式"
+      }
+    },
+    {
+      "segment_id": "130e2dfb",
+      "source_content": "If you are using Xcode or your favorite editor, build and run your native iOS application as normal. Alternatively, you can run the app from the command line using:",
+      "source_content_hash": "d65c48b53e02298d10f90e9a6b7e2eee08867a8054d82c6e0eeee06e03167f8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您使用 Xcode 或您喜愛的編輯器，請像平常一樣建置並運行您的原生 iOS 應用程式。或者，您也可以使用以下命令從命令行運行應用程式："
+      }
+    },
+    {
+      "segment_id": "fa163a68",
+      "source_content": "```\n# From the root of your project\n$ npx react-native run-ios\n```",
+      "source_content_hash": "2b818b8147981cf04ad2dd5812d2eb98ce5960153056e58e3ef7ea386b40640f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fa163a68"
+      }
+    },
+    {
+      "segment_id": "45d5dee4",
+      "source_content": "In our sample application, you should see the link to the \"High Scores\" and then when you click on that you will see the rendering of your React Native component.",
+      "source_content_hash": "3c1bc40937efa9437ee366b58dd649ab9f4d4801d1ecbe58ff1fda9d39bb095a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在我們的範例應用程式中，您應該會看到「高分榜」的連結，點擊後將看到 React Native 元件的渲染結果。"
+      }
+    },
+    {
+      "segment_id": "83d7d3bc",
+      "source_content": "Here is the _native_ application home screen:",
+      "source_content_hash": "8de74dc174a336daba595541aaf264ecd43873415dabfb514016251f10c7d2e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是 _原生_ 應用程式的主畫面："
+      }
+    },
+    {
+      "segment_id": "2e76bd58",
+      "source_content": "![Home Screen](/docs/assets/react-native-add-react-native-integration-example-home-screen.png)",
+      "source_content_hash": "07a57819112514d3600e8470969a35a1379e94239d5cf5b58e42856b8ac5bf52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![主畫面](/docs/assets/react-native-add-react-native-integration-example-home-screen.png)"
+      }
+    },
+    {
+      "segment_id": "c9f6a516",
+      "source_content": "Here is the _React Native_ high score screen:",
+      "source_content_hash": "fb98faeb0ad92d866da78108704ae9a42b14701b1b95b34b5e46072a0795f563",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是 _React Native_ 的高分榜畫面："
+      }
+    },
+    {
+      "segment_id": "b8954ec9",
+      "source_content": "![High Scores](/docs/assets/react-native-add-react-native-integration-example-high-scores.png)",
+      "source_content_hash": "0423876c059cc4c7b386324e35bfa2e63a323afb7906c4d5c8116a281570e341",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![高分榜](/docs/assets/react-native-add-react-native-integration-example-high-scores.png)"
+      }
+    },
+    {
+      "segment_id": "c4967bbc",
+      "source_content": "> If you are getting module resolution issues when running your application please see [this GitHub issue](https://github.com/facebook/react-native/issues/4968) for information and possible resolution. [This comment](https://github.com/facebook/react-native/issues/4968#issuecomment-220941717) seemed to be the latest possible resolution.",
+      "source_content_hash": "8d4fc0315233ff1a4f2a786777413b969e7153e4eb36d27907b61bbf0c8c48ef",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果在運行應用程式時遇到模組解析問題，請參閱 [此 GitHub 議題](https://github.com/facebook/react-native/issues/4968) 以獲取資訊和可能的解決方案。[此評論](https://github.com/facebook/react-native/issues/4968#issuecomment-220941717) 似乎是最新的解決方案。"
+      }
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### Now what?",
+      "source_content_hash": "3f41131596e2a049d4d00c4f4c304ff87d8d3cc0474a4c61c485847d9bafeca5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 接下來呢？"
+      }
+    },
+    {
+      "segment_id": "71e7acda",
+      "source_content": "At this point you can continue developing your app as usual. Refer to our [debugging](debugging) and [deployment](running-on-device) docs to learn more about working with React Native.",
+      "source_content_hash": "2a765e765a3af5281841e72ffe76592a8162446ba5f35a892d9224be47053a1e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時，您可以像往常一樣繼續開發您的應用程式。請參考我們的 [除錯](debugging) 和 [部署](running-on-device) 文件，以了解更多關於使用 React Native 的資訊。"
+      }
+    },
+    {
+      "segment_id": "06be6e87",
+      "source_content": "[metro]: https://metrobundler.dev/",
+      "source_content_hash": "8c5ea598f1617ded21c97316c723153cb950dfa6243784130f5b320382243ad1",
+      "node_type": "definition",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[metro]: https://metrobundler.dev/"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/_integration-with-existing-apps-swift.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.309736+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a02f3c26e128dd5601e90c74f00b8e5603c2f3775ffb758f6f8d15047bfd340f"
+  }
+}

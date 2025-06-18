@@ -1,0 +1,454 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/direct-manipulation.md",
+  "source_file_content_hash": "08c535d3a9c5928edb5c55bdc61eb22f97f05011b08c3109c434d7d76b6b6b01",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: direct-manipulation\ntitle: Direct Manipulation\n---",
+      "source_content_hash": "d4b98f9df8ef14c70f8a6a497c1abed19dd4e80fb5c09beeb8567466d92c4a2b",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import NativeDeprecated from './the-new-architecture/\\_markdown_native_deprecation.mdx'",
+      "source_content_hash": "0e53d2663ca7ee44056ad6b215d06a3e68169fbc99f17fbeb99e4507b2894124",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<NativeDeprecated />",
+      "source_content_hash": "1680a0727658899157f198b9f9f0a950c884554cdfaa045c2229262db270638c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "It is sometimes necessary to make changes directly to a component without using state/props to trigger a re-render of the entire subtree. When using React in the browser for example, you sometimes need to directly modify a DOM node, and the same is true for views in mobile apps. `setNativeProps` is the React Native equivalent to setting properties directly on a DOM node.",
+      "source_content_hash": "577faaa9a3f6d1f05309f1a294fc6850d7e9a8221360cdcef69842c1a0adb4f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0e7eb58c",
+      "source_content": ":::caution\nUse `setNativeProps` when frequent re-rendering creates a performance bottleneck!\n\nDirect manipulation will not be a tool that you reach for frequently. You will typically only be using it for creating continuous animations to avoid the overhead of rendering the component hierarchy and reconciling many views.\n`setNativeProps` is imperative and stores state in the native layer (DOM, UIView, etc.) and not within your React components, which makes your code more difficult to reason about.\n\nBefore you use it, try to solve your problem with `setState` and [`shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#shouldcomponentupdate-in-action).\n:::",
+      "source_content_hash": "57531cddea9c1882bfe115d78d3ad61fd7387899cfbdeebe2d1aaf9d832bd5e6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## setNativeProps with TouchableOpacity",
+      "source_content_hash": "e7b3ec45514558ac1996496818c72d5896c93269272e1645af6a2d2ac796adc7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "[TouchableOpacity](https://github.com/facebook/react-native/blob/0.70-stable/Libraries/Components/Touchable/TouchableOpacity.js) uses `setNativeProps` internally to update the opacity of its child component:",
+      "source_content_hash": "525cfcbfa906a7e39edffe6b12a19ef0635693faa053846821876e2221adacfc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3569d545",
+      "source_content": "```jsx\nconst viewRef = useRef();\nconst setOpacityTo = useCallback(value => {\n  // Redacted: animation related code\n  viewRef.current.setNativeProps({\n    opacity: value,\n  });\n}, []);\n```",
+      "source_content_hash": "790472ef0e1775f7ec6d16a7efecd32e013bbdd3b2b44b58f48437cd6b805b04",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "This allows us to write the following code and know that the child will have its opacity updated in response to taps, without the child having any knowledge of that fact or requiring any changes to its implementation:",
+      "source_content_hash": "9c9aba3734afd6b54905702cbc5f3bfdeb1d58fd288a8684a19047da706958a2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be2d5397",
+      "source_content": "```jsx\n<TouchableOpacity onPress={handlePress}>\n  <View>\n    <Text>Press me!</Text>\n  </View>\n</TouchableOpacity>\n```",
+      "source_content_hash": "e1fd22d91c587d56b0d1b12a15c9c34644da6f3d02db152be7ee955be7d80cf6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "Let's imagine that `setNativeProps` was not available. One way that we might implement it with that constraint is to store the opacity value in the state, then update that value whenever `onPress` is fired:",
+      "source_content_hash": "37306e3b55909f09ed9fa0f396b26be0494f31cdef2c4ed180f95bb882cfcf91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b75ddc12",
+      "source_content": "```jsx\nconst [buttonOpacity, setButtonOpacity] = useState(1);\nreturn (\n  <TouchableOpacity\n    onPressIn={() => setButtonOpacity(0.5)}\n    onPressOut={() => setButtonOpacity(1)}>\n    <View style={{opacity: buttonOpacity}}>\n      <Text>Press me!</Text>\n    </View>\n  </TouchableOpacity>\n);\n```",
+      "source_content_hash": "3ddc0f6e7b1e7e98c7f08bd4fd87f33170d455970b26b0d68d7151e936f4776a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "This is computationally intensive compared to the original example - React needs to re-render the component hierarchy each time the opacity changes, even though other properties of the view and its children haven't changed. Usually this overhead isn't a concern but when performing continuous animations and responding to gestures, judiciously optimizing your components can improve your animations' fidelity.",
+      "source_content_hash": "ba1a853eaba9385d5b88b2aabbebfd351e67e63af7e5b7fdf34e4622109f8090",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "If you look at the implementation of `setNativeProps` in [NativeMethodsMixin](https://github.com/facebook/react-native/blob/0.70-stable/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js) you will notice that it is a wrapper around `RCTUIManager.updateView` - this is the exact same function call that results from re-rendering - see [receiveComponent in ReactNativeBaseComponent](https://github.com/facebook/react-native/blob/fb2ec1ea47c53c2e7b873acb1cb46192ac74274e/Libraries/Renderer/oss/ReactNativeRenderer-prod.js#L5793-L5813).",
+      "source_content_hash": "53ce1f1fae53770117c72e9538dd77e1f043d0f11df6b74a3d45203ad39808cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c315c636",
+      "source_content": "## Composite components and setNativeProps",
+      "source_content_hash": "4f14ddf8138cb0e95bfed341d11dd6405d82a025cf459b23a00afb80c0298b51",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "Composite components are not backed by a native view, so you cannot call `setNativeProps` on them. Consider this example:",
+      "source_content_hash": "e1785ce45df80caf7bd60da2d967cad75ccf1a23415794c3d59eedc55fffa4ad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "67b24fc5",
+      "source_content": "```SnackPlayer name=setNativeProps%20with%20Composite%20Components\nimport React from \"react\";\nimport { Text, TouchableOpacity, View } from \"react-native\";\n\nconst MyButton = (props) => (\n  <View style={{ marginTop: 50 }}>\n    <Text>{props.label}</Text>\n  </View>\n);\n\nexport default App = () => (\n  <TouchableOpacity>\n    <MyButton label=\"Press me!\" />\n  </TouchableOpacity>\n);\n```",
+      "source_content_hash": "b74f00a4b003ed8723c591824e5189ba54673e6b0034f1cf56cfa56ab4818a6f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "If you run this you will immediately see this error: `Touchable child must either be native or forward setNativeProps to a native component`. This occurs because `MyButton` isn't directly backed by a native view whose opacity should be set. You can think about it like this: if you define a component with `createReactClass` you would not expect to be able to set a style prop on it and have that work - you would need to pass the style prop down to a child, unless you are wrapping a native component. Similarly, we are going to forward `setNativeProps` to a native-backed child component.",
+      "source_content_hash": "4da0cc80d69ea3e5c1189bad12a9f203f489f2af9827f04b0ae3e5742c2647a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "759d12dd",
+      "source_content": "#### Forward setNativeProps to a child",
+      "source_content_hash": "39588a349510d99641c85588ccc951a0d9a26b8752c56fb0dc5bd37268345957",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "Since the `setNativeProps` method exists on any ref to a `View` component, it is enough to forward a ref on your custom component to one of the `<View />` components that it renders. This means that a call to `setNativeProps` on the custom component will have the same effect as if you called `setNativeProps` on the wrapped `View` component itself.",
+      "source_content_hash": "915a77f87ff917e7edabb2ac89332600d957d063f518363375b4df9be4b903bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5dd0e3a7",
+      "source_content": "```SnackPlayer name=Forwarding%20setNativeProps\nimport React from \"react\";\nimport { Text, TouchableOpacity, View } from \"react-native\";\n\nconst MyButton = React.forwardRef((props, ref) => (\n  <View {...props} ref={ref} style={{ marginTop: 50 }}>\n    <Text>{props.label}</Text>\n  </View>\n));\n\nexport default App = () => (\n  <TouchableOpacity>\n    <MyButton label=\"Press me!\" />\n  </TouchableOpacity>\n);\n```",
+      "source_content_hash": "e96850cf0868f63c77058913f0028217ee1d73e5647b93857fb1a2c440c34436",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "You can now use `MyButton` inside of `TouchableOpacity`!",
+      "source_content_hash": "3fd9a48f9ba4768eb8922233075fe2ca7fc34e4b3f90a533f32142c1ac901870",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您可以在 `TouchableOpacity` 中使用 `MyButton` 了！"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "You may have noticed that we passed all of the props down to the child view using `{...props}`. The reason for this is that `TouchableOpacity` is actually a composite component, and so in addition to depending on `setNativeProps` on its child, it also requires that the child perform touch handling. To do this, it passes on [various props](view.md#onmoveshouldsetresponder) that call back to the `TouchableOpacity` component. `TouchableHighlight`, in contrast, is backed by a native view and only requires that we implement `setNativeProps`.",
+      "source_content_hash": "ae1a8b2bb648e1e0232e438e55a916db213eeeb791efa3787c6bc280e78f95fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可能注意到我們使用 `{...props}` 將所有屬性傳遞給子視圖。這是因為 `TouchableOpacity` 實際上是一個複合元件，除了依賴子元件的 `setNativeProps` 外，還要求子元件處理觸控操作。為此，它會傳遞[多種屬性](view.md#onmoveshouldsetresponder)回調到 `TouchableOpacity` 元件。相比之下，`TouchableHighlight` 由原生視圖支持，僅需要我們實現 `setNativeProps`。"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "## setNativeProps to edit TextInput value",
+      "source_content_hash": "a6ecb0bf6b078449562269350493d598fe80994e8847b5d630206c1bc565e81e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 setNativeProps 編輯 TextInput 值"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "Another very common use case of `setNativeProps` is to edit the value of the TextInput. The `controlled` prop of TextInput can sometimes drop characters when the `bufferDelay` is low and the user types very quickly. Some developers prefer to skip this prop entirely and instead use `setNativeProps` to directly manipulate the TextInput value when necessary. For example, the following code demonstrates editing the input when you tap a button:",
+      "source_content_hash": "5c16cd7de7b0220f5b989ec2bb2c714287365b55cd0f6be930309600e0f22f66",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`setNativeProps` 另一個常見用途是編輯 TextInput 的值。當 `bufferDelay` 較低且用戶輸入速度極快時，TextInput 的 `controlled` 屬性有時會丟失字符。部分開發者傾向完全跳過此屬性，轉而必要時直接使用 `setNativeProps` 操作 TextInput 值。例如，以下代碼示範點擊按鈕時編輯輸入框："
+      }
+    },
+    {
+      "segment_id": "f155ef1e",
+      "source_content": "```SnackPlayer name=Clear%20text\nimport React from \"react\";\nimport { useCallback, useRef } from \"react\";\nimport { StyleSheet, TextInput, Text, TouchableOpacity, View } from \"react-native\";\n\nconst App = () => {\n  const inputRef = useRef();\n  const editText = useCallback(() => {\n    inputRef.current.setNativeProps({ text: \"Edited Text\" });\n  }, []);\n\n  return (\n    <View style={styles.container}>\n      <TextInput ref={inputRef} style={styles.input} />\n      <TouchableOpacity onPress={editText}>\n        <Text>Edit text</Text>\n      </TouchableOpacity>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: \"center\",\n    justifyContent: \"center\",\n  },\n  input: {\n    height: 50,\n    width: 200,\n    marginHorizontal: 20,\n    borderWidth: 1,\n    borderColor: \"#ccc\",\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "b9ec34b227690b397b4aef2439d7dacabcdbf5752d226052c5717b3648a96eaf",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f155ef1e"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "You can use the [`clear`](textinput#clear) method to clear the `TextInput` which clears the current input text using the same approach.",
+      "source_content_hash": "d7b915c7452e43d21342a6e4d6f944f401143e7eae4ce824cc03f73d1482328d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以使用 [`clear`](textinput#clear) 方法清除 `TextInput`，該方法採用相同方式清除當前輸入文本。"
+      }
+    },
+    {
+      "segment_id": "b50cf7ff",
+      "source_content": "## Avoiding conflicts with the render function",
+      "source_content_hash": "4b1062a450ccdab28a3d40906335dede03ed3a455504ef9a41d39e7008de550e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 避免與渲染函數衝突"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "If you update a property that is also managed by the render function, you might end up with some unpredictable and confusing bugs because anytime the component re-renders and that property changes, whatever value was previously set from `setNativeProps` will be completely ignored and overridden.",
+      "source_content_hash": "948e74227a9a95bf9f8a7692aee2183766ac79f362026ec2ce76f16b25ab499a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您更新的屬性同時由渲染函數管理，可能導致不可預測的混淆錯誤，因為元件重新渲染且該屬性變更時，先前透過 `setNativeProps` 設定的值將被完全忽略並覆寫。"
+      }
+    },
+    {
+      "segment_id": "3c6dd548",
+      "source_content": "## setNativeProps & shouldComponentUpdate",
+      "source_content_hash": "f0be8c3a7bc9e16ddab7f42b0e719e352092a682795313f45322d0b0ffdae069",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## setNativeProps 與 shouldComponentUpdate"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "By [intelligently applying `shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation) you can avoid the unnecessary overhead involved in reconciling unchanged component subtrees, to the point where it may be performant enough to use `setState` instead of `setNativeProps`.",
+      "source_content_hash": "b4026551ebad95b774f11d0c27adebe2b4ad1876525273714d9b4f9d4fa76758",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過[智慧應用 `shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation)，可避免協調未變更元件子樹的不必要開銷，甚至可能使 `setState` 的性能足以取代 `setNativeProps`。"
+      }
+    },
+    {
+      "segment_id": "f6a06609",
+      "source_content": "## Other native methods",
+      "source_content_hash": "d815609fcb6ce5756e41958fde9a1d9d275e84a3bb117554698bc560b0bba581",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他原生方法"
+      }
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "The methods described here are available on most of the default components provided by React Native. Note, however, that they are _not_ available on composite components that aren't directly backed by a native view. This will generally include most components that you define in your own app.",
+      "source_content_hash": "046402c26b8a08090a83909a2b508e3a4302aef346cd0dc232288aa64f8d3064",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此處描述的方法適用於 React Native 提供的大多數預設元件。但請注意，這些方法_不適用_於非直接由原生視圖支持的複合元件，這通常包含您自訂應用中的多數元件。"
+      }
+    },
+    {
+      "segment_id": "657bde08",
+      "source_content": "### measure(callback)",
+      "source_content_hash": "42ede145526a82c5f9cee7ff9f7b742e6e7441536b3a5c556e2f74655dca2f52",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### measure(callback)"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "Determines the location on screen, width, and height in the viewport of the given view and returns the values via an async callback. If successful, the callback will be called with the following arguments:",
+      "source_content_hash": "17e20462af69769fcecaa91bda433324c34ccd4bde1113111dbefffbf1706257",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測定指定視圖在螢幕上的位置、寬度和高度，並透過異步回調返回數值。成功時回調參數如下："
+      }
+    },
+    {
+      "segment_id": "35b64b93",
+      "source_content": "- x\n- y\n- width\n- height\n- pageX\n- pageY",
+      "source_content_hash": "8a8f3ad8e8c6c2914c077cb244be5edcf1e4968cd57ad393a15baa5158a0e5b3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- x\n- y\n- width\n- height\n- pageX\n- pageY"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "Note that these measurements are not available until after the rendering has been completed in native. If you need the measurements as soon as possible and you don't need `pageX` and `pageY`, consider using the [`onLayout`](view.md#onlayout) property instead.",
+      "source_content_hash": "6ea7d5b5cbabfab5e6bb7a39050e7f0f601aa4ad4e3bc441e0160e6b2c031789",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意這些測量值需待原生端渲染完成後才可用。若需盡快取得測量值且不需要 `pageX` 和 `pageY`，建議改用 [`onLayout`](view.md#onlayout) 屬性。"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "Also the width and height returned by `measure()` are the width and height of the component in the viewport. If you need the actual size of the component, consider using the [`onLayout`](view.md#onlayout) property instead.",
+      "source_content_hash": "8fc12da3679304efbdf9ad56013382f83963a9c16db6d2e9531c58df49fdb6e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，`measure()` 返回的寬高是元件在視窗中的尺寸。若需元件的實際尺寸，建議改用 [`onLayout`](view.md#onlayout) 屬性。"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "### measureInWindow(callback)",
+      "source_content_hash": "71601f887631841d61fde77719d53630e8619033f0999898d4a7db24fd47c5dc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### measureInWindow(callback)"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "Determines the location of the given view in the window and returns the values via an async callback. If the React root view is embedded in another native view, this will give you the absolute coordinates. If successful, the callback will be called with the following arguments:",
+      "source_content_hash": "e524c2042bcf677288905c1ee9157d42ed8838411bcf7d47e615a3240d7f8f52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測定指定視圖在視窗中的位置，並透過異步回調返回數值。若 React 根視圖嵌入其他原生視圖中，此方法將提供絕對座標。成功時回調參數如下："
+      }
+    },
+    {
+      "segment_id": "aa3dd15d",
+      "source_content": "- x\n- y\n- width\n- height",
+      "source_content_hash": "f8fe52e94c5c1ffc6ced6bd58e1399deca75e89f3b636cf343256e84fe522c20",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- x\n- y\n- width\n- height"
+      }
+    },
+    {
+      "segment_id": "6d457467",
+      "source_content": "### measureLayout(relativeToNativeComponentRef, onSuccess, onFail)",
+      "source_content_hash": "eda66a06b87cc0a7cc5c0f5c06966147211774f0e33c30b770ab68dc13a628c0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### measureLayout(relativeToNativeComponentRef, onSuccess, onFail)"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "Like `measure()`, but measures the view relative to an ancestor, specified with `relativeToNativeComponentRef` reference. This means that the returned coordinates are relative to the origin `x`, `y` of the ancestor view.",
+      "source_content_hash": "3ffaaa03e78723944f69c39c0ebd4fd981dd974d29b7945012fc9c787eb8e5b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "類似 `measure()`，但以 `relativeToNativeComponentRef` 參照的祖先視圖為基準進行測量。返回的座標相對於祖先視圖原點 `x`, `y`。"
+      }
+    },
+    {
+      "segment_id": "751dd460",
+      "source_content": ":::note\nThis method can also be called with a `relativeToNativeNode` handler (instead of reference), but this variant is deprecated.\n:::",
+      "source_content_hash": "4061a4a6731e687e9fc093f1d1be6479c9c9af4ee2a5aa8c69ab7742c6336f68",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n此方法亦可使用 `relativeToNativeNode` 處理程序（而非參照）調用，但此變體已棄用。\n:::"
+      }
+    },
+    {
+      "segment_id": "46dadadd",
+      "source_content": "```SnackPlayer name=measureLayout%20example&supportedPlatforms=android,ios\nimport React, { useEffect, useRef, useState } from \"react\";\nimport { Text, View, StyleSheet } from \"react-native\";\n\nconst App = () => {\n  const textContainerRef = useRef(null);\n  const textRef = useRef(null);\n  const [measure, setMeasure] = useState(null);\n\n  useEffect(() => {\n    if (textRef.current && textContainerRef.current) {\n      textRef.current.measureLayout(\n        textContainerRef.current,\n        (left, top, width, height) => {\n          setMeasure({ left, top, width, height });\n        }\n      );\n    }\n  }, [measure]);\n\n  return (\n    <View style={styles.container}>\n      <View\n        ref={textContainerRef}\n        style={styles.textContainer}\n      >\n        <Text ref={textRef}>\n          Where am I? (relative to the text container)\n        </Text>\n      </View>\n      <Text style={styles.measure}>\n        {JSON.stringify(measure)}\n      </Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: \"center\",\n  },\n  textContainer: {\n    backgroundColor: \"#61dafb\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n    padding: 12,\n  },\n  measure: {\n    textAlign: \"center\",\n    padding: 12,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "f346512a7b6a03402b4777be1d8062f94f8e2ba4867fcf5dd0458ba8a400ba3e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_46dadadd"
+      }
+    },
+    {
+      "segment_id": "50e53dff",
+      "source_content": "### focus()",
+      "source_content_hash": "4119f5bf9384561424f8e9773ce1efd53522e0665fe6e1794a9cca51dbd293f5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### focus()"
+      }
+    },
+    {
+      "segment_id": "f6e7e6a7",
+      "source_content": "Requests focus for the given input or view. The exact behavior triggered will depend on the platform and type of view.",
+      "source_content_hash": "d16c3ede12d258f315c6aab5f53ea527272280779afe57607e779412dd8b2a07",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99e592b0",
+      "source_content": "### blur()",
+      "source_content_hash": "07061806aa2efe66f2e3214a5bfd7971794e42e9725459a4e9710ca2b3719457",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "93f7c834",
+      "source_content": "Removes focus from an input or view. This is the opposite of `focus()`.",
+      "source_content_hash": "fc1c83cf79f7dc0147df99205d0e3c93f7e0dc97ef5ef5378b7862854dc4014f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/direct-manipulation.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.345040+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "08c535d3a9c5928edb5c55bdc61eb22f97f05011b08c3109c434d7d76b6b6b01"
+  }
+}

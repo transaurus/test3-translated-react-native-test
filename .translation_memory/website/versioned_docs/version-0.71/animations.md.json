@@ -1,0 +1,932 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/animations.md",
+  "source_file_content_hash": "a926981be3fff66510fa5e6e06635b495c977fe51536265abab0130e80e13632",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: animations\ntitle: Animations\n---",
+      "source_content_hash": "380ca41bc755a07945d27ff0fb6427c7c81f2e62ed72dc0c43b3566b57a3d652",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Animations are very important to create a great user experience. Stationary objects must overcome inertia as they start moving. Objects in motion have momentum and rarely come to a stop immediately. Animations allow you to convey physically believable motion in your interface.",
+      "source_content_hash": "4988e6454ce17b03a3ffefe1d3b306e156158f12a9f22a7a9caf1f29f9cdedcd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫對於創造出色的使用者體驗至關重要。靜止的物體開始移動時需克服慣性，而運動中的物體具有動量，很少會立即停止。動畫能讓您在介面中傳遞符合物理規律的運動效果。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "React Native provides two complementary animation systems: [`Animated`](animations#animated-api) for granular and interactive control of specific values, and [`LayoutAnimation`](animations#layoutanimation-api) for animated global layout transactions.",
+      "source_content_hash": "139ac6422b7c1b72ac0569f6a10d2eed741013acc53e406d4ab94219283de061",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 提供兩套互補的動畫系統：[`Animated`](animations#animated-api) 用於對特定值進行細粒度互動控制，[`LayoutAnimation`](animations#layoutanimation-api) 則用於全局佈局變換的動畫處理。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## `Animated` API",
+      "source_content_hash": "127b14c5a8ff18ade40bfe09836014194f189f24a8e1c22cfa6b80b7dc17e7be",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## `Animated` API"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The [`Animated`](animated) API is designed to concisely express a wide variety of interesting animation and interaction patterns in a very performant way. `Animated` focuses on declarative relationships between inputs and outputs, with configurable transforms in between, and `start`/`stop` methods to control time-based animation execution.",
+      "source_content_hash": "23c0568e209fa2ceec421793121a7066d34f00f62877eedaa793b318e52501db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[`Animated`](animated) API 的設計旨在以高效能的方式簡潔表達各種動畫與互動模式。其核心是輸入輸出的聲明式關係，中間可配置轉換過程，並通過 `start`/`stop` 方法控制基於時間軸的動畫執行。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "`Animated` exports six animatable component types: `View`, `Text`, `Image`, `ScrollView`, `FlatList` and `SectionList`, but you can also create your own using `Animated.createAnimatedComponent()`.",
+      "source_content_hash": "56e8f93bdbef71e4d86d122e6c2ef4080bf424f55a8bca667a4e82b19fc939c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 導出六種可動畫化元件類型：`View`、`Text`、`Image`、`ScrollView`、`FlatList` 和 `SectionList`，您也可以使用 `Animated.createAnimatedComponent()` 創建自訂元件。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "For example, a container view that fades in when it is mounted may look like this:",
+      "source_content_hash": "c61bcd1a39301e3184400679b87954214d09c82239b739630010ad0e4235b218",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，一個在掛載時淡入的容器視圖可能如下所示："
+      }
+    },
+    {
+      "segment_id": "8f488ab5",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer ext=js&supportedPlatforms=ios,android\nimport React, {useEffect, useAnimatedValue} from 'react';\nimport {Animated, Text, View} from 'react-native';\n\nconst FadeInView = props => {\n  const fadeAnim = useAnimatedValue(0); // Initial value for opacity: 0\n\n  useEffect(() => {\n    Animated.timing(fadeAnim, {\n      toValue: 1,\n      duration: 10000,\n      useNativeDriver: true,\n    }).start();\n  }, [fadeAnim]);\n\n  return (\n    <Animated.View // Special animatable View\n      style={{\n        ...props.style,\n        opacity: fadeAnim, // Bind opacity to animated value\n      }}>\n      {props.children}\n    </Animated.View>\n  );\n};\n\n// You can then use your `FadeInView` in place of a `View` in your components:\nexport default () => {\n  return (\n    <View\n      style={{\n        flex: 1,\n        alignItems: 'center',\n        justifyContent: 'center',\n      }}>\n      <FadeInView\n        style={{\n          width: 250,\n          height: 50,\n          backgroundColor: 'powderblue',\n        }}>\n        <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>\n          Fading in\n        </Text>\n      </FadeInView>\n    </View>\n  );\n};\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer ext=tsx\nimport React, {useEffect} from 'react';\nimport {Animated, Text, View, useAnimatedValue} from 'react-native';\nimport type {PropsWithChildren} from 'react';\nimport type {ViewStyle} from 'react-native';\n\ntype FadeInViewProps = PropsWithChildren<{style: ViewStyle}>;\n\nconst FadeInView: React.FC<FadeInViewProps> = props => {\n  const fadeAnim = useAnimatedValue(0); // Initial value for opacity: 0\n\n  useEffect(() => {\n    Animated.timing(fadeAnim, {\n      toValue: 1,\n      duration: 10000,\n      useNativeDriver: true,\n    }).start();\n  }, [fadeAnim]);\n\n  return (\n    <Animated.View // Special animatable View\n      style={{\n        ...props.style,\n        opacity: fadeAnim, // Bind opacity to animated value\n      }}>\n      {props.children}\n    </Animated.View>\n  );\n};\n\n// You can then use your `FadeInView` in place of a `View` in your components:\nexport default () => {\n  return (\n    <View\n      style={{\n        flex: 1,\n        alignItems: 'center',\n        justifyContent: 'center',\n      }}>\n      <FadeInView\n        style={{\n          width: 250,\n          height: 50,\n          backgroundColor: 'powderblue',\n        }}>\n        <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>\n          Fading in\n        </Text>\n      </FadeInView>\n    </View>\n  );\n};\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "da864a78bf46d41e48ce915a9b838a45b6f338c7f17e6d52eab10103b3d846ea",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f488ab5"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "Let's break down what's happening here. In the `FadeInView` constructor, a new `Animated.Value` called `fadeAnim` is initialized as part of `state`. The opacity property on the `View` is mapped to this animated value. Behind the scenes, the numeric value is extracted and used to set opacity.",
+      "source_content_hash": "7388cba49df8bacbce890f2f95387c8a75dc360d3b993c4f479c6d95a5f94ba8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "解析這段代碼：在 `FadeInView` 構造函數中，初始化了名為 `fadeAnim` 的 `Animated.Value` 作為 `state` 的一部分。`View` 的透明度屬性被映射到這個動畫值。底層運行時會提取數值並用於設置透明度。"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "When the component mounts, the opacity is set to 0. Then, an easing animation is started on the `fadeAnim` animated value, which will update all of its dependent mappings (in this case, only the opacity) on each frame as the value animates to the final value of 1.",
+      "source_content_hash": "0ec0bc916768164748b3b0943a2f721a278606fa03629f9c98e07c8f23e05578",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "元件掛載時，透明度設為 0。接著在 `fadeAnim` 動畫值上啟動緩動動畫，該動畫會在每一幀更新所有依賴映射（此例中僅透明度屬性），使數值從初始值漸變至最終值 1。"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "This is done in an optimized way that is faster than calling `setState` and re-rendering. Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.",
+      "source_content_hash": "5e51573d5073936f210d09d198e1a049c80a29efcf3ce978f73000f747b8f576",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這種實現方式經過優化，比調用 `setState` 重新渲染更高效。由於整個配置是聲明式的，未來還能實現更多優化，例如序列化配置並在高優先級線程運行動畫。"
+      }
+    },
+    {
+      "segment_id": "c6868a9f",
+      "source_content": "### Configuring animations",
+      "source_content_hash": "593875e88306417de19107bda268eeaf6ce5761ebc436177607362e9b9821305",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 配置動畫"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.",
+      "source_content_hash": "fb29411ba14f541e1fec6804a88688ba5d1c46048ca486cc24ede98294ed663a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫具有高度可配置性。自訂或預設的緩動函數、延遲、持續時間、衰減因子、彈簧常數等參數，均可根據動畫類型進行調整。"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "`Animated` provides several animation types, the most commonly used one being [`Animated.timing()`](animated#timing). It supports animating a value over time using one of various predefined easing functions, or you can use your own. Easing functions are typically used in animation to convey gradual acceleration and deceleration of objects.",
+      "source_content_hash": "18f7debb18026d4992a626046cdc730bd247816fcdbce8f82564d7ad66844d2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 提供多種動畫類型，最常用的是 [`Animated.timing()`](animated#timing)。它支持使用預設緩動函數或自訂函數隨時間變化數值。緩動函數通常用於表現物體逐漸加速或減速的運動過程。"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "By default, `timing` will use an easeInOut curve that conveys gradual acceleration to full speed and concludes by gradually decelerating to a stop. You can specify a different easing function by passing an `easing` parameter. Custom `duration` or even a `delay` before the animation starts is also supported.",
+      "source_content_hash": "460ac45540376b252bfeb793b3cf9df1555179470f829543f3a1d865d716055c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "默認情況下，`timing` 採用 easeInOut 曲線，表現為先漸加速至全速，結束時漸減速至停止。您可通過 `easing` 參數指定其他緩動函數，同時支持自訂 `duration` 或設置動畫開始前的 `delay`。"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "For example, if we want to create a 2-second long animation of an object that slightly backs up before moving to its final position:",
+      "source_content_hash": "efdd925bf497b7f4f4163a03804c452d37a9184a798be377e2f6e3e3d84dcd15",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如要創建一個 2 秒長的動畫，讓物體在到達最終位置前輕微回彈："
+      }
+    },
+    {
+      "segment_id": "eb25bb8c",
+      "source_content": "```tsx\nAnimated.timing(this.state.xPosition, {\n  toValue: 100,\n  easing: Easing.back(),\n  duration: 2000,\n  useNativeDriver: true,\n}).start();\n```",
+      "source_content_hash": "2fece54a976a6b521b9273c32b4cee8c5d65db23ece844f13f8130c962f035f5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb25bb8c"
+      }
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "Take a look at the [Configuring animations](animated#configuring-animations) section of the `Animated` API reference to learn more about all the config parameters supported by the built-in animations.",
+      "source_content_hash": "1b2987696b205df70d4a9eb1e6e5039a41600352ee59c688274bea2dcc43f261",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查閱 `Animated` API 參考文檔的[配置動畫](animated#configuring-animations)章節，了解內建動畫支持的所有配置參數。"
+      }
+    },
+    {
+      "segment_id": "531ec0bb",
+      "source_content": "### Composing animations",
+      "source_content_hash": "60f8b794928e38f67e12e381e02c208987ccbdce67e54f833d8421b0794542f7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 組合動畫"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "Animations can be combined and played in sequence or in parallel. Sequential animations can play immediately after the previous animation has finished, or they can start after a specified delay. The `Animated` API provides several methods, such as `sequence()` and `delay()`, each of which take an array of animations to execute and automatically calls `start()`/`stop()` as needed.",
+      "source_content_hash": "988fe16b7a9c97dc537c9602362220b8534f544daea4b68b3740e4967b2a426f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫可組合為順序或並行播放。順序動畫可在前一動畫結束後立即播放，或延遲指定時間啟動。`Animated` API 提供 `sequence()` 和 `delay()` 等方法，這些方法接收動畫數組並自動按需調用 `start()`/`stop()`。"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "For example, the following animation coasts to a stop, then it springs back while twirling in parallel:",
+      "source_content_hash": "943c9a659185eef89b34a8d00a5776fc174c3ff2382dd614de7eadbb4a18d1e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如以下動畫先滑行停止，然後並行執行回彈與旋轉："
+      }
+    },
+    {
+      "segment_id": "71779666",
+      "source_content": "```tsx\nAnimated.sequence([\n  // decay, then spring to start and twirl\n  Animated.decay(position, {\n    // coast to a stop\n    velocity: {x: gestureState.vx, y: gestureState.vy}, // velocity from gesture release\n    deceleration: 0.997,\n    useNativeDriver: true,\n  }),\n  Animated.parallel([\n    // after decay, in parallel:\n    Animated.spring(position, {\n      toValue: {x: 0, y: 0}, // return to start\n      useNativeDriver: true,\n    }),\n    Animated.timing(twirl, {\n      // and twirl\n      toValue: 360,\n      useNativeDriver: true,\n    }),\n  ]),\n]).start(); // start the sequence group\n```",
+      "source_content_hash": "9d2a7e37ab8f5efbd6f61f538d5b0e2ec63bf0995132665a81ecc1bf065f1336",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71779666"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "If one animation is stopped or interrupted, then all other animations in the group are also stopped. `Animated.parallel` has a `stopTogether` option that can be set to `false` to disable this.",
+      "source_content_hash": "166184403fdbabbc4ff2b36fa40ed1f58705c0c97cf7eef1f74ff1d69244a449",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果一個動畫被停止或中斷，那麼群組中的所有其他動畫也會被停止。`Animated.parallel` 提供了一個 `stopTogether` 選項，可設置為 `false` 來禁用此行為。"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "You can find a full list of composition methods in the [Composing animations](animated#composing-animations) section of the `Animated` API reference.",
+      "source_content_hash": "294b5252e040b27cb3d02bd51ecc8db3422b5404e4df5b4913d9fbb2c5a0c19c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 `Animated` API 參考文件的[組合動畫](animated#composing-animations)章節中找到完整的組合方法列表。"
+      }
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "### Combining animated values",
+      "source_content_hash": "d5725af6ad6addb4fa0f6f0576624474ac53434215e19209506205e6fdf871ed",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 合併動畫值"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "You can [combine two animated values](animated#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.",
+      "source_content_hash": "1d61845fdb16ac08ecabf1166f7950c8cc9cf3cf92d8ed3bc3e1e4d010f722a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以通過加法、乘法、除法或模運算來[合併兩個動畫值](animated#combining-animated-values)，從而創建一個新的動畫值。"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "There are some cases where an animated value needs to invert another animated value for calculation. An example is inverting a scale (2x --> 0.5x):",
+      "source_content_hash": "bf035a4811dec251a028d21281c51695a79f00ecc481c4645b39b77f7e804d40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在某些情況下，一個動畫值需要對另一個動畫值進行反向計算。例如反轉縮放比例（2倍 --> 0.5倍）："
+      }
+    },
+    {
+      "segment_id": "ec2ce541",
+      "source_content": "```tsx\nconst a = new Animated.Value(1);\nconst b = Animated.divide(1, a);\n\nAnimated.spring(a, {\n  toValue: 2,\n  useNativeDriver: true,\n}).start();\n```",
+      "source_content_hash": "65997a9594ba5b86dce970114793abfade99a6175f2c9738ff8c7bf9f2181e51",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ec2ce541"
+      }
+    },
+    {
+      "segment_id": "bf3eb388",
+      "source_content": "### Interpolation",
+      "source_content_hash": "d754974511f9e5dfafe9487e64ac23adb03a9c3eab32484fb848b9efd14475ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 插值"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "Each property can be run through an interpolation first. An interpolation maps input ranges to output ranges, typically using a linear interpolation but also supports easing functions. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value.",
+      "source_content_hash": "dd1fb98debea76f8da98a954c6c473a250ee860c151b4cf528b21757a0556fdd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個屬性都可以先經過插值處理。插值將輸入範圍映射到輸出範圍，通常使用線性插值，但也支援緩動函數。默認情況下，它會外推超出給定範圍的曲線，但您也可以設置使其限制輸出值。"
+      }
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "A basic mapping to convert a 0-1 range to a 0-100 range would be:",
+      "source_content_hash": "57195f990a149a1d21398e2207311056eb8396866da28fcd044ce83423f4a1a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 0-1 範圍轉換為 0-100 範圍的基本映射如下："
+      }
+    },
+    {
+      "segment_id": "af7c5c4e",
+      "source_content": "```tsx\nvalue.interpolate({\n  inputRange: [0, 1],\n  outputRange: [0, 100],\n});\n```",
+      "source_content_hash": "758dc8c87f12f3fae03b5f876826224995f9a9ab3fecbdbdc680f8a05b241f10",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af7c5c4e"
+      }
+    },
+    {
+      "segment_id": "e4945edb",
+      "source_content": "For example, you may want to think about your `Animated.Value` as going from 0 to 1, but animate the position from 150px to 0px and the opacity from 0 to 1. This can be done by modifying `style` from the example above like so:",
+      "source_content_hash": "63342f0239c865174478e3bc149760770dbde7420d1aefeae6e7c826431ed4a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，您可能希望將 `Animated.Value` 視為從 0 到 1，但將位置從 150px 動畫到 0px，並將透明度從 0 動畫到 1。可以通過修改上述範例中的 `style` 來實現："
+      }
+    },
+    {
+      "segment_id": "1be6af7b",
+      "source_content": "```tsx\n  style={{\n    opacity: this.state.fadeAnim, // Binds directly\n    transform: [{\n      translateY: this.state.fadeAnim.interpolate({\n        inputRange: [0, 1],\n        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0\n      }),\n    }],\n  }}\n```",
+      "source_content_hash": "b35eb9db856b077477c90ca52f7cd526ff68eb7c3e3f2928e79519de24023749",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1be6af7b"
+      }
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "[`interpolate()`](animated#interpolate) supports multiple range segments as well, which is handy for defining dead zones and other handy tricks. For example, to get a negation relationship at -300 that goes to 0 at -100, then back up to 1 at 0, and then back down to zero at 100 followed by a dead-zone that remains at 0 for everything beyond that, you could do:",
+      "source_content_hash": "44a1364b94617645ac8a5d522efde09cf9c6a70716b277cd41158bd95f214c59",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[`interpolate()`](animated#interpolate) 還支援多個範圍段，這對於定義死區和其他技巧非常有用。例如，要在 -300 處建立一個反向關係，在 -100 處回到 0，在 0 處回到 1，然後在 100 處回到 0，之後的所有值保持為 0 的死區，可以這樣做："
+      }
+    },
+    {
+      "segment_id": "0883e35a",
+      "source_content": "```tsx\nvalue.interpolate({\n  inputRange: [-300, -100, 0, 100, 101],\n  outputRange: [300, 0, 1, 0, 0],\n});\n```",
+      "source_content_hash": "41d3da6a953afb5e5318638ff316a94f583ad277fad526b46beded46e403e3d7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0883e35a"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "Which would map like so:",
+      "source_content_hash": "a70dba9829f8889197260fb03908e669b28e04aee4537502ed0f61b323f7d90d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其映射關係如下："
+      }
+    },
+    {
+      "segment_id": "4f217d4a",
+      "source_content": "```\nInput | Output\n------|-------\n  -400|    450\n  -300|    300\n  -200|    150\n  -100|      0\n   -50|    0.5\n     0|      1\n    50|    0.5\n   100|      0\n   101|      0\n   200|      0\n```",
+      "source_content_hash": "6d2381085360fb77bbf4510df8c833b0c40478432f0e55bdf3d1a84019bc507d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4f217d4a"
+      }
+    },
+    {
+      "segment_id": "070ff7a2",
+      "source_content": "`interpolate()` also supports mapping to strings, allowing you to animate colors as well as values with units. For example, if you wanted to animate a rotation you could do:",
+      "source_content_hash": "02285932f200f5c6ea0a0a7d15528ee6c3c7b8086e0bb375e7a762cd7027f15e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`interpolate()` 還支援映射到字符串，允許您動畫顏色以及帶單位的值。例如，如果要動畫旋轉，可以這樣做："
+      }
+    },
+    {
+      "segment_id": "703442ed",
+      "source_content": "```tsx\nvalue.interpolate({\n  inputRange: [0, 360],\n  outputRange: ['0deg', '360deg'],\n});\n```",
+      "source_content_hash": "99e2b5c478ff5dedcd4b2ee349788d4b7de739857e969946956003269046d681",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_703442ed"
+      }
+    },
+    {
+      "segment_id": "6085c028",
+      "source_content": "`interpolate()` also supports arbitrary easing functions, many of which are already implemented in the [`Easing`](easing) module. `interpolate()` also has configurable behavior for extrapolating the `outputRange`. You can set the extrapolation by setting the `extrapolate`, `extrapolateLeft`, or `extrapolateRight` options. The default value is `extend` but you can use `clamp` to prevent the output value from exceeding `outputRange`.",
+      "source_content_hash": "55913f0a1fb10a54bb9870d7b6588b4ce6a2559c175872bc7e32bfbcb5bfde38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`interpolate()` 還支援任意緩動函數，其中許多已在 [`Easing`](easing) 模組中實現。`interpolate()` 還可配置外推 `outputRange` 的行為。您可以通過設置 `extrapolate`、`extrapolateLeft` 或 `extrapolateRight` 選項來配置外推。默認值為 `extend`，但您可以使用 `clamp` 來防止輸出值超出 `outputRange`。"
+      }
+    },
+    {
+      "segment_id": "16efe6ee",
+      "source_content": "### Tracking dynamic values",
+      "source_content_hash": "8f41b9a0e7a7b4340898f4696185e1dddc72b04bb52bc3ecf5b8d3fc6a957285",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 追蹤動態值"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Animated values can also track other values by setting the `toValue` of an animation to another animated value instead of a plain number. For example, a \"Chat Heads\" animation like the one used by Messenger on Android could be implemented with a `spring()` pinned on another animated value, or with `timing()` and a `duration` of 0 for rigid tracking. They can also be composed with interpolations:",
+      "source_content_hash": "0164679e583de15e63bd689c21bcabc6360b6ddd7771b4049c767f04cc1f2385",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫值還可以通過將動畫的 `toValue` 設置為另一個動畫值而非普通數字來追蹤其他值。例如，Android 版 Messenger 使用的「聊天頭像」動畫可以通過固定在另一個動畫值上的 `spring()` 來實現，或者使用 `duration` 為 0 的 `timing()` 來實現嚴格的追蹤。它們還可以與插值組合使用："
+      }
+    },
+    {
+      "segment_id": "099d21ed",
+      "source_content": "```tsx\nAnimated.spring(follower, {toValue: leader}).start();\nAnimated.timing(opacity, {\n  toValue: pan.x.interpolate({\n    inputRange: [0, 300],\n    outputRange: [1, 0],\n    useNativeDriver: true,\n  }),\n}).start();\n```",
+      "source_content_hash": "e96550ffd099166887425c6353bd911fbcb363f2387437691628c66bed5bd5c0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_099d21ed"
+      }
+    },
+    {
+      "segment_id": "7fa65ec5",
+      "source_content": "The `leader` and `follower` animated values would be implemented using `Animated.ValueXY()`. `ValueXY` is a handy way to deal with 2D interactions, such as panning or dragging. It is a basic wrapper that contains two `Animated.Value` instances and some helper functions that call through to them, making `ValueXY` a drop-in replacement for `Value` in many cases. It allows us to track both x and y values in the example above.",
+      "source_content_hash": "749c208a16fdf80c89c02064876bed4eba2aff8e2657adb6a8b44cfb79339ca6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`leader` 和 `follower` 動畫值將使用 `Animated.ValueXY()` 實現。`ValueXY` 是處理 2D 交互（如平移或拖拽）的便捷方式。它是一個基本包裝器，包含兩個 `Animated.Value` 實例和一些調用它們的輔助函數，使 `ValueXY` 在許多情況下可以作為 `Value` 的替代品。它允許我們在上面的範例中同時追蹤 x 和 y 值。"
+      }
+    },
+    {
+      "segment_id": "e151b2af",
+      "source_content": "### Tracking gestures",
+      "source_content_hash": "71246a88951b12f5ae2dd719a3af09a318894cadd34d3566041ee298d1c54931",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 追蹤手勢"
+      }
+    },
+    {
+      "segment_id": "850ec775",
+      "source_content": "Gestures, like panning or scrolling, and other events can map directly to animated values using [`Animated.event`](animated#event). This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.",
+      "source_content_hash": "205a05204f37a4a5316f621abbc01158ddd8d52b6fcc46b3c755f36f879f99ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "手勢（如平移或滾動）和其他事件可以使用 [`Animated.event`](animated#event) 直接映射到動畫值。這是通過結構化映射語法實現的，以便可以從複雜的事件對象中提取值。第一層是一個數組，允許跨多個參數進行映射，該數組包含嵌套的對象。"
+      }
+    },
+    {
+      "segment_id": "858b0a05",
+      "source_content": "For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):",
+      "source_content_hash": "a51325d2b0923e7ac6a21c69b70c54ece615c7a54a420dd6a077b3e6d6e9a719",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，當處理水平滾動手勢時，您可以透過以下方式將 `event.nativeEvent.contentOffset.x` 映射到 `scrollX`（一個 `Animated.Value`）："
+      }
+    },
+    {
+      "segment_id": "98fbc9ce",
+      "source_content": "```tsx\n onScroll={Animated.event(\n   // scrollX = e.nativeEvent.contentOffset.x\n   [{nativeEvent: {\n        contentOffset: {\n          x: scrollX\n        }\n      }\n    }]\n )}\n```",
+      "source_content_hash": "683c8602997b91de6f726a3febe6ee5db3f4216e882286d92ffb6e3bc21293b1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_98fbc9ce"
+      }
+    },
+    {
+      "segment_id": "c2a9a004",
+      "source_content": "The following example implements a horizontal scrolling carousel where the scroll position indicators are animated using the `Animated.event` used in the `ScrollView`",
+      "source_content_hash": "497fcd9ff3d8bbb7b3e8a81760e4594ee48c9751054500c2cbd16d57c9c21519",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下範例實現了一個水平滾動的輪播，其中滾動位置指示器使用 `ScrollView` 中的 `Animated.event` 進行動畫處理："
+      }
+    },
+    {
+      "segment_id": "d96e8afa",
+      "source_content": "#### ScrollView with Animated Event Example",
+      "source_content_hash": "f95b00434705d6dd906cc8c4d8b0a4be730136b6e38bcfa91797fa5845bf1315",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 使用動畫事件的 ScrollView 範例"
+      }
+    },
+    {
+      "segment_id": "639ab976",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=Animated&supportedPlatforms=ios,android\nimport React from 'react';\nimport {\n  SafeAreaView,\n  ScrollView,\n  Text,\n  StyleSheet,\n  View,\n  ImageBackground,\n  Animated,\n  useWindowDimensions,\n  useAnimatedValue,\n} from 'react-native';\n\nconst images = new Array(6).fill(\n  'https://images.unsplash.com/photo-1556740749-887f6717d7e4',\n);\n\nconst App = () => {\n  const scrollX = useAnimatedValue(0);\n\n  const {width: windowWidth} = useWindowDimensions();\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <View style={styles.scrollContainer}>\n        <ScrollView\n          horizontal={true}\n          pagingEnabled\n          showsHorizontalScrollIndicator={false}\n          onScroll={Animated.event([\n            {\n              nativeEvent: {\n                contentOffset: {\n                  x: scrollX,\n                },\n              },\n            },\n          ])}\n          scrollEventThrottle={1}>\n          {images.map((image, imageIndex) => {\n            return (\n              <View style={{width: windowWidth, height: 250}} key={imageIndex}>\n                <ImageBackground source={{uri: image}} style={styles.card}>\n                  <View style={styles.textContainer}>\n                    <Text style={styles.infoText}>\n                      {'Image - ' + imageIndex}\n                    </Text>\n                  </View>\n                </ImageBackground>\n              </View>\n            );\n          })}\n        </ScrollView>\n        <View style={styles.indicatorContainer}>\n          {images.map((image, imageIndex) => {\n            const width = scrollX.interpolate({\n              inputRange: [\n                windowWidth * (imageIndex - 1),\n                windowWidth * imageIndex,\n                windowWidth * (imageIndex + 1),\n              ],\n              outputRange: [8, 16, 8],\n              extrapolate: 'clamp',\n            });\n            return (\n              <Animated.View\n                key={imageIndex}\n                style={[styles.normalDot, {width}]}\n              />\n            );\n          })}\n        </View>\n      </View>\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  scrollContainer: {\n    height: 300,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  card: {\n    flex: 1,\n    marginVertical: 4,\n    marginHorizontal: 16,\n    borderRadius: 5,\n    overflow: 'hidden',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  textContainer: {\n    backgroundColor: 'rgba(0,0,0, 0.7)',\n    paddingHorizontal: 24,\n    paddingVertical: 8,\n    borderRadius: 5,\n  },\n  infoText: {\n    color: 'white',\n    fontSize: 16,\n    fontWeight: 'bold',\n  },\n  normalDot: {\n    height: 8,\n    width: 8,\n    borderRadius: 4,\n    backgroundColor: 'silver',\n    marginHorizontal: 4,\n  },\n  indicatorContainer: {\n    flexDirection: 'row',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Animated&supportedPlatforms=ios,android&ext=js\nimport React, {Component} from 'react';\nimport {\n  SafeAreaView,\n  ScrollView,\n  Text,\n  StyleSheet,\n  View,\n  ImageBackground,\n  Animated,\n  Dimensions,\n} from 'react-native';\n\nconst images = new Array(6).fill(\n  'https://images.unsplash.com/photo-1556740749-887f6717d7e4',\n);\n\nconst windowDimensions = Dimensions.get('window');\n\nexport default class App extends Component {\n  scrollX = new Animated.Value(0);\n\n  state = {\n    dimensions: {\n      window: windowDimensions,\n    },\n  };\n\n  onDimensionsChange = ({window}) => {\n    this.setState({dimensions: {window}});\n  };\n\n  componentDidMount() {\n    this.dimensionsSubscription = Dimensions.addEventListener(\n      'change',\n      this.onDimensionsChange,\n    );\n  }\n\n  componentWillUnmount() {\n    this.dimensionsSubscription.remove();\n  }\n\n  render() {\n    const windowWidth = this.state.dimensions.window.width;\n\n    return (\n      <SafeAreaView style={styles.container}>\n        <View style={styles.scrollContainer}>\n          <ScrollView\n            horizontal={true}\n            pagingEnabled\n            showsHorizontalScrollIndicator={false}\n            onScroll={Animated.event([\n              {\n                nativeEvent: {\n                  contentOffset: {\n                    x: this.scrollX,\n                  },\n                },\n              },\n            ])}\n            scrollEventThrottle={1}>\n            {images.map((image, imageIndex) => {\n              return (\n                <View\n                  style={{\n                    width: windowWidth,\n                    height: 250,\n                  }}\n                  key={imageIndex}>\n                  <ImageBackground source={{uri: image}} style={styles.card}>\n                    <View style={styles.textContainer}>\n                      <Text style={styles.infoText}>\n                        {'Image - ' + imageIndex}\n                      </Text>\n                    </View>\n                  </ImageBackground>\n                </View>\n              );\n            })}\n          </ScrollView>\n          <View style={styles.indicatorContainer}>\n            {images.map((image, imageIndex) => {\n              const width = this.scrollX.interpolate({\n                inputRange: [\n                  windowWidth * (imageIndex - 1),\n                  windowWidth * imageIndex,\n                  windowWidth * (imageIndex + 1),\n                ],\n                outputRange: [8, 16, 8],\n                extrapolate: 'clamp',\n              });\n              return (\n                <Animated.View\n                  key={imageIndex}\n                  style={[styles.normalDot, {width}]}\n                />\n              );\n            })}\n          </View>\n        </View>\n      </SafeAreaView>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  scrollContainer: {\n    height: 300,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  card: {\n    flex: 1,\n    marginVertical: 4,\n    marginHorizontal: 16,\n    borderRadius: 5,\n    overflow: 'hidden',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  textContainer: {\n    backgroundColor: 'rgba(0,0,0, 0.7)',\n    paddingHorizontal: 24,\n    paddingVertical: 8,\n    borderRadius: 5,\n  },\n  infoText: {\n    color: 'white',\n    fontSize: 16,\n    fontWeight: 'bold',\n  },\n  normalDot: {\n    height: 8,\n    width: 8,\n    borderRadius: 4,\n    backgroundColor: 'silver',\n    marginHorizontal: 4,\n  },\n  indicatorContainer: {\n    flexDirection: 'row',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Animated&supportedPlatforms=ios,android&ext=tsx\nimport React, {Component} from 'react';\nimport {\n  SafeAreaView,\n  ScrollView,\n  Text,\n  StyleSheet,\n  View,\n  ImageBackground,\n  Animated,\n  Dimensions,\n} from 'react-native';\nimport type {ScaledSize, EmitterSubscription} from 'react-native';\n\nconst images = new Array(6).fill(\n  'https://images.unsplash.com/photo-1556740749-887f6717d7e4',\n);\n\nconst windowDimensions = Dimensions.get('window');\n\nexport default class App extends Component {\n  dimensionsSubscription?: EmitterSubscription;\n  scrollX = new Animated.Value(0);\n\n  state = {\n    dimensions: {\n      window: windowDimensions,\n    },\n  };\n\n  onDimensionsChange = ({window}: {window: ScaledSize}) => {\n    this.setState({dimensions: {window}});\n  };\n\n  componentDidMount() {\n    this.dimensionsSubscription = Dimensions.addEventListener(\n      'change',\n      this.onDimensionsChange,\n    );\n  }\n\n  componentWillUnmount() {\n    this.dimensionsSubscription?.remove();\n  }\n\n  render() {\n    const windowWidth = this.state.dimensions.window.width;\n\n    return (\n      <SafeAreaView style={styles.container}>\n        <View style={styles.scrollContainer}>\n          <ScrollView\n            horizontal={true}\n            pagingEnabled\n            showsHorizontalScrollIndicator={false}\n            onScroll={Animated.event([\n              {\n                nativeEvent: {\n                  contentOffset: {\n                    x: this.scrollX,\n                  },\n                },\n              },\n            ])}\n            scrollEventThrottle={1}>\n            {images.map((image, imageIndex) => {\n              return (\n                <View\n                  style={{\n                    width: windowWidth,\n                    height: 250,\n                  }}\n                  key={imageIndex}>\n                  <ImageBackground source={{uri: image}} style={styles.card}>\n                    <View style={styles.textContainer}>\n                      <Text style={styles.infoText}>\n                        {'Image - ' + imageIndex}\n                      </Text>\n                    </View>\n                  </ImageBackground>\n                </View>\n              );\n            })}\n          </ScrollView>\n          <View style={styles.indicatorContainer}>\n            {images.map((image, imageIndex) => {\n              const width = this.scrollX.interpolate({\n                inputRange: [\n                  windowWidth * (imageIndex - 1),\n                  windowWidth * imageIndex,\n                  windowWidth * (imageIndex + 1),\n                ],\n                outputRange: [8, 16, 8],\n                extrapolate: 'clamp',\n              });\n              return (\n                <Animated.View\n                  key={imageIndex}\n                  style={[styles.normalDot, {width}]}\n                />\n              );\n            })}\n          </View>\n        </View>\n      </SafeAreaView>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  scrollContainer: {\n    height: 300,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  card: {\n    flex: 1,\n    marginVertical: 4,\n    marginHorizontal: 16,\n    borderRadius: 5,\n    overflow: 'hidden',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  textContainer: {\n    backgroundColor: 'rgba(0,0,0, 0.7)',\n    paddingHorizontal: 24,\n    paddingVertical: 8,\n    borderRadius: 5,\n  },\n  infoText: {\n    color: 'white',\n    fontSize: 16,\n    fontWeight: 'bold',\n  },\n  normalDot: {\n    height: 8,\n    width: 8,\n    borderRadius: 4,\n    backgroundColor: 'silver',\n    marginHorizontal: 4,\n  },\n  indicatorContainer: {\n    flexDirection: 'row',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n```\n\n</TabItem>\n</Tabs>\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "5225afd0fde2b2a11396927c4829ad5fdbbe8eeb08bca4c31e7824edbdf85c79",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_639ab976"
+      }
+    },
+    {
+      "segment_id": "96a98088",
+      "source_content": "When using `PanResponder`, you could use the following code to extract the x and y positions from `gestureState.dx` and `gestureState.dy`. We use a `null` in the first position of the array, as we are only interested in the second argument passed to the `PanResponder` handler, which is the `gestureState`.",
+      "source_content_hash": "f0bb573c4a6d86b3e1847feaff3e191298a2bde7198f2e30c22ea78c7ea4d916",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當使用 `PanResponder` 時，您可以使用以下代碼從 `gestureState.dx` 和 `gestureState.dy` 中提取 x 和 y 位置。我們在陣列的第一個位置使用 `null`，因為我們只對傳遞給 `PanResponder` 處理器的第二個參數 `gestureState` 感興趣。"
+      }
+    },
+    {
+      "segment_id": "ed2bd809",
+      "source_content": "```tsx\nonPanResponderMove={Animated.event(\n  [null, // ignore the native event\n  // extract dx and dy from gestureState\n  // like 'pan.x = gestureState.dx, pan.y = gestureState.dy'\n  {dx: pan.x, dy: pan.y}\n])}\n```",
+      "source_content_hash": "a0f9244e9838336820fe7f15c8dd045caf142bde763c60a37e43b5121d36e743",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ed2bd809"
+      }
+    },
+    {
+      "segment_id": "f1bfc3a0",
+      "source_content": "#### PanResponder with Animated Event Example",
+      "source_content_hash": "71cfc7a2512ea3d2f27b6496a3eb0115e4fed41c8215db97a3192d6bbf08808b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 使用動畫事件的 PanResponder 範例"
+      }
+    },
+    {
+      "segment_id": "3b9edfd7",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=Animated\nimport React, {useRef} from 'react';\nimport {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';\n\nconst App = () => {\n  const pan = useRef(new Animated.ValueXY()).current;\n  const panResponder = useRef(\n    PanResponder.create({\n      onMoveShouldSetPanResponder: () => true,\n      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),\n      onPanResponderRelease: () => {\n        Animated.spring(pan, {\n          toValue: {x: 0, y: 0},\n          useNativeDriver: true,\n        }).start();\n      },\n    }),\n  ).current;\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.titleText}>Drag & Release this box!</Text>\n      <Animated.View\n        style={{\n          transform: [{translateX: pan.x}, {translateY: pan.y}],\n        }}\n        {...panResponder.panHandlers}>\n        <View style={styles.box} />\n      </Animated.View>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  titleText: {\n    fontSize: 14,\n    lineHeight: 24,\n    fontWeight: 'bold',\n  },\n  box: {\n    height: 150,\n    width: 150,\n    backgroundColor: 'blue',\n    borderRadius: 5,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=Animated\nimport React, {Component} from 'react';\nimport {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';\n\nexport default class App extends Component {\n  pan = new Animated.ValueXY();\n  panResponder = PanResponder.create({\n    onMoveShouldSetPanResponder: () => true,\n    onPanResponderMove: Animated.event([\n      null,\n      {dx: this.pan.x, dy: this.pan.y},\n    ]),\n    onPanResponderRelease: () => {\n      Animated.spring(this.pan, {\n        toValue: {x: 0, y: 0},\n        useNativeDriver: true,\n      }).start();\n    },\n  });\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Text style={styles.titleText}>Drag & Release this box!</Text>\n        <Animated.View\n          style={{\n            transform: [{translateX: this.pan.x}, {translateY: this.pan.y}],\n          }}\n          {...this.panResponder.panHandlers}>\n          <View style={styles.box} />\n        </Animated.View>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  titleText: {\n    fontSize: 14,\n    lineHeight: 24,\n    fontWeight: 'bold',\n  },\n  box: {\n    height: 150,\n    width: 150,\n    backgroundColor: 'blue',\n    borderRadius: 5,\n  },\n});\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "00665171c267b6b2c108cc62f6d011e3c5c26bbc6b216fc1dee47ad02c391e51",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3b9edfd7"
+      }
+    },
+    {
+      "segment_id": "1aa2de60",
+      "source_content": "### Responding to the current animation value",
+      "source_content_hash": "ed13e7d51d91108b21788bfa4ed3de52d3eb0bfe8d8c345458727e50c892715c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 響應當前的動畫值"
+      }
+    },
+    {
+      "segment_id": "d8903f53",
+      "source_content": "You may notice that there is no clear way to read the current value while animating. This is because the value may only be known in the native runtime due to optimizations. If you need to run JavaScript in response to the current value, there are two approaches:",
+      "source_content_hash": "cdebdfb21107ece139e9862943d536821629444bf340f2a6fc5819c2c4e9f483",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可能會注意到，在動畫過程中沒有明確的方法來讀取當前值。這是因為由於優化，該值可能僅在原生運行時中已知。如果您需要根據當前值運行 JavaScript，有兩種方法："
+      }
+    },
+    {
+      "segment_id": "32a76f36",
+      "source_content": "- `spring.stopAnimation(callback)` will stop the animation and invoke `callback` with the final value. This is useful when making gesture transitions.\n- `spring.addListener(callback)` will invoke `callback` asynchronously while the animation is running, providing a recent value. This is useful for triggering state changes, for example snapping a bobble to a new option as the user drags it closer, because these larger state changes are less sensitive to a few frames of lag compared to continuous gestures like panning which need to run at 60 fps.",
+      "source_content_hash": "ea45aac3513400cf6d01fb750003033fbcf8fe5d3bdd58f9b26853abf334b391",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `spring.stopAnimation(callback)` 會停止動畫並使用最終值調用 `callback`。這在製作手勢過渡時非常有用。\n- `spring.addListener(callback)` 會在動畫運行時異步調用 `callback`，提供最近的值。這對於觸發狀態變化非常有用，例如當用戶將一個泡泡拖得更近時將其吸附到新選項，因為這些較大的狀態變化對幾幀的延遲不太敏感，而像平移這樣的連續手勢需要以 60 fps 運行。"
+      }
+    },
+    {
+      "segment_id": "87fabda7",
+      "source_content": "`Animated` is designed to be fully serializable so that animations can be run in a high performance way, independent of the normal JavaScript event loop. This does influence the API, so keep that in mind when it seems a little trickier to do something compared to a fully synchronous system. Check out `Animated.Value.addListener` as a way to work around some of these limitations, but use it sparingly since it might have performance implications in the future.",
+      "source_content_hash": "21f158e0de2bd24492c089fcb33a12626a6db76257bfc57d151825c6d5ab7270",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 設計為完全可序列化，以便動畫可以以高性能的方式運行，獨立於正常的 JavaScript 事件循環。這會影響 API，因此當您發現某些操作比完全同步的系統更棘手時，請記住這一點。可以查看 `Animated.Value.addListener` 作為解決這些限制的一種方法，但請謹慎使用，因為它可能會在未來影響性能。"
+      }
+    },
+    {
+      "segment_id": "6cece64a",
+      "source_content": "### Using the native driver",
+      "source_content_hash": "5d8075c6531f059e469ed970a361af8eebaa94518f8a4244ab19f1de3d5bc989",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用原生驅動"
+      }
+    },
+    {
+      "segment_id": "037370a0",
+      "source_content": "The `Animated` API is designed to be serializable. By using the [native driver](/blog/2017/02/14/using-native-driver-for-animated), we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.",
+      "source_content_hash": "3b8b3719377eec05c3158441d6d8158c9f1861d2c1bf8cdfc271934735c68e7e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` API 設計為可序列化。通過使用[原生驅動](/blog/2017/02/14/using-native-driver-for-animated)，我們在開始動畫之前將所有關於動畫的內容發送到原生端，允許原生代碼在 UI 線程上執行動畫，而無需在每一幀都通過橋接。一旦動畫開始，JS 線程可以被阻塞而不會影響動畫。"
+      }
+    },
+    {
+      "segment_id": "cec570ea",
+      "source_content": "Using the native driver for normal animations can be accomplished by setting `useNativeDriver: true` in animation config when starting it. Animations without a `useNativeDriver` property will default to false for legacy reasons, but emit a warning (and typechecking error in TypeScript).",
+      "source_content_hash": "13fa7da1a03d659efcc04b1e89c492c2aa2cf1449dc1f78c61453316a2f58f72",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為普通動畫使用原生驅動可以通過在開始動畫時在動畫配置中設置 `useNativeDriver: true` 來實現。沒有 `useNativeDriver` 屬性的動畫將默認為 false（出於遺留原因），但會發出警告（在 TypeScript 中會出現類型檢查錯誤）。"
+      }
+    },
+    {
+      "segment_id": "be84dc2f",
+      "source_content": "```tsx\nAnimated.timing(this.state.animatedValue, {\n  toValue: 1,\n  duration: 500,\n  useNativeDriver: true, // <-- Set this to true\n}).start();\n```",
+      "source_content_hash": "7f97e54e812b9832c4ff50eb86336b226b62b9459e66daa536d9364537b49b83",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_be84dc2f"
+      }
+    },
+    {
+      "segment_id": "064277fe",
+      "source_content": "Animated values are only compatible with one driver so if you use native driver when starting an animation on a value, make sure every animation on that value also uses the native driver.",
+      "source_content_hash": "4ac29f7a23b7e78f512afb0881ead998ddc0a12871777447c2fa0e7000a3b827",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫值僅與一個驅動程序兼容，因此如果您在啟動某個值的動畫時使用原生驅動，請確保該值的每個動畫也都使用原生驅動。"
+      }
+    },
+    {
+      "segment_id": "5361ae35",
+      "source_content": "The native driver also works with `Animated.event`. This is especially useful for animations that follow the scroll position as without the native driver, the animation will always run a frame behind the gesture due to the async nature of React Native.",
+      "source_content_hash": "edaa24e1de700f24b5f9c4417b8de694edaa914e2e89d5c8825a87b70d4e5f1f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生驅動也可以與 `Animated.event` 一起使用。這對於跟隨滾動位置的動畫特別有用，因為如果沒有原生驅動，由於 React Native 的異步特性，動畫總是會比手勢慢一幀。"
+      }
+    },
+    {
+      "segment_id": "b21a3871",
+      "source_content": "```tsx\n<Animated.ScrollView // <-- Use the Animated ScrollView wrapper\n  scrollEventThrottle={1} // <-- Use 1 here to make sure no events are ever missed\n  onScroll={Animated.event(\n    [\n      {\n        nativeEvent: {\n          contentOffset: {y: this.state.animatedValue},\n        },\n      },\n    ],\n    {useNativeDriver: true}, // <-- Set this to true\n  )}>\n  {content}\n</Animated.ScrollView>\n```",
+      "source_content_hash": "c516558a60f51cdb95a30ae1ab9fca1a08b602ca1e73b50d1ae0b29de3745128",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b21a3871"
+      }
+    },
+    {
+      "segment_id": "8db5b7b9",
+      "source_content": "You can see the native driver in action by running the [RNTester app](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/), then loading the Native Animated Example. You can also take a look at the [source code](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) to learn how these examples were produced.",
+      "source_content_hash": "7a6c34928b2191692a19f35e448be1c6b150e825a85eb18169d92314433e37f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以通過運行 [RNTester 應用](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/)，然後加載原生動畫範例來查看原生驅動的實際效果。您也可以查看[源代碼](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)以了解這些範例是如何製作的。"
+      }
+    },
+    {
+      "segment_id": "6f2ea281",
+      "source_content": "#### Caveats",
+      "source_content_hash": "7a82080cc386b501d60997b1a54b272638401400c5db6c247ebd1bb72f4312f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 注意事項"
+      }
+    },
+    {
+      "segment_id": "4856afff",
+      "source_content": "Not everything you can do with `Animated` is currently supported by the native driver. The main limitation is that you can only animate non-layout properties: things like `transform` and `opacity` will work, but Flexbox and position properties will not. When using `Animated.event`, it will only work with direct events and not bubbling events. This means it does not work with `PanResponder` but does work with things like `ScrollView#onScroll`.",
+      "source_content_hash": "1f345cad974fa315d271b0e6756fee9319e6ee0f8b5f4961c31739124ce61f27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "並非所有使用 `Animated` 的功能目前都受到原生驅動程式的支援。主要的限制在於你只能動畫化非佈局屬性：例如 `transform` 和 `opacity` 會起作用，但 Flexbox 和位置屬性則不會。當使用 `Animated.event` 時，它僅適用於直接事件而不支援冒泡事件。這意味著它無法與 `PanResponder` 一起使用，但可以與 `ScrollView#onScroll` 等事件配合運作。"
+      }
+    },
+    {
+      "segment_id": "3ab1fa12",
+      "source_content": "When an animation is running, it can prevent `VirtualizedList` components from rendering more rows. If you need to run a long or looping animation while the user is scrolling through a list, you can use `isInteraction: false` in your animation's config to prevent this issue.",
+      "source_content_hash": "f180651358c9d816d2ea70e56fcd3ce5476e4c62b32440d22fed975efabc60fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當動畫正在執行時，它可能會阻止 `VirtualizedList` 元件渲染更多行。如果你需要在用戶滾動列表時執行長時間或循環動畫，可以在動畫配置中使用 `isInteraction: false` 來避免此問題。"
+      }
+    },
+    {
+      "segment_id": "a7c281d9",
+      "source_content": "### Bear in mind",
+      "source_content_hash": "30f979f331246d50759d0ec5acf92606b58689ab4427b940e10d1c74f6969c96",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 注意事項"
+      }
+    },
+    {
+      "segment_id": "0247e30d",
+      "source_content": "While using transform styles such as `rotateY`, `rotateX`, and others ensure the transform style `perspective` is in place. At this time some animations may not render on Android without it. Example below.",
+      "source_content_hash": "e158b29419263c7c7de72ee456829824aa810436a987df456036144457b5eaeb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用如 `rotateY`、`rotateX` 等變形樣式時，請確保同時設置 `perspective` 變形樣式。目前某些動畫若未設置此屬性，在 Android 上可能無法正常渲染。範例如下。"
+      }
+    },
+    {
+      "segment_id": "7e249e01",
+      "source_content": "```tsx\n<Animated.View\n  style={{\n    transform: [\n      {scale: this.state.scale},\n      {rotateY: this.state.rotateY},\n      {perspective: 1000}, // without this line this Animation will not render on Android while working fine on iOS\n    ],\n  }}\n/>\n```",
+      "source_content_hash": "85e426f38867332bbb4f5a4a6fd8b9bcbb3c5824c54b9467b1957058eaae99a9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7e249e01"
+      }
+    },
+    {
+      "segment_id": "355587d0",
+      "source_content": "### Additional examples",
+      "source_content_hash": "79a3e647a99ed9a02790807b3f57bbcc1a817fc1c772331a187d788450f0ae47",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他範例"
+      }
+    },
+    {
+      "segment_id": "36fe1bb5",
+      "source_content": "The RNTester app has various examples of `Animated` in use:",
+      "source_content_hash": "9ebf5e036eac3401892c341d015fa9caaa4e9457d0dd4e11a9b8b6365668e498",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "RNTester 應用程式提供了多種使用 `Animated` 的範例："
+      }
+    },
+    {
+      "segment_id": "14cf5af0",
+      "source_content": "- [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/0.71-stable/packages/rn-tester/js/examples/AnimatedGratuitousApp)\n- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)",
+      "source_content_hash": "3bb02aed08820a1b816f6ab10e243c220ddf8bdddd8da6b367c1c39420efad2b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/0.71-stable/packages/rn-tester/js/examples/AnimatedGratuitousApp)\n- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)"
+      }
+    },
+    {
+      "segment_id": "f26c7c32",
+      "source_content": "## `LayoutAnimation` API",
+      "source_content_hash": "3e0efa926a66096a3474812734145d5e8720a5f98968739839d0d84f6f845374",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## `LayoutAnimation` API"
+      }
+    },
+    {
+      "segment_id": "0a749aa0",
+      "source_content": "`LayoutAnimation` allows you to globally configure `create` and `update` animations that will be used for all views in the next render/layout cycle. This is useful for doing Flexbox layout updates without bothering to measure or calculate specific properties in order to animate them directly, and is especially useful when layout changes may affect ancestors, for example a \"see more\" expansion that also increases the size of the parent and pushes down the row below which would otherwise require explicit coordination between the components in order to animate them all in sync.",
+      "source_content_hash": "9a7119401a573f985aae0c5e536de3471bc8466ad843b6d9c49c09c3f0ef01d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`LayoutAnimation` 允許你全局配置將在下一個渲染/佈局周期中用於所有視圖的「創建」和「更新」動畫。這對於進行 Flexbox 佈局更新非常有用，無需費心測量或計算特定屬性來直接動畫化它們，尤其當佈局變更可能影響上層元件時（例如「查看更多」展開同時增加父元件大小並下推下方行），否則需要元件間明確協調才能同步動畫化所有元件。"
+      }
+    },
+    {
+      "segment_id": "2eb82969",
+      "source_content": "Note that although `LayoutAnimation` is very powerful and can be quite useful, it provides much less control than `Animated` and other animation libraries, so you may need to use another approach if you can't get `LayoutAnimation` to do what you want.",
+      "source_content_hash": "01e891ae5ff85fec8d61282835db7b025c63ec6da8d6f8b613a0c2555e9c1c24",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，儘管 `LayoutAnimation` 功能強大且相當實用，但它提供的控制力遠低於 `Animated` 和其他動畫函式庫，因此若無法透過 `LayoutAnimation` 實現需求，可能需要改用其他方法。"
+      }
+    },
+    {
+      "segment_id": "20642bec",
+      "source_content": "Note that in order to get this to work on **Android** you need to set the following flags via `UIManager`:",
+      "source_content_hash": "3b8fe7a7636d1c93a3d7e2f1520a80cb4404d9b2cc5d2eaee4ff24c3598cde70",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，在 **Android** 上要使此功能正常運作，需透過 `UIManager` 設置以下標誌："
+      }
+    },
+    {
+      "segment_id": "901721b1",
+      "source_content": "```tsx\nUIManager.setLayoutAnimationEnabledExperimental(true);\n```",
+      "source_content_hash": "fe77268592ac684ba1e7172bfea9c9f9edea5762727f055a54193bb6e9781766",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_901721b1"
+      }
+    },
+    {
+      "segment_id": "e8472196",
+      "source_content": "```SnackPlayer name=LayoutAnimations&supportedPlatforms=ios,android\nimport React from 'react';\nimport {\n  NativeModules,\n  LayoutAnimation,\n  Text,\n  TouchableOpacity,\n  StyleSheet,\n  View,\n} from 'react-native';\n\nconst {UIManager} = NativeModules;\n\nUIManager.setLayoutAnimationEnabledExperimental &&\n  UIManager.setLayoutAnimationEnabledExperimental(true);\n\nexport default class App extends React.Component {\n  state = {\n    w: 100,\n    h: 100,\n  };\n\n  _onPress = () => {\n    // Animate the update\n    LayoutAnimation.spring();\n    this.setState({w: this.state.w + 15, h: this.state.h + 15});\n  };\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <View\n          style={[styles.box, {width: this.state.w, height: this.state.h}]}\n        />\n        <TouchableOpacity onPress={this._onPress}>\n          <View style={styles.button}>\n            <Text style={styles.buttonText}>Press me!</Text>\n          </View>\n        </TouchableOpacity>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  box: {\n    width: 200,\n    height: 200,\n    backgroundColor: 'red',\n  },\n  button: {\n    backgroundColor: 'black',\n    paddingHorizontal: 20,\n    paddingVertical: 15,\n    marginTop: 15,\n  },\n  buttonText: {\n    color: '#fff',\n    fontWeight: 'bold',\n  },\n});\n```",
+      "source_content_hash": "ceead7593ebf4f9f921ba5782293461f06c5db646ca2f04dae515693c38440d7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e8472196"
+      }
+    },
+    {
+      "segment_id": "4186999c",
+      "source_content": "This example uses a preset value, you can customize the animations as you need, see [LayoutAnimation.js](https://github.com/facebook/react-native/blob/0.71-stable/Libraries/LayoutAnimation/LayoutAnimation.js) for more information.",
+      "source_content_hash": "dc7f0e413b510872cb51bf29b52d014143af6d6b648314761b009ee688cab1df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此範例使用了預設值，你可以根據需求自訂動畫，詳見 [LayoutAnimation.js](https://github.com/facebook/react-native/blob/0.71-stable/Libraries/LayoutAnimation/LayoutAnimation.js) 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "7c74e8bb",
+      "source_content": "## Additional notes",
+      "source_content_hash": "fa28ab0a18a642a6aee73ed8af9d5aab3c210c5ba8d877868bc08b7184e1a7e1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 補充說明"
+      }
+    },
+    {
+      "segment_id": "c05211c2",
+      "source_content": "### `requestAnimationFrame`",
+      "source_content_hash": "a6a8dbed4f3e2f56c3a0cab9d434a31ef2d32cc55bb3a27e1ae48cb03bd9a990",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `requestAnimationFrame`"
+      }
+    },
+    {
+      "segment_id": "07ccfe59",
+      "source_content": "`requestAnimationFrame` is a polyfill from the browser that you might be familiar with. It accepts a function as its only argument and calls that function before the next repaint. It is an essential building block for animations that underlies all of the JavaScript-based animation APIs. In general, you shouldn't need to call this yourself - the animation APIs will manage frame updates for you.",
+      "source_content_hash": "8e37175544407eed9ae8a776fde6bd4863abc2aa3f070276c05b489349aa7c34",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`requestAnimationFrame` 是來自瀏覽器的 polyfill，你可能對它很熟悉。它接受一個函式作為唯一參數，並在下一次重繪前調用該函式。這是所有基於 JavaScript 的動畫 API 的基礎建構塊。通常你不需要手動調用它——動畫 API 會為你管理幀更新。"
+      }
+    },
+    {
+      "segment_id": "e855e613",
+      "source_content": "### `setNativeProps`",
+      "source_content_hash": "81447a778d813c0fd445bd2fbf6656a3f63597dc6141224cc168427cf9b0f0dd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setNativeProps`"
+      }
+    },
+    {
+      "segment_id": "c5e1e4ef",
+      "source_content": "As mentioned [in the Direct Manipulation section](direct-manipulation), `setNativeProps` allows us to modify properties of native-backed components (components that are actually backed by native views, unlike composite components) directly, without having to `setState` and re-render the component hierarchy.",
+      "source_content_hash": "7d89176b12db34b2b366ff1bcb834ed9837a14e6475357eb950098a25efee780",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如[直接操作章節](direct-manipulation)所述，`setNativeProps` 允許我們直接修改原生支援元件（實際由原生視圖支持的元件，而非複合元件）的屬性，而無需透過 `setState` 重新渲染元件層級結構。"
+      }
+    },
+    {
+      "segment_id": "8527e1d1",
+      "source_content": "We could use this in the Rebound example to update the scale - this might be helpful if the component that we are updating is deeply nested and hasn't been optimized with `shouldComponentUpdate`.",
+      "source_content_hash": "cf6411ab39685816571a3eb3961f0df4698c539e385d7352ba8e82301ad6758d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們可以在 Rebound 範例中使用此方法來更新縮放比例——這對於更新深度嵌套且未經 `shouldComponentUpdate` 優化的元件可能有所助益。"
+      }
+    },
+    {
+      "segment_id": "1351a518",
+      "source_content": "If you find your animations with dropping frames (performing below 60 frames per second), look into using `setNativeProps` or `shouldComponentUpdate` to optimize them. Or you could run the animations on the UI thread rather than the JavaScript thread [with the useNativeDriver option](/blog/2017/02/14/using-native-driver-for-animated). You may also want to defer any computationally intensive work until after animations are complete, using the [InteractionManager](interactionmanager). You can monitor the frame rate by using the In-App Developer Menu \"FPS Monitor\" tool.",
+      "source_content_hash": "74d50fa4c018f255341c49b06497b0ab553625705a3e3f807aa62631248de4f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您發現動畫出現掉幀（低於每秒60幀）的情況，可以考慮使用 `setNativeProps` 或 `shouldComponentUpdate` 來優化。或者，您也可以選擇[透過 useNativeDriver 選項](/blog/2017/02/14/using-native-driver-for-animated)在UI執行緒而非JavaScript執行緒上執行動畫。此外，建議使用 [InteractionManager](interactionmanager) 將計算密集型工作延遲到動畫完成後再處理。您可以使用應用內開發者選單中的「FPS監測」工具來監控幀率。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/animations.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.295907+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a926981be3fff66510fa5e6e06635b495c977fe51536265abab0130e80e13632"
+  }
+}

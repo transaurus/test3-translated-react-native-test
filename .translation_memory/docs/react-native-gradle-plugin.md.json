@@ -1,0 +1,712 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/react-native-gradle-plugin.md",
+  "source_file_content_hash": "9b0815a73aef56607c35b5cf7ef0d9fea4710cb1d69c57c05970a0fa2f57df86",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: react-native-gradle-plugin\ntitle: React Native Gradle Plugin\n---",
+      "source_content_hash": "5c094c41c73a1c562a81d88586840f6088a023004179f1ba1473c0d87ed2c179",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "This guide describes how to configure the **React Native Gradle Plugin** (often referred as RNGP), when building your React Native application for Android.",
+      "source_content_hash": "6c9768b2a7fa562bb6fafd43f211dc47e2a11876066ccd051dc6ad3233a8ef2c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南說明如何配置 **React Native Gradle 插件**（通常簡稱 RNGP），以便為 Android 構建 React Native 應用程式。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Using the plugin",
+      "source_content_hash": "01e877e8f02591c4e94b44562f673817ac12de0efa8ca42a697f9f93096b483b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用插件"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The React Native Gradle Plugin is distributed as a separate NPM package which is installed automatically with `react-native`.",
+      "source_content_hash": "44b648bb687fc90368c455c95f6c3c6feb4ac4bf19823025fd47a886aadc3cf1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native Gradle 插件作為獨立的 NPM 套件分發，安裝 `react-native` 時會自動安裝。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The plugin is **already configured** for new projects created using `npx react-native init`. You don't need to do any extra steps to install it if you created your app with this command.",
+      "source_content_hash": "21003a7eb16203fafcbbabec1c2ff9ffb4a0986e4ecef53c6c8a8bde418336f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `npx react-native init` 創建的新專案**已預設配置**該插件。若您以此命令創建應用程式，無需進行額外安裝步驟。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "If you're integrating React Native into an existing project, please refer to [the corresponding page](/docs/next/integration-with-existing-apps#configuring-gradle): it contains specific instructions on how to install the plugin.",
+      "source_content_hash": "e02c87a625f9d2a81f5be7511bb61ca298ca8e8929bfb54e7137b8b461608e5e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若需將 React Native 整合至現有專案，請參閱[對應頁面](/docs/next/integration-with-existing-apps#configuring-gradle)，其中包含插件安裝的具體指引。"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "## Configuring the plugin",
+      "source_content_hash": "a780c827b2a0e0e7688450cb6b192f17c0ff2b0d5fa244acd7a5d8b742057270",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 配置插件"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "By default, the plugin will work **out of the box** with sensible defaults. You should refer to this guide and customize the behavior only if you need it.",
+      "source_content_hash": "e2222e9eabb7ec96c57b777cf45e0973d16ca3c615eafa187ef2e45b1b12c524",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，插件會以**開箱即用**的合理配置運作。僅在需要時才參考本指南進行客製化調整。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "To configure the plugin you can modify the `react` block, inside your `android/app/build.gradle`:",
+      "source_content_hash": "5485d6ec6afee3b6e476c2e4401e11cbe2eedbffa848eaedb879b86d68f714d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要配置插件，可修改 `android/app/build.gradle` 中的 `react` 區塊："
+      }
+    },
+    {
+      "segment_id": "9eee5787",
+      "source_content": "```groovy\napply plugin: \"com.facebook.react\"\n\n/**\n * This is the configuration block to customize your React Native Android app.\n * By default you don't need to apply any configuration, just uncomment the lines you need.\n */\nreact {\n  // Custom configuration goes here.\n}\n```",
+      "source_content_hash": "a8dade9ce0054a8419c3c0ab834733143312ad1a50c4f6f3d575e94ad339d27a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9eee5787"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "Each configuration key is described below:",
+      "source_content_hash": "d8e000f12dedca60f78a275cc16ac9b00ac4604841e1fe5f6f04a8998a42c069",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "各配置參數說明如下："
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "### `root`",
+      "source_content_hash": "743e16991530d8e34d7d335fe577461f05c51911c447bcb4409a2314afa8887c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `root`"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "This is the root folder of your React Native project, i.e. where the `package.json` file lives. Default is `..`. You can customize it as follows:",
+      "source_content_hash": "c57df5f9aeebfbe2c3ce464b302d8949ceeef840ac713a809fccdc75b6820a78",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為 React Native 專案的根目錄（即包含 `package.json` 的目錄）。預設值為 `..`。可依以下方式客製化："
+      }
+    },
+    {
+      "segment_id": "a11df754",
+      "source_content": "```groovy\nroot = file(\"../\")\n```",
+      "source_content_hash": "6c437811696a55baf5fac9ece4abb16e9c9067b6067c25153ce69744580a34e5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a11df754"
+      }
+    },
+    {
+      "segment_id": "54268405",
+      "source_content": "### `reactNativeDir`",
+      "source_content_hash": "23199bede3fcea6c1d060c6e69bcd7545dae8c3b3958224db1413bce961bdd18",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `reactNativeDir`"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "This is the folder where the `react-native` package lives. Default is `../node_modules/react-native`.\nIf you're in a monorepo or using a different package manager, you can use adjust `reactNativeDir` to your setup.",
+      "source_content_hash": "aecc8b4d72b15904f0b749cf0eed2efb6a2fa5b6e7f187318a59ee673dc4a0ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為 `react-native` 套件所在目錄。預設值為 `../node_modules/react-native`。\n若處於 monorepo 環境或使用其他套件管理器，可調整 `reactNativeDir` 以符合您的架構。"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "You can customize it as follows:",
+      "source_content_hash": "ea452f25d2ef71fd0e1dfb3b8c2ea038c6278b630d8cc515a1f5b3c23ccddb75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "客製化方式如下："
+      }
+    },
+    {
+      "segment_id": "4795a13d",
+      "source_content": "```groovy\nreactNativeDir = file(\"../node_modules/react-native\")\n```",
+      "source_content_hash": "b780b73e7e2ced036acfb72276d43b31721b9a7121294f5c55762f63fb797205",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4795a13d"
+      }
+    },
+    {
+      "segment_id": "af52d59d",
+      "source_content": "### `codegenDir`",
+      "source_content_hash": "35fe21a7b4671de82d146a1a003cea00c4ec083bd393d214277abf0a3d246986",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `codegenDir`"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "This is the folder where the `react-native-codegen` package lives. Default is `../node_modules/react-native-codegen`.\nIf you're in a monorepo or using a different package manager, you can adjust `codegenDir` to your setup.",
+      "source_content_hash": "3c634a4da01f41fa7579dc68927adc48edb9d8834b5800c48af54643b507343e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為 `react-native-codegen` 套件所在目錄。預設值為 `../node_modules/react-native-codegen`。\n若處於 monorepo 環境或使用其他套件管理器，可調整 `codegenDir` 以符合您的架構。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "You can customize it as follows:",
+      "source_content_hash": "ea452f25d2ef71fd0e1dfb3b8c2ea038c6278b630d8cc515a1f5b3c23ccddb75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "客製化方式如下："
+      }
+    },
+    {
+      "segment_id": "3adc0ceb",
+      "source_content": "```groovy\ncodegenDir = file(\"../node_modules/@react-native/codegen\")\n```",
+      "source_content_hash": "41e11361dbd616b54ae821abce9acc30939ab70117926185dbe8340dbf39b816",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3adc0ceb"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### `cliFile`",
+      "source_content_hash": "cd91fec1b012b1b6e811982b91ccbf3377adb8f12c1ab14a38b389b336b293c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `cliFile`"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "This is the entrypoint file for the React Native CLI. Default is `../node_modules/react-native/cli.js`.\nThe entrypoint file is needed as the plugin needs to invoke the CLI for bundling and creating your app.",
+      "source_content_hash": "aa71aba19ff2621996e846f8a1e82df83ea72c83890972af0256793b2d3c1df2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為 React Native CLI 的入口檔案。預設值為 `../node_modules/react-native/cli.js`。\n插件需透過此入口檔案調用 CLI 來進行打包和應用程式構建。"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "If you're in a monorepo or using a different package manager, you can adjust `cliFile` to your setup.\nYou can customize it as follows:",
+      "source_content_hash": "9d0e3fcaccec9e95e954735e3108b452bbbda338be021891cee4162793a6fb23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若處於 monorepo 環境或使用其他套件管理器，可調整 `cliFile` 以符合您的架構。\n客製化方式如下："
+      }
+    },
+    {
+      "segment_id": "af983f82",
+      "source_content": "```groovy\ncliFile = file(\"../node_modules/react-native/cli.js\")\n```",
+      "source_content_hash": "695a28967b0eec96c72546ff6d504e41c2938e281b9e61ee53162e228d473826",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af983f82"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "### `debuggableVariants`",
+      "source_content_hash": "2fb49c3308a967a443fd62c0dfe6601a9cccf6bd65fd1dee19423f0d170945b1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `debuggableVariants`"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "This is the list of variants that are debuggable (see [using variants](#using-variants) for more context on variants).",
+      "source_content_hash": "e0a36afdb3bbe73d25c002066ec018d40d44468f61216cd79f50c78544569af6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為可調試變體的列表（關於變體的詳細說明請參閱[使用變體](#using-variants)）。"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "By default the plugin is considering as `debuggableVariants` only `debug`, while `release` is not. If you have other\nvariants (like `staging`, `lite`, etc.) you'll need to adjust this accordingly.",
+      "source_content_hash": "8fe983ea6d876e8722cbd768ebe73cc81cf89b24f66dd42ab8e47715d93e37c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，插件僅將 `debug` 變體視為 `debuggableVariants`，而 `release` 則否。若存在其他變體（如 `staging`、`lite` 等），需相應調整此配置。"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "Variants that are listed as `debuggableVariants` will not come with a shipped bundle, so you'll need Metro to run them.",
+      "source_content_hash": "479e674c0155dbfd3d9a1f483ef630d35ea61424f95f1ede2a94581a14101804",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "列為 `debuggableVariants` 的變體不會附帶預編譯套件包，因此需運行 Metro 才能使用。"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "You can customize it as follows:",
+      "source_content_hash": "ea452f25d2ef71fd0e1dfb3b8c2ea038c6278b630d8cc515a1f5b3c23ccddb75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "客製化方式如下："
+      }
+    },
+    {
+      "segment_id": "f6563256",
+      "source_content": "```groovy\ndebuggableVariants = [\"liteDebug\", \"prodDebug\"]\n```",
+      "source_content_hash": "e4cdce032264169d91e5a034280db799896fa8c0c560d056f12b46f947d014f2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f6563256"
+      }
+    },
+    {
+      "segment_id": "39db08de",
+      "source_content": "### `nodeExecutableAndArgs`",
+      "source_content_hash": "54eda7cfe5f904f4c53818e1199cb9ed495323827398a5237e810ee3085b415b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nodeExecutableAndArgs`"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "This is the list of node command and arguments that should be invoked for all the scripts. By default is `[node]` but can be customized to add extra flags as follows:",
+      "source_content_hash": "de743808a7df8ce0d4e4ddff629169e4fe617d9f9fc644a584931453ac062c1d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為執行所有腳本時需調用的 node 命令及其參數列表。預設值為 `[node]`，可依以下方式添加額外參數："
+      }
+    },
+    {
+      "segment_id": "ec99e704",
+      "source_content": "```groovy\nnodeExecutableAndArgs = [\"node\"]\n```",
+      "source_content_hash": "9d4cbf5882c3a8acf640f38b9d6882b98f3c0d8dc7a321f9e69e6b6945555a74",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ec99e704"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "### `bundleCommand`",
+      "source_content_hash": "50bc1f5539c86016fab43064cfb64216f4d9499f17701e7aac2907561d3f2c13",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bundleCommand`"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "This is the name of the `bundle` command to be invoked when creating the bundle for your app. That's useful if you're using [RAM Bundles](https://reactnative.dev/docs/0.74/ram-bundles-inline-requires). By default is `bundle` but can be customized to add extra flags as follows:",
+      "source_content_hash": "1347efe2123723688966d4afd32de6fc8f971d728a60d9a4540f2188278a01bf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是建立應用程式套件時要呼叫的 `bundle` 指令名稱。若您使用 [RAM Bundles](https://reactnative.dev/docs/0.74/ram-bundles-inline-requires) 時會很有用。預設為 `bundle`，但可透過以下方式自訂並添加額外參數："
+      }
+    },
+    {
+      "segment_id": "64071bcc",
+      "source_content": "```groovy\nbundleCommand = \"ram-bundle\"\n```",
+      "source_content_hash": "74f0f0ef2e3c8d8ad6b6c02827743a50bb5769cf7c620365c718e7eb223eae1d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_64071bcc"
+      }
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "### `bundleConfig`",
+      "source_content_hash": "76e1aea94a45fa9b9d10e6c1a5346f4f0faa29ce1cc57389e307a998a6b08cca",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bundleConfig`"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "This is the path to a configuration file that will be passed to `bundle --config <file>` if provided. Default is empty (no config file will be probided). More information on bundling config files can be found [on the CLI documentation](https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle). Can be customized as follow:",
+      "source_content_hash": "aa7659d4f241bb2d4a8241efa0321ae19131e7c0f71aa7252392572069e56a1b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為傳遞給 `bundle --config <file>` 的設定檔路徑（若提供）。預設為空（不提供設定檔）。更多關於套件設定檔的資訊可參閱 [CLI 文件](https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle)。可透過以下方式自訂："
+      }
+    },
+    {
+      "segment_id": "f39e109c",
+      "source_content": "```groovy\nbundleConfig = file(../rn-cli.config.js)\n```",
+      "source_content_hash": "23279a418346fc7d3a5af7609645bcbda39419769e571624365c254a145d8825",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f39e109c"
+      }
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "### `bundleAssetName`",
+      "source_content_hash": "db6b1e07da17ff98ffa3d20c2e1dfbd075ebc53d5222682e9f8bc1235820c949",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bundleAssetName`"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "This is the name of the bundle file that should be generated. Default is `index.android.bundle`. Can be customized as follow:",
+      "source_content_hash": "9e9d4056ca489e09e3adc5aaa5ed6c563ffffb8ca99da9a550319786c5441aa7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為應生成的套件檔案名稱。預設為 `index.android.bundle`。可透過以下方式自訂："
+      }
+    },
+    {
+      "segment_id": "1a63b635",
+      "source_content": "```groovy\nbundleAssetName = \"MyApplication.android.bundle\"\n```",
+      "source_content_hash": "82e37285a281f48aea29b33d7d7e4b167699e87fc6b63af8ccb25c27703548d3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a63b635"
+      }
+    },
+    {
+      "segment_id": "ed644f52",
+      "source_content": "### `entryFile`",
+      "source_content_hash": "1ed6d70cc15aead246bb77e0f08117811c17b27ffe7d01ebe512397b6d9c7ce7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `entryFile`"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "The entry file used for bundle generation. The default is to search for `index.android.js` or `index.js`. Can be customized as follow:",
+      "source_content_hash": "03275dfd411a71a19ddb0bb0d3cf5bf7c75a426147a03fe8839c4d5bf84be7c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於套件生成的進入點檔案。預設會搜尋 `index.android.js` 或 `index.js`。可透過以下方式自訂："
+      }
+    },
+    {
+      "segment_id": "2f34b0ad",
+      "source_content": "```groovy\nentryFile = file(\"../js/MyApplication.android.js\")\n```",
+      "source_content_hash": "129c0797ff63a4f46a8999599fc69439f4d73aacbaaf80b3fbd95c7b8f1b3783",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2f34b0ad"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "### `extraPackagerArgs`",
+      "source_content_hash": "12191a744fff253144281990a4739c29915dfbbd715a84469898b4ed6e3a9d9a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `extraPackagerArgs`"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "A list of extra flags that will be passed to the `bundle` command. The list of available flags is in [the CLI documentation](https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle). Default is empty. Can be customized as follows:",
+      "source_content_hash": "39b35044a296628b1ac408218901ef70bff9ab221bc827d5ee77196a44607db3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "傳遞給 `bundle` 指令的額外參數清單。可用參數清單請參閱 [CLI 文件](https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle)。預設為空。可透過以下方式自訂："
+      }
+    },
+    {
+      "segment_id": "f2f9d525",
+      "source_content": "```groovy\nextraPackagerArgs = []\n```",
+      "source_content_hash": "190f94d57adc7f5fcba8a8db96f06bad76423d8eafb78fd6a298c91b91885614",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2f9d525"
+      }
+    },
+    {
+      "segment_id": "fff17ff8",
+      "source_content": "### `hermesCommand`",
+      "source_content_hash": "4124f6de0cea38f8c2b736c529015c5cb5cfa3c4602fa304cb1170d16e8f9072",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hermesCommand`"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "The path to the `hermesc` command (the Hermes Compiler). React Native comes with a version of the Hermes compiler bundled with it, so you generally won't be needing to customize this. The plugin will use the correct compiler for your system by default.",
+      "source_content_hash": "0c740d28af722c16aab199d300a1f88cd784194cba21271684234665687432c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`hermesc` 指令（Hermes 編譯器）的路徑。React Native 自帶 Hermes 編譯器版本，因此通常不需自訂此設定。外掛程式預設會為您的系統使用正確的編譯器。"
+      }
+    },
+    {
+      "segment_id": "af843cee",
+      "source_content": "### `hermesFlags`",
+      "source_content_hash": "501ac111d8a4d50be1c95df413ecbc7022b46e906cc330006950503de6afbbf5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hermesFlags`"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "The list of flags to pass to `hermesc`. By default is `[\"-O\", \"-output-source-map\"]`. You can customize it as follows",
+      "source_content_hash": "fb0fb8fa83898f17f630bede087f4bacfe313374febe66acff0481a1a80aa512",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "傳遞給 `hermesc` 的參數清單。預設為 `[\"-O\", \"-output-source-map\"]`。可透過以下方式自訂："
+      }
+    },
+    {
+      "segment_id": "eb25bb8c",
+      "source_content": "```groovy\nhermesFlags = [\"-O\", \"-output-source-map\"]\n```",
+      "source_content_hash": "7108d6c4f6f7e1ba70865becb6d6dfa76e30bf5fd959ed5c7585f4261c7bf0c8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb25bb8c"
+      }
+    },
+    {
+      "segment_id": "671cbf7c",
+      "source_content": "### `enableBundleCompression`",
+      "source_content_hash": "d96297254572a4eb9b6c3d390d6d993e863b12771a96ae200532bcae44898d4a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `enableBundleCompression`"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "Whether the Bundle Asset should be compressed when packaged into a `.apk`, or not.",
+      "source_content_hash": "d24d81a3766187b465aae59d8b474b8c570b64f1e95ee4c395c555306c7cf9cd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "套件資源在打包成 `.apk` 時是否應壓縮。"
+      }
+    },
+    {
+      "segment_id": "63565425",
+      "source_content": "Disabling compression for the `.bundle` allows it to be directly memory-mapped to RAM, hence improving startup time - at the cost of a larger resulting app size on disk. Please note that the `.apk` download size will be mostly unaffected as the `.apk` files are compressed before downloading",
+      "source_content_hash": "24c3e192022fd0527337408ca444aeaf0820800ce53b4872cef33f2ba2c795a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "停用 `.bundle` 的壓縮可讓其直接映射到記憶體，從而改善啟動時間，但會增加磁碟上的應用程式大小。請注意，`.apk` 的下載大小大多不受影響，因為 `.apk` 檔案在下載前會先壓縮。"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "By default this is disabled, and you should not turn it on, unless you're really concerned about disk space for your application.",
+      "source_content_hash": "6e5353fe7c1960865914cdf57e36085c589bf0243e11346bbd424df1ef179709",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設此功能為停用，除非您非常在意應用程式的磁碟空間，否則不應啟用。"
+      }
+    },
+    {
+      "segment_id": "3c6dd548",
+      "source_content": "## Using Flavors & Build Variants",
+      "source_content_hash": "afb38812a86af20db736461cc0924560ad69b0c7b33cc54e4c6a143a557f974b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用風味與建置變體"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "When building Android apps, you might want to use [custom flavors](https://developer.android.com/studio/build/build-variants#product-flavors) to have different versions of your app starting from the same project.",
+      "source_content_hash": "539127483aaa865a5c97dd21b3698e691cfacf9b1395f19ef0301868bb138cde",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建置 Android 應用程式時，您可能會想使用 [自訂風味](https://developer.android.com/studio/build/build-variants#product-flavors) 來從同一專案產生不同版本的應用程式。"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "Please refer to the [official Android guide](https://developer.android.com/studio/build/build-variants) to configure custom build types (like `staging`) or custom flavors (like `full`, `lite`, etc.).\nBy default new apps are created with two build types (`debug` and `release`) and no custom flavors.",
+      "source_content_hash": "6278224b8c052a37d211d1a22b43f47a34c8370fe698242cafacfafda6a7e3a4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請參閱 [官方 Android 指南](https://developer.android.com/studio/build/build-variants) 來設定自訂建置類型（如 `staging`）或自訂風味（如 `full`、`lite` 等）。\n新應用程式預設會建立兩種建置類型（`debug` 和 `release`）且無自訂風味。"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "The combination of all the build types and all the flavors generates a set of **build variants**. For instance for `debug`/`staging`/`release` build types and `full`/`lite` you will have 6 build variants: `fullDebug`, `fullStaging`, `fullRelease` and so on.",
+      "source_content_hash": "835b5839302252d06b17c1d691bd527d49529a2ec499389eca67d5b23b3996d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "所有建置類型與風味的組合會產生一組 **建置變體**。例如，對於 `debug`/`staging`/`release` 建置類型和 `full`/`lite` 風味，您將有 6 個建置變體：`fullDebug`、`fullStaging`、`fullRelease` 等。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "If you're using custom variants beyond `debug` and `release`, you need to instruct the React Native Gradle Plugin specifying which of your variants are **debuggable** using the [`debuggableVariants`](#debuggablevariants) configuration as follows:",
+      "source_content_hash": "d1a0c2f148cee11a275e35e1bc9383771432b439d571ef6c983948295a0ca001",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 `debug` 和 `release` 以外的自訂變體，需透過 [`debuggableVariants`](#debuggablevariants) 設定來指示 React Native Gradle 外掛程式哪些變體是 **可偵錯的**，如下所示："
+      }
+    },
+    {
+      "segment_id": "90c0aa8a",
+      "source_content": "```diff\napply plugin: \"com.facebook.react\"\n\nreact {\n+ debuggableVariants = [\"fullStaging\", \"fullDebug\"]\n}\n```",
+      "source_content_hash": "38e216efb1e651b929dc5c7a2b8fc480e8020e506d986431510877028f6064f7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_90c0aa8a"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "This is necessary because the plugin will skip the JS bundling for all the `debuggableVariants`: you'll need Metro to run them. For example, if you list `fullStaging` in the `debuggableVariants`, you won't be able to publish it to a store as it will be missing the bundle.",
+      "source_content_hash": "06c4eb707d537681aa6722bcebd227403b7aa0652b9576827cd2d69e708a7ad4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是必要的，因為插件會跳過所有 `debuggableVariants` 的 JS 打包流程：你需要讓 Metro 來執行這些變體。例如，如果你在 `debuggableVariants` 中列出 `fullStaging`，將無法將其發布到商店，因為它會缺少打包後的 bundle。"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "## What is the plugin doing under the hood?",
+      "source_content_hash": "be8cac345584b6d58c90fc391bb0a3fbba7e13707fe7d2decce2b19d505dd889",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 插件在底層做了什麼？"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "The React Native Gradle Plugin is responsible for configuring your Application build to ship React Native applications to production.\nThe plugin is also used inside 3rd party libraries, to run the [Codegen](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/codegen.md) used for the New Architecture.",
+      "source_content_hash": "33e0b680cfb52cec7e0fc7b0e4f6674b977a840df96a39ed3ba5ddd9c14958dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native Gradle 插件負責配置你的應用程式構建，以便將 React Native 應用程式發布到生產環境。該插件也用於第三方函式庫中，以執行新架構所需的 [Codegen](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/codegen.md)。"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "Here is a summary of the plugin responsibilities:",
+      "source_content_hash": "430bd124dbcb9a5dcc1930c5907a8ca2010b21b14d1ea13973cdea9d43c622a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是插件的主要職責概述："
+      }
+    },
+    {
+      "segment_id": "fc7b5b3c",
+      "source_content": "- Add a `createBundle<Variant>JsAndAssets` task for every non debuggable variant, that is responsible of invoking the `bundle`, `hermesc` and `compose-source-map` commands.\n- Setting up the proper version of the `com.facebook.react:react-android` and `com.facebook.react:hermes-android` dependency, reading the React Native version from the `package.json` of `react-native`.\n- Setting up the proper Maven repositories (Maven Central, Google Maven Repo, JSC local Maven repo, etc.) needed to consume all the necessary Maven Dependencies.\n- Setting up the NDK to let you build apps that are using the New Architecture.\n- Setting up the `buildConfigFields` so that you can know at runtime if Hermes or the New Architecture are enabled.\n- Setting up the Metro DevServer Port as an Android resource so the app knows on which port to connect.\n- Invoking the [React Native Codegen](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/codegen.md) if a library or app is using the Codegen for the New Architecture.",
+      "source_content_hash": "a468821376be3563e7969177723eda09cf09948a2b92b5b7907b2ed414b71c60",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 為每個非可調試變體添加 `createBundle<Variant>JsAndAssets` 任務，負責調用 `bundle`、`hermesc` 和 `compose-source-map` 命令。\n- 根據 `react-native` 的 `package.json` 中的版本，設置正確版本的 `com.facebook.react:react-android` 和 `com.facebook.react:hermes-android` 依賴項。\n- 設置必要的 Maven 倉庫（如 Maven Central、Google Maven Repo、JSC 本地 Maven 倉庫等），以獲取所有必需的 Maven 依賴項。\n- 配置 NDK，讓你能夠構建使用新架構的應用程式。\n- 設置 `buildConfigFields`，以便在運行時判斷是否啟用了 Hermes 或新架構。\n- 將 Metro 開發伺服器端口設置為 Android 資源，讓應用程式知道連接的端口。\n- 如果函式庫或應用程式使用新架構的 Codegen，則調用 [React Native Codegen](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/codegen.md)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/react-native-gradle-plugin.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.185850+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "9b0815a73aef56607c35b5cf7ef0d9fea4710cb1d69c57c05970a0fa2f57df86"
+  }
+}

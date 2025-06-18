@@ -1,0 +1,2722 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/layout-props.md",
+  "source_file_content_hash": "ee5c9d57ed09b42fe3299bb7b9af1ff559fa79f241708c070d00f779fd2986f0",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: layout-props\ntitle: Layout Props\n---",
+      "source_content_hash": "71c18c7d0bb6039786fa49a5cd1e20e5aae9319c741f0e3c7a071150f6006afc",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "e7ec881c",
+      "source_content": "> More detailed examples about those properties can be found on the [Layout with Flexbox](flexbox) page.",
+      "source_content_hash": "4cf820bd23c1851167fec2d408b4c09f02dc3373fc13bde29283de6f4579b5dc",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 關於這些屬性的更詳細範例，請參閱 [Flexbox 佈局](flexbox) 頁面。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### Example",
+      "source_content_hash": "b9b5449b4e5cc2bf7390d309862a49a3dbf04030ec7257d36932125bd4e08256",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 範例"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The following example shows how different properties can affect or shape a React Native layout. You can try for example to add or remove squares from the UI while changing the values of the property `flexWrap`.",
+      "source_content_hash": "551e97ac3547a7b846b47f63ff859a881655431fff45b441161d1a831df75456",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下範例展示不同屬性如何影響或塑造 React Native 的佈局。您可以嘗試在變更 `flexWrap` 屬性值的同時，從 UI 中添加或移除方塊。"
+      }
+    },
+    {
+      "segment_id": "899bc9b4",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=LayoutProps%20Example&ext=js\nimport React, {useState} from 'react';\nimport {Button, ScrollView, StyleSheet, Text, View} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const [flexDirection, setFlexDirection] = useState(0);\n  const [justifyContent, setJustifyContent] = useState(0);\n  const [alignItems, setAlignItems] = useState(0);\n  const [direction, setDirection] = useState(0);\n  const [wrap, setWrap] = useState(0);\n\n  const [squares, setSquares] = useState([<Square />, <Square />, <Square />]);\n\n  const hookedStyles = {\n    flexDirection: flexDirections[flexDirection],\n    justifyContent: justifyContents[justifyContent],\n    alignItems: alignItemsArr[alignItems],\n    direction: directions[direction],\n    flexWrap: wraps[wrap],\n  };\n\n  const changeSetting = (value, options, setterFunction) => {\n    if (value === options.length - 1) {\n      setterFunction(0);\n      return;\n    }\n    setterFunction(value + 1);\n  };\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <View style={[styles.container, styles.playingSpace, hookedStyles]}>\n          {squares.map(elem => elem)}\n        </View>\n        <ScrollView style={styles.layoutContainer}>\n          <View style={styles.controlSpace}>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Flex Direction\"\n                onPress={() =>\n                  changeSetting(flexDirection, flexDirections, setFlexDirection)\n                }\n              />\n              <Text style={styles.text}>{flexDirections[flexDirection]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Justify Content\"\n                onPress={() =>\n                  changeSetting(\n                    justifyContent,\n                    justifyContents,\n                    setJustifyContent,\n                  )\n                }\n              />\n              <Text style={styles.text}>{justifyContents[justifyContent]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Align Items\"\n                onPress={() =>\n                  changeSetting(alignItems, alignItemsArr, setAlignItems)\n                }\n              />\n              <Text style={styles.text}>{alignItemsArr[alignItems]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Direction\"\n                onPress={() =>\n                  changeSetting(direction, directions, setDirection)\n                }\n              />\n              <Text style={styles.text}>{directions[direction]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Flex Wrap\"\n                onPress={() => changeSetting(wrap, wraps, setWrap)}\n              />\n              <Text style={styles.text}>{wraps[wrap]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Add Square\"\n                onPress={() => setSquares([...squares, <Square />])}\n              />\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Delete Square\"\n                onPress={() =>\n                  setSquares(squares.filter((v, i) => i !== squares.length - 1))\n                }\n              />\n            </View>\n          </View>\n        </ScrollView>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst flexDirections = ['row', 'row-reverse', 'column', 'column-reverse'];\nconst justifyContents = [\n  'flex-start',\n  'flex-end',\n  'center',\n  'space-between',\n  'space-around',\n  'space-evenly',\n];\nconst alignItemsArr = [\n  'flex-start',\n  'flex-end',\n  'center',\n  'stretch',\n  'baseline',\n];\nconst wraps = ['nowrap', 'wrap', 'wrap-reverse'];\nconst directions = ['inherit', 'ltr', 'rtl'];\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  layoutContainer: {\n    flex: 0.5,\n  },\n  playingSpace: {\n    backgroundColor: 'white',\n    borderColor: 'blue',\n    borderWidth: 3,\n    overflow: 'hidden',\n  },\n  controlSpace: {\n    flexDirection: 'row',\n    flexWrap: 'wrap',\n  },\n  buttonView: {\n    width: '50%',\n    padding: 10,\n  },\n  text: {\n    textAlign: 'center',\n  },\n});\n\nconst Square = () => (\n  <View\n    style={{\n      width: 50,\n      height: 50,\n      backgroundColor: randomHexColor(),\n    }}\n  />\n);\n\nconst randomHexColor = () => {\n  return '#000000'.replace(/0/g, () => {\n    return Math.round(Math.random() * 14).toString(16);\n  });\n};\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=LayoutProps%20Example&ext=tsx\nimport React, {useState} from 'react';\nimport {\n  Button,\n  ScrollView,\n  StyleSheet,\n  Text,\n  View,\n  FlexAlignType,\n  FlexStyle,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const [flexDirection, setFlexDirection] = useState(0);\n  const [justifyContent, setJustifyContent] = useState(0);\n  const [alignItems, setAlignItems] = useState(0);\n  const [direction, setDirection] = useState(0);\n  const [wrap, setWrap] = useState(0);\n\n  const [squares, setSquares] = useState([<Square />, <Square />, <Square />]);\n\n  const hookedStyles = {\n    flexDirection: flexDirections[flexDirection],\n    justifyContent: justifyContents[justifyContent],\n    alignItems: alignItemsArr[alignItems],\n    direction: directions[direction],\n    flexWrap: wraps[wrap],\n  } as FlexStyle;\n\n  const changeSetting = (\n    value: number,\n    options: any[],\n    setterFunction: (index: number) => void,\n  ) => {\n    if (value === options.length - 1) {\n      setterFunction(0);\n      return;\n    }\n    setterFunction(value + 1);\n  };\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <View style={[styles.container, styles.playingSpace, hookedStyles]}>\n          {squares.map(elem => elem)}\n        </View>\n        <ScrollView style={styles.layoutContainer}>\n          <View style={styles.controlSpace}>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Flex Direction\"\n                onPress={() =>\n                  changeSetting(flexDirection, flexDirections, setFlexDirection)\n                }\n              />\n              <Text style={styles.text}>{flexDirections[flexDirection]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Justify Content\"\n                onPress={() =>\n                  changeSetting(\n                    justifyContent,\n                    justifyContents,\n                    setJustifyContent,\n                  )\n                }\n              />\n              <Text style={styles.text}>{justifyContents[justifyContent]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Align Items\"\n                onPress={() =>\n                  changeSetting(alignItems, alignItemsArr, setAlignItems)\n                }\n              />\n              <Text style={styles.text}>{alignItemsArr[alignItems]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Direction\"\n                onPress={() =>\n                  changeSetting(direction, directions, setDirection)\n                }\n              />\n              <Text style={styles.text}>{directions[direction]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Change Flex Wrap\"\n                onPress={() => changeSetting(wrap, wraps, setWrap)}\n              />\n              <Text style={styles.text}>{wraps[wrap]}</Text>\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Add Square\"\n                onPress={() => setSquares([...squares, <Square />])}\n              />\n            </View>\n            <View style={styles.buttonView}>\n              <Button\n                title=\"Delete Square\"\n                onPress={() =>\n                  setSquares(squares.filter((v, i) => i !== squares.length - 1))\n                }\n              />\n            </View>\n          </View>\n        </ScrollView>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst flexDirections = [\n  'row',\n  'row-reverse',\n  'column',\n  'column-reverse',\n] as FlexStyle['flexDirection'][];\nconst justifyContents = [\n  'flex-start',\n  'flex-end',\n  'center',\n  'space-between',\n  'space-around',\n  'space-evenly',\n] as FlexStyle['justifyContent'][];\nconst alignItemsArr = [\n  'flex-start',\n  'flex-end',\n  'center',\n  'stretch',\n  'baseline',\n] as FlexAlignType[];\nconst wraps = ['nowrap', 'wrap', 'wrap-reverse'];\nconst directions = ['inherit', 'ltr', 'rtl'];\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  layoutContainer: {\n    flex: 0.5,\n  },\n  playingSpace: {\n    backgroundColor: 'white',\n    borderColor: 'blue',\n    borderWidth: 3,\n    overflow: 'hidden',\n  },\n  controlSpace: {\n    flexDirection: 'row',\n    flexWrap: 'wrap',\n  },\n  buttonView: {\n    width: '50%',\n    padding: 10,\n  },\n  text: {\n    textAlign: 'center',\n  },\n});\n\nconst Square = () => (\n  <View\n    style={{\n      width: 50,\n      height: 50,\n      backgroundColor: randomHexColor(),\n    }}\n  />\n);\n\nconst randomHexColor = () => {\n  return '#000000'.replace(/0/g, () => {\n    return Math.round(Math.random() * 14).toString(16);\n  });\n};\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "fbed61ac0ae098bbde9b7b2ee6e744aa95daebfa4ca6d9e0eb37dece3204a261",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_899bc9b4"
+      }
+    },
+    {
+      "segment_id": "b3dd391a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "faaf88af",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "fa461c90",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "b98aff93",
+      "source_content": "### `alignContent`",
+      "source_content_hash": "72d2c5830399c7baeb32f13d754f4042859927809e52972e2b1d2d7445117334",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alignContent`"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "`alignContent` controls how rows align in the cross direction, overriding the `alignContent` of the parent. See https://developer.mozilla.org/en-US/docs/Web/CSS/align-content for more details.",
+      "source_content_hash": "74c30f1cabe6b4b85fa1e97792c29cb0306174f4fce20e3370adb9a738702d75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`alignContent` 控制行在交叉方向上的對齊方式，覆蓋父元素的 `alignContent`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/align-content。"
+      }
+    },
+    {
+      "segment_id": "7c1adbed",
+      "source_content": "| Type                                                                                                 | Required |\n| ---------------------------------------------------------------------------------------------------- | -------- |\n| enum('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | No       |",
+      "source_content_hash": "55ada58696bf0c98f5879e362d623cabedee0ca8a3b43e9220eec81aae4dd38f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7c1adbed"
+      }
+    },
+    {
+      "segment_id": "2b9eaaff",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "811ba0cd",
+      "source_content": "### `alignItems`",
+      "source_content_hash": "f2bc183d491f0f7632e9c1c81e0eac164faacf2598773f3af0e7f195957c1783",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alignItems`"
+      }
+    },
+    {
+      "segment_id": "639926e9",
+      "source_content": "`alignItems` aligns children in the cross direction. For example, if children are flowing vertically, `alignItems` controls how they align horizontally. It works like `align-items` in CSS (default: stretch). See https://developer.mozilla.org/en-US/docs/Web/CSS/align-items for more details.",
+      "source_content_hash": "f5f4d0761510a1d3c267cd9ffe184f0f9e79911576739a7a38f3068361a9db46",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`alignItems` 在交叉方向上對齊子元素。例如，若子元素垂直排列，`alignItems` 控制其水平對齊方式。功能類似 CSS 的 `align-items`（預設值：stretch）。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/align-items。"
+      }
+    },
+    {
+      "segment_id": "942e483d",
+      "source_content": "| Type                                                            | Required |\n| --------------------------------------------------------------- | -------- |\n| enum('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | No       |",
+      "source_content_hash": "9855e8e80d08c1f15eae2baa10d8fa7913943d659abf83f40a09dc9328074bf1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_942e483d"
+      }
+    },
+    {
+      "segment_id": "7fe90e2a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5d1aec8a",
+      "source_content": "### `alignSelf`",
+      "source_content_hash": "30f5dbd8dd72b772531deb5698e84df05c68aed4a8f978226ef215f18ed822f2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alignSelf`"
+      }
+    },
+    {
+      "segment_id": "ff95ec03",
+      "source_content": "`alignSelf` controls how a child aligns in the cross direction, overriding the `alignItems` of the parent. It works like `align-self` in CSS (default: auto). See https://developer.mozilla.org/en-US/docs/Web/CSS/align-self for more details.",
+      "source_content_hash": "f0e641eb1e072d47af31af5e1305fdf842e928dd9f9223471975b1cc098f3585",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`alignSelf` 控制子元素在交叉方向上的對齊方式，覆蓋父元素的 `alignItems`。功能類似 CSS 的 `align-self`（預設值：auto）。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/align-self。"
+      }
+    },
+    {
+      "segment_id": "d9d96683",
+      "source_content": "| Type                                                                    | Required |\n| ----------------------------------------------------------------------- | -------- |\n| enum('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | No       |",
+      "source_content_hash": "99d6e617e3fac03f22af44ee4ef32325861ee157cb20750cb82a317a01cdfd43",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d9d96683"
+      }
+    },
+    {
+      "segment_id": "e75ec459",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7083d194",
+      "source_content": "### `aspectRatio`",
+      "source_content_hash": "a9eb5f76db02ef807ef9639534afd5f44355d633cc94a4a3155bee420a3398e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aspectRatio`"
+      }
+    },
+    {
+      "segment_id": "7a210168",
+      "source_content": "Aspect ratio controls the size of the undefined dimension of a node. See https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio for more details.",
+      "source_content_hash": "d21239f423d6c8df45da8420960d4e6a558ee9ee1110b73c3ac161f681d305de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "長寬比控制節點未定義維度的大小。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio。"
+      }
+    },
+    {
+      "segment_id": "1912b799",
+      "source_content": "- On a node with a set width/height, aspect ratio controls the size of the unset dimension\n- On a node with a set flex basis, aspect ratio controls the size of the node in the cross axis if unset\n- On a node with a measure function, aspect ratio works as though the measure function measures the flex basis\n- On a node with flex grow/shrink, aspect ratio controls the size of the node in the cross axis if unset\n- Aspect ratio takes min/max dimensions into account",
+      "source_content_hash": "5ebf245c1175f1604e53fe718ae17315c263af34d79445048ec097105e0ccc26",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在設定寬度/高度的節點上，長寬比控制未設定維度的大小\n- 在設定 flex basis 的節點上，長寬比控制未設定時交叉軸上的節點大小\n- 在具有測量函式的節點上，長寬比作用如同測量函式測量 flex basis\n- 在具有 flex grow/shrink 的節點上，長寬比控制未設定時交叉軸上的節點大小\n- 長寬比會考慮最小/最大尺寸限制"
+      }
+    },
+    {
+      "segment_id": "d6c2f090",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d6c2f090"
+      }
+    },
+    {
+      "segment_id": "408460b4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9d81e9c3",
+      "source_content": "### `borderBottomWidth`",
+      "source_content_hash": "d1a5efa61ed8fd6edbe22262ce6fe058382b757cca93b32ea5aba6e359c4145c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderBottomWidth`"
+      }
+    },
+    {
+      "segment_id": "60d3a00d",
+      "source_content": "`borderBottomWidth` works like `border-bottom-width` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width for more details.",
+      "source_content_hash": "938ec05bbc26a03df5a3239d4f448baf97dcda0ad1fa0a73610d168736de8fd8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`borderBottomWidth` 功能類似 CSS 的 `border-bottom-width`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width。"
+      }
+    },
+    {
+      "segment_id": "4a5f0a89",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4a5f0a89"
+      }
+    },
+    {
+      "segment_id": "5d71a1d1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "394d8574",
+      "source_content": "### `borderEndWidth`",
+      "source_content_hash": "58e43c930e1356ef35b4b235e1e673845e2e1a16fcd801271d866d0964bd976a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderEndWidth`"
+      }
+    },
+    {
+      "segment_id": "13c7706c",
+      "source_content": "When direction is `ltr`, `borderEndWidth` is equivalent to `borderRightWidth`. When direction is `rtl`, `borderEndWidth` is equivalent to `borderLeftWidth`.",
+      "source_content_hash": "e5c4fa88ba3961edb5d196ae6841688c68b9236d176f18e2f4964b39d4ebe7e2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`borderEndWidth` 等同於 `borderRightWidth`；當方向為 `rtl` 時，則等同於 `borderLeftWidth`。"
+      }
+    },
+    {
+      "segment_id": "c85d8f42",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c85d8f42"
+      }
+    },
+    {
+      "segment_id": "8b58470d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7d7166d8",
+      "source_content": "### `borderLeftWidth`",
+      "source_content_hash": "aae1b5c8bfbf9d5f5c5c2c35859083a9d6243ddb8c734471057687ef9d7c91cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderLeftWidth`"
+      }
+    },
+    {
+      "segment_id": "69d6e4be",
+      "source_content": "`borderLeftWidth` works like `border-left-width` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width for more details.",
+      "source_content_hash": "99da4b43d809b7a17376f6381bae58e6f041cd2732573efea2a193296a6779af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`borderLeftWidth` 功能類似 CSS 的 `border-left-width`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width。"
+      }
+    },
+    {
+      "segment_id": "a1732894",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a1732894"
+      }
+    },
+    {
+      "segment_id": "00bbf3b4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4170d23c",
+      "source_content": "### `borderRightWidth`",
+      "source_content_hash": "24a81961577b7df60710c97b3d8b2372abafa9e1385273d67700fd460104dd35",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderRightWidth`"
+      }
+    },
+    {
+      "segment_id": "76356197",
+      "source_content": "`borderRightWidth` works like `border-right-width` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width for more details.",
+      "source_content_hash": "1e01919294203ab54f958962119d7878eff3ccd8a38906857b3e6f3161bbd37e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`borderRightWidth` 功能類似 CSS 的 `border-right-width`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width。"
+      }
+    },
+    {
+      "segment_id": "7e745966",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7e745966"
+      }
+    },
+    {
+      "segment_id": "22b726d5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2f9a305c",
+      "source_content": "### `borderStartWidth`",
+      "source_content_hash": "a5b680450b9750f4ef7c28f7aef88782f21b2d2ce548c355443242b57f1803dc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderStartWidth`"
+      }
+    },
+    {
+      "segment_id": "0b7b2b74",
+      "source_content": "When direction is `ltr`, `borderStartWidth` is equivalent to `borderLeftWidth`. When direction is `rtl`, `borderStartWidth` is equivalent to `borderRightWidth`.",
+      "source_content_hash": "e49bc05d8ed1cc7a9c90332ef2b48d7b9a5e55943fe48710a4088f087778cdf5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`borderStartWidth` 等同於 `borderLeftWidth`。當方向為 `rtl` 時，`borderStartWidth` 等同於 `borderRightWidth`。"
+      }
+    },
+    {
+      "segment_id": "3e9b548c",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3e9b548c"
+      }
+    },
+    {
+      "segment_id": "9325051f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6a428f3",
+      "source_content": "### `borderTopWidth`",
+      "source_content_hash": "b4336dc64da42612e4da1ef1d902316976d2bc173297fc86b4c17fd61650f99d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderTopWidth`"
+      }
+    },
+    {
+      "segment_id": "6cf42755",
+      "source_content": "`borderTopWidth` works like `border-top-width` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width for more details.",
+      "source_content_hash": "d7d51ba48eda92b255cc3a0ee5fe16d983fb5ff8ec4b15a6e86e4b92ff80be51",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`borderTopWidth` 的功能類似 CSS 中的 `border-top-width`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width 以獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "c813e133",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c813e133"
+      }
+    },
+    {
+      "segment_id": "79a53cd6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "421a9608",
+      "source_content": "### `borderWidth`",
+      "source_content_hash": "5a9271880e7079badb8f20d447e6bd664581fbc860af71c1c3dedaaf3ddc8832",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `borderWidth`"
+      }
+    },
+    {
+      "segment_id": "bd254bae",
+      "source_content": "`borderWidth` works like `border-width` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/border-width for more details.",
+      "source_content_hash": "11f1c0b08bd2447d2d229d53400a74ccede13c66186a8046734d962363a00172",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`borderWidth` 的功能類似 CSS 中的 `border-width`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/border-width 以獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "1b8df448",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1b8df448"
+      }
+    },
+    {
+      "segment_id": "b900cc83",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "aeee39a9",
+      "source_content": "### `bottom`",
+      "source_content_hash": "0af5a039015342c138ee56de79dc1c7a7d33c52f095aaec4be4973caeb5a2684",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bottom`"
+      }
+    },
+    {
+      "segment_id": "81ed2b45",
+      "source_content": "`bottom` is the number of logical pixels to offset the bottom edge of this component.",
+      "source_content_hash": "948ce6c694ed9063bddefcee3cf825486976265f408ed55b1184ec4590ccb4f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`bottom` 表示此元件底部邊緣偏移的邏輯像素數。"
+      }
+    },
+    {
+      "segment_id": "7f0cded5",
+      "source_content": "It works similarly to `bottom` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "74fa73f9355a8a75140857fc049bc5aed4aefbdbb94768b41a79f3a98e54e928",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `bottom`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "2a5b873d",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/bottom for more details of how `bottom` affects layout.",
+      "source_content_hash": "9449a3f2c74d8af8980eb3c5469749038bbb091d95a575336180fabb4f1c9d1d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/bottom 以了解 `bottom` 如何影響佈局。"
+      }
+    },
+    {
+      "segment_id": "74185ca1",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_74185ca1"
+      }
+    },
+    {
+      "segment_id": "cf8ce5d8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "abda6bdf",
+      "source_content": "### `boxSizing`",
+      "source_content_hash": "6b83ac580b40cbb5441085c45bb6484cb591e8391586da2452c13aaf8ea48f22",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `boxSizing`"
+      }
+    },
+    {
+      "segment_id": "d5059db6",
+      "source_content": "`boxSizing` defines how the element's various sizing props (`width`, `height`, `minWidth`, `minHeight`, etc.) are computed. If `boxSizing` is `border-box`, these sizes apply to the border box of the element. If it is `content-box`, they apply to the content box of the element. The default value is `border-box`. The [web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) is a good source of information if you wish to learn more about how this prop works.",
+      "source_content_hash": "f6ea5b236bc0adaf4316e17c2276af67d963a079185b5d4fd28db9e3ed566736",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`boxSizing` 定義元素各種尺寸屬性（`width`、`height`、`minWidth`、`minHeight` 等）的計算方式。若設為 `border-box`，這些尺寸會套用至元素的邊框盒；若設為 `content-box`，則套用至內容盒。預設值為 `border-box`。[網頁文件](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)是了解此屬性運作方式的良好參考來源。"
+      }
+    },
+    {
+      "segment_id": "bfd906ef",
+      "source_content": "| Type                              | Required |\n| --------------------------------- | -------- |\n| enum('border-box', 'content-box') | No       |",
+      "source_content_hash": "02c2b69dc9955054a190a7808a70eaed004146795742934941d738cdceb18eb7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bfd906ef"
+      }
+    },
+    {
+      "segment_id": "52788036",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a13176c5",
+      "source_content": "### `columnGap`",
+      "source_content_hash": "9aec687c82fcd1e4efbbea1deb3b25d9f9798991a890cbb1ecbf90d476b1d5fb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `columnGap`"
+      }
+    },
+    {
+      "segment_id": "61a57ead",
+      "source_content": "`columnGap` works like `column-gap` in CSS. Only pixel units are supported in React Native. See https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap for more details.",
+      "source_content_hash": "98f75727ca4a9d975adf6f6795888db5fc9bfea4c18a95c991762afbb91544b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`columnGap` 的功能類似 CSS 中的 `column-gap`。React Native 僅支援像素單位。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap 以獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "21a720d2",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_21a720d2"
+      }
+    },
+    {
+      "segment_id": "5cec9452",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bb7f44f4",
+      "source_content": "### `direction`",
+      "source_content_hash": "a16ea493acf47338f6f3412a7515e1998ef2a95c8d59df2eb862fb78e1074e30",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `direction`"
+      }
+    },
+    {
+      "segment_id": "8856ba44",
+      "source_content": "`direction` specifies the directional flow of the user interface. The default is `inherit`, except for root node which will have value based on the current locale. See https://www.yogalayout.dev/docs/styling/layout-direction for more details.",
+      "source_content_hash": "f69e18b22d3bdbd206141c188d46595756088d60f63061c4ba9fb52474928a29",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`direction` 指定使用者介面的文字流向。預設值為 `inherit`，但根節點會根據當前語言環境設定值。詳見 https://www.yogalayout.dev/docs/styling/layout-direction 以獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "3d8f27e5",
+      "source_content": "| Type                          | Required | Platform |\n| ----------------------------- | -------- | -------- |\n| enum('inherit', 'ltr', 'rtl') | No       | iOS      |",
+      "source_content_hash": "eea7c19d229206dd37fd6e371c9e7f24031f267fe3193140a2c4ce4539d0604e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3d8f27e5"
+      }
+    },
+    {
+      "segment_id": "c779bd5f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "89d9a6db",
+      "source_content": "### `display`",
+      "source_content_hash": "f36f3acb95e51158b50e488dafec611d8ab954ea5e5f0b704c9d30d7ef772077",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `display`"
+      }
+    },
+    {
+      "segment_id": "b12a2e99",
+      "source_content": "`display` sets the display type of this component.",
+      "source_content_hash": "222e9d3573ff7f1375160d948735be001e46df87d4acd3c04431753e5bfddcc3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`display` 設定此元件的顯示類型。"
+      }
+    },
+    {
+      "segment_id": "0ba09731",
+      "source_content": "It works similarly to `display` in CSS but only supports the values 'flex', 'none', and 'contents'. The default is `flex`.",
+      "source_content_hash": "4a62aae86f43831e6550bd848c20d15c1007a9e6b26bf334e678f349a0c6cdce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `display`，但僅支援 'flex'、'none' 和 'contents' 值。預設值為 `flex`。"
+      }
+    },
+    {
+      "segment_id": "7cc62407",
+      "source_content": "| Type                             | Required |\n| -------------------------------- | -------- |\n| enum('none', 'flex', 'contents') | No       |",
+      "source_content_hash": "34cc84444de328163c4976988ab5201f1ef048af06193ff23267e2df0e40cc8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7cc62407"
+      }
+    },
+    {
+      "segment_id": "b54a7699",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a2b3c814",
+      "source_content": "### `end`",
+      "source_content_hash": "fd48920de1352ff2bd4927f0c10c3dc812c1379fe2867e6c8a57fd9dbadcf6e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `end`"
+      }
+    },
+    {
+      "segment_id": "75f427fc",
+      "source_content": "When the direction is `ltr`, `end` is equivalent to `right`. When the direction is `rtl`, `end` is equivalent to `left`.",
+      "source_content_hash": "e72615fede369e1d8090b436ab2741ec21ba8fcf434c44b99785f78e1e45afbf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`end` 等同於 `right`；當方向為 `rtl` 時，`end` 等同於 `left`。"
+      }
+    },
+    {
+      "segment_id": "90365458",
+      "source_content": "This style takes precedence over the `left` and `right` styles.",
+      "source_content_hash": "b6b62515bd24ed7b2a93d70beba2f373e8bbfd5f1309750858546e03ed8c32a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此樣式優先於 `left` 和 `right` 樣式。"
+      }
+    },
+    {
+      "segment_id": "2f5037ab",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2f5037ab"
+      }
+    },
+    {
+      "segment_id": "06817f2f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8744c122",
+      "source_content": "### `flex`",
+      "source_content_hash": "a161e2e0cbd3b5cde1d71da9783f303210c1bce2b2e6c61b57cf604970a73e72",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flex`"
+      }
+    },
+    {
+      "segment_id": "4e776de2",
+      "source_content": "In React Native `flex` does not work the same way that it does in CSS. `flex` is a number rather than a string, and it works according to the [Yoga](https://github.com/facebook/yoga) layout engine.",
+      "source_content_hash": "ce09e01584fecc3b1be9ca2367659ad049a71973bcdc144c560573f87a88d498",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 中，`flex` 的運作方式與 CSS 不同。`flex` 是一個數字而非字串，其行為遵循 [Yoga](https://github.com/facebook/yoga) 佈局引擎。"
+      }
+    },
+    {
+      "segment_id": "bface61c",
+      "source_content": "When `flex` is a positive number, it makes the component flexible, and it will be sized proportional to its flex value. So a component with `flex` set to 2 will take twice the space as a component with `flex` set to 1. `flex: <positive number>` equates to `flexGrow: <positive number>, flexShrink: 1, flexBasis: 0`.",
+      "source_content_hash": "2e68442411d2bde5da96fb88fe04ca38957853d1f43cd51ec9e6b02d5a91e411",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `flex` 為正數時，會使元件具有彈性，其尺寸將按比例分配至其 flex 值。因此，`flex` 設為 2 的元件所佔空間將是 `flex` 設為 1 的元件的兩倍。`flex: <正數>` 等同於 `flexGrow: <正數>, flexShrink: 1, flexBasis: 0`。"
+      }
+    },
+    {
+      "segment_id": "d55ba54d",
+      "source_content": "When `flex` is 0, the component is sized according to `width` and `height`, and it is inflexible.",
+      "source_content_hash": "20ad31a58eaf3f5c18a2b849930f5763a62c76a49aa948ab7405a4c64f50b7ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `flex` 為 0 時，元件會根據 `width` 和 `height` 設定尺寸，且不具彈性。"
+      }
+    },
+    {
+      "segment_id": "ab9fb328",
+      "source_content": "When `flex` is -1, the component is normally sized according to `width` and `height`. However, if there's not enough space, the component will shrink to its `minWidth` and `minHeight`.",
+      "source_content_hash": "bda86eb9ece1898f8a793507a251e24526b102737eb15de09c85cb17f08b897e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `flex` 為 -1 時，元件通常會根據 `width` 和 `height` 設定尺寸。然而，若空間不足，元件會縮小至其 `minWidth` 和 `minHeight`。"
+      }
+    },
+    {
+      "segment_id": "df08ff06",
+      "source_content": "`flexGrow`, `flexShrink`, and `flexBasis` work the same as in CSS.",
+      "source_content_hash": "85526cc03772d98de9542bb6bb5989ffb032598d999856a7fb18b188369add35",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexGrow`、`flexShrink` 和 `flexBasis` 的作用與 CSS 中相同。"
+      }
+    },
+    {
+      "segment_id": "fec39f09",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fec39f09"
+      }
+    },
+    {
+      "segment_id": "469e3061",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "08ad3c7d",
+      "source_content": "### `flexBasis`",
+      "source_content_hash": "d124ea8a557bf6986a72f1d5772ba4127a57c800482b3d7af2dde22dce726c52",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flexBasis`"
+      }
+    },
+    {
+      "segment_id": "c6dee347",
+      "source_content": "`flexBasis` is an axis-independent way of providing the default size of an item along the main axis. Setting the `flexBasis` of a child is similar to setting the `width` of that child if its parent is a container with `flexDirection: row` or setting the `height` of a child if its parent is a container with `flexDirection: column`. The `flexBasis` of an item is the default size of that item, the size of the item before any `flexGrow` and `flexShrink` calculations are performed.",
+      "source_content_hash": "931326322b12802c22d70d014e54cb8f4cd773b3b599a1d2f6fbc1848dc7ae04",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexBasis` 是一種與軸向無關的方式，用於設定項目在主軸上的預設尺寸。設定子元件的 `flexBasis` 類似於在父容器為 `flexDirection: row` 時設定該子元件的 `width`，或在父容器為 `flexDirection: column` 時設定其 `height`。項目的 `flexBasis` 是該項目的預設尺寸，即在進行任何 `flexGrow` 和 `flexShrink` 計算之前的尺寸。"
+      }
+    },
+    {
+      "segment_id": "0fdd9cbc",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0fdd9cbc"
+      }
+    },
+    {
+      "segment_id": "90c20e3d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9f1e5bd3",
+      "source_content": "### `flexDirection`",
+      "source_content_hash": "b9e96fe090b36755d228f37e0fca27b64854b282117c353a2a68c51fa906c083",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flexDirection`"
+      }
+    },
+    {
+      "segment_id": "efd1b767",
+      "source_content": "`flexDirection` controls which directions children of a container go. `row` goes left to right, `column` goes top to bottom, and you may be able to guess what the other two do. It works like `flex-direction` in CSS, except the default is `column`. See https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction for more details.",
+      "source_content_hash": "44f0f61b38823164891981d1f05c9848057f1fdc8da6ef2a397ac06ce2bbb002",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexDirection` 控制容器內子元件的排列方向。`row` 表示從左到右排列，`column` 表示從上到下排列，其他兩個值的作用也可想而知。其作用類似於 CSS 中的 `flex-direction`，但預設值為 `column`。詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction。"
+      }
+    },
+    {
+      "segment_id": "d35523a8",
+      "source_content": "| Type                                                   | Required |\n| ------------------------------------------------------ | -------- |\n| enum('row', 'row-reverse', 'column', 'column-reverse') | No       |",
+      "source_content_hash": "ef2eba6147abeee921f97d48342fa51a01e7c18f2be5008878687b40b4a84ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d35523a8"
+      }
+    },
+    {
+      "segment_id": "3057b00a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1212565e",
+      "source_content": "### `flexGrow`",
+      "source_content_hash": "5a04669e4a549c4ae0fe09b3c75bab39f7113877d83c8b3c48084b2c132affda",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flexGrow`"
+      }
+    },
+    {
+      "segment_id": "52e54b91",
+      "source_content": "`flexGrow` describes how any space within a container should be distributed among its children along the main axis. After laying out its children, a container will distribute any remaining space according to the flex grow values specified by its children.",
+      "source_content_hash": "358b66c2ead1537844673256e2ae5db4664d7173641bf49644f23e7b986002ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexGrow` 描述容器內剩餘空間應如何沿主軸分配給其子元件。在佈局子元件後，容器會根據子元件指定的 flex grow 值分配剩餘空間。"
+      }
+    },
+    {
+      "segment_id": "79dbe3da",
+      "source_content": "`flexGrow` accepts any floating point value >= 0, with 0 being the default value. A container will distribute any remaining space among its children weighted by the children’s `flexGrow` values.",
+      "source_content_hash": "991ad24ff4f64abed1caf43c5b588a04e32978786521a48f44115554490a7bac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexGrow` 接受任何大於或等於 0 的浮點數，預設值為 0。容器會根據子元件的 `flexGrow` 值加權分配剩餘空間。"
+      }
+    },
+    {
+      "segment_id": "5be38dca",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5be38dca"
+      }
+    },
+    {
+      "segment_id": "f33273af",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d2e9b3bc",
+      "source_content": "### `flexShrink`",
+      "source_content_hash": "80923a289e04273cd432006bccd2e18b44e2a3ddd10203b8fe62412f836992d8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flexShrink`"
+      }
+    },
+    {
+      "segment_id": "13d96f40",
+      "source_content": "[`flexShrink`](layout-props#flexshrink) describes how to shrink children along the main axis in the case in which the total size of the children overflows the size of the container on the main axis. `flexShrink` is very similar to `flexGrow` and can be thought of in the same way if any overflowing size is considered to be negative remaining space. These two properties also work well together by allowing children to grow and shrink as needed.",
+      "source_content_hash": "5636d88fbbddc83cb9f5e7bb0cf2f4f7da9b225116343e88b04b70b9863d8f84",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[`flexShrink`](layout-props#flexshrink) 描述當子元件的總尺寸在主軸上超出容器尺寸時，應如何縮小子元件。`flexShrink` 與 `flexGrow` 非常相似，可將溢出的尺寸視為負的剩餘空間來理解。這兩個屬性也能很好地配合使用，讓子元件能根據需要伸縮。"
+      }
+    },
+    {
+      "segment_id": "b36284bc",
+      "source_content": "`flexShrink` accepts any floating point value >= 0, with 0 being the default value. A container will shrink its children weighted by the children’s `flexShrink` values.",
+      "source_content_hash": "b8c983c8be3ced515a8213178ac044372c3bca40df6b867c1bb260cb8cc17167",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexShrink` 接受任何大於或等於 0 的浮點數，預設值為 0。容器會根據子元件的 `flexShrink` 值加權縮小其尺寸。"
+      }
+    },
+    {
+      "segment_id": "6a4059de",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6a4059de"
+      }
+    },
+    {
+      "segment_id": "acbaa481",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "63cf2ad5",
+      "source_content": "### `flexWrap`",
+      "source_content_hash": "cb0e21130f97f1c18e560b9d3db65d77d781eee48d0fcc71bf6cd91287967e10",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flexWrap`"
+      }
+    },
+    {
+      "segment_id": "9db6669a",
+      "source_content": "`flexWrap` controls whether children can wrap around after they hit the end of a flex container. It works like `flex-wrap` in CSS (default: nowrap). See https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap for more details. Note it does not work anymore with `alignItems: stretch` (the default), so you may want to use `alignItems: flex-start` for example (breaking change details: https://github.com/facebook/react-native/releases/tag/v0.28.0).",
+      "source_content_hash": "a5564902e00a98de691740861832610ce011a8c6921af05250488899ea736759",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`flexWrap` 控制子元件在到達彈性容器末端後是否換行。其作用類似於 CSS 中的 `flex-wrap`（預設值為 nowrap）。詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap。注意它不再與 `alignItems: stretch`（預設值）一起作用，因此你可能需要使用 `alignItems: flex-start` 等設定（重大變更詳情：https://github.com/facebook/react-native/releases/tag/v0.28.0）。"
+      }
+    },
+    {
+      "segment_id": "54cc9601",
+      "source_content": "| Type                                   | Required |\n| -------------------------------------- | -------- |\n| enum('wrap', 'nowrap', 'wrap-reverse') | No       |",
+      "source_content_hash": "87b0528206747bd3f1b2a6553956488ac949d3927a0ec7ee0fca896d1965b789",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54cc9601"
+      }
+    },
+    {
+      "segment_id": "d4c20ea2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2f2cc7ab",
+      "source_content": "### `gap`",
+      "source_content_hash": "277c0a51320dbc37782fc7ffa3fae28908e08b1798b5249f7c56500b8ec32eb1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `gap`"
+      }
+    },
+    {
+      "segment_id": "359ebb36",
+      "source_content": "`gap` works like `gap` in CSS. Only pixel units are supported in React Native. See https://developer.mozilla.org/en-US/docs/Web/CSS/gap for more details.",
+      "source_content_hash": "01cebce632ed950210e1b9af39b2d384249355fe8f7430dea133196a45cbf719",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`gap` 的功能與 CSS 中的 `gap` 相同。在 React Native 中僅支援像素單位。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/gap 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "398b34b5",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_398b34b5"
+      }
+    },
+    {
+      "segment_id": "44ac5331",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "79869619",
+      "source_content": "### `height`",
+      "source_content_hash": "e4fb016c96faca759fece3409dfac1f2604a28231868dee85e3089e499d9d537",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `height`"
+      }
+    },
+    {
+      "segment_id": "81f22300",
+      "source_content": "`height` sets the height of this component.",
+      "source_content_hash": "f59819be12275d572b6eaf1d308c5acbb4d6d14e0cf09330406437cb63757c42",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`height` 設定此元件的高度。"
+      }
+    },
+    {
+      "segment_id": "560d66e0",
+      "source_content": "It works similarly to `height` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported. See https://developer.mozilla.org/en-US/docs/Web/CSS/height for more details.",
+      "source_content_hash": "602bc20426d731ae5a462f93753632435eb094b35e500aefd3266cfdf2d285b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `height`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/height 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "60132f2b",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_60132f2b"
+      }
+    },
+    {
+      "segment_id": "e6875bfb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "185b49e4",
+      "source_content": "### `justifyContent`",
+      "source_content_hash": "b3dc7e627d9e88e415f876af60ea08df2c5a5f614c0b7436eae2d3ceadeecec0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `justifyContent`"
+      }
+    },
+    {
+      "segment_id": "f4f6cbea",
+      "source_content": "`justifyContent` aligns children in the main direction. For example, if children are flowing vertically, `justifyContent` controls how they align vertically. It works like `justify-content` in CSS (default: flex-start). See https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content for more details.",
+      "source_content_hash": "658da04a397e289c02e75957a859c20b060a8926e50d247aa3e3fb29ef0fb671",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`justifyContent` 沿主軸方向對齊子元件。例如，若子元件垂直排列，`justifyContent` 控制其垂直對齊方式。功能等同 CSS 的 `justify-content`（預設值：flex-start）。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "a3c96bf8",
+      "source_content": "| Type                                                                                      | Required |\n| ----------------------------------------------------------------------------------------- | -------- |\n| enum('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | No       |",
+      "source_content_hash": "a0b464e9074125bd2ed0818307e06a4b5e5c9cbcca7c07821978eefa55a6f4a7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a3c96bf8"
+      }
+    },
+    {
+      "segment_id": "cc40f05f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dfc5d601",
+      "source_content": "### `left`",
+      "source_content_hash": "814220ddb87a3fb27eab1711c415a6f3c3160e53603bc9099662b2703c030ffb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `left`"
+      }
+    },
+    {
+      "segment_id": "4b874e17",
+      "source_content": "`left` is the number of logical pixels to offset the left edge of this component.",
+      "source_content_hash": "4001fb8e63078b77c54b3447f06ee7f6d775c5c3bb530621a2820fca028e5bc5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`left` 設定此元件左邊緣的邏輯像素偏移量。"
+      }
+    },
+    {
+      "segment_id": "c2d52844",
+      "source_content": "It works similarly to `left` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "715ecc86964c4ed395a85ffae59134bee70d4ccc1aa5292f286e9d0781bd8f56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `left`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "89663107",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/left for more details of how `left` affects layout.",
+      "source_content_hash": "739e63c35a0e7449952458efe48c9e90864c022edb2d30507372dc8a6ecae968",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/left 以了解 `left` 如何影響佈局。"
+      }
+    },
+    {
+      "segment_id": "dc9fd54f",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_dc9fd54f"
+      }
+    },
+    {
+      "segment_id": "892ac608",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0b4ae2f4",
+      "source_content": "### `margin`",
+      "source_content_hash": "c26c72e88f4d2f4cf7fa87dd74970382ed254199b96071ca7e93dfaf902dc275",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `margin`"
+      }
+    },
+    {
+      "segment_id": "90878fe8",
+      "source_content": "Setting `margin` has the same effect as setting each of `marginTop`, `marginLeft`, `marginBottom`, and `marginRight`. See https://developer.mozilla.org/en-US/docs/Web/CSS/margin for more details.",
+      "source_content_hash": "fe05c509ff804f6fbd0a74456e811387c7e24e0e113946e1f88ba8940b4dc7e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `margin` 等同於同時設定 `marginTop`、`marginLeft`、`marginBottom` 和 `marginRight`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/margin 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "3e3f4f07",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3e3f4f07"
+      }
+    },
+    {
+      "segment_id": "8e44aa97",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7cbcfb2d",
+      "source_content": "### `marginBottom`",
+      "source_content_hash": "5caba0d2388898899d8d1ccdeda0f81bdf08171b13468f7d6c69dd5ecd0d71ce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginBottom`"
+      }
+    },
+    {
+      "segment_id": "d9b6134e",
+      "source_content": "`marginBottom` works like `margin-bottom` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom for more details.",
+      "source_content_hash": "dfbe147afc604b46beb59b58ead88fe068a84511513e160744cf96e44818ccbd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`marginBottom` 功能等同 CSS 的 `margin-bottom`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "c2214f28",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c2214f28"
+      }
+    },
+    {
+      "segment_id": "11b66897",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fd0ec171",
+      "source_content": "### `marginEnd`",
+      "source_content_hash": "13c2b945c65228cd3aa774477f184d000cbf156d0208a01040ac87b3b458e508",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginEnd`"
+      }
+    },
+    {
+      "segment_id": "bd471ae9",
+      "source_content": "When direction is `ltr`, `marginEnd` is equivalent to `marginRight`. When direction is `rtl`, `marginEnd` is equivalent to `marginLeft`.",
+      "source_content_hash": "7046c00032de3b0bee490fd0b2fe50a9c4bd9e78b6ca90d2ccfa089093dd6ea4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`marginEnd` 等同於 `marginRight`；當方向為 `rtl` 時，`marginEnd` 等同於 `marginLeft`。"
+      }
+    },
+    {
+      "segment_id": "42f69e62",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_42f69e62"
+      }
+    },
+    {
+      "segment_id": "99958360",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d20526c4",
+      "source_content": "### `marginHorizontal`",
+      "source_content_hash": "b43f5c5408dce36fa0a1285306778f6391483219f6460985092288afa5fb7d50",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginHorizontal`"
+      }
+    },
+    {
+      "segment_id": "75e2e289",
+      "source_content": "Setting `marginHorizontal` has the same effect as setting both `marginLeft` and `marginRight`.",
+      "source_content_hash": "70844480ef8b61fa237c1c5f6cb9227fb80c177d81ee0f46c7f234425ab129be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `marginHorizontal` 等同於同時設定 `marginLeft` 和 `marginRight`。"
+      }
+    },
+    {
+      "segment_id": "f58c7b6c",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f58c7b6c"
+      }
+    },
+    {
+      "segment_id": "762592ce",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d814a3fc",
+      "source_content": "### `marginLeft`",
+      "source_content_hash": "bfb498cd22f0a575ebddd37fd63c4798b244e394757d8c7c7120b9aa4cd47e83",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginLeft`"
+      }
+    },
+    {
+      "segment_id": "7b2cc559",
+      "source_content": "`marginLeft` works like `margin-left` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left for more details.",
+      "source_content_hash": "6846e0da1a21e7a3f8283a2912f2ada209b7124a6848b3b2a4579c0aa92d2b6d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`marginLeft` 功能等同 CSS 的 `margin-left`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "4d553a30",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d553a30"
+      }
+    },
+    {
+      "segment_id": "474445ab",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6814ccab",
+      "source_content": "### `marginRight`",
+      "source_content_hash": "878ff9a58acd928c757532a2c263278d87928e970645779b7c84b76da4efe0a0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginRight`"
+      }
+    },
+    {
+      "segment_id": "d1d04358",
+      "source_content": "`marginRight` works like `margin-right` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right for more details.",
+      "source_content_hash": "ecdfec2b150474f97bec9ee19dc09639a3c3b6960a84c13cff56415ad424aa5b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`marginRight` 功能等同 CSS 的 `margin-right`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "387da2b6",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_387da2b6"
+      }
+    },
+    {
+      "segment_id": "1faebdff",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d8336f3e",
+      "source_content": "### `marginStart`",
+      "source_content_hash": "1b4e004d5576bee20b270a70da20158279759c6a85de2ced02f4500fb513ede0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginStart`"
+      }
+    },
+    {
+      "segment_id": "09fde125",
+      "source_content": "When direction is `ltr`, `marginStart` is equivalent to `marginLeft`. When direction is `rtl`, `marginStart` is equivalent to `marginRight`.",
+      "source_content_hash": "0bbae729fcf7bfbc506a12c11695bfec34f2e1ba746254ce596b061fd3ff6dd5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`marginStart` 等同於 `marginLeft`；當方向為 `rtl` 時，`marginStart` 等同於 `marginRight`。"
+      }
+    },
+    {
+      "segment_id": "5977c608",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5977c608"
+      }
+    },
+    {
+      "segment_id": "35a74d00",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "750e45bd",
+      "source_content": "### `marginTop`",
+      "source_content_hash": "140b8423f76f1b6e2a9a0864ed03cea73649b4301c3e0b1c2ffd8d980ad8ff51",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginTop`"
+      }
+    },
+    {
+      "segment_id": "5f4b614f",
+      "source_content": "`marginTop` works like `margin-top` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top for more details.",
+      "source_content_hash": "6fd65f98d39116e64748e3b47fe30f2bce4b17e32fcc56c0d1a2171cf4064cf9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`marginTop` 功能等同 CSS 的 `margin-top`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "28376db4",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_28376db4"
+      }
+    },
+    {
+      "segment_id": "69c9550f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0d680664",
+      "source_content": "### `marginVertical`",
+      "source_content_hash": "d843d7fb53cf06d482a038c197634cdf89fb44acb9e4ad63389cdf4b380f26d3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `marginVertical`"
+      }
+    },
+    {
+      "segment_id": "7b93fbb2",
+      "source_content": "Setting `marginVertical` has the same effect as setting both `marginTop` and `marginBottom`.",
+      "source_content_hash": "f8078ce8af0c41fd384aa0f4500b694b2beabdadbf7699c26be47325e1d22913",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `marginVertical` 的效果等同於同時設定 `marginTop` 和 `marginBottom`。"
+      }
+    },
+    {
+      "segment_id": "0f996642",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0f996642"
+      }
+    },
+    {
+      "segment_id": "c98fa5aa",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a0b0151e",
+      "source_content": "### `maxHeight`",
+      "source_content_hash": "90db64801f54bf102cc517061b96fb8bca33fa67c3485955f96fa0c99eeb08bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maxHeight`"
+      }
+    },
+    {
+      "segment_id": "05cfbe93",
+      "source_content": "`maxHeight` is the maximum height for this component, in logical pixels.",
+      "source_content_hash": "214909a7e2581a68dbd7ec1156358468af5dca7911ec89175596fc270305b8d6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`maxHeight` 是此元件的最大高度，以邏輯像素為單位。"
+      }
+    },
+    {
+      "segment_id": "bc8b7650",
+      "source_content": "It works similarly to `max-height` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "a1fe59176fc893db001834deea192b8a83f48bdea845c5765bb963f75550f74d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `max-height`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "10aa6964",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/max-height for more details.",
+      "source_content_hash": "5d72ff9adec98f33d8b7dfce2c10408a940c9038efa89fb125d7d6333ea82847",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/max-height 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "09bb8821",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_09bb8821"
+      }
+    },
+    {
+      "segment_id": "b7989a0c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "01d62133",
+      "source_content": "### `maxWidth`",
+      "source_content_hash": "7de049a1376216d24f3099df860816ed17f09c9cf9264d2d6f8028c10e49e9aa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maxWidth`"
+      }
+    },
+    {
+      "segment_id": "643e67b6",
+      "source_content": "`maxWidth` is the maximum width for this component, in logical pixels.",
+      "source_content_hash": "701ec0e76eef1b9e73c88f37e80205c39d22757ae93e25b8cca671f4a4261ced",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`maxWidth` 是此元件的最大寬度，以邏輯像素為單位。"
+      }
+    },
+    {
+      "segment_id": "927fbbdb",
+      "source_content": "It works similarly to `max-width` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "9bc6b908b45865ef1e508a76fa0eb474b0796faacb6e0313f5baba5f0195d80d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `max-width`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "855bf260",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/max-width for more details.",
+      "source_content_hash": "c27f3a159d575a8f633f21690ca2b6d0c99948265caa797ae16994a7f2ab3356",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/max-width 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "5ac1846a",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5ac1846a"
+      }
+    },
+    {
+      "segment_id": "35ba8fc6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13733062",
+      "source_content": "### `minHeight`",
+      "source_content_hash": "3e72c995604bda5aa9aabef0813df311442fea9ab0b296ecf1daf24f0c439c7f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `minHeight`"
+      }
+    },
+    {
+      "segment_id": "b19ccef1",
+      "source_content": "`minHeight` is the minimum height for this component, in logical pixels.",
+      "source_content_hash": "5a6b0af664a61de4b6787c0aef2589aa8d0f433622c75af2d7a21fcf41835982",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`minHeight` 是此元件的最小高度，以邏輯像素為單位。"
+      }
+    },
+    {
+      "segment_id": "7e4076cc",
+      "source_content": "It works similarly to `min-height` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "26c4818baab279fdb501108fdc11729913da942ac78d7c47ecbcc4030858e55f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `min-height`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "e7ded1fc",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/min-height for more details.",
+      "source_content_hash": "7f166ad2d65e32ea5c7c395a91ab9edd54adc91e06d0ecef41cac012ec921439",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/min-height 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "082ec619",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_082ec619"
+      }
+    },
+    {
+      "segment_id": "197ce73d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "35e3d319",
+      "source_content": "### `minWidth`",
+      "source_content_hash": "f248a925c2aeba14ccb18ed3ab0af6dc429778d054599ea4b7d9e55a6cdaf66e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `minWidth`"
+      }
+    },
+    {
+      "segment_id": "6df76b89",
+      "source_content": "`minWidth` is the minimum width for this component, in logical pixels.",
+      "source_content_hash": "fa6392e1acd096b4007423ddcca42cc96f35ec9e405173da1f15a1fb4ba45abe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`minWidth` 是此元件的最小寬度，以邏輯像素為單位。"
+      }
+    },
+    {
+      "segment_id": "ab7fbd06",
+      "source_content": "It works similarly to `min-width` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "81ff2d166b3a8e5c24ed6dc5102cef893682af9de5bb2800a5165f19780adcd5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似 CSS 中的 `min-width`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "c8dd9e4a",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/min-width for more details.",
+      "source_content_hash": "e84de3dc78a43097d09f9f83625a02fc4f95b3823e2c75b2ae84c15813d8b06a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/min-width 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "d8fe098f",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d8fe098f"
+      }
+    },
+    {
+      "segment_id": "af89cd75",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0990b557",
+      "source_content": "### `overflow`",
+      "source_content_hash": "a4e25b76e471e66f036419ea14dc0f063171890a397212f1ca4e22e1aa74acdc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `overflow`"
+      }
+    },
+    {
+      "segment_id": "bc13da32",
+      "source_content": "`overflow` controls how children are measured and displayed. `overflow: hidden` causes views to be clipped while `overflow: scroll` causes views to be measured independently of their parents' main axis. It works like `overflow` in CSS (default: visible). See https://developer.mozilla.org/en/docs/Web/CSS/overflow for more details.",
+      "source_content_hash": "d775e8b2fb97fcd12b8abd8b7ed1141903eb8372e687d47595ae09ab5dbbcb96",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`overflow` 控制子元件的測量與顯示方式。`overflow: hidden` 會裁切視圖，而 `overflow: scroll` 會讓視圖獨立於父元件主軸進行測量。其功能類似 CSS 中的 `overflow`（預設值為 visible）。詳見 https://developer.mozilla.org/en/docs/Web/CSS/overflow 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "84083b77",
+      "source_content": "| Type                                | Required |\n| ----------------------------------- | -------- |\n| enum('visible', 'hidden', 'scroll') | No       |",
+      "source_content_hash": "a4784c7da86c921baaef9328095da13d401d3ea1af6c0c8436710f56314f90f8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_84083b77"
+      }
+    },
+    {
+      "segment_id": "c2f4ee49",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "677e48c9",
+      "source_content": "### `padding`",
+      "source_content_hash": "241e61a7cd47dfd97c8993f3395efbea2e0f0d653e3b061582f86049dad700a2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `padding`"
+      }
+    },
+    {
+      "segment_id": "e28b963e",
+      "source_content": "Setting `padding` has the same effect as setting each of `paddingTop`, `paddingBottom`, `paddingLeft`, and `paddingRight`. See https://developer.mozilla.org/en-US/docs/Web/CSS/padding for more details.",
+      "source_content_hash": "fd5785556d113d3e4d42d540e1ee16e39e8f44b681a8eb35057c71fedae1479d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `padding` 的效果等同於同時設定 `paddingTop`、`paddingBottom`、`paddingLeft` 和 `paddingRight`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/padding 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "1776a0db",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1776a0db"
+      }
+    },
+    {
+      "segment_id": "f011c2a7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fff3a4e3",
+      "source_content": "### `paddingBottom`",
+      "source_content_hash": "d7b8df5a2f3009b14689fde8b80d8cae3efd8cb19133423af249c7133c93d269",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingBottom`"
+      }
+    },
+    {
+      "segment_id": "813a0d83",
+      "source_content": "`paddingBottom` works like `padding-bottom` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom for more details.",
+      "source_content_hash": "edf54575762875ca6f02807bc008aeed98bfc0724980892afc3b7ca99a0e23d3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`paddingBottom` 的功能類似 CSS 中的 `padding-bottom`。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom 獲取更多細節。"
+      }
+    },
+    {
+      "segment_id": "3097ebbc",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3097ebbc"
+      }
+    },
+    {
+      "segment_id": "c9cc71c6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a4aa9fcd",
+      "source_content": "### `paddingEnd`",
+      "source_content_hash": "6b441a90c69b215ad4b6d22ad9cc1edcec53ad7a926aeab97b15acce6db7092d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingEnd`"
+      }
+    },
+    {
+      "segment_id": "ff04d106",
+      "source_content": "When direction is `ltr`, `paddingEnd` is equivalent to `paddingRight`. When direction is `rtl`, `paddingEnd` is equivalent to `paddingLeft`.",
+      "source_content_hash": "8edb6ded6e40e561612d3112afa1a15affd1b4a0e1877a2203061935672930e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`paddingEnd` 等同於 `paddingRight`；當方向為 `rtl` 時，`paddingEnd` 等同於 `paddingLeft`。"
+      }
+    },
+    {
+      "segment_id": "1502ac0e",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1502ac0e"
+      }
+    },
+    {
+      "segment_id": "942a9418",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f627412c",
+      "source_content": "### `paddingHorizontal`",
+      "source_content_hash": "1f0e7232d7e583f807f4b952f2ad25914ea9fc0d13a59ca0910574e5447cd81b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingHorizontal`"
+      }
+    },
+    {
+      "segment_id": "68aa928a",
+      "source_content": "Setting `paddingHorizontal` is like setting both of `paddingLeft` and `paddingRight`.",
+      "source_content_hash": "6aeba12b191852b6e9541129919d4d0199127743041298f6f14db4779aff94aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `paddingHorizontal` 的效果等同於同時設定 `paddingLeft` 和 `paddingRight`。"
+      }
+    },
+    {
+      "segment_id": "c8da6818",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c8da6818"
+      }
+    },
+    {
+      "segment_id": "46ae7333",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2e14d468",
+      "source_content": "### `paddingLeft`",
+      "source_content_hash": "1a98584d9be22ed6a82859e0a60ae7c2198b6c59d4074cecc7a7d72a01e8e41e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingLeft`"
+      }
+    },
+    {
+      "segment_id": "d3d5ef7e",
+      "source_content": "`paddingLeft` works like `padding-left` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left for more details.",
+      "source_content_hash": "36bdbde2e4b1092f9788a9f15c129850ed7b59c8fc67e489cc5fcdee77539558",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`paddingLeft` 的作用類似 CSS 中的 `padding-left`。詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left。"
+      }
+    },
+    {
+      "segment_id": "db835a93",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_db835a93"
+      }
+    },
+    {
+      "segment_id": "869c59fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1717df23",
+      "source_content": "### `paddingRight`",
+      "source_content_hash": "256e1fdbf2c62af573b0f908c8fe440463f6d9a65027796596f7ecbfacdbabb1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingRight`"
+      }
+    },
+    {
+      "segment_id": "0745a07e",
+      "source_content": "`paddingRight` works like `padding-right` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right for more details.",
+      "source_content_hash": "e2e380d0f2b71b117364259d08d80709ac68b3827039c4a3c662d5baafe2530f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`paddingRight` 的作用類似 CSS 中的 `padding-right`。詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right。"
+      }
+    },
+    {
+      "segment_id": "d2e78c4c",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d2e78c4c"
+      }
+    },
+    {
+      "segment_id": "95d6e8cd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "980a39a7",
+      "source_content": "### `paddingStart`",
+      "source_content_hash": "7a1c8d226ffda486e7f0a18e006543f9bdbea256a4e59d5df751e2fa07a9dc0a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingStart`"
+      }
+    },
+    {
+      "segment_id": "631bec9f",
+      "source_content": "When direction is `ltr`, `paddingStart` is equivalent to `paddingLeft`. When direction is `rtl`, `paddingStart` is equivalent to `paddingRight`.",
+      "source_content_hash": "738b662244fe86ce79c3a288e8a86014c8b65a9f9f009ca3ff7ac9eda9005f1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`paddingStart` 等同於 `paddingLeft`。當方向為 `rtl` 時，`paddingStart` 等同於 `paddingRight`。"
+      }
+    },
+    {
+      "segment_id": "2d86f52a",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2d86f52a"
+      }
+    },
+    {
+      "segment_id": "9e5417bc",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bc19b7a6",
+      "source_content": "### `paddingTop`",
+      "source_content_hash": "b6de6dd05041bde3b7943329911de3fa25e05069cdd94d1507b641b08e853624",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingTop`"
+      }
+    },
+    {
+      "segment_id": "9580943c",
+      "source_content": "`paddingTop` works like `padding-top` in CSS. See https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top for more details.",
+      "source_content_hash": "09d6261236708d694a21abde1d5b59e7ac148f8639140337b488b01fb20a80fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`paddingTop` 的作用類似 CSS 中的 `padding-top`。詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top。"
+      }
+    },
+    {
+      "segment_id": "46c67eae",
+      "source_content": "| Type            | Required |\n| --------------- | -------- |\n| number, ,string | No       |",
+      "source_content_hash": "de5afa5cca6c5cd4a3afb4887899ff690ffd0273dca9f5aa4d570b72595528c2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_46c67eae"
+      }
+    },
+    {
+      "segment_id": "7168ef96",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6f06b535",
+      "source_content": "### `paddingVertical`",
+      "source_content_hash": "6fbc7db8eafbb8101b4837c4cfe4cdad4977a53565e9d4803c1ab9b557329864",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `paddingVertical`"
+      }
+    },
+    {
+      "segment_id": "0ad4645b",
+      "source_content": "Setting `paddingVertical` is like setting both of `paddingTop` and `paddingBottom`.",
+      "source_content_hash": "19fe7804e6e71373d994a757f489670b53d0bdea25d6cb55805164d9a8e979b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `paddingVertical` 的效果等同於同時設定 `paddingTop` 和 `paddingBottom`。"
+      }
+    },
+    {
+      "segment_id": "5280918f",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5280918f"
+      }
+    },
+    {
+      "segment_id": "01904195",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fe10c65e",
+      "source_content": "### `position`",
+      "source_content_hash": "e810e7442eb6f001a5036963325247baaaefdbe08973aa47d8e1303db46add9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `position`"
+      }
+    },
+    {
+      "segment_id": "cb717ec7",
+      "source_content": "`position` in React Native is similar to [regular CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/position), but everything is set to `relative` by default.",
+      "source_content_hash": "1765c9f4239c5e64dde666919eac24cb80b8aef32dc3d05c791b3b9c9a14495b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 中的 `position` 與 [常規 CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/position) 類似，但預設情況下所有元素都設為 `relative`。"
+      }
+    },
+    {
+      "segment_id": "6166925a",
+      "source_content": "`relative` will position an element according to the normal flow of the layout. Insets (`top`, `bottom`, `left`, `right`) will offset relative to this layout.",
+      "source_content_hash": "eb65c7a69294c7b4b19743a9988c62eaa6879bb58f4bb768735d535d24ec9116",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`relative` 會根據佈局的正常流來定位元素。偏移量（`top`、`bottom`、`left`、`right`）會相對於此佈局進行調整。"
+      }
+    },
+    {
+      "segment_id": "1371b605",
+      "source_content": "`absolute` takes the element out of the normal flow of the layout. Insets will offset relative to its [containing block](./flexbox.md#the-containing-block).",
+      "source_content_hash": "e335bf288123e7af493a846bb18a5e9cc7a2ee3f49e19375a6953dc36d7b5e9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`absolute` 會將元素從佈局的正常流中移除。偏移量會相對於其 [包含塊](./flexbox.md#the-containing-block) 進行調整。"
+      }
+    },
+    {
+      "segment_id": "8db5b7b9",
+      "source_content": "`static` will position an element according to the normal flow of the layout. Insets will have no effect.\n`static` elements do not form a containing block for absolute descendants.",
+      "source_content_hash": "c5108ddff0dc2f35fa6f56192dbe8479db51777130d9e6b5d9257ec878456777",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`static` 會根據佈局的正常流來定位元素。偏移量不會產生任何效果。\n`static` 元素不會為絕對定位的後代元素形成包含塊。"
+      }
+    },
+    {
+      "segment_id": "3d4a30ae",
+      "source_content": "For more information, see the [Layout with Flexbox docs](./flexbox.md#position). Also, [the Yoga documentation](https://www.yogalayout.dev/docs/styling/position) has more details on how `position` differs between React Native and CSS.",
+      "source_content_hash": "92f5c18bf3580928163e4ad97542574c7485c007b12bf69b957ff0e9afb0b72e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多資訊請參閱 [Flexbox 佈局文件](./flexbox.md#position)。此外，[Yoga 文件](https://www.yogalayout.dev/docs/styling/position) 詳細說明了 React Native 與 CSS 中 `position` 的差異。"
+      }
+    },
+    {
+      "segment_id": "fd44dc25",
+      "source_content": "| Type                                   | Required |\n| -------------------------------------- | -------- |\n| enum('absolute', 'relative', 'static') | No       |",
+      "source_content_hash": "47e3d2d80e7fa5840abcd1993397858d02016de39b82110b2f8c73b745581b21",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fd44dc25"
+      }
+    },
+    {
+      "segment_id": "acc0966f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ab05effc",
+      "source_content": "### `right`",
+      "source_content_hash": "d9332c94feee72a63e03f75c89303a9075d97c641203c931151b8d56fa2ce65f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `right`"
+      }
+    },
+    {
+      "segment_id": "d72c3106",
+      "source_content": "`right` is the number of logical pixels to offset the right edge of this component.",
+      "source_content_hash": "229adba2af2a98af7674382a35d332baf3dbe24121d0f3db8f832939162c78ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`right` 是此元件右邊緣偏移的邏輯像素數。"
+      }
+    },
+    {
+      "segment_id": "d5e03fc5",
+      "source_content": "It works similarly to `right` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "5b802ab737650dea2d9ba7b62dab155815862e7999c14593b4e57c661e7cd593",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其作用類似 CSS 中的 `right`，但在 React Native 中必須使用點數或百分比。不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "5e838049",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/right for more details of how `right` affects layout.",
+      "source_content_hash": "b67fc083c06cbc5c4014a30a2b259740b440fc8355af293e2b2d2f1035054a65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/right 了解 `right` 如何影響佈局。"
+      }
+    },
+    {
+      "segment_id": "f6e64fdd",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f6e64fdd"
+      }
+    },
+    {
+      "segment_id": "b77b91a5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3e65a9d2",
+      "source_content": "### `rowGap`",
+      "source_content_hash": "19a8194c48069143c7a853bcb119dacbda4105eef077c1973a150673fb5af4c6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `rowGap`"
+      }
+    },
+    {
+      "segment_id": "21be29b5",
+      "source_content": "`rowGap` works like `row-gap` in CSS. Only pixel units are supported in React Native. See https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap for more details.",
+      "source_content_hash": "f5dad1b00acf57f1c4e11deb7503e6c7751b04d322f2841159c46294434eeb12",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`rowGap` 的作用類似 CSS 中的 `row-gap`。React Native 僅支援像素單位。詳情請參閱 https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap。"
+      }
+    },
+    {
+      "segment_id": "d774812e",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d774812e"
+      }
+    },
+    {
+      "segment_id": "661fe749",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7e5e8226",
+      "source_content": "### `start`",
+      "source_content_hash": "333eb8d146af69c9904a3b3703aef72fbd7abb5508bfc295c1302727d016726d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `start`"
+      }
+    },
+    {
+      "segment_id": "20642bec",
+      "source_content": "When the direction is `ltr`, `start` is equivalent to `left`. When the direction is `rtl`, `start` is equivalent to `right`.",
+      "source_content_hash": "6aaff4d0376a24042e449c1ff8f2c58ba08872fefece2ed3ed239a94381ec292",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當方向為 `ltr` 時，`start` 等同於 `left`。當方向為 `rtl` 時，`start` 等同於 `right`。"
+      }
+    },
+    {
+      "segment_id": "4b576b9e",
+      "source_content": "This style takes precedence over the `left`, `right`, and `end` styles.",
+      "source_content_hash": "ed3446544924c6cc1ae5bf44a32d8f83235ce05e6801d0467fd29767613a3658",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此樣式的優先級高於 `left`、`right` 和 `end` 樣式。"
+      }
+    },
+    {
+      "segment_id": "c1b35992",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c1b35992"
+      }
+    },
+    {
+      "segment_id": "2c6caea6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4caa3a53",
+      "source_content": "### `top`",
+      "source_content_hash": "8e09c492c0ab3f28a3632af18215b4aafad386673ec9aa204f9c56c58fa2c20a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `top`"
+      }
+    },
+    {
+      "segment_id": "0bce09b7",
+      "source_content": "`top` is the number of logical pixels to offset the top edge of this component.",
+      "source_content_hash": "430e09f63b0552a7659c37b6b36e1598b80aaed24ea407d20ec163aff55fae41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`top` 是此元件頂部邊緣偏移的邏輯像素數。"
+      }
+    },
+    {
+      "segment_id": "da03db37",
+      "source_content": "It works similarly to `top` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported.",
+      "source_content_hash": "6206347e059d055a4244f38e69fe95ed6561595796f25d6970d39234bb52382d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似於 CSS 中的 `top`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。"
+      }
+    },
+    {
+      "segment_id": "5f2b8c7c",
+      "source_content": "See https://developer.mozilla.org/en-US/docs/Web/CSS/top for more details of how `top` affects layout.",
+      "source_content_hash": "16f2ed4f5f6381de06e317375987fee10f7c4d6a878dd7e222a67d9db1b50f1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/top 了解 `top` 如何影響版面配置。"
+      }
+    },
+    {
+      "segment_id": "1aee5cc4",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1aee5cc4"
+      }
+    },
+    {
+      "segment_id": "2a1a9ced",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ce96fdcf",
+      "source_content": "### `width`",
+      "source_content_hash": "466da2ad29daff30b425dbfda1b4bbf5a290672ed5b2415e7bbfb14d844dbe75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `width`"
+      }
+    },
+    {
+      "segment_id": "e9039826",
+      "source_content": "`width` sets the width of this component.",
+      "source_content_hash": "4c905353b08873fcd959f78046ac198388f3727ef2e4bdabb2e0d8388695270a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`width` 用於設定此元件的寬度。"
+      }
+    },
+    {
+      "segment_id": "c09d1615",
+      "source_content": "It works similarly to `width` in CSS, but in React Native you must use points or percentages. Ems and other units are not supported. See https://developer.mozilla.org/en-US/docs/Web/CSS/width for more details.",
+      "source_content_hash": "dad84447e7b02043e9792693f7f0720134f84ab9e8bc6df032e239f0fe6e987b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其功能類似於 CSS 中的 `width`，但在 React Native 中必須使用點數或百分比單位，不支援 em 等其他單位。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/width 了解更多細節。"
+      }
+    },
+    {
+      "segment_id": "ce55f414",
+      "source_content": "| Type           | Required |\n| -------------- | -------- |\n| number, string | No       |",
+      "source_content_hash": "989e34e96bf87a1a4819803535f4674497d1a066ef66ed4211846a8e0f7a24dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ce55f414"
+      }
+    },
+    {
+      "segment_id": "bf4e2697",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6932f26d",
+      "source_content": "### `zIndex`",
+      "source_content_hash": "afea2558a3fd8e6bed17b794fcf47c10b5c0c766bb8ce775355570d1e8b51c49",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `zIndex`"
+      }
+    },
+    {
+      "segment_id": "941dcfce",
+      "source_content": "`zIndex` controls which components display on top of others. Normally, you don't use `zIndex`. Components render according to their order in the document tree, so later components draw over earlier ones. `zIndex` may be useful if you have animations or custom modal interfaces where you don't want this behavior.",
+      "source_content_hash": "2e8c8b9fe807df7d200cd62b934560b4bb08dc336b73b7b38d98f7c5104ac811",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`zIndex` 控制哪些元件會顯示在其他元件上方。通常情況下不需要使用 `zIndex`，元件會依照文件樹中的順序渲染，後渲染的元件會覆蓋先前的元件。但在動畫或自訂模態介面等需要打破此預設行為時，`zIndex` 會很有用。"
+      }
+    },
+    {
+      "segment_id": "c7fcd568",
+      "source_content": "It works like the CSS `z-index` property - components with a larger `zIndex` will render on top. Think of the z-direction like it's pointing from the phone into your eyeball. See https://developer.mozilla.org/en-US/docs/Web/CSS/z-index for more details.",
+      "source_content_hash": "73175682d09d66015b12c472f633c3ae51b1c45c150b9c695929c6d6bb125f40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其運作方式類似 CSS 的 `z-index` 屬性——數值較大的 `zIndex` 會渲染在上層。可將 z 軸方向想像成從手機螢幕指向您的眼球。詳見 https://developer.mozilla.org/en-US/docs/Web/CSS/z-index 了解更多細節。"
+      }
+    },
+    {
+      "segment_id": "42ab7a56",
+      "source_content": "On iOS, `zIndex` may require `View`s to be siblings of each other for it to work as expected.",
+      "source_content_hash": "a15989236129742155930dc9474f16867f467fb20e19f1cef3d6708d131bcc0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 上，要使 `zIndex` 正常運作，可能需要讓 `View` 元件彼此是兄弟節點關係。"
+      }
+    },
+    {
+      "segment_id": "a9c0b96b",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9c0b96b"
+      }
+    },
+    {
+      "segment_id": "777d1a13",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/layout-props.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.036317+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ee5c9d57ed09b42fe3299bb7b9af1ff559fa79f241708c070d00f779fd2986f0"
+  }
+}

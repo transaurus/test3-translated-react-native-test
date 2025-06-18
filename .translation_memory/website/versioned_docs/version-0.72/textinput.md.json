@@ -1,0 +1,3382 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/textinput.md",
+  "source_file_content_hash": "69437ca08529d56c2d3547a7a742b9f22e97173750b93e77b82c554f12e2bd3e",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: textinput\ntitle: TextInput\n---",
+      "source_content_hash": "deaf47fa339ab838ebc21ba337e06245d7ae33e858c8b2ed9e2b37e4aef128f8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad.",
+      "source_content_hash": "b3a12833666c6bc545b0aa2d552204005861993c771af580ee3469b9de967deb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個基礎組件，用於透過鍵盤在應用程式中輸入文字。其屬性可配置多種功能，如自動校正、自動大寫、佔位文字以及不同鍵盤類型（例如數字鍵盤）。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The most basic use case is to plop down a `TextInput` and subscribe to the `onChangeText` events to read the user input. There are also other events, such as `onSubmitEditing` and `onFocus` that can be subscribed to. A minimal example:",
+      "source_content_hash": "50ef3863277c9bf2bcb936603a69a45ff359488d845e8d7f0b156ec2a85ec6db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最基本的用法是放置一個 `TextInput` 並訂閱 `onChangeText` 事件來讀取用戶輸入。還可以訂閱其他事件，如 `onSubmitEditing` 和 `onFocus`。以下是一個簡單範例："
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=TextInput\nimport React from 'react';\nimport {SafeAreaView, StyleSheet, TextInput} from 'react-native';\n\nconst TextInputExample = () => {\n  const [text, onChangeText] = React.useState('Useless Text');\n  const [number, onChangeNumber] = React.useState('');\n\n  return (\n    <SafeAreaView>\n      <TextInput\n        style={styles.input}\n        onChangeText={onChangeText}\n        value={text}\n      />\n      <TextInput\n        style={styles.input}\n        onChangeText={onChangeNumber}\n        value={number}\n        placeholder=\"useless placeholder\"\n        keyboardType=\"numeric\"\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  input: {\n    height: 40,\n    margin: 12,\n    borderWidth: 1,\n    padding: 10,\n  },\n});\n\nexport default TextInputExample;\n```",
+      "source_content_hash": "2a44d4eb4bafc54c3f9340449cc3494b0ad8daa50894f2b4df4ae8364cb9d09d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Two methods exposed via the native element are .focus() and .blur() that will focus or blur the TextInput programmatically.",
+      "source_content_hash": "72c736ed7a42f29910a8707b52959947cb215fab53add48476f865bc71da5c23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過原生元素暴露的兩個方法 `.focus()` 和 `.blur()` 可以程式化地聚焦或模糊 TextInput。"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "Note that some props are only available with `multiline={true/false}`. Additionally, border styles that apply to only one side of the element (e.g., `borderBottomColor`, `borderLeftWidth`, etc.) will not be applied if `multiline=true`. To achieve the same effect, you can wrap your `TextInput` in a `View`:",
+      "source_content_hash": "9c81ee0bdfd406cd8ba75e919f97ee869174c06128f7b4550d78c66fc17c5a49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，某些屬性僅在 `multiline={true/false}` 時可用。此外，若 `multiline=true`，則僅應用於元素單邊的邊框樣式（例如 `borderBottomColor`、`borderLeftWidth` 等）將不會生效。要達到相同效果，可以將 `TextInput` 包裹在 `View` 中："
+      }
+    },
+    {
+      "segment_id": "64b6f348",
+      "source_content": "```SnackPlayer name=TextInput\nimport React from 'react';\nimport {View, TextInput} from 'react-native';\n\nconst MultilineTextInputExample = () => {\n  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');\n\n  // If you type something in the text box that is a color, the background will change to that\n  // color.\n  return (\n    <View\n      style={{\n        backgroundColor: value,\n        borderBottomColor: '#000000',\n        borderBottomWidth: 1,\n      }}>\n      <TextInput\n        editable\n        multiline\n        numberOfLines={4}\n        maxLength={40}\n        onChangeText={text => onChangeText(text)}\n        value={value}\n        style={{padding: 10}}\n      />\n    </View>\n  );\n};\n\nexport default MultilineTextInputExample;\n```",
+      "source_content_hash": "df521270b3a6240415dd3e6823a12de676c99a99616b45a0096337d2f5d4e3ab",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_64b6f348"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "`TextInput` has by default a border at the bottom of its view. This border has its padding set by the background image provided by the system, and it cannot be changed. Solutions to avoid this are to either not set height explicitly, in which case the system will take care of displaying the border in the correct position, or to not display the border by setting `underlineColorAndroid` to transparent.",
+      "source_content_hash": "2f4b0d005fdeed741e1de3af02d4e95ba036b0ffedfad8cbe5188dcdfc3d6f45",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TextInput` 預設在其視圖底部有一個邊框。此邊框的內邊距由系統提供的背景圖片設定，無法更改。解決方案是避免明確設定高度（系統會自動正確顯示邊框位置），或透過將 `underlineColorAndroid` 設為透明來隱藏邊框。"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "Note that on Android performing text selection in an input can change the app's activity `windowSoftInputMode` param to `adjustResize`. This may cause issues with components that have position: 'absolute' while the keyboard is active. To avoid this behavior either specify `windowSoftInputMode` in AndroidManifest.xml ( https://developer.android.com/guide/topics/manifest/activity-element.html ) or control this param programmatically with native code.",
+      "source_content_hash": "480ff20b51c3abc12739047dc109d9bad174825b5e77cb0192dda376427db1b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，在 Android 上，輸入框中的文字選取操作可能會將應用的活動 `windowSoftInputMode` 參數更改為 `adjustResize`。這可能導致鍵盤激活時，具有 `position: 'absolute'` 的組件出現問題。要避免此行為，可以在 AndroidManifest.xml 中指定 `windowSoftInputMode`（https://developer.android.com/guide/topics/manifest/activity-element.html），或透過原生代碼程式化控制此參數。"
+      }
+    },
+    {
+      "segment_id": "8b0ba3cf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [View 屬性](view.md#props)"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [View 屬性](view.md#props)。"
+      }
+    },
+    {
+      "segment_id": "ab3df6e6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c19de48a",
+      "source_content": "### `allowFontScaling`",
+      "source_content_hash": "cd3aaaa5104322d70f08c73bcfcb70cc71e4f0c002ce8291a5ca30e6d525a79e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `allowFontScaling`"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "Specifies whether fonts should scale to respect Text Size accessibility settings. The default is `true`.",
+      "source_content_hash": "14c619c707fa72c0b6dedb8de227244ee132fbc66c218ed3775de778e211a0e2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定字體是否應縮放以符合「文字大小」輔助設定。預設值為 `true`。"
+      }
+    },
+    {
+      "segment_id": "f4f901d3",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f4f901d3"
+      }
+    },
+    {
+      "segment_id": "4fc5e34f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "### `autoCapitalize`",
+      "source_content_hash": "6595652d5ce6c4a46cdf37342493b145a85c70703e33ed3bd76be595cf55612c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `autoCapitalize`"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "Tells `TextInput` to automatically capitalize certain characters. This property is not supported by some keyboard types such as `name-phone-pad`.",
+      "source_content_hash": "8789337e56b233541b44f45a250bf575b45e4b3d31a56df6109f952ac5decd73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "告訴 `TextInput` 自動大寫特定字元。此屬性不受某些鍵盤類型支援（例如 `name-phone-pad`）。"
+      }
+    },
+    {
+      "segment_id": "1b8037f4",
+      "source_content": "- `characters`: all characters.\n- `words`: first letter of each word.\n- `sentences`: first letter of each sentence (_default_).\n- `none`: don't auto capitalize anything.",
+      "source_content_hash": "9a4ebe9f5d1f5fdb7341594d4d77f867194052d7fa34107bbb24f263fe5e18c3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `characters`: 所有字元。\n- `words`: 每個單詞的首字母。\n- `sentences`: 每個句子的首字母（_預設_）。\n- `none`: 不自動大寫任何內容。"
+      }
+    },
+    {
+      "segment_id": "29b12c10",
+      "source_content": "| Type                                             |\n| ------------------------------------------------ |\n| enum('none', 'sentences', 'words', 'characters') |",
+      "source_content_hash": "84feead7da2b7f97982d86d48066246220fb9d1d20da5ef798122ef24ef7a666",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29b12c10"
+      }
+    },
+    {
+      "segment_id": "862bb4be",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ed644f52",
+      "source_content": "### `autoComplete`",
+      "source_content_hash": "f4ada68986e20b1138ce19af79cea8f843e725337f62c40168db2e48a10b0f87",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `autoComplete`"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "Specifies autocomplete hints for the system, so it can provide autofill. On Android, the system will always attempt to offer autofill by using heuristics to identify the type of content. To disable autocomplete, set `autoComplete` to `off`.",
+      "source_content_hash": "7911a6d2bd9f77e1fb447c2797ee500145a05f1c5670f95a77af490c66adeb76",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為系統指定自動完成提示，以便提供自動填充功能。在 Android 上，系統會始終嘗試透過啟發式識別內容類型來提供自動填充。要禁用自動完成，請將 `autoComplete` 設為 `off`。"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "The following values work across platforms:",
+      "source_content_hash": "d576a66f99741bc367f923eab320a6bfa48b90fbcb030c9ede3c36d6a3b01a60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下值跨平台通用："
+      }
+    },
+    {
+      "segment_id": "a8198b43",
+      "source_content": "- `additional-name`\n- `address-line1`\n- `address-line2`\n- `cc-number`\n- `country`\n- `current-password`\n- `email`\n- `family-name`\n- `given-name`\n- `honorific-prefix`\n- `honorific-suffix`\n- `name`\n- `new-password`\n- `off`\n- `one-time-code`\n- `postal-code`\n- `street-address`\n- `tel`\n- `username`",
+      "source_content_hash": "3a54441d20611c8b5941e4f8af244f7b7d37e6bcb641601aa92a6e97dae742b8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `additional-name`\n- `address-line1`\n- `address-line2`\n- `cc-number`\n- `country`\n- `current-password`\n- `email`\n- `family-name`\n- `given-name`\n- `honorific-prefix`\n- `honorific-suffix`\n- `name`\n- `new-password`\n- `off`\n- `one-time-code`\n- `postal-code`\n- `street-address`\n- `tel`\n- `username`"
+      }
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "<div class=\"label basic ios\">iOS</div>",
+      "source_content_hash": "01e150b81f700b4c139313cb054c7e1b8d88251162c5de2cf855d60d4040aa13",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<div class=\"label basic ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "The following values work on iOS only:",
+      "source_content_hash": "fcc41273333c6fc52aa969dc35a1d450dfccc6af1170ff7f6c19a8dd92359da0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下值僅在 iOS 上有效："
+      }
+    },
+    {
+      "segment_id": "1852dfef",
+      "source_content": "- `nickname`\n- `organization`\n- `organization-title`\n- `url`",
+      "source_content_hash": "7f93de7783b2a54080fcf41ffed9c7d6ba74c4eaad61279826a0e516e7320142",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `nickname`\n- `organization`\n- `organization-title`\n- `url`"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "<div class=\"label basic android\">Android</div>",
+      "source_content_hash": "f47b0c2ed434f23a4f6575238fb38b2391d763c28d22367f1fde6324d88844aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<div class=\"label basic android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "The following values work on Android only:",
+      "source_content_hash": "996a17d911d113bbdf7d6ad459cae1c30f0e550197b17015cab19bda248bb3a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值僅適用於 Android："
+      }
+    },
+    {
+      "segment_id": "93fcd90c",
+      "source_content": "- `birthdate-day`\n- `birthdate-full`\n- `birthdate-month`\n- `birthdate-year`\n- `cc-csc`\n- `cc-exp`\n- `cc-exp-day`\n- `cc-exp-month`\n- `cc-exp-year`\n- `gender`\n- `name-family`\n- `name-given`\n- `name-middle`\n- `name-middle-initial`\n- `name-prefix`\n- `name-suffix`\n- `password`\n- `password-new`\n- `postal-address`\n- `postal-address-country`\n- `postal-address-extended`\n- `postal-address-extended-postal-code`\n- `postal-address-locality`\n- `postal-address-region`\n- `sms-otp`\n- `tel-country-code`\n- `tel-national`\n- `tel-device`\n- `username-new`",
+      "source_content_hash": "560707646e54b8127fbb127132c213deb78afccd4250f57c367dc28b0c35f401",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `birthdate-day`\n- `birthdate-full`\n- `birthdate-month`\n- `birthdate-year`\n- `cc-csc`\n- `cc-exp`\n- `cc-exp-day`\n- `cc-exp-month`\n- `cc-exp-year`\n- `gender`\n- `name-family`\n- `name-given`\n- `name-middle`\n- `name-middle-initial`\n- `name-prefix`\n- `name-suffix`\n- `password`\n- `password-new`\n- `postal-address`\n- `postal-address-country`\n- `postal-address-extended`\n- `postal-address-extended-postal-code`\n- `postal-address-locality`\n- `postal-address-region`\n- `sms-otp`\n- `tel-country-code`\n- `tel-national`\n- `tel-device`\n- `username-new`"
+      }
+    },
+    {
+      "segment_id": "6f7967ab",
+      "source_content": "| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |\n| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| enum('additional-name', 'address-line1', 'address-line2', 'birthdate-day', 'birthdate-full', 'birthdate-month', 'birthdate-year', 'cc-csc', 'cc-exp', 'cc-exp-day', 'cc-exp-month', 'cc-exp-year', 'cc-number', 'country', 'current-password', 'email', 'family-name', 'gender', 'given-name', 'honorific-prefix', 'honorific-suffix', 'name', 'name-family', 'name-given', 'name-middle', 'name-middle-initial', 'name-prefix', 'name-suffix', 'new-password', 'nickname', 'one-time-code', 'organization', 'organization-title', 'password', 'password-new', 'postal-address', 'postal-address-country', 'postal-address-extended', 'postal-address-extended-postal-code', 'postal-address-locality', 'postal-address-region', 'postal-code', 'street-address', 'sms-otp', 'tel', 'tel-country-code', 'tel-national', 'tel-device', 'url', 'username', 'username-new', 'off') |",
+      "source_content_hash": "24d239e58e9d7010d1a111b0f35127e863d2c8fd28ed4ce04ee18414d99c33b8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6f7967ab"
+      }
+    },
+    {
+      "segment_id": "ff3b26d5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8159e12a",
+      "source_content": "### `autoCorrect`",
+      "source_content_hash": "cbd0e4a99a13de7d55cb0147e4899e3b95df6722a05604720085005cad8b6a05",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `autoCorrect`"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "If `false`, disables auto-correct. The default value is `true`.",
+      "source_content_hash": "ea4b92ef95de2e142f4ef0517ae22ef5f1cd10e595dab71691402009d1117d1b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `false`，則停用自動校正功能。預設值為 `true`。"
+      }
+    },
+    {
+      "segment_id": "d251d5be",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d251d5be"
+      }
+    },
+    {
+      "segment_id": "ba014c2d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bf3eb388",
+      "source_content": "### `autoFocus`",
+      "source_content_hash": "da62f701e044ad6fd38873d74572de59e266d95841058a2d2ab5c9f1c5d263a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `autoFocus`"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "If `true`, focuses the input on `componentDidMount` or `useEffect`. The default value is `false`.",
+      "source_content_hash": "e49fc7e23fa437290bda69df275433d45a103dce8d68cb7a6ef9ae43246ca656",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，則會在 `componentDidMount` 或 `useEffect` 時自動聚焦輸入框。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "ce712201",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ce712201"
+      }
+    },
+    {
+      "segment_id": "c60fccc8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dc825187",
+      "source_content": "### `blurOnSubmit`",
+      "source_content_hash": "0d099817cdb62babf3e5f1b10485f3e39eec419c97b03bb63e9345b1fde5f98b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `blurOnSubmit`"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "If `true`, the text field will blur when submitted. The default value is true for single-line fields and false for multiline fields. Note that for multiline fields, setting `blurOnSubmit` to `true` means that pressing return will blur the field and trigger the `onSubmitEditing` event instead of inserting a newline into the field.",
+      "source_content_hash": "4a445a14a7422de272c26f7a707f495dd6660305d2f953b4fad0d86bdcc84e6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，則在提交時會使文字框失去焦點。單行輸入框的預設值為 true，多行輸入框則為 false。請注意，對多行輸入框設定 `blurOnSubmit` 為 `true` 時，按下返回鍵會使輸入框失去焦點並觸發 `onSubmitEditing` 事件，而非在欄位中插入換行符號。"
+      }
+    },
+    {
+      "segment_id": "f41bd436",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f41bd436"
+      }
+    },
+    {
+      "segment_id": "fd182f8e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "63daebc9",
+      "source_content": "### `caretHidden`",
+      "source_content_hash": "58aacff87d26d151e8c70567bdbdc2bdc84ec1a4313d605777ccbe2861543644",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `caretHidden`"
+      }
+    },
+    {
+      "segment_id": "228d01d5",
+      "source_content": "If `true`, caret is hidden. The default value is `false`.",
+      "source_content_hash": "3323fed77d01a6eb24c0c61b8341ed97336ace1b7735a94d7caa24354db0aa0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，則會隱藏游標。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "427ca3fc",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_427ca3fc"
+      }
+    },
+    {
+      "segment_id": "4b45c59d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ad8a5f54",
+      "source_content": "### `clearButtonMode` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "af723ee10300eb5b11064d66c2c6ea67ac07e93f2d00e2b9192b7787a1aad148",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `clearButtonMode` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "4033c370",
+      "source_content": "When the clear button should appear on the right side of the text view. This property is supported only for single-line TextInput component. The default value is `never`.",
+      "source_content_hash": "a2537a6c17f7e21bd9f0f8f91db2d842daf7132e603392183e8ea7c14ea87292",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定清除按鈕應何時出現在文字輸入框的右側。此屬性僅支援單行 TextInput 元件。預設值為 `never`。"
+      }
+    },
+    {
+      "segment_id": "6c82acb3",
+      "source_content": "| Type                                                       |\n| ---------------------------------------------------------- |\n| enum('never', 'while-editing', 'unless-editing', 'always') |",
+      "source_content_hash": "d61e7e6fd72c869a3e98bfec5ec5a7ad37f0a51520444588fcbcceceef01c999",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6c82acb3"
+      }
+    },
+    {
+      "segment_id": "14781855",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13095ea3",
+      "source_content": "### `clearTextOnFocus` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "31f89770360cacaf10fe103e5540306a9087d462b3f0305eeaa3d707bbb99e34",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `clearTextOnFocus` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "b0c30ab4",
+      "source_content": "If `true`, clears the text field automatically when editing begins.",
+      "source_content_hash": "f1949f4d85304ec2de0c53efb7551f6e926bb7999244027297b8ade837e4aa9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，則在開始編輯時會自動清除文字框內容。"
+      }
+    },
+    {
+      "segment_id": "aaf8810e",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_aaf8810e"
+      }
+    },
+    {
+      "segment_id": "53e78d36",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cb2e9dbf",
+      "source_content": "### `contextMenuHidden`",
+      "source_content_hash": "f993c9084e173e199b6f6d935ee0b734dd9ab0ee530fcad8073d925dd3ca7b10",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `contextMenuHidden`"
+      }
+    },
+    {
+      "segment_id": "9c70c953",
+      "source_content": "If `true`, context menu is hidden. The default value is `false`.",
+      "source_content_hash": "79d61fac3ade722f35ac3fe49e66d0373bc8036c5071e12cd812e732f841d4e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，則會隱藏上下文選單。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "745b9b1e",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_745b9b1e"
+      }
+    },
+    {
+      "segment_id": "66b13ac5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3a600569",
+      "source_content": "### `dataDetectorTypes` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "bc3716729573332f28f219d6ca81a0d4e0593626d6e048fd096120012e2f60ca",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `dataDetectorTypes` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6085c028",
+      "source_content": "Determines the types of data converted to clickable URLs in the text input. Only valid if `multiline={true}` and `editable={false}`. By default no data types are detected.",
+      "source_content_hash": "a421bbade5b804c6d4dbf990ca46356b8bc0905d42e73887df2e7da5d22703c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定文字輸入框中哪些類型的資料會被轉換為可點擊的連結。僅在 `multiline={true}` 且 `editable={false}` 時有效。預設情況下不偵測任何資料類型。"
+      }
+    },
+    {
+      "segment_id": "216a8ee1",
+      "source_content": "You can provide one type or an array of many types.",
+      "source_content_hash": "08a67d14d0d0c23fd6f3df7133d43fc3147ce3a65d833c929107dae93288cdd2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以指定單一類型或多種類型的陣列。"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Possible values for `dataDetectorTypes` are:",
+      "source_content_hash": "67b16b947247f999dbc9a8ac4f300fceeaeb8958f15befb892815a27e11ba0a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`dataDetectorTypes` 的可能值包括："
+      }
+    },
+    {
+      "segment_id": "05840e29",
+      "source_content": "- `'phoneNumber'`\n- `'link'`\n- `'address'`\n- `'calendarEvent'`\n- `'none'`\n- `'all'`",
+      "source_content_hash": "5f46c8dac52d000b5d9ef3e97925c3aca1431a37600805f01cb7a1b1cd53b420",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'phoneNumber'`\n- `'link'`\n- `'address'`\n- `'calendarEvent'`\n- `'none'`\n- `'all'`"
+      }
+    },
+    {
+      "segment_id": "85829b62",
+      "source_content": "| Type                                                                                                                                                     |\n| -------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all') |",
+      "source_content_hash": "4b12039178ba5e7c624d37baff626a27a7ef2e478b9cb886c7dd657b25ece29d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_85829b62"
+      }
+    },
+    {
+      "segment_id": "ef5856f7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e151b2af",
+      "source_content": "### `defaultValue`",
+      "source_content_hash": "140633d075ba606f4e7dbf0b400d0deb020c402ec3490288c230261e2d92963f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `defaultValue`"
+      }
+    },
+    {
+      "segment_id": "850ec775",
+      "source_content": "Provides an initial value that will change when the user starts typing. Useful for use-cases where you do not want to deal with listening to events and updating the value prop to keep the controlled state in sync.",
+      "source_content_hash": "cdcdb93152ee0d3209ff5255c3c9e87d66f7c9c78e0c02fbdcc835413eb74bab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提供初始值，該值會在使用者開始輸入時改變。適用於您不想處理監聽事件並更新 value 屬性以保持受控狀態同步的使用情境。"
+      }
+    },
+    {
+      "segment_id": "72b90e05",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_72b90e05"
+      }
+    },
+    {
+      "segment_id": "ab7077c0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ad966a7e",
+      "source_content": "### `cursorColor` <div class=\"label android\">Android</div>",
+      "source_content_hash": "43c4b9e948c87cf15bb32222cde2d18c1549d544e96d0c96eba6da31ce302051",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `cursorColor` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "6c4ea90c",
+      "source_content": "When provided it will set the color of the cursor (or \"caret\") in the component. Unlike the behavior of `selectionColor` the cursor color will be set independently from the color of the text selection box.",
+      "source_content_hash": "571b686c670c37821d377f5e6a117395168bf013432145f8f2146cf290a23c36",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當提供此屬性時，它會設定元件中游標（或「插入符號」）的顏色。與 `selectionColor` 的行為不同，游標顏色將獨立於文字選取框的顏色設定。"
+      }
+    },
+    {
+      "segment_id": "3f98cfa1",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3f98cfa1"
+      }
+    },
+    {
+      "segment_id": "3c14ecac",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d96e8afa",
+      "source_content": "### `disableFullscreenUI` <div class=\"label android\">Android</div>",
+      "source_content_hash": "15f84e545cbc423b5542e171357fafe9ea1d1bef65462a304bfb148b2515f1c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `disableFullscreenUI` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "e020f7ed",
+      "source_content": "When `false`, if there is a small amount of space available around a text input (e.g. landscape orientation on a phone), the OS may choose to have the user edit the text inside of a full screen text input mode. When `true`, this feature is disabled and users will always edit the text directly inside of the text input. Defaults to `false`.",
+      "source_content_hash": "0771c67c54d218e33ce8028af419d24d8a19af12d7a7662551c839e1badaa5c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為 `false` 時，如果文字輸入周圍可用空間較小（例如手機的橫向模式），作業系統可能會選擇讓使用者在全螢幕文字輸入模式中編輯文字。設為 `true` 時，此功能將被禁用，使用者將始終直接在文字輸入框中編輯文字。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "a86c73f7",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a86c73f7"
+      }
+    },
+    {
+      "segment_id": "c611b0e1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "757c087d",
+      "source_content": "### `editable`",
+      "source_content_hash": "fdf2e78ac25a04e2173bc42893e10b6b784783b4d990686e24131bf2c6e561c2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `editable`"
+      }
+    },
+    {
+      "segment_id": "1dffcdf5",
+      "source_content": "If `false`, text is not editable. The default value is `true`.",
+      "source_content_hash": "879fadb58a839fd6232f80d2a8a20a612770f2ec6704f3a909e06d505d044739",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果設為 `false`，文字將不可編輯。預設值為 `true`。"
+      }
+    },
+    {
+      "segment_id": "a7248b56",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a7248b56"
+      }
+    },
+    {
+      "segment_id": "5e5a4d7d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4632603c",
+      "source_content": "### `enablesReturnKeyAutomatically` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "f510c10d6eee98808525fc3b6486b6bcef6b0e0a852b0fefc84893d0382e12bc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `enablesReturnKeyAutomatically` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "9802de48",
+      "source_content": "If `true`, the keyboard disables the return key when there is no text and automatically enables it when there is text. The default value is `false`.",
+      "source_content_hash": "70ab407284c109face8e69251812acc56dd0364ac35b73981a277074dc66827c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果設為 `true`，鍵盤會在沒有文字時禁用返回鍵，並在有文字時自動啟用它。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "d0595914",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d0595914"
+      }
+    },
+    {
+      "segment_id": "a323db7f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7ee8342f",
+      "source_content": "### `enterKeyHint`",
+      "source_content_hash": "930499c554d9fa236764ab7880fca744f04d174a98549344209593472fa9c2d2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `enterKeyHint`"
+      }
+    },
+    {
+      "segment_id": "6fecc583",
+      "source_content": "Determines what text should be shown to the return key. Has precedence over the `returnKeyType` prop.",
+      "source_content_hash": "afed54bb132415ff7615bae91a67d6110a538a9f25a867fbd3ebe6fe71d95828",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定返回鍵上應顯示的文字。此屬性優先於 `returnKeyType` 屬性。"
+      }
+    },
+    {
+      "segment_id": "d70ad719",
+      "source_content": "The following values work across platforms:",
+      "source_content_hash": "d576a66f99741bc367f923eab320a6bfa48b90fbcb030c9ede3c36d6a3b01a60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下值適用於所有平台："
+      }
+    },
+    {
+      "segment_id": "071a21cc",
+      "source_content": "- `enter`\n- `done`\n- `next`\n- `search`\n- `send`",
+      "source_content_hash": "2dbfdfaaa690418081f39ce959907d2ba061c5417f718aeaa3e7bd033a66a394",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `enter`\n- `done`\n- `next`\n- `search`\n- `send`"
+      }
+    },
+    {
+      "segment_id": "4cba7b8e",
+      "source_content": "_Android Only_",
+      "source_content_hash": "d048b02757857e80c050e17d8d2dee18c8a9273ca8a4cfa0ea722cafe414ed3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_僅限 Android_"
+      }
+    },
+    {
+      "segment_id": "c419a086",
+      "source_content": "The following values work on Android only:",
+      "source_content_hash": "996a17d911d113bbdf7d6ad459cae1c30f0e550197b17015cab19bda248bb3a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下值僅在 Android 上有效："
+      }
+    },
+    {
+      "segment_id": "b60d3a33",
+      "source_content": "- `previous`",
+      "source_content_hash": "42378d1be1d301c2d58a7df66e6c818aad604e3fa8df95e961d2f64451fca079",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `previous`"
+      }
+    },
+    {
+      "segment_id": "f83153b4",
+      "source_content": "| Type                                                        |\n| ----------------------------------------------------------- |\n| enum('enter', 'done', 'next', 'previous', 'search', 'send') |",
+      "source_content_hash": "a280690dd4442ee662862983f384cfdbdcea8e4925be270b365ff5ecf83ab4b4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f83153b4"
+      }
+    },
+    {
+      "segment_id": "a35bb120",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ef0eaf79",
+      "source_content": "### `importantForAutofill` <div class=\"label android\">Android</div>",
+      "source_content_hash": "b78ee5795a4c746bbcc950c966ca3414ba213c9d71fafd56baf3067c6329b5b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `importantForAutofill` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "227b5df5",
+      "source_content": "Tells the operating system whether the individual fields in your app should be included in a view structure for autofill purposes on Android API Level 26+. Possible values are `auto`, `no`, `noExcludeDescendants`, `yes`, and `yesExcludeDescendants`. The default value is `auto`.",
+      "source_content_hash": "4cbf669d97b692d1da27b5a53540f7486236a0f9fae1013bc305a1421dc1c647",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "告訴作業系統是否應將應用中的個別欄位包含在 Android API 26+ 的自動填充視圖結構中。可能的值為 `auto`、`no`、`noExcludeDescendants`、`yes` 和 `yesExcludeDescendants`。預設值為 `auto`。"
+      }
+    },
+    {
+      "segment_id": "26260b54",
+      "source_content": "- `auto`: Let the Android System use its heuristics to determine if the view is important for autofill.\n- `no`: This view isn't important for autofill.\n- `noExcludeDescendants`: This view and its children aren't important for autofill.\n- `yes`: This view is important for autofill.\n- `yesExcludeDescendants`: This view is important for autofill, but its children aren't important for autofill.",
+      "source_content_hash": "55980afff8ffe80e48934e675a14751de929cae93c8bf3142c5be7f9c3a11cfd",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `auto`：讓 Android 系統使用其啟發式方法決定視圖是否對自動填充重要。\n- `no`：此視圖對自動填充不重要。\n- `noExcludeDescendants`：此視圖及其子視圖對自動填充不重要。\n- `yes`：此視圖對自動填充重要。\n- `yesExcludeDescendants`：此視圖對自動填充重要，但其子視圖不重要。"
+      }
+    },
+    {
+      "segment_id": "5bed7a49",
+      "source_content": "| Type                                                                       |\n| -------------------------------------------------------------------------- |\n| enum('auto', 'no', 'noExcludeDescendants', 'yes', 'yesExcludeDescendants') |",
+      "source_content_hash": "1f5bc3fe87893035154259516cbcf9c9f32882cbc4bd646e5572b9c68797b29c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5bed7a49"
+      }
+    },
+    {
+      "segment_id": "65675a97",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5176651f",
+      "source_content": "### `inlineImageLeft` <div class=\"label android\">Android</div>",
+      "source_content_hash": "d696fef74e95d434bec62ba7580c4f575108f8b93edb240f162aa4458a1acd7a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `inlineImageLeft` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "475959f2",
+      "source_content": "If defined, the provided image resource will be rendered on the left. The image resource must be inside `/android/app/src/main/res/drawable` and referenced like",
+      "source_content_hash": "5d1c3bf34779535e03b3bdaeeb9b9a39f69e36c00a91a47e86c1c83b50154ff5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果定義，提供的圖片資源將顯示在左側。圖片資源必須位於 `/android/app/src/main/res/drawable` 中，並以類似方式引用。"
+      }
+    },
+    {
+      "segment_id": "99727f95",
+      "source_content": "```\n<TextInput\n inlineImageLeft='search_icon'\n/>\n```",
+      "source_content_hash": "71a8e63f70b115403426fd75ada51e0b8deb83a5baa8c27ef310be53aaf630c2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99727f95"
+      }
+    },
+    {
+      "segment_id": "f98645d7",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f98645d7"
+      }
+    },
+    {
+      "segment_id": "672ed619",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c489a644",
+      "source_content": "### `inlineImagePadding` <div class=\"label android\">Android</div>",
+      "source_content_hash": "c6c6621e7bf655f3fef0967eccde38df98ebe185c794b502e11406979b43fa4d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `inlineImagePadding` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "b63b9ccf",
+      "source_content": "Padding between the inline image, if any, and the text input itself.",
+      "source_content_hash": "8dda012cd6b4afca7d9ae43a6471bdcb890e2e35fd80ce656458e4e82b81d195",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "內嵌圖片（如果有）與文字輸入框本身之間的間距。"
+      }
+    },
+    {
+      "segment_id": "d7272572",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7272572"
+      }
+    },
+    {
+      "segment_id": "db1cf4a5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0d14771f",
+      "source_content": "### `inputAccessoryViewID` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "c82476bfbe74841e33425bbc8244176ffcf5ef2227c9ef652959f66a47fd8481",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `inputAccessoryViewID` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "158df793",
+      "source_content": "An optional identifier which links a custom [InputAccessoryView](inputaccessoryview.md) to this text input. The InputAccessoryView is rendered above the keyboard when this text input is focused.",
+      "source_content_hash": "b0dcb59415fbf666d290f943ec3655c0680017f3cba55fc294ea1a675669a29e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個可選的標識符，用於將自定義的 [InputAccessoryView](inputaccessoryview.md) 連結到此文字輸入框。當此文字輸入框獲得焦點時，InputAccessoryView 會顯示在鍵盤上方。"
+      }
+    },
+    {
+      "segment_id": "4273744e",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4273744e"
+      }
+    },
+    {
+      "segment_id": "e5af272a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "53edfb3e",
+      "source_content": "### `inputMode`",
+      "source_content_hash": "16588a6c3510dabd74bed9f6837cfcc0dbefa10a656f5007b6bf6b75ab2ae48e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `inputMode`"
+      }
+    },
+    {
+      "segment_id": "0273ea32",
+      "source_content": "Works like the `inputmode` attribute in HTML, it determines which keyboard to open, e.g. `numeric` and has precedence over `keyboardType`.",
+      "source_content_hash": "ce4a31c5ebc8801c2348a0c54aa5138b490a88e7f0da6817c03846a5fff4ea9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "功能類似於 HTML 中的 `inputmode` 屬性，它決定要開啟哪種鍵盤，例如 `numeric`，並且優先於 `keyboardType`。"
+      }
+    },
+    {
+      "segment_id": "9f46c1b6",
+      "source_content": "Support the following values:",
+      "source_content_hash": "d5103af0ea8af2989187ce967f24b78eb0c0fc45b4baed5b25735c5d36b8b73a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支援以下數值："
+      }
+    },
+    {
+      "segment_id": "0f46bc6c",
+      "source_content": "- `none`\n- `text`\n- `decimal`\n- `numeric`\n- `tel`\n- `search`\n- `email`\n- `url`",
+      "source_content_hash": "908e06a538a46a98f4e41da1059380e37f45ff904d82699c8f8a8be430aba5ac",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `none`\n- `text`\n- `decimal`\n- `numeric`\n- `tel`\n- `search`\n- `email`\n- `url`"
+      }
+    },
+    {
+      "segment_id": "f7e7d4c8",
+      "source_content": "| Type                                                                        |\n| --------------------------------------------------------------------------- |\n| enum('decimal', 'email', 'none', 'numeric', 'search', 'tel', 'text', 'url') |",
+      "source_content_hash": "197856c9ee34af908dbe6ecf2a9ee44031c0287c024c9077afcb3e32fab2c31d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f7e7d4c8"
+      }
+    },
+    {
+      "segment_id": "b2c83116",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b6ec34ca",
+      "source_content": "### `keyboardAppearance` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "b56f2de17b2fc53686a0d2e1180eaebf96ebf42d19da8a90171118d6088fa55f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `keyboardAppearance` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "0beac34c",
+      "source_content": "Determines the color of the keyboard.",
+      "source_content_hash": "10a13c6241880837f739245c4cf9e001e47d3e3d8550481c380a3bcb781cfd74",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定鍵盤的顏色。"
+      }
+    },
+    {
+      "segment_id": "3fb1bca9",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| enum('default', 'light', 'dark') |",
+      "source_content_hash": "b57dcc85a8786e472e05c69c4cf83755734e25befafca98a841cb0738a75223a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3fb1bca9"
+      }
+    },
+    {
+      "segment_id": "0b0f3095",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "db274ff9",
+      "source_content": "### `keyboardType`",
+      "source_content_hash": "d926ca0014ce3a0d6c157a433985d9a1c3e3c628244eccc2e7e5634737abbcac",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `keyboardType`"
+      }
+    },
+    {
+      "segment_id": "bfa178cb",
+      "source_content": "Determines which keyboard to open, e.g.`numeric`.",
+      "source_content_hash": "c9ed9e6866ea66a78d41a7419aa847b836aabc69b57cd87bc557c8be79b7c596",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定要開啟哪種鍵盤，例如 `numeric`。"
+      }
+    },
+    {
+      "segment_id": "ec3c0760",
+      "source_content": "See screenshots of all the types [here](http://lefkowitz.me/2018/04/30/visual-guide-to-react-native-textinput-keyboardtype-options/).",
+      "source_content_hash": "8bcd3cf0e68cbce2637da265704cbdad1825e0872dd179af8d46cefa517a0642",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "所有類型的截圖請參見[這裡](http://lefkowitz.me/2018/04/30/visual-guide-to-react-native-textinput-keyboardtype-options/)。"
+      }
+    },
+    {
+      "segment_id": "69d6e4be",
+      "source_content": "The following values work across platforms:",
+      "source_content_hash": "d576a66f99741bc367f923eab320a6bfa48b90fbcb030c9ede3c36d6a3b01a60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值跨平台通用："
+      }
+    },
+    {
+      "segment_id": "a129ae74",
+      "source_content": "- `default`\n- `number-pad`\n- `decimal-pad`\n- `numeric`\n- `email-address`\n- `phone-pad`\n- `url`",
+      "source_content_hash": "ca2e0ea5066ced96ab3fe93f2b890a31fab7008dc7e993512e37a1f6745c94c7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `default`\n- `number-pad`\n- `decimal-pad`\n- `numeric`\n- `email-address`\n- `phone-pad`\n- `url`"
+      }
+    },
+    {
+      "segment_id": "76356197",
+      "source_content": "_iOS Only_",
+      "source_content_hash": "dbcdb552f0d481187a8d1d3e35f8109147b7e1e58a12419f7aaf31fd8c08bbe0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_iOS 專用_"
+      }
+    },
+    {
+      "segment_id": "4dd62f5c",
+      "source_content": "The following values work on iOS only:",
+      "source_content_hash": "fcc41273333c6fc52aa969dc35a1d450dfccc6af1170ff7f6c19a8dd92359da0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值僅在 iOS 上有效："
+      }
+    },
+    {
+      "segment_id": "53d85bf8",
+      "source_content": "- `ascii-capable`\n- `numbers-and-punctuation`\n- `name-phone-pad`\n- `twitter`\n- `web-search`",
+      "source_content_hash": "f5648bd277937f7ef7a9f12c0c2c19fe7a0b5b7d5f3daac02927ca41a4189efc",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `ascii-capable`\n- `numbers-and-punctuation`\n- `name-phone-pad`\n- `twitter`\n- `web-search`"
+      }
+    },
+    {
+      "segment_id": "0b7b2b74",
+      "source_content": "_Android Only_",
+      "source_content_hash": "d048b02757857e80c050e17d8d2dee18c8a9273ca8a4cfa0ea722cafe414ed3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_Android 專用_"
+      }
+    },
+    {
+      "segment_id": "b136c0e9",
+      "source_content": "The following values work on Android only:",
+      "source_content_hash": "996a17d911d113bbdf7d6ad459cae1c30f0e550197b17015cab19bda248bb3a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值僅在 Android 上有效："
+      }
+    },
+    {
+      "segment_id": "1c800f63",
+      "source_content": "- `visible-password`",
+      "source_content_hash": "d4aacef903419320ce9f7aa9e26b7a9e0a40ef420a4523060c6beb35020f14d4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `visible-password`"
+      }
+    },
+    {
+      "segment_id": "9352031b",
+      "source_content": "| Type                                                                                                                                                                                                    |\n| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| enum('default', 'email-address', 'numeric', 'phone-pad', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search', 'visible-password') |",
+      "source_content_hash": "0df1baa40ceaf850f70a9f8ca5e870747cb0f46c372fd44a2b42d966ea018a71",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9352031b"
+      }
+    },
+    {
+      "segment_id": "0966a140",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "76f5fa2a",
+      "source_content": "### `maxFontSizeMultiplier`",
+      "source_content_hash": "f690dc4a694b9e09fcc4fe1b120bd1ad9d95e75dc23dca70e40c79a2cc242bdb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maxFontSizeMultiplier`"
+      }
+    },
+    {
+      "segment_id": "16341c03",
+      "source_content": "Specifies largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:",
+      "source_content_hash": "275ab57d5ba41afbd095979bee0a4e90cede30751937060059e7a5c0ed4d0773",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定當 `allowFontScaling` 啟用時，字體可以達到的最大縮放比例。可能的數值："
+      }
+    },
+    {
+      "segment_id": "564bb8f1",
+      "source_content": "- `null/undefined` (default): inherit from the parent node or the global default (0)\n- `0`: no max, ignore parent/global default\n- `>= 1`: sets the `maxFontSizeMultiplier` of this node to this value",
+      "source_content_hash": "02f66764721096513431c808d6fc895a8df0e90b75dfde48cd6761d2673b541f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `null/undefined`（預設）：繼承父節點或全域預設值（0）\n- `0`：無最大值，忽略父節點/全域預設值\n- `>= 1`：將此節點的 `maxFontSizeMultiplier` 設為此數值"
+      }
+    },
+    {
+      "segment_id": "bdd51d27",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bdd51d27"
+      }
+    },
+    {
+      "segment_id": "53298416",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0d37b206",
+      "source_content": "### `maxLength`",
+      "source_content_hash": "d23b79d0cf984ee9be67416706b06b523fd06a179045621e9517ff459d8bd89a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maxLength`"
+      }
+    },
+    {
+      "segment_id": "44314141",
+      "source_content": "Limits the maximum number of characters that can be entered. Use this instead of implementing the logic in JS to avoid flicker.",
+      "source_content_hash": "e4c4d2fa86e85237c8b62651a5904c4261b849ed11db41eede2c5bf96e3fb486",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "限制可以輸入的最大字元數。使用此屬性代替在 JS 中實現邏輯以避免閃爍。"
+      }
+    },
+    {
+      "segment_id": "89e45c93",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_89e45c93"
+      }
+    },
+    {
+      "segment_id": "2d0c4d8d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c27cc457",
+      "source_content": "### `multiline`",
+      "source_content_hash": "d254a9db16ca7780fd813d18872a91e742c44aae6cecdbf16584931f8a58dbf2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `multiline`"
+      }
+    },
+    {
+      "segment_id": "48089f3d",
+      "source_content": "If `true`, the text input can be multiple lines. The default value is `false`.",
+      "source_content_hash": "28e49c86e8c56f54ea4e1c0d02c98e1ede30235efc237bf21a8a788b2fb0f751",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果為 `true`，文字輸入可以有多行。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "991ac41c",
+      "source_content": ":::note\nIt is important to note that this aligns the text to the top on iOS, and centers it on Android. Use with `textAlignVertical` set to `top` for the same behavior in both platforms.\n:::",
+      "source_content_hash": "321279710f66986b5f0b9e50f328186a91ed7e4cd659967ceceb26375959f94a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n需要注意的是，這在 iOS 上會將文字對齊頂部，而在 Android 上會居中對齊。若要讓兩個平台的行為一致，請將 `textAlignVertical` 設為 `top`。\n:::"
+      }
+    },
+    {
+      "segment_id": "6b3677e9",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6b3677e9"
+      }
+    },
+    {
+      "segment_id": "006d06ed",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3a8e718b",
+      "source_content": "### `numberOfLines` <div class=\"label android\">Android</div>",
+      "source_content_hash": "befac71c07261c4002852e08e8e1a830c3a6c06b489eef257e4f4c766d85dde0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `numberOfLines` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "7b046f1b",
+      "source_content": "Sets the number of lines for a `TextInput`. Use it with multiline set to `true` to be able to fill the lines.",
+      "source_content_hash": "8b9e1f58d6d7aa8f2238e00783635a516b424500f4d41fc9d7df84ec5e398ae6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `TextInput` 的行數。與 `multiline` 設為 `true` 一起使用，以便填滿行數。"
+      }
+    },
+    {
+      "segment_id": "8003e30c",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8003e30c"
+      }
+    },
+    {
+      "segment_id": "36a42514",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "76d60c63",
+      "source_content": "### `onBlur`",
+      "source_content_hash": "6bf3a786fd93c508b37aac3d06cf5135ccba5e8fbe4448868388ab49bfc9272d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onBlur`"
+      }
+    },
+    {
+      "segment_id": "4fa5605e",
+      "source_content": "Callback that is called when the text input is blurred.",
+      "source_content_hash": "fb1042a60403f44a6b15cf1184a587c7d9675ec730354525e91a8b0e8740b9ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入失去焦點時呼叫的回調函數。"
+      }
+    },
+    {
+      "segment_id": "df06aa49",
+      "source_content": "> Note: If you are attempting to access the `text` value from `nativeEvent` keep in mind that the resulting value you get can be `undefined` which can cause unintended errors. If you are trying to find the last value of TextInput, you can use the [`onEndEditing`](textinput#onendediting) event, which is fired upon completion of editing.",
+      "source_content_hash": "81edac91dcfa6997bbcbd028e93dfdf6f4a769a0094bb26c0f90d7b1f9e2d8f7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：如果您嘗試從 `nativeEvent` 中存取 `text` 值，請注意得到的值可能是 `undefined`，這可能會導致意外錯誤。如果您想找到 TextInput 的最後一個值，可以使用 [`onEndEditing`](textinput#onendediting) 事件，該事件在編輯完成時觸發。"
+      }
+    },
+    {
+      "segment_id": "3d8f27e5",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3d8f27e5"
+      }
+    },
+    {
+      "segment_id": "c779bd5f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "89d9a6db",
+      "source_content": "### `onChange`",
+      "source_content_hash": "92a82b3aafe067a055cf8fef12dc8fa687f79be589007ce08daaa1fd1cbdbcc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onChange`"
+      }
+    },
+    {
+      "segment_id": "b12a2e99",
+      "source_content": "Callback that is called when the text input's text changes.",
+      "source_content_hash": "da274169bd07ec3983df9720d0c146293279ad39fb375d550e8eda47c45d8887",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入框的文字變更時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "b9b64921",
+      "source_content": "| Type                                                  |\n| ----------------------------------------------------- |\n| (`{nativeEvent: {eventCount, target, text}}`) => void |",
+      "source_content_hash": "9db50f93e763a171f244c80cdae678ccdda7cfa14a13457169d0e268ff5b77c6",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b9b64921"
+      }
+    },
+    {
+      "segment_id": "279acb5e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "85c87282",
+      "source_content": "### `onChangeText`",
+      "source_content_hash": "3a73bdfa94be4ad21f7e294cc66da76384353c65d36f8312584eb01bd22b7a67",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onChangeText`"
+      }
+    },
+    {
+      "segment_id": "0e5d7420",
+      "source_content": "Callback that is called when the text input's text changes. Changed text is passed as a single string argument to the callback handler.",
+      "source_content_hash": "642fc44456fe6df4a90a79bcfecd1c7c1701033d2909e505d205150e39aad060",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入框的文字變更時呼叫的回調函式。變更後的文字會以單一字串參數形式傳遞給回調處理器。"
+      }
+    },
+    {
+      "segment_id": "736333fe",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_736333fe"
+      }
+    },
+    {
+      "segment_id": "47b17d67",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "03461273",
+      "source_content": "### `onContentSizeChange`",
+      "source_content_hash": "7547e161cf4be8a2303b2173ec1005d2e6de54f91714530f71e23e4c0e9684fc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onContentSizeChange`"
+      }
+    },
+    {
+      "segment_id": "e93bb501",
+      "source_content": "Callback that is called when the text input's content size changes.",
+      "source_content_hash": "0bb7ab19a04ee9704b689222174fc07bff7ee4238268ea18d33d3aeb441630b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入框的內容尺寸變更時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "5591470c",
+      "source_content": "Only called for multiline text inputs.",
+      "source_content_hash": "482336acaaad917723c3022d2926500ea7ad6e31cb5cb4f3f3d2073899d8c463",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅適用於多行文字輸入框。"
+      }
+    },
+    {
+      "segment_id": "0dab06d8",
+      "source_content": "| Type                                                       |\n| ---------------------------------------------------------- |\n| (`{nativeEvent: {contentSize: {width, height} }}`) => void |",
+      "source_content_hash": "6703379ffa3021af8aaf8bf736a8c0ec960acbe4fcd41c4c8a85bac57805da5d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0dab06d8"
+      }
+    },
+    {
+      "segment_id": "4f1405c5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "169dc225",
+      "source_content": "### `onEndEditing`",
+      "source_content_hash": "04d099efbd5bdb4c8d788d650ca0eb3fba74d0756d1c3fc8f65fe40b149828af",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onEndEditing`"
+      }
+    },
+    {
+      "segment_id": "df08ff06",
+      "source_content": "Callback that is called when text input ends.",
+      "source_content_hash": "53f5077a72695e1389cad1c80565e42658c3e0c5b8196976b178240f10367212",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入結束時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "fec39f09",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fec39f09"
+      }
+    },
+    {
+      "segment_id": "469e3061",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "08ad3c7d",
+      "source_content": "### `onPressIn`",
+      "source_content_hash": "ae65497c18a5296604bb4cfba2740bf13b9312197cdc31bf92aa808a5e62628f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressIn`"
+      }
+    },
+    {
+      "segment_id": "c6dee347",
+      "source_content": "Callback that is called when a touch is engaged.",
+      "source_content_hash": "59ef237b48ed1df1e49976f111800bba553176b65384888cd30a4b48c521aaea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當觸碰動作開始時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "0fdd9cbc",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0fdd9cbc"
+      }
+    },
+    {
+      "segment_id": "90c20e3d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9f1e5bd3",
+      "source_content": "### `onPressOut`",
+      "source_content_hash": "ffc349eda93250705960dc02d87ba3d2a94f9465be883d516060a2eca5c7643f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressOut`"
+      }
+    },
+    {
+      "segment_id": "efd1b767",
+      "source_content": "Callback that is called when a touch is released.",
+      "source_content_hash": "4c993e9e4708a6136a413e58d44988a7aa0cf709c3cead91e9a358f1084676ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當觸碰動作結束時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "d35523a8",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d35523a8"
+      }
+    },
+    {
+      "segment_id": "3057b00a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1212565e",
+      "source_content": "### `onFocus`",
+      "source_content_hash": "819b1098d4e8c5d9b626b3e4df44e68d618c9fd7e788e90017167c396a21ac1b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onFocus`"
+      }
+    },
+    {
+      "segment_id": "52e54b91",
+      "source_content": "Callback that is called when the text input is focused.",
+      "source_content_hash": "765f612c6e959319d29b9f8e961702c89de914a20b1b889febe0ae34c28681ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入框獲得焦點時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "e7ac6393",
+      "source_content": "| Type                                                     |\n| -------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |",
+      "source_content_hash": "53882e7a75b7789bb4eca313c0bfd12b1d730533fe194f44b12dee8209224cb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e7ac6393"
+      }
+    },
+    {
+      "segment_id": "c053e679",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c1d27079",
+      "source_content": "### `onKeyPress`",
+      "source_content_hash": "5fd81c50c85df170c1a724870e00694a704bcce703b5f1733c464dde5809bb88",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onKeyPress`"
+      }
+    },
+    {
+      "segment_id": "5bd59085",
+      "source_content": "Callback that is called when a key is pressed. This will be called with object where `keyValue` is `'Enter'` or `'Backspace'` for respective keys and the typed-in character otherwise including `' '` for space. Fires before `onChange` callbacks. Note: on Android only the inputs from soft keyboard are handled, not the hardware keyboard inputs.",
+      "source_content_hash": "3186a97c4dfbcd8334c96c86923a977f9938e875f5388428f27be37f3cbbb867",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當按鍵被按下時呼叫的回調函式。會傳遞一個物件參數，其中 `keyValue` 會是 `'Enter'` 或 `'Backspace'` 對應按鍵，其餘輸入字元則包含空格 `' '`。此回調會在 `onChange` 之前觸發。注意：在 Android 上僅處理軟鍵盤輸入，不處理硬體鍵盤輸入。"
+      }
+    },
+    {
+      "segment_id": "4e96edd6",
+      "source_content": "| Type                                        |\n| ------------------------------------------- |\n| (`{nativeEvent: {key: keyValue} }`) => void |",
+      "source_content_hash": "71235d89f1bb18b9ce2941bc2a22075ffc50b7de9db939eb14d052084bdcf97f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e96edd6"
+      }
+    },
+    {
+      "segment_id": "49236388",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6bc314bd",
+      "source_content": "### `onLayout`",
+      "source_content_hash": "4003ab8e4c09c2b682ab13f81e81b2827452db77e43f86621b1c3c7107f873ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLayout`"
+      }
+    },
+    {
+      "segment_id": "0756e68c",
+      "source_content": "Invoked on mount and on layout changes.",
+      "source_content_hash": "290f35b58ac09874c73cf9c19bd00bc7285f2b644910877c66249e1c5fe2aa8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在元件掛載或佈局變更時觸發。"
+      }
+    },
+    {
+      "segment_id": "fe299f82",
+      "source_content": "| Type                                                     |\n| -------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |",
+      "source_content_hash": "53882e7a75b7789bb4eca313c0bfd12b1d730533fe194f44b12dee8209224cb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fe299f82"
+      }
+    },
+    {
+      "segment_id": "94209988",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dc6bd4f7",
+      "source_content": "### `onScroll`",
+      "source_content_hash": "aa5d18a7769bf17efff68033c502384f86f58980c1d232c2d6006383bfd3340b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onScroll`"
+      }
+    },
+    {
+      "segment_id": "78d1234b",
+      "source_content": "Invoked on content scroll. May also contain other properties from `ScrollEvent` but on Android `contentSize` is not provided for performance reasons.",
+      "source_content_hash": "48d7b6ab258bc13c809bd170f0ed7e9edea3ddba7e51993f5a24626d2730c3ed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當內容滾動時觸發。可能包含來自 `ScrollEvent` 的其他屬性，但在 Android 上因效能考量不會提供 `contentSize`。"
+      }
+    },
+    {
+      "segment_id": "5f49c52f",
+      "source_content": "| Type                                                |\n| --------------------------------------------------- |\n| (`{nativeEvent: {contentOffset: {x, y} }}`) => void |",
+      "source_content_hash": "9c425ebba406f9ca883ccf269ca87b586962b51f80ccc00a72cdd5c717b47aa9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5f49c52f"
+      }
+    },
+    {
+      "segment_id": "ba25e1be",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "906620fd",
+      "source_content": "### `onSelectionChange`",
+      "source_content_hash": "61fa74e48d44de78c6d59d712503db4e69092ad27e4be0371ad649c392ee5f02",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onSelectionChange`"
+      }
+    },
+    {
+      "segment_id": "538f8d2f",
+      "source_content": "Callback that is called when the text input selection is changed.",
+      "source_content_hash": "b8b20acdb4b487484b9d52ec09e138f2c196e67f2822982b9521b935990267ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入框的選取範圍變更時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "8e77a952",
+      "source_content": "| Type                                                  |\n| ----------------------------------------------------- |\n| (`{nativeEvent: {selection: {start, end} }}`) => void |",
+      "source_content_hash": "ef78db569bc3294171e838733a3ae494250d1f9a76bc8f862632072346ec98a2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8e77a952"
+      }
+    },
+    {
+      "segment_id": "f127a8af",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bd6b59a9",
+      "source_content": "### `onSubmitEditing`",
+      "source_content_hash": "6e2dcea85a086511173593ac475ef4865d70e6ee1c4b5e0991b7eb3b341cf970",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onSubmitEditing`"
+      }
+    },
+    {
+      "segment_id": "83bf44f4",
+      "source_content": "Callback that is called when the text input's submit button is pressed.",
+      "source_content_hash": "ee5fb7926659fc09b4581a9f8a00b02a663fb277b2821866e18a7cb569aaf64f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當文字輸入框的提交按鈕被按下時呼叫的回調函式。"
+      }
+    },
+    {
+      "segment_id": "f71cead5",
+      "source_content": "| Type                                                  |\n| ----------------------------------------------------- |\n| (`{nativeEvent: {text, eventCount, target}}`) => void |",
+      "source_content_hash": "85e191d9310b73dce7ab772efa0113013678f8b79fd0ea4aed37f9d9b84bc1b8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f71cead5"
+      }
+    },
+    {
+      "segment_id": "f4f6cbea",
+      "source_content": "Note that on iOS this method isn't called when using `keyboardType=\"phone-pad\"`.",
+      "source_content_hash": "d27c356b3cbd76c86dc81b8ba70baae245aba69ff81bd7e8814e7526ace5b0e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意：在 iOS 上使用 `keyboardType=\"phone-pad\"` 時不會呼叫此方法。"
+      }
+    },
+    {
+      "segment_id": "d83eaf58",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "407acba8",
+      "source_content": "### `placeholder`",
+      "source_content_hash": "c0aac503a9eb72f48b1e273ea98af7f752796dab915de36d8e811347f8bfec15",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `placeholder`"
+      }
+    },
+    {
+      "segment_id": "d27371fb",
+      "source_content": "The string that will be rendered before text input has been entered.",
+      "source_content_hash": "7af112b67e65c998a9a41442b199d47d4312e209341945ccd67e590f1735b7cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在文字輸入框尚未輸入內容時顯示的預留文字。"
+      }
+    },
+    {
+      "segment_id": "4efc3a4c",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4efc3a4c"
+      }
+    },
+    {
+      "segment_id": "537bd06f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "850abfc1",
+      "source_content": "### `placeholderTextColor`",
+      "source_content_hash": "f4e30c0fbccd6559e5f02bc191add9d1161d23aefe1a59e67ccae9c815b51968",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `placeholderTextColor`"
+      }
+    },
+    {
+      "segment_id": "d730ea8c",
+      "source_content": "The text color of the placeholder string.",
+      "source_content_hash": "851daf147a107292bdbc666cbe7fd001624545895a64142322e8826317252524",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預留文字的字體顏色。"
+      }
+    },
+    {
+      "segment_id": "2fec6a8e",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2fec6a8e"
+      }
+    },
+    {
+      "segment_id": "b0f8c696",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "00f1d343",
+      "source_content": "### `readOnly`",
+      "source_content_hash": "3057663c123cf73ed57698dfa4a73fbf3571fe1922d34aac328189790ffe1767",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `readOnly`"
+      }
+    },
+    {
+      "segment_id": "445e9994",
+      "source_content": "If `true`, text is not editable. The default value is `false`.",
+      "source_content_hash": "01e9893174e847823517df0e0c6e58a2ea733f52c7c3e9583a252e216494b31c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若為 `true`，則文字不可編輯。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "85f6c781",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_85f6c781"
+      }
+    },
+    {
+      "segment_id": "385ae181",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "db3d15a6",
+      "source_content": "### `returnKeyLabel` <div class=\"label android\">Android</div>",
+      "source_content_hash": "3665b863f1df62eec976bc78cdbf03c915c63d691f85c3bf273fd33f93473d12",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `returnKeyLabel` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "a31c9245",
+      "source_content": "Sets the return key to the label. Use it instead of `returnKeyType`.",
+      "source_content_hash": "9a618149f802cd5903ccb7c0b96e6d8a27a240c48bddae26472feee217813e49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定返回鍵的標籤文字。可替代 `returnKeyType` 使用。"
+      }
+    },
+    {
+      "segment_id": "c7929025",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c7929025"
+      }
+    },
+    {
+      "segment_id": "ed303692",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ae321ea7",
+      "source_content": "### `returnKeyType`",
+      "source_content_hash": "105576bfd16f447299e747904220bf76934a0e7c03aa49682a6f413ef903f099",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `returnKeyType`"
+      }
+    },
+    {
+      "segment_id": "0e8d0733",
+      "source_content": "Determines how the return key should look. On Android you can also use `returnKeyLabel`.",
+      "source_content_hash": "8c93aeaeb350929045ddf5b00149f12269d9979b94b5bfec1d61b26f5a4b8976",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定返回鍵的外觀樣式。在 Android 上也可以使用 `returnKeyLabel`。"
+      }
+    },
+    {
+      "segment_id": "47f2d66d",
+      "source_content": "_Cross platform_",
+      "source_content_hash": "b9d550ff8ccb84ee3bcf0ba506889fd4632261ce9913fb9e878a6ad5cee70bd0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_跨平台支援_"
+      }
+    },
+    {
+      "segment_id": "40d8315f",
+      "source_content": "The following values work across platforms:",
+      "source_content_hash": "d576a66f99741bc367f923eab320a6bfa48b90fbcb030c9ede3c36d6a3b01a60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值適用於所有平台："
+      }
+    },
+    {
+      "segment_id": "b676ba8c",
+      "source_content": "- `done`\n- `go`\n- `next`\n- `search`\n- `send`",
+      "source_content_hash": "2f4571cab1aa87d9214b157f95d83b1c962973fa912b23afa133958a0b99da1f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `done` (完成)\n- `go` (前往)\n- `next` (下一個)\n- `search` (搜尋)\n- `send` (傳送)"
+      }
+    },
+    {
+      "segment_id": "4f6f5d56",
+      "source_content": "_Android Only_",
+      "source_content_hash": "d048b02757857e80c050e17d8d2dee18c8a9273ca8a4cfa0ea722cafe414ed3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_僅限 Android_"
+      }
+    },
+    {
+      "segment_id": "81cabb68",
+      "source_content": "The following values work on Android only:",
+      "source_content_hash": "996a17d911d113bbdf7d6ad459cae1c30f0e550197b17015cab19bda248bb3a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值僅在 Android 上有效："
+      }
+    },
+    {
+      "segment_id": "ac32a015",
+      "source_content": "- `none`\n- `previous`",
+      "source_content_hash": "81f26b83a50e48cbe4fec8c703e5d039dfba7105d37ab69c5bff6f8d796bdbaf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `none` (無)\n- `previous` (上一個)"
+      }
+    },
+    {
+      "segment_id": "9a246e40",
+      "source_content": "_iOS Only_",
+      "source_content_hash": "dbcdb552f0d481187a8d1d3e35f8109147b7e1e58a12419f7aaf31fd8c08bbe0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_僅限 iOS_"
+      }
+    },
+    {
+      "segment_id": "5aa217bf",
+      "source_content": "The following values work on iOS only:",
+      "source_content_hash": "fcc41273333c6fc52aa969dc35a1d450dfccc6af1170ff7f6c19a8dd92359da0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下數值僅在 iOS 上有效："
+      }
+    },
+    {
+      "segment_id": "cfd3d6a5",
+      "source_content": "- `default`\n- `emergency-call`\n- `google`\n- `join`\n- `route`\n- `yahoo`",
+      "source_content_hash": "4be87ab3dc95e3c3dc50e6b37d0c83446067cbb160f580b829da98ae447c4453",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `default` (預設)\n- `emergency-call` (緊急通話)\n- `google` (Google)\n- `join` (加入)\n- `route` (路線)\n- `yahoo` (Yahoo)"
+      }
+    },
+    {
+      "segment_id": "387da2b6",
+      "source_content": "| Type                                                                                                                              |\n| --------------------------------------------------------------------------------------------------------------------------------- |\n| enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo') |",
+      "source_content_hash": "40cf568c5e2319cc15217de1943505eee722c37804334f30381a3c72f47d9627",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_387da2b6"
+      }
+    },
+    {
+      "segment_id": "08495385",
+      "source_content": "### `rejectResponderTermination` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "8b27b9ccd633ccfdeca671cbc81aa4d7f2010b483570286b9646b761d3b2b6c6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `rejectResponderTermination` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "dbf6b268",
+      "source_content": "If `true`, allows TextInput to pass touch events to the parent component. This allows components such as SwipeableListView to be swipeable from the TextInput on iOS, as is the case on Android by default. If `false`, TextInput always asks to handle the input (except when disabled). The default value is `true`.",
+      "source_content_hash": "7bd3f5e833b640e940a8bbdea98a93da35356570cd443b99cd23d50af0ccc786",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，允許 TextInput 將觸控事件傳遞給父元件。這使得如 SwipeableListView 等元件能從 TextInput 處滑動操作（Android 預設即支援此行為）。若設為 `false`，TextInput 會始終要求處理輸入（除非被禁用）。預設值為 `true`。"
+      }
+    },
+    {
+      "segment_id": "c9207287",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9207287"
+      }
+    },
+    {
+      "segment_id": "7c9d6d93",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4cede9a1",
+      "source_content": "### `rows` <div class=\"label android\">Android</div>",
+      "source_content_hash": "f2e1ea6e61ebebd4da1d8154eac6338c09aebeabe5d0b529cbf34f0641f4ce07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `rows` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "836aeded",
+      "source_content": "Sets the number of lines for a `TextInput`. Use it with multiline set to `true` to be able to fill the lines.",
+      "source_content_hash": "8b9e1f58d6d7aa8f2238e00783635a516b424500f4d41fc9d7df84ec5e398ae6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `TextInput` 的行數。需與 `multiline` 設為 `true` 搭配使用以填滿行數。"
+      }
+    },
+    {
+      "segment_id": "73c25d58",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_73c25d58"
+      }
+    },
+    {
+      "segment_id": "cd7cb1b5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "07866865",
+      "source_content": "### `scrollEnabled` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "de9e278f2eecb7f0b637afa47e948cd1ef6eb77513b3f8c30023d3f6277cdd94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollEnabled` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "b0e3b09d",
+      "source_content": "If `false`, scrolling of the text view will be disabled. The default value is `true`. Only works with `multiline={true}`.",
+      "source_content_hash": "f15e1dc69091f90bd6a857547bf28e6ea263561cdec8f7efbd8042bc2aab0ef7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `false`，將禁用文字視窗的滾動功能。預設值為 `true`。僅在 `multiline={true}` 時有效。"
+      }
+    },
+    {
+      "segment_id": "36e20716",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_36e20716"
+      }
+    },
+    {
+      "segment_id": "f6319356",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f1bfc3a0",
+      "source_content": "### `secureTextEntry`",
+      "source_content_hash": "2d77f5a82186f2af0038d54401bb6098704933597ae6cef4b29c8c4b8f6c935a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `secureTextEntry`"
+      }
+    },
+    {
+      "segment_id": "e00c1030",
+      "source_content": "If `true`, the text input obscures the text entered so that sensitive text like passwords stay secure. The default value is `false`. Does not work with `multiline={true}`.",
+      "source_content_hash": "14235f7bf8201b177ffae70797b55aa1f10312b53139a509f9dfec282816e8b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，文字輸入會隱藏內容（如密碼等敏感資訊）。預設值為 `false`。不可與 `multiline={true}` 同時使用。"
+      }
+    },
+    {
+      "segment_id": "472c793f",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_472c793f"
+      }
+    },
+    {
+      "segment_id": "5eff5cfb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "58224701",
+      "source_content": "### `selection`",
+      "source_content_hash": "a35d010f29a7383dd1803f9ea1b02a987e16969d27f9073bf3cfa6da236b893a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `selection`"
+      }
+    },
+    {
+      "segment_id": "45652342",
+      "source_content": "The start and end of the text input's selection. Set start and end to the same value to position the cursor.",
+      "source_content_hash": "fabd9c7f3ee090b4f182630aed4fde1ea1472a1cf2111d3bc7350594918a6478",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "文字輸入選取範圍的起始與結束位置。將起始與結束設為相同值可定位游標。"
+      }
+    },
+    {
+      "segment_id": "180dafb9",
+      "source_content": "| Type                                  |\n| ------------------------------------- |\n| object: `{start: number,end: number}` |",
+      "source_content_hash": "0a31ea13f16fa2f33743edfea683c46d25d32cfec04299a1a7f9f03098c1ccda",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_180dafb9"
+      }
+    },
+    {
+      "segment_id": "596fd6d4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "574154d0",
+      "source_content": "### `selectionColor`",
+      "source_content_hash": "5449babd0637073d4b10035c1533ef589bb8b51c010ef626380deaea65e4cf4b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `selectionColor`"
+      }
+    },
+    {
+      "segment_id": "855bf260",
+      "source_content": "The highlight and cursor color of the text input.",
+      "source_content_hash": "edc19e52109c3e6dc01e1a888e6203eb9cfbbd09cd04403a101fe27e7cbf94a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "文字輸入的選取反白與游標顏色。"
+      }
+    },
+    {
+      "segment_id": "5ac1846a",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5ac1846a"
+      }
+    },
+    {
+      "segment_id": "35ba8fc6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13733062",
+      "source_content": "### `selectTextOnFocus`",
+      "source_content_hash": "9b513c5c5df2cedcdeed56cbca3bc1812e0dc9d6fe4b73b716c084daaff97c0e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `selectTextOnFocus`"
+      }
+    },
+    {
+      "segment_id": "b19ccef1",
+      "source_content": "If `true`, all text will automatically be selected on focus.",
+      "source_content_hash": "e01b09990d4bfa29d2266ea5fdb61c61a50dc5c687205b3aa79f539cb63c0de5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，聚焦時會自動選取全部文字。"
+      }
+    },
+    {
+      "segment_id": "03fae06a",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03fae06a"
+      }
+    },
+    {
+      "segment_id": "caff14df",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3649bc3c",
+      "source_content": "### `showSoftInputOnFocus`",
+      "source_content_hash": "aa0f6dd690f16fdb44dff2ec7267cf02785500b6fde1296562ddd16633041e7b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showSoftInputOnFocus`"
+      }
+    },
+    {
+      "segment_id": "b0286e2e",
+      "source_content": "When `false`, it will prevent the soft keyboard from showing when the field is focused. The default value is `true`.",
+      "source_content_hash": "2c8ebc6b2772bd127e3ffa9fe6fb4422e760ed4e02beb96355b2cf295c1ef95a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `false` 時，聚焦該欄位將不會觸發軟鍵盤彈出。預設值為 `true`。"
+      }
+    },
+    {
+      "segment_id": "8bd91f36",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8bd91f36"
+      }
+    },
+    {
+      "segment_id": "eb5402f1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "670ed09f",
+      "source_content": "### `spellCheck` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "55e7ad2cd8fab685e9c0265c706fde91e3872a024e535a9055e7df032a703f96",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `spellCheck` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "dd1e5c41",
+      "source_content": "If `false`, disables spell-check style (i.e. red underlines). The default value is inherited from `autoCorrect`.",
+      "source_content_hash": "aa660bf1336743f4ea7d58179ad6c53f5cb06da32b1d158d7ee6dbe7f97ad51f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `false`，將禁用拼字檢查樣式（如紅色底線）。預設值繼承自 `autoCorrect`。"
+      }
+    },
+    {
+      "segment_id": "9e2219b0",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9e2219b0"
+      }
+    },
+    {
+      "segment_id": "f3e53014",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f5692fc5",
+      "source_content": "### `textAlign`",
+      "source_content_hash": "102c4633cac3013c3a06641804be0699d9173a714e4f16d56ebaeba5c0e4c7a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textAlign`"
+      }
+    },
+    {
+      "segment_id": "55ed1bcc",
+      "source_content": "Align the input text to the left, center, or right sides of the input field.",
+      "source_content_hash": "905e0d2c3f60008038f24308ee73ef4f2e6fe6f21e4ee9e2937bd48bdd7e1674",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將輸入文字對齊輸入欄位的左側、中央或右側。"
+      }
+    },
+    {
+      "segment_id": "9a6e0e5d",
+      "source_content": "Possible values for `textAlign` are:",
+      "source_content_hash": "5f979d42f12305726bb29cab9116328d2fb692e53e0bbc1b6f39ec83410ca462",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`textAlign` 的可能數值為："
+      }
+    },
+    {
+      "segment_id": "8e54682d",
+      "source_content": "- `left`\n- `center`\n- `right`",
+      "source_content_hash": "25f3db48130c59a1550cc6ae971146f03d07cc39bed232fa95a7c00b0ef80c62",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `left` (左對齊)\n- `center` (置中)\n- `right` (右對齊)"
+      }
+    },
+    {
+      "segment_id": "7288d481",
+      "source_content": "| Type                            |\n| ------------------------------- |\n| enum('left', 'center', 'right') |",
+      "source_content_hash": "20cc0e7ee2fd3a1ce653bb1b00ee4f86609a06f65b2c44765bffde93dcfce50f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7288d481"
+      }
+    },
+    {
+      "segment_id": "2aba997b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9dfcd64a",
+      "source_content": "### `textContentType` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "e52b53eff939b46885a2f32a578fce861650ed9824d16f12c7c5b6bbbdbf6461",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textContentType` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "5a832bdd",
+      "source_content": "Give the keyboard and the system information about the expected semantic meaning for the content that users enter.",
+      "source_content_hash": "4a7f6eab555423456cfc8c83e90c58f50a4c8067b2d3749d9b3a491174603448",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "向鍵盤和系統提供關於使用者輸入內容預期語義的資訊。"
+      }
+    },
+    {
+      "segment_id": "e3c67a5c",
+      "source_content": ":::note\n[`autoComplete`](#autocomplete), provides the same functionality and is available for all platforms. You can use [`Platform.select`](/docs/next/platform#select) for differing platform behaviors.\n\nAvoid using both `textContentType` and `autoComplete`. For backwards compatibility, `textContentType` takes precedence when both properties are set.\n:::",
+      "source_content_hash": "76713d318598cc3bd356ff173daa55c70510e8046551bc11a4513e6806b49d49",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n[`autoComplete`](#autocomplete) 提供相同功能且支援全平台。可使用 [`Platform.select`](/docs/next/platform#select) 處理平台差異行為。\n\n避免同時使用 `textContentType` 和 `autoComplete`。為保持向後兼容性，當兩個屬性同時設定時，`textContentType` 會優先生效。\n:::"
+      }
+    },
+    {
+      "segment_id": "d8faf1ac",
+      "source_content": "For iOS 11+ you can set `textContentType` to `username` or `password` to enable autofill of login details from the device keychain.",
+      "source_content_hash": "c52f6e9bde59cb3dc1dea0bca464d1ed7b386a5c4b649ad26835db8f75f3631d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 11+ 上，可將 `textContentType` 設為 `username` 或 `password` 以啟用裝置鑰匙圈自動填入登入資訊功能。"
+      }
+    },
+    {
+      "segment_id": "34211dfc",
+      "source_content": "For iOS 12+ `newPassword` can be used to indicate a new password input the user may want to save in the keychain, and `oneTimeCode` can be used to indicate that a field can be autofilled by a code arriving in an SMS.",
+      "source_content_hash": "fe73d72c1be9f8b688c490a2d60110e65c74676aee5f1c1a0039c452fd48e73f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 12+ 上，`newPassword` 可用於標示使用者可能想儲存至鑰匙圈的新密碼輸入欄位，`oneTimeCode` 則可用於標示可透過簡訊驗證碼自動填入的欄位。"
+      }
+    },
+    {
+      "segment_id": "ff04d106",
+      "source_content": "To disable autofill, set `textContentType` to `none`.",
+      "source_content_hash": "1020058a4655f4a2fdd32f186181bbb3668ecddd8441ea3fcfa566f8434ddf88",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要停用自動填入，請將 `textContentType` 設為 `none`。"
+      }
+    },
+    {
+      "segment_id": "1ade042b",
+      "source_content": "Possible values for `textContentType` are:",
+      "source_content_hash": "461ec58abeea6db8db7e5f91df1d5decfaedd33fb28df4ada8cb2bac4e7c0378",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`textContentType` 的可能值包括："
+      }
+    },
+    {
+      "segment_id": "4147f7ef",
+      "source_content": "- `none`\n- `URL`\n- `addressCity`\n- `addressCityAndState`\n- `addressState`\n- `countryName`\n- `creditCardNumber`\n- `emailAddress`\n- `familyName`\n- `fullStreetAddress`\n- `givenName`\n- `jobTitle`\n- `location`\n- `middleName`\n- `name`\n- `namePrefix`\n- `nameSuffix`\n- `nickname`\n- `organizationName`\n- `postalCode`\n- `streetAddressLine1`\n- `streetAddressLine2`\n- `sublocality`\n- `telephoneNumber`\n- `username`\n- `password`\n- `newPassword`\n- `oneTimeCode`",
+      "source_content_hash": "6aef831c4a14e9a6c8c89c555180d39728ce1b71963eedc8b5ef35f24f492576",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `none`\n- `URL`\n- `addressCity`\n- `addressCityAndState`\n- `addressState`\n- `countryName`\n- `creditCardNumber`\n- `emailAddress`\n- `familyName`\n- `fullStreetAddress`\n- `givenName`\n- `jobTitle`\n- `location`\n- `middleName`\n- `name`\n- `namePrefix`\n- `nameSuffix`\n- `nickname`\n- `organizationName`\n- `postalCode`\n- `streetAddressLine1`\n- `streetAddressLine2`\n- `sublocality`\n- `telephoneNumber`\n- `username`\n- `password`\n- `newPassword`\n- `oneTimeCode`"
+      }
+    },
+    {
+      "segment_id": "5dddfe38",
+      "source_content": "| Type                                                                                                                                                                                                                                                                                                                                                                                                       |\n| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| enum('none', 'URL', 'addressCity', 'addressCityAndState', 'addressState', 'countryName', 'creditCardNumber', 'emailAddress', 'familyName', 'fullStreetAddress', 'givenName', 'jobTitle', 'location', 'middleName', 'name', 'namePrefix', 'nameSuffix', 'nickname', 'organizationName', 'postalCode', 'streetAddressLine1', 'streetAddressLine2', 'sublocality', 'telephoneNumber', 'username', 'password') |",
+      "source_content_hash": "a5dcf6567f7b0029630bc8888740d7ddd2b30fc3523b0943fb0ce20beeb34f8f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5dddfe38"
+      }
+    },
+    {
+      "segment_id": "46ac6387",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a5e5f17d",
+      "source_content": "### `passwordRules` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "6346c826d2363bf15b361dc9e9439cfc9a4675d113c87dfcd0716517f8b0e567",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `passwordRules` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "41de556b",
+      "source_content": "When using `textContentType` as `newPassword` on iOS we can let the OS know the minimum requirements of the password so that it can generate one that will satisfy them. In order to create a valid string for `PasswordRules` take a look to the [Apple Docs](https://developer.apple.com/password-rules/).",
+      "source_content_hash": "66f9f72627bcae64259c5a383debfa8efdc4efe01d0cf4b254eda5e3fbccac2e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當在 iOS 上使用 `textContentType` 設為 `newPassword` 時，可透過此屬性讓系統知悉密碼的最低要求，以便生成符合條件的密碼。建立有效的 `PasswordRules` 字串請參閱 [Apple 官方文件](https://developer.apple.com/password-rules/)。"
+      }
+    },
+    {
+      "segment_id": "592605a4",
+      "source_content": "> If passwords generation dialog doesn't appear please make sure that:\n>\n> - AutoFill is enabled: **Settings** → **Passwords & Accounts** → toggle \"On\" the **AutoFill Passwords**,\n> - iCloud Keychain is used: **Settings** → **Apple ID** → **iCloud** → **Keychain** → toggle \"On\" the **iCloud Keychain**.",
+      "source_content_hash": "759897520b7e77141b0ac16d3c580d96f624452e56403f54cafbcaba126eda54",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 若未出現密碼生成對話框，請確認：\n>\n> - 已啟用自動填入：**設定** → **密碼與帳號** → 開啟 **自動填入密碼**\n> - 已使用 iCloud 鑰匙圈：**設定** → **Apple ID** → **iCloud** → **鑰匙圈** → 開啟 **iCloud 鑰匙圈**"
+      }
+    },
+    {
+      "segment_id": "1629a4f2",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1629a4f2"
+      }
+    },
+    {
+      "segment_id": "fb0bafe3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "154d4afd",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `style`"
+      }
+    },
+    {
+      "segment_id": "77de8f1c",
+      "source_content": "Note that not all Text styles are supported, an incomplete list of what is not supported includes:",
+      "source_content_hash": "e176d4f341ee9588f8540b66035171ef25f60767ad58618134fed7caac1ee22a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意並非所有文字樣式都受支援，以下為部分不支援的樣式清單："
+      }
+    },
+    {
+      "segment_id": "89952e07",
+      "source_content": "- `borderLeftWidth`\n- `borderTopWidth`\n- `borderRightWidth`\n- `borderBottomWidth`\n- `borderTopLeftRadius`\n- `borderTopRightRadius`\n- `borderBottomRightRadius`\n- `borderBottomLeftRadius`",
+      "source_content_hash": "c4cba4e68af023f6f649c8127d39cc31dedbfae7ed88a6fbb47d0c0ecec12b4a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `borderLeftWidth`\n- `borderTopWidth`\n- `borderRightWidth`\n- `borderBottomWidth`\n- `borderTopLeftRadius`\n- `borderTopRightRadius`\n- `borderBottomRightRadius`\n- `borderBottomLeftRadius`"
+      }
+    },
+    {
+      "segment_id": "3b7add9c",
+      "source_content": "see [Issue#7070](https://github.com/facebook/react-native/issues/7070) for more detail.",
+      "source_content_hash": "4dde2867ef2dbf9a9759a6ce261cf1d32b5f5b1f0cb14c04f24fba71269fed7c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [Issue#7070](https://github.com/facebook/react-native/issues/7070)。"
+      }
+    },
+    {
+      "segment_id": "339ece39",
+      "source_content": "[Styles](style.md)",
+      "source_content_hash": "31fd99b37230e71fcd83947bd2fa3cae6fdc9c43bc32549398f59e86ec34d718",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[樣式](style.md)"
+      }
+    },
+    {
+      "segment_id": "a6ac66cc",
+      "source_content": "| Type                  |\n| --------------------- |\n| [Text](text.md#style) |",
+      "source_content_hash": "f3059882440b6ee28a0bbaa0672c9a766473e21bd86249640413849a5e1ce602",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a6ac66cc"
+      }
+    },
+    {
+      "segment_id": "289363b2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7572de73",
+      "source_content": "### `textBreakStrategy` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1b2a667c372a20754547fc04c96117f70c596af311b374a1a10108ef85396947",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `textBreakStrategy` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "3d4a30ae",
+      "source_content": "Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced` The default value is `highQuality`.",
+      "source_content_hash": "6308079b9ab02f3cb696d88182537085db2925684244723f78552449ffa4f8b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android API Level 23+ 上設定文字斷行策略，可能值為 `simple`、`highQuality`、`balanced`，預設值為 `highQuality`。"
+      }
+    },
+    {
+      "segment_id": "fd44dc25",
+      "source_content": "| Type                                      |\n| ----------------------------------------- |\n| enum('simple', 'highQuality', 'balanced') |",
+      "source_content_hash": "f63cb0382d1f61cce31b1d6d09b700e0efa9160dad787a138c268b6ebae3c896",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fd44dc25"
+      }
+    },
+    {
+      "segment_id": "acc0966f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ab05effc",
+      "source_content": "### `underlineColorAndroid` <div class=\"label android\">Android</div>",
+      "source_content_hash": "90f0c6f2062a67d3dda5e11d85f4425a10b171f073a3bb532bfbe9dcdba3ff86",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `underlineColorAndroid` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "d72c3106",
+      "source_content": "The color of the `TextInput` underline.",
+      "source_content_hash": "911cabaf5ecdd4fcc93434056b52ba1427d91937479512c0f458ed45915fade7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定 `TextInput` 底線的顏色。"
+      }
+    },
+    {
+      "segment_id": "d2413ae7",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d2413ae7"
+      }
+    },
+    {
+      "segment_id": "622a859a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "21865597",
+      "source_content": "### `value`",
+      "source_content_hash": "026cc7d3101b85c0149c1e7b5884fe371673a67a96490697f786054d9ce3cfe2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `value`"
+      }
+    },
+    {
+      "segment_id": "5a7699d4",
+      "source_content": "The value to show for the text input. `TextInput` is a controlled component, which means the native value will be forced to match this value prop if provided. For most uses, this works great, but in some cases this may cause flickering - one common cause is preventing edits by keeping value the same. In addition to setting the same value, either set `editable={false}`, or set/update `maxLength` to prevent unwanted edits without flicker.",
+      "source_content_hash": "6626b63b2f7739340ff2a1063925aa06941a15b2b7fc3d8cd0cc13afaba84ade",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "文字輸入框顯示的值。`TextInput` 是一個受控元件，這意味著如果提供了這個值屬性，原生值將被迫與之匹配。在大多數情況下，這運作良好，但在某些情況下可能會導致閃爍——一個常見的原因是通過保持值不變來防止編輯。除了設置相同的值外，可以設置 `editable={false}`，或者設置/更新 `maxLength` 來防止不需要的編輯而不會閃爍。"
+      }
+    },
+    {
+      "segment_id": "250798c2",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_250798c2"
+      }
+    },
+    {
+      "segment_id": "d59bed6f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f26c7c32",
+      "source_content": "### `lineBreakStrategyIOS` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "6a18c4706d1537d8c1c8b75746ac5fcb9c82905d60239024873d6e49376aec76",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `lineBreakStrategyIOS` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "0a749aa0",
+      "source_content": "Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `hangul-word` and `push-out`.",
+      "source_content_hash": "e6d4974ac443a3c362dc19673cdeaa6e93e3a835df0a6e76ffb641b6dc417832",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 14+ 上設置換行策略。可能的值為 `none`、`standard`、`hangul-word` 和 `push-out`。"
+      }
+    },
+    {
+      "segment_id": "2e6a3e30",
+      "source_content": "| Type                                                        | Default  |\n| ----------------------------------------------------------- | -------- |\n| enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |",
+      "source_content_hash": "b9a532b273a626231976e54b0ca6a00c9dddb2b99bc29156c80725466aa8ae87",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2e6a3e30"
+      }
+    },
+    {
+      "segment_id": "f493f259",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "79d78c81",
+      "source_content": "### `.focus()`",
+      "source_content_hash": "3612774125f6b77b71daecdd984ff18c05aab4d05f6d707f89a682ed847359f6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `.focus()`"
+      }
+    },
+    {
+      "segment_id": "e8472196",
+      "source_content": "```tsx\nfocus();\n```",
+      "source_content_hash": "ef13b40b769f6a79dddbb7dd34b33c27d7af2ee9d3d6649ba41aea89b70a3760",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e8472196"
+      }
+    },
+    {
+      "segment_id": "0d01b2ec",
+      "source_content": "Makes the native input request focus.",
+      "source_content_hash": "388534b0e6381aa2c25cd18ad380b0a173e8c851e203b00a580b827909aa6972",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使原生輸入請求焦點。"
+      }
+    },
+    {
+      "segment_id": "9379e5e9",
+      "source_content": "### `.blur()`",
+      "source_content_hash": "8228cd84747912f6bf80af5ee5514ff710feb2e20b60f19d7783df913277a2e1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `.blur()`"
+      }
+    },
+    {
+      "segment_id": "fbefbd00",
+      "source_content": "```tsx\nblur();\n```",
+      "source_content_hash": "ae11925ddec92e8d1878a7c09be9d64792740257c8a8501301474ab8fb03cb42",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fbefbd00"
+      }
+    },
+    {
+      "segment_id": "ce36972f",
+      "source_content": "Makes the native input lose focus.",
+      "source_content_hash": "dcc16ab6d34b9084570952542929e833a3d95f1803e45fe3e550acfedf4051aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使原生輸入失去焦點。"
+      }
+    },
+    {
+      "segment_id": "bdb8c2e1",
+      "source_content": "### `clear()`",
+      "source_content_hash": "c47045d79f8125a3700cb890f7984e9bae26cd66b3080d63c0a3554cab306868",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `clear()`"
+      }
+    },
+    {
+      "segment_id": "84a61e09",
+      "source_content": "```tsx\nclear();\n```",
+      "source_content_hash": "01bba82c2dc709190ea179bf3e79d92d9353a08e221075a8aee08363fa0afa98",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_84a61e09"
+      }
+    },
+    {
+      "segment_id": "e9039826",
+      "source_content": "Removes all text from the `TextInput`.",
+      "source_content_hash": "2d95c051be4f43d2f43d61bb20a3d5f7a70c176859cbb339688ea68ae742d344",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "移除 `TextInput` 中的所有文字。"
+      }
+    },
+    {
+      "segment_id": "42035126",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e10d3e60",
+      "source_content": "### `isFocused()`",
+      "source_content_hash": "25588c947e195595f076c59047183c599d6fcd8acfa34c5133bb2500c034481e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isFocused()`"
+      }
+    },
+    {
+      "segment_id": "896538f4",
+      "source_content": "```tsx\nisFocused(): boolean;\n```",
+      "source_content_hash": "a06be1452899a49912d8e364c0860195a296589a30baa2d58b6574c188c32d88",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_896538f4"
+      }
+    },
+    {
+      "segment_id": "3aa5487d",
+      "source_content": "Returns `true` if the input is currently focused; `false` otherwise.",
+      "source_content_hash": "489ae287566f8cf5017b7b2be485556d0455a2d3de862d971153772877c4d7f9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果輸入目前有焦點則返回 `true`；否則返回 `false`。"
+      }
+    },
+    {
+      "segment_id": "c0a9eb5b",
+      "source_content": "# Known issues",
+      "source_content_hash": "8c2b620309aaae36b42a64b7c3cec0a70a954f61c956e785c658864b8057b9d9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 已知問題"
+      }
+    },
+    {
+      "segment_id": "e4654919",
+      "source_content": "- [react-native#19096](https://github.com/facebook/react-native/issues/19096): Doesn't support Android's `onKeyPreIme`.\n- [react-native#19366](https://github.com/facebook/react-native/issues/19366): Calling .focus() after closing Android's keyboard via back button doesn't bring keyboard up again.\n- [react-native#26799](https://github.com/facebook/react-native/issues/26799): Doesn't support Android's `secureTextEntry` when `keyboardType=\"email-address\"` or `keyboardType=\"phone-pad\"`.",
+      "source_content_hash": "e4df37b9b62c07106c8e5d8a929a2c615d936b5b8d5f58317e6580d204e738f1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [react-native#19096](https://github.com/facebook/react-native/issues/19096): 不支援 Android 的 `onKeyPreIme`。\n- [react-native#19366](https://github.com/facebook/react-native/issues/19366): 在通過返回按鈕關閉 Android 鍵盤後呼叫 .focus() 不會再次彈出鍵盤。\n- [react-native#26799](https://github.com/facebook/react-native/issues/26799): 當 `keyboardType=\"email-address\"` 或 `keyboardType=\"phone-pad\"` 時不支援 Android 的 `secureTextEntry`。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/textinput.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.430328+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "69437ca08529d56c2d3547a7a742b9f22e97173750b93e77b82c554f12e2bd3e"
+  }
+}

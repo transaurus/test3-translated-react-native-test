@@ -1,0 +1,352 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/the-new-architecture/turbo-modules-with-swift.md",
+  "source_file_content_hash": "4fc593c1e1bf20b47f6e42560b0970405cf14c9fe03106e609b74eecd180a765",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "# iOS - Using Swift in Your Native Modules",
+      "source_content_hash": "0e47e39442591c2bfba5a6289edcc6921f18cffc181c9debfac342d6008845df",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# iOS - 在原生模組中使用 Swift"
+      }
+    },
+    {
+      "segment_id": "faebdc62",
+      "source_content": "Swift is the official and default language for developing native application on iOS.",
+      "source_content_hash": "f1a36e4016770e0b26c0ad2e2ca56f4b62952219d6f4346ce6c9fdcb94e80634",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Swift 是開發 iOS 原生應用程式的官方預設語言。"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "In this guide, you will explore how you can write your Native Modules using Swift.",
+      "source_content_hash": "3208691abdcec4eed62f510957bc8314ec5e69b46cfeb6d7f162c435cfca3017",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將探討如何使用 Swift 編寫您的原生模組。"
+      }
+    },
+    {
+      "segment_id": "8c98994c",
+      "source_content": ":::note\nThe core of React Native is mainly written in C++ and the interoperability between Swift and C++ is not great, despite the [interoperability layer](https://www.swift.org/documentation/cxx-interop/) developed by Apple.\n\nTherefore, the module you are going to write in this guide won't be a pure Swift implementation due to the incompatibilities between the languages. You'll have to write some Objective-C++ glue code but the goal of the guide is to minimize the amount of Objective-C++ code that is needed. If you are migrating an existing Native Modules from the legacy architecture to the New Architecture, this approach should allow you to reuse most of the code.\n:::",
+      "source_content_hash": "7e31c6fe32f35097883f3ccdcb7c48edde1c9a8457201fbf9d4e4986ae396d89",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\nReact Native 的核心主要使用 C++ 編寫，而 Swift 與 C++ 之間的互通性並不理想，儘管 Apple 開發了[互通層](https://www.swift.org/documentation/cxx-interop/)。\n\n因此，本指南中您將編寫的模組不會是純 Swift 實現，這是由於語言之間的不相容性。您需要編寫一些 Objective-C++ 黏合程式碼，但本指南的目標是盡量減少所需的 Objective-C++ 程式碼量。如果您正在將現有原生模組從舊架構遷移到新架構，這種方法應該能讓您重用大部分程式碼。\n:::"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "This guide starts from the iOS implementation of the [Native Module](/docs/next/turbo-native-modules-introduction) guide.\nMake sure to be familiar with that guide before diving into this one, potentially implementing the example in the guide.",
+      "source_content_hash": "41b50664878bd2d3630cb2e3557d09cac200dbdcd25b895f17487058e342a3fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南從 [原生模組](/docs/next/turbo-native-modules-introduction) 指南的 iOS 實現開始。在深入本指南之前，請確保熟悉該指南，並可能實作其中的範例。"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "## The Adapter pattern",
+      "source_content_hash": "c27541f7450401771ed6c2f28157ead061b78856196ebb8af51688dd72aee500",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 適配器模式"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "The goal is to implement all our business logic using a Swift module and have a thin glue layer in Objective-C++ that is able to connect the app with the Swift implementation.",
+      "source_content_hash": "d3ab201f09eed060b4dd34eac7ab0e64c41d092e06c977536e77756c4792999a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目標是使用 Swift 模組實作所有業務邏輯，並在 Objective-C++ 中建立一個薄黏合層，將應用程式與 Swift 實現連接起來。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "You can achieve this by leveraging the [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) design pattern, to connect the Swift Module with the Objective-C++ layer.",
+      "source_content_hash": "edc363af0b204856be6fc9e7d893f0621b7a686154a04c5d02a578caae39f8b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以利用[適配器](https://en.wikipedia.org/wiki/Adapter_pattern)設計模式來實現這一點，將 Swift 模組與 Objective-C++ 層連接。"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "The Objective-C++ object is created by React Native and it keeps a reference to the Swift module, handling its lifecycle. The Objective-C++ object forwards to the all the methods invocation to Swift.",
+      "source_content_hash": "9fc978297894bcc2c5e3036bc4722c715206888578cf76e2b1d88997a1c5c5c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Objective-C++ 物件由 React Native 創建，它保留對 Swift 模組的引用，並處理其生命週期。Objective-C++ 物件將所有方法調用轉發到 Swift。"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "### Creating the Swift Module",
+      "source_content_hash": "ba5357c1c4ca0e453d5b3d35103503d6026022b6fd281df2c86ec554d8f2b018",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 創建 Swift 模組"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "The first step is to move the implementation from the Objective-C++ layer to the Swift Layer.",
+      "source_content_hash": "b27e49758ad3f9a9f1e664e5a94c17901e2974efbafcc794482102b9f49a8a03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一步是將實現從 Objective-C++ 層移到 Swift 層。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "To achieve that, please follow these steps:",
+      "source_content_hash": "170118d33414d90f7b20e3440d753c0db45d81f1210801388150ebd5ce075248",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為實現這一點，請按照以下步驟操作："
+      }
+    },
+    {
+      "segment_id": "5da9e02b",
+      "source_content": "1. Create a new empty file in the Xcode project, and call it `NativeLocalStorage.swift`\n2. Add the implementation in your Swift module like it follows:",
+      "source_content_hash": "c127a932067e9c6a0bf5edd9879e5e7b9d2ed9485f900f1982f77099900b96a9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在 Xcode 專案中創建一個新的空白文件，並命名為 `NativeLocalStorage.swift`\n2. 在您的 Swift 模組中添加如下實現："
+      }
+    },
+    {
+      "segment_id": "a2110253",
+      "source_content": "```swift title=\"NativeLocalStorage.swift\"\nimport Foundation\n\n@objc public class NativeLocalStorage: NSObject {\n  let userDefaults = UserDefaults(suiteName: \"local-storage\");\n\n\n  @objc public func getItem(for key: String) -> String? {\n    return userDefaults?.string(forKey: key)\n  }\n\n  @objc public func setItem(for key: String, value: String) {\n    userDefaults?.set(value, forKey: key)\n  }\n\n  @objc public func removeItem(for key: String) {\n    userDefaults?.removeObject(forKey: key)\n  }\n\n  @objc public  func clear() {\n    userDefaults?.dictionaryRepresentation().keys.forEach { removeItem(for: $0) }\n  }\n}\n\n```",
+      "source_content_hash": "e3be2367fc1c01a24da2f3cd4db98d6548e4529b668b1dceb6054f423533347d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a2110253"
+      }
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "Notice that you have to declare all the methods that you need to call from Objective-C as `public` and with the `@objc` annotation.\nRemember also to make your class inherit from `NSObject`, otherwise it would not be possible to use it from Objective-C.",
+      "source_content_hash": "26a5d651b18a3b5392355ecb35174127a8f515e8f6bc0456a1d21192071e6b17",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，您需要將所有需要從 Objective-C 調用的方法聲明為 `public` 並加上 `@objc` 註解。\n同時記得讓您的類繼承自 `NSObject`，否則將無法從 Objective-C 使用它。"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "### Update the `RCTNativeLocalStorage` file",
+      "source_content_hash": "6a6e6e1c40951e881243bcab0e426c6f41a4b1b86f8c81f13def9e0d58ad9d24",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 更新 `RCTNativeLocalStorage` 文件"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "Then, you need to update the implementation of the `RCTNativeLocalStorage` to be able to create the Swift module and to call its methods.",
+      "source_content_hash": "a19fad00733443a8f1f8e8ad771b88b2e03cfb754a84e0dcb6977bb053dab58e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著，您需要更新 `RCTNativeLocalStorage` 的實現，以便能夠創建 Swift 模組並調用其方法。"
+      }
+    },
+    {
+      "segment_id": "2eb5ba30",
+      "source_content": "1. Open the `RCTNativeLocalStorage.mm` file\n2. Update it as it follows:",
+      "source_content_hash": "d038841f16b474b0bfb9c5f05e08fe41e18d7b9a4a94c483b2a5b6cd0ddc2b0d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 打開 `RCTNativeLocalStorage.mm` 文件\n2. 按如下方式更新它："
+      }
+    },
+    {
+      "segment_id": "29ad5b0e",
+      "source_content": "```diff title=\"RCTNativeLocalStorage.mm\"\n//  RCTNativeLocalStorage.m\n//  TurboModuleExample\n\n#import \"RCTNativeLocalStorage.h\"\n+#import \"SampleApp-Swift.h\"\n\n- static NSString *const RCTNativeLocalStorageKey = @\"local-storage\";\n\n-@interface RCTNativeLocalStorage()\n-@property (strong, nonatomic) NSUserDefaults *localStorage;\n-@end\n\n-@implementation RCTNativeLocalStorage\n+@implementation RCTNativeLocalStorage {\n+    NativeLocalStorage *storage;\n+}\n\n-RCT_EXPORT_MODULE(NativeLocalStorage)\n\n - (id) init {\n   if (self = [super init]) {\n-    _localStorage = [[NSUserDefaults alloc] initWithSuiteName:RCTNativeLocalStorageKey];\n+    storage = [NativeLocalStorage new];\n   }\n   return self;\n }\n\n - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {\n   return std::make_shared<facebook::react::NativeLocalStorageSpecJSI>(params);\n }\n\n - (NSString * _Nullable)getItem:(NSString *)key {\n-   return [self.localStorage stringForKey:key];\n+   return [storage getItemFor:key];\n }\n\n - (void)setItem:(NSString *)value key:(NSString *)key {\n-   [self.localStorage setObject:value forKey:key];\n+   [storage setItemFor:key value:value];\n }\n\n - (void)removeItem:(NSString *)key {\n-   [self.localStorage removeObjectForKey:key];\n+   [storage removeItemFor:key];\n }\n\n - (void)clear {\n-   NSDictionary *keys = [self.localStorage dictionaryRepresentation];\n-   for (NSString *key in keys) {\n-     [self removeItem:key];\n-   }\n+  [storage clear];\n }\n\n++ (NSString *)moduleName\n+{\n+  return @\"NativeLocalStorage\";\n+}\n\n@end\n```",
+      "source_content_hash": "1db56b3866e62372415eb3773591ded325812de336d26c4f2c0e4aaa84784e37",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29ad5b0e"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "The code is not really changed. Instead of creating a reference to the `NSUserDefaults` directly, you create a new `NativeLocalStorage` using the swift implementation and, whenever a native module function is invoked, the invocation is forwarded to the `NativeLocalStorage` implemented in Swift.",
+      "source_content_hash": "480ccfa0c434e90d20d693b0103acfe92b94cc53d92b4f7b8ef4932cce54fce5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "程式碼並未真正改變。與直接創建對 `NSUserDefaults` 的引用不同，您使用 Swift 實現創建了一個新的 `NativeLocalStorage`，並且每當調用原生模組函數時，調用會被轉發到 Swift 實現的 `NativeLocalStorage`。"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "Remember to import the `\"SampleApp-Swift.h\"` header. This is a header automatically generated by Xcode which contains the public API of your Swift files, in a format that is consumable by Objective-C. The `SampleApp` part of the header is actually your App name, so if you created the app with a name that is **different** from `SampleApp`, you'll have to change it.",
+      "source_content_hash": "ffce8745ccdd093c9f26b7b182b4add5e11a80b998f889a1a40af0b8205eb11a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "記得導入 `\"SampleApp-Swift.h\"` 標頭文件。這是 Xcode 自動生成的標頭文件，其中包含您的 Swift 文件的公共 API，以 Objective-C 可消費的格式呈現。標頭文件中的 `SampleApp` 部分實際上是您的應用程式名稱，因此如果您創建的應用程式名稱**不同**於 `SampleApp`，則需要更改它。"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "Note also that the `RCT_EXPORT_MODULE` macro is not required anymore, because native modules are registered using the `package.json` as described [here](/docs/next/turbo-native-modules-introduction?platforms=ios#register-the-native-module-in-your-app).",
+      "source_content_hash": "efac4972e5d1313001726a8f7c706f9587b4bd28e26fe7802aa421349d92723a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "還請注意，不再需要 `RCT_EXPORT_MODULE` 宏，因為原生模組是使用 `package.json` 註冊的，如[此處](/docs/next/turbo-native-modules-introduction?platforms=ios#register-the-native-module-in-your-app)所述。"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "This approach introduces a bit of code duplication in the interfaces, but it allows you to reuse the Swift code you may already have in your codebase, with little extra effort.",
+      "source_content_hash": "c93daf551596790005fd54dc1933e0c5139d84cca73c4177a5d3d5a1e4f680d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這種方法在介面上引入了一些程式碼重複，但它允許您以最小的額外努力重用您可能已經在程式碼庫中擁有的 Swift 程式碼。"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "### Implementing the Bridging Header",
+      "source_content_hash": "a33da4499ec14e51dc6cba9348786b371fde908456ca213e8c71d43f2cddb1ac",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 實作橋接標頭"
+      }
+    },
+    {
+      "segment_id": "c68501e5",
+      "source_content": ":::note\nIf you are a library author, developing a native module that is going to be distributed as a separate library, this step is not required.\n:::",
+      "source_content_hash": "42ce9d70ad8ae620effc7cde5fad1b8008a3b3f1dc739e34b5cf5b555fe735ee",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n若您是函式庫作者，正在開發將作為獨立函式庫分發的原生模組，則此步驟並非必要。\n:::"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "The last required step to connect the Swift code with the Objective-C++ counterpart is a bridging header.",
+      "source_content_hash": "78e2b906f103b68c6a66c6f1833b445aa7c52d0ca82a0b2fd2c66a04dd0ca862",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "連接 Swift 程式碼與 Objective-C++ 對應部分的最後必要步驟是橋接標頭檔（bridging header）。"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "A bridging header is an header where you can import all the Objective-C header files that needs to be visible by your swift code.",
+      "source_content_hash": "a394e2c010c7aaa70407e4d310598c6bd28fd4d0be42d5b351ed0e01a42e694d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "橋接標頭檔是一個可匯入所有需讓 Swift 程式碼可見的 Objective-C 標頭檔的檔案。"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "You might already have a bridging header in your codebase, but in case you haven't, you can create a new one by following these steps:",
+      "source_content_hash": "a771b71db41507b35cf813b5e48f75b883bba072479a77ae5a023ebd24872ade",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您的程式碼庫中可能已有橋接標頭檔，若尚未建立，可依下列步驟新增："
+      }
+    },
+    {
+      "segment_id": "f4e38e16",
+      "source_content": "1. In Xcode, create a new file and call it `\"SampleApp-Bridging-Header.h\"`\n2. Update the content of the `\"SampleApp-Bridging-Header.h\"` like this:",
+      "source_content_hash": "35f000e67de7ce3f3205eff8ba05f95db010c2fd77bb3cd32cf00c550d7a9900",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在 Xcode 中建立新檔案，命名為 `\"SampleApp-Bridging-Header.h\"`\n2. 更新 `\"SampleApp-Bridging-Header.h\"` 內容如下："
+      }
+    },
+    {
+      "segment_id": "d58c5dc0",
+      "source_content": "```diff title=\"SampleApp-Bridging-Header.h\"\n//\n//  Use this file to import your target's public headers that you would like to expose to Swift.\n//\n\n+ #import <React-RCTAppDelegate/RCTDefaultReactNativeFactoryDelegate.h>\n```",
+      "source_content_hash": "9697824023d55dfca7a758a0cfcd643b1d062f7b8fda97a3ef5ac16dbdf509c0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d58c5dc0"
+      }
+    },
+    {
+      "segment_id": "0c315794",
+      "source_content": "3. Link the Bridging header in your project:\n   1. In the project navigator, select your app name (`SampleApp`, on the left)\n   2. Click on `Build Settings`\n   3. Filter for `\"Bridging Header\"`\n   4. Add the relative path to the \"Bridging Header\", in the example it is `SampleApp-Bridging-Header.h`",
+      "source_content_hash": "e475b077523a53dd3a4be4bdc04e670ea6f5adaa6bb8bd0931f0ed8928660055",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "3. 在專案中連結橋接標頭檔：\n   1. 在專案導覽器中選擇您的應用名稱（左側的 `SampleApp`）\n   2. 點擊 `Build Settings`\n   3. 篩選 `\"Bridging Header\"`\n   4. 新增橋接標頭檔的相對路徑，範例中為 `SampleApp-Bridging-Header.h`"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "![Bridging Header](/docs/assets/BridgingHeader.png)",
+      "source_content_hash": "cca9d357816950c15ae5ac67d948be08ccccd913b52f63aedefb40f5007a8ec3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![橋接標頭檔](/docs/assets/BridgingHeader.png)"
+      }
+    },
+    {
+      "segment_id": "16ae54ea",
+      "source_content": "## Build and Run Your App",
+      "source_content_hash": "3633e80bacbbd5a47b29aca7bf66de7d51f5dac431fde08782fe1dbc0e928a07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 建置並執行您的應用"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "Now you can follow the last step of the [Native Module's guide](/docs/turbo-native-modules-introduction#build-and-run-your-code-on-a-simulator) and you should see your app running with a Native Module written in Swift.",
+      "source_content_hash": "1a79c00a278d41051a1f0321d17dfd483aab0f9472ba34eab2ff44b8be0f8133",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您可以依照[原生模組指南](/docs/turbo-native-modules-introduction#build-and-run-your-code-on-a-simulator)的最後步驟操作，即可看到應用執行時使用 Swift 編寫的原生模組。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/the-new-architecture/turbo-modules-with-swift.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.169551+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "4fc593c1e1bf20b47f6e42560b0970405cf14c9fe03106e609b74eecd180a765"
+  }
+}

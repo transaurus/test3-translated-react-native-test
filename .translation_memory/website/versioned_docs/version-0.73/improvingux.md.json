@@ -1,0 +1,222 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/improvingux.md",
+  "source_file_content_hash": "cd6cface44d122183222e0ff51362da4a66b72377896199bfd3b6ae93301fed1",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: improvingux\ntitle: Improving User Experience\n---",
+      "source_content_hash": "87f93a12fb4908d6682e54035ae4c1023c7d5454b895e6756b24bfd18b446465",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Configure text inputs",
+      "source_content_hash": "0b9703434ab7e7270197ff1b2f4e93beb1236ff820792917bf5efbc27db460e4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 設定文字輸入欄位"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Entering text on touch phone is a challenge - small screen, software keyboard. But based on what kind of data you need, you can make it easier by properly configuring the text inputs:",
+      "source_content_hash": "1d81f13a0ad48641abeb167f4b19f036663bbfd132ab03930fec15c77ef78d1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在觸控手機上輸入文字是一項挑戰——螢幕小、軟體鍵盤。但根據您需要的資料類型，可以透過適當配置文字輸入欄位來簡化操作："
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- Focus the first field automatically\n- Use placeholder text as an example of expected data format\n- Enable or disable autocapitalization and autocorrect\n- Choose keyboard type (e.g. email, numeric)\n- Make sure the return button focuses the next field or submits the form",
+      "source_content_hash": "ad5f7e48c01446a4ac8e11286eedcb7fd738f9dc5616f2353e0128ff382d0f12",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 自動聚焦第一個欄位\n- 使用預留文字作為預期資料格式的範例\n- 啟用或停用自動大寫和自動校正\n- 選擇鍵盤類型（例如電子郵件、數字）\n- 確保返回按鈕能聚焦下一個欄位或提交表單"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Check out [`TextInput` docs](textinput.md) for more configuration options.",
+      "source_content_hash": "5406ed011c926db8bd47dab799c9f833686928a73aa501e23b72fed45490b2fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多配置選項請參閱 [`TextInput` 文件](textinput.md)。"
+      }
+    },
+    {
+      "segment_id": "8f488ab5",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=TextInput%20form%20example&ext=js\nimport React, {useState, useRef} from 'react';\nimport {\n  Alert,\n  Text,\n  StatusBar,\n  TextInput,\n  View,\n  StyleSheet,\n} from 'react-native';\n\nconst App = () => {\n  const emailInput = useRef(null);\n  const [name, setName] = useState('');\n  const [email, setEmail] = useState('');\n\n  const submit = () => {\n    Alert.alert(\n      `Welcome, ${name}! Confirmation email has been sent to ${email}`,\n    );\n  };\n\n  return (\n    <View style={styles.container}>\n      <StatusBar barStyle=\"light-content\" />\n      <View style={styles.header}>\n        <Text style={styles.description}>\n          This demo shows how using available TextInput customizations can make\n          forms much easier to use. Try completing the form and notice that\n          different fields have specific optimizations and the return key\n          changes from focusing next input to submitting the form.\n        </Text>\n      </View>\n      <TextInput\n        style={styles.input}\n        value={name}\n        onChangeText={text => setName(text)}\n        placeholder=\"Full Name\"\n        autoFocus={true}\n        autoCapitalize=\"words\"\n        autoCorrect={true}\n        keyboardType=\"default\"\n        returnKeyType=\"next\"\n        onSubmitEditing={() => emailInput.current.focus()}\n        blurOnSubmit={false}\n      />\n      <TextInput\n        style={styles.input}\n        value={email}\n        onChangeText={text => setEmail(text)}\n        ref={emailInput}\n        placeholder=\"email@example.com\"\n        autoCapitalize=\"none\"\n        autoCorrect={false}\n        keyboardType=\"email-address\"\n        returnKeyType=\"send\"\n        onSubmitEditing={submit}\n        blurOnSubmit={true}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  header: {\n    paddingTop: 64,\n    padding: 20,\n    backgroundColor: '#282c34',\n  },\n  description: {\n    fontSize: 14,\n    color: 'white',\n  },\n  input: {\n    margin: 20,\n    marginBottom: 0,\n    height: 34,\n    paddingHorizontal: 10,\n    borderRadius: 4,\n    borderColor: '#ccc',\n    borderWidth: 1,\n    fontSize: 16,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=TextInput%20form%20example&ext=tsx\nimport React, {useState, useRef} from 'react';\nimport {\n  Alert,\n  Text,\n  StatusBar,\n  TextInput,\n  View,\n  StyleSheet,\n} from 'react-native';\n\nconst App = () => {\n  const emailInput = useRef<TextInput>(null);\n  const [name, setName] = useState('');\n  const [email, setEmail] = useState('');\n\n  const submit = () => {\n    Alert.alert(\n      `Welcome, ${name}! Confirmation email has been sent to ${email}`,\n    );\n  };\n\n  return (\n    <View style={styles.container}>\n      <StatusBar barStyle=\"light-content\" />\n      <View style={styles.header}>\n        <Text style={styles.description}>\n          This demo shows how using available TextInput customizations can make\n          forms much easier to use. Try completing the form and notice that\n          different fields have specific optimizations and the return key\n          changes from focusing next input to submitting the form.\n        </Text>\n      </View>\n      <TextInput\n        style={styles.input}\n        value={name}\n        onChangeText={text => setName(text)}\n        placeholder=\"Full Name\"\n        autoFocus={true}\n        autoCapitalize=\"words\"\n        autoCorrect={true}\n        keyboardType=\"default\"\n        returnKeyType=\"next\"\n        onSubmitEditing={() => emailInput.current?.focus()}\n        blurOnSubmit={false}\n      />\n      <TextInput\n        style={styles.input}\n        value={email}\n        onChangeText={text => setEmail(text)}\n        ref={emailInput}\n        placeholder=\"email@example.com\"\n        autoCapitalize=\"none\"\n        autoCorrect={false}\n        keyboardType=\"email-address\"\n        returnKeyType=\"send\"\n        onSubmitEditing={submit}\n        blurOnSubmit={true}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  header: {\n    paddingTop: 64,\n    padding: 20,\n    backgroundColor: '#282c34',\n  },\n  description: {\n    fontSize: 14,\n    color: 'white',\n  },\n  input: {\n    margin: 20,\n    marginBottom: 0,\n    height: 34,\n    paddingHorizontal: 10,\n    borderRadius: 4,\n    borderColor: '#ccc',\n    borderWidth: 1,\n    fontSize: 16,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "db0677f89ff07061663c01962c7244cfe56cb0b676cd90c80a1beb557def178a",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f488ab5"
+      }
+    },
+    {
+      "segment_id": "4e8f71c1",
+      "source_content": "## Manage layout when keyboard is visible",
+      "source_content_hash": "e83e18dcb35bfdc8d602b666418c99b39c9d7ec27985bb85c1eb75c2079bf230",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 管理鍵盤顯示時的版面配置"
+      }
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "Software keyboard takes almost half of the screen. If you have interactive elements that can get covered by the keyboard, make sure they are still accessible by using the [`KeyboardAvoidingView` component](keyboardavoidingview.md).",
+      "source_content_hash": "d353133b9e19a4d6a707dc865ffcd0ac86f6bf5dbf9a284ea586d52f1a1e3cfa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "軟體鍵盤幾乎佔據半個螢幕。如果有互動元素可能被鍵盤遮蓋，請使用 [`KeyboardAvoidingView` 元件](keyboardavoidingview.md) 確保它們仍可存取。"
+      }
+    },
+    {
+      "segment_id": "e313eecd",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=KeyboardAvoidingView%20example&ext=js\nimport React, {useState, useRef} from 'react';\nimport {\n  Alert,\n  Text,\n  Button,\n  StatusBar,\n  TextInput,\n  KeyboardAvoidingView,\n  View,\n  StyleSheet,\n} from 'react-native';\n\nconst App = () => {\n  const emailInput = useRef(null);\n  const [email, setEmail] = useState('');\n\n  const submit = () => {\n    emailInput.current.blur();\n    Alert.alert(`Confirmation email has been sent to ${email}`);\n  };\n\n  return (\n    <View style={styles.container}>\n      <StatusBar barStyle=\"light-content\" />\n      <View style={styles.header}>\n        <Text style={styles.description}>\n          This demo shows how to avoid covering important UI elements with the\n          software keyboard. Focus the email input below and notice that the\n          Sign Up button and the text adjusted positions to make sure they are\n          not hidden under the keyboard.\n        </Text>\n      </View>\n      <KeyboardAvoidingView behavior=\"padding\" style={styles.form}>\n        <TextInput\n          style={styles.input}\n          value={email}\n          onChangeText={text => setEmail(text)}\n          ref={emailInput}\n          placeholder=\"email@example.com\"\n          autoCapitalize=\"none\"\n          autoCorrect={false}\n          keyboardType=\"email-address\"\n          returnKeyType=\"send\"\n          onSubmitEditing={submit}\n          blurOnSubmit={true}\n        />\n        <View>\n          <Button title=\"Sign Up\" onPress={submit} />\n          <Text style={styles.legal}>Some important legal fine print here</Text>\n        </View>\n      </KeyboardAvoidingView>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  header: {\n    paddingTop: 64,\n    padding: 20,\n    backgroundColor: '#282c34',\n  },\n  description: {\n    fontSize: 14,\n    color: 'white',\n  },\n  input: {\n    margin: 20,\n    marginBottom: 0,\n    height: 34,\n    paddingHorizontal: 10,\n    borderRadius: 4,\n    borderColor: '#ccc',\n    borderWidth: 1,\n    fontSize: 16,\n  },\n  legal: {\n    margin: 10,\n    color: '#333',\n    fontSize: 12,\n    textAlign: 'center',\n  },\n  form: {\n    flex: 1,\n    justifyContent: 'space-between',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=KeyboardAvoidingView%20example&ext=tsx\nimport React, {useState, useRef} from 'react';\nimport {\n  Alert,\n  Text,\n  Button,\n  StatusBar,\n  TextInput,\n  KeyboardAvoidingView,\n  View,\n  StyleSheet,\n} from 'react-native';\n\nconst App = () => {\n  const emailInput = useRef<TextInput>(null);\n  const [email, setEmail] = useState('');\n\n  const submit = () => {\n    emailInput.current?.blur();\n    Alert.alert(`Confirmation email has been sent to ${email}`);\n  };\n\n  return (\n    <View style={styles.container}>\n      <StatusBar barStyle=\"light-content\" />\n      <View style={styles.header}>\n        <Text style={styles.description}>\n          This demo shows how to avoid covering important UI elements with the\n          software keyboard. Focus the email input below and notice that the\n          Sign Up button and the text adjusted positions to make sure they are\n          not hidden under the keyboard.\n        </Text>\n      </View>\n      <KeyboardAvoidingView behavior=\"padding\" style={styles.form}>\n        <TextInput\n          style={styles.input}\n          value={email}\n          onChangeText={text => setEmail(text)}\n          ref={emailInput}\n          placeholder=\"email@example.com\"\n          autoCapitalize=\"none\"\n          autoCorrect={false}\n          keyboardType=\"email-address\"\n          returnKeyType=\"send\"\n          onSubmitEditing={submit}\n          blurOnSubmit={true}\n        />\n        <View>\n          <Button title=\"Sign Up\" onPress={submit} />\n          <Text style={styles.legal}>Some important legal fine print here</Text>\n        </View>\n      </KeyboardAvoidingView>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  header: {\n    paddingTop: 64,\n    padding: 20,\n    backgroundColor: '#282c34',\n  },\n  description: {\n    fontSize: 14,\n    color: 'white',\n  },\n  input: {\n    margin: 20,\n    marginBottom: 0,\n    height: 34,\n    paddingHorizontal: 10,\n    borderRadius: 4,\n    borderColor: '#ccc',\n    borderWidth: 1,\n    fontSize: 16,\n  },\n  legal: {\n    margin: 10,\n    color: '#333',\n    fontSize: 12,\n    textAlign: 'center',\n  },\n  form: {\n    flex: 1,\n    justifyContent: 'space-between',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "576b67efb7fc9feda0217689ba0442535b355958609eda0b443f6d7cc77f9dab",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e313eecd"
+      }
+    },
+    {
+      "segment_id": "086e47bd",
+      "source_content": "## Make tappable areas larger",
+      "source_content_hash": "279df215d65aa7d8ec59195ede837fe463cbd874719374e10be8390716dce372",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 擴大可點擊區域"
+      }
+    },
+    {
+      "segment_id": "94a47b80",
+      "source_content": "On mobile phones it's hard to be very precise when pressing buttons. Make sure all interactive elements are 44x44 or larger. One way to do this is to leave enough space for the element, `padding`, `minWidth` and `minHeight` style values can be useful for that. Alternatively, you can use [`hitSlop` prop](touchablewithoutfeedback.md#hitslop) to increase interactive area without affecting the layout. Here's a demo:",
+      "source_content_hash": "c108e3670badc79532626d95675c6d14a0a7c5a42ebf4d950e3447d955d78296",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在手機上按鈕時很難非常精準。確保所有互動元素尺寸為 44x44 或更大。一種方法是為元素留足夠空間，`padding`、`minWidth` 和 `minHeight` 樣式值對此很有用。或者，您可以使用 [`hitSlop` 屬性](touchablewithoutfeedback.md#hitslop) 在不影響版面的情況下增加互動區域。以下是示範："
+      }
+    },
+    {
+      "segment_id": "9f4bf2e5",
+      "source_content": "```SnackPlayer name=HitSlop%20example\nimport React from 'react';\nimport {\n  Text,\n  StatusBar,\n  TouchableOpacity,\n  View,\n  StyleSheet,\n} from 'react-native';\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <StatusBar barStyle=\"light-content\" />\n      <View style={styles.header}>\n        <Text style={styles.description}>\n          This demo shows how using hitSlop can make interactive elements much\n          easier to tap without changing their layout and size. Try pressing\n          each button quickly multiple times and notice which one is easier to\n          hit.\n        </Text>\n      </View>\n      <View style={styles.content}>\n        <TouchableOpacity>\n          <Text style={styles.label}>Without hitSlop</Text>\n        </TouchableOpacity>\n        <View style={styles.separator} />\n        <View style={styles.preview}>\n          <TouchableOpacity\n            hitSlop={{top: 20, left: 20, bottom: 20, right: 20}}>\n            <Text style={styles.label}>With hitSlop</Text>\n          </TouchableOpacity>\n        </View>\n      </View>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  header: {\n    paddingTop: 64,\n    padding: 20,\n    backgroundColor: '#282c34',\n  },\n  description: {\n    fontSize: 14,\n    color: 'white',\n  },\n  content: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  label: {\n    fontSize: 18,\n    color: '#336699',\n    textAlign: 'center',\n    borderColor: '#ddd',\n    borderWidth: 1,\n  },\n  separator: {\n    height: 50,\n  },\n  preview: {\n    padding: 20,\n    backgroundColor: '#f6f6f6',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "75f4c701eaeee88bb239687ebe5832f67c001e5b8b1bf4bcd871bdb9875c60f4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9f4bf2e5"
+      }
+    },
+    {
+      "segment_id": "dd33c745",
+      "source_content": "## Use Android Ripple",
+      "source_content_hash": "6a9311c6c5e7bc34cb6beda51046edc19ca1532f30d456e81271482f38479894",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 Android 漣漪效果"
+      }
+    },
+    {
+      "segment_id": "e548f48f",
+      "source_content": "Android API 21+ uses the material design ripple to provide user with feedback when they touch an interactable area on the screen. React Native exposes this through the [`TouchableNativeFeedback` component](touchablenativefeedback.md). Using this touchable effect instead of opacity or highlight will often make your app feel much more fitting on the platform. That said, you need to be careful when using it because it doesn't work on iOS or on Android API < 21, so you will need to fallback to using one of the other Touchable components on iOS. You can use a library like [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) to handle the platform differences for you.",
+      "source_content_hash": "ae55c6b1eec83d238bfb7fb11f1be1f495e57a65d17c00bb55b735980ffdf8ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android API 21+ 使用 Material Design 漣漪效果在使用者觸控螢幕互動區域時提供反饋。React Native 透過 [`TouchableNativeFeedback` 元件](touchablenativefeedback.md) 實現此效果。使用這種觸控效果而非透明度或高亮，通常會讓您的應用更符合平台風格。但需注意它不支援 iOS 或 Android API < 21，因此需要在 iOS 上回退使用其他 Touchable 元件。您可以使用像 [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) 這樣的函式庫來處理平台差異。"
+      }
+    },
+    {
+      "segment_id": "74f81e8f",
+      "source_content": "```SnackPlayer name=Android%20Ripple%20example&supportedPlatforms=android\nimport React from 'react';\nimport {\n  TouchableNativeFeedback,\n  TouchableOpacity,\n  TouchableHighlight,\n  Platform,\n  Text,\n  View,\n  StyleSheet,\n} from 'react-native';\n\nconst SUPPORTS_NATIVE_FEEDBACK =\n  Platform.OS === 'android' && Platform.Version >= 21;\n\nconst noop = () => {};\nconst defaultHitSlop = {top: 15, bottom: 15, right: 15, left: 15};\n\nconst ButtonsWithNativeFeedback = () => (\n  <View style={styles.buttonContainer}>\n    <TouchableNativeFeedback\n      onPress={noop}\n      background={TouchableNativeFeedback.Ripple('#06bcee', false)}\n      hitSlop={defaultHitSlop}>\n      <View style={styles.button}>\n        <Text style={styles.text}>This is a ripple respecting borders</Text>\n      </View>\n    </TouchableNativeFeedback>\n    <TouchableNativeFeedback\n      onPress={noop}\n      background={TouchableNativeFeedback.Ripple('#06bcee', true)}\n      hitSlop={defaultHitSlop}>\n      <View style={styles.button}>\n        <Text style={styles.text}>\n          This is ripple without borders, this is more useful for icons, eg: in\n          tab bar\n        </Text>\n      </View>\n    </TouchableNativeFeedback>\n  </View>\n);\n\nconst Buttons = () => (\n  <View style={styles.buttonContainer}>\n    <TouchableOpacity\n      style={styles.button}\n      onPress={noop}\n      hitSlop={defaultHitSlop}>\n      <Text style={styles.text}>This is opacity</Text>\n    </TouchableOpacity>\n    <TouchableHighlight\n      style={styles.button}\n      onPress={noop}\n      hitSlop={defaultHitSlop}\n      underlayColor=\"#06bcee\">\n      <Text style={styles.text}>This is highlight</Text>\n    </TouchableHighlight>\n  </View>\n);\n\nconst App = () => (\n  <View style={styles.container}>\n    {SUPPORTS_NATIVE_FEEDBACK ? <ButtonsWithNativeFeedback /> : <Buttons />}\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n    paddingTop: 64,\n    backgroundColor: '#fff',\n  },\n  buttonContainer: {\n    margin: 24,\n  },\n  text: {\n    fontSize: 20,\n    color: '#fff',\n    fontWeight: 'bold',\n  },\n  button: {\n    padding: 25,\n    borderRadius: 5,\n    backgroundColor: '#000',\n    marginBottom: 30,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "957328a63dd569d7f5a1399ab7f2723d0baba348323443d1b815aab1f54a5a78",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_74f81e8f"
+      }
+    },
+    {
+      "segment_id": "08ad3c7d",
+      "source_content": "## Screen orientation lock",
+      "source_content_hash": "c7453b70bdd864abd07e4a89b327c2cc212f9f8052cc3aca99817e6ebd602dd7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 螢幕方向鎖定"
+      }
+    },
+    {
+      "segment_id": "c6dee347",
+      "source_content": "Multiple screen orientations should work fine by default unless you're using `Dimensions` API and don't handle orientation changes. If you don't want to support multiple screen orientations, you can lock the screen orientation to either portrait or landscape.",
+      "source_content_hash": "eafd41d83f6c71213f40438e2065e2047d1464c3dda9e150ecddb8cf61ade9ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除非您使用 `Dimensions` API 且未處理方向變更，否則多種螢幕方向預設應能正常運作。如果不需支援多種螢幕方向，可將螢幕鎖定為直向或橫向。"
+      }
+    },
+    {
+      "segment_id": "11ca2290",
+      "source_content": "On iOS, in the General tab and Deployment Info section of Xcode enable the Device Orientation you want to support (ensure you have selected iPhone from the Devices menu when making the changes). For Android, open the AndroidManifest.xml file and within the activity element add `'android:screenOrientation=\"portrait\"'` to lock to portrait or `'android:screenOrientation=\"landscape\"'` to lock to landscape.",
+      "source_content_hash": "4fd0c419fa9a112def28756c959823665fb1a7080273d044eee4a4ae14fc3cde",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 上，於 Xcode 的 General 標籤和 Deployment Info 部分啟用您想支援的裝置方向（確保在變更時已從 Devices 選單中選擇 iPhone）。對於 Android，開啟 AndroidManifest.xml 文件並在 activity 元素中添加 `'android:screenOrientation=\"portrait\"'` 鎖定為直向，或 `'android:screenOrientation=\"landscape\"'` 鎖定為橫向。"
+      }
+    },
+    {
+      "segment_id": "c73a7e79",
+      "source_content": "# Learn more",
+      "source_content_hash": "70462298151176112bf86b408dbe6f2c3764855a687985bc691e70ceb1a4514f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 了解更多"
+      }
+    },
+    {
+      "segment_id": "24b35bc5",
+      "source_content": "[Material Design](https://material.io/) and [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) are great resources for learning more about designing for mobile platforms.",
+      "source_content_hash": "4d12fb25d04e0e97212aeb69aa72fea2215647d7e5e890378a37558b25a4047d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Material Design](https://material.io/) 和 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) 是學習行動平台設計的絕佳資源。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/improvingux.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.499459+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "cd6cface44d122183222e0ff51362da4a66b72377896199bfd3b6ae93301fed1"
+  }
+}

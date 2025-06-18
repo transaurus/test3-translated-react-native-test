@@ -1,0 +1,362 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2016-12-05-easier-upgrades.md",
+  "source_file_content_hash": "38ac92255ee39a767f714882d21c5fbb9bb43f88aa3b3d9f9d4663bb711b53e8",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Easier Upgrades Thanks to Git\nauthor: Nicolas Cuillery\nauthorTitle: JavaScript consultant and trainer at Zenika\nauthorURL: 'https://twitter.com/ncuillery'\nauthorImageURL: 'https://fr.gravatar.com/userimage/78328995/184460def705a160fd8edadc04f60eaf.jpg?size=128'\nauthorTwitter: ncuillery\ntags: [announcement]\n---",
+      "source_content_hash": "c61c2d13e48d1efc749c44480e9d1116716a59d9bca7552a5d65890f465b0670",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Upgrading to new versions of React Native has been difficult. You might have seen something like this before:",
+      "source_content_hash": "de01f5ad2948979e8ff72ed6517e6a8fa4db47f91c8b8abb436020e4ff7d9424",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "升級 React Native 版本向來是個難題。你可能曾遇過類似以下情況："
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "![](/blog/assets/git-upgrade-conflict.png)",
+      "source_content_hash": "9a27af6287c68c34af96654f2dd88356cdca67fdff5fc5c529c027a146d0014e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/git-upgrade-conflict.png)"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "None of those options is ideal. By overwriting the file we lose our local changes. By not overwriting we don't get the latest updates.",
+      "source_content_hash": "f639b75b9aa0ace8c2a3da16e6dd942bdaefcb7c8c545840973a8dee0cd74a83",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些選項都不理想。覆寫檔案會導致本地修改遺失，不覆寫則無法取得最新更新。"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "Today I am proud to introduce a new tool that helps solve this problem. The tool is called `react-native-git-upgrade` and uses Git behind the scenes to resolve conflicts automatically whenever possible.",
+      "source_content_hash": "8b73f7a96158c126e137422d4391e98d049052b90f323b17d518f786f7d5234a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我很榮幸介紹一款解決此問題的新工具。該工具名為 `react-native-git-upgrade`，背後運用 Git 技術在可能情況下自動解決衝突。"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "## Usage",
+      "source_content_hash": "63bfd61a0561b255a2caa0a2e3add091ca7e327f2fa06a407cbb2ff341b858d8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用方式"
+      }
+    },
+    {
+      "segment_id": "265557aa",
+      "source_content": "> **Requirement**: Git has to be available in the `PATH`. Your project doesn't have to be managed by Git.",
+      "source_content_hash": "0a6c73ddacbd2f10c084e1dbca73ca5a96803c9375a7503f626b1f71af2051c1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **必要條件**：Git 必須存在於 `PATH` 環境變數中。專案本身無需受 Git 管理。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Install `react-native-git-upgrade` globally:",
+      "source_content_hash": "9f4802898a859cd725e7c0ca92bda0b2f4d8ee5a34dd90825cf3f5f91e8b3f14",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "全域安裝 `react-native-git-upgrade`："
+      }
+    },
+    {
+      "segment_id": "3569d545",
+      "source_content": "```shell\n$ npm install -g react-native-git-upgrade\n```",
+      "source_content_hash": "61d895e2273a33b11569b1846cb6a353612ffd66cf6b9861a863da7398bcb0ba",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3569d545"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "or, using [Yarn](https://yarnpkg.com/):",
+      "source_content_hash": "3ec5e55179ed648f4a14d307638250d820a92911b7e96b189e930c82af498163",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "或使用 [Yarn](https://yarnpkg.com/)："
+      }
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```shell\n$ yarn global add react-native-git-upgrade\n```",
+      "source_content_hash": "779d71019dd8dd216879afe762e3979d4bac4eb87a586ef44a72059d9afad3a9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cb57d798"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "Then, run it inside your project directory:",
+      "source_content_hash": "4368b25bb471043b76a0e6ad06aab8a69a4795ef88c30a7538f6252b00a1d1aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著在專案目錄內執行："
+      }
+    },
+    {
+      "segment_id": "be2d5397",
+      "source_content": "```shell\n$ cd MyProject\n$ react-native-git-upgrade 0.38.0\n```",
+      "source_content_hash": "17257b0bfcf9586d73d8b3eedfb0d5349c712f37b7622dfbd5c7181b2f1a2eab",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_be2d5397"
+      }
+    },
+    {
+      "segment_id": "3a248751",
+      "source_content": "> Note: Do **not** run 'npm install' to install a new version of `react-native`. The tool needs to be able to compare the old and new project template to work correctly. Simply run it inside your app folder as shown above, while still on the old version.",
+      "source_content_hash": "87d0cc1241451cb7023f68dd5f4be8a12b3073197054a5076f568cc76e34e4be",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：請**不要**執行 'npm install' 來安裝新版 `react-native`。此工具需比對新舊專案模板才能正確運作。只需如上所示在舊版專案目錄內直接執行即可。"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "Example output:",
+      "source_content_hash": "5cd14a4bfcdbbc322d152d064ba25916845608f0a18a54a1d26ccdf679156032",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例輸出："
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "![](/blog/assets/git-upgrade-output.png)",
+      "source_content_hash": "590c4431c850f04900120756d5e5e7af29aa8cb32b5b8245d0883fb65f08c4b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/git-upgrade-output.png)"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "You can also run `react-native-git-upgrade` with no arguments to upgrade to the latest version of React Native.",
+      "source_content_hash": "c5f41890b2319822bf056da1342c23a2cdcb856388ed0c5cfe9809888ff7db20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "亦可直接執行 `react-native-git-upgrade` 不帶參數，即會升級至最新 React Native 版本。"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "We try to preserve your changes in Android and iOS build files, so you don't need to run `react-native link` after an upgrade.",
+      "source_content_hash": "76ef416aa769bc701877bc8c9535c7ac778fd46d32bbd6a6ed937fd705523e1b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們會盡量保留你對 Android 與 iOS 建置檔案的修改，因此升級後無需執行 `react-native link`。"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "We have designed the implementation to be as little intrusive as possible. It is entirely based on a local Git repository created on-the-fly in a temporary directory. It won't interfere with your project repository (no matter what VCS you use: Git, SVN, Mercurial, ... or none). Your sources are restored in case of unexpected errors.",
+      "source_content_hash": "60196cd94fd0547b47b200ae6fc8ba60900a06f0a03b9a39f78046080adf13b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此實作設計盡可能降低侵入性。完全基於臨時目錄中即時建立的本地 Git 倉庫，不會干擾你的專案倉庫（無論使用何種版本控制系統：Git、SVN、Mercurial...或無）。若發生意外錯誤，原始碼將被還原。"
+      }
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "## How does it work?",
+      "source_content_hash": "cabe7b4ea1251edc235dc25fdf3eef20e8c6fa0220386c0293c892724a4fb177",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 運作原理"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "The key step is generating a Git patch. The patch contains all the changes made in the React Native templates between the version your app is using and the new version.",
+      "source_content_hash": "60b9daff3e500f607d723756a62f548c1b49bc3605aa9c72a501e45a3fc0a077",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "關鍵步驟在於產生 Git 補丁。該補丁包含 React Native 模板從當前版本到新版本之間的所有變更。"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "To obtain this patch, we need to generate an app from the templates embedded in the `react-native` package inside your `node_modules` directory (these are the same templates the `react-native init` commands uses). Then, after the native apps have been generated from the templates in both the current version and the new version, Git is able to produce a patch that is adapted to your project (i.e. containing your app name):",
+      "source_content_hash": "5c879af690430caa94dab51f2cf25de21feaf1cff9b79a3e1b71c17df7d5ff7e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為取得此補丁，我們需要從 `node_modules` 目錄下 `react-native` 套件內嵌的模板生成應用程式（這些模板與 `react-native init` 指令使用的相同）。接著，當原生應用程式分別從當前版本與新版本的模板生成後，Git 便能產出符合專案的補丁（例如包含你的應用名稱）："
+      }
+    },
+    {
+      "segment_id": "3c08ed05",
+      "source_content": "```\n[...]\n\ndiff --git a/ios/MyAwesomeApp/Info.plist b/ios/MyAwesomeApp/Info.plist\nindex e98ebb0..2fb6a11 100644\n--- a/ios/MyAwesomeApp/Info.plist\n+++ b/ios/MyAwesomeApp/Info.plist\n@@ -45,7 +45,7 @@\n        <dict>\n            <key>localhost</key>\n            <dict>\n-               <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>\n+               <key>NSExceptionAllowsInsecureHTTPLoads</key>\n                <true/>\n            </dict>\n        </dict>\n[...]\n```",
+      "source_content_hash": "2af2bfa10c2dd65ec1f04419b99dbc9b532f31039e233ff83e28a80c6dccfe34",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3c08ed05"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "All we need now is to apply this patch to your source files. While the old `react-native upgrade` process would have prompted you for any small difference, Git is able to merge most of the changes automatically using its 3-way merge algorithm and eventually leave us with familiar conflict delimiters:",
+      "source_content_hash": "b883d1c1d252a0dc80eabfb13a9a00e35d8c4b6c47f1835e9fbc36491d0381df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後只需將此補丁套用至原始碼檔案。舊版 `react-native upgrade` 流程會要求確認每個微小差異，而 Git 能透過三方合併演算法自動整合多數變更，最終僅留下熟悉的衝突標記："
+      }
+    },
+    {
+      "segment_id": "9f4336b3",
+      "source_content": "```\n    13B07F951A680F5B00A75B9A /* Release */ = {\n      isa = XCBuildConfiguration;\n      buildSettings = {\n        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;\n<<<<<<< ours\n        CODE_SIGN_IDENTITY = \"iPhone Developer\";\n        FRAMEWORK_SEARCH_PATHS = (\n          \"$(inherited)\",\n          \"$(PROJECT_DIR)/HockeySDK.embeddedframework\",\n          \"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework\",\n        );\n=======\n        CURRENT_PROJECT_VERSION = 1;\n>>>>>>> theirs\n        HEADER_SEARCH_PATHS = (\n          \"$(inherited)\",\n          /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,\n          \"$(SRCROOT)/../node_modules/react-native/React/**\",\n          \"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**\",\n        );\n```",
+      "source_content_hash": "b1c64c7ba03dbfb91fd43bf87dba3cf9e71e787de17e29c121be97739eda005b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9f4336b3"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "These conflicts are generally easy to reason about. The delimiter **ours** stands for \"your team\" whereas **theirs** could be seen as \"the React Native team\".",
+      "source_content_hash": "94a125a9baee50e8d3c24244ac1fb6ffd45081698416fd31d14db69ceac5c65b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些衝突通常易於理解。標記 **ours** 代表「你的團隊」，而 **theirs** 可視為「React Native 團隊」。"
+      }
+    },
+    {
+      "segment_id": "c7c92a79",
+      "source_content": "## Why introduce a new global package?",
+      "source_content_hash": "12bfeb96aed11593dce9117778bb35f5e3cbf14c4679be22eb7b1ac17722c0ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 為何要引入新全域套件？"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "React Native comes with a global CLI (the [react-native-cli](https://www.npmjs.com/package/react-native-cli) package) which delegates commands to the local CLI embedded in the `node_modules/react-native/local-cli` directory.",
+      "source_content_hash": "72f75943c3c03c5a15d8d5b9141d9aa971178979a5b30a993a54c71559c844f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 自帶全域 CLI（[react-native-cli](https://www.npmjs.com/package/react-native-cli) 套件），會將指令委派給 `node_modules/react-native/local-cli` 目錄中的本地 CLI。"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "As we mentioned above, the process has to be started from your current React Native version. If we had embedded the implementation in the local-cli, you wouldn't be able to enjoy this feature when using old versions of React Native. For example, you wouldn't be able to upgrade from 0.29.2 to 0.38.0 if this new upgrade code was only released in 0.38.0.",
+      "source_content_hash": "20c79a24e60147f113d51a89d1576d17cea243d5b90708e39f67255d3b03e574",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如前所述，此流程必須從當前 React Native 版本啟動。若將實作內嵌於 local-cli，使用舊版 React Native 時就無法享受此功能。例如，若此升級程式碼僅在 0.38.0 版釋出，你將無法從 0.29.2 升級至 0.38.0。"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "Upgrading based on Git is a big improvement in developer experience and it is important to make it available to everyone. By using a separate package [react-native-git-upgrade](https://www.npmjs.com/package/react-native-git-upgrade) installed globally you can use this new code today no matter what version of React Native your project is using.",
+      "source_content_hash": "37acda11a5b6d31dabdd94637f7993700a4a77da1821355945f391a3d5935770",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基於 Git 的升級方式大幅改善了開發者體驗，讓所有人都能使用這項功能至關重要。透過全域安裝的獨立套件 [react-native-git-upgrade](https://www.npmjs.com/package/react-native-git-upgrade)，無論您的專案使用哪個 React Native 版本，現在就能立即採用這項新功能。"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "One more reason is the recent [Yeoman wipeout](https://twitter.com/martinkonicek/status/800730190141857793) by Martin Konicek. We didn't want to get these Yeoman dependencies back into the `react-native` package to be able to evaluate the old template in order to create the patch.",
+      "source_content_hash": "488b1b591f7cbb435ad0c1c5c1ffa61bf7af2fc35ccae0c5321a19aa1b3013c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個原因是 Martin Konicek 近期執行的 [Yeoman 移除計畫](https://twitter.com/martinkonicek/status/800730190141857793)。我們不希望為了比對舊版模板來建立修補檔，而讓這些 Yeoman 相依套件重新回到 `react-native` 套件中。"
+      }
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "## Try it out and provide feedback",
+      "source_content_hash": "96ac44780d5f75ec4caa86d2183bed5a9c28c997ad06b3d34c83294b25621157",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 試用並提供意見回饋"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "As a conclusion, I would say, enjoy the feature and feel free [to suggest improvements, report issues](https://github.com/facebook/react-native/issues) and especially [send pull requests](https://github.com/facebook/react-native/pulls). Each environment is a bit different and each React Native project is different, and we need your feedback to make this work well for everyone.",
+      "source_content_hash": "98973eb8578b84ef06c577195be188106b1c3f663e675e334064f25420233811",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "總結來說，請盡情使用這項功能，並歡迎[提出改進建議、回報問題](https://github.com/facebook/react-native/issues)，特別是[發送 Pull Request](https://github.com/facebook/react-native/pulls)。每種開發環境與 React Native 專案都有差異，我們需要您的回饋來讓這項功能更完善。"
+      }
+    },
+    {
+      "segment_id": "638efb88",
+      "source_content": "### Thank you!",
+      "source_content_hash": "da5277bac39a74aca3711accbee4fd89af38bbc91317fc58bb356e1a4e7c3525",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 致謝"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "I would like to thank the awesome companies [Zenika](https://www.zenika.com) and [M6 Web (archived)](https://web.archive.org/web/20161230163633/http://www.groupem6.fr:80/le-groupe_en/activites/diversifications/m6-web.html) without whom none of this would have been possible!",
+      "source_content_hash": "92f749f818c8c3699bf433a79dcbba39dc2ee46eae327b785ba56f3d4e8d71b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "特別感謝優秀的公司 [Zenika](https://www.zenika.com) 與 [M6 Web (封存頁面)](https://web.archive.org/web/20161230163633/http://www.groupem6.fr:80/le-groupe_en/activites/diversifications/m6-web.html)，若沒有他們的協助，這一切將無法實現！"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2016-12-05-easier-upgrades.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.215515+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "38ac92255ee39a767f714882d21c5fbb9bb43f88aa3b3d9f9d4663bb711b53e8"
+  }
+}

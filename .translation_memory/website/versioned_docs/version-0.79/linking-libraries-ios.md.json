@@ -1,0 +1,252 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/linking-libraries-ios.md",
+  "source_file_content_hash": "f49f94e0b4aba27d433c7b93255846a84fbeca0e7ccc4c7572fc84d522c8af06",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: linking-libraries-ios\ntitle: Linking Libraries\n---",
+      "source_content_hash": "6274d725091e7ef777cfaa6a1ce08e21967d61b6a448bf138af556e1f2717302",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Not every app uses all the native capabilities, and including the code to support all those features would impact the binary size... But we still want to support adding these features whenever you need them.",
+      "source_content_hash": "847cb24d3770d9b232fcdfecf8a4cbd01c419d23df8705c43b922d11a762134e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "並非每個應用程式都會使用所有原生功能，包含支援這些功能的程式碼會影響二進位檔案大小...但我們仍希望在您需要時能支援新增這些功能。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "With that in mind we exposed many of these features as independent static libraries.",
+      "source_content_hash": "6e936f0f7839efd5d9f49bb9e27cd5a9bae114b36e7d9c352c19a7b0a54e8723",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基於這個考量，我們將許多這類功能以獨立的靜態函式庫形式提供。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "For most of the libs it will be as quick as dragging two files, sometimes a third step will be necessary, but no more than that.",
+      "source_content_hash": "d64ffec43636e85fb282205fa1a27efe72789aadf6a7eeda17581d54d92947d1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "大多數函式庫只需拖曳兩個檔案即可完成整合，有時需要第三步驟，但不會超過這個範圍。"
+      }
+    },
+    {
+      "segment_id": "0e7eb58c",
+      "source_content": ":::note\nAll the libraries we ship with React Native live in the `Libraries` folder in the root of the repository. Some of them are pure JavaScript, and you only need to `require` it.\nOther libraries also rely on some native code, in that case you'll have to add these files to your app, otherwise the app will throw an error as soon as you try to use the library.\n:::",
+      "source_content_hash": "98b20205af581cc667b4c61f93c9c96178f6ff7fab6ab0bd6c250db8d7480240",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n我們隨 React Native 提供的所有函式庫都存放在儲存庫根目錄的 `Libraries` 資料夾中。其中有些是純 JavaScript，您只需 `require` 即可使用。\n其他函式庫還依賴一些原生程式碼，這種情況下您必須將這些檔案加入您的應用程式，否則當您嘗試使用該函式庫時，應用程式會立即拋出錯誤。\n:::"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "## Here are the few steps to link your libraries that contain native code",
+      "source_content_hash": "99f6de5548abb823c4680d9a8519d96f4a4283f4f9a493b792abfd09f0983880",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 以下是連結包含原生程式碼函式庫的幾個步驟"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "### Automatic linking",
+      "source_content_hash": "5338ec724eeeae974d76257384d6ce458543abfdbb78017d23b719655651ab49",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 自動連結"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Install a library with native dependencies:",
+      "source_content_hash": "46c84294e0fd46634b05cd7becc2dc21ee6ff1f803fce8c83bf0b58390569f48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "安裝具有原生依賴的函式庫："
+      }
+    },
+    {
+      "segment_id": "41a8ae85",
+      "source_content": "```shell\nnpm install <library-with-native-dependencies> --save\n```",
+      "source_content_hash": "4fb128804f504eba5a600c7dd7c4755990c59002d1a29255ef4da8730b382a33",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41a8ae85"
+      }
+    },
+    {
+      "segment_id": "6b3596a2",
+      "source_content": ":::info\n`--save` or `--save-dev` flag is very important for this step. React Native will link your libs based on `dependencies` and `devDependencies` in your `package.json` file.\n:::",
+      "source_content_hash": "d61ca96176ae296ff0f7ced39d4fe8f23cba71677d4bdd8c480d0a016d495697",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n此步驟中 `--save` 或 `--save-dev` 標記非常重要。React Native 會根據您 `package.json` 檔案中的 `dependencies` 和 `devDependencies` 來連結您的函式庫。\n:::"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "That's it! Next time you build your app the native code will be linked thanks to the [autolinking](https://github.com/react-native-community/cli/blob/main/docs/autolinking.md) mechanism.",
+      "source_content_hash": "d985ca02736a0cee7365f4753a17ed79449b52f2d92f10397be48e04b9b97324",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "就是這樣！下次建置您的應用程式時，原生程式碼將透過[自動連結](https://github.com/react-native-community/cli/blob/main/docs/autolinking.md)機制完成連結。"
+      }
+    },
+    {
+      "segment_id": "0037ff70",
+      "source_content": "### Manual linking",
+      "source_content_hash": "27ad4bbc4f42613ed02b837dad82fd84bfe105017dcc6bb1ad51bfd774b54625",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 手動連結"
+      }
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "#### Step 1",
+      "source_content_hash": "23179f4d403dc5a18e4e227a4834577aab2722612b5b75af7d6d91f1d8d995a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 步驟 1"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "If the library has native code, there must be an `.xcodeproj` file inside its folder. Drag this file to your project on Xcode (usually under the `Libraries` group on Xcode);",
+      "source_content_hash": "aaf6f3da8ea55e1d28bf2212fe1f62091808d4c5e0249d32f095a87716bc913d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果函式庫包含原生程式碼，其資料夾內必須有一個 `.xcodeproj` 檔案。將此檔案拖曳到 Xcode 中的專案（通常在 Xcode 的 `Libraries` 群組下）；"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "![](/docs/assets/AddToLibraries.png)",
+      "source_content_hash": "21cdfc1e3fbd79d8f1e2be129422377664625a82094b68bc3a6d6fba9b4deb55",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/docs/assets/AddToLibraries.png)"
+      }
+    },
+    {
+      "segment_id": "9f9e64f5",
+      "source_content": "#### Step 2",
+      "source_content_hash": "8df5d7a9a06c93c96ef1c3d15b5fc9e10696c7b5b356eb6ff0df3a7f7880bac9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 步驟 2"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "Click on your main project file (the one that represents the `.xcodeproj`) select `Build Phases` and drag the static library from the `Products` folder inside the Library you are importing to `Link Binary With Libraries`",
+      "source_content_hash": "1d0b57eb249f60c5133b37ea20df9b9ae711aa543908f5111c0c8aa2682d537c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "點擊您的主要專案檔案（代表 `.xcodeproj` 的那個），選擇 `Build Phases`，然後從您要匯入的函式庫內的 `Products` 資料夾中，將靜態函式庫拖曳到 `Link Binary With Libraries`"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "![](/docs/assets/AddToBuildPhases.png)",
+      "source_content_hash": "a3bb275be6b378248b5d1784a063f60d0d09efda61671253dc03b4ee482ddebb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/docs/assets/AddToBuildPhases.png)"
+      }
+    },
+    {
+      "segment_id": "f44c1398",
+      "source_content": "#### Step 3",
+      "source_content_hash": "a2730e599548a4b00e608ea1c79f7925f0f502e8b2c5d3c31afa9a82daa6709c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 步驟 3"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "Not every library will need this step, what you need to consider is:",
+      "source_content_hash": "bd0a16bbbbfa613ba1f30f20babb6451c146d3428f4a731755907375ce3c82db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "並非所有函式庫都需要此步驟，您需要考慮的是："
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "_Do I need to know the contents of the library at compile time?_",
+      "source_content_hash": "7b5a24ccb57857874681d55ccde47636299b91ebbb9c172cf23b014eb7c629c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_我是否需要在編譯時知道函式庫的內容？_"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "What that means is, are you using this library on the native side or only in JavaScript? If you are only using it in JavaScript, you are good to go!",
+      "source_content_hash": "86a9de844c00c69d849805823ab7e1d7770aba3e0f7594f63b139f28689f3219",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這意味著，您是在原生端使用此函式庫，還是僅在 JavaScript 中使用？如果僅在 JavaScript 中使用，那麼您已經完成設定！"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "If you do need to call it from native, then we need to know the library's headers. To achieve that you have to go to your project's file, select `Build Settings` and search for `Header Search Paths`. There you should include the path to your library. (This documentation used to recommend using `recursive`, but this is no longer recommended, as it can cause subtle build failures, especially with CocoaPods.)",
+      "source_content_hash": "175f8698e4924c9f3d48a0b250687961e6855ae029b02786af299ce19936f5a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您確實需要從原生端呼叫它，那麼我們需要知道函式庫的標頭檔。為此，您需要前往專案檔案，選擇 `Build Settings` 並搜尋 `Header Search Paths`。在那裡您應包含函式庫的路徑。（此文件過去建議使用 `recursive`，但這不再推薦，因為它可能導致細微的建置失敗，特別是與 CocoaPods 一起使用時。）"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "![](/docs/assets/AddToSearchPaths.png)",
+      "source_content_hash": "09fdfedb2a173c6953b83b6fd35ca44a66c224ecfe782b498c98e101d62838cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/docs/assets/AddToSearchPaths.png)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/linking-libraries-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.004677+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "f49f94e0b4aba27d433c7b93255846a84fbeca0e7ccc4c7572fc84d522c8af06"
+  }
+}

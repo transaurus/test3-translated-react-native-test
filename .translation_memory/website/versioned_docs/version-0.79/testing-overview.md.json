@@ -1,0 +1,956 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/testing-overview.md",
+  "source_file_content_hash": "b4f3a3a706bd1ca368dd4c300c03feb5cc58a71ee80e4434d79efeaab1a01602",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: testing-overview\ntitle: Testing\nauthor: Vojtech Novak\nauthorURL: 'https://twitter.com/vonovak'\ndescription: This guide introduces React Native developers to the key concepts behind testing, how to write good tests, and what kinds of tests you can incorporate into your workflow.\n---",
+      "source_content_hash": "cc3bc2f94a2720f30ee8401600c5d977f53e8586abe234c83981cde61ac5cefc",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "As your codebase expands, small errors and edge cases you don’t expect can cascade into larger failures. Bugs lead to bad user experience and ultimately, business losses. One way to prevent fragile programming is to test your code before releasing it into the wild.",
+      "source_content_hash": "82f9ed96b6c3cea64a954435481331858938f94d01eb2c09264e891b9f99bad7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著程式碼庫擴展，未預期的小錯誤和邊緣案例可能引發更大規模的故障。錯誤會導致糟糕的使用者體驗，最終造成業務損失。預防脆弱程式設計的方法之一，是在程式碼發布前進行測試。"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "In this guide, we will cover different, automated ways to ensure your app works as expected, ranging from static analysis to end-to-end tests.",
+      "source_content_hash": "7fa116b8718fc97063881e920a7c20a7842401955ddf2fe289beb6dc305bfb12",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將涵蓋多種自動化測試方法，從靜態分析到端到端測試，確保應用程式如預期運作。"
+      }
+    },
+    {
+      "segment_id": "5da3670c",
+      "source_content": "<img src=\"/docs/assets/diagram_testing.svg\" alt=\"Testing is a cycle of fixing, testing, and either passing to release or failing back into testing.\" />",
+      "source_content_hash": "7f52efe9178444e08dcaaf47bd572646c4540173430bc45ee5990189da13299a",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5da3670c"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## Why Test",
+      "source_content_hash": "3dfec73a75f92e1c419a6854410706507474b213e3c5f33945f7d2f06753e960",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 為何需要測試"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "We're humans, and humans make mistakes. Testing is important because it helps you uncover these mistakes and verifies that your code is working. Perhaps even more importantly, testing ensures that your code continues to work in the future as you add new features, refactor the existing ones, or upgrade major dependencies of your project.",
+      "source_content_hash": "70a5990ab9aa67910f90a2f022928fc01330bf7c36a2fa336c866599f5fe7c15",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "人類難免犯錯。測試的重要性在於幫助發現這些錯誤並驗證程式碼是否正常運作。更重要的是，當您新增功能、重構現有程式碼或升級專案主要依賴項時，測試能確保程式碼持續正常運作。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "There is more value in testing than you might realize. One of the best ways to fix a bug in your code is to write a failing test that exposes it. Then when you fix the bug and re-run the test, if it passes it means the bug is fixed, never reintroduced into the code base.",
+      "source_content_hash": "fc77c811b10dc50d9055c3fcec0e56e037f4de8a284d3dc510a7e2e742c2ee49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試的價值超乎想像。修復程式錯誤的最佳方法之一，就是撰寫能暴露該錯誤的失敗測試。當您修復錯誤後重新執行測試，若測試通過即表示錯誤已修復且不會再次引入程式碼庫。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Tests can also serve as documentation for new people joining your team. For people who have never seen a codebase before, reading tests can help them understand how the existing code works.",
+      "source_content_hash": "c430f463947bc053f3cab21e8f852538551f2b5b987cc7eac85ed638a07eabdd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試也能作為新團隊成員的技術文件。對於初次接觸程式碼庫的人員，閱讀測試能幫助理解現有程式碼的運作方式。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Last but not least, more automated testing means less time spent with manual <abbr title=\"Quality Assurance\">QA</abbr>, freeing up valuable time.",
+      "source_content_hash": "4478a0db75a6b9a5005b8403c30ae471c30ec9e886006117f46615dec8fc7c49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後但同樣重要的是，更多自動化測試意味著減少手動<abbr title=\"Quality Assurance\">QA</abbr>的時間，釋放寶貴資源。"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "## Static Analysis",
+      "source_content_hash": "727c0ddccd08c7d52ee952389cdddb1e303f06197d209fc933176927b3530537",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 靜態分析"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "The first step to improve your code quality is to start using static analysis tools. Static analysis checks your code for errors as you write it, but without running any of that code.",
+      "source_content_hash": "70f6416e0de53d4c76b0f44d52dce53886825d283ae88c45d4fd55b7edcb65e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提升程式碼品質的第一步是使用靜態分析工具。靜態分析會在撰寫程式碼時檢查錯誤，但無需實際執行該程式碼。"
+      }
+    },
+    {
+      "segment_id": "77bf3ec9",
+      "source_content": "- **Linters** analyze code to catch common errors such as unused code and to help avoid pitfalls, to flag style guide no-nos like using tabs instead of spaces (or vice versa, depending on your configuration).\n- **Type checking** ensures that the construct you’re passing to a function matches what the function was designed to accept, preventing passing a string to a counting function that expects a number, for instance.",
+      "source_content_hash": "3a57515583c7c6f1b875323d990929800df7e8bf5f1d1d59ad0b5d3816ce101c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **Linter** 會分析程式碼以捕捉常見錯誤（如未使用的程式碼），幫助避免陷阱，並標記違反風格指南的行為（例如使用製表符而非空格，或反之，取決於您的配置）。\n- **型別檢查** 確保傳遞給函式的結構符合函式設計預期，例如防止將字串傳遞給預期接收數字的計數函式。"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "React Native comes with two such tools configured out of the box: [ESLint](https://eslint.org/) for linting and [TypeScript](typescript) for type checking.",
+      "source_content_hash": "bc09ea71c3b156858994cec38dfc59a42f080d9e24b06df5be1ff7f745877e86",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 預設配置了兩種工具：[ESLint](https://eslint.org/) 用於程式碼檢查，[TypeScript](typescript) 用於型別檢查。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "## Writing Testable Code",
+      "source_content_hash": "67c943ce6086ff1504ce6e8b2c9e8a97ac08da9eaf2fac57f3b01b86ad84fd82",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 撰寫可測試的程式碼"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "To start with tests, you first need to write code that is testable. Consider an aircraft manufacturing process - before any model first takes off to show that all of its complex systems work well together, individual parts are tested to guarantee they are safe and function correctly. For example, wings are tested by bending them under extreme load; engine parts are tested for their durability; the windshield is tested against simulated bird impact.",
+      "source_content_hash": "22082264dda4709cd4c1f31651d331679ba71a0ff86df4ea9dc7dda21d740581",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開始測試前，首先需要撰寫可測試的程式碼。以飛機製造過程為例——在模型首次起飛展示所有複雜系統協同運作前，會先測試各個零件以確保安全性和功能性。例如：機翼需通過極端負載下的彎曲測試；引擎零件需通過耐久性測試；擋風玻璃需通過模擬鳥擊測試。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Software is similar. Instead of writing your entire program in one huge file with many lines of code, you write your code in multiple small modules that you can test more thoroughly than if you tested the assembled whole. In this way, writing testable code is intertwined with writing clean, modular code.",
+      "source_content_hash": "f4b0fd62b76e2734610011d5beb8279b4742cdb7ef27e70d842c6980ded5dfbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "軟體開發亦同。與其將整個程式寫在一個龐大檔案中，不如將程式碼拆分為多個小型模組，這樣能比測試完整組裝的程式進行更徹底的測試。因此，撰寫可測試程式碼與撰寫乾淨、模組化的程式碼息息相關。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "To make your app more testable, start by separating the view part of your app—your React components—from your business logic and app state (regardless of whether you use Redux, MobX or other solutions). This way, you can keep your business logic testing—which shouldn’t rely on your React components—independent of the components themselves, whose job is primarily rendering your app’s UI!",
+      "source_content_hash": "79ee9e2f93bdadc6a918d66bbef9dc7448674f54075c3cdfeb3e5871f1f8b267",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要提升應用程式的可測試性，首先應將應用程式的視圖部分（React 元件）與業務邏輯和應用狀態分離（無論您使用 Redux、MobX 或其他解決方案）。如此一來，您可以保持業務邏輯測試（不應依賴 React 元件）與元件本身的獨立性，而元件的主要職責是渲染應用程式的 UI！"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "Theoretically, you could go so far as to move all logic and data fetching out of your components. This way your components would be solely dedicated to rendering. Your state would be entirely independent of your components. Your app’s logic would work without any React components at all!",
+      "source_content_hash": "685c71165a7e90d6c18b355e55b4969f95120447908bb8c45def62a3d01c4710",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "理論上，您甚至可以將所有邏輯和資料獲取移出元件。這樣元件將專注於渲染，狀態完全獨立於元件，應用程式邏輯甚至可以在沒有任何 React 元件的情況下運作！"
+      }
+    },
+    {
+      "segment_id": "da4202dd",
+      "source_content": "> We encourage you to further explore the topic of testable code in other learning resources.",
+      "source_content_hash": "1e6ae5fb540adaab926cb8ab35961b6c022bc46e86b237a34500ca6522b4d0ba",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 我們鼓勵您透過其他學習資源進一步探索可測試程式碼的主題。"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "## Writing Tests",
+      "source_content_hash": "ab7d14351258511ffb73b5e0cbbd81aca079d6613aa7548f46beedc71d7a15ba",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 撰寫測試"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "After writing testable code, it’s time to write some actual tests! The default template of React Native ships with [Jest](https://jestjs.io) testing framework. It includes a preset that's tailored to this environment so you can get productive without tweaking the configuration and mocks straight away—[more on mocks](#mocking) shortly. You can use Jest to write all types of tests featured in this guide.",
+      "source_content_hash": "f05eab90ef83d25eea07d2efbdf706bee6f97463699c7a4cf2b52331de6a7bd2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "撰寫完可測試程式碼後，是時候撰寫實際測試了！React Native 的預設模板附帶 [Jest](https://jestjs.io) 測試框架。它包含針對此環境量身定制的預設配置，讓您無需立即調整配置和模擬（mock）即可投入開發——[關於模擬的更多資訊](#mocking）。您可以使用 Jest 撰寫本指南中提到的所有測試類型。"
+      }
+    },
+    {
+      "segment_id": "b50c461f",
+      "source_content": "> If you do test-driven development, you actually write tests first! That way, testability of your code is given.",
+      "source_content_hash": "a3aa44cca04bfdddafa60d8ab9fdae7788b9cc79843838f75a041fdfc450dca6",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果你採用測試驅動開發（TDD），實際上你會先寫測試！這樣一來，程式碼的可測試性自然就具備了。"
+      }
+    },
+    {
+      "segment_id": "cb5b269c",
+      "source_content": "### Structuring Tests",
+      "source_content_hash": "52e20b82848542a8e186abd2ff542494c4d116bd9e7513d2c446141d9aa58f55",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試結構設計"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "Your tests should be short and ideally test only one thing. Let's start with an example unit test written with Jest:",
+      "source_content_hash": "ca911fedbff5397474db7a6021aafb14be0a41249902383902ec07d163616870",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試應該簡潔且理想上只驗證單一事項。以下是一個用Jest撰寫的單元測試範例："
+      }
+    },
+    {
+      "segment_id": "eb80afe1",
+      "source_content": "```js\nit('given a date in the past, colorForDueDate() returns red', () => {\n  expect(colorForDueDate('2000-10-20')).toBe('red');\n});\n```",
+      "source_content_hash": "ca7cf1c458b3b2030d41c0ed10d4be43cf12e13498235b4bc7f6a4eb24d8bf1c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb80afe1"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "The test is described by the string passed to the [`it`](https://jestjs.io/docs/en/api#testname-fn-timeout) function. Take good care writing the description so that it’s clear what is being tested. Do your best to cover the following:",
+      "source_content_hash": "1b7a2b931ea329fd04365e8ea9a6aade67e2a0caa1f41bde9ec1dcdc6cd33cb4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試描述由傳入[`it`](https://jestjs.io/docs/en/api#testname-fn-timeout)函式的字串定義。請仔細撰寫描述以明確標示測試內容。盡量涵蓋以下要素："
+      }
+    },
+    {
+      "segment_id": "158e1f5d",
+      "source_content": "1. **Given** - some precondition\n2. **When** - some action executed by the function that you’re testing\n3. **Then** - the expected outcome",
+      "source_content_hash": "8d5922958503a968b2ca1371e35b952be528e8a79a1575513f8a403440602380",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. **Given** - 前置條件\n2. **When** - 被測函式執行的動作\n3. **Then** - 預期結果"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "This is also known as AAA (Arrange, Act, Assert).",
+      "source_content_hash": "d8a4fbd0ee2a0969cf450676f9651873c7fa0567f838e4a10a3e4b21ceed08ad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此模式亦稱為AAA模式（Arrange, Act, Assert）。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "Jest offers [`describe`](https://jestjs.io/docs/en/api#describename-fn) function to help structure your tests. Use `describe` to group together all tests that belong to one functionality. Describes can be nested, if you need that. Other functions you'll commonly use are [`beforeEach`](https://jestjs.io/docs/en/api#beforeeachfn-timeout) or [`beforeAll`](https://jestjs.io/docs/en/api#beforeallfn-timeout) that you can use for setting up the objects you're testing. Read more in the [Jest api reference](https://jestjs.io/docs/en/api).",
+      "source_content_hash": "ebaab215bfec8613b548779ebff0483e769f5be78e8400092bc45b66a813ff68",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Jest提供[`describe`](https://jestjs.io/docs/en/api#describename-fn)函式協助組織測試。用`describe`將同功能相關的測試分組，必要時可嵌套使用。其他常用函式如[`beforeEach`](https://jestjs.io/docs/en/api#beforeeachfn-timeout)或[`beforeAll`](https://jestjs.io/docs/en/api#beforeallfn-timeout)，可用於設置測試物件。詳見[Jest API文檔](https://jestjs.io/docs/en/api)。"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "If your test has many steps or many expectations, you probably want to split it into multiple smaller ones. Also, ensure that your tests are completely independent of one another. Each test in your suite must be executable on its own without first running some other test. Conversely, if you run all your tests together, the first test must not influence the output of the second one.",
+      "source_content_hash": "b93b9b4369a8f88023321d565f419ebd0f4ed3f53e2c4d2a737daea1124bef11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若測試步驟繁多或有多項驗證點，建議拆分成多個小測試。同時確保測試間完全獨立——每個測試都應能單獨執行，且全體測試一起運行時，前序測試不影響後續結果。"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Lastly, as developers we like when our code works great and doesn't crash. With tests, this is often the opposite. Think of a failed test as of a _good thing!_ When a test fails, it often means something is not right. This gives you an opportunity to fix the problem before it impacts the users.",
+      "source_content_hash": "8b257e1d6be81322d0c8e32e577e225e6d2d8740d57c678f6b01e7b012a62846",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後要記得：開發者通常期望程式碼完美運行，但測試恰恰相反。將測試失敗視為「好事」！失敗往往意味著問題存在，讓你有機會在影響用戶前修復它。"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "## Unit Tests",
+      "source_content_hash": "594d8fab91c6a4fd3a0d42faba0873a831cb2107ee8701d503e24b1c52b724c7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 單元測試"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Unit tests cover the smallest parts of code, like individual functions or classes.",
+      "source_content_hash": "f97ac4afadc30fd1acc4e0a73ace9b848730f22365d78aef6f6fe0f88d8acfc5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "單元測試針對程式碼最小單位，如獨立函式或類別。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "When the object being tested has any dependencies, you’ll often need to mock them out, as described in the next paragraph.",
+      "source_content_hash": "15331d6a8e5594f093b266714f200e3c0977afed06686523297dd3bd2365649e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當被測物件有依賴項時，常需進行模擬（mock），詳見下節說明。"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "The great thing about unit tests is that they are quick to write and run. Therefore, as you work, you get fast feedback about whether your tests are passing. Jest even has an option to continuously run tests that are related to code you’re editing: [Watch mode](https://jestjs.io/docs/en/cli#watch).",
+      "source_content_hash": "7dccb9ffcbf7899f21a267ff1b5e3bbe6656b27d3c0c5b11c562f48c285cfb19",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "單元測試的優勢在於快速撰寫與執行，能即時反饋測試結果。Jest還提供[Watch模式](https://jestjs.io/docs/en/cli#watch)，可持續運行與編輯程式碼相關的測試。"
+      }
+    },
+    {
+      "segment_id": "3e8b4b41",
+      "source_content": "<img src=\"/docs/assets/p_tests-unit.svg\" alt=\" \" />",
+      "source_content_hash": "bce1b7effe3bf015e5a8900eb0abdf35b0d28a61427d19d0fadde21a0683211e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3e8b4b41"
+      }
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "### Mocking",
+      "source_content_hash": "27d5ce8b4a9183bb69846b93e044b7c67f213b539c4f6a6794462a9d0857c6e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 模擬測試"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "Sometimes, when your tested objects have external dependencies, you’ll want to “mock them out.” “Mocking” is when you replace some dependency of your code with your own implementation.",
+      "source_content_hash": "99adf80f6b41977267b0944e635effcc62e34cad5ddef8bb366977ba264e88a4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當被測物件有外部依賴時，常需進行「模擬」——用自訂實現替換依賴項。"
+      }
+    },
+    {
+      "segment_id": "30d027a1",
+      "source_content": "> Generally, using real objects in your tests is better than using mocks but there are situations where this is not possible. For example: when your JS unit test relies on a native module written in Java or Objective-C.",
+      "source_content_hash": "d6c85859b772c0642b44b2496802039441c76286160e556800c841f9e5f15b4a",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 原則上，測試中使用真實物件優於模擬，但某些情境無法避免。例如：當JS單元測試依賴Java/Objective-C編寫的原生模組時。"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "Imagine you’re writing an app that shows the current weather in your city and you’re using some external service or other dependency that provides you with the weather information. If the service tells you that it’s raining, you want to show an image with a rainy cloud. You don’t want to call that service in your tests, because:",
+      "source_content_hash": "243f1b8a585e3ce2bcf9ad3490831827d3fe499752c1ce847b72d7545569aa7d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設你開發的天氣App需呼叫外部服務獲取數據。測試時不應實際呼叫該服務，因為："
+      }
+    },
+    {
+      "segment_id": "023197ab",
+      "source_content": "- It could make the tests slow and unstable (because of the network requests involved)\n- The service may return different data every time you run the test\n- Third party services can go offline when you really need to run tests!",
+      "source_content_hash": "2b509152adb781615dbe150d1e964848b367506cc30f21fbfd8d23db6d56fd5c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 網路請求會導致測試緩慢且不穩定\n- 服務每次可能返回不同數據\n- 第三方服務可能在測試時離線！"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "Therefore, you can provide a mock implementation of the service, effectively replacing thousands of lines of code and some internet-connected thermometers!",
+      "source_content_hash": "bb1c7561c2f6fe9b1542535419956bd7bf87c974724e07f772ee09877ad12f6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時可提供服務的模擬實現，等效取代數千行程式碼與聯網溫度計！"
+      }
+    },
+    {
+      "segment_id": "eff16de8",
+      "source_content": "> Jest comes with [support for mocking](https://jestjs.io/docs/en/mock-functions#mocking-modules) from function level all the way to module level mocking.",
+      "source_content_hash": "64eaf8184c9768852f868411abb7098407e0a7e6b1de8475b4bd4beaec98d221",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> Jest內建[模擬支援](https://jestjs.io/docs/en/mock-functions#mocking-modules)，從函式級到模組級皆可模擬。"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "## Integration Tests",
+      "source_content_hash": "b70d06124533107318c3c5978f3677080e3828eed9e7bd368bdca7e83cf194cf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 整合測試"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "When writing larger software systems, individual pieces of it need to interact with each other. In unit testing, if your unit depends on another one, you’ll sometimes end up mocking the dependency, replacing it with a fake one.",
+      "source_content_hash": "ba86a2d5228ac4d5027dba16b1caad94449efbaf739291353c9ca3a13185e6d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在開發大型軟體系統時，各個組件需要相互協作。在單元測試中，若被測試單元依賴其他組件，通常會使用模擬(mock)方式替換這些依賴項。"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "In integration testing, real individual units are combined (same as in your app) and tested together to ensure that their cooperation works as expected. This is not to say that mocking does not happen here: you’ll still need mocks (for example, to mock communication with a weather service), but you'll need them much less than in unit testing.",
+      "source_content_hash": "1b2ede0ec28035b16b5a62036252cc3ae5227556ddcc8809ea582e43c5f2b9e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "整合測試則是將實際的獨立單元(如同在應用程式中)組合起來共同測試，以確保它們的協作符合預期。這並非意味著完全不需要模擬——例如仍需模擬與天氣服務的通訊——但相較單元測試，所需模擬的場景會少很多。"
+      }
+    },
+    {
+      "segment_id": "ceb1ddd1",
+      "source_content": "> Please note that the terminology around what integration testing means is not always consistent. Also, the line between what is a unit test and what is an integration test may not always be clear. For this guide, your test falls into \"integration testing\" if it:\n>\n> - Combines several modules of your app as described above\n> - Uses an external system\n> - Makes a network call to other application (such as the weather service API)\n> - Does any kind of file or database <abbr title=\"Input/Output\">I/O</abbr>",
+      "source_content_hash": "834dbf46ea41948769198194bea7ce035b2d056ec8f50e332ef6343e02ceeea7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意，關於整合測試的術語定義並非總是統一。單元測試與整合測試的界線有時也較為模糊。在本指南中，若測試符合以下特徵即歸類為「整合測試」：\n>\n> - 組合應用程式的多個模組\n> - 使用外部系統\n> - 進行網路呼叫(如天氣服務API)\n> - 執行任何檔案或資料庫<abbr title=\"輸入/輸出\">I/O</abbr>操作"
+      }
+    },
+    {
+      "segment_id": "f018dbb4",
+      "source_content": "<img src=\"/docs/assets/p_tests-integration.svg\" alt=\" \" />",
+      "source_content_hash": "7a6b5a8a8aa8b784d04b54f56776974af0b6a3f11697e0803e82661e0fedfeef",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "## Component Tests",
+      "source_content_hash": "0b277cdeacbae3920dbdd226cfd8643ff7dac3948944bfc1133a83cd291bdc44",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 元件測試"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "React components are responsible for rendering your app, and users will directly interact with their output. Even if your app's business logic has high testing coverage and is correct, without component tests you may still deliver a broken UI to your users. Component tests could fall into both unit and integration testing, but because they are such a core part of React Native, we'll cover them separately.",
+      "source_content_hash": "956b69d2d7391ee1234cc85b4659cbe6df10ac4cc078f7d9e2a968f794bb035a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React元件負責渲染應用界面，使用者將直接與其輸出互動。即使業務邏輯已具備高測試覆蓋率且正確無誤，若缺少元件測試，仍可能向使用者交付有缺陷的UI。元件測試可歸類為單元測試或整合測試，但由於其在React Native中的核心地位，我們將單獨討論。"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "For testing React components, there are two things you may want to test:",
+      "source_content_hash": "c87dfef2e15c97de3374cdc3a964c129f9305943f2b5d5fceeb1d5ddaf1d1d5c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試React元件時，主要有兩個面向需要驗證："
+      }
+    },
+    {
+      "segment_id": "9673e622",
+      "source_content": "- Interaction: to ensure the component behaves correctly when interacted with by a user (eg. when user presses a button)\n- Rendering: to ensure the component render output used by React is correct (eg. the button's appearance and placement in the UI)",
+      "source_content_hash": "d784750b615d21f372c6928c7b45a03ac7b3df597888e3012fa632c333cc495b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 互動行為：確保元件在使用者操作時反應正確（例如按鈕點擊）\n- 渲染輸出：確保React使用的元件渲染結果正確（例如按鈕外觀與UI位置）"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "For example, if you have a button that has an `onPress` listener, you want to test that the button both appears correctly and that tapping the button is correctly handled by the component.",
+      "source_content_hash": "086e898e31ce1b2e640910bfd6771b1ba997cc054160c07c9da174f7fb5c1890",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "舉例來說，若按鈕設有`onPress`監聽器，您需要同時測試按鈕的視覺呈現與點擊後的處理邏輯。"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "There are several libraries that can help you testing these:",
+      "source_content_hash": "1668d6ddd26bef5ded51cf74383226e29e0f36ac483093f87de9dcb96518336b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下套件可協助進行這類測試："
+      }
+    },
+    {
+      "segment_id": "d9b1e67e",
+      "source_content": "- React’s [Test Renderer](https://reactjs.org/docs/test-renderer.html), developed alongside its core, provides a React renderer that can be used to render React components to pure JavaScript objects, without depending on the DOM or a native mobile environment.\n- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) builds on top of React’s test renderer and adds `fireEvent` and `query` APIs described in the next paragraph.",
+      "source_content_hash": "01ba793a1cf1e26a8f4f412bc05db7d9277d0727031e18e3b00d9a77b73b57fa",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- React官方提供的[Test Renderer](https://reactjs.org/docs/test-renderer.html)，能將元件渲染為純JavaScript物件，無需依賴DOM或原生行動環境\n- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)基於React測試渲染器，增加了後文將說明的`fireEvent`與`query`API"
+      }
+    },
+    {
+      "segment_id": "919de16a",
+      "source_content": "> Component tests are only JavaScript tests running in Node.js environment. They do _not_ take into account any iOS, Android, or other platform code which is backing the React Native components. It follows that they cannot give you a 100% confidence that everything works for the user. If there is a bug in the iOS or Android code, they will not find it.",
+      "source_content_hash": "2d30ffbaabd09ad76a37fb4549d816de9baa620ed78ac92d5fec1ea962e5092b",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 元件測試僅是在Node.js環境中運行的JavaScript測試，不涉及React Native元件底層的iOS、Android或其他平台程式碼。因此無法100%保證使用者端的完整正確性——若底層原生程式碼存在錯誤，這類測試將無法發現。"
+      }
+    },
+    {
+      "segment_id": "448a0039",
+      "source_content": "<img src=\"/docs/assets/p_tests-component.svg\" alt=\" \" />",
+      "source_content_hash": "219b7eefc0a04076c95e4724b4a89b69224b16a89c52d22b6b76d5f75de20423",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a461a67b",
+      "source_content": "### Testing User Interactions",
+      "source_content_hash": "0804bc91bef03bbcaecbf4c7f9ddd71837a09f47cd17dd9a967076f15ac30e95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試使用者互動"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Aside from rendering some UI, your components handle events like `onChangeText` for `TextInput` or `onPress` for `Button`. They may also contain other functions and event callbacks. Consider the following example:",
+      "source_content_hash": "63fbcbff9de9427d4bdc8e1cc553df2b750d896df31421e80bc2acbbc1f877fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了渲染UI外，您的元件還需處理各類事件，如`TextInput`的`onChangeText`或`Button`的`onPress`事件，以及其他函數與回調。參考以下範例："
+      }
+    },
+    {
+      "segment_id": "6e57b94c",
+      "source_content": "```tsx\nfunction GroceryShoppingList() {\n  const [groceryItem, setGroceryItem] = useState('');\n  const [items, setItems] = useState<string[]>([]);\n\n  const addNewItemToShoppingList = useCallback(() => {\n    setItems([groceryItem, ...items]);\n    setGroceryItem('');\n  }, [groceryItem, items]);\n\n  return (\n    <>\n      <TextInput\n        value={groceryItem}\n        placeholder=\"Enter grocery item\"\n        onChangeText={text => setGroceryItem(text)}\n      />\n      <Button\n        title=\"Add the item to list\"\n        onPress={addNewItemToShoppingList}\n      />\n      {items.map(item => (\n        <Text key={item}>{item}</Text>\n      ))}\n    </>\n  );\n}\n```",
+      "source_content_hash": "c6c1017e399c06afc3ef34c524b658fd1986db2503d363394c30b1acbee178a6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "When testing user interactions, test the component from the user perspective—what's on the page? What changes when interacted with?",
+      "source_content_hash": "8b8bb2bc3aeb9c56dfa08f9106cf4d5029fbf68f5aa9dbbd1c949fa9e33e6412",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試使用者互動時，應從使用者角度出發——頁面顯示什麼內容？互動後會產生什麼變化？"
+      }
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "As a rule of thumb, prefer using things users can see or hear:",
+      "source_content_hash": "82e521b4ed3e0b7981d3859cbb165f20eefc31f9871af3c2db3f85c6dad53a8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基本原則建議優先採用使用者可感知的元素進行驗證："
+      }
+    },
+    {
+      "segment_id": "e1b58cbf",
+      "source_content": "- make assertions using rendered text or [accessibility helpers](https://reactnative.dev/docs/accessibility#accessibility-properties)",
+      "source_content_hash": "eb02302232e80863c48ed79ce9fd580ee3ac68c7c7e7c1f2064353e9581ac8a3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用渲染文字或[無障礙輔助功能](https://reactnative.dev/docs/accessibility#accessibility-properties)進行斷言"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "Conversely, you should avoid:",
+      "source_content_hash": "774502ccda2e4d6e8365b69d07125ffbe5d701548631a06a087b95fdb128e34f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "相對地，應避免以下做法："
+      }
+    },
+    {
+      "segment_id": "db79148c",
+      "source_content": "- making assertions on component props or state\n- testID queries",
+      "source_content_hash": "29d81997c1b934a71402373c87893c1021f912c87b581d6227d7a45870e884a0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 對元件props或state進行斷言\n- 使用testID進行查詢"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "Avoid testing implementation details like props or state—while such tests work, they are not oriented toward how users will interact with the component and tend to break by refactoring (for example when you'd like to rename some things or rewrite class component using hooks).",
+      "source_content_hash": "ab35d8f21120fe753efb14c46179134e43aee571044124f557ff697171e4bc8b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "避免測試實作細節如props或state——雖然這類測試能運作，但不符合使用者實際互動方式，且在重構時(例如重命名或改用Hooks改寫class元件)容易導致測試失效。"
+      }
+    },
+    {
+      "segment_id": "001e6f78",
+      "source_content": "> React class components are especially prone to testing their implementation details such as internal state, props or event handlers. To avoid testing implementation details, prefer using function components with Hooks, which make relying on component internals _harder_.",
+      "source_content_hash": "994162dbbcc401fcb613a41b1754715b0fad2f42610a8737ccdd60829db9e2d3",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> React 類別元件特別容易測試其實作細節，例如內部狀態、props 或事件處理器。為避免測試實作細節，建議優先使用搭配 Hooks 的函式元件，這會讓依賴元件內部邏輯變得更加困難。"
+      }
+    },
+    {
+      "segment_id": "e5821418",
+      "source_content": "Component testing libraries such as [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) facilitate writing user-centric tests by careful choice of provided APIs. The following example uses `fireEvent` methods `changeText` and `press` that simulate a user interacting with the component and a query function `getAllByText` that finds matching `Text` nodes in the rendered output.",
+      "source_content_hash": "2d53355752c1d754a2ba1c67c6a6662a11cb9c2eaffb4a109428f0295c7e272b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "諸如 [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) 這類元件測試函式庫，透過精心設計的 API 來協助撰寫以使用者為中心的測試。以下範例使用 `fireEvent` 的 `changeText` 和 `press` 方法模擬使用者與元件互動，並透過查詢函式 `getAllByText` 在渲染輸出中尋找匹配的 `Text` 節點。"
+      }
+    },
+    {
+      "segment_id": "1cd1d315",
+      "source_content": "```tsx\ntest('given empty GroceryShoppingList, user can add an item to it', () => {\n  const {getByPlaceholderText, getByText, getAllByText} = render(\n    <GroceryShoppingList />,\n  );\n\n  fireEvent.changeText(\n    getByPlaceholderText('Enter grocery item'),\n    'banana',\n  );\n  fireEvent.press(getByText('Add the item to list'));\n\n  const bananaElements = getAllByText('banana');\n  expect(bananaElements).toHaveLength(1); // expect 'banana' to be on the list\n});\n```",
+      "source_content_hash": "e7dc7daae0c9f8672e9fa791b13ffe4b552edf7acfe630812be30d495ffa4962",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1cd1d315"
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "This example is not testing how some state changes when you call a function. It tests what happens when a user changes text in the `TextInput` and presses the `Button`!",
+      "source_content_hash": "ae12b577d3700fe48b244311404e191e81b1a76f9d33e829846dba2432673ca9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此範例並非測試呼叫函式時狀態如何變化，而是測試當使用者在 `TextInput` 中變更文字並按下 `Button` 時會發生什麼！"
+      }
+    },
+    {
+      "segment_id": "a7628008",
+      "source_content": "### Testing Rendered Output",
+      "source_content_hash": "ca506cebb531e54daffb77226641d3d965d71b84e925a5b3a9d096a944e6aa0b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試渲染輸出"
+      }
+    },
+    {
+      "segment_id": "7e563909",
+      "source_content": "[Snapshot testing](https://jestjs.io/docs/en/snapshot-testing) is an advanced kind of testing enabled by Jest. It is a very powerful and low-level tool, so extra attention is advised when using it.",
+      "source_content_hash": "75fa41b9a1dc8ec702c662512c45ec0ec8dbe7e61151cdad10e2fe7e240cb00d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[快照測試](https://jestjs.io/docs/en/snapshot-testing)是 Jest 提供的一種進階測試方式。由於這是極強大且底層的工具，使用時需格外謹慎。"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "A \"component snapshot\" is a JSX-like string created by a custom React serializer built into Jest. This serializer lets Jest translate React component trees to string that's human-readable. Put another way: a component snapshot is a textual representation of your component’s render output _generated_ during a test run. It may look like this:",
+      "source_content_hash": "66ea2db3798feb057cce2e67c0887c780d2bf85eaba5518ae046555641d4d397",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "「元件快照」是由 Jest 內建的自訂 React 序列化器產生的類 JSX 字串。此序列化器讓 Jest 能將 React 元件樹轉換為人類可讀的字串。換言之：元件快照是測試執行期間_生成_的元件渲染輸出的文字表示，其內容可能如下："
+      }
+    },
+    {
+      "segment_id": "f377fafa",
+      "source_content": "```tsx\n<Text\n  style={\n    Object {\n      \"fontSize\": 20,\n      \"textAlign\": \"center\",\n    }\n  }>\n  Welcome to React Native!\n</Text>\n```",
+      "source_content_hash": "3159f911dba453d16ebe9f7dba4f940912aa1a791a9266a93445ab51f6c23d2c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f377fafa"
+      }
+    },
+    {
+      "segment_id": "f6479c91",
+      "source_content": "With snapshot testing, you typically first implement your component and then run the snapshot test. The snapshot test then creates a snapshot and saves it to a file in your repo as a reference snapshot. **The file is then committed and checked during code review**. Any future changes to the component render output will change its snapshot, which will cause the test to fail. You then need to update the stored reference snapshot for the test to pass. That change again needs to be committed and reviewed.",
+      "source_content_hash": "bf4e131742d2e2d7650f397292920fb7e00303526e4b0702835ab0be346e3a3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進行快照測試時，通常會先實作元件再執行快照測試。測試會建立快照並將其作為參考快照存入專案倉庫的檔案中。**該檔案需提交並在程式碼審查時檢查**。後續任何元件渲染輸出的變更都會導致快照變化，從而使測試失敗。此時需更新儲存的參考快照才能使測試通過，而此變更同樣需提交並審查。"
+      }
+    },
+    {
+      "segment_id": "61e5dad6",
+      "source_content": "Snapshots have several weak points:",
+      "source_content_hash": "385f683f8027655ff87a9f354ec8fc39c8cc7e0416543ddcefec65b85ac98e25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "快照存在幾項弱點："
+      }
+    },
+    {
+      "segment_id": "1537994d",
+      "source_content": "- For you as a developer or reviewer, it can be hard to tell whether a change in snapshot is intended or whether it's evidence of a bug. Especially large snapshots can quickly become hard to understand and their added value becomes low.\n- When snapshot is created, at that point it is considered to be correct-even in the case when the rendered output is actually wrong.\n- When a snapshot fails, it's tempting to update it using the `--updateSnapshot` jest option without taking proper care to investigate whether the change is expected. Certain developer discipline is thus needed.",
+      "source_content_hash": "6e86a2d32ddbb217324595209ac93348caf2a3c9062a7f836b6eb66d34c350ca",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 對開發者或審查者而言，難以判斷快照變更屬預期修改或錯誤跡象。龐大的快照尤其容易變得難以理解，其附加價值隨之降低。\n- 快照建立當下即被視為正確版本——即使實際渲染輸出存在錯誤。\n- 當快照失敗時，開發者容易直接使用 Jest 的 `--updateSnapshot` 選項更新，而未仔細檢查變更是否合理。因此需要相當的開發紀律。"
+      }
+    },
+    {
+      "segment_id": "228d01d5",
+      "source_content": "Snapshots themselves do not ensure that your component render logic is correct, they are merely good at guarding against unexpected changes and for checking that the components in the React tree under test receive the expected props (styles and etc.).",
+      "source_content_hash": "a51b051f8f55b6e44629946ab3e9d47ec0f9a2c1829cc411a2f78537dd90031c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "快照本身無法保證元件渲染邏輯的正確性，其主要用途在於防範意外變更，以及驗證測試中 React 樹下的元件是否接收預期的 props（樣式等）。"
+      }
+    },
+    {
+      "segment_id": "85b17c36",
+      "source_content": "We recommend that you only use small snapshots (see [`no-large-snapshots` rule](https://github.com/jest-community/eslint-plugin-jest/blob/master/docs/rules/no-large-snapshots.md)). If you want to test a _change_ between two React component states, use [`snapshot-diff`](https://github.com/jest-community/snapshot-diff). When in doubt, prefer explicit expectations as described in the previous paragraph.",
+      "source_content_hash": "6c6f62181079f3cacc162fda7adee491cd6e44c44c8a2764e72b46e246fbdc76",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議僅使用小型快照（參見 [`no-large-snapshots` 規則](https://github.com/jest-community/eslint-plugin-jest/blob/master/docs/rules/no-large-snapshots.md)）。若需測試兩個 React 元件狀態間的_差異_，可使用 [`snapshot-diff`](https://github.com/jest-community/snapshot-diff)。若有疑慮，建議優先採用前文所述的明確斷言方式。"
+      }
+    },
+    {
+      "segment_id": "de60fdf8",
+      "source_content": "<img src=\"/docs/assets/p_tests-snapshot.svg\" alt=\" \" />",
+      "source_content_hash": "45fbc00d864efe777fc29c8f55231405abeb67071204440011e3adc696115b82",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de60fdf8"
+      }
+    },
+    {
+      "segment_id": "67dfd717",
+      "source_content": "## End-to-End Tests",
+      "source_content_hash": "051640ef12f2cc94ec779acacdb0fdfb808b87202983ea640c4d19fc56ed8ea5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 端對端測試"
+      }
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "In end-to-end (E2E) tests, you verify your app is working as expected on a device (or a simulator / emulator) from the user perspective.",
+      "source_content_hash": "4ce65cb4a732cc3255b8c2dd57d9d9f94416318e64fa6c3a270b35c6792b324d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在端對端（E2E）測試中，您會從使用者角度驗證應用程式在裝置（或模擬器/仿真器）上的運作是否符合預期。"
+      }
+    },
+    {
+      "segment_id": "4033c370",
+      "source_content": "This is done by building your app in the release configuration and running the tests against it. In E2E tests, you no longer think about React components, React Native APIs, Redux stores or any business logic. That is not the purpose of E2E tests and those are not even accessible to you during E2E testing.",
+      "source_content_hash": "d51fef27b5bb5436a009a4d483fc5755c21e75220746e83402d75dbf3f9fce5d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此測試需建置發布版本的應用程式並對其執行測試。E2E 測試不再考量 React 元件、React Native API、Redux 儲存庫或任何業務邏輯，這些並非 E2E 測試的目的，且在測試期間也無法存取。"
+      }
+    },
+    {
+      "segment_id": "dfb6fc67",
+      "source_content": "Instead, E2E testing libraries allow you to find and control elements in the screen of your app: for example, you can _actually_ tap buttons or insert text into `TextInputs` the same way a real user would. Then you can make assertions about whether or not a certain element exists in the app’s screen, whether or not it’s visible, what text it contains, and so on.",
+      "source_content_hash": "654855652068b470817f8899947423c76d4fe07f213360a795ed2aacfa0e363c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "相反地，E2E 測試函式庫讓您能尋找並控制應用程式畫面上的元素：例如，您可以_實際_點擊按鈕或在 `TextInput` 中輸入文字，如同真實使用者操作。接著可對畫面元素進行斷言，例如特定元素是否存在、是否可見、包含何種文字等。"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "E2E tests give you the highest possible confidence that part of your app is working. The tradeoffs include:",
+      "source_content_hash": "f0c7367d2cddedbd293bef463016a5a602c851f966e93522e1acc23257404acb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "E2E 測試能提供最高程度的信心，確保應用程式的某部分正常運作。其代價包括："
+      }
+    },
+    {
+      "segment_id": "13f5db84",
+      "source_content": "- writing them is more time consuming compared to the other types of tests\n- they are slower to run\n- they are more prone to flakiness (a \"flaky\" test is a test which randomly passes and fails without any change to code)",
+      "source_content_hash": "ab61e21123fba26ddc915c989db3cfd1425ea94e69fa4e52aabbd579935ed620",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 撰寫這類測試比其他類型的測試更耗時\n- 執行速度較慢\n- 更容易出現不穩定性（「不穩定」測試是指代碼未變更情況下隨機通過或失敗的測試）"
+      }
+    },
+    {
+      "segment_id": "b0c30ab4",
+      "source_content": "Try to cover the vital parts of your app with E2E tests: authentication flow, core functionalities, payments, etc. Use faster JS tests for the non-vital parts of your app. The more tests you add, the higher your confidence, but also, the more time you'll spend maintaining and running them. Consider the tradeoffs and decide what's best for you.",
+      "source_content_hash": "81ae0a3239cbfa174eb40623a7ebc6246825879e68b8b9d379d1d0e3513653c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議針對應用程式的關鍵部分進行端到端測試：身份驗證流程、核心功能、支付等。對於非關鍵部分，可使用執行速度更快的 JavaScript 測試。測試覆蓋率越高，信心度也越高，但同時也需要投入更多時間維護和執行這些測試。請權衡利弊後做出最適合的選擇。"
+      }
+    },
+    {
+      "segment_id": "318fb07e",
+      "source_content": "There are several E2E testing tools available: in the React Native community, [Detox](https://github.com/wix/detox/) is a popular framework because it’s tailored for React Native apps. Another popular library in the space of iOS and Android apps is [Appium](https://appium.io/) or [Maestro](https://maestro.mobile.dev/).",
+      "source_content_hash": "d5b56f6ec085bd7421c97c8af023e464fcea584b3623f0ded31926a4ff791281",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現有多種端到端測試工具可供選擇：在 React Native 社群中，[Detox](https://github.com/wix/detox/) 因其專為 React Native 應用設計而廣受歡迎。在 iOS 和 Android 應用領域，[Appium](https://appium.io/) 和 [Maestro](https://maestro.mobile.dev/) 也是常見選項。"
+      }
+    },
+    {
+      "segment_id": "e698fc81",
+      "source_content": "<img src=\"/docs/assets/p_tests-e2e.svg\" alt=\" \" />",
+      "source_content_hash": "45254901ab1ff842b02c6ef88973cb6af38c8c46cbe9f858c41df571d584aa4f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e698fc81"
+      }
+    },
+    {
+      "segment_id": "50e53dff",
+      "source_content": "## Summary",
+      "source_content_hash": "30ac03ff33731529441be8fbe52a3bd0d4c5ec830e806d54692168ebb7f98ada",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 總結"
+      }
+    },
+    {
+      "segment_id": "f6e7e6a7",
+      "source_content": "We hope you enjoyed reading and learned something from this guide. There are many ways you can test your apps. It may be hard to decide what to use at first. However, we believe it all will make sense once you start adding tests to your awesome React Native app. So what are you waiting for? Get your coverage up!",
+      "source_content_hash": "0be3ea3a1827aee3473e024b39e88542d01a8b6cddd3ef5397d053e31c40f383",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "希望您喜歡這份指南並有所收穫。測試應用程式的方法有很多種，初學者可能難以抉擇。但相信當您開始為 React Native 應用添加測試時，一切會變得清晰。還在等什麼？快來提升測試覆蓋率吧！"
+      }
+    },
+    {
+      "segment_id": "99e592b0",
+      "source_content": "### Links",
+      "source_content_hash": "952dce07a1bc56487bf4800dcd92fd9705b2b44016bf7045c7a953ea28ea7067",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 相關連結"
+      }
+    },
+    {
+      "segment_id": "dae0c632",
+      "source_content": "- [React testing overview](https://reactjs.org/docs/testing.html)\n- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)\n- [Jest docs](https://jestjs.io/docs/en/tutorial-react-native)\n- [Detox](https://github.com/wix/detox/)\n- [Appium](https://appium.io/)\n- [Maestro](https://maestro.mobile.dev/)",
+      "source_content_hash": "40eef6f6b122137a172198cdf3a602260f9dc2b14d6ee82d9e71f28582c55cf3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [React 測試概述](https://reactjs.org/docs/testing.html)\n- [React Native 測試庫](https://callstack.github.io/react-native-testing-library/)\n- [Jest 文檔](https://jestjs.io/docs/en/tutorial-react-native)\n- [Detox](https://github.com/wix/detox/)\n- [Appium](https://appium.io/)\n- [Maestro](https://maestro.mobile.dev/)"
+      }
+    },
+    {
+      "segment_id": "abafdef2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f4b938fe",
+      "source_content": "_This guide originally authored and contributed in full by [Vojtech Novak](https://twitter.com/vonovak)._",
+      "source_content_hash": "bce91170c78bc737c42d51636188ca19ff7b8a3782e7125fd12879f641008add",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_本指南由 [Vojtech Novak](https://twitter.com/vonovak) 原創並完整貢獻。_"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/testing-overview.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.991282+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "b4f3a3a706bd1ca368dd4c300c03feb5cc58a71ee80e4434d79efeaab1a01602"
+  }
+}

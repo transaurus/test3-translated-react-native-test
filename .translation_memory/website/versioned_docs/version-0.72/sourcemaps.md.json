@@ -1,0 +1,262 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/sourcemaps.md",
+  "source_file_content_hash": "a558b19b14a63c139b14f4ec5fe2cd7a0a5d6c7b884c871c3368c6a587029b5f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: sourcemaps\ntitle: Source Maps\n---",
+      "source_content_hash": "67714ee351ce9ab6f77464a6cc20ea9f7f4420c4a725edb4f705d3b351e79ddf",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Source maps allow you to map a transformed file back to the original source file. The main purpose of source maps is to aid debugging and help with investigating issues from release builds.",
+      "source_content_hash": "43e52c83218bd6349d851f17323daef980fefe2c492bf93e355ea9ead51e73a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原始碼映射(source maps)能將轉換後的檔案對應回原始來源檔案，主要用途是協助除錯及調查正式版建置中的問題。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Without the source maps, when running into an error in the release build you will see a stacktrace like:",
+      "source_content_hash": "dd3c57d4201e645466c8a7393a14bd81836602bfc5d727d3b37d94347fbe51c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若無原始碼映射，當正式版建置發生錯誤時，您將看到如下堆疊追蹤："
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```text\nTypeError: Cannot read property 'data' of undefined\n  at anonymous(app:///index.android.bundle:1:4277021)\n  at call(native)\n  at p(app:///index.android.bundle:1:227785)\n```",
+      "source_content_hash": "e8f4b9df911c1bbba2464b3e2c414ff78f08f7cee817594126fd4106d9ace9f5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "With source maps generated, a stacktrace will include path, file name, and line number of the original source file:",
+      "source_content_hash": "a0cfbf8045617e5e524a7d9fae34f9daadeabcf8931488d22e3a15faee43595f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若已生成原始碼映射，堆疊追蹤會顯示原始檔案的完整路徑、檔名與行號："
+      }
+    },
+    {
+      "segment_id": "940e34e3",
+      "source_content": "```text\nTypeError: Cannot read property 'data' of undefined\n  at anonymous(src/modules/notifications/Permission.js:15:requestNotificationPermission)\n  at call(native)\n  at p(node_modules/regenerator-runtime/runtime.js:64:Generator)\n```",
+      "source_content_hash": "305b0a12942e73f6ed1e0f3f7df8a666dc46cf0f198754fa7ea96e364bff8ca2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_940e34e3"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "This allows you to triage release issues using a decipherable stacktrace.",
+      "source_content_hash": "32426caedc0beb1132c7daa328bc0d86fa229d4dc81399b4f4775ad8605461f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這讓您能透過可解讀的堆疊追蹤來處理正式版問題。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Follow the instructions below to get started with source maps.",
+      "source_content_hash": "8907c0f5b2d19ee70d0027710e51f0dcd59a43b7027298af0c282fc7860dc9df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請遵循以下指示開始使用原始碼映射。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "## Enable source maps on Android",
+      "source_content_hash": "035fc47d54c0ae0fd31626984b75eeabc907fae706135bedcb60e655cfe1dd06",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 在 Android 啟用原始碼映射"
+      }
+    },
+    {
+      "segment_id": "b25f21be",
+      "source_content": "### Hermes",
+      "source_content_hash": "7ed1f61df3a363c605dd2a78251f26d56f212d78cc5cb44f2b6b07dc2aa17dc3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Hermes 引擎"
+      }
+    },
+    {
+      "segment_id": "b56ef571",
+      "source_content": ":::info\nSource maps are built in Release mode by default, unless `hermesFlagsRelease` is set. In that case source maps will have to be enabled.\n:::",
+      "source_content_hash": "d47ce46217f2ab5d1695aa00b97e98a6234464651fd83c7a33417adb5d2ed11a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n原始碼映射在 Release 模式預設會自動建置，除非設定了 `hermesFlagsRelease` 參數。此情況下需手動啟用原始碼映射。\n:::"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "To do so, ensure the following is set in your app's `android/app/build.gradle` file.",
+      "source_content_hash": "fe76ba656dc78bf8f3b3407134f4b9d051166a11e54485d3be2de19ddfce8e96",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請確認您應用程式的 `android/app/build.gradle` 檔案中有以下設定："
+      }
+    },
+    {
+      "segment_id": "a11df754",
+      "source_content": "```groovy\nproject.ext.react = [\n    enableHermes: true,\n    hermesFlagsRelease: [\"-O\", \"-output-source-map\"], // plus whichever flag was required to set this away from default\n]\n```",
+      "source_content_hash": "fb171b8b7ccf2ab82199dd94b31cfc5f867dbf0a01fab1bb3c89164fb5f791df",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a11df754"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "If done correctly you should see the output location of the source map during Metro build output.",
+      "source_content_hash": "c0d808457b579f62ce95a90ce431ff7e8c562657f9e9b0a22e8b4effa32287d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定正確時，您應能在 Metro 建置輸出中看到原始碼映射的輸出位置。"
+      }
+    },
+    {
+      "segment_id": "229d6705",
+      "source_content": "```text\nWriting bundle output to:, android/app/build/generated/assets/react/release/index.android.bundle\nWriting sourcemap output to:, android/app/build/intermediates/sourcemaps/react/release/index.android.bundle.packager.map\n```",
+      "source_content_hash": "b1779761189ff6aff669d38e95020ee89f213249c63f4edaf2cf4ae88f77919e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_229d6705"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "Development builds do not produce a bundle and thus already have symbols, but if the development build is bundled you may use `hermesFlagsDebug` like above to enable source maps.",
+      "source_content_hash": "5e7bd38788703a4b9613357b8dafbb7e68c8a4d373253d575ff8b49b3d49ec48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開發版建置不會產生 bundle 檔案（已包含符號表），但若開發版需打包時，可參照前述方式使用 `hermesFlagsDebug` 啟用原始碼映射。"
+      }
+    },
+    {
+      "segment_id": "2c1b51df",
+      "source_content": "## Enable source maps on iOS",
+      "source_content_hash": "d3f158b12247172323e8cedff1f1439c5f03a900d04a13dce748188212d68553",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 在 iOS 啟用原始碼映射"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "Source maps are disabled by default. To enable them one has to define a `SOURCEMAP_FILE` environment variable.",
+      "source_content_hash": "0580f864118187f68f2aed5dc53318554bafa3171e43122cee7a5f24baf80140",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原始碼映射預設為停用狀態。需定義 `SOURCEMAP_FILE` 環境變數來啟用。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "In order to do so, within Xcode head to the Build Phase - \"Bundle React Native code and images\".",
+      "source_content_hash": "d7bf0598c880384780e000ec7c160b40d8d6ec49de9ba5a565807981787a9d92",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請於 Xcode 中前往建置階段(Build Phase)的「Bundle React Native code and images」項目。"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "At the top of the file near the other exports, add an entry for `SOURCEMAP_FILE` to the preferred location and name. Like below:",
+      "source_content_hash": "cac2a4d3c19b72b4e1098585291337edd04589b35ed958da251b04c4d10fd22a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在檔案頂部其他環境變數旁，新增 `SOURCEMAP_FILE` 變數並指定輸出路徑與名稱，如下所示："
+      }
+    },
+    {
+      "segment_id": "5a41b4fb",
+      "source_content": "```\nexport SOURCEMAP_FILE=\"$(pwd)/../main.jsbundle.map\";\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n```",
+      "source_content_hash": "8655fa6b1872d30afdcd7c26ccb4c054443755bb446cc95f115f25c490be5027",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5a41b4fb"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "If done correctly you should see the output location of the source map during Metro build output.",
+      "source_content_hash": "c0d808457b579f62ce95a90ce431ff7e8c562657f9e9b0a22e8b4effa32287d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定正確時，您應能在 Metro 建置輸出中看到原始碼映射的輸出位置。"
+      }
+    },
+    {
+      "segment_id": "bc137a19",
+      "source_content": "```text\nWriting bundle output to:, Build/Intermediates.noindex/ArchiveIntermediates/application/BuildProductsPath/Release-iphoneos/main.jsbundle\nWriting sourcemap output to:, Build/Intermediates.noindex/ArchiveIntermediates/application/BuildProductsPath/Release-iphoneos/main.jsbundle.map\n```",
+      "source_content_hash": "dda82e03a7980841dacc7b921ffac7f47b1982413f924176ef7225ef01c45500",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bc137a19"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "## Manual Symbolication",
+      "source_content_hash": "99d4343e6274910d267a7e101aa1df6e27b7c025e7f27ef4ed1a1a9e7c6f9bd6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 手動符號化"
+      }
+    },
+    {
+      "segment_id": "f5db8e60",
+      "source_content": ":::info\nYou may read about manual symbolication of a stack trace on the [symbolication](symbolication.md) page.\n:::",
+      "source_content_hash": "524d755e319f4720d5c2501084b4df2cb9ad2c50157de9e720beae29fa02fcfb",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n關於堆疊追蹤的手動符號化程序，請參閱[符號化說明頁面](symbolication.md)。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/sourcemaps.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.422715+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a558b19b14a63c139b14f4ec5fe2cd7a0a5d6c7b884c871c3368c6a587029b5f"
+  }
+}

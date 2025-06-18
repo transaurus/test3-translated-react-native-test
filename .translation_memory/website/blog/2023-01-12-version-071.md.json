@@ -1,0 +1,862 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2023-01-12-version-071.md",
+  "source_file_content_hash": "6dcd0308507391f349ca9411faf96577295ab31dc806b1c65f672c329801cfd5",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.71: TypeScript by Default, Flexbox Gap, and more...'\nauthors: [mattcarrollcode, NickGerleman, cortinico, kelset]\ntags: [announcement, release]\ndate: 2023-01-12\n---",
+      "source_content_hash": "d3252635a85af71d865ef68bccc94c3e6ce681f124dcbf5121f74e8f4d869734",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Today we’re releasing React Native version 0.71! This is a feature-packed release including:",
+      "source_content_hash": "631c2ea10898edd2a654335fc9f3db457c03b0d592a585a2272bd06e3b495fd1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們正式發佈 React Native 0.71 版本！這個版本包含多項重要功能："
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- [TypeScript by default](/blog/2023/01/12/version-071#typescript-by-default)\n- [Simplifying layouts with Flexbox Gap](/blog/2023/01/12/version-071#simplifying-layouts-with-flexbox-gap)\n- [Web-inspired props for accessibility, styles, and events](/blog/2023/01/12/version-071#web-inspired-props-for-accessibility-styles-and-events)\n- [Restoring PropTypes](/blog/2023/01/12/version-071#restoring-proptypes)\n- [Developer Experience Improvements](/blog/2023/01/12/version-071#developer-experience-improvements)\n- [New Architecture Updates](/blog/2023/01/12/version-071#new-architecture)",
+      "source_content_hash": "6ad75d1b36b91bb642e8f06bd640822bf962cd0150fc49c2b28bae3b9ed1d829",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [預設支援 TypeScript](/blog/2023/01/12/version-071#typescript-by-default)\n- [使用 Flexbox Gap 簡化佈局](/blog/2023/01/12/version-071#simplifying-layouts-with-flexbox-gap)\n- [基於網頁標準的無障礙屬性、樣式與事件](/blog/2023/01/12/version-071#web-inspired-props-for-accessibility-styles-and-events)\n- [恢復 PropTypes 支援](/blog/2023/01/12/version-071#restoring-proptypes)\n- [開發者體驗改進](/blog/2023/01/12/version-071#developer-experience-improvements)\n- [新架構更新](/blog/2023/01/12/version-071#new-architecture)"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "In this post we’ll cover some of the highlights of 0.71.",
+      "source_content_hash": "1af8908e21877beef79a61e240b1ce35c1cd315eb591086d477021f9878a32f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本文將重點介紹 0.71 版本的主要更新內容。"
+      }
+    },
+    {
+      "segment_id": "29ee8c7a",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29ee8c7a"
+      }
+    },
+    {
+      "segment_id": "cac45343",
+      "source_content": ":::info\nFor a full list of changes, check out [CHANGELOG.md](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v071).\n:::",
+      "source_content_hash": "33245dcaa05037a6311c72bab5659be12a7c08c520761ad2a7446237bb316986",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n完整變更清單請參閱 [CHANGELOG.md](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v071)。\n:::"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "## TypeScript by default",
+      "source_content_hash": "28b317c2354a235be2e879852d814eff9116cdc0bb7288928d23a4d4224466a8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 預設支援 TypeScript"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "In this release, we’re investing in the TypeScript experience of React Native.",
+      "source_content_hash": "fe84a104422b762cfd6a6c257fa3de9edb7bb9979802b3fafb260afbd64a26c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此版本中，我們強化了 React Native 的 TypeScript 開發體驗。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "Starting with 0.71, when you create a new React Native app via the React Native CLI you'll get a TypeScript app by default. The new project is already set up with a `tsconfig.json` so out of the box your IDE will help you write typed code right away.",
+      "source_content_hash": "20303718ac3984f6331321321967328b7184645b26f3cc7c26c63f091bd670b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 0.71 開始，當您透過 React Native CLI 建立新專案時，預設將生成 TypeScript 應用程式。新專案已配置好 `tsconfig.json` 文件，讓您的 IDE 能立即提供類型提示支援。"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "We’re also offering built-in, more accurate TypeScript declarations directly from the `react-native` package. This means you won’t need `@types/react-native` any longer, and the types will be updated in lockstep with React Native releases.",
+      "source_content_hash": "b550878b3d54906d2663f45a944df125ab6a1f2ecdf8732293a07bd8d7ad02c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們現在直接從 `react-native` 套件提供更精確的內建 TypeScript 型別定義。這意味著您不再需要安裝 `@types/react-native`，且型別定義會與 React Native 版本同步更新。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "Finally, our documentation has been updated to feature TypeScript for all examples.",
+      "source_content_hash": "5966cd9b0bdba27971fd6309009576f97f145fc1d4589dc990802445138bb19a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，我們已更新所有範例程式碼，全面採用 TypeScript 語法。"
+      }
+    },
+    {
+      "segment_id": "26b47687",
+      "source_content": ":::note\n\nAfter upgrading to React Native 0.71, we recommend removing `@types/react-native` from your package.json `devDependencies`.\n\n:::",
+      "source_content_hash": "b1f1da68208a511f2292047316bc3baa09f87acd36738006639e2fd702556324",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n\n升級至 React Native 0.71 後，建議從 package.json 的 `devDependencies` 中移除 `@types/react-native`。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "For more details on this change, including migration steps and how this affects Flow users, check out our previous post [First-class Support for TypeScript](https://reactnative.dev/blog/2023/01/03/typescript-first).",
+      "source_content_hash": "20495fb7320353d4243ea5f35c68181d7d8321b05321f23f2bc3cd149c4a5b5c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有關此變更的詳細資訊（包括遷移步驟與對 Flow 使用者的影響），請參閱我們先前的文章《[First-class Support for TypeScript](https://reactnative.dev/blog/2023/01/03/typescript-first)》。"
+      }
+    },
+    {
+      "segment_id": "06c0f776",
+      "source_content": "## Simplifying layouts with Flexbox gap",
+      "source_content_hash": "457a5f1136462763c0b892383f019d547d541f4ea5cc33f37379c58de0114028",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 Flexbox Gap 簡化佈局"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "With React Native you can flexibly layout components on different screen sizes using Flexbox. Browsers have supported the Flexbox properties [gap](https://developer.mozilla.org/en-US/docs/Web/CSS/gap), [rowGap](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap), and [columnGap](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap), which allow you to specify the amount of space between all items in a Flexbox.",
+      "source_content_hash": "58b933aa35dde62ce75b7f864403489b993ec17ee423ad5da996d2e084a391ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 讓您能透過 Flexbox 在不同螢幕尺寸上靈活排列元件。瀏覽器長期支援的 Flexbox 屬性 [gap](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)、[rowGap](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap) 和 [columnGap](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)，可讓您精確控制 Flexbox 中所有項目間的間距。"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "These properties have been long requested in React Native, and 0.71 adds initial support for gaps defined using pixel values. In future versions, we will add support for more values, such as percentages.",
+      "source_content_hash": "86d3942fc36d1f31565839271dce24399c4da79b4d37b9af358c99b2f9324dc4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些屬性在 React Native 社群中被長期呼籲支援，0.71 版本現在初步支援以像素值定義的間距。未來版本將加入更多數值類型支援，例如百分比。"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "To see why this is useful, imagine trying to build a responsive layout with variably sized cards, 10px apart from each other, hugging the edges of the parent container. Trying to accomplish this layout with child margins can be tricky.",
+      "source_content_hash": "9a485e0cfbd8a6d313ed63a8a4309a2ec87d3e5c1260bf40c09be34443453072",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "舉例來說，當您需要建立一個響應式佈局，其中包含大小不一的卡片元件，要求卡片間距為 10px 且緊貼父容器邊緣時，若使用子元素邊距(margin)來實現會相當棘手。"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "The following shows a layout where we start by giving each child `margin: 10` style:",
+      "source_content_hash": "c5c5b8f4a0cf5d8751e9a2b83be962077375231829b734705f654d32a13a4aa8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "下圖展示我們最初為每個子元素設定 `margin: 10` 樣式的佈局效果："
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "![Two diagrams. On the left it shows a skeleton of an app with three boxes that have margin around them cause the boxes to have margin around all sides. On the right, the same diagram is shown highlighted to demonstrate the margin on all sides.](/blog/assets/FlexboxGapBefore.png)",
+      "source_content_hash": "ca5c7ab67ddee27922e0fd345d47ce1d0dff26cd6c7e4ef898bace7593df584e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![兩張示意圖。左圖顯示應用程式框架中有三個方塊，由於設定了邊距導致所有方塊四周都有間距。右圖用高亮標示相同佈局，展示所有邊緣的間距效果。](/blog/assets/FlexboxGapBefore.png)"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "Margins are applied uniformly to the edges of all children and don’t collapse under Flexbox, giving us spacing at the exterior of the cards, and double the space on the interior compared to what we wanted. We can get around this by applying non-uniform margins, using negative margins on the parent, halving our intended spacing, etc, but it can be made much easier.",
+      "source_content_hash": "92da0d72261923ed73edcea8e02bd34e774cd78db8c00894a4220f86c200da72",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "邊距會均勻套用至所有子元素的邊緣，且在 Flexbox 中不會折疊，這導致卡片外側出現多餘間距，而內側間距則是預期值的兩倍。雖然可以透過非均勻邊距、父元素負邊距或間距減半等方法解決，但現在有更簡便的方案。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "With flex gap, this layout can be achieved by setting `gap: 10` on the container for a 10 pixel gap between the interior of the cards:",
+      "source_content_hash": "fc74c52a128d3ee3adff8d06d7177b4eeb643f78de69b791b950c2a467e00a67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 flex gap 屬性，只需在容器上設定 `gap: 10` 即可在卡片內側之間建立 10 像素的間距："
+      }
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "![Two diagrams. On the left it shows a skeleton of an app with three boxes that have margin only on the inner sides and not the outer sides of the boxes due to the Flexbox gap property. On the right, the same diagram is shown highlighted to demonstrate the margin only on the inner sides.](/blog/assets/FlexboxGapAfter.png)",
+      "source_content_hash": "68f62275de1a6382dd64011c45829b0439a12ac0313e7875fda80657b86987fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![兩張示意圖。左圖顯示應用程式的骨架，三個方塊因 Flexbox gap 屬性僅在內側有間距，外側則無。右圖以高亮顯示相同佈局，標示出僅存在於內側的間距。](/blog/assets/FlexboxGapAfter.png)"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "For more information on Flexbox gaps, see [this blogpost from CSS Tricks](https://css-tricks.com/minding-the-gap/#aa-flexbox-gaps).",
+      "source_content_hash": "7e7eb37e5842b5d930869cbc2862f95c3c3b05c4fdcdc3a2badad173a4122c95",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多關於 Flexbox 間距的資訊，請參閱 [CSS Tricks 的這篇部落格文章](https://css-tricks.com/minding-the-gap/#aa-flexbox-gaps)。"
+      }
+    },
+    {
+      "segment_id": "9e95fc4a",
+      "source_content": "## Web-inspired props for accessibility, styles, and events",
+      "source_content_hash": "60b95551db596ba5ee4a76148226de8882938dfba45fbbd2d6158826b4cfc722",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 受網頁啟發的無障礙功能、樣式與事件屬性"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "This release includes a number of new props inspired by web standards to align React Native’s APIs across many platforms. These new props are purely additive so there are no expected migrations or change of behavior for equivalent accessibility, behavior, or style props.",
+      "source_content_hash": "469a758d7ca1d00a203551aab83820632bbd9d2fdb513f7efb4ca0cf0bc52ca0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本新增多個參考網頁標準設計的屬性，以統一 React Native 跨平台的 API 介面。這些新屬性均為純粹的附加功能，現有的等效無障礙屬性、行為或樣式屬性皆無需遷移或改變既有行為。"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "For any new prop alias introduced, if there is an existing prop with a different name and both are specified, the new alias prop value will take precedence. For example, this release adds a `src` prop alias for `source` on the Image component to align with the `src` prop on web. If both `src` and `source` are provided, the new `src` prop will be used.",
+      "source_content_hash": "0126cbd791c780d15fa58c3bb875cee6d143ea9527e8eefab68c23208f252d16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "所有新增的別名屬性若與既有屬性名稱不同，當兩者同時被指定時，新別名屬性的值將優先採用。例如本次為 Image 元件新增與網頁 `src` 屬性對齊的 `src` 別名屬性，若同時提供 `src` 與 `source`，系統將採用新的 `src` 屬性值。"
+      }
+    },
+    {
+      "segment_id": "c9945b55",
+      "source_content": ":::note\n\nFor more background on aligning React Native to web standards, check out this [proposal](https://github.com/necolas/discussions-and-proposals/blob/reduce-fragmentation/proposals/0000-reduce-fragmentation.md) and [related discussion](https://github.com/react-native-community/discussions-and-proposals/pull/496).\n:::",
+      "source_content_hash": "4656fd1c57f12a118285fd37f327be1a6082c47fdfcdbe8f980ee09705886ebe",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n\n欲了解 React Native 與網頁標準對齊的更多背景，請參閱此[提案](https://github.com/necolas/discussions-and-proposals/blob/reduce-fragmentation/proposals/0000-reduce-fragmentation.md)及[相關討論](https://github.com/react-native-community/discussions-and-proposals/pull/496)。\n:::"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "#### Accessibility",
+      "source_content_hash": "a4619d76e4ddbd0665d7ff1649b97f942a222559aab5981fade17015dd4119d5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 無障礙功能"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "We introduced ARIA props as alias to existing React Native accessibility props.",
+      "source_content_hash": "f86beaec08bc70ccea19a8b4b33d627fb96edd6480a298b09e891e7e87da4d8b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們新增 ARIA 屬性作為現有 React Native 無障礙屬性的別名。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "These props now exist on all core components of React Native:`aria-label`, `aria-labelledby`,`aria-modal`, `id`, `aria-busy`, `aria-checked`, `aria-disabled`, `aria-expanded`, `aria-selected`, `aria-valuemax`, `aria-valuemin`, `aria-valuenow`, and `aria-valuetext`.",
+      "source_content_hash": "3b166ce156839b17eb553c9b9414e55fc51cadee8621d693f206102002635c7f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下屬性現已存在於所有 React Native 核心元件：`aria-label`、`aria-labelledby`、`aria-modal`、`id`、`aria-busy`、`aria-checked`、`aria-disabled`、`aria-expanded`、`aria-selected`、`aria-valuemax`、`aria-valuemin`、`aria-valuenow` 及 `aria-valuetext`。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "We also introduced equivalent web behavior for: `aria-hidden`, `aria-live`, `role`, and `tabIndex`.",
+      "source_content_hash": "c218ed4888a61866dac9074caae1a2f1274a0ed0435c85e32a979a8e4a67cc15",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們也實作了與網頁等效的行為：`aria-hidden`、`aria-live`、`role` 和 `tabIndex`。"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "See this [issue](https://github.com/facebook/react-native/issues/34424) for more details.",
+      "source_content_hash": "493ba39bef3bf34d8ab6d02d3b961c890794490de80af8c5af571b323c5c0d73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳情請參閱此[議題](https://github.com/facebook/react-native/issues/34424)。"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "#### Component-Specific Behavior",
+      "source_content_hash": "31c685ba8be7ce6229819554826caf84a26eb4aad3054bb0d228045113a35c05",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 元件特定行為"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "There were also props introduced to align prop names with equivalent DOM prop names for core components.",
+      "source_content_hash": "0405d136c2e1e01baedeb35588659da9a28c1b84bf571a54db7a9aa5d392381b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本次也新增了與 DOM 屬性名稱對齊的核心元件屬性。"
+      }
+    },
+    {
+      "segment_id": "887c863e",
+      "source_content": "- **Image**: `alt`, `tintColor`, `crossOrigin`, `height`, `referrerPolicy`, `src`, `srcSet`, and `width`.\n- **TextInput**: `autoComplete`, `enterKeyHint`, `inputMode`, `readOnly`, and `rows`.",
+      "source_content_hash": "dbab6c6b54e36d94034087fb71c6cbc173afd2a3dfdfec5087edcb4ec2a6e272",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **Image**：`alt`、`tintColor`、`crossOrigin`、`height`、`referrerPolicy`、`src`、`srcSet` 和 `width`。\n- **TextInput**：`autoComplete`、`enterKeyHint`、`inputMode`、`readOnly` 和 `rows`。"
+      }
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "See this [issue](https://github.com/facebook/react-native/issues/34424) for more details.",
+      "source_content_hash": "493ba39bef3bf34d8ab6d02d3b961c890794490de80af8c5af571b323c5c0d73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳情請參閱此[議題](https://github.com/facebook/react-native/issues/34424)。"
+      }
+    },
+    {
+      "segment_id": "39db08de",
+      "source_content": "#### Styles",
+      "source_content_hash": "ddef395968b071f72da00880ddc673bb6749517849d9d7155e12b3b9ad5bca71",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 樣式"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "To align with certain CSS styles, there have been feature extensions for the following styles:",
+      "source_content_hash": "ab07553904f2c54ae3cd8475ccebc9217a0da09a7febb0574de53b3e1a907284",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為對齊特定 CSS 樣式，以下樣式功能已擴充："
+      }
+    },
+    {
+      "segment_id": "b264104e",
+      "source_content": "- [`aspectRatio`](https://reactnative.dev/docs/layout-props#aspectratio) now supports string values\n- [`fontVariant`](https://reactnative.dev/docs/text-style-props#fontvariant) now supports space-separated string values\n- [`fontWeight`](https://reactnative.dev/docs/text-style-props#fontWeight) now supports number values\n- [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) now supports string values",
+      "source_content_hash": "87e23a95f6729648959dd5fe92d6e4954ed11eba416bfe5c0ec7ca9992a716e7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`aspectRatio`](https://reactnative.dev/docs/layout-props#aspectratio) 現支援字串值\n- [`fontVariant`](https://reactnative.dev/docs/text-style-props#fontvariant) 現支援以空格分隔的字串值\n- [`fontWeight`](https://reactnative.dev/docs/text-style-props#fontWeight) 現支援數值輸入\n- [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) 現支援字串值"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "The following aliases have been added to shadow existing React Native styles:",
+      "source_content_hash": "5e75fc37149ce98872f5f5fd0482986b273fd76d26abdff97bdf681d5d846bbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下別名已新增以對應現有 React Native 樣式："
+      }
+    },
+    {
+      "segment_id": "936011bd",
+      "source_content": "- [`objectFit`](https://reactnative.dev/docs/image#objectfit)\n- [`pointerEvents`](https://reactnative.dev/docs/view-style-props#pointerevents)\n- [`userSelect`](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)\n- [`verticalAlign`](https://reactnative.dev/docs/text-style-props#verticalalign-android)",
+      "source_content_hash": "c1e671cddf464084a8db5de0b7c369a487c9cd5dc0488fae9225ecdd203374ff",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`objectFit`](https://reactnative.dev/docs/image#objectfit)\n- [`pointerEvents`](https://reactnative.dev/docs/view-style-props#pointerevents)\n- [`userSelect`](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)\n- [`verticalAlign`](https://reactnative.dev/docs/text-style-props#verticalalign-android)"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "See this [issue](https://github.com/facebook/react-native/issues/34425) for more details.",
+      "source_content_hash": "21367b828315fc88fa2db280be530d876d7725773d4e6ed73e6e945348ab8fc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳情請參閱此[議題](https://github.com/facebook/react-native/issues/34425)。"
+      }
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "#### Events",
+      "source_content_hash": "fedc2bbc318a086d5cb54a71fdc68c156343bd51c065ee45758ccd054c7ec8bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 事件"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "Finally, we also added an opt-in implementation of [PointerEvents](https://w3c.github.io/pointerevents)",
+      "source_content_hash": "85a5641e4ce8d959a9fa3f4a055d46bcaa9430be1e49d5dfcadb83d557242637",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，我們還新增了 [PointerEvents](https://w3c.github.io/pointerevents) 的選擇性實作"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "Once enabled, the following handlers on `View` will support hover:",
+      "source_content_hash": "bb7e5b44989b0116b30409a059d8430fddde4a1f49ccc31d02f9a47640c607a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "啟用後，`View` 上的以下處理器將支援懸停："
+      }
+    },
+    {
+      "segment_id": "2890f5b2",
+      "source_content": "- `onPointerOver`, `onPointerOut`\n- `onPointerEnter`, `onPointerLeave`",
+      "source_content_hash": "bdf30206cb304eb521158d626d4987bba3f3d558e4517f7523ef04e29bf20dc8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `onPointerOver`, `onPointerOut`\n- `onPointerEnter`, `onPointerLeave`"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "These events are also implemented in `Pressability` for new opt-in support for hover.",
+      "source_content_hash": "00e35258d44059f18856cf43c3ea452c61713384fdfb42664e5d1c67f6a5e883",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些事件也在 `Pressability` 中實作，以新增對懸停的選擇性支援。"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "To enable these features, set the following flags to true:",
+      "source_content_hash": "d9e5113a823b78af826442154c8381deac2bc41f34233b3632f4d164de0caacf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要啟用這些功能，請將以下標記設為 true："
+      }
+    },
+    {
+      "segment_id": "6f605d92",
+      "source_content": "```js\nimport ReactNativeFeatureFlags from 'react-native/Libraries/ReactNative/ReactNativeFeatureFlags';\n\n// enable the JS-side of the w3c PointerEvent implementation\nReactNativeFeatureFlags.shouldEmitW3CPointerEvents = () => true;\n\n// enable hover events in Pressibility to be backed by the PointerEvent implementation.\n// shouldEmitW3CPointerEvents should also be true\nReactNativeFeatureFlags.shouldPressibilityUseW3CPointerEventsForHover =\n  () => true;\n```",
+      "source_content_hash": "ec04e46287c528c4751fae41c187b41f33b49fcb54203a13a789f43983f2c5d2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6f605d92"
+      }
+    },
+    {
+      "segment_id": "70c0d7b3",
+      "source_content": ":::note\n\nYou’ll also need to enable React feature flags on your [Android](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native#android-specific) and [iOS](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native#ios-specific) native setup.\n\n:::",
+      "source_content_hash": "db03b7b232d702c1b346ac8f6819d58baabe5e3f198c9b21fd669fdd2ca2e9b8",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n\n您還需要在 [Android](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native#android-specific) 和 [iOS](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native#ios-specific) 的原生設定中啟用 React 功能標記。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "Check out our dedicated [PointerEvents post](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native) to learn more.",
+      "source_content_hash": "9dbbb611527f85a41365a250ca3a2627c0084b904bddc439ff9b7a509e297da6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查看我們專屬的 [PointerEvents 文章](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native) 以了解更多。"
+      }
+    },
+    {
+      "segment_id": "0d5321b7",
+      "source_content": "## Restoring PropTypes",
+      "source_content_hash": "f77f31e8928af4da793d330afb42cb455292127747b1b4aa630d781bf0b8d0fb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 恢復 PropTypes"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "React Native’s prop types, such as `ViewPropTypes` and `Text.propTypes`, were deprecated in 0.66 and accessing them would output deprecation warnings. When they were removed in 0.68, many developers began experiencing errors when upgrading to the latest version of React Native.",
+      "source_content_hash": "23b05f574195374ec8f83ebef78c8f3713a9cb07e7268302d0d24cdf30453cc8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 的 prop 類型，如 `ViewPropTypes` 和 `Text.propTypes`，在 0.66 版本中被棄用，存取它們會輸出棄用警告。當它們在 0.68 版本中被移除時，許多開發者在升級到最新版本的 React Native 時開始遇到錯誤。"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "After some investigation, we realized that a couple issues prevented the community from taking action on the deprecation warnings. First, the deprecation warning was not always actionable which caused people to ignore them ([issue one](https://github.com/facebook/react-native/pull/34650), [issue two](https://github.com/react-native-community/cli/pull/1699)). Second, the deprecation warnings were being [incorrectly filtered](https://github.com/facebook/react-native/commit/fa2842d) by `LogBox.ignoreLogs`. Both of these have now been fixed, but we want to give people more time to upgrade the deprecated call sites.",
+      "source_content_hash": "bdf7a5fdf7a15db25990246b9299710df3ac1220e9d8abd6610dd0486f80c23c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "經過一些調查，我們意識到有幾個問題阻止了社群對棄用警告採取行動。首先，棄用警告並不總是具有可操作性，這導致人們忽略它們（[問題一](https://github.com/facebook/react-native/pull/34650)，[問題二](https://github.com/react-native-community/cli/pull/1699)）。其次，棄用警告被 `LogBox.ignoreLogs` [錯誤地過濾](https://github.com/facebook/react-native/commit/fa2842d)。這兩個問題現在都已修復，但我們希望給人們更多時間來升級棄用的呼叫站點。"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "So in this release we are adding back React Native’s propTypes so that it is easier for people to upgrade and migrate their code to avoid using them. The `deprecated-react-native-prop-types` package has also been updated for all of the props in 0.71. In the future, we plan to proceed with the deprecation and remove prop types once again. We expect that when we revisit the removal, the community will experience significantly fewer issues.",
+      "source_content_hash": "2abe88594c6d9174269bc82245317d3d2a804578df8c6b7b772c4a4b478d60f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此，在這個版本中，我們重新加入了 React Native 的 propTypes，以便人們更容易升級並遷移他們的程式碼以避免使用它們。`deprecated-react-native-prop-types` 套件也已更新，以包含 0.71 版本中的所有 prop。未來，我們計劃繼續進行棄用並再次移除 prop 類型。我們預計當我們重新審視移除時，社群將遇到明顯更少的問題。"
+      }
+    },
+    {
+      "segment_id": "ff35cad6",
+      "source_content": ":::caution\n\nAs part of this change, we are also removing the console filtering from `LogBox.ignoreLog`. This means logs that you have previously filtered with `Logbox.ignoreLog` will start appearing again in the console when you upgrade.\n\nThis is expected, because it allows logs such as deprecation warnings to be found and fixed.\n:::",
+      "source_content_hash": "dd537f75372c10c2fe940b1b22558fa800a5018c305e979334c6f0d9fc3cca55",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution\n\n作為此變更的一部分，我們還移除了 `LogBox.ignoreLog` 中的控制台過濾功能。這意味著您之前使用 `Logbox.ignoreLog` 過濾的日誌將在升級後再次出現在控制台中。\n\n這是預期的行為，因為它允許發現並修復諸如棄用警告之類的日誌。\n:::"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "## Developer Experience Improvements",
+      "source_content_hash": "e3555834f7136981e4ecd999d5942e88b5fa5c74c851b8df20495f17ee67214f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 開發者體驗改進"
+      }
+    },
+    {
+      "segment_id": "3c6dd548",
+      "source_content": "### React DevTools",
+      "source_content_hash": "c3572b38abc8d6e34cdb01ecdf5ab33d474310592c2a6d30b47c27419a9ea0d6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### React DevTools"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "In this release, we've brought two popular React DevTools features on web to React Native.",
+      "source_content_hash": "fcd90b8e35c4457f886b926f0f40f8110c89897d50c9b3f24f7afbe512bbe437",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在這個版本中，我們將兩個在網頁上流行的 React DevTools 功能帶到了 React Native。"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "\"Click to inspect\" is the option in the top left corner of React Dev Tools that allows you to click on an item in the app to inspect it in Dev Tools, similar to the Chrome element inspector.",
+      "source_content_hash": "6c176697b8d158e452a9d8fa235eda643b4f59434f9982779ba633bf71b0df03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "「點擊檢查」是 React Dev Tools 左上角的選項，允許您點擊應用中的項目以在 Dev Tools 中檢查它，類似於 Chrome 的元素檢查器。"
+      }
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "Component highlighting will highlight the element you select in DevTools in the app so you can see which React components line up with which on-screen elements.",
+      "source_content_hash": "1ed5886061387aab1d6dbc1ac244e3baae7ec7aec188a81fd619be6bbf2993b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "元件高亮將在 DevTools 中高亮顯示您選擇的元素，以便您可以看到哪些 React 元件與螢幕上的哪些元素對應。"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "Here are both features in action:",
+      "source_content_hash": "11946d87abb349bdf9514a07fc87976f233e3c1d1354567e865b81a65a6aad2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是這兩個功能的實際操作："
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "![Video of the behavior described above in action. On the left is a React Native app running in an iPhone simulator. On the right is the React DevTools. In both workflows, clicking on an item in the DevTools highlights the corresponding components in the app.](/blog/assets/ElementInspecting.gif)",
+      "source_content_hash": "da9df5ed6316d2627489f2eae158ec64322e2629339b4048282903f84062db20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![上述行為的實際操作影片。左側是在 iPhone 模擬器中運行的 React Native 應用。右側是 React DevTools。在這兩種工作流程中，點擊 DevTools 中的項目會高亮顯示應用中對應的元件。](/blog/assets/ElementInspecting.gif)"
+      }
+    },
+    {
+      "segment_id": "6ffd1ebe",
+      "source_content": "### Hermes",
+      "source_content_hash": "7ed1f61df3a363c605dd2a78251f26d56f212d78cc5cb44f2b6b07dc2aa17dc3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Hermes"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "In React Native 0.70, we made [Hermes the default engine for React Native](https://reactnative.dev/blog/2022/07/08/hermes-as-the-default).",
+      "source_content_hash": "36d7cec81bae8d1cec5aa2b640e41e7cb14e08539556abddf994bac54360f869",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.70 中，我們將 [Hermes 設為 React Native 的預設引擎](https://reactnative.dev/blog/2022/07/08/hermes-as-the-default)。"
+      }
+    },
+    {
+      "segment_id": "808b0414",
+      "source_content": "In React Native 0.71, we’re upgrading Hermes with a few notable improvements:",
+      "source_content_hash": "745bc7501cc010710421ebc0dca440f50b11b7a6239de1481c4928e738043aed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.71 中，我們升級了 Hermes，並帶來了一些顯著的改進："
+      }
+    },
+    {
+      "segment_id": "5b1ccdc9",
+      "source_content": "- **Improve source maps**: By loading source maps over the network with Metro we’ve restored the ability to use source maps in recent versions of Chrome Dev Tools outside of Flipper.\n- **Improve `JSON.parse` performance**: This version includes a performance optimization that improves the performance of `JSON.parse` up to 30%.\n- **Add support for `.at()`**: Hermes now [supports](https://github.com/facebook/hermes/issues/823)`.at()` for `String`, `TypedArray`, and `Array`.",
+      "source_content_hash": "ef918cd8233b020710c9d50cdcbca9ab6818628d036f1ec783bb234804420c33",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **改善原始碼對應表**：透過 Metro 從網路載入原始碼對應表，我們恢復了在 Flipper 之外使用 Chrome 開發者工具最新版本中原始碼對應表的功能。\n- **提升 `JSON.parse` 效能**：此版本包含一項效能優化，可將 `JSON.parse` 的效能提升高達 30%。\n- **新增支援 `.at()` 方法**：Hermes 現在[支援](https://github.com/facebook/hermes/issues/823)對 `String`、`TypedArray` 和 `Array` 使用 `.at()` 方法。"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "For a full list of changes see [the Road to 71 issue](https://github.com/reactwg/react-native-releases/discussions/41#discussioncomment-4089256).",
+      "source_content_hash": "86d359772b5c02f726582f81afbbf857734d1aacf00c3c792482840abe7adaab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完整變更清單請參閱 [Road to 71 議題](https://github.com/reactwg/react-native-releases/discussions/41#discussioncomment-4089256)。"
+      }
+    },
+    {
+      "segment_id": "61282bab",
+      "source_content": "### New Architecture",
+      "source_content_hash": "2618bd8e4cc68e24d74b3226b6a524255ee28eae4325d30a42e2704544d22c66",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新架構"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "This release brings many improvements to the experimental New Architecture experience based on user feedback and reports we collected so far.",
+      "source_content_hash": "fa24c33348300d863cfc63b9bbf3b37289a25f14800bf7378d8a2ba9c03bccf8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本根據使用者回饋和我們目前收集的報告，為實驗性的新架構體驗帶來多項改進。"
+      }
+    },
+    {
+      "segment_id": "fc7b5b3c",
+      "source_content": "- **Reduced build times**: The new distribution model uses Maven Central, which allows us to greatly reduce the build time on Android, resolves many build problems on Windows, and provides a more seamless experience with the New Architecture. [Read more here](https://github.com/reactwg/react-native-new-architecture/discussions/105).\n- **Write less C++ code**: You can now enable the New Architecture without having to add any C++ code in your app and the CLI app template has been cleaned of all the C++ code and the CMake files. [Read more here](https://github.com/reactwg/react-native-new-architecture/discussions/101).\n- **Better encapsulation of iOS app setup**: On iOS, we followed a similar approach to Android and encapsulated most of the logic to set up the New Architecture in the `RCTAppDelegate` class, which will simplify upgrades in the future with fewer manual breaking changes.\n- **Better dependency management on iOS**: For library maintainers, we've added a new `install_module_dependencies` function to call inside your package `podspec` which will install all the required dependencies for the New Architecture.\n- **Bug fixes and better IDE support**: we fixed several bugs and issues (like [better IDE support for Android](https://github.com/reactwg/react-native-new-architecture/discussions/102)) that were reported by our users in the [New Architecture Working Group](https://github.com/reactwg/react-native-new-architecture/discussions).",
+      "source_content_hash": "294291c091b5e36f4d26d38f4a323d66a214edd846cc0e466f4b525551942f17",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **縮短建置時間**：新的發佈模型採用 Maven Central，讓我們能大幅減少 Android 上的建置時間，解決 Windows 上的許多建置問題，並提供更無縫的新架構體驗。[詳情請見](https://github.com/reactwg/react-native-new-architecture/discussions/105)。\n- **減少 C++ 程式碼撰寫**：現在您可以在不須於應用程式中添加任何 C++ 程式碼的情況下啟用新架構，且 CLI 應用程式範本已清除所有 C++ 程式碼和 CMake 檔案。[詳情請見](https://github.com/reactwg/react-native-new-architecture/discussions/101)。\n- **改善 iOS 應用程式設定的封裝**：在 iOS 上，我們採用了與 Android 類似的做法，將大部分設定新架構的邏輯封裝在 `RCTAppDelegate` 類別中，這將簡化未來的升級流程，減少手動處理的重大變更。\n- **改善 iOS 上的相依性管理**：對於函式庫維護者，我們在套件的 `podspec` 中新增了 `install_module_dependencies` 函式，用於安裝新架構所需的所有相依性。\n- **錯誤修正與更好的 IDE 支援**：我們修復了多個由使用者在[新架構工作小組](https://github.com/reactwg/react-native-new-architecture/discussions)中回報的錯誤和問題（例如[對 Android 更好的 IDE 支援](https://github.com/reactwg/react-native-new-architecture/discussions/102)）。"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "As a reminder, the New Architecture is still an experimental API experience as we iterate on changes to make adoption easier. Please try out the new simplified steps in the [New Architecture documentation](https://reactnative.dev/docs/new-architecture-intro) and post any feedback you have to the [New Architecture Working Group](https://github.com/reactwg/react-native-new-architecture/discussions).",
+      "source_content_hash": "3d5a818b8b61b27f00522574c0a78cab93523ff3e8d223549e16b48e560ced1c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提醒您，新架構仍是實驗性的 API 體驗，我們會持續迭代改進以簡化採用流程。請嘗試[新架構文件](https://reactnative.dev/docs/new-architecture-intro)中簡化的步驟，並將任何意見回饋提交至[新架構工作小組](https://github.com/reactwg/react-native-new-architecture/discussions)。"
+      }
+    },
+    {
+      "segment_id": "dfa23ddf",
+      "source_content": "### Other Notable Fixes",
+      "source_content_hash": "38dd6c4d73d7b0bc2d83f1be22ecfbf4a2ddcf9d882d399179352f967496f93d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他值得注意的修正"
+      }
+    },
+    {
+      "segment_id": "2810dba7",
+      "source_content": "- **Better stack frame collapsing**: We've [updated the list of internal frames](https://github.com/react-native-community/cli/pull/1699) for React Native so LogBox will show your code more often rather than internal React Native frames, helping you to debug issues faster.\n- **Build time improvements:** We migrated assets to Maven Central for prefabs to improve build times (both iOS and Android) for Hermes in both the current and new architectures.\n- **Android template improvements**: The Android template was heavily cleaned and now fully relies on the React Native Gradle Plugin. You can find the configuration instructions directly inside the template or in the [new dedicated page on the website](https://reactnative.dev/docs/react-native-gradle-plugin).",
+      "source_content_hash": "f6d31fcc682a9871697d510f7108bfc658fb23d8ab060b0b325b59db013530bc",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **改善堆疊框架摺疊**：我們已[更新 React Native 的內部框架清單](https://github.com/react-native-community/cli/pull/1699)，讓 LogBox 更常顯示您的程式碼而非 React Native 的內部框架，協助您更快除錯問題。\n- **建置時間改進**：我們將 Hermes 的資源遷移至 Maven Central 以使用預製件，改善當前和新架構在 iOS 和 Android 上的建置時間。\n- **Android 範本改進**：Android 範本經過大幅清理，現在完全依賴 React Native Gradle Plugin。您可以在範本中或[網站上的新專屬頁面](https://reactnative.dev/docs/react-native-gradle-plugin)找到設定說明。"
+      }
+    },
+    {
+      "segment_id": "6ac93c98",
+      "source_content": "## Breaking changes",
+      "source_content_hash": "d1c69ba9bc90db546d2a6a7611ea8e640505ca79693bd7ae7fdfd3a792d9dcc5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重大變更"
+      }
+    },
+    {
+      "segment_id": "c53e56f7",
+      "source_content": "- **Changes to Console Logging:** `LogBox.ignoreLog` no longer filters console logs. This means you will start seeing logs in the console that you have silenced in LogBox. See [this comment](https://github.com/facebook/react-native/pull/34476#issuecomment-1240667794) for more details.\n- **Removed AsyncStorage and MaskedViewIOS**: These components have been deprecated since version [0.59](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#deprecated-8), so it’s time we remove them entirely. For alternatives, please check [React Native Directory](https://reactnative.directory/) for community packages that cover those use cases.\n- **JSCRuntime moved to react-jsc:** react-jsi is now split into react-jsc and react-jsi. If you use JSCRuntime, you will need to add react-jsc as a dependency ([facebook/react-native@6b129d8](https://github.com/facebook/react-native/commit/6b129d81ed8cab301775d2a04971e255df9290de)).",
+      "source_content_hash": "c67dbede6fde6e545c6549f2c70737e25976945974ff773f4c5de79bcf9910eb",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **主控台記錄變更：** `LogBox.ignoreLog` 不再過濾主控台記錄。這意味著您將開始在主控台中看到已被 LogBox 靜音的記錄。詳情請參閱[此評論](https://github.com/facebook/react-native/pull/34476#issuecomment-1240667794)。\n- **移除 AsyncStorage 和 MaskedViewIOS：** 這些元件自 [0.59 版](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#deprecated-8)起已被棄用，現在我們將完全移除它們。替代方案請查閱 [React Native Directory](https://reactnative.directory/) 以尋找涵蓋這些使用情境的社群套件。\n- **JSCRuntime 移至 react-jsc：** react-jsi 現在拆分為 react-jsc 和 react-jsi。如果您使用 JSCRuntime，則需要添加 react-jsc 作為依賴項（[facebook/react-native@6b129d8](https://github.com/facebook/react-native/commit/6b129d81ed8cab301775d2a04971e255df9290de)）。"
+      }
+    },
+    {
+      "segment_id": "e457c208",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "eeeea5ce",
+      "source_content": "This release is possible thanks to the work of 70+ contributors adding over 1000 commits.",
+      "source_content_hash": "eebfa20adb54aa1d15efcfe3eda98aaedeeaf68218a5378f9a204baa4d1e5648",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本次發布得益於 70 多位貢獻者的努力，他們提交了超過 1000 次提交。"
+      }
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "We especially want to thank those who contributed to these major React Native projects:",
+      "source_content_hash": "220158300ca86a7c8c16d73e24ff8dd37042d00576679983282365453ec3fc80",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們特別感謝以下為 React Native 主要專案做出貢獻的人："
+      }
+    },
+    {
+      "segment_id": "417c03c6",
+      "source_content": "- **Flexbox Gap Support**: [@intergalacticspacehighway](https://github.com/intergalacticspacehighway) and [@jacobp100](https://github.com/jacobp100).\n- **Web-inspired props**: [@gabrieldonadel](https://github.com/gabrieldonadel) [@dakshbhardwaj](https://github.com/dakshbhardwaj) [@dhruvtailor7](https://github.com/dhruvtailor7) [@ankit-tailor](https://github.com/ankit-tailor) [@madhav23bansal](https://github.com/madhav23bansal).\n- **Codegen Improvements**: [@AntoineDoubovetzky](https://github.com/AntoineDoubovetzky), [@MaeIg](https://github.com/MaeIg), [@Marcoo09](https://github.com/Marcoo09), [@Naturalclar](https://github.com/Naturalclar), [@Pranav-yadav](https://github.com/Pranav-yadav), [@ZihanChen-MSFT](https://github.com/ZihanChen-MSFT), [@dakshbhardwaj](https://github.com/dakshbhardwaj), [@dhruvtailor7](https://github.com/dhruvtailor7), [@gabrieldonadel](https://github.com/gabrieldonadel), [@harshsiri110](https://github.com/harshsiri110), [@ken0nek](https://github.com/ken0nek), [@kylemacabasco](https://github.com/kylemacabasco), [@matiassalles99](https://github.com/matiassalles99), [@mdaj06](https://github.com/mdaj06), [@mohitcharkha](https://github.com/mohitcharkha), [@tarunrajput](https://github.com/tarunrajput), [@vinayharwani13](https://github.com/vinayharwani13), [@youedd](https://github.com/youedd), [@byCedric](https://github.com/byCedric).",
+      "source_content_hash": "1966681cdaf46095bd54d962c385d441d8b97a127f6e14c505f38c6b2df920ad",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **Flexbox 間距支援：** [@intergalacticspacehighway](https://github.com/intergalacticspacehighway) 和 [@jacobp100](https://github.com/jacobp100)。\n- **Web 風格屬性：** [@gabrieldonadel](https://github.com/gabrieldonadel) [@dakshbhardwaj](https://github.com/dakshbhardwaj) [@dhruvtailor7](https://github.com/dhruvtailor7) [@ankit-tailor](https://github.com/ankit-tailor) [@madhav23bansal](https://github.com/madhav23bansal)。\n- **程式碼生成改進：** [@AntoineDoubovetzky](https://github.com/AntoineDoubovetzky)、[@MaeIg](https://github.com/MaeIg)、[@Marcoo09](https://github.com/Marcoo09)、[@Naturalclar](https://github.com/Naturalclar)、[@Pranav-yadav](https://github.com/Pranav-yadav)、[@ZihanChen-MSFT](https://github.com/ZihanChen-MSFT)、[@dakshbhardwaj](https://github.com/dakshbhardwaj)、[@dhruvtailor7](https://github.com/dhruvtailor7)、[@gabrieldonadel](https://github.com/gabrieldonadel)、[@harshsiri110](https://github.com/harshsiri110)、[@ken0nek](https://github.com/ken0nek)、[@kylemacabasco](https://github.com/kylemacabasco)、[@matiassalles99](https://github.com/matiassalles99)、[@mdaj06](https://github.com/mdaj06)、[@mohitcharkha](https://github.com/mohitcharkha)、[@tarunrajput](https://github.com/tarunrajput)、[@vinayharwani13](https://github.com/vinayharwani13)、[@youedd](https://github.com/youedd)、[@byCedric](https://github.com/byCedric)。"
+      }
+    },
+    {
+      "segment_id": "c277c3c0",
+      "source_content": "Finally, thanks to [@cortinico](https://github.com/cortinico), [@kelset](https://github.com/kelset), [@dmytrorykun](https://github.com/dmytrorykun), [@cipolleschi](https://github.com/cipolleschi), and [@titozzz](https://github.com/titozzz) for cutting this release!",
+      "source_content_hash": "7ea444fa013dd2b60f8134b261352d47d5a9bf33937d3698767bddebe32aac4d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，感謝 [@cortinico](https://github.com/cortinico)、[@kelset](https://github.com/kelset)、[@dmytrorykun](https://github.com/dmytrorykun)、[@cipolleschi](https://github.com/cipolleschi) 和 [@titozzz](https://github.com/titozzz) 完成本次發布！"
+      }
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "## Try out 0.71.0 now!",
+      "source_content_hash": "5631b3bd947dc74bddc02022bcfb3e1c52164cc6a6e281293394bb8058483717",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 立即試用 0.71.0！"
+      }
+    },
+    {
+      "segment_id": "e4945edb",
+      "source_content": "For React Native CLI users, see the [upgrade documentation](https://reactnative.dev/docs/upgrading) for how to update your existing project, or create a new project with `npx react-native init MyProject`.",
+      "source_content_hash": "638dca9926f76e0dec2513c1ffcc00673ae57c5a27c6f283ee3a86f81da237bb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於 React Native CLI 使用者，請參閱[升級文件](https://reactnative.dev/docs/upgrading)以了解如何更新現有專案，或使用 `npx react-native init MyProject` 建立新專案。"
+      }
+    },
+    {
+      "segment_id": "9ede513a",
+      "source_content": "React Native version 0.71 will be supported in Expo SDK version 48.",
+      "source_content_hash": "ff68b4a7b7a397acd1fe6427ff2669fd46606daf1be1fdb98a8dc0c9c2fcf22f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.71 版將在 Expo SDK 48 版中獲得支援。"
+      }
+    },
+    {
+      "segment_id": "4540c1b4",
+      "source_content": ":::info\n0.71 is now the latest stable version of React Native and 0.68.x versions are now unsupported. For more information see [React Native’s support policy](https://github.com/reactwg/react-native-releases#releases-support-policy).\n:::",
+      "source_content_hash": "9e41bafd2cde8db4a56e3dbb64bf9ec49923e12d801c14362806686cd806746d",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.71 現已成為 React Native 的最新穩定版本，而 0.68.x 版本則不再受支援。更多資訊請參閱 [React Native 的支援政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2023-01-12-version-071.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.230584+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6dcd0308507391f349ca9411faf96577295ab31dc806b1c65f672c329801cfd5"
+  }
+}

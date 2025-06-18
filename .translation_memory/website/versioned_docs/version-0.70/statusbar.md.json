@@ -1,0 +1,1032 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/statusbar.md",
+  "source_file_content_hash": "e094409e074d331925d84c0aff09437cd4335ed0f9a051261766e9ca9294f1f8",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: statusbar\ntitle: StatusBar\n---",
+      "source_content_hash": "2ab985b3c09e16096914ec24c1f6096253bca40e12648568706dce0d09ba055b",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Component to control the app's status bar. The status bar is the zone, typically at the top of the screen, that displays the current time, Wi-Fi and cellular network information, battery level and/or other status icons.",
+      "source_content_hash": "89420ec06162b1ab7dfd65e7bd9bc675bf50fa82b816cd93acaad19cd4615584",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於控制應用程式狀態列的元件。狀態列通常是螢幕頂部的區域，顯示當前時間、Wi-Fi和行動網路資訊、電池電量和其他狀態圖示。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "### Usage with Navigator",
+      "source_content_hash": "d2494997c87641ad1f0cb2ba269e890ab4a3d41cf02ef175244fc686d4540131",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 與導航器一起使用"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "It is possible to have multiple `StatusBar` components mounted at the same time. The props will be merged in the order the `StatusBar` components were mounted.",
+      "source_content_hash": "e36c90880a58a0956d7a4117aa2dbf669f5e1499706ef687f72f4af7def71354",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可以同時掛載多個 `StatusBar` 元件。這些屬性將按照 `StatusBar` 元件掛載的順序進行合併。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=StatusBar%20Component%20Example&supportedPlatforms=android,ios\nimport React, { useState } from 'react';\nimport { Button, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';\n\nconst STYLES = ['default', 'dark-content', 'light-content'];\nconst TRANSITIONS = ['fade', 'slide', 'none'];\n\nconst App = () => {\n  const [hidden, setHidden] = useState(false);\n  const [statusBarStyle, setStatusBarStyle] = useState(STYLES[0]);\n  const [statusBarTransition, setStatusBarTransition] = useState(TRANSITIONS[0]);\n\n  const changeStatusBarVisibility = () => setHidden(!hidden);\n\n  const changeStatusBarStyle = () => {\n    const styleId = STYLES.indexOf(statusBarStyle) + 1;\n    if (styleId === STYLES.length) {\n      setStatusBarStyle(STYLES[0]);\n    } else {\n      setStatusBarStyle(STYLES[styleId]);\n    }\n  };\n\n  const changeStatusBarTransition = () => {\n    const transition = TRANSITIONS.indexOf(statusBarTransition) + 1;\n    if (transition === TRANSITIONS.length) {\n      setStatusBarTransition(TRANSITIONS[0]);\n    } else {\n      setStatusBarTransition(TRANSITIONS[transition]);\n    }\n  };\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <StatusBar\n        animated={true}\n        backgroundColor=\"#61dafb\"\n        barStyle={statusBarStyle}\n        showHideTransition={statusBarTransition}\n        hidden={hidden} />\n      <Text style={styles.textStyle}>\n        StatusBar Visibility:{'\\n'}\n        {hidden ? 'Hidden' : 'Visible'}\n      </Text>\n      <Text style={styles.textStyle}>\n        StatusBar Style:{'\\n'}\n        {statusBarStyle}\n      </Text>\n      {Platform.OS === 'ios' ? (\n        <Text style={styles.textStyle}>\n          StatusBar Transition:{'\\n'}\n          {statusBarTransition}\n        </Text>\n      ) : null}\n      <View style={styles.buttonsContainer}>\n        <Button\n          title=\"Toggle StatusBar\"\n          onPress={changeStatusBarVisibility} />\n        <Button\n          title=\"Change StatusBar Style\"\n          onPress={changeStatusBarStyle} />\n        {Platform.OS === 'ios' ? (\n          <Button\n            title=\"Change StatusBar Transition\"\n            onPress={changeStatusBarTransition} />\n        ) : null}\n      </View>\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    backgroundColor: '#ECF0F1'\n  },\n  buttonsContainer: {\n    padding: 10\n  },\n  textStyle: {\n    textAlign: 'center',\n    marginBottom: 8\n  }\n});\n\nexport default App;\n```",
+      "source_content_hash": "8a47196f7f7a9a5bbcfcfcbbdf53094b76970bbaa745f6777c668ba65cbf6e08",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "### Imperative API",
+      "source_content_hash": "b2f1157ff2001dda90a32cc909119eeca09b3663f4efa1941a8e1760871715af",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 命令式 API"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "For cases where using a component is not ideal, there is also an imperative API exposed as static functions on the component. It is however not recommended to use the static API and the component for the same prop because any value set by the static API will get overridden by the one set by the component in the next render.",
+      "source_content_hash": "9dcb3b2f4a8d6a7634c3d3e85f5590193df12c69b1208bade144e1676ee33633",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於不適合使用元件的情況，還有一個作為元件靜態函數公開的命令式 API。但不建議同時使用靜態 API 和元件來設置相同的屬性，因為靜態 API 設置的任何值將在下一次渲染時被元件設置的值覆蓋。"
+      }
+    },
+    {
+      "segment_id": "e9ae42a9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "42a5832e",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "## Constants",
+      "source_content_hash": "7f283750ddbaecb158fc5f94b28b54cc1b19f71d8f947cd494c4b88fdf44ed8f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 常數"
+      }
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "### `currentHeight` <div class=\"label android\">Android</div>",
+      "source_content_hash": "97c9fb4e57e9a8f65785f8cc28f51b55f0ada59ad6fc2bb7dfb4fa5e96cf9999",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `currentHeight` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "The height of the status bar, which includes the notch height, if present.",
+      "source_content_hash": "e7e69d1f19793318b80e38a25ff3e2fc8e942208a7061aaf53aca146e7d75f48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "狀態列的高度，包括凹口高度（如果存在）。"
+      }
+    },
+    {
+      "segment_id": "e55f4c1f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "37fca32e",
+      "source_content": "### `animated`",
+      "source_content_hash": "6d280bd9a9b7803880711cf3f5fc29f614badca2e9dce31827fa927fc2ae3305",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `animated`"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "If the transition between status bar property changes should be animated. Supported for `backgroundColor`, `barStyle` and `hidden` properties.",
+      "source_content_hash": "0daecc76a1ee8090417c9933bfb3a16b2974241a161ab08b19e55adb4750e2d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "是否應在狀態列屬性變化之間進行過渡動畫。支援 `backgroundColor`、`barStyle` 和 `hidden` 屬性。"
+      }
+    },
+    {
+      "segment_id": "4fdeb798",
+      "source_content": "| Type    | Required | Default |\n| ------- | -------- | ------- |\n| boolean | No       | `false` |",
+      "source_content_hash": "126a9b32b5dba5fb92f68c131e784987b6ed1dc5806631c0c38972d61ae191ad",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fdeb798"
+      }
+    },
+    {
+      "segment_id": "18fa676c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "### `backgroundColor` <div class=\"label android\">Android</div>",
+      "source_content_hash": "8a8a747ff52e5b22f21ce3ee880d4e48c7b0e0f2fd1ce7acceb6c99b062744ff",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `backgroundColor` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "The background color of the status bar.",
+      "source_content_hash": "a56f6224ef79a39a99bf22637b1da0abc293f70fa35943cd6e344ce65fdfbb4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "狀態列的背景顏色。"
+      }
+    },
+    {
+      "segment_id": "71b314cb",
+      "source_content": "| Type            | Required | Default                                                                |\n| --------------- | -------- | ---------------------------------------------------------------------- |\n| [color](colors) | No       | default system StatusBar background color, or `'black'` if not defined |",
+      "source_content_hash": "77a3c9c2bcb490664652ee71c59285b1e0f2d294b91598590c648f417b161567",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b314cb"
+      }
+    },
+    {
+      "segment_id": "efbc76b7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6868a9f",
+      "source_content": "### `barStyle`",
+      "source_content_hash": "b3bb091aad032264e161630c738094a85b1ccada749fb4a80ed92c2449cad7db",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `barStyle`"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "Sets the color of the status bar text.",
+      "source_content_hash": "96798b8f24cdee0ef62ae0f326195196ef49285fb1acfac9a7433d6f22850d38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設置狀態列文字的顏色。"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "On Android, this will only have an impact on API versions 23 and above.",
+      "source_content_hash": "6c19184f168ef2917c95e83029174dac72d1963388cef5cc4b2567a5aa62e9c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，此屬性僅在 API 版本 23 及以上版本中有效。"
+      }
+    },
+    {
+      "segment_id": "4402cbf6",
+      "source_content": "| Type                                       | Required | Default     |\n| ------------------------------------------ | -------- | ----------- |\n| [StatusBarStyle](statusbar#statusbarstyle) | No       | `'default'` |",
+      "source_content_hash": "92d5d87c159014ac6ac0344570ac6ebc394f32e9319e32f3d77c4161e2e2cd06",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4402cbf6"
+      }
+    },
+    {
+      "segment_id": "f97c407b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "### `hidden`",
+      "source_content_hash": "b756e885e5c928cbf87736e480c58a81552ed7029528cbac8834b08a43409750",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hidden`"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "If the status bar is hidden.",
+      "source_content_hash": "f83735369cb7a2e539af08c0d9114c0101502ae1c182e6bb7d26f9ad60d310fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "狀態列是否隱藏。"
+      }
+    },
+    {
+      "segment_id": "afa7774a",
+      "source_content": "| Type    | Required | Default |\n| ------- | -------- | ------- |\n| boolean | No       | `false` |",
+      "source_content_hash": "126a9b32b5dba5fb92f68c131e784987b6ed1dc5806631c0c38972d61ae191ad",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_afa7774a"
+      }
+    },
+    {
+      "segment_id": "e2bc0815",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3c6dd548",
+      "source_content": "### `networkActivityIndicatorVisible` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "7e7d7b7714f771b266eff96938972dc406d15be8d9f1a898ac79ef47b5d66178",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `networkActivityIndicatorVisible` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "If the network activity indicator should be visible.",
+      "source_content_hash": "8ade3aa2175d8fcb598a72b9e234fffcd9f90607d66a7d508c2a9f0bcc715450",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "網路活動指示器是否可見。"
+      }
+    },
+    {
+      "segment_id": "9fa6e97c",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9fa6e97c"
+      }
+    },
+    {
+      "segment_id": "7dfee470",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "16ae54ea",
+      "source_content": "### `showHideTransition` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "72a1eb53293b48aab2f5753c697aa5fe25a00336df9be7ec3f4abbbae1063293",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showHideTransition` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "The transition effect when showing and hiding the status bar using the `hidden` prop.",
+      "source_content_hash": "08a004f043b71fcfe95dd598fe056c5abd3d23f1fa453968475fb0b7a7d4b645",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `hidden` 屬性顯示和隱藏狀態列時的過渡效果。"
+      }
+    },
+    {
+      "segment_id": "b6840b81",
+      "source_content": "| Type                                               | Default  |\n| -------------------------------------------------- | -------- |\n| [StatusBarAnimation](statusbar#statusbaranimation) | `'fade'` |",
+      "source_content_hash": "71eb7a64d7bdaa4f921557990dacd33ecd5bd6f324947b18b54e4ed37a1dc6f5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b6840b81"
+      }
+    },
+    {
+      "segment_id": "f83eccd3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2b5df263",
+      "source_content": "### `translucent` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1bacd68b183f23c7efdcdb5c0509a1c771051156c124e17a74a12e7c41184617",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `translucent` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "If the status bar is translucent. When translucent is set to `true`, the app will draw under the status bar. This is useful when using a semi transparent status bar color.",
+      "source_content_hash": "69664238857ac4b839ad671e5d3f663244e23e081511ba479f049e62058f2514",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "狀態列是否透明。當設置為 `true` 時，應用程式將在狀態列下方繪製。這在使用半透明狀態列顏色時非常有用。"
+      }
+    },
+    {
+      "segment_id": "16abbd53",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_16abbd53"
+      }
+    },
+    {
+      "segment_id": "cce332f2",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "af250a10",
+      "source_content": "### `popStackEntry()`",
+      "source_content_hash": "64348b6455a35f9db4119d4524866b20df613f99dc9307bcf06615489d899b66",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `popStackEntry()`"
+      }
+    },
+    {
+      "segment_id": "54dd003b",
+      "source_content": "```jsx\nstatic popStackEntry(entry: any)\n```",
+      "source_content_hash": "d299fcef4534bac343658b023dd73534fa3aa2c9c9e3fce28d7f4a08a071966d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54dd003b"
+      }
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "Get and remove the last StatusBar entry from the stack.",
+      "source_content_hash": "b008186c67114e9389248b9fba161ad47b4917f33a1895f52351d274d7084dd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "獲取並移除堆疊中的最後一個 StatusBar 條目。"
+      }
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "18e9d1c5",
+      "source_content": "| Name                                                   | Type | Description                           |\n| ------------------------------------------------------ | ---- | ------------------------------------- |\n| entry <div class=\"label basic required\">Required</div> | any  | Entry returned from `pushStackEntry`. |",
+      "source_content_hash": "e4c7a2c81ba64fa6a453d7c5bcae940691fde3d432bc5bc8c2adaed22d0361dc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_18e9d1c5"
+      }
+    },
+    {
+      "segment_id": "06b779bf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "428f235a",
+      "source_content": "### `pushStackEntry()`",
+      "source_content_hash": "f263b1d5950a9aa0f42b102fa48eda274f96d629304582e7a42fff652e31a13d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pushStackEntry()`"
+      }
+    },
+    {
+      "segment_id": "5b2e44c7",
+      "source_content": "```jsx\nstatic pushStackEntry(props: any)\n```",
+      "source_content_hash": "d668809aacaeceecbfb0ea3bb04574cad1f83155d876e74c865b6e7155f645e1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5b2e44c7"
+      }
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "Push a StatusBar entry onto the stack. The return value should be passed to `popStackEntry` when complete.",
+      "source_content_hash": "95f0f1146b59e32c69029f49bd274728e9a8027c8214d02d72f0f2ce0a844d11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將一個 StatusBar 條目推入堆疊。完成後應將返回值傳遞給 `popStackEntry`。"
+      }
+    },
+    {
+      "segment_id": "af834e0d",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "faa7ba96",
+      "source_content": "| Name                                                   | Type | Description                                                      |\n| ------------------------------------------------------ | ---- | ---------------------------------------------------------------- |\n| props <div class=\"label basic required\">Required</div> | any  | Object containing the StatusBar props to use in the stack entry. |",
+      "source_content_hash": "72c71654e90ce50a6414e84207de1c9d0e009edda32f7bc084b6cbaea09ae0de",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_faa7ba96"
+      }
+    },
+    {
+      "segment_id": "378585a7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7ab93a8",
+      "source_content": "### `replaceStackEntry()`",
+      "source_content_hash": "4f1ce51bf5fbd8ecde71cd18cb5c949f05e5f8a52ff466fcb41ad9df1c2206a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `replaceStackEntry()`"
+      }
+    },
+    {
+      "segment_id": "1be6af7b",
+      "source_content": "```jsx\nstatic replaceStackEntry(entry: any, props: any)\n```",
+      "source_content_hash": "a634d59c2cac93bcb60c60d33a12faf1a0dff478cbcc360bd22caf766f2222b9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1be6af7b"
+      }
+    },
+    {
+      "segment_id": "01902900",
+      "source_content": "Replace an existing StatusBar stack entry with new props.",
+      "source_content_hash": "00ebc1ff92a6eaf909a95ba23a35f9ebc06debd5561d937d7dc5e45f4e6ec50b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "替換現有的 StatusBar 堆疊條目為新的屬性。"
+      }
+    },
+    {
+      "segment_id": "dbeb30c1",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "793b6449",
+      "source_content": "| Name                                                   | Type | Description                                                                  |\n| ------------------------------------------------------ | ---- | ---------------------------------------------------------------------------- |\n| entry <div class=\"label basic required\">Required</div> | any  | Entry returned from `pushStackEntry` to replace.                             |\n| props <div class=\"label basic required\">Required</div> | any  | Object containing the StatusBar props to use in the replacement stack entry. |",
+      "source_content_hash": "66806477fd84a6551fab00d268e67f10e79854e37dfaaa4d7800988b83c1fefc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_793b6449"
+      }
+    },
+    {
+      "segment_id": "4b45c59d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ad8a5f54",
+      "source_content": "### `setBackgroundColor()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "cf3838c9c3339b553ac0ce0d47ae28e73acea522698e877be3a60e18d28f8c78",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setBackgroundColor()` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "9d31dc8f",
+      "source_content": "```jsx\nstatic setBackgroundColor(color: string, [animated]: boolean)\n```",
+      "source_content_hash": "08442ce6d5f71b2f3ee051cd21588b56bde31a287f386ebcd35b65dc2f562f86",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9d31dc8f"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "Set the background color for the status bar.",
+      "source_content_hash": "dd66226c4d5c360e5f641ffda5c5c08075d4a9666e2139cb2b863a07e3e904a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定狀態欄的背景顏色。"
+      }
+    },
+    {
+      "segment_id": "d3f13bf4",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "2c73297c",
+      "source_content": "| Name                                                   | Type    | Description               |\n| ------------------------------------------------------ | ------- | ------------------------- |\n| color <div class=\"label basic required\">Required</div> | string  | Background color.         |\n| animated                                               | boolean | Animate the style change. |",
+      "source_content_hash": "39d5e0fd15a20457ac9ad406f1e8867ccc921c7deb72e1989375728d42078a72",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2c73297c"
+      }
+    },
+    {
+      "segment_id": "7b53658b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "365a11aa",
+      "source_content": "### `setBarStyle()`",
+      "source_content_hash": "9f063c2e379d556a07f1c8fbab622cadde74b62e05eb1cd66e3cdf3e5b67ea8c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setBarStyle()`"
+      }
+    },
+    {
+      "segment_id": "2ef49e00",
+      "source_content": "```jsx\nstatic setBarStyle(style: StatusBarStyle, [animated]: boolean)\n```",
+      "source_content_hash": "480cf60d2b5432082f429f5bd932da1a6e320305e8bad2532c8a28559d88a795",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2ef49e00"
+      }
+    },
+    {
+      "segment_id": "070ff7a2",
+      "source_content": "Set the status bar style.",
+      "source_content_hash": "9fd43255d3228bab8548086f7e32d2f132320bee49c502c17662905fc1d519d3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定狀態欄的樣式。"
+      }
+    },
+    {
+      "segment_id": "715a86e2",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "b62cf193",
+      "source_content": "| Name                                                   | Type                                       | Description               |\n| ------------------------------------------------------ | ------------------------------------------ | ------------------------- |\n| style <div class=\"label basic required\">Required</div> | [StatusBarStyle](statusbar#statusbarstyle) | Status bar style to set.  |\n| animated                                               | boolean                                    | Animate the style change. |",
+      "source_content_hash": "299986a25c4392b1aabad6b5be7bcff3e74cbda97801fa7f72cfa62b83eb6b94",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b62cf193"
+      }
+    },
+    {
+      "segment_id": "1fbbc73e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "16efe6ee",
+      "source_content": "### `setHidden()`",
+      "source_content_hash": "283e7190bd18a5255626531a72c51b7303da77ccf5dc436628f5895ae3eebd06",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setHidden()`"
+      }
+    },
+    {
+      "segment_id": "b7c66f56",
+      "source_content": "```jsx\nstatic setHidden(hidden: boolean, [animation]: StatusBarAnimation)\n```",
+      "source_content_hash": "a78086c14de03188e3a622f3cefd74a21cf15ae354edc13eb8d3082f6e0ade32",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7c66f56"
+      }
+    },
+    {
+      "segment_id": "2f8456b2",
+      "source_content": "Show or hide the status bar.",
+      "source_content_hash": "65ec69f8f7562c7f87275e38f0d854b1077c76d5e850cff9d9b80f5b03339578",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯示或隱藏狀態欄。"
+      }
+    },
+    {
+      "segment_id": "1d39fdbf",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "95a47993",
+      "source_content": "| Name                                                    | Type                                               | Description                                             |\n| ------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------- |\n| hidden <div class=\"label basic required\">Required</div> | boolean                                            | Hide the status bar.                                    |\n| animation <div class=\"label ios\">iOS</div>              | [StatusBarAnimation](statusbar#statusbaranimation) | Animation when changing the status bar hidden property. |",
+      "source_content_hash": "837c26bcc1c58769345b5f430c9ee42624347b434e94a93a1d16c46713363498",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95a47993"
+      }
+    },
+    {
+      "segment_id": "ef5856f7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e151b2af",
+      "source_content": "### `setNetworkActivityIndicatorVisible()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "27689e0c4a602d7276124f15b653d684a33ecb3e65b13b15b2106a4b78b05618",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setNetworkActivityIndicatorVisible()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "00c94fa3",
+      "source_content": "```jsx\nstatic setNetworkActivityIndicatorVisible(visible: boolean)\n```",
+      "source_content_hash": "b6a24224f6c3d6beec096d6846d1ee4168fa25fc29d60aa90f40b80b84118994",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_00c94fa3"
+      }
+    },
+    {
+      "segment_id": "c95293b9",
+      "source_content": "Control the visibility of the network activity indicator.",
+      "source_content_hash": "cef3329b6999032d25cdf06913e96db9e4ad89c8aec17d6a0ae57b81b803768d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制網路活動指示器的可見性。"
+      }
+    },
+    {
+      "segment_id": "7ed923ee",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "562528a3",
+      "source_content": "| Name                                                     | Type    | Description         |\n| -------------------------------------------------------- | ------- | ------------------- |\n| visible <div class=\"label basic required\">Required</div> | boolean | Show the indicator. |",
+      "source_content_hash": "e5e64ef8b2f4c627bdc56fb57b59f066b9e269bf48302cae6bef1e641c8dffe0",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_562528a3"
+      }
+    },
+    {
+      "segment_id": "4b6c570f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fd59095d",
+      "source_content": "### `setTranslucent()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "2b1b3abde566caaf7fb8807c89c153539208f4b1c7aad808c32938a72b961041",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setTranslucent()` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "fa163a68",
+      "source_content": "```jsx\nstatic setTranslucent(translucent: boolean)\n```",
+      "source_content_hash": "6aae72c0495c84756411d3b3582b3a907795e4c628ad2e3826b4a3df07070834",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fa163a68"
+      }
+    },
+    {
+      "segment_id": "e020f7ed",
+      "source_content": "Control the translucency of the status bar.",
+      "source_content_hash": "1406bb7d87c34f6c719bd38db8180261b757eb8fc1021a2bbce4029efa9e280f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制狀態欄的透明度。"
+      }
+    },
+    {
+      "segment_id": "d83b50df",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "04724ba9",
+      "source_content": "| Name                                                         | Type    | Description         |\n| ------------------------------------------------------------ | ------- | ------------------- |\n| translucent <div class=\"label basic required\">Required</div> | boolean | Set as translucent. |",
+      "source_content_hash": "52e05975c15095e9dc2e0ff1d5188476ef2bc6fb91a7a50aabeee836b25c5ce2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_04724ba9"
+      }
+    },
+    {
+      "segment_id": "757c087d",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 類型定義"
+      }
+    },
+    {
+      "segment_id": "5cd80849",
+      "source_content": "### StatusBarAnimation",
+      "source_content_hash": "602f9dfb735464381f899e0f50ba24ba4b470f215ba851b34f4961a588351810",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### StatusBarAnimation"
+      }
+    },
+    {
+      "segment_id": "8862791b",
+      "source_content": "Status bar animation type for transitions on the iOS.",
+      "source_content_hash": "9432306ac0ed61fa4997bd72f4b02f7ca3dda84442d3fa594161624f255c5fa0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 上狀態欄過渡的動畫類型。"
+      }
+    },
+    {
+      "segment_id": "1a9293f4",
+      "source_content": "| Type |\n| ---- |\n| enum |",
+      "source_content_hash": "acce1a73aae91a3f42f93bf7861ba7e90bf77418c4ba1f67f0de2dca001d3380",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a9293f4"
+      }
+    },
+    {
+      "segment_id": "0302cdc1",
+      "source_content": "**Constants:**",
+      "source_content_hash": "2d67b935d703c9e4a672891ff91c01f2a112534a57e26d8a9ca8fe12cf4dbdc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**常數：**"
+      }
+    },
+    {
+      "segment_id": "0518bd1c",
+      "source_content": "| Value     | Type   | Description     |\n| --------- | ------ | --------------- |\n| `'fade'`  | string | Fade animation  |\n| `'slide'` | string | Slide animation |\n| `'none'`  | string | No animation    |",
+      "source_content_hash": "22c2e7603a12044bba2b24b3c386b285fde7441cc1771a7d8b10004d3c653939",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0518bd1c"
+      }
+    },
+    {
+      "segment_id": "a323db7f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7ee8342f",
+      "source_content": "### StatusBarStyle",
+      "source_content_hash": "ebf50420c8f02000debc14a19e98e6d23957da0cc4dc9eb02c19ce8e0a97eed8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### StatusBarStyle"
+      }
+    },
+    {
+      "segment_id": "6fecc583",
+      "source_content": "Status bar style type.",
+      "source_content_hash": "f364586e68b9e22ca545c56abe36e776b64bfbc89057aabaa430c2e90a6fb803",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "狀態欄樣式類型。"
+      }
+    },
+    {
+      "segment_id": "afcad612",
+      "source_content": "| Type |\n| ---- |\n| enum |",
+      "source_content_hash": "acce1a73aae91a3f42f93bf7861ba7e90bf77418c4ba1f67f0de2dca001d3380",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_afcad612"
+      }
+    },
+    {
+      "segment_id": "dbd18971",
+      "source_content": "**Constants:**",
+      "source_content_hash": "2d67b935d703c9e4a672891ff91c01f2a112534a57e26d8a9ca8fe12cf4dbdc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**常數：**"
+      }
+    },
+    {
+      "segment_id": "b2ef1050",
+      "source_content": "| Value             | Type   | Description                                                          |\n| ----------------- | ------ | -------------------------------------------------------------------- |\n| `'default'`       | string | Default status bar style (dark for iOS, light for Android)           |\n| `'light-content'` | string | Dark background, white texts and icons                               |\n| `'dark-content'`  | string | Light background, dark texts and icons (requires API>=23 on Android) |",
+      "source_content_hash": "2a541c48e3ba8d0776b73272e2bc6c6831e9cfd1bd03f26eba1a9cea618e1407",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b2ef1050"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/statusbar.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.276015+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "e094409e074d331925d84c0aff09437cd4335ed0f9a051261766e9ca9294f1f8"
+  }
+}

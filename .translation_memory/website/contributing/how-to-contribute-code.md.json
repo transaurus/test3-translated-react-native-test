@@ -1,0 +1,302 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "contributing/how-to-contribute-code.md",
+  "source_file_content_hash": "7ebd599f181f191892011077967520b45296fd1cbf9d3ad2c832709bbd0ead16",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: How to Contribute Code\n---",
+      "source_content_hash": "ee05ad4cae74623f3ec72af114c930b54c0a6bfd9015a965e9244fd24fcea356",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "Thank you for your interest in contributing to React Native! From commenting on and triaging issues, to reviewing and sending PRs, [all contributions are welcome](/contributing/overview). In this document, we'll cover the steps to contributing code to React Native.",
+      "source_content_hash": "aff599e3e2645b6954583e8039549274f6cbcf8c9c81d4f2b9412a4dbf80da3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝您對貢獻 React Native 感興趣！從評論和分類問題，到審查和提交 PR，[我們歡迎所有形式的貢獻](/contributing/overview)。本文件將說明如何貢獻程式碼至 React Native。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "If you are eager to start contributing code right away, we have a list of [`good first issues`](https://github.com/facebook/react-native/labels/good%20first%20issue) that contain bugs which have a relatively limited scope.\nIssues labeled [`help wanted`](https://github.com/facebook/react-native/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22help+wanted+%3Aoctocat%3A%22+sort%3Aupdated-desc+) are good issues to submit a PR for.",
+      "source_content_hash": "09af5c82b237d45f68e8340d6bf378054157f34365822a6b864e56cd61fc3e7e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您希望立即開始貢獻程式碼，我們有一份 [`good first issues`](https://github.com/facebook/react-native/labels/good%20first%20issue) 清單，其中包含範圍相對有限的錯誤。\n標記為 [`help wanted`](https://github.com/facebook/react-native/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22help+wanted+%3Aoctocat%3A%22+sort%3Aupdated-desc+) 的問題適合提交 PR。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Prerequisites",
+      "source_content_hash": "bbd3d4949a6f237efd8d4ff5c7c5f30d968e7a989ad12f3d7dcef69c98053912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 必要條件"
+      }
+    },
+    {
+      "segment_id": "0e7eb58c",
+      "source_content": ":::info\nPlease refer to the [Environment Setup](/docs/environment-setup) guide to setup required tools and the development environment based on the platform us use and platform which you want to develop for.\n:::",
+      "source_content_hash": "3659f63e47c7d23697664381fc6ca05f69f5d0e4efebbc9d5bd86b4ec97c95d0",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n請參閱[環境設定指南](/docs/environment-setup)，根據您使用的平台和開發目標平台，設定所需工具和開發環境。\n:::"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "## Development Workflow",
+      "source_content_hash": "e6944ed08e4a6ee8e35c6fb888f581bde68113a923fa8bdfcf040711b7f4c125",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 開發工作流程"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "After cloning React Native, open the directory and run `yarn` to install its dependencies.",
+      "source_content_hash": "f9aaa4317368d77ee550c633e6a1322fd67a38811c6f151e20c1b36dd248b740",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "克隆 React Native 後，開啟目錄並執行 `yarn` 以安裝其依賴項。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "Now you are set up to run several commands:",
+      "source_content_hash": "69b056d7dff728a670489185c5516323cd4371683f1f0f429430355564884782",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您已準備好執行以下指令："
+      }
+    },
+    {
+      "segment_id": "da23c906",
+      "source_content": "- `yarn start` starts the Metro packager server.\n- `yarn lint` checks the code style.\n- `yarn format` automatically formats your code.\n- `yarn test` runs the Jest-based JavaScript test suite.\n  - `yarn test --watch` runs an interactive JavaScript test watcher.\n  - `yarn test <pattern>` runs JavaScript tests with matching filenames.\n- `yarn flow` runs the [Flow](https://flowtype.org/) typechecks.\n  - `yarn flow-check-android` does a full Flow check over `*.android.js` files.\n  - `yarn flow-check-ios` does a full Flow check over `*.ios.js` files.\n- `yarn test-typescript` runs the [TypeScript](https://www.typescriptlang.org/) typechecks.\n- `yarn test-ios` runs the iOS test suite (macOS required).\n- `yarn build` builds all configured packages — in general, this command only needs to be run by CI ahead of publishing.\n  - Packages which require a build are configured in [scripts/build/config.js](https://github.com/facebook/react-native/blob/main/scripts/build/config.js).",
+      "source_content_hash": "a7625dbbe8e913b4f5fa9fd5885d184167b197e82ed56e02814c75a26e4707ab",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `yarn start` 啟動 Metro 打包伺服器。\n- `yarn lint` 檢查程式碼風格。\n- `yarn format` 自動格式化您的程式碼。\n- `yarn test` 執行基於 Jest 的 JavaScript 測試套件。\n  - `yarn test --watch` 執行互動式 JavaScript 測試監視器。\n  - `yarn test <pattern>` 執行符合檔案名稱模式的 JavaScript 測試。\n- `yarn flow` 執行 [Flow](https://flowtype.org/) 型別檢查。\n  - `yarn flow-check-android` 對 `*.android.js` 檔案執行完整 Flow 檢查。\n  - `yarn flow-check-ios` 對 `*.ios.js` 檔案執行完整 Flow 檢查。\n- `yarn test-typescript` 執行 [TypeScript](https://www.typescriptlang.org/) 型別檢查。\n- `yarn test-ios` 執行 iOS 測試套件（需 macOS）。\n- `yarn build` 建置所有設定的套件 — 通常此指令僅需由 CI 在發布前執行。\n  - 需要建置的套件設定於 [scripts/build/config.js](https://github.com/facebook/react-native/blob/main/scripts/build/config.js)。"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "## Testing your Changes",
+      "source_content_hash": "2d8427530b83c420753b5a3b36506979e8a1d28e0bf29fb03e0cf378ecb9f74c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 測試您的變更"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Tests help us prevent regressions from being introduced to the codebase. We recommend running `yarn test` or the platform-specific scripts above to make sure you don't introduce any regressions as you work on your change.",
+      "source_content_hash": "847e156f5b50402ec658ac86fc302d84dda0c7f0f6cf48c03c246259655d7a28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試有助於防止程式碼庫引入回歸問題。我們建議執行 `yarn test` 或上述平台特定指令碼，以確保您在變更時不會引入任何回歸問題。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "The GitHub repository is [continuously tested](/contributing/how-to-run-and-write-tests#continuous-testing) using CircleCI, the results of which are available through the Checks functionality on [commits](https://github.com/facebook/react-native/commits/main) and pull requests.",
+      "source_content_hash": "17ea2e1c482127cd21517050c8d95ff3ac30b43fd82080bf24c3bfe010e94f52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "GitHub 儲存庫透過 CircleCI [持續測試](/contributing/how-to-run-and-write-tests#continuous-testing)，測試結果可透過 [commits](https://github.com/facebook/react-native/commits/main) 和 pull request 上的 Checks 功能查看。"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "You can learn more about running and writing tests on the [How to Run and Write Tests](/contributing/how-to-run-and-write-tests) page.",
+      "source_content_hash": "45fbecba629e9ca0162c99e4eae28cc8b7d3c170134a9b0594b43e29e48c7ea6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在[如何執行和撰寫測試](/contributing/how-to-run-and-write-tests)頁面了解更多關於執行和撰寫測試的資訊。"
+      }
+    },
+    {
+      "segment_id": "54268405",
+      "source_content": "## Coding Style",
+      "source_content_hash": "935816ca292374d8aca4c2165556e160ab433c9e17575435efdf35703a10fe12",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 程式碼風格"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "We use Prettier to format our JavaScript code. This saves you time and energy as you can let Prettier fix up any formatting issues automatically through its editor integrations, or by manually running `yarn run prettier`. We also use a linter to catch styling issues that may exist in your code. You can check the status of your code styling by running `yarn run lint`.",
+      "source_content_hash": "c17be06dc0b5b1f13e5efbe18fb2e2041329725ce6679df8adca5810bcac7916",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們使用 Prettier 格式化 JavaScript 程式碼。這可節省您的時間和精力，因為您可以透過其編輯器整合自動修復格式問題，或手動執行 `yarn run prettier`。我們還使用 linter 捕捉程式碼中可能存在的風格問題。您可以執行 `yarn run lint` 檢查程式碼風格狀態。"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "However, there are still some styles that the linter cannot pick up, notably in Java or Objective-C code.",
+      "source_content_hash": "23f359beab7737fb285c34f833c54324ef1e64b785ca9f7cdbd27fd49928f9a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，仍有部分風格是 linter 無法捕捉的，特別是 Java 或 Objective-C 程式碼。"
+      }
+    },
+    {
+      "segment_id": "6d28a77c",
+      "source_content": "### Objective-C",
+      "source_content_hash": "35f3a7470f36e188e717d322815295ffdc2ad39d0a50ba536e1b86568424f29f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Objective-C"
+      }
+    },
+    {
+      "segment_id": "b4ef1e56",
+      "source_content": "- Space after `@property` declarations\n- Brackets on _every_ `if`, on the _same_ line\n- `- method`, `@interface`, and `@implementation` brackets on the following line\n- _Try_ to keep it around 80 characters line length (sometimes it's not possible...)\n- `*` operator goes with the variable name (e.g. `NSObject *variableName;`)",
+      "source_content_hash": "0c95eacfc6fe7c5a78ca39b12a67a51d724da3786bb41a8c1f1b6908e3c1ee65",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `@property` 宣告後保留空格\n- 每個 `if` 的括號位於同一行\n- `- method`、`@interface` 和 `@implementation` 的括號位於下一行\n- 盡量保持每行約 80 字元（有時無法達成...）\n- `*` 運算子與變數名稱相連（例如 `NSObject *variableName;`）"
+      }
+    },
+    {
+      "segment_id": "1a316f80",
+      "source_content": "### Java",
+      "source_content_hash": "2485230a2c62e665a7ab3fccd77b7b49cce3f306e1af987991f33725e105636b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Java"
+      }
+    },
+    {
+      "segment_id": "a0e887c2",
+      "source_content": "- If a method call spans multiple lines closing bracket is on the same line as the last argument.\n- If a method header doesn't fit on one line each argument goes on a separate line.\n- 100 character line length",
+      "source_content_hash": "1535e872324fcf008dac7380f6495716a7c988e4e81115ae5c9e5aac86830ef0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 若方法調用跨越多行，右括號應與最後一個參數位於同一行。\n- 若方法標頭無法容納於一行，每個參數應獨立成行。\n- 每行長度限制為100個字符"
+      }
+    },
+    {
+      "segment_id": "c315c636",
+      "source_content": "## Sending a Pull Request",
+      "source_content_hash": "fe3597ce8b147ced61b846b0af06200be9a9a9883e5963aa24f2e60994230ff0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 提交拉取請求"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "Code-level contributions to React Native generally come in the form of [a pull request](https://help.github.com/en/articles/about-pull-requests). The process of proposing a change to React Native can be summarized as follows:",
+      "source_content_hash": "ad9a174f9e157f7bbebd4ff5cb8662cda1959150098a48b94def7fc88c59bb9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對React Native的程式碼貢獻通常以[拉取請求](https://help.github.com/en/articles/about-pull-requests)形式提交。向React Native提案變更的流程可歸納如下："
+      }
+    },
+    {
+      "segment_id": "645e08e3",
+      "source_content": "1. Fork the React Native repository and create your branch from `main`.\n2. If you've added code that should be tested, add tests.\n3. If you've changed APIs, update the documentation.\n4. Ensure the test suite passes, either locally or on CI once you opened a pull request.\n5. Make sure your code lints (for example via `yarn lint --fix`).\n6. Push the changes to your fork.\n7. Create a pull request to the React Native repository.\n8. Review and address comments on your pull request.\n9. A bot may comment with suggestions. Generally we ask you to resolve these first before a maintainer will review your code.\n10. If you haven't already, submit the [Contributor License Agreement (\"CLA\")](#contributor-license-agreement).",
+      "source_content_hash": "9e1887263beeea3187714aa978cafd0faea56016c2faee3f0235d73385e2e7ca",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 複製React Native儲存庫並從`main`分支創建您的分支。\n2. 若新增需測試的程式碼，請添加測試。\n3. 若變更API，請更新文件。\n4. 確保測試套件通過（可在本地或於開啟拉取請求後透過CI測試）。\n5. 確認程式碼符合規範（例如執行`yarn lint --fix`）。\n6. 將變更推送至您的複製儲存庫。\n7. 向React Native儲存庫發起拉取請求。\n8. 審閱並處理拉取請求上的評論。\n9. 機器人可能提出建議，通常我們會要求您先解決這些問題，維護者才會審查您的程式碼。\n10. 若尚未簽署，請提交[貢獻者許可協議（\"CLA\"）](#contributor-license-agreement)。"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "If all goes well, your pull request will be merged. If it is not merged, maintainers will do their best to explain their reasoning.",
+      "source_content_hash": "96fb39b0d0ede21a613a90a6325ddf5e7dcca321bd1e5f07fe80e6eccac4f1d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若一切順利，您的拉取請求將被合併。若未獲合併，維護者將盡力說明原因。"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "If this is your first time sending a pull request, we have created a [step-by-step guide to help you get started](/contributing/how-to-open-a-pull-request). For more detailed information on how pull requests are handled, see the [Managing Pull Requests page](managing-pull-requests).",
+      "source_content_hash": "502a0644cc3679f71d74c45251cabb3c97403851f2194c4c9f86f6e05bee4b25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若這是您首次提交拉取請求，我們已建立[逐步指南協助您入門](/contributing/how-to-open-a-pull-request)。有關拉取請求處理的詳細資訊，請參閱[管理拉取請求頁面](managing-pull-requests)。"
+      }
+    },
+    {
+      "segment_id": "66819c78",
+      "source_content": "### Contributor License Agreement",
+      "source_content_hash": "4b1cb8e3b5caaec71924f153bfb858b46ae29afe5989022d30678168ee881361",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 貢獻者許可協議"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "In order to accept your pull request, we need you to submit a [Contributor License Agreement (CLA)](/contributing/contribution-license-agreement). You only need to do this once to work on any of Meta's open source projects. It only takes a minute, so you can do it while you wait for your dependencies to install.",
+      "source_content_hash": "bb0e916991e2bee26cfe4fe534b5dff98088e497fdcb03c4d52117f2a30cce81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為接受您的拉取請求，您需提交[貢獻者許可協議（CLA）](/contributing/contribution-license-agreement)。此為一次性要求，適用於所有Meta開源專案。簽署僅需一分鐘，您可在等待依賴項安裝時完成。"
+      }
+    },
+    {
+      "segment_id": "759d12dd",
+      "source_content": "## License",
+      "source_content_hash": "6c549a56db01e021f248d8da78289a3197d3db86fe0d36d33381d0dfc711e8bc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 授權條款"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "By contributing to React Native, you agree that your contributions will be licensed under the [LICENSE](https://github.com/facebook/react-native/blob/main/LICENSE) file in the root directory of the React Native repository.",
+      "source_content_hash": "1c1df3bac51e9031f5a505f7a0be9601ac5cce06f85bf40fa3b19b19c216a17d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "貢獻React Native即表示您同意，您的貢獻將依React Native儲存庫根目錄中的[授權條款](https://github.com/facebook/react-native/blob/main/LICENSE)文件授權。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-contributing/how-to-contribute-code.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.274204+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "7ebd599f181f191892011077967520b45296fd1cbf9d3ad2c832709bbd0ead16"
+  }
+}

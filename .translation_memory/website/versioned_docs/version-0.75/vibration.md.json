@@ -1,0 +1,178 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.75/vibration.md",
+  "source_file_content_hash": "d55b0aeb381fb186547bdb6a2811a3340496224e57b6f296fcd1b6c9afe40642",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: vibration\ntitle: Vibration\n---",
+      "source_content_hash": "3d90313c9ba64bea3f380c1da8d523f1ffbafcf4896ec7042d6cb3796e1d05e3",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Vibrates the device.",
+      "source_content_hash": "063a86585d6e238b926a3b3e46e1595fb7d3f03f48530e31c87834d0cc3d15ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=Vibration&supportedPlatforms=ios,android\nimport React from 'react';\nimport {\n  Button,\n  Platform,\n  Text,\n  Vibration,\n  View,\n  SafeAreaView,\n  StyleSheet,\n} from 'react-native';\n\nconst Separator = () => {\n  return <View style={Platform.OS === 'android' ? styles.separator : null} />;\n};\n\nconst App = () => {\n  const ONE_SECOND_IN_MS = 1000;\n\n  const PATTERN = [\n    1 * ONE_SECOND_IN_MS,\n    2 * ONE_SECOND_IN_MS,\n    3 * ONE_SECOND_IN_MS,\n  ];\n\n  const PATTERN_DESC =\n    Platform.OS === 'android'\n      ? 'wait 1s, vibrate 2s, wait 3s'\n      : 'wait 1s, vibrate, wait 2s, vibrate, wait 3s';\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>\n      <View>\n        <Button title=\"Vibrate once\" onPress={() => Vibration.vibrate()} />\n      </View>\n      <Separator />\n      {Platform.OS === 'android'\n        ? [\n            <View>\n              <Button\n                title=\"Vibrate for 10 seconds\"\n                onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}\n              />\n            </View>,\n            <Separator />,\n          ]\n        : null}\n      <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>\n      <Button\n        title=\"Vibrate with pattern\"\n        onPress={() => Vibration.vibrate(PATTERN)}\n      />\n      <Separator />\n      <Button\n        title=\"Vibrate with pattern until cancelled\"\n        onPress={() => Vibration.vibrate(PATTERN, true)}\n      />\n      <Separator />\n      <Button\n        title=\"Stop vibration pattern\"\n        onPress={() => Vibration.cancel()}\n        color=\"#FF0000\"\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    paddingTop: 44,\n    padding: 8,\n  },\n  header: {\n    fontSize: 18,\n    fontWeight: 'bold',\n    textAlign: 'center',\n  },\n  paragraph: {\n    margin: 24,\n    textAlign: 'center',\n  },\n  separator: {\n    marginVertical: 8,\n    borderBottomColor: '#737373',\n    borderBottomWidth: StyleSheet.hairlineWidth,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "a1a06900c9bdc2ee3d2289453afe8547ee01ca37ec91dcd5d392df13e5081e7b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d75a01e8",
+      "source_content": "> Android apps should request the `android.permission.VIBRATE` permission by adding `<uses-permission android:name=\"android.permission.VIBRATE\"/>` to `AndroidManifest.xml`.",
+      "source_content_hash": "f0a6bd0de2419f3715b08ec5c07559e4fb73c6a92a144ae588c184966fba441c",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e7f157ed",
+      "source_content": "> The Vibration API is implemented as a `AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)` call on iOS.",
+      "source_content_hash": "9af5d6a1927c28216244f278e72633ae9dc89518f4b9f80bd9d2aef809f9eb04",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4fc5e34f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ab39e8a7",
+      "source_content": "### `cancel()`",
+      "source_content_hash": "abf8f1d4b7e29ae54d369f3a8742ee43d43927bbc0ef33876c969c7375d0a553",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f155ef1e",
+      "source_content": "```tsx\nstatic cancel();\n```",
+      "source_content_hash": "e0aedb5219d536144a01c158109406f334e3af59e0805721947ee6c0337a6476",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "Call this to stop vibrating after having invoked `vibrate()` with repetition enabled.",
+      "source_content_hash": "3db05cc1ae6e71f2327bfb5f9dbbdeaccdc0ddfa60ab47390ab466a6c73ccd64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "256e0c86",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### `vibrate()`",
+      "source_content_hash": "a2353901c5bc7141bc0b0a562a54866380281ff7cf6312f063419b9004f9e2bc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e2c67c87",
+      "source_content": "```tsx\nstatic vibrate(\n  pattern?: number | number[],\n  repeat?: boolean\n);\n```",
+      "source_content_hash": "fed7a0eb64633266a6a44e234ff5e73579d0c5c531c897bb3e0d92420dfb7964",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "Triggers a vibration with a fixed duration.",
+      "source_content_hash": "3cf99e56fee02dfcee161f3932fa6543290ab6d57a3a344ab0e1dc8ddef389fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "**On Android,** the vibration duration defaults to 400 milliseconds, and an arbitrary vibration duration can be specified by passing a number as the value for the `pattern` argument. **On iOS,** the vibration duration is fixed at roughly 400 milliseconds.",
+      "source_content_hash": "5c7ea1bb6f42669ac63ea2d49c0e4a5dd1705a1e4f15261a0616f5a7f0b80467",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "The `vibrate()` method can take a `pattern` argument with an array of numbers that represent time in milliseconds. You may set `repeat` to true to run through the vibration pattern in a loop until `cancel()` is called.",
+      "source_content_hash": "676268c6cd387cd25155916b605543bf9fa22276bd6f3dde95afa59a9254c857",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "**On Android,** the odd indices of the `pattern` array represent the vibration duration, while the even ones represent the separation time. **On iOS,** the numbers in the `pattern` array represent the separation time, as the vibration duration is fixed.",
+      "source_content_hash": "f9d5bf78ff18015d6882e6058456eeca402f76c99a5e26d9542e535d7a034dbd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9c3b8644",
+      "source_content": "| Name    | Type                                                                     | Default | Description                                                                                       |\n| ------- | ------------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------- |\n| pattern | number <div className=\"label android\">Android</div><hr/>array of numbers | `400`   | Vibration duration in milliseconds.<hr/>Vibration pattern as an array of numbers in milliseconds. |\n| repeat  | boolean                                                                  | `false` | Repeat vibration pattern until `cancel()`.                                                        |",
+      "source_content_hash": "9201c08ada429a9864d52a5eaaee2eb0c486924ff5521a58982282ff3a3afc11",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.75/vibration.md",
+  "last_updated_timestamp": "2025-06-18T17:57:12.660115+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

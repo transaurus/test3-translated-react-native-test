@@ -1,0 +1,302 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/the-new-architecture/native-modules-custom-events.md",
+  "source_file_content_hash": "c52e2e18ad060e41d8e61886572beb9f56269087eafac6d0c7a85f57fd2bbb16",
+  "segments": [
+    {
+      "segment_id": "a9b642df",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9b642df"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "# Emitting Events in Native Modules",
+      "source_content_hash": "5c46ed6b3803ae01062a40516d6f0dfbe16735928e63e97ff67e2dcb97f183bc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 在原生模組中發送事件"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "In some circustamces, you may want to have a Native Module that listen to some events in the platform layer and then emit them to the JavaScript layer, to let you application react to such native events. In other cases, you might have long running operations that can emits events so that the UI can be updated when those happen.",
+      "source_content_hash": "92cfa0f3c7bf078fa2fe0664741a13635a1ad695258ef12c66302fe718229bc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在某些情況下，您可能需要一個原生模組來監聽平台層的某些事件，然後將這些事件發送到 JavaScript 層，以便您的應用程式能夠對這些原生事件做出反應。在其他情況下，您可能有一些長時間運行的操作，可以發送事件，以便在這些事件發生時更新 UI。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Both are good use cases for emitting events from a Native Modules. In this guide, you'll learn how to do that.",
+      "source_content_hash": "f8e0fdef3d35e0ce13be863680a943898343ecfd2caf34d6a98019a59bf0ca91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這兩種情況都是從原生模組發送事件的良好用例。在本指南中，您將學習如何做到這一點。"
+      }
+    },
+    {
+      "segment_id": "d912d376",
+      "source_content": "## Emitting an Event when a new key added to the storage",
+      "source_content_hash": "61a62a65f7e122bd90dacd3c4fb885794e54f6e1bea0637dc54032729a4d754a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 當新鍵添加到儲存時發送事件"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "In this example, you will learn how to emit an event when a new key is added to the storage. Changing the value of the key will not emit the event, but adding a new key will.",
+      "source_content_hash": "367a28e656ab48984338e791e2fb57f364fbadcd7c7950c4c54e7c18157a5509",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在這個例子中，您將學習如何在儲存中添加新鍵時發送事件。更改鍵的值不會發送事件，但添加新鍵會。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "This guide starts from the [Native Module](/docs/next/turbo-native-modules-introduction) guide.\nMake sure to be familiar with that guide before diving into this one, potentially implementing the example in the guide.",
+      "source_content_hash": "8efc6c4f0fb28d6177c773873c18e919e2ab31ae07b992ee33177bc6d83700ad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南從[原生模組](/docs/next/turbo-native-modules-introduction)指南開始。\n在深入學習本指南之前，請確保熟悉該指南，並可能實現該指南中的示例。"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "## Step 1: Update the Specs of NativeLocalStorage",
+      "source_content_hash": "ba4fc9dd3ae9163f98ad37863444f97bc962d4bac98da440ccf6cd130da3c1bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 步驟 1：更新 NativeLocalStorage 的規格"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "The first step would be to update the specs of the `NativeLocalStorage` specs to let React Native aware that the module can emit events.",
+      "source_content_hash": "d058b5d2b7e33794d7515f3112c551ed7aa5a6c35b266b54bc3ca8aae1b140f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一步是更新 `NativeLocalStorage` 的規格，讓 React Native 知道該模組可以發送事件。"
+      }
+    },
+    {
+      "segment_id": "8f488ab5",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\nOpen the `NativeLocalStorage.ts` file and update it as it follows:\n\n```diff title=\"NativeLocalStorage.ts\"\nimport type {TurboModule} from 'react-native';\nimport {TurboModuleRegistry} from 'react-native';\n+import type {EventEmitter} from 'react-native/Libraries/Types/CodegenTypes';\n\n+export type KeyValuePair = {\n+  key: string,\n+  value: string,\n+}\n\nexport interface Spec extends TurboModule {\n  setItem(value: string, key: string): void;\n  getItem(key: string): string | null;\n  removeItem(key: string): void;\n  clear(): void;\n\n+ readonly onKeyAdded: EventEmitter<KeyValuePair>;\n}\n\nexport default TurboModuleRegistry.getEnforcing<Spec>(\n  'NativeLocalStorage',\n);\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\nOpen the `NativeLocalStorage.js` file and update it as it follows:\n\n```diff title=\"NativeLocalStorage.js\"\n\n// @flow\nimport type {TurboModule} from 'react-native';\nimport {TurboModule, TurboModuleRegistry} from 'react-native';\n+import type {EventEmitter} from 'react-native/Libraries/Types/CodegenTypes';\n\n+export type KeyValuePair = {\n+  key: string,\n+  value: string,\n+}\n\nexport interface Spec extends TurboModule {\n  setItem(value: string, key: string): void;\n  getItem(key: string): ?string;\n  removeItem(key: string): void;\n  clear(): void;\n+ onKeyAdded: EventEmitter<KeyValuePair>\n}\nexport default (TurboModuleRegistry.get<Spec>(\n  'NativeLocalStorage'\n): ?Spec);\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "5cf0fa5ce846a4f3867b099b0f99b0011b758fa9a720d9fdfeee42020456bda1",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f488ab5"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "With the `import type` statement, you are importing the `EventEmitter` type that is required to then add the `onKeyAdded` property.",
+      "source_content_hash": "3b92ebc7d4c7f8a6683ca35f9b4632a25279747d8dc27eb83c78f4bafdc565d1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通過 `import type` 語句，您導入所需的 `EventEmitter` 類型，以便添加 `onKeyAdded` 屬性。"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "When the event is emitted, you expect for it to receive a parameter of type `string`.",
+      "source_content_hash": "d55944c7855d0167d1b9705cace6c61c1602f695d8d639294e3e56d1d05ee608",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當事件被發送時，您期望它接收一個類型為 `string` 的參數。"
+      }
+    },
+    {
+      "segment_id": "0a103a02",
+      "source_content": "## Step 2: Generate Codegen",
+      "source_content_hash": "eef5a698d168dadd4daf83867fa6b1b2027e3b4c8bc6d783c2ce1ae43b46a7e1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 步驟 2：生成 Codegen"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "Given that you have updated the specs for your Native Module, you now have to rerun Codegen to generate the artifacts in the native code.",
+      "source_content_hash": "7107220f5b034e27dc47d28c3798f13e29bd6dc5a8df152586bc00213ad7e970",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於您已經更新了原生模組的規格，現在需要重新運行 Codegen 以在原生代碼中生成工件。"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "This is the same process presented in the Native Modules guide.",
+      "source_content_hash": "d5b441ea975eacbef10838112e35a35690ca717619d26a3268521d112e68d303",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這與原生模組指南中描述的過程相同。"
+      }
+    },
+    {
+      "segment_id": "3ca4b8b0",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n<TabItem value=\"android\" label=\"Android\">\nCodegen is executed through the `generateCodegenArtifactsFromSchema` Gradle task:\n\n```bash\ncd android\n./gradlew generateCodegenArtifactsFromSchema\n\nBUILD SUCCESSFUL in 837ms\n14 actionable tasks: 3 executed, 11 up-to-date\n```\n\nThis is automatically run when you build your Android application.\n</TabItem>\n<TabItem value=\"ios\" label=\"iOS\">\nCodegen is run as part of the script phases that's automatically added to the project generated by CocoaPods.\n\n```bash\ncd ios\nbundle install\nbundle exec pod install\n```\n\nThe output will look like this:\n\n```shell\n...\nFramework build type is static library\n[Codegen] Adding script_phases to ReactCodegen.\n[Codegen] Generating ./build/generated/ios/ReactCodegen.podspec.json\n[Codegen] Analyzing /Users/me/src/TurboModuleExample/package.json\n[Codegen] Searching for Codegen-enabled libraries in the app.\n[Codegen] Found TurboModuleExample\n[Codegen] Searching for Codegen-enabled libraries in the project dependencies.\n[Codegen] Found react-native\n...\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "3702fa3718bd64891786c1b627c44df15ad9622e3403cec0b6d1f66bca064e2b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ca4b8b0"
+      }
+    },
+    {
+      "segment_id": "47cd8dd6",
+      "source_content": "## Step 3: Update the App code",
+      "source_content_hash": "067faadb61bae90353d85c22e237e097e594d0674f1655bcc4134b86c811e725",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 步驟 3：更新應用程式代碼"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "Now, it's time to update the code of the App to handle the new event.",
+      "source_content_hash": "af5f4d6ee866c540c4c5025e9e494ad148745526a0d6f15fcf1290319070ca43",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候更新應用程式的代碼以處理新事件了。"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "Open the `App.tsx` file and modify it as it follows:",
+      "source_content_hash": "72e5c328ae889e7c532f14d71a6ed94ff60d00ccd4dc3cee2ceb393977cf1533",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "打開 `App.tsx` 文件並按以下方式修改："
+      }
+    },
+    {
+      "segment_id": "8d1b00fd",
+      "source_content": "```diff title=\"App.tsx\"\nimport React from 'react';\nimport {\n+ Alert,\n+ EventSubscription,\n  SafeAreaView,\n  StyleSheet,\n  Text,\n  TextInput,\n  Button,\n} from 'react-native';\n\nimport NativeLocalStorage from './specs/NativeLocalStorage';\n\nconst EMPTY = '<empty>';\n\nfunction App(): React.JSX.Element {\n  const [value, setValue] = React.useState<string | null>(null);\n+ const [key, setKey] = React.useState<string | null>(null);\n+ const listenerSubscription = React.useRef<null | EventSubscription>(null);\n\n+ React.useEffect(() => {\n+   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`New key added: ${pair.key} with value: ${pair.value}`));\n\n+   return  () => {\n+     listenerSubscription.current?.remove();\n+     listenerSubscription.current = null;\n+   }\n+ }, [])\n\n  const [editingValue, setEditingValue] = React.useState<\n    string | null\n  >(null);\n\n- React.useEffect(() => {\n-   const storedValue = NativeLocalStorage?.getItem('myKey');\n-   setValue(storedValue ?? '');\n- }, []);\n\n  function saveValue() {\n+   if (key == null) {\n+     Alert.alert('Please enter a key');\n+     return;\n+   }\n    NativeLocalStorage?.setItem(editingValue ?? EMPTY, key);\n    setValue(editingValue);\n  }\n\n  function clearAll() {\n    NativeLocalStorage?.clear();\n    setValue('');\n  }\n\n  function deleteValue() {\n+   if (key == null) {\n+     Alert.alert('Please enter a key');\n+     return;\n+   }\n    NativeLocalStorage?.removeItem(key);\n    setValue('');\n  }\n\n+ function retrieveValue() {\n+   if (key == null) {\n+     Alert.alert('Please enter a key');\n+     return;\n+   }\n+   const val = NativeLocalStorage?.getItem(key);\n+   setValue(val);\n+ }\n\n  return (\n    <SafeAreaView style={{flex: 1}}>\n      <Text style={styles.text}>\n        Current stored value is: {value ?? 'No Value'}\n      </Text>\n+     <Text>Key:</Text>\n+      <TextInput\n+       placeholder=\"Enter the key you want to store\"\n+       style={styles.textInput}\n+       onChangeText={setKey}\n+     />\n+     <Text>Value:</Text>\n      <TextInput\n        placeholder=\"Enter the text you want to store\"\n        style={styles.textInput}\n        onChangeText={setEditingValue}\n      />\n      <Button title=\"Save\" onPress={saveValue} />\n+     <Button title=\"Retrieve\" onPress={retrieveValue} />\n      <Button title=\"Delete\" onPress={deleteValue} />\n      <Button title=\"Clear\" onPress={clearAll} />\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  text: {\n    margin: 10,\n    fontSize: 20,\n  },\n  textInput: {\n    margin: 10,\n    height: 40,\n    borderColor: 'black',\n    borderWidth: 1,\n    paddingLeft: 5,\n    paddingRight: 5,\n    borderRadius: 5,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "97a195abd913f6e91eb8e14888bdcdea8aaadf93cdf8c9f1afbfa60f050247ad",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8d1b00fd"
+      }
+    },
+    {
+      "segment_id": "65be34cb",
+      "source_content": "There are a few relevant changes to look at:",
+      "source_content_hash": "068e743439ee1491b9a700f7c84e50b9f10b2eb18ffb6b0fac818e1717b08c65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有幾個相關的更改需要注意："
+      }
+    },
+    {
+      "segment_id": "c5b7e1f6",
+      "source_content": "1. You need to import the `EventSubscription` type from `react-native` to handle the `EventSubscription`\n2. You need to use a `useRef` to keep track of the `EventSubscription` reference\n3. You register the listener using an `useEffect` hook. The `onKeyAdded` function takes a callback with an object of type `KeyValuePair` as a function parameter.\n4. The callback added to `onKeyAdded` is executed every time the event is emitted from Native to JS.\n5. In the `useEffect` cleanup function, you `remove` the event subscription and you set the ref to `null`.",
+      "source_content_hash": "bee7a02d80371ae91f461fcbd27031121b16bdaadea7ba29b3e43694a8e25b2a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 您需要從 `react-native` 導入 `EventSubscription` 類型來處理 `EventSubscription`\n2. 您需要使用 `useRef` 來跟踪 `EventSubscription` 的引用\n3. 您使用 `useEffect` 鉤子註冊監聽器。`onKeyAdded` 函數接受一個回調函數，該回調函數的參數是一個類型為 `KeyValuePair` 的對象。\n4. 添加到 `onKeyAdded` 的回調函數在每次從原生層發送到 JS 層的事件時執行。\n5. 在 `useEffect` 的清理函數中，您 `remove` 事件訂閱並將引用設置為 `null`。"
+      }
+    },
+    {
+      "segment_id": "5d5a3416",
+      "source_content": "The rest of the changes are regular React changes to improve the App for this new feature.",
+      "source_content_hash": "77c7ba6786a0d8382e13ca23622c09209c06f321b9b2202f83af78922bfdc3ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其餘的更改是常規的 React 更改，以改進應用程式的新功能。"
+      }
+    },
+    {
+      "segment_id": "90032345",
+      "source_content": "## Step 4: Write your Native Code",
+      "source_content_hash": "e8bb28c37204fd3390a8929d3e42b69ff7b2ed509354e0304dba5142a3c4285c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 步驟 4：編寫您的原生代碼"
+      }
+    },
+    {
+      "segment_id": "715a86e2",
+      "source_content": "With everything prepared, let's start writing native platform code.",
+      "source_content_hash": "e9cc38c05d54bf81d16b8aff1a08e4b72c02f37d792bd7efdf7ccd0628734679",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一切準備就緒後，讓我們開始編寫原生平台代碼。"
+      }
+    },
+    {
+      "segment_id": "5c035652",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n<TabItem value=\"android\" label=\"Android\">\n\nAssuming you followed the guide for iOS described in the [Native Modules guide](/docs/turbo-native-modules-introduction?platforms=android&language=typescript#3-write-application-code-using-the-turbo-native-module), what's left to do is to plug the code that emit the events in your app.\n\nTo do so, you have to:\n\n1. Open the `NativeLocalStorage.kt` file\n2. Modify it as it follows:\n\n```diff title=\"NativeLocalStorage\"\npackage com.nativelocalstorage\n\nimport android.content.Context\nimport android.content.SharedPreferences\nimport com.nativelocalstorage.NativeLocalStorageSpec\n+import com.facebook.react.bridge.Arguments\nimport com.facebook.react.bridge.ReactApplicationContext\n+import com.facebook.react.bridge.WritableMap\n\nclass NativeLocalStorageModule(reactContext: ReactApplicationContext) : NativeLocalStorageSpec(reactContext) {\n\n  override fun getName() = NAME\n\n  override fun setItem(value: String, key: String) {\n+   var shouldEmit = false\n+   if (getItem(key) != null) {\n+       shouldEmit = true\n+   }\n    val sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE)\n    val editor = sharedPref.edit()\n    editor.putString(key, value)\n    editor.apply()\n\n+   if (shouldEmit == true) {\n+       val eventData = Arguments.createMap().apply {\n+           putString(\"key\", key)\n+           putString(\"value\", value)\n+       }\n+       emitOnKeyAdded(eventData)\n+   }\n  }\n\n  override fun getItem(key: String): String? {\n    val sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE)\n    val username = sharedPref.getString(key, null)\n    return username.toString()\n  }\n```\n\nFirst, you need to import a couple of types that you need to use to create the eventData that needs to be sent from Native to JS. These imports are:\n\n- `import com.facebook.react.bridge.Arguments`\n- `import com.facebook.react.bridge.WritableMap`\n\nSecondly, you need to implement the logic that actually emits the event to JS. In case of complex types, like the `KeyValuePair` defined in the specs, Codegen will generate a function that expects a `ReadableMap` as a parameter. You can create the `ReadableMap` by using the `Arguments.createMap()` factory method, and use the `apply` function to populate the map. It's your responsibility to make sure that the the keys you are using in the map are the same properties that are defined in the spec type in JS.\n\n</TabItem>\n<TabItem value=\"ios\" label=\"iOS\">\n\nAssuming you followed the guide for iOS described in the [Native Modules guide](/docs/turbo-native-modules-introduction?platforms=ios&language=typescript#3-write-application-code-using-the-turbo-native-module), what's left to do is to plug the code that emit the events in your app.\n\nTo do so, you have to:\n\n1. Open the `RCTNativeLocalStorage.h` file.\n2. Change the base class from `NSObject` to `NativeLocalStorageSpecBase`\n\n```diff title=\"RCTNativeLocalStorage.h\"\n#import <Foundation/Foundation.h>\n#import <NativeLocalStorageSpec/NativeLocalStorageSpec.h>\n\nNS_ASSUME_NONNULL_BEGIN\n\n-@interface RCTNativeLocalStorage : NSObject <NativeLocalStorageSpec>\n+@interface RCTNativeLocalStorage : NativeLocalStorageSpecBase <NativeLocalStorageSpec>\n\n@end\n\nNS_ASSUME_NONNULL_END\n```\n\n3. Open the `RCTNativeLocalStorage.mm` file.\n4. Modify it to emit the events when needed, for example:\n\n```diff title=\"RCTNativeLocalStorage.mm\"\n - (void)setItem:(NSString *)value key:(NSString *)key {\n+  BOOL shouldEmitEvent = NO;\n+  if (![self getItem:key]) {\n+    shouldEmitEvent = YES;\n+  }\n   [self.localStorage setObject:value forKey:key];\n\n+  if (shouldEmitEvent) {\n+    [self emitOnKeyAdded:@{@\"key\": key, @\"value\": value}];\n+  }\n}\n```\n\nThe `NativeLocalStorageSpecBase` is a base class that provides the `emitOnKeyAdded` method and its basic implementation and boilerplate. Thanks to this class, you don't have to handle all the conversion between Objective-C and JSI that is required to send the event to JS.\n\nIn case of complex types, like the `KeyValuePair` defined in the specs, Codegen will generate a generic dictionary that you can populate on the native side. It's your responsibility to make sure that the the keys you are using in the dictionary are the same properties that are defined in the spec type in JS.\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "c7508286fe2601db6d62e3249036c4a94b08d37432c8e9c3acad42fbee7e9e7b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5c035652"
+      }
+    },
+    {
+      "segment_id": "3f6b512a",
+      "source_content": "## Step 5: Run Your App",
+      "source_content_hash": "646ca4a3cebfae67a8f4ac6f1b5b499e9de93ac8af325ce76be3840a7635c5c7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 步驟 5：運行您的應用程式"
+      }
+    },
+    {
+      "segment_id": "e91bdcd9",
+      "source_content": "If you now try to run your app, you should see this behavior.",
+      "source_content_hash": "20b145f6578ded448a8d42859d2dc7f5f9e568210b043c3731e9998f73c33809",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您現在嘗試運行您的應用程式，您應該會看到這種行為。"
+      }
+    },
+    {
+      "segment_id": "fd1acad4",
+      "source_content": "| <center>Android</center>                                                                                    | <center>iOS</center>                                                                                    |\n| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |\n| <center><img src=\"/docs/assets/turbo-native-modules-events-android.gif\" width=\"75%\" height=\"75%\"/></center> | <center><img src=\"/docs/assets/turbo-native-modules-events-ios.gif\" width=\"75%\" height=\"75%\"/></center> |",
+      "source_content_hash": "6039157a11ec88f308344dbc4cd188f572c3d22992e7b6108abe5a9aa97ff22d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fd1acad4"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/the-new-architecture/native-modules-custom-events.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.028999+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "c52e2e18ad060e41d8e61886572beb9f56269087eafac6d0c7a85f57fd2bbb16"
+  }
+}

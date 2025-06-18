@@ -1,0 +1,480 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2020-07-06-version-0.63.md",
+  "source_file_content_hash": "c5b9648ca13bb55948c061dad950e2bbb6746fad9538823270b6564f5d3238a3",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Announcing React Native 0.63 with LogBox\nauthors: [grabbou]\ntags: [announcement, release]\n---",
+      "source_content_hash": "f8521236b5a1db686e84cf48026bbe7423beea55f150dc73133b11330c9eb1d5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Today we’re releasing React Native 0.63 that ships with LogBox turned on by default.",
+      "source_content_hash": "183af29d9585b101b549cb1d2b8c64b0bd26d40c4952e6f796c1dcd083d10642",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們正式發布 React Native 0.63 版本，預設啟用 LogBox 功能。"
+      }
+    },
+    {
+      "segment_id": "d912d376",
+      "source_content": "## LogBox",
+      "source_content_hash": "7acc997fbbe39eb75d08a7456fd6efaaa51decdadc53e00c6948142842fd1acd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## LogBox"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "We’ve heard frequent feedback from the community that errors and warnings are difficult to debug in React Native. To address these issues we took a look at the entire error, warning, and log system in React Native and redesigned it [from the ground up](https://www.youtube.com/watch?v=Y8brBH5O-bQ&feature=youtu.be).",
+      "source_content_hash": "a5df3e3cbf34b17d1679acd9d645898aa04eee95d01dc3b0eb1521fb358c2877",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們經常收到社群回饋，指出 React Native 中的錯誤與警告訊息難以除錯。為解決這些問題，我們全面檢視並從頭重新設計了整個錯誤、警告及日誌系統[從底層重構](https://www.youtube.com/watch?v=Y8brBH5O-bQ&feature=youtu.be)。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "![Screenshot of LogBox](/blog/assets/0.63-logbox.png)",
+      "source_content_hash": "eb04cedfbc19c7cbf204f27b5ec4ae30cca0d9808a06818f5f6c492339fd391a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![LogBox 截圖](/blog/assets/0.63-logbox.png)"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "LogBox is a completely redesigned redbox, yellowbox, and logging experience in React Native. In 0.62 we introduced LogBox as an opt-in. In this release, we’re launching LogBox as the default experience in all of React Native.",
+      "source_content_hash": "8486076faec9f9f187751f456a074cd75d8634f8ec1ec8e1c9053af936b1cb30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "LogBox 是 React Native 中全新設計的紅屏錯誤、黃屏警告及日誌體驗。在 0.62 版本中我們以選用功能推出 LogBox，而本次更新將使其成為 React Native 的預設標準功能。"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "LogBox addresses complaints that errors and warnings were too verbose, poorly formatted, or unactionable by focusing on three primary goals:",
+      "source_content_hash": "332a4e7cf3c8b92928254c06eab8ae4d911c078481f8848ac86f285b92b41a8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "LogBox 針對錯誤警告訊息過於冗長、格式混亂或難以處理等問題，聚焦三大核心目標："
+      }
+    },
+    {
+      "segment_id": "034de896",
+      "source_content": "- **Concise**: Logs should provide the minimum amount of information necessary to debug an issue.\n- **Formatted**: Logs should be formatted so that you can quickly find the information you need.\n- **Actionable**: Logs should be actionable, so you can fix the issue and move on.",
+      "source_content_hash": "9d204517f5575f6e593c3ac4c42b2c3e166afc3aace2341445f88106173f2b55",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **簡潔性**：日誌應提供除錯所需的最精要資訊。\n- **格式化**：日誌應經過妥善排版，便於快速定位關鍵資訊。\n- **可操作性**：日誌應具備可執行性，讓開發者能立即解決問題。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "To achieve these goals, LogBox includes:",
+      "source_content_hash": "320e87d06d6a99acff097e1be5e3011028b86295f0f0f6c714ea1dff244d098c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為實現這些目標，LogBox 包含以下功能："
+      }
+    },
+    {
+      "segment_id": "44d89370",
+      "source_content": "- **Log notifications**: We’ve redesigned the warning notifications and added support for errors so that all console.warn and console.log messages show up as notifications instead of covering your app.\n- **Code Frames**: Every error and warning now includes a code frame that shows the source code of the log right inside the app, allowing you to quickly identify the source of your issue.\n- **Component Stacks**: All component stacks are now stripped from error messages and put into their own section with the top three frames visible. This gives you a single, consistent space to expect stack frame information that doesn’t clutter the log message.\n- **Stack Frame Collapsing**: By default we now collapse call stack frames not related to your application’s code so you can quickly see the issue in your app and not sift through React Native internals.\n- **Syntax Error Formatting**: We’ve improved the formatting for syntax errors and added codeframes with syntax highlighting so you can see the source of the error, fix it, and continue coding without React Native getting in your way.",
+      "source_content_hash": "b66dea1e8fd2b31b9fdf2b5cbc5bbe308996deb42ce6a5841a26a2e2499a5fe5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **日誌通知**：重新設計警告通知並新增錯誤支援，所有 console.warn 和 console.log 訊息將以通知形式顯示，不再遮蓋應用畫面。\n- **程式碼框架**：每個錯誤與警告現在都附帶原始碼框架，直接在應用中顯示日誌對應的源碼位置。\n- **元件堆疊**：所有元件堆疊資訊從錯誤訊息中分離，獨立顯示前三個關鍵堆疊框架。\n- **堆疊框架折疊**：預設折疊與應用程式碼無關的調用堆疊，快速聚焦問題核心。\n- **語法錯誤格式化**：強化語法錯誤排版並新增語法高亮的程式碼框架，直觀顯示錯誤源頭。"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "We’ve wrapped all of these features into an improved visual design that’s consistent between errors and warnings and allows paginating through all logs in one enjoyable UI.",
+      "source_content_hash": "38e964072add5fceda1401559e819c60e638d7f517799c4bcc3d48777dc2c08f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些功能整合於統一的視覺設計中，錯誤與警告介面風格一致，並支援流暢翻頁瀏覽所有日誌。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "With this change we’re also deprecating YellowBox in favor of LogBox APIs:",
+      "source_content_hash": "6e9cef269bdc32b6118187247f5c5bf24029395eb71f4a678a634a70c98d062a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更同時宣告以下 LogBox API 將取代 YellowBox："
+      }
+    },
+    {
+      "segment_id": "fc8eadc3",
+      "source_content": "- `LogBox.ignoreLogs()`: This function replaces `YellowBox.ignoreLogs([])` as a way to silence any logs that match the given strings or regexes.\n- `LogBox.ignoreAllLogs()`: This function replaces `console.disableYellowBox` as a way to turn off error or warning notifications. Note: this only disables notifications, uncaught errors will still open a full screen LogBox.",
+      "source_content_hash": "e6dacb3f1543341d96d54fa90a1749231dde929aa45cd0a0b6c3cb51c5914aaf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `LogBox.ignoreLogs()`：此函數取代 `YellowBox.ignoreLogs([])`，用於過濾符合指定字串或正則表達式的日誌。\n- `LogBox.ignoreAllLogs()`：此函數取代 `console.disableYellowBox`，可關閉錯誤與警告通知（注意：僅停用通知，未捕獲的錯誤仍會觸發全屏 LogBox）。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "In 0.63, we will warn when using these deprecated modules or methods. Please update your call sites off of these APIs before they are removed in 0.64.",
+      "source_content_hash": "bef6c0926383df13b89e8a34afd55f21766a098a87c74833ed490be831fafcdc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "0.63 版本將在使用這些棄用模組或方法時發出警告，請在 0.64 版本移除前完成 API 遷移。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "For more information on LogBox and debugging react native, see the docs [here](https://reactnative.dev/docs/debugging#in-app-errors-and-warnings).",
+      "source_content_hash": "943d752b360d93fab9dd51ef20c3ed1d316a02fc01cbb7f6c6633188930395fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多關於 LogBox 與 React Native 除錯資訊，請參閱[官方文件](https://reactnative.dev/docs/debugging#in-app-errors-and-warnings)。"
+      }
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "## Pressable",
+      "source_content_hash": "258dba1131a1a48ab89f0bb5aee5fb078cd53b592567534838e3a778fb062bef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Pressable 按壓元件"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "React Native is built to enable applications to meet user’s expectations of the platform. This includes avoiding “tells”—little things that give away that the experience was built with React Native. One major source of these tells has been the Touchable components: `Button`, `TouchableWithoutFeedback`, `TouchableHighlight`, `TouchableOpacity`, `TouchableNativeFeedback`, and `TouchableBounce`. These components make your application interactive by allowing you to provide visual feedback to user interactions. However, because they include built-in styles and effects that don’t match the platform interaction, users can tell when experiences are written with React Native.",
+      "source_content_hash": "fe833294ad22c21acbfc5df880a2d83ad54b4e183ffdfdd2132f8e1ea9592005",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 的設計宗旨是讓應用程式符合使用者對平台的期待，這包含避免暴露框架特徵的「破綻」。現有的觸控元件（`Button`、`TouchableWithoutFeedback`、`TouchableHighlight`、`TouchableOpacity`、`TouchableNativeFeedback` 和 `TouchableBounce`）由於內建不符合平台互動模式的視覺回饋效果，往往成為這類破綻的主要來源。"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "Further, as React Native has grown and our bar for high-quality applications has gone up, these components haven't grown with it. React Native now supports platforms like Web, Desktop, and TV, but support for additional input modalities has been lacking. React Native needs to support high-quality interaction experiences on all platforms.",
+      "source_content_hash": "1d1397985c8df0007d598604e689d4991b363bd6a432c8d69b26e7e2e564e7d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，隨著 React Native 的發展以及我們對高品質應用程式的標準提升，這些元件並未隨之進化。React Native 現已支援 Web、桌面和電視等平台，但對於其他輸入模式的支援卻有所不足。React Native 需要在所有平台上提供高品質的互動體驗。"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "To address these problems, we are shipping a new core component called `Pressable`. This component can be used to detect various types of interactions. The API was designed to provide direct access to the current state of interaction without having to maintain state manually in a parent component. It was also designed to enable platforms to extend it's capabilities to include hover, blur, focus, and more. We expect that most people will build and share components utilizing `Pressable` under the hood instead of relying on the default experience of something like `TouchableOpacity`.",
+      "source_content_hash": "6808c8e934824c017c2cdb934d0b3c665b2e7107eafa1673c583209c5b485f1e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了解決這些問題，我們推出了一個名為 `Pressable` 的新核心元件。此元件可用於檢測多種類型的互動。其 API 設計旨在直接存取互動的當前狀態，而無需在父元件中手動維護狀態。同時，它也設計成可讓平台擴展其功能，包括懸停、模糊、聚焦等。我們預期大多數人會基於 `Pressable` 來構建和共享元件，而不是依賴像 `TouchableOpacity` 這樣的預設體驗。"
+      }
+    },
+    {
+      "segment_id": "95318d95",
+      "source_content": "```jsx\nimport {Pressable, Text} from 'react-native';\n\n<Pressable\n  onPress={() => {\n    console.log('pressed');\n  }}\n  style={({pressed}) => ({\n    backgroundColor: pressed ? 'lightskyblue' : 'white',\n  })}>\n  <Text style={styles.text}>Press Me!</Text>\n</Pressable>;\n```",
+      "source_content_hash": "f18586080d940693265ec5db242322c3ce64fc34b0401182a501757a5100239b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95318d95"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "<p className=\"snippet-caption\">A simple example of a Pressable component in action</p>",
+      "source_content_hash": "42abc7971565627fd793bb43a92c69ee549f7652b37c993083cf9b89cdb74d4d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<p className=\"snippet-caption\">Pressable 元件的簡單範例</p>"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "You can learn more about it from [the documentation](https://reactnative.dev/docs/pressable).",
+      "source_content_hash": "cff643d8755b3233710e6ca2e0ace0e4610ac97ce427f029269d0fd560a41ad1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以從[文件](https://reactnative.dev/docs/pressable)中了解更多相關資訊。"
+      }
+    },
+    {
+      "segment_id": "bd92edfc",
+      "source_content": "## Native Colors (PlatformColor, DynamicColorIOS)",
+      "source_content_hash": "5f69f99cc4cc51aa43a404618fc01bd6785dd78ccceeeeb3bc608fd600f1fc2e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 原生色彩 (PlatformColor, DynamicColorIOS)"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "Every native platform has the concept of system-defined colors. Colors that automatically respond to system theme settings such as Light or Dark mode, accessibility settings such as a High Contrast mode, and even its context within the app such as the traits of a containing view or window.",
+      "source_content_hash": "aa109e5180549240e5fb652df2b4044d19d37e985a8bf081343fecf64c0e8d1e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個原生平台都有系統定義色彩的概念。這些色彩能自動響應系統主題設定（如淺色或深色模式）、無障礙設定（如高對比模式），甚至應用程式內的上下文（如包含視圖或視窗的特性）。"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "While it is possible to detect some of these settings via the [`Appearance`](https://reactnative.dev/docs/appearance#getcolorscheme) API and/or [`AccessibilityInfo`](https://reactnative.dev/docs/accessibilityinfo#isgrayscaleenabled) and set your styles accordingly, such abstractions are not only costly to develop but are approximating the appearance of native colors. These inconsistencies are particularly noticeable when working on a hybrid application, where React Native elements co-exist next to the native ones.",
+      "source_content_hash": "7b78ade970fbee8674afd3dd9679b0d5ecadd58c34e050487dbf270d44077fe5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然可以透過 [`Appearance`](https://reactnative.dev/docs/appearance#getcolorscheme) API 和/或 [`AccessibilityInfo`](https://reactnative.dev/docs/accessibilityinfo#isgrayscaleenabled) 檢測部分設定並據此調整樣式，但這些抽象不僅開發成本高，而且僅是近似原生色彩的外觀。這些不一致性在混合應用程式中尤其明顯，其中 React Native 元素與原生元素並存。"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "React Native now provides an out-of-the-box solution to use these system colors. `PlatformColor()` is a new API that can be used like any other color in React Native.",
+      "source_content_hash": "e84eb6cb59ac08b01736556871b721bdaf8e865a7f2677755c2c57ac7ee4e1d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 現在提供了一個開箱即用的解決方案來使用這些系統色彩。`PlatformColor()` 是一個新的 API，可以像 React Native 中的任何其他色彩一樣使用。"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "For example, on iOS, the [system provides a color called `labelColor`](https://developer.apple.com/documentation/uikit/uicolor/ui_element_colors?language=objc). That can be used in React Native with `PlatformColor` like this:",
+      "source_content_hash": "4464966d173e10c690915a3a29855fd3f0096eaffea9328da9b0624afd478680",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在 iOS 上，[系統提供了一個名為 `labelColor` 的色彩](https://developer.apple.com/documentation/uikit/uicolor/ui_element_colors?language=objc)。可以在 React Native 中這樣使用 `PlatformColor`："
+      }
+    },
+    {
+      "segment_id": "8a9e710a",
+      "source_content": "```jsx\nimport {Text, PlatformColor} from 'react-native';\n\n<Text style={{color: PlatformColor('labelColor')}}>\n  This is a label\n</Text>;\n```",
+      "source_content_hash": "8a87399acab52fb9ef63d85bd4849121680e35761aa101dde73f72f7d1e96aa6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a9e710a"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "<p className=\"snippet-caption\">Sets the color of the Text component to labelColor as defined by iOS.</p>",
+      "source_content_hash": "394c8bed06c9c62a2fdd48c6132cecf697fea1fadce0e69efc14d300926fdc3c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<p className=\"snippet-caption\">將 Text 元件的色彩設定為 iOS 定義的 labelColor</p>"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "Android, on the other hand, [provides colors like colorButtonNormal](https://developer.android.com/reference/android/R.attr#colorButtonNormal). You can use this color in React Native with:",
+      "source_content_hash": "a1ae03d7dda56e2291834bb6da21a10a7008776dd6f2cf5d1dd33a39f3084461",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一方面，Android [提供了像 colorButtonNormal 這樣的色彩](https://developer.android.com/reference/android/R.attr#colorButtonNormal)。您可以在 React Native 中這樣使用此色彩："
+      }
+    },
+    {
+      "segment_id": "7d898a0e",
+      "source_content": "```jsx\nimport {View, Text, PlatformColor} from 'react-native';\n\n<View\n  style={{\n    backgroundColor: PlatformColor('?attr/colorButtonNormal'),\n  }}>\n  <Text>This is colored like a button!</Text>\n</View>;\n```",
+      "source_content_hash": "e6b6c344059e22eb2935484692e2e6d8b13f718019377f6b5fc83f1c3224c20f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d898a0e"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "<p className=\"snippet-caption\">Sets the background color of the View component to colorButtonNormal as defined by Android.</p>",
+      "source_content_hash": "37fc35f2233f7ec7516a0f83c9a31f9860572b451542ccf38d5c915d8804406d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<p className=\"snippet-caption\">將 View 元件的背景色彩設定為 Android 定義的 colorButtonNormal</p>"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "You can learn more about `PlatformColor` from [the documentation](https://reactnative.dev/docs/platformcolor). You can also check the actual [code examples present in the RNTester](https://github.com/facebook/react-native/blob/master/packages/rn-tester/js/examples/PlatformColor/PlatformColorExample.js).",
+      "source_content_hash": "0d1dad19d68b4fb94b54c75b9138a151050bd49fe3338d2e60823e5f2087aeda",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以從[文件](https://reactnative.dev/docs/platformcolor)中了解更多關於 `PlatformColor` 的資訊。您也可以查看 [RNTester 中的實際程式碼範例](https://github.com/facebook/react-native/blob/master/packages/rn-tester/js/examples/PlatformColor/PlatformColorExample.js)。"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "`DynamicColorIOS` is an iOS only API that lets you define which color to use in light and dark mode. Similar to `PlatformColor`, this can be used anywhere you can use colors. `DynamicColorIOS` uses iOS’s `colorWithDynamicProvider` under the hood.",
+      "source_content_hash": "e8e4a990857d6ab236ab9bd0b53011a4d1c849629bc2212c9845a1b53ecaae39",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`DynamicColorIOS` 是一個僅限 iOS 的 API，可讓您定義在淺色和深色模式中使用的色彩。與 `PlatformColor` 類似，這可以在任何可以使用色彩的地方使用。`DynamicColorIOS` 在底層使用了 iOS 的 `colorWithDynamicProvider`。"
+      }
+    },
+    {
+      "segment_id": "de26f08a",
+      "source_content": "```jsx\nimport {Text, DynamicColorIOS} from 'react-native';\n\nconst customDynamicTextColor = DynamicColorIOS({\n  dark: 'lightskyblue',\n  light: 'midnightblue',\n});\n\n<Text style={{color: customDynamicTextColor}}>\n  This color changes automatically based on the system theme!\n</Text>;\n```",
+      "source_content_hash": "453586d75d8da5a67bc8c92702711acb6e8861be3ce46362882548b367867e78",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de26f08a"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "<p className=\"snippet-caption\">Changes the text color based on the system theme</p>",
+      "source_content_hash": "2134435c464398825fbe7fb2539a8c435acfb26cc47069b086686f61891ec142",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<p className=\"snippet-caption\">根據系統主題變更文字色彩</p>"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "You can learn more about `DynamicColorIOS` from [the documentation](https://reactnative.dev/docs/dynamiccolorios).",
+      "source_content_hash": "8b49db3d3488245050a86b5762b1a9dca445923704a6e12cb9625e2d9889d001",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以從[文件](https://reactnative.dev/docs/dynamiccolorios)中了解更多關於 `DynamicColorIOS` 的資訊。"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "## Dropping iOS 9 and Node.js 8 support",
+      "source_content_hash": "84db4399509b867b5b387eaa6e13768f731d1d6b8bc7adf5402f6d03e0235415",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 停止支援 iOS 9 和 Node.js 8"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "After over four years from its release, we are dropping support for iOS 9. This change will allow us to move faster by being able to reduce the number of compatibility checks that need to be placed in the native code to detect whether a given feature was supported on a certain iOS version. With its [market share of 1%](https://david-smith.org/iosversionstats/), it shouldn’t have much negative impact on your customers.",
+      "source_content_hash": "94072ca89d8bb876fc62adba15bed2707cd092f18e43a5bc6949f6bb35dcdffd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在發布四年多後，我們將停止支援 iOS 9。這項變動能讓我們減少原生程式碼中針對特定 iOS 版本功能支援的相容性檢查，從而加快開發速度。考慮到 iOS 9 的[市佔率僅有 1%](https://david-smith.org/iosversionstats/)，此舉對您的用戶影響應相當有限。"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "At the same time, we are dropping support for Node 8. [Its LTS maintenance cycle expired in December 2019](https://nodejs.org/fr/blog/release/v8.9.0/). The current LTS is Node 10 and it is now the version that we are targeting. If you are still using Node 8 for the development of React Native applications, we encourage you to upgrade in order to receive all the latest security fixes and updates.",
+      "source_content_hash": "737219f47e463c57deb76510aba693c29827a3ceb23f6ca2bca66f7707604e30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同時，我們也將停止支援 Node 8。[其長期支援維護週期已於 2019 年 12 月結束](https://nodejs.org/fr/blog/release/v8.9.0/)。目前的長期支援版本是 Node 10，這也是我們現在鎖定的目標版本。若您仍在使用 Node 8 開發 React Native 應用程式，我們建議您升級以獲取所有最新的安全性修復與更新。"
+      }
+    },
+    {
+      "segment_id": "4dd6a631",
+      "source_content": "## Other notable improvements",
+      "source_content_hash": "17b9e33c380ea68116918d134aaa0f0501cacb5a18bc2f49f54cb06a00645dbd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他值得注意的改進"
+      }
+    },
+    {
+      "segment_id": "cd2fd2f2",
+      "source_content": "- **Support rendering `<View />` in `<Text />` without explicit size**: You can now render any `<View />` inside any `<Text />` component without setting its width and height explicitly, which wasn’t always possible. On previous releases of React Native, this would result in a RedBox.\n- **Changed iOS LaunchScreen from `xib` to `storyboard`**: Starting April 30, 2020, all apps submitted to the App Store must use an Xcode storyboard to provide the app’s launch screen and all iPhone apps must support all iPhone screens. This commit adjusts the default React Native template to be compatible with this requirement.",
+      "source_content_hash": "8148894981c58420d945f5f504186a19214e88908336cfddbb14452ac853456d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **支援在 `<Text />` 中直接渲染 `<View />` 而無需明確設定尺寸**：現在您可以在任何 `<Text />` 組件內渲染 `<View />`，無需明確設定其寬度和高度，這在之前的版本中並非總是可行。在 React Native 的舊版中，此操作會導致 RedBox 錯誤。\n- **將 iOS 啟動畫面從 `xib` 改為 `storyboard`**：自 2020 年 4 月 30 日起，提交至 App Store 的所有應用程式必須使用 Xcode storyboard 來提供啟動畫面，且所有 iPhone 應用程式必須支援所有 iPhone 螢幕尺寸。此提交調整了預設的 React Native 模板以符合此要求。"
+      }
+    },
+    {
+      "segment_id": "d53c8ed4",
+      "source_content": "## Thanks",
+      "source_content_hash": "1e57366f4f2b8342ce1186455878164e2c099d41b453de456c1a921520e0df59",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "Thank you to the hundreds of contributors that helped make 0.63 possible!",
+      "source_content_hash": "bec8280855f35238913f351d98bf79d9525e396f861e01b4508f15083b82ffb5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝數百位貢獻者協助實現 0.63 版本！"
+      }
+    },
+    {
+      "segment_id": "31e045cc",
+      "source_content": "<!--alex ignore special white-->",
+      "source_content_hash": "6a0701b9994ab83fa7331f0d528b328b0921aa721e941c93407723de41faebd5",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d54fd161",
+      "source_content": "> Special thanks to [Rick Hanlon](https://twitter.com/rickhanlonii) for authoring the section on `LogBox` and [Eli White](https://twitter.com/Eli_White) for authoring the `Pressable` part of this article.",
+      "source_content_hash": "efaeca1de80ec12dd9e91cd96d5e331b40fca2c9879c9a2b3d7e227a498471d1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 特別感謝 [Rick Hanlon](https://twitter.com/rickhanlonii) 撰寫關於 `LogBox` 的章節，以及 [Eli White](https://twitter.com/Eli_White) 撰寫本文中 `Pressable` 的相關內容。"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "To see all the updates, take a look at the [0.63 changelog](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0630).",
+      "source_content_hash": "4fb684327ff987d439fb6a28e2ff6066de7ae8a34b00966d51506e85025035d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要查看所有更新內容，請參閱 [0.63 版本變更日誌](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0630)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2020-07-06-version-0.63.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.221620+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "c5b9648ca13bb55948c061dad950e2bbb6746fad9538823270b6564f5d3238a3"
+  }
+}

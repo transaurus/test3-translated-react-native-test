@@ -1,0 +1,2922 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/view.md",
+  "source_file_content_hash": "5ac30d171555ab4cbd61415ee29e10b4693df131c4f2df27159b3469ceacaf70",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: view\ntitle: View\n---",
+      "source_content_hash": "88f1700f68933c8bc1ed86186070da9dfa55fd9fbed72b461cde4efc2ff5b245",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The most fundamental component for building a UI, `View` is a container that supports layout with [flexbox](flexbox.md), [style](style.md), [some touch handling](handling-touches.md), and [accessibility](accessibility.md) controls. `View` maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a `UIView`, `<div>`, `android.view`, etc.",
+      "source_content_hash": "7685885f3188e5a1d4b19d6c5b48a8765ae4858e5009024899a45ae247d34d70",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "作為構建使用者介面最基礎的元件，`View` 是一個支援 [flexbox](flexbox.md) 佈局、[樣式](style.md)、[觸控處理](handling-touches.md) 和 [無障礙功能](accessibility.md) 控制的容器。`View` 會直接對應到 React Native 運行平台的原生視圖，無論是 `UIView`、`<div>` 還是 `android.view` 等。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`View` is designed to be nested inside other views and can have 0 to many children of any type.",
+      "source_content_hash": "bcea45e78d9d0b440a47b364ffe3d42f72e38d7edc1aaa96092a038e211ebc09",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`View` 設計用於嵌套在其他視圖中，可以包含 0 到多個任意類型的子元件。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "This example creates a `View` that wraps two boxes with color and a text component in a row with padding.",
+      "source_content_hash": "85c18aef27a0d211a455ba462b5f9344ef8083e4c2c0a808a38f6d63eeee9fa4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此範例建立了一個 `View`，其中包裝了兩個帶有顏色的方塊和一個文字元件，並以行排列且具有內邊距。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=View%20Example\nimport React from 'react';\nimport {View, Text} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst ViewBoxesWithColorAndText = () => {\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={{height: 100, flexDirection: 'row'}}>\n        <View style={{backgroundColor: 'blue', flex: 0.2}} />\n        <View style={{backgroundColor: 'red', flex: 0.4}} />\n        <Text>Hello World!</Text>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nexport default ViewBoxesWithColorAndText;\n```",
+      "source_content_hash": "a09976cd59b8789769bc83a07aab47abebb51ba7ae71a32e918fbc122f7902f0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "adb6a20b",
+      "source_content": "> `View`s are designed to be used with [`StyleSheet`](style.md) for clarity and performance, although inline styles are also supported.",
+      "source_content_hash": "1b949649000c130c72ce2d5060bfcd5032626af70c1e66d8e80762734af4afed",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 為了清晰度和效能，`View` 建議與 [`StyleSheet`](style.md) 一起使用，但也支援行內樣式。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "### Synthetic Touch Events",
+      "source_content_hash": "1281d718994a2ac704eee446ea6017e280aa751c63f7cd5db4e431f72fe46168",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 合成觸控事件"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "For `View` responder props (e.g., `onResponderMove`), the synthetic touch event passed to them are in form of [PressEvent](pressevent).",
+      "source_content_hash": "26ac6d4a28ea49d6f5a219678de5eb7f62ec4ccd7aaf46df803ea559e3bf449d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於 `View` 的回應器屬性（例如 `onResponderMove`），傳遞給它們的合成觸控事件是以 [PressEvent](pressevent) 的形式呈現。"
+      }
+    },
+    {
+      "segment_id": "91afe33f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "782c902a",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文檔"
+      }
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "d4e0d4e1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "### `accessibilityActions`",
+      "source_content_hash": "65ef3575ce8d838b086a5c2fd4b1081092142981debde17f9be061924f735a04",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityActions`"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.",
+      "source_content_hash": "54644c08572ef7e56bb3faee5c6bfecc2df56951e35195bb534e8886d86941e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無障礙操作允許輔助技術以程式化的方式呼叫元件的操作。`accessibilityActions` 屬性應包含一個操作物件列表，每個操作物件應包含名稱和標籤欄位。"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.",
+      "source_content_hash": "1ecfd1939abbd0b9fbbf4aca4dc411e396b37a95ea49c57fc68dbd30ca09d3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [無障礙功能指南](accessibility.md#accessibility-actions)。"
+      }
+    },
+    {
+      "segment_id": "84e35a30",
+      "source_content": "| Type  |\n| ----- |\n| array |",
+      "source_content_hash": "d367bc20920305bfca8041f5ae017ae39f43765585b7321d77aeb1d8a6108226",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_84e35a30"
+      }
+    },
+    {
+      "segment_id": "716da8e8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1a316f80",
+      "source_content": "### `accessibilityElementsHidden` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "8b639791d045d475b38fd218fc6159abd881965f18aaa0c7823d80e6e38eeeaa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityElementsHidden` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "A value indicating whether the accessibility elements contained within this accessibility element are hidden. Default is `false`.",
+      "source_content_hash": "b7e16d6e45256354027347bc5fba50aa36cc1adc21a86124945befbba3f023c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此值表示此無障礙元素內包含的無障礙元素是否隱藏。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilityelementshidden-ios) for more information.",
+      "source_content_hash": "341e5ab2bb6286b0356b084c3e2611f61297eead662ef7b313026239dc07bbc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [無障礙功能指南](accessibility.md#accessibilityelementshidden-ios)。"
+      }
+    },
+    {
+      "segment_id": "8dd718bb",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8dd718bb"
+      }
+    },
+    {
+      "segment_id": "ba96ee98",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ee8401db",
+      "source_content": "### `accessibilityHint`",
+      "source_content_hash": "bedd0a5bcd9baf72a419279154a2810f95389d1831588606f607037dbc93a9c3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityHint`"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.",
+      "source_content_hash": "a28e86300fde49260b1d879c349bbc48a31ed8492169472d6997c74c3c686cd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當操作無障礙元素的結果無法從無障礙標籤中明確理解時，無障礙提示可幫助使用者理解執行操作後會發生的情況。"
+      }
+    },
+    {
+      "segment_id": "0f41bcbd",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0f41bcbd"
+      }
+    },
+    {
+      "segment_id": "254ea949",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "3dc0369a4635cd2313255713560a12e19a44f4ce4fde6140a6d2611dd0e6277d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).",
+      "source_content_hash": "30d5b47298f6a63225a0c59bf266ad065d26e09236f44289899f9e6efbba48ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此值表示使用者與元素互動時，螢幕閱讀器應使用的語言。應遵循 [BCP 47 規範](https://www.rfc-editor.org/info/bcp47)。"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.",
+      "source_content_hash": "d68609535930b1a80996cf1b5fb093608182de99a22cb49da46805464549191d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [iOS `accessibilityLanguage` 文檔](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。"
+      }
+    },
+    {
+      "segment_id": "0d9b3b59",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0d9b3b59"
+      }
+    },
+    {
+      "segment_id": "233bb60e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "### `accessibilityIgnoresInvertColors` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "5a4ecceada547eee228617a551914cf78b1fd79d85367a9e6767e48b3a929fd5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityIgnoresInvertColors` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "A value indicating this view should or should not be inverted when color inversion is turned on. A value of `true` will tell the view to not be inverted even if color inversion is turned on.",
+      "source_content_hash": "83ba99c1aaefc96ad919d829c4effcb553c8a677298b46a4baf34a57359599e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此值表示當顏色反轉功能開啟時，此視圖是否應被反轉。值為 `true` 時，即使顏色反轉開啟，視圖也不會被反轉。"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilityignoresinvertcolors) for more information.",
+      "source_content_hash": "3ed23a00823b279fc70b62779d98453c4d7f2dbb511d5ebcd28c13515c8e037b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [無障礙功能指南](accessibility.md#accessibilityignoresinvertcolors)。"
+      }
+    },
+    {
+      "segment_id": "4661feaa",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4661feaa"
+      }
+    },
+    {
+      "segment_id": "647304fd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "71169a2d",
+      "source_content": "### `accessibilityLabel`",
+      "source_content_hash": "4f55de35ce0c561187344a423b6279d22ada7d874f880caef84af52c16646758",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLabel`"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.",
+      "source_content_hash": "1fe23ddffef265929fbb351e955236a65e9e36826519eac34bfbf70bcc254ae9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "覆寫螢幕閱讀器在使用者與元素互動時朗讀的文字。預設情況下，標籤是通過遍歷所有子元件並累積所有以空格分隔的 `Text` 節點來構建的。"
+      }
+    },
+    {
+      "segment_id": "99cd240c",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99cd240c"
+      }
+    },
+    {
+      "segment_id": "0c6c4220",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ab39e8a7",
+      "source_content": "### `accessibilityLiveRegion` <div class=\"label android\">Android</div>",
+      "source_content_hash": "5cdda930550e62093ac02f62d2f09c98464e5030fd777081629f5a9567e1095a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLiveRegion` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only. Possible values:",
+      "source_content_hash": "039a70bb26575c2255fb9af8e3332593de5fb074e3655c3b99b6068c1c75d03b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指示輔助技術服務是否應在該視圖變更時通知使用者。僅適用於 Android API ≥ 19。可能的值包括："
+      }
+    },
+    {
+      "segment_id": "2979d081",
+      "source_content": "- `'none'` - Accessibility services should not announce changes to this view.\n- `'polite'`- Accessibility services should announce changes to this view.\n- `'assertive'` - Accessibility services should interrupt ongoing speech to immediately announce changes to this view.",
+      "source_content_hash": "8c74ca797c0166059adc611972a5b423c307cb94b1b15f7d7281a76118ad5e0a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'none'` - 輔助技術服務不應宣佈此視圖的變更。\n- `'polite'` - 輔助技術服務應宣佈此視圖的變更。\n- `'assertive'` - 輔助技術服務應中斷正在進行的語音以立即宣佈此視圖的變更。"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "See the [Android `View` docs](https://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion) for reference.",
+      "source_content_hash": "6b66d9695ed311dfa946eddcd2d1ca83853ccd41f016e87fe6f69c8b00642f41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [Android `View` 文檔](https://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion) 參考。"
+      }
+    },
+    {
+      "segment_id": "aaf39b16",
+      "source_content": "| Type                                |\n| ----------------------------------- |\n| enum('none', 'polite', 'assertive') |",
+      "source_content_hash": "7cf8c80f85b7820c73d65585f44e44a9a9429a518fc3826fabf4e03b18d7339b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_aaf39b16"
+      }
+    },
+    {
+      "segment_id": "ce5ba214",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4dd6a631",
+      "source_content": "### `accessibilityRole`",
+      "source_content_hash": "caaf5bfb084952597e44b24f22d7d856e62e4f400b44dea56540dda8a44ce327",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityRole`"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "`accessibilityRole` communicates the purpose of a component to the user of an assistive technology.",
+      "source_content_hash": "8a2ec9f02b933d49470b73010d8dea30a3209e3075dc9d5719310d70c8f4b551",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityRole` 向輔助技術的使用者傳達組件的用途。"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "`accessibilityRole` can be one of the following:",
+      "source_content_hash": "ccd1687fa3de1781f489ea29d5281a6e2eca88bc1df0037fba2d4a0f69a7609b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityRole` 可以是以下之一："
+      }
+    },
+    {
+      "segment_id": "c7ff42af",
+      "source_content": "- `'none'` - Used when the element has no role.\n- `'button'` - Used when the element should be treated as a button.\n- `'link'` - Used when the element should be treated as a link.\n- `'search'` - Used when the text field element should also be treated as a search field.\n- `'image'` - Used when the element should be treated as an image. Can be combined with button or link, for example.\n- `'keyboardkey'` - Used when the element acts as a keyboard key.\n- `'text'` - Used when the element should be treated as static text that cannot change.\n- `'adjustable'` - Used when an element can be \"adjusted\" (e.g. a slider).\n- `'imagebutton'` - Used when the element should be treated as a button and is also an image.\n- `'header'` - Used when an element acts as a header for a content section (e.g. the title of a navigation bar).\n- `'summary'` - Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.\n- `'alert'` - Used when an element contains important text to be presented to the user.\n- `'checkbox'` - Used when an element represents a checkbox which can be checked, unchecked, or have mixed checked state.\n- `'combobox'` - Used when an element represents a combo box, which allows the user to select among several choices.\n- `'menu'` - Used when the component is a menu of choices.\n- `'menubar'` - Used when a component is a container of multiple menus.\n- `'menuitem'` - Used to represent an item within a menu.\n- `'progressbar'` - Used to represent a component which indicates progress of a task.\n- `'radio'` - Used to represent a radio button.\n- `'radiogroup'` - Used to represent a group of radio buttons.\n- `'scrollbar'` - Used to represent a scroll bar.\n- `'spinbutton'` - Used to represent a button which opens a list of choices.\n- `'switch'` - Used to represent a switch which can be turned on and off.\n- `'tab'` - Used to represent a tab.\n- `'tablist'` - Used to represent a list of tabs.\n- `'timer'` - Used to represent a timer.\n- `'toolbar'` - Used to represent a tool bar (a container of action buttons or components).\n- `'grid'` - Used with ScrollView, VirtualizedList, FlatList, or SectionList to represent a grid. Adds the in/out of grid announcements to the android GridView.",
+      "source_content_hash": "ad05ed73feed4c32dfa6bdf0b59a5361bfaf7cd3991611cf76c38d363cabd6e7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'none'` - 當元素沒有角色時使用。\n- `'button'` - 當元素應被視為按鈕時使用。\n- `'link'` - 當元素應被視為連結時使用。\n- `'search'` - 當文字輸入框元素也應被視為搜尋欄位時使用。\n- `'image'` - 當元素應被視為圖片時使用。可與按鈕或連結等結合使用。\n- `'keyboardkey'` - 當元素充當鍵盤按鍵時使用。\n- `'text'` - 當元素應被視為不可變的靜態文字時使用。\n- `'adjustable'` - 當元素可被「調整」時使用（例如滑桿）。\n- `'imagebutton'` - 當元素應被視為按鈕且同時是圖片時使用。\n- `'header'` - 當元素充當內容區段的標題時使用（例如導覽列的標題）。\n- `'summary'` - 當元素可用於提供應用程式啟動時當前條件的快速摘要時使用。\n- `'alert'` - 當元素包含需向使用者展示的重要文字時使用。\n- `'checkbox'` - 當元素代表可勾選、取消勾選或具有混合勾選狀態的核取方塊時使用。\n- `'combobox'` - 當元素代表允許使用者在多個選項中選擇的組合框時使用。\n- `'menu'` - 當組件是選單時使用。\n- `'menubar'` - 當組件是多個選單的容器時使用。\n- `'menuitem'` - 用於代表選單中的項目。\n- `'progressbar'` - 用於代表指示任務進度的組件。\n- `'radio'` - 用於代表單選按鈕。\n- `'radiogroup'` - 用於代表一組單選按鈕。\n- `'scrollbar'` - 用於代表捲軸。\n- `'spinbutton'` - 用於代表開啟選項列表的按鈕。\n- `'switch'` - 用於代表可開啟和關閉的開關。\n- `'tab'` - 用於代表標籤頁。\n- `'tablist'` - 用於代表標籤頁列表。\n- `'timer'` - 用於代表計時器。\n- `'toolbar'` - 用於代表工具列（動作按鈕或組件的容器）。\n- `'grid'` - 與 ScrollView、VirtualizedList、FlatList 或 SectionList 一起使用，代表網格。向 android GridView 添加網格內/外的宣告。"
+      }
+    },
+    {
+      "segment_id": "9fa6e97c",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9fa6e97c"
+      }
+    },
+    {
+      "segment_id": "7dfee470",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "16ae54ea",
+      "source_content": "### `accessibilityState`",
+      "source_content_hash": "0bdd4e063a84d12800f47b3af7a48f24aa490be3f0a319e622aaed8a851fab2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityState`"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "Describes the current state of a component to the user of an assistive technology.",
+      "source_content_hash": "4576e049d883460e0ff7e7dd3f7b85a4f38f84e0099a2bb344152f8eec3ebb39",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "向輔助技術的使用者描述組件的當前狀態。"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilitystate-ios-android) for more information.",
+      "source_content_hash": "10680687d8421799a58c492e7d60296aac3a1c078e5badaf202e48ef6e1b071e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [無障礙指南](accessibility.md#accessibilitystate-ios-android) 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "41321865",
+      "source_content": "| Type                                                                                             |\n| ------------------------------------------------------------------------------------------------ |\n| object: `{disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool}` |",
+      "source_content_hash": "48f561bf9dfffde8c33723842c6674368a56697076c0ebbc1d8ceb46b81ab410",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41321865"
+      }
+    },
+    {
+      "segment_id": "cdeffb11",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8d279c43",
+      "source_content": "### `accessibilityValue`",
+      "source_content_hash": "cbedf783dfb2e42529ea0760cf4fb5081d51852d680f7c8d8dc08d4608313921",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityValue`"
+      }
+    },
+    {
+      "segment_id": "e5821418",
+      "source_content": "Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).",
+      "source_content_hash": "61fa1e8e3b29a12c60a6750ced40d31b0b56fc0a3d1887b52febb19c162c04fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "代表組件的當前值。它可以是組件值的文字描述，或者對於基於範圍的組件（如滑桿和進度條），它包含範圍資訊（最小值、當前值和最大值）。"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilityvalue-ios-android) for more information.",
+      "source_content_hash": "daa9601fc0dde7afd885229abd529b327c006e1a571b1629308898111135e70d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [無障礙指南](accessibility.md#accessibilityvalue-ios-android) 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "24128ec4",
+      "source_content": "| Type                                                            |\n| --------------------------------------------------------------- |\n| object: `{min: number, max: number, now: number, text: string}` |",
+      "source_content_hash": "07335fcdd70c91e0b8c54c8da80316fb8f5af26782de018a8a2c76f2f176aca8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_24128ec4"
+      }
+    },
+    {
+      "segment_id": "dfdfd869",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6d75762",
+      "source_content": "### `accessibilityViewIsModal` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "9d761bcca9428aa4ecee978774f821177f7a41d1911e9dc98835f4b30b572737",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityViewIsModal` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "A value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Default is `false`.",
+      "source_content_hash": "1bfedaf2520f7771f0f300604512aa9491fc0e559d7f9b51045af2cd21ba72bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示 VoiceOver 是否應忽略接收器同層級視圖中的元素。預設值為 `false`。"
+      }
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilityviewismodal-ios) for more information.",
+      "source_content_hash": "dfcf6836b0da78070313c59fdcaf218781cd465c7ac3166f472ff07372650d71",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙功能指南](accessibility.md#accessibilityviewismodal-ios)獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "18e9d1c5",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_18e9d1c5"
+      }
+    },
+    {
+      "segment_id": "06b779bf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "428f235a",
+      "source_content": "### `accessible`",
+      "source_content_hash": "7e2f45d1c536354ff4e8f949668ed0b63fc433f315af4147b029c19a8259c830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessible`"
+      }
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "When `true`, indicates that the view is an accessibility element and discoverable by assistive technologies such as screen readers and hardware keyboards. By default, all the touchable elements are accessible.",
+      "source_content_hash": "67684ea408126607314aa81a29049dc12d865e454dc36fe5518e3da5a7c4dcf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為 `true` 時，表示該視圖是一個無障礙元素，可被輔助技術（如螢幕閱讀器和硬體鍵盤）發現。預設情況下，所有可觸控元素都具有無障礙特性。"
+      }
+    },
+    {
+      "segment_id": "eeeea5ce",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessible) for more information.",
+      "source_content_hash": "8598755623d761d0648bbc6b7cce5012a064c200e1de044b8b2f3689488ff59f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙功能指南](accessibility.md#accessible)獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "a025b260",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ba4aa94e",
+      "source_content": "### `aria-busy`",
+      "source_content_hash": "2d7129d4b1ef33f5fb6834bebc39064f979bb22c9bc9b432d1ffa601bfefff8b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-busy`"
+      }
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.",
+      "source_content_hash": "9def7a899263ea015f97bf76a19b3117a2428cfbc7774a4282235a04d4019b9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素正在被修改，輔助技術可能需要等待變更完成後再通知使用者更新。"
+      }
+    },
+    {
+      "segment_id": "12cbb2c8",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12cbb2c8"
+      }
+    },
+    {
+      "segment_id": "fe7bdddf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "950e5c6c",
+      "source_content": "### `aria-checked`",
+      "source_content_hash": "1ddb4bac483133b13df7ffe6a86f8c816c15f58317a05c6dee8e7f6727d4ae29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-checked`"
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "Indicates the state of a checkable element. This field can either take a boolean or the \"mixed\" string to represent mixed checkboxes.",
+      "source_content_hash": "ee00810ca9f60817dfa81860d77c913a25c1592c90cdf81625831248bece7011",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可勾選元素的狀態。此屬性可接受布林值或 \"mixed\" 字串來表示混合狀態的核取方塊。"
+      }
+    },
+    {
+      "segment_id": "46f9cb25",
+      "source_content": "| Type             | Default |\n| ---------------- | ------- |\n| boolean, 'mixed' | false   |",
+      "source_content_hash": "35b713c4cc986c8b8e7daf0a70768426bc9f94663f227376941544b0bdd30e2d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_46f9cb25"
+      }
+    },
+    {
+      "segment_id": "40f71b18",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5e300688",
+      "source_content": "### `aria-disabled`",
+      "source_content_hash": "8f594923bce023c64d4fc2aee2a4c42ab34f87bdf7415694cb7ad9c12af72aa9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-disabled`"
+      }
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.",
+      "source_content_hash": "1e3ab9d887f87e2c70b2de3b929d2b081abf17a414c68440a3b6e9ffaa05ad16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素可感知但處於禁用狀態，因此不可編輯或操作。"
+      }
+    },
+    {
+      "segment_id": "972686b4",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_972686b4"
+      }
+    },
+    {
+      "segment_id": "f0644895",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4147aea6",
+      "source_content": "### `aria-expanded`",
+      "source_content_hash": "81570a1ec92ab2059c46a439c874fa3f93ee6f66baf451ea9c6aa69ca5e98e20",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-expanded`"
+      }
+    },
+    {
+      "segment_id": "43287462",
+      "source_content": "Indicates whether an expandable element is currently expanded or collapsed.",
+      "source_content_hash": "2ab2df61a604dfe4bc68b1ebd36184ebc1de1bce603f5c9ce5e00d563309e8fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可展開元素當前是展開還是折疊狀態。"
+      }
+    },
+    {
+      "segment_id": "cee68c12",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cee68c12"
+      }
+    },
+    {
+      "segment_id": "decc5f7c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6beaa586",
+      "source_content": "### `aria-hidden`",
+      "source_content_hash": "d4c26b2e1464907f95cce749168fccf41fc5dadf72126e6ef7f2dbb323854798",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-hidden`"
+      }
+    },
+    {
+      "segment_id": "41e7f712",
+      "source_content": "Indicates whether the accessibility elements contained within this accessibility element are hidden.",
+      "source_content_hash": "1e97043f98e2a14fd64bbc6e6ff804be4e39b6ed0f817070ba6b595a1c9004b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示此無障礙元素中包含的子無障礙元素是否隱藏。"
+      }
+    },
+    {
+      "segment_id": "15d5abf0",
+      "source_content": "For example, in a window that contains sibling views `A` and `B`, setting `aria-hidden` to `true` on view `B` causes VoiceOver to ignore the elements in the view `B`.",
+      "source_content_hash": "eaba936be96810eeeb0e184dcdceb6bd51e24052c28e664ee678b5bdf7496089",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在包含同層級視圖 `A` 和 `B` 的視窗中，將視圖 `B` 的 `aria-hidden` 設為 `true` 會導致 VoiceOver 忽略視圖 `B` 中的元素。"
+      }
+    },
+    {
+      "segment_id": "8f6a7793",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f6a7793"
+      }
+    },
+    {
+      "segment_id": "55e0e60b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "66a437ee",
+      "source_content": "### `aria-label`",
+      "source_content_hash": "a00fb48b33ddc9a416be3c695411699edb748552c762cabf3a218884fefccd94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-label`"
+      }
+    },
+    {
+      "segment_id": "bb5297fc",
+      "source_content": "Defines a string value that labels an interactive element.",
+      "source_content_hash": "833b7b7f2013c4efe8f0db65c63e6d4cfb1ff08cf03b33a641e54d5f17f9dffb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義標記互動元素的字串值。"
+      }
+    },
+    {
+      "segment_id": "93d30302",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93d30302"
+      }
+    },
+    {
+      "segment_id": "34c51f55",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "846134ef",
+      "source_content": "### `aria-labelledby` <div class=\"label android\">Android</div>",
+      "source_content_hash": "5499c13496fe4a3557abb9db1e97ecbed645d76a3f01694fcfdbdcaf6ab2a077",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-labelledby` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "53e725dc",
+      "source_content": "Identifies the element that labels the element it is applied to. The value of `aria-labelledby` should match the [`nativeID`](view.md#nativeid) of the related element:",
+      "source_content_hash": "77075d4aa1a3431c837448a7baaec7bfc3caefcc2a728f19459d3c1370dc34fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "標識用於標記當前元素的關聯元素。`aria-labelledby` 的值應與關聯元素的 [`nativeID`](view.md#nativeid) 匹配："
+      }
+    },
+    {
+      "segment_id": "79d8cec2",
+      "source_content": "```tsx\n<View>\n  <Text nativeID=\"formLabel\">Label for Input Field</Text>\n  <TextInput aria-label=\"input\" aria-labelledby=\"formLabel\" />\n</View>\n```",
+      "source_content_hash": "aba19bc1dbd23c461440ff7e22dea0e3555072691187b520bd542278a1fc310b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_79d8cec2"
+      }
+    },
+    {
+      "segment_id": "bbaaf77a",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bbaaf77a"
+      }
+    },
+    {
+      "segment_id": "516c4835",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f3fc8281",
+      "source_content": "### `aria-live` <div class=\"label android\">Android</div>",
+      "source_content_hash": "f3312596850f0827d3fdf53dfd4a95697596454838b31d16a1febf1da3121199",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-live` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "60e22db4",
+      "source_content": "Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.",
+      "source_content_hash": "90cc9783b52ded41df83aeb94fef0311fcd5ab10744da7efad50079dfdd293d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素將被更新，並描述使用者代理、輔助技術和使用者可預期的即時區域更新類型。"
+      }
+    },
+    {
+      "segment_id": "af22f0d4",
+      "source_content": "- **off** Accessibility services should not announce changes to this view.\n- **polite** Accessibility services should announce changes to this view.\n- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.",
+      "source_content_hash": "882da3a0dee3132a4ba00ff12a4c11adf6f959862f7f55b263c736938fc43de2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **off** 無障礙服務不應宣佈此視圖的變更。\n- **polite** 無障礙服務應宣佈此視圖的變更。\n- **assertive** 無障礙服務應中斷當前語音以立即宣佈此視圖的變更。"
+      }
+    },
+    {
+      "segment_id": "2b6d6f41",
+      "source_content": "| Type                                     | Default |\n| ---------------------------------------- | ------- |\n| enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |",
+      "source_content_hash": "9e10cf9f97d738bb2a59906cd28b1029beeb84caf7305cc24ec051b828ddff09",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2b6d6f41"
+      }
+    },
+    {
+      "segment_id": "1864a9c0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b8925cfb",
+      "source_content": "### `aria-modal` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "fd30cd3cb003f3b9bc19dbb07333c9989bdd5fbeb01277c1c64d7da833f00d46",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-modal` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "95b3e282",
+      "source_content": "Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Has precedence over the [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) prop.",
+      "source_content_hash": "0b526a70a89fae1b6f5afdb39343912b714d21a3becd46bb77a94d301f764ea7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "布林值，表示 VoiceOver 是否應忽略接收器同層級視圖中的元素。優先級高於 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 屬性。"
+      }
+    },
+    {
+      "segment_id": "d01dc4cd",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d01dc4cd"
+      }
+    },
+    {
+      "segment_id": "f6da3fad",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8e437dbf",
+      "source_content": "### `aria-selected`",
+      "source_content_hash": "326fe630abddf06fe498f4b493ea8e9261d66db3bfa8efffa30fa552d22d6d9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-selected`"
+      }
+    },
+    {
+      "segment_id": "c9f6a516",
+      "source_content": "Indicates whether a selectable element is currently selected or not.",
+      "source_content_hash": "b454a16cf5dc03042d2fe609cc3ba01bec5a1a44d18fd14c1bc66a587d206836",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可選元素當前是否被選中。"
+      }
+    },
+    {
+      "segment_id": "151606e1",
+      "source_content": "| Type    |\n| ------- |\n| boolean |",
+      "source_content_hash": "afc5252fe97c3b4645cc839e72fb23555baeef211698715abd6b5ac8ee57a841",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_151606e1"
+      }
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### `aria-valuemax`",
+      "source_content_hash": "268b14b5873da3a2ac33edc44653ce7676fe0fbfa2e4570e4691a715c3daec34",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuemax`"
+      }
+    },
+    {
+      "segment_id": "71e7acda",
+      "source_content": "Represents the maximum value for range-based components, such as sliders and progress bars. Has precedence over the `max` value in the `accessibilityValue` prop.",
+      "source_content_hash": "e1e5ed89d35814992f63b13daf583152823d271fa142859d286a94cc9831d7d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示範圍型元件（如滑塊和進度條）的最大值。優先級高於 `accessibilityValue` 屬性中的 `max` 值。"
+      }
+    },
+    {
+      "segment_id": "4d025145",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d025145"
+      }
+    },
+    {
+      "segment_id": "705d5eb7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7737b8a",
+      "source_content": "### `aria-valuemin`",
+      "source_content_hash": "fb609f8a26b7b2db2702e6b1d5c22b47611f76e14338579d02042e8a807e7849",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuemin`"
+      }
+    },
+    {
+      "segment_id": "7441a9ec",
+      "source_content": "Represents the minimum value for range-based components, such as sliders and progress bars. Has precedence over the `min` value in the `accessibilityValue` prop.",
+      "source_content_hash": "671c8fef48a27885f827dc63fa2c9827743c608f184dfaf5043bac56edcb567e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示範圍型元件（如滑塊和進度條）的最小值。優先級高於 `accessibilityValue` 屬性中的 `min` 值。"
+      }
+    },
+    {
+      "segment_id": "38c1f9c1",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_38c1f9c1"
+      }
+    },
+    {
+      "segment_id": "1d2e0593",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "06c38a62",
+      "source_content": "### `aria-valuenow`",
+      "source_content_hash": "7665766428ab6cf85136a07811d232bded83d8a46ba7ead882db0b0e4c7052e7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuenow`"
+      }
+    },
+    {
+      "segment_id": "b3b952f2",
+      "source_content": "Represents the current value for range-based components, such as sliders and progress bars. Has precedence over the `now` value in the `accessibilityValue` prop.",
+      "source_content_hash": "33e9d495e5d7ea2ef965c17574518057894857d445576a57b1728bdbb7aa93c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示範圍型元件（如滑塊和進度條）的當前值。優先級高於 `accessibilityValue` 屬性中的 `now` 值。"
+      }
+    },
+    {
+      "segment_id": "404cc48b",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_404cc48b"
+      }
+    },
+    {
+      "segment_id": "d73211d9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "505664a6",
+      "source_content": "### `aria-valuetext`",
+      "source_content_hash": "dcace833d7618c1dc715194f717363e7d44fe1fe6906b36433799e44fb375dbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuetext`"
+      }
+    },
+    {
+      "segment_id": "3d5e3f4c",
+      "source_content": "Represents the textual description of the component. Has precedence over the `text` value in the `accessibilityValue` prop.",
+      "source_content_hash": "04a48d11400f6d569938273bf5dc073c0ffa0ce68e1f372069b1b2c2981fc8fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元件的文字描述。優先級高於 `accessibilityValue` 屬性中的 `text` 值。"
+      }
+    },
+    {
+      "segment_id": "210748fa",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_210748fa"
+      }
+    },
+    {
+      "segment_id": "8ec80a23",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dbf99e1b",
+      "source_content": "### `collapsable`",
+      "source_content_hash": "55afdf44a574993c9ccae1fa9ccf575dab09bfcc082b75796c4bbeabaab9c732",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `collapsable`"
+      }
+    },
+    {
+      "segment_id": "d04a3ef5",
+      "source_content": "Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization. Set this property to `false` to disable this optimization and ensure that this `View` exists in the native view hierarchy.",
+      "source_content_hash": "b571a4139ea15c44d3c2664026545e553fd343b8297980c42f9fe52f057a5515",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅用於佈局子元件或不繪製任何內容的視圖，可能會作為優化被自動從原生層級中移除。將此屬性設為 `false` 可禁用此優化，確保該 `View` 存在於原生視圖層級中。"
+      }
+    },
+    {
+      "segment_id": "7ac51ca9",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | true    |",
+      "source_content_hash": "99e5c4979cc525dddeb1bc1897e28dbda5a408d4014ddbfe3e51c5011558eb34",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7ac51ca9"
+      }
+    },
+    {
+      "segment_id": "561c22a6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f7420cb5",
+      "source_content": "### `collapsableChildren`",
+      "source_content_hash": "2613e027ee7de8571ce4aa522613a9dcafb8c3513ad85b17c32c572b5915ccf4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `collapsableChildren`"
+      }
+    },
+    {
+      "segment_id": "dbea1fe8",
+      "source_content": "Setting to false prevents direct children of the view from being removed from the native view hierarchy, similar to the effect of setting `collapsable={false}` on each child.",
+      "source_content_hash": "dfe23c7488ba077760a1604dfb853f61af69a210ba6dcc9c57edf6bf1ce1b411",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 false 可防止該視圖的直接子元件被從原生視圖層級中移除，效果類似於對每個子元件設置 `collapsable={false}`。"
+      }
+    },
+    {
+      "segment_id": "9e2a39e2",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | true    |",
+      "source_content_hash": "99e5c4979cc525dddeb1bc1897e28dbda5a408d4014ddbfe3e51c5011558eb34",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9e2a39e2"
+      }
+    },
+    {
+      "segment_id": "1da485f4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b98aff93",
+      "source_content": "### `focusable` <div class=\"label android\">Android</div>",
+      "source_content_hash": "4464384b0374ea3104eb0ae3fb970379983e4a02fdbc8026cc8365db4e33a149",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `focusable` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.",
+      "source_content_hash": "8156820fbae4fad61a9cff9524f5f446dcba870e1837f3cae67d23a487e83307",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定此 `View` 是否可透過非觸控輸入設備（如硬體鍵盤）獲取焦點。"
+      }
+    },
+    {
+      "segment_id": "7c1adbed",
+      "source_content": "| Type    |\n| ------- |\n| boolean |",
+      "source_content_hash": "afc5252fe97c3b4645cc839e72fb23555baeef211698715abd6b5ac8ee57a841",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7c1adbed"
+      }
+    },
+    {
+      "segment_id": "2b9eaaff",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "811ba0cd",
+      "source_content": "### `hitSlop`",
+      "source_content_hash": "26286f73e2dd5a9f4368223cf673cd055081b64745da2d570610b1325f508d40",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hitSlop`"
+      }
+    },
+    {
+      "segment_id": "639926e9",
+      "source_content": "This defines how far a touch event can start away from the view. Typical interface guidelines recommend touch targets that are at least 30 - 40 points/density-independent pixels.",
+      "source_content_hash": "260a61995ef44366cf7e423ff3dec97d30399002c0dfb087138971d22661953c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義觸控事件可從視圖外多遠處開始觸發。典型的介面指南建議觸控目標至少為 30-40 點/密度無關像素。"
+      }
+    },
+    {
+      "segment_id": "85f6fcdd",
+      "source_content": "For example, if a touchable view has a height of 20 the touchable height can be extended to 40 with `hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}`",
+      "source_content_hash": "f045b1cb00d20b85d8e042653f9516f5e9c9369141735e8cb657287f53d10181",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，若可觸控視圖高度為 20，可透過 `hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}` 將可觸控高度擴展至 40。"
+      }
+    },
+    {
+      "segment_id": "23a11560",
+      "source_content": "> The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.",
+      "source_content_hash": "d9c7f6d80c2b26318c9698ec385b8d9c6c10aa0cb4ff485369aa6bdc5ba9cb7e",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 觸控區域永遠不會超出父視圖邊界，且當觸控命中兩個重疊視圖時，兄弟視圖的 Z-index 永遠具有優先權。"
+      }
+    },
+    {
+      "segment_id": "b56f3214",
+      "source_content": "| Type                                                                 |\n| -------------------------------------------------------------------- |\n| object: `{top: number, left: number, bottom: number, right: number}` |",
+      "source_content_hash": "8be6d1f7fdf7e8ca7e415188404c72bf26d248c35d62c81da91b3c54c8f1b16e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b56f3214"
+      }
+    },
+    {
+      "segment_id": "1ee22564",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "72965517",
+      "source_content": "### `id`",
+      "source_content_hash": "6fa10ecc5949d933365af59824901f344e8a5ed1c7d28cb9c17847fab685f567",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `id`"
+      }
+    },
+    {
+      "segment_id": "ce99c217",
+      "source_content": "Used to locate this view from native classes. Has precedence over `nativeID` prop.",
+      "source_content_hash": "b1f221b4237abebd1e42435c2134aa33180a39a644824e2a8c74a90e98dfe692",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於從原生類定位此視圖。優先級高於 `nativeID` 屬性。"
+      }
+    },
+    {
+      "segment_id": "082302ac",
+      "source_content": "> This disables the 'layout-only view removal' optimization for this view!",
+      "source_content_hash": "69be33f7c36a1a48908246e08c63d189dc2007827532e02af519c86230e4aef1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 這會禁用此視圖的「僅佈局視圖移除」優化！"
+      }
+    },
+    {
+      "segment_id": "f9b68d1b",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f9b68d1b"
+      }
+    },
+    {
+      "segment_id": "2d96236e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "52c6a5e7",
+      "source_content": "### `importantForAccessibility` <div class=\"label android\">Android</div>",
+      "source_content_hash": "f413cedbdd567de916fc5bcb2191d96efb53743cb0ea6a3bc872cc6ac6f6696c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `importantForAccessibility` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "a279d6f8",
+      "source_content": "Controls how view is important for accessibility which is if it fires accessibility events and if it is reported to accessibility services that query the screen. Works for Android only.",
+      "source_content_hash": "3836ad7020e4262d7d697e82606d6ea47a040bc51dcf4243a02062b8416a0e3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制視圖對無障礙功能的重要性，決定是否觸發無障礙事件及是否回報給查詢螢幕的無障礙服務。僅適用於 Android。"
+      }
+    },
+    {
+      "segment_id": "033308da",
+      "source_content": "Possible values:",
+      "source_content_hash": "60baf39ad7be5ed682b1ddf8115127dee8c77351019a0432acc3fd5f1fbdb1ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可能的值："
+      }
+    },
+    {
+      "segment_id": "94946c67",
+      "source_content": "- `'auto'` - The system determines whether the view is important for accessibility - default (recommended).\n- `'yes'` - The view is important for accessibility.\n- `'no'` - The view is not important for accessibility.\n- `'no-hide-descendants'` - The view is not important for accessibility, nor are any of its descendant views.",
+      "source_content_hash": "6426227fd9aff00c8a9b558692f1eb56a2dcff3fb35b420e24105a6a5ca274ba",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'auto'` - 由系統決定該視圖是否對無障礙功能重要 - 預設值（推薦）。\n- `'yes'` - 該視圖對無障礙功能重要。\n- `'no'` - 該視圖對無障礙功能不重要。\n- `'no-hide-descendants'` - 該視圖及其所有子視圖對無障礙功能都不重要。"
+      }
+    },
+    {
+      "segment_id": "df64d276",
+      "source_content": "See the [Android `importantForAccessibility` docs](https://developer.android.com/reference/android/R.attr.html#importantForAccessibility) for reference.",
+      "source_content_hash": "fdd64e5e5ca1c00a4e54dc34f528ad1caf515e0c7d03f17d16ccfe94c7d0697e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [Android `importantForAccessibility` 文檔](https://developer.android.com/reference/android/R.attr.html#importantForAccessibility) 以獲取參考。"
+      }
+    },
+    {
+      "segment_id": "5e57cf71",
+      "source_content": "| Type                                             |\n| ------------------------------------------------ |\n| enum('auto', 'yes', 'no', 'no-hide-descendants') |",
+      "source_content_hash": "a9c4851263b28b946086fe24bc6bc1b4cbe3192a9dbdd1ff1b0e05c0f28f7fea",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5e57cf71"
+      }
+    },
+    {
+      "segment_id": "c18bd29f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ccaaddaa",
+      "source_content": "### `nativeID`",
+      "source_content_hash": "157dbabe7da1e6477d223af8aea3d0045181cfaad08511e049648be26c80d1c8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nativeID`"
+      }
+    },
+    {
+      "segment_id": "e99b1eb5",
+      "source_content": "Used to locate this view from native classes.",
+      "source_content_hash": "8d4c954ccffdf7b5e5f880d2fc9d10356f6cd2974baff918b6a72fcb5f06c685",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於從原生類別中定位此視圖。"
+      }
+    },
+    {
+      "segment_id": "ce51b710",
+      "source_content": "> This disables the 'layout-only view removal' optimization for this view!",
+      "source_content_hash": "69be33f7c36a1a48908246e08c63d189dc2007827532e02af519c86230e4aef1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 這會禁用該視圖的「僅佈局視圖移除」優化！"
+      }
+    },
+    {
+      "segment_id": "9ca71e68",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9ca71e68"
+      }
+    },
+    {
+      "segment_id": "66bc07c8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "95a0af4d",
+      "source_content": "### `needsOffscreenAlphaCompositing`",
+      "source_content_hash": "673f3aca55d67e453d899684564b4028812f2d026b5f2c6be4c9a68a36615020",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `needsOffscreenAlphaCompositing`"
+      }
+    },
+    {
+      "segment_id": "0d8c3e6f",
+      "source_content": "Whether this `View` needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior. The default (`false`) falls back to drawing the component and its children with an alpha applied to the paint used to draw each element instead of rendering the full component offscreen and compositing it back with an alpha value. This default may be noticeable and undesired in the case where the `View` you are setting an opacity on has multiple overlapping elements (e.g. multiple overlapping `View`s, or text and a background).",
+      "source_content_hash": "d8d682e8fbf607cac0b3d9a687335a2ad383b6f1bd2783a21924c30b53458864",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此 `View` 是否需要離屏渲染並以 alpha 值合成，以保留 100% 正確的顏色和混合行為。預設值 (`false`) 會改為在繪製每個元素時，將 alpha 值應用於繪製用的顏料，而非將整個元件離屏渲染後再以 alpha 值合成回來。在您設置透明度的 `View` 包含多個重疊元素（例如多個重疊的 `View`，或文字與背景）的情況下，這種預設行為可能會引起注意且不符合預期。"
+      }
+    },
+    {
+      "segment_id": "b13a021c",
+      "source_content": "Rendering offscreen to preserve correct alpha behavior is extremely expensive and hard to debug for non-native developers, which is why it is not turned on by default. If you do need to enable this property for an animation, consider combining it with renderToHardwareTextureAndroid if the view **contents** are static (i.e. it doesn't need to be redrawn each frame). If that property is enabled, this View will be rendered off-screen once, saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.",
+      "source_content_hash": "4b1d597eca261f21d948869a32c7f6fc41f9afcf828378d842bb53abda2adb29",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "離屏渲染以保留正確的 alpha 行為非常耗費資源，且對非原生開發者難以調試，因此預設不啟用。如果您確實需要為動畫啟用此屬性，考慮將其與 renderToHardwareTextureAndroid 結合使用（前提是視圖**內容**是靜態的，即不需要每幀重新繪製）。若啟用該屬性，此 View 將被離屏渲染一次，保存為硬體紋理，然後每幀以 alpha 值合成到螢幕上，無需在 GPU 上切換渲染目標。"
+      }
+    },
+    {
+      "segment_id": "ba3a2bf5",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ba3a2bf5"
+      }
+    },
+    {
+      "segment_id": "96665a9b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9f33b63d",
+      "source_content": "### `nextFocusDown` <div class=\"label android\">Android</div>",
+      "source_content_hash": "6c0f648a65e640cdf3531c93e81e4e4bf86167850217eced7d4d8a312ba28e5e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusDown` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "ceff655b",
+      "source_content": "Designates the next view to receive focus when the user navigates down. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown).",
+      "source_content_hash": "0e8683f645404059fe158a143f08f2bc1a0ba67190efa4448fe8b0553de1e224",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定用戶向下導航時下一個獲得焦點的視圖。詳見 [Android 文檔](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown)。"
+      }
+    },
+    {
+      "segment_id": "b49b9038",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b49b9038"
+      }
+    },
+    {
+      "segment_id": "f6c300a0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a06e043d",
+      "source_content": "### `nextFocusForward` <div class=\"label android\">Android</div>",
+      "source_content_hash": "6eacec870a936a6705b4999288a87caa5d5caa4c9d1396f395f94449f5ae86f0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusForward` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "57450780",
+      "source_content": "Designates the next view to receive focus when the user navigates forward. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward).",
+      "source_content_hash": "4d5b1c424c4f91d4cfa529c114ad826800353f8ca707d02cb5a98205657a3a47",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定用戶向前導航時下一個獲得焦點的視圖。詳見 [Android 文檔](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward)。"
+      }
+    },
+    {
+      "segment_id": "a8cf921f",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a8cf921f"
+      }
+    },
+    {
+      "segment_id": "7b4974cb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c089b41f",
+      "source_content": "### `nextFocusLeft` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1577e315578ad89d5cdb59d09b3dbc72703f411b765251d9d0b700bb8ae13145",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusLeft` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "beec49ed",
+      "source_content": "Designates the next view to receive focus when the user navigates left. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft).",
+      "source_content_hash": "ce95af2593639551f5f3ba04adbf3358ce44441c73c318be927eef4582c9ee17",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定用戶向左導航時下一個獲得焦點的視圖。詳見 [Android 文檔](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft)。"
+      }
+    },
+    {
+      "segment_id": "a93da900",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a93da900"
+      }
+    },
+    {
+      "segment_id": "f3ef0910",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a8b7718a",
+      "source_content": "### `nextFocusRight` <div class=\"label android\">Android</div>",
+      "source_content_hash": "62f0d601a1406d71088f6b2d7686d341b1da264341960f14c72d56f27f3dbb23",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusRight` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "865bbe8d",
+      "source_content": "Designates the next view to receive focus when the user navigates right. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight).",
+      "source_content_hash": "98e9034174a8face809d35b92bea95a98731d566641bcff0e8be5f15db73edd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定用戶向右導航時下一個獲得焦點的視圖。詳見 [Android 文檔](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight)。"
+      }
+    },
+    {
+      "segment_id": "6daad168",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6daad168"
+      }
+    },
+    {
+      "segment_id": "cf10381f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e6791c87",
+      "source_content": "### `nextFocusUp` <div class=\"label android\">Android</div>",
+      "source_content_hash": "26e8f90af8fafb9d9947e19e5488a2c9d55bef505e8941dfd022e51fbb3711fe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusUp` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "698d0e82",
+      "source_content": "Designates the next view to receive focus when the user navigates up. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp).",
+      "source_content_hash": "08e80b27c4cbf9b964f4be6abb09762cdab9077037c5b9029f229aadb5fcd743",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定用戶向上導航時下一個獲得焦點的視圖。詳見 [Android 文檔](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp)。"
+      }
+    },
+    {
+      "segment_id": "281d7c07",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_281d7c07"
+      }
+    },
+    {
+      "segment_id": "a6585120",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8d5b0d96",
+      "source_content": "### `onAccessibilityAction`",
+      "source_content_hash": "dc1fa5441c72b99fa55a0422042b127dc29f5dd2504f564005575aac5f2ced8d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onAccessibilityAction`"
+      }
+    },
+    {
+      "segment_id": "8a5228e1",
+      "source_content": "Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.",
+      "source_content_hash": "697cf8f7f183845f1281ba73335775299a1c74a3ef55ce41be43edc49c2c5c8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當用戶執行無障礙操作時觸發。此函數的唯一參數是一個包含要執行操作名稱的事件對象。"
+      }
+    },
+    {
+      "segment_id": "9dd7d40a",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.",
+      "source_content_hash": "1ecfd1939abbd0b9fbbf4aca4dc411e396b37a95ea49c57fc68dbd30ca09d3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙功能指南](accessibility.md#accessibility-actions)獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "4de17b7e",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4de17b7e"
+      }
+    },
+    {
+      "segment_id": "016f094c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5898a953",
+      "source_content": "### `onAccessibilityEscape` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "9db7c462cb9fd4a93d355e29e1ade46b6574b8d1e2f1fc1b18cf2bf05f13e886",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onAccessibilityEscape` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "b20523b9",
+      "source_content": "When `accessible` is `true`, the system will invoke this function when the user performs the escape gesture.",
+      "source_content_hash": "0ca33e28bdbdaa4db7f0e4930720b2bb143a37ebe0c1607ee0e6d1aabbe478fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當`accessible`設為`true`時，用戶執行escape手勢時系統將調用此函數。"
+      }
+    },
+    {
+      "segment_id": "8bd8e253",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8bd8e253"
+      }
+    },
+    {
+      "segment_id": "175968af",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "77698b3b",
+      "source_content": "### `onAccessibilityTap` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "f65dac607f9f4ca4b0269f998b74e40da3c5abc6880ea84e8685e2619c804474",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onAccessibilityTap` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "aad65e01",
+      "source_content": "When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.",
+      "source_content_hash": "32f610a380368874336abf193eb44430a28bcd7a286006e7902574905cf21604",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當`accessible`為true時，用戶執行無障礙點擊手勢時系統會嘗試調用此函數。"
+      }
+    },
+    {
+      "segment_id": "4542eb77",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4542eb77"
+      }
+    },
+    {
+      "segment_id": "c7c49a13",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "35630ad1",
+      "source_content": "### `onLayout`",
+      "source_content_hash": "4003ab8e4c09c2b682ab13f81e81b2827452db77e43f86621b1c3c7107f873ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLayout`"
+      }
+    },
+    {
+      "segment_id": "99cb8892",
+      "source_content": "Invoked on mount and on layout changes.",
+      "source_content_hash": "290f35b58ac09874c73cf9c19bd00bc7285f2b644910877c66249e1c5fe2aa8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在組件掛載和佈局變化時觸發。"
+      }
+    },
+    {
+      "segment_id": "e6bf9a6c",
+      "source_content": "This event is fired immediately once the layout has been calculated, but the new layout may not yet be reflected on the screen at the time the event is received, especially if a layout animation is in progress.",
+      "source_content_hash": "8c3d35aa7b396cef37338525da253991ff962beea5aec16069ee3e1ea7a1f3d6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該事件在佈局計算完成後立即觸發，但新的佈局可能尚未在屏幕上顯示，特別是在佈局動畫進行期間。"
+      }
+    },
+    {
+      "segment_id": "d6b7b8e8",
+      "source_content": "| Type                                                     |\n| -------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |",
+      "source_content_hash": "53882e7a75b7789bb4eca313c0bfd12b1d730533fe194f44b12dee8209224cb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d6b7b8e8"
+      }
+    },
+    {
+      "segment_id": "9df94287",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "56163162",
+      "source_content": "### `onMagicTap` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "a271f4e5397b5f2522fc34f1e2f19d58dfa9407ced57bf7bbaa56c6ea5187c84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMagicTap` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "055b8b01",
+      "source_content": "When `accessible` is `true`, the system will invoke this function when the user performs the magic tap gesture.",
+      "source_content_hash": "077e1307de19a7f63e47453ba38d2851b982965878ea13a691fc6cc614e86956",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當`accessible`設為`true`時，用戶執行magic tap手勢時系統將調用此函數。"
+      }
+    },
+    {
+      "segment_id": "f424ff70",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f424ff70"
+      }
+    },
+    {
+      "segment_id": "a5071eaf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "829d38a7",
+      "source_content": "### `onMoveShouldSetResponder`",
+      "source_content_hash": "5858e40f5992d3eb08bf5fcfe350f288edb6984f729337fcd64b68e161445fc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMoveShouldSetResponder`"
+      }
+    },
+    {
+      "segment_id": "c25bcc17",
+      "source_content": "Does this view want to \"claim\" touch responsiveness? This is called for every touch move on the `View` when it is not the responder.",
+      "source_content_hash": "1a5a0b77d1869f52708184db61b70aa1d2322849ef2fcc110bc18e077cfbc4cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該視圖是否想「聲明」觸控響應？當視圖不是響應者時，每次觸控移動都會調用此函數。"
+      }
+    },
+    {
+      "segment_id": "1fd92352",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1fd92352"
+      }
+    },
+    {
+      "segment_id": "2c952db0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0621a2c6",
+      "source_content": "### `onMoveShouldSetResponderCapture`",
+      "source_content_hash": "0c3580fb2f0f18e76227961d9eb4519d07998d074091a9c0a527721566bffebe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMoveShouldSetResponderCapture`"
+      }
+    },
+    {
+      "segment_id": "36a7c2db",
+      "source_content": "If a parent `View` wants to prevent a child `View` from becoming responder on a move, it should have this handler which returns `true`.",
+      "source_content_hash": "e250d69804e3a041d639c495410805f1271065387d520e21c2fe949f5d80be5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若父視圖想阻止子視圖在移動時成為響應者，應設置此處理函數並返回`true`。"
+      }
+    },
+    {
+      "segment_id": "2bd3d81f",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2bd3d81f"
+      }
+    },
+    {
+      "segment_id": "e14bc8f3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6c37027",
+      "source_content": "### `onResponderGrant`",
+      "source_content_hash": "1e5b237268a2d87bfba9fb9638d2c3b7347450faa4204a487f9731187f943d9b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderGrant`"
+      }
+    },
+    {
+      "segment_id": "37090b28",
+      "source_content": "The View is now responding for touch events. This is the time to highlight and show the user what is happening.",
+      "source_content_hash": "19e26e4103c0ae6bf8bd25546063209ede5c9c3ca72cedf3c9bb849cd2e69616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該視圖現在開始響應觸控事件。此時應高亮顯示並向用戶展示正在發生的操作。"
+      }
+    },
+    {
+      "segment_id": "0638c630",
+      "source_content": "On Android, return true from this callback to prevent any other native components from becoming responder until this responder terminates.",
+      "source_content_hash": "c43e5c561df4e0519bba0586ce2b8ebf9f38953c04955588ffa7e450e7d6cce2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Android上，從此回調返回true可阻止其他原生組件在此響應者終止前成為響應者。"
+      }
+    },
+    {
+      "segment_id": "54875d3e",
+      "source_content": "| Type                                                              |\n| ----------------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void ｜ boolean` |",
+      "source_content_hash": "28cab019b186e2cf81a133f3e4a9e7b0f11f1cb2f8dab85fb1ff8d55ca303806",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54875d3e"
+      }
+    },
+    {
+      "segment_id": "00c58efb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "32f059c7",
+      "source_content": "### `onResponderMove`",
+      "source_content_hash": "c30bc4e92ced71cb1e3dafbb8f8d3096430bc6b3880608fd83410b812ab59e08",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderMove`"
+      }
+    },
+    {
+      "segment_id": "9623a9ba",
+      "source_content": "The user is moving their finger.",
+      "source_content_hash": "6a912d0eb46e8514f0bd9ec7bb1185c15c2b1a91995989f0028746eb62799322",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用戶正在移動手指。"
+      }
+    },
+    {
+      "segment_id": "21cd45be",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_21cd45be"
+      }
+    },
+    {
+      "segment_id": "7ad23d02",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "adb7af0c",
+      "source_content": "### `onResponderReject`",
+      "source_content_hash": "8615d0e418aa6e2f699a03543fce8e07cae7d2adecd27ced042d9dc11f5d14ce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderReject`"
+      }
+    },
+    {
+      "segment_id": "0241afda",
+      "source_content": "Another responder is already active and will not release it to that `View` asking to be the responder.",
+      "source_content_hash": "ee3018f267b5e3a7ca0546c2176b9d7ce1f1859b7ede23eebd43d1397c1143b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "已有其他響應者處於活動狀態且不願釋放給請求成為響應者的該視圖。"
+      }
+    },
+    {
+      "segment_id": "8ddf0370",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8ddf0370"
+      }
+    },
+    {
+      "segment_id": "228ef126",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "419d05eb",
+      "source_content": "### `onResponderRelease`",
+      "source_content_hash": "db004f2c97ad9f28b12c3f3674094d904f00b4a9a8eb0b91e3a340ab6327e6ba",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderRelease`"
+      }
+    },
+    {
+      "segment_id": "673173a8",
+      "source_content": "Fired at the end of the touch.",
+      "source_content_hash": "47680ffe52b65e4a91bb9df19ba98122bc50e52291f5f058285cbb9fd9b1fd31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在觸控結束時觸發。"
+      }
+    },
+    {
+      "segment_id": "736fb2d9",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_736fb2d9"
+      }
+    },
+    {
+      "segment_id": "72071bcf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "31962a34",
+      "source_content": "### `onResponderTerminate`",
+      "source_content_hash": "a56719ae413f87f4c557e3766e52ee5885355619d0cd1fdf7cc6451e676b5c40",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderTerminate`"
+      }
+    },
+    {
+      "segment_id": "92bceadb",
+      "source_content": "The responder has been taken from the `View`. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (e.g., happens with control center/ notification center on iOS)",
+      "source_content_hash": "5e5214bcd9786577bcb0afb376e454a354f24b3b2fd26453eb3609b3e404f335",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "響應者權限已從該視圖剝離。可能在調用`onResponderTerminationRequest`後被其他視圖獲取，也可能被系統未經詢問直接剝奪（例如iOS控制中心/通知中心觸發時）"
+      }
+    },
+    {
+      "segment_id": "e809677a",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e809677a"
+      }
+    },
+    {
+      "segment_id": "4a895472",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b7660644",
+      "source_content": "### `onResponderTerminationRequest`",
+      "source_content_hash": "c61a8cac6f5a112b417de355746345d66eba0619744daaf0cb778b231f93242e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onResponderTerminationRequest`"
+      }
+    },
+    {
+      "segment_id": "444c86cc",
+      "source_content": "Some other `View` wants to become responder and is asking this `View` to release its responder. Returning `true` allows its release.",
+      "source_content_hash": "3a939cd898810a79b3e9876b3bdd204f9427f3258c7a6c272c1bba53da80bbc8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其他視圖希望成為響應者並要求該視圖釋放權限。返回`true`表示允許釋放。"
+      }
+    },
+    {
+      "segment_id": "b24cb72a",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b24cb72a"
+      }
+    },
+    {
+      "segment_id": "23ae5919",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ac8a983d",
+      "source_content": "### `onStartShouldSetResponder`",
+      "source_content_hash": "a2a03b62ae6d0086d969f19d855baeaff51a83fa3702e087705167368611df3f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onStartShouldSetResponder`"
+      }
+    },
+    {
+      "segment_id": "8d9854f6",
+      "source_content": "Does this view want to become responder on the start of a touch?",
+      "source_content_hash": "026d9c16b00065e80d2276de57d5b7e2d989f68d586386e31c8f54a154fe8f5f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此視圖是否希望在觸摸開始時成為響應者？"
+      }
+    },
+    {
+      "segment_id": "2d91dd28",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2d91dd28"
+      }
+    },
+    {
+      "segment_id": "29c586a8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "60e0dd0f",
+      "source_content": "### `onStartShouldSetResponderCapture`",
+      "source_content_hash": "8f80d1b54de1a035f8ee55996990ff176e3ec1715b3811be15f6b8c0cdcb471b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onStartShouldSetResponderCapture`"
+      }
+    },
+    {
+      "segment_id": "7102fa78",
+      "source_content": "If a parent `View` wants to prevent a child `View` from becoming responder on a touch start, it should have this handler which returns `true`.",
+      "source_content_hash": "476d69248e467eae82cfc6c34ef10f5dc7d92903fed0eeac49f41b351309f861",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若父視圖希望阻止子視圖在觸摸開始時成為響應者，應設置此處理函數並返回 `true`。"
+      }
+    },
+    {
+      "segment_id": "eb409860",
+      "source_content": "| Type                                                      |\n| --------------------------------------------------------- |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |",
+      "source_content_hash": "3bea66bec63625ce039bcc975c20abf19aac6e33520e2d2d758645a2f668b0cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb409860"
+      }
+    },
+    {
+      "segment_id": "65903746",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5daa5e9d",
+      "source_content": "### `pointerEvents`",
+      "source_content_hash": "fbaf5cbb3bbba365920f8133d8751acc773d71414ec8410185bf5aa61cb2f631",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pointerEvents`"
+      }
+    },
+    {
+      "segment_id": "f62a3d7a",
+      "source_content": "Controls whether the `View` can be the target of touch events.",
+      "source_content_hash": "97bad8994f9b1323af576b5d65036723d1cf3b532b1f874d3307799a12909fa4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制視圖能否成為觸摸事件的目標。"
+      }
+    },
+    {
+      "segment_id": "fd008a8b",
+      "source_content": "- `'auto'`: The View can be the target of touch events.\n- `'none'`: The View is never the target of touch events.\n- `'box-none'`: The View is never the target of touch events but its subviews can be. It behaves like if the view had the following classes in CSS:",
+      "source_content_hash": "fe83741f25c1a88dcdb245a35053a82d88f0c013e3d57d85dcd32a686b0bf794",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'auto'`: 視圖可以成為觸摸事件的目標。\n- `'none'`: 視圖永遠不會成為觸摸事件的目標。\n- `'box-none'`: 視圖本身不會成為觸摸事件的目標，但其子視圖可以。行為類似於CSS中設置以下類別："
+      }
+    },
+    {
+      "segment_id": "3eae89e3",
+      "source_content": "```css\n.box-none {\n  pointer-events: none;\n}\n.box-none * {\n  pointer-events: auto;\n}\n```",
+      "source_content_hash": "ba78317247230c5fcc09665ab616cae0223211ad243bb7af187a5b49c98824bf",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3eae89e3"
+      }
+    },
+    {
+      "segment_id": "87e8327a",
+      "source_content": "- `'box-only'`: The view can be the target of touch events but its subviews cannot be. It behaves like if the view had the following classes in CSS:",
+      "source_content_hash": "1e1e55e3072b156e3c4bf0af9aadb870cdebd1dac7d8a877d4a66b0c6d75c1fc",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'box-only'`: 視圖可以成為觸摸事件的目標，但其子視圖不能。行為類似於CSS中設置以下類別："
+      }
+    },
+    {
+      "segment_id": "52d4940b",
+      "source_content": "```css\n.box-only {\n  pointer-events: auto;\n}\n.box-only * {\n  pointer-events: none;\n}\n```",
+      "source_content_hash": "b110879d58aa3240a8a9ce210a62853d9ad4d587f4e2d08652077f3f6894d0d3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_52d4940b"
+      }
+    },
+    {
+      "segment_id": "8c83e28e",
+      "source_content": "| Type                                         |\n| -------------------------------------------- |\n| enum('box-none', 'none', 'box-only', 'auto') |",
+      "source_content_hash": "2ba60bfd6d4324fc184e94a736a12b60d470b10deb799e75aad0d05309f1bae7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8c83e28e"
+      }
+    },
+    {
+      "segment_id": "374ce94b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4d4c89ad",
+      "source_content": "### `removeClippedSubviews`",
+      "source_content_hash": "d2b01d5ab6351cea3ad1de31e0a03694c1e6f6ced6db1eea925e53d9c6a9c545",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeClippedSubviews`"
+      }
+    },
+    {
+      "segment_id": "8beee012",
+      "source_content": "This is a reserved performance property exposed by `RCTView` and is useful for scrolling content when there are many subviews, most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound. The subviews must also have `overflow: hidden`, as should the containing view (or one of its superviews).",
+      "source_content_hash": "692cfd630b6c7b0627ec6da9020495866917aa6b28b8e427f49de1ff850060e3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是 `RCTView` 提供的保留性能屬性，適用於包含大量子視圖且多數位於屏幕外的滾動內容。要使此屬性生效，必須將其應用於包含大量超出邊界的子視圖的視圖上。子視圖必須設置 `overflow: hidden`，包含視圖（或其父視圖之一）也應如此設置。"
+      }
+    },
+    {
+      "segment_id": "d71383f3",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d71383f3"
+      }
+    },
+    {
+      "segment_id": "b3ec7806",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3e76a8eb",
+      "source_content": "### `renderToHardwareTextureAndroid` <div class=\"label android\">Android</div>",
+      "source_content_hash": "2a027b00868324e70f09c83c7686f245ad7348fa9a13f6318ce5c69b4a0bb669",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `renderToHardwareTextureAndroid` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "c1be5883",
+      "source_content": "Whether this `View` should render itself (and all of its children) into a single hardware texture on the GPU.",
+      "source_content_hash": "738575650be11655964c3f6d099e4f630140dd09cac27d0fc023f93563c57a4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此視圖是否應將自身（及其所有子視圖）渲染為GPU上的單一硬件紋理。"
+      }
+    },
+    {
+      "segment_id": "458b4b96",
+      "source_content": "On Android, this is useful for animations and interactions that only modify opacity, rotation, translation, and/or scale: in those cases, the view doesn't have to be redrawn and display lists don't need to be re-executed. The texture can be re-used and re-composited with different parameters. The downside is that this can use up limited video memory, so this prop should be set back to false at the end of the interaction/animation.",
+      "source_content_hash": "3fffd25e075ebe78d07560a3a90fb820efa1d860631de44e72d3cf35bfa6dda5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Android上，這對於僅修改透明度、旋轉、平移和/或縮放的動畫和交互非常有用：在這些情況下，視圖無需重繪且顯示列表無需重新執行。紋理可重複使用並以不同參數重新合成。缺點是可能消耗有限的顯存，因此應在交互/動畫結束後將此屬性設回false。"
+      }
+    },
+    {
+      "segment_id": "9c695e70",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9c695e70"
+      }
+    },
+    {
+      "segment_id": "9d160dc2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0a8b41a1",
+      "source_content": "### `role`",
+      "source_content_hash": "3463b610032512464093b5c5733eee15f95cb5e1b5a4a8c84895aa293f5c1937",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `role`"
+      }
+    },
+    {
+      "segment_id": "1f719a7f",
+      "source_content": "`role` communicates the purpose of a component to the user of an assistive technology. Has precedence over the [`accessibilityRole`](view#accessibilityrole) prop.",
+      "source_content_hash": "be7884b3672692dcfd6dfda8d281c1542fe87e3cb58db41546f51cd878567d21",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`role` 向輔助技術用戶傳達組件的用途。優先級高於 [`accessibilityRole`](view#accessibilityrole) 屬性。"
+      }
+    },
+    {
+      "segment_id": "22745000",
+      "source_content": "| Type                       |\n| -------------------------- |\n| [Role](accessibility#role) |",
+      "source_content_hash": "7176a0fd87b8c1b1a63103667fd3ad1d4150680e301afa9a3defd16c8dd653ac",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_22745000"
+      }
+    },
+    {
+      "segment_id": "f91934fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "10577f52",
+      "source_content": "### `shouldRasterizeIOS` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "7099099ed1daf6c8d3ee225e27e02bc8bfa26b1bb0295bfc37e068539b5f556f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `shouldRasterizeIOS` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "24770a5d",
+      "source_content": "Whether this `View` should be rendered as a bitmap before compositing.",
+      "source_content_hash": "10977b8750500125d7241e4730ff0cdfc88781bc1c55b83cf4e88e3f4b4e0af0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此視圖是否應在合成前渲染為位圖。"
+      }
+    },
+    {
+      "segment_id": "5737787e",
+      "source_content": "On iOS, this is useful for animations and interactions that do not modify this component's dimensions nor its children; for example, when translating the position of a static view, rasterization allows the renderer to reuse a cached bitmap of a static view and quickly composite it during each frame.",
+      "source_content_hash": "1a5bbc70654bcff98f72308c338332e4ac4d1197cd9674aad9841fd0dc5c05a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在iOS上，這對於不修改組件尺寸或其子視圖的動畫和交互非常有用；例如，當平移靜態視圖的位置時，柵格化允許渲染器重用靜態視圖的緩存位圖並在每幀快速合成。"
+      }
+    },
+    {
+      "segment_id": "c9e8b912",
+      "source_content": "Rasterization incurs an off-screen drawing pass and the bitmap consumes memory. Test and measure when using this property.",
+      "source_content_hash": "41030fc4a64766672d8f049642d26a0215d7c4ad1654d0a60f646c9d329aa65e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "柵格化會導致離屏繪製過程且位圖消耗內存。使用此屬性時需測試和評估性能。"
+      }
+    },
+    {
+      "segment_id": "f2ed7ad8",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2ed7ad8"
+      }
+    },
+    {
+      "segment_id": "69c9c872",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3a8b4f1e",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `style`"
+      }
+    },
+    {
+      "segment_id": "cec1a6de",
+      "source_content": "| Type                           |\n| ------------------------------ |\n| [View Style](view-style-props) |",
+      "source_content_hash": "3f5e7d47ed5fe1549f22190a423f07653ab9e06b85ac74a7d5143036b57ac753",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cec1a6de"
+      }
+    },
+    {
+      "segment_id": "ce9ecf19",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "44ce4272",
+      "source_content": "### `tabIndex` <div class=\"label android\">Android</div>",
+      "source_content_hash": "ceb635e19872dd24b7ae43f8e21b0752877581fefa798db8415433ac3c7ecf85",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `tabIndex` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "33e61440",
+      "source_content": "Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.\nSupports the following values:",
+      "source_content_hash": "7e850dd4adc7141f083256729b33f6cfe30c171a3c75d164c9533d6316f197aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此視圖是否應可通過非觸摸輸入設備（如硬件鍵盤）獲取焦點。\n支持以下值："
+      }
+    },
+    {
+      "segment_id": "dd6d1690",
+      "source_content": "- `0` - View is focusable\n- `-1` - View is not focusable",
+      "source_content_hash": "ea0d159ce2f2e87630f8cff39a7f6e8efd1fd55de44895a039ce4f522c98c9d2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `0` - 視圖可獲取焦點\n- `-1` - 視圖不可獲取焦點"
+      }
+    },
+    {
+      "segment_id": "510d71ae",
+      "source_content": "| Type        |\n| ----------- |\n| enum(0, -1) |",
+      "source_content_hash": "0978f6561abd04f7fb4081fa15d5cf5486ff12d30985d4030debf92f03d07bb1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_510d71ae"
+      }
+    },
+    {
+      "segment_id": "47d9f84b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "04f34f22",
+      "source_content": "### `testID`",
+      "source_content_hash": "83bb1ecc3bce9cf38987403cbf0eee8440f9d30cfdf54fe124a9fc8228f9b47c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `testID`"
+      }
+    },
+    {
+      "segment_id": "76e35af6",
+      "source_content": "Used to locate this view in end-to-end tests.",
+      "source_content_hash": "8358f089947ad586b55fd43eb0645023a4374ab9abb17f363cae443734b4a16e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於在端到端測試中定位此視圖。"
+      }
+    },
+    {
+      "segment_id": "f4198a1b",
+      "source_content": "> This disables the 'layout-only view removal' optimization for this view!",
+      "source_content_hash": "69be33f7c36a1a48908246e08c63d189dc2007827532e02af519c86230e4aef1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 這會停用此視圖的「僅佈局視圖移除」優化！"
+      }
+    },
+    {
+      "segment_id": "8eccfab3",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8eccfab3"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/view.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.988493+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "5ac30d171555ab4cbd61415ee29e10b4693df131c4f2df27159b3469ceacaf70"
+  }
+}

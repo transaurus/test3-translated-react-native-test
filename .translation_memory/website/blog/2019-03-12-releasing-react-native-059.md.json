@@ -1,0 +1,332 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2019-03-12-releasing-react-native-059.md",
+  "source_file_content_hash": "bc1e9b8e0a623c6a64a858059ffee2e6ee3099500331f392313bca787bc65b8c",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Releasing React Native 0.59\nauthor: Ryan Turner\nauthorTitle: Core Maintainer & React Native Developer\nauthorURL: 'https://twitter.com/turnrye'\nauthorImageURL: 'https://avatars0.githubusercontent.com/u/701035?s=460&v=4'\nauthorTwitter: turnrye\ntags: [announcement, release]\n---",
+      "source_content_hash": "37801d5ddc94637373a36189e8c3e1e896aa1af544831456669db5135a77c82b",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Welcome to the 0.59 release of React Native! This is another big release with 644 commits by 88 contributors. Contributions also come in other forms, so _thank you_ for maintaining issues, fostering communities, and teaching people about React Native. This month brings a number of highly anticipated changes, and we hope you enjoy them.",
+      "source_content_hash": "390aef0b16107923c8e7ad29a93dba2d4560a8e788dd6fea54d1dde1d2712eeb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "歡迎來到 React Native 0.59 版本！這是一個包含 88 位貢獻者提交的 644 個 commits 的重大版本。貢獻也以其他形式呈現，因此 _感謝您_ 維護問題、培育社群以及向人們傳授 React Native 知識。本月帶來了一些備受期待的變更，希望您會喜歡。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## 🎣 Hooks are here",
+      "source_content_hash": "d45f5cae7dd3df1bb34af09162469d265a12d97efa14c384de2a36ce1bd8b2eb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 🎣 Hooks 登場"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "React Hooks are part of this release, which let you reuse stateful logic across components. There is a lot of buzz about hooks, but if you haven't heard, take a look at some of the wonderful resources below:",
+      "source_content_hash": "b6bc5720b60e3044d687fba4349507d1f7bb8bf547033000e6b0ac4a1557d36c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Hooks 是此版本的一部分，它讓您可以在組件之間重用狀態邏輯。關於 hooks 有很多討論，但如果您還沒聽說過，請看看以下一些精彩的資源："
+      }
+    },
+    {
+      "segment_id": "33c0d938",
+      "source_content": "> - [Introducing Hooks](https://reactjs.org/docs/hooks-intro.html) explains why we’re adding Hooks to React.\n> - [Hooks at a Glance](https://reactjs.org/docs/hooks-overview.html) is a fast-paced overview of the built-in Hooks.\n> - [Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html) demonstrates code reuse with custom Hooks.\n> - [Making Sense of React Hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) explores the new possibilities unlocked by Hooks.\n> - [useHooks.com](https://usehooks.com/) showcases community-maintained Hooks recipes and demos.",
+      "source_content_hash": "f391ce3d70bbb59323b10bbf0597ac6984ef01e6ce39df985a1caf152694a015",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> - [介紹 Hooks](https://reactjs.org/docs/hooks-intro.html) 解釋了為什麼我們要在 React 中添加 Hooks。\n> - [Hooks 概覽](https://reactjs.org/docs/hooks-overview.html) 是對內置 Hooks 的快速概述。\n> - [構建您自己的 Hooks](https://reactjs.org/docs/hooks-custom.html) 展示了如何使用自定義 Hooks 重用代碼。\n> - [理解 React Hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) 探討了 Hooks 解鎖的新可能性。\n> - [useHooks.com](https://usehooks.com/) 展示了社區維護的 Hooks 配方和演示。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Be sure to give this a try in your apps. We hope that you find the reuse as exciting as we do.",
+      "source_content_hash": "5a38030c5c9f9ba27870c454a05821f3bcbec1ea733950d3f0375ad618b6641c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請務必在您的應用中嘗試這些功能。我們希望您能像我們一樣對這種重用感到興奮。"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "## 📱 Updated JSC means performance gains and 64-bit support on Android",
+      "source_content_hash": "bddbdd12c5f3faf931e035c5174ce31286645dcfaa2f3146609cdf82a3da622b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 📱 更新的 JSC 帶來性能提升和 Android 上的 64 位支持"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "React Native uses JSC ([JavaScriptCore](https://webkit.org/)) to power your application. JSC on Android was a few years old, which meant that a lot of modern JavaScript features weren't supported. Even worse, it performed poorly compared iOS's modern JSC. With this release, that all changes.",
+      "source_content_hash": "9fb317145fd6403eaef95c2fb333c3c312206b263e9f83a7908645502f39066a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 使用 JSC ([JavaScriptCore](https://webkit.org/)) 來驅動您的應用程序。Android 上的 JSC 已經有幾年的歷史，這意味著許多現代 JavaScript 功能不受支持。更糟糕的是，與 iOS 的現代 JSC 相比，它的性能較差。隨著此版本的發布，這一切都將改變。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "Thanks to some awesome work by [@DanielZlotin](https://github.com/danielzlotin), [@dulmandakh](https://github.com/dulmandakh), [@gengjiawen](https://github.com/gengjiawen), [@kmagiera](https://github.com/kmagiera), and [@kudo](https://github.com/kudo) JSC has caught up with the past few years. This brings with it 64-bit support, modern JavaScript support, and [big performance improvements](https://github.com/react-native-community/jsc-android-buildscripts/tree/master/measure). Kudos for also making this a maintainable process now so that we can take advantage of future WebKit improvements without so much legwork, and thank you Software Mansion and Expo for making this work possible.",
+      "source_content_hash": "4f337da16e24a81d000b9986446365d6a80587205271f451fe2f44ea06f748f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝 [@DanielZlotin](https://github.com/danielzlotin)、[@dulmandakh](https://github.com/dulmandakh)、[@gengjiawen](https://github.com/gengjiawen)、[@kmagiera](https://github.com/kmagiera) 和 [@kudo](https://github.com/kudo) 的出色工作，JSC 已經趕上了過去幾年的發展。這帶來了 64 位支持、現代 JavaScript 支持以及[巨大的性能改進](https://github.com/react-native-community/jsc-android-buildscripts/tree/master/measure)。同時也感謝他們使這一過程變得可維護，以便我們可以在未來輕鬆利用 WebKit 的改進，而無需太多繁瑣的工作。感謝 Software Mansion 和 Expo 使這項工作成為可能。"
+      }
+    },
+    {
+      "segment_id": "48847fd4",
+      "source_content": "## 💨 Faster app launches with inline requires",
+      "source_content_hash": "d6df4e40e2d3b7cdfc384801931d28f7fbf4534b36ecce69ebf93f8ea00dc5ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 💨 通過內聯 requires 加快應用啟動速度"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "We want to help people have performant React Native apps by default and are working to bring Facebook's optimizations to the community. Applications load resources as needed rather than slowing down launch. This feature is called \"inline requires\", as it lets Metro identify components to be lazy loaded. Apps with a deep and varied component architecture will see the most improvement.",
+      "source_content_hash": "9f4846aeedd657081f35d75b9de21506ee3a7314080b565b4ab01f17b80878f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們希望幫助人們默認擁有高性能的 React Native 應用，並正在努力將 Facebook 的優化帶給社區。應用程序按需加載資源，而不是減慢啟動速度。此功能稱為「內聯 requires」，因為它讓 Metro 識別需要懶加載的組件。具有深度和多樣化組件架構的應用將看到最大的改進。"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "![source of the `metro.config.js` file in the 0.59 template, demonstrating where to enable `inlineRequires`](/blog/assets/inline-requires.png)",
+      "source_content_hash": "9f2600ff884c51004fb812768130641e9a37e145f853c379c39f74ae03f5a363",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![0.59 模板中的 `metro.config.js` 文件源代碼，展示了如何啟用 `inlineRequires`](/blog/assets/inline-requires.png)"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "We need the community to let us know how it works before we turn it on by default. When you upgrade to 0.59, there will be a new `metro.config.js` file; flip the options to true and give us [your feedback](https://twitter.com/hashtag/inline-requires)! Read more about inline requires [in the performance docs](/docs/performance#inline-requires) to benchmark your app.",
+      "source_content_hash": "d7d41a8dd78d3537249e06b9344ebdf0121f5216ca010282a9f8d29f072500cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們需要社區在我們默認啟用此功能之前告訴我們它的效果如何。當您升級到 0.59 時，將會有一個新的 `metro.config.js` 文件；將選項切換為 true 並給我們[您的反饋](https://twitter.com/hashtag/inline-requires)！閱讀更多關於內聯 requires 的內容[在性能文檔中](/docs/performance#inline-requires)以對您的應用進行基準測試。"
+      }
+    },
+    {
+      "segment_id": "62a6890b",
+      "source_content": "## 🚅 Lean core is underway",
+      "source_content_hash": "073f5f5655f897034bda18ca176b5ec0c1c27cd5b3d670d561010faf83ed3241",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 🚅 Lean core 正在進行中"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "React Native is a large and complex project with a complicated repository. This makes the codebase less approachable to contributors, difficult to test, and bloated as a dev dependency. [Lean Core](https://github.com/react-native-community/discussions-and-proposals/issues/6) is our effort to address these issues by migrating code to separate libraries for better management. The past few releases have seen the first steps of this, but [let's get serious](https://www.youtube.com/watch?v=FMLKb4or8yg).",
+      "source_content_hash": "ff5669b4c34a724b2d6b7e59f8efe2ada4b4a11f2f70db516c0188bc560ca365",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 是一個龐大而複雜的項目，擁有複雜的代碼庫。這使得代碼庫對貢獻者不太友好，難以測試，並且作為開發依賴項顯得臃腫。[Lean Core](https://github.com/react-native-community/discussions-and-proposals/issues/6) 是我們通過將代碼遷移到單獨的庫中以更好地管理這些問題的努力。過去的幾個版本已經看到了這方面的第一步，但[讓我們認真對待](https://www.youtube.com/watch?v=FMLKb4or8yg)。"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "You may notice that additional components are now officially deprecated. This is great news, as there are now owners for these features actively maintaining them. Heed the warning messages and migrate to the new libraries for these features, because they will be removed in a future release. Below is a table indicating the component, its status, and where you may migrate your use to.",
+      "source_content_hash": "84a7ab3a10d6367653e61dfc616c4f030643a1ee3632d123595c2fef535031ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可能會注意到，現在有額外的元件已被正式棄用。這是個好消息，因為這些功能現在有維護者積極維護它們。請注意警告訊息並遷移到這些功能的新函式庫，因為它們將在未來的版本中被移除。下方表格列出了元件、其狀態以及您可以遷移到的替代方案。"
+      }
+    },
+    {
+      "segment_id": "17d239d8",
+      "source_content": "| Component            | Deprecated? | New home                                                                                                                                                 |\n| -------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| **AsyncStorage**     | 0.59        | [@react-native-community/react-native-async-storage](https://github.com/react-native-community/react-native-async-storage)                               |\n| **ImageStore**       | 0.59        | [expo-file-system](https://github.com/expo/expo/tree/master/packages/expo-file-system) or [react-native-fs](https://github.com/itinance/react-native-fs) |\n| **MaskedViewIOS**    | 0.59        | [@react-native-community/react-native-masked-view](https://github.com/react-native-community/react-native-masked-view)                                   |\n| **NetInfo**          | 0.59        | [@react-native-community/react-native-netinfo](https://github.com/react-native-community/react-native-netinfo)                                           |\n| **Slider**           | 0.59        | [@react-native-community/react-native-slider](https://github.com/react-native-community/react-native-slider)                                             |\n| **ViewPagerAndroid** | 0.59        | [@react-native-community/react-native-viewpager](https://github.com/react-native-community/react-native-viewpager)                                       |",
+      "source_content_hash": "62910a757d351bff12e33c6ddb465d88597fddf5e2409599182f715d2abc6e47",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_17d239d8"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "Over the coming months, there will be many more components following this path to a leaner core. We're looking for help with this &mdash; head over to the [lean core umbrella](https://github.com/facebook/react-native/issues/23313) to pitch in.",
+      "source_content_hash": "7be9e42c7ad7c0f520955d7f5210a6b9ca7be1f53f30fa39ce2d7ea47b038050",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在接下來的幾個月裡，將有更多元件遵循這條精簡核心的路徑。我們需要協助來完成這項工作 — 請前往 [lean core umbrella](https://github.com/facebook/react-native/issues/23313) 參與貢獻。"
+      }
+    },
+    {
+      "segment_id": "2c1b51df",
+      "source_content": "## 👩🏽‍💻 CLI improvements",
+      "source_content_hash": "9bb560c4a3618226d48f4c4abc153eeebc1852b1d92dc611860e49b9270b98ae",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 👩🏽‍💻 CLI 改進"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "React Native's command line tools are developer's entry point to the ecosystem, but they had long-standing issues and lacked official support. The CLI tools have been moved to a [new repository](https://github.com/react-native-community/react-native-cli), and a [dedicated group of maintainers](https://blog.callstack.io/the-react-native-cli-has-a-new-home-79b63838f0e6) have already made some exciting improvements.",
+      "source_content_hash": "dd01389aa69ef4ad171804fd9453d4ad04ab6f8a500d49eeaa04598549c3540f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 的命令行工具是開發者進入生態系統的入口，但它們長期存在問題且缺乏官方支援。CLI 工具已移至 [新的儲存庫](https://github.com/react-native-community/react-native-cli)，並且由 [專職的維護者團隊](https://blog.callstack.io/the-react-native-cli-has-a-new-home-79b63838f0e6) 進行了一些令人興奮的改進。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "Logs are formatted much better now. Commands now run nearly instantly &mdash; you'll immediately notice a difference:",
+      "source_content_hash": "bbe4f9b0c3ac5c54df1883e796da0802df5fce4ef3b2bf054a1b312651a1e29f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在日誌的格式更加美觀。命令的執行速度幾乎是即時的 — 您會立即注意到差異："
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "![0.58's CLI is slow to start](/blog/assets/0.58-cli-speed.png)![0.58's CLI is nearly instantaneous](/blog/assets/0.59-cli-speed.png)",
+      "source_content_hash": "1ae61257a3191c630bb3815d2cd243662c31002cd06e12dcbedb9f73d9f19110",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![0.58 版本的 CLI 啟動緩慢](/blog/assets/0.58-cli-speed.png)![0.59 版本的 CLI 幾乎是即時的](/blog/assets/0.59-cli-speed.png)"
+      }
+    },
+    {
+      "segment_id": "c315c636",
+      "source_content": "## 🚀 Upgrading to 0.59",
+      "source_content_hash": "7ee9e98f1d445ffaa5f5a101f3d2e3e1dffd516e1153e6dfb3c8d30fa1259941",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 🚀 升級至 0.59"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "We heard your feedback regarding the [React Native upgrade process](https://github.com/react-native-community/discussions-and-proposals/issues/68) and we are taking steps to improve the experience in [future releases](https://github.com/react-native-community/discussions-and-proposals/issues/64#issuecomment-444775432). To upgrade to 0.59, we recommend using [`rn-diff-purge`](https://github.com/react-native-community/rn-diff-purge) to determine what has changed between your current React Native version and 0.59, then applying those changes manually. Once you've upgraded your project to 0.59, you will be able to use the newly improved `react-native upgrade` command (based on `rn-diff-purge`!) to upgrade to 0.60 and beyond as newer releases become available.",
+      "source_content_hash": "b5a00bfb7e81c167c979ccc88807f048b9dc7778f0a21cf7a4281e7a9eba1c58",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們聽取了您對 [React Native 升級流程](https://github.com/react-native-community/discussions-and-proposals/issues/68) 的反饋，並正在採取措施在 [未來的版本](https://github.com/react-native-community/discussions-and-proposals/issues/64#issuecomment-444775432) 中改善體驗。要升級至 0.59，我們建議使用 [`rn-diff-purge`](https://github.com/react-native-community/rn-diff-purge) 來確定您當前的 React Native 版本與 0.59 之間的變更，然後手動應用這些變更。一旦您將專案升級至 0.59，您將能夠使用新改進的 `react-native upgrade` 命令（基於 `rn-diff-purge`！）來升級至 0.60 及更高版本。"
+      }
+    },
+    {
+      "segment_id": "bd92edfc",
+      "source_content": "## 🔨 Breaking Changes",
+      "source_content_hash": "56892d25b9ad87e6fd0daf67091bed78f647023d0a62c538f4eed7d2625f6d19",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 🔨 重大變更"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "Android support in 0.59 has been cleaned up following Google's latest recommendations, which may result in potential breakage of existing apps. This issue might present as a runtime crash and a message, \"You need to use a Theme.AppCompat theme (or descendant) with this activity\". We recommend updating your project's `AndroidManifest.xml` file, making sure that the `android:theme` value is an `AppCompat` theme (such as `@style/Theme.AppCompat.Light.NoActionBar`).",
+      "source_content_hash": "d25a0ff258d21cab175313c661df62963262384332b112ec3c25de0ccaffe0a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "0.59 中的 Android 支援已根據 Google 的最新建議進行了清理，這可能會導致現有應用程式出現問題。此問題可能表現為運行時崩潰並顯示訊息「You need to use a Theme.AppCompat theme (or descendant) with this activity」。我們建議更新您專案的 `AndroidManifest.xml` 文件，確保 `android:theme` 的值是 `AppCompat` 主題（例如 `@style/Theme.AppCompat.Light.NoActionBar`）。"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "The `react-native-git-upgrade` command has been removed in 0.59, in favor of the newly improved `react-native upgrade` command.",
+      "source_content_hash": "17b8df6c7d9654d5bd01deb01e2e90c74656bd017984c310beca49763436225f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`react-native-git-upgrade` 命令已在 0.59 中被移除，取而代之的是新改進的 `react-native upgrade` 命令。"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "## 🤗 Thanks",
+      "source_content_hash": "afecb5884a295f71edd57e756a7db57cd87375fea24c4826da16cd6ba5e3b99f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 🤗 感謝"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "Lots of new contributors helped with [enabling generation of native code from flow types](https://github.com/facebook/react-native/issues/22990) and [resolving Xcode warnings](https://github.com/facebook/react-native/issues/22609) - these are a great way to learn how React Native works and contributing to the greater good. Thank you! Look out for similar issues in the future.",
+      "source_content_hash": "c947c35cdf2034414b4817d0bae8d979f8279a5906a01c2884f41d452e9e04c3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "許多新貢獻者協助 [啟用從 Flow 類型生成原生程式碼](https://github.com/facebook/react-native/issues/22990) 和 [解決 Xcode 警告](https://github.com/facebook/react-native/issues/22609) — 這些是了解 React Native 如何運作並為公共利益做出貢獻的好方法。謝謝！請留意未來的類似問題。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "While these are the highlights that we noted, there are many others to be excited about. To see all of the updates, take a look at the [changelog](https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md). 0.59 is a huge release – we can't wait for you to try it out.",
+      "source_content_hash": "e0fde8bab1689d8d90ba6a3bbffeb9640eb29b6d01810368f7021af48e77f0b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然這些是我們注意到的亮點，但還有許多其他令人興奮的更新。要查看所有更新，請參閱 [變更日誌](https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md)。0.59 是一個重大版本 — 我們迫不及待想讓您試用。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "We have even more improvements coming throughout the rest of the year. Stay tuned!",
+      "source_content_hash": "11e37c5cf3faccacdd7ca701c94c31b73643ca5337e0ca25307c2ca1b031def4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們在今年還會有更多改進。敬請期待！"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "[Ryan](https://github.com/turnrye) and the whole [React Native core team](https://twitter.com/reactnative)",
+      "source_content_hash": "003e73e86d5c8f6f749bcf2d4e3e3d882e3bc1383140fa7ed70a722701212632",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Ryan](https://github.com/turnrye) 和整個 [React Native 核心團隊](https://twitter.com/reactnative)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2019-03-12-releasing-react-native-059.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.222143+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "bc1e9b8e0a623c6a64a858059ffee2e6ee3099500331f392313bca787bc65b8c"
+  }
+}

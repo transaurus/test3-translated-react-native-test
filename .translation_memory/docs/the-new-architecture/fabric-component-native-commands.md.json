@@ -1,0 +1,282 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/the-new-architecture/fabric-component-native-commands.md",
+  "source_file_content_hash": "ab38fe20571b83dc987b1a2d599e65c228055082ed04ecb1e6526062488f7f23",
+  "segments": [
+    {
+      "segment_id": "a9b642df",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9b642df"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "# Invoking native functions on your native component",
+      "source_content_hash": "b64c58b9769dd15e43ce2d2bcf79b2bcce384d547db9b395342f254ec4a07b95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 在原生元件上呼叫原生函式"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "In the [base guide](/docs/fabric-native-components-introduction) to write a new Native Component, you have explored how to create a new component, how to pass properties from the JS side to the native side, and how to emit events from native side to JS.",
+      "source_content_hash": "9056e2e22ea5cf88fcbff59516d9c572621dffc579461d6cc25834b1ebd4b3c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在[基礎指南](/docs/fabric-native-components-introduction)中建立新原生元件時，您已了解如何建立新元件、如何從JS端傳遞屬性到原生端，以及如何從原生端發送事件到JS端。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Custom components can also call some of the functions implementated in the native code imperatively, to achieve some more advanced functionalities, such as programmatically reload a web page.",
+      "source_content_hash": "9984ca561a12197524354e0a1e4f99fd482f7cd63924ee5dedd99e3a1b97ad4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自訂元件還可以命令式地呼叫原生程式碼中實作的某些函式，以實現更高級的功能，例如以程式方式重新載入網頁。"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "In this guide you'll learn how to achieve this, by using a new concept: Native Commands.",
+      "source_content_hash": "9ba52061fdeeedbbc6377e72ff271780b58c15d7fc117777e74b1f26479d4ce9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將透過一個新概念「原生指令」來教您如何達成此目的。"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "This guide starts from the [Native Components](/docs/fabric-native-components-introduction) guide and assumes that you are familiar with it and that you are familiar with [Codegen](/docs/next/the-new-architecture/what-is-codegen).",
+      "source_content_hash": "ca53bdb6a927d3e0ce15ce9b1b52a5d59e10a7a6c5ce5c12d914f012fb88ba6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南從[原生元件](/docs/fabric-native-components-introduction)指南延伸，假設您已熟悉該內容並了解[Codegen](/docs/next/the-new-architecture/what-is-codegen)。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## 1. Update your component specs",
+      "source_content_hash": "cf6ad5da669edb1b7741d5a0d4588dfac65b59b98d7ff10884eb2ba322f5c7b7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 1. 更新元件規格"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "The first step is to update the component spec to declare the `NativeCommand`.",
+      "source_content_hash": "103fa9dd9eb36bbb5d9a233e602ef2717001dd6444ab0a542137de96703e814f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一步是更新元件規格以宣告「原生指令」。"
+      }
+    },
+    {
+      "segment_id": "514644bf",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\nUpdate the `WebViewNativeComponent.ts` as it follows:\n\n```diff title=\"Demo/specs/WebViewNativeComponent.ts\"\nimport type {HostComponent, ViewProps} from 'react-native';\nimport type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';\nimport codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';\n+import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';\n\ntype WebViewScriptLoadedEvent = {\n  result: 'success' | 'error';\n};\n\nexport interface NativeProps extends ViewProps {\n  sourceURL?: string;\n  onScriptLoaded?: BubblingEventHandler<WebViewScriptLoadedEvent> | null;\n}\n\n+interface NativeCommands {\n+    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;\n+}\n\n+export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({\n+    supportedCommands: ['reload'],\n+});\n\nexport default codegenNativeComponent<NativeProps>(\n  'CustomWebView',\n) as HostComponent<NativeProps>;\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\nUpdate the `WebViewNativeComponent.js` as it follows:\n\n```diff title=\"Demo/specs/WebViewNativeComponent.js\"\n// @flow strict-local\n\nimport type {HostComponent, ViewProps} from 'react-native';\nimport type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';\nimport codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';\n+import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';\n\ntype WebViewScriptLoadedEvent = $ReadOnly<{|\n  result: \"success\" | \"error\",\n|}>;\n\ntype NativeProps = $ReadOnly<{|\n  ...ViewProps,\n  sourceURL?: string;\n  onScriptLoaded?: BubblingEventHandler<WebViewScriptLoadedEvent>?;\n|}>;\n\n+interface NativeCommands {\n+    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;\n+}\n\n+export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({\n+    supportedCommands: ['reload'],\n+});\n\nexport default (codegenNativeComponent<NativeProps>(\n  'CustomWebView',\n): HostComponent<NativeProps>);\n\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "1e6594062e61db4a8cf45059732a3a10489b5f1ccabf859071a3bfa0064b2093",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_514644bf"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "These changes requires you to:",
+      "source_content_hash": "9f00da3eb74c7d75b84d28489b45c7613c9fad57984a47b0cdd843957057d6b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些變更需要您："
+      }
+    },
+    {
+      "segment_id": "2fc7ec55",
+      "source_content": "1. Import the `codegenNativeCommands` function from `react-native`. This instruct codegen that it has to generate the code for `NativeCommands`\n2. Define an interface that contains the methods we want to invoke in native. All the Native Commands must have a first parameter of type `React.ElementRef`.\n3. Export the `Commands` variable that is the result of the invocation of `codegenNativeCommands`, passing a list of the supported commands.",
+      "source_content_hash": "df3d62740edf83e5a120820dc22003708d4138c3eff6c0d52d613a5f8be5b92a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 從`react-native`導入`codegenNativeCommands`函式。這會指示Codegen需為「原生指令」生成程式碼\n2. 定義包含我們要在原生端呼叫方法的介面。所有原生指令的第一個參數必須是`React.ElementRef`類型\n3. 導出`Commands`變數，該變數是呼叫`codegenNativeCommands`並傳入支援指令清單後的結果"
+      }
+    },
+    {
+      "segment_id": "53cf11b8",
+      "source_content": ":::warning\nIn TypeScript, the `React.ElementRef` is deprecated. The correct type to use is actually `React.ComponentRef`. However, due to a bug in Codegen, using `ComponentRef` will crash the app. We have the fix already, but we need to release a new version of React Native to apply it.\n:::",
+      "source_content_hash": "a6eeba39abe8ead314bf859a1de8cba805312a02ba80a23065b587524263ecc4",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n在TypeScript中，`React.ElementRef`已被棄用。正確的類型應使用`React.ComponentRef`。但由於Codegen的錯誤，使用`ComponentRef`會導致應用程式崩潰。我們已有修復方案，但需發布新版本的React Native才能應用。\n:::"
+      }
+    },
+    {
+      "segment_id": "c19de48a",
+      "source_content": "## 2. Update the App code to use the new command",
+      "source_content_hash": "e8994ade74d6d238ba1719d8c83832ac8789cd8e911d01dd096d9583394acefb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 2. 更新應用程式碼以使用新指令"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "Now you can use the command in the the app.",
+      "source_content_hash": "aae97374d2952e4f2519b1cc99a8ab38f3c5caa3d1dc0a431ddf512b6f1384b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您可以在應用程式中使用該指令。"
+      }
+    },
+    {
+      "segment_id": "341c2c0e",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\nOpen the `App.tsx` file and modify it as it follows:\n\n```diff title=\"App.tsx\"\nimport React from 'react';\n-import {Alert, StyleSheet, View} from 'react-native';\n-import WebView from '../specs/WebViewNativeComponent';\n+import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';\n+import WebView, {Commands} from '../specs/WebViewNativeComponent';\n\nfunction App(): React.JSX.Element {\n+    const webViewRef = React.useRef<React.ElementRef<typeof View> | null>(null);\n+\n+    const refresh = () => {\n+        if (webViewRef.current) {\n+            Commands.reload(webViewRef.current);\n+        }\n+    };\n\n  return (\n    <View style={styles.container}>\n      <WebView\n+       ref={webViewRef}\n        sourceURL=\"https://react.dev/\"\n        style={styles.webview}\n        onScriptLoaded={() => {\n          Alert.alert('Page Loaded');\n        }}\n      />\n+      <View style={styles.tabbar}>\n+        <Pressable onPress={refresh} style={styles.button}>\n+            {({pressed}) => (\n+                !pressed ? <Text style={styles.buttonText}>Refresh</Text> : <Text style={styles.buttonTextPressed}>Refresh</Text>) }\n+        </Pressable>\n+      </View>\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    alignContent: 'center',\n  },\n  webview: {\n    width: '100%',\n-    height: '100%',\n+    height: '90%',\n  },\n+  tabbar: {\n+    flex: 1,\n+    backgroundColor: 'gray',\n+    width: '100%',\n+    alignItems: 'center',\n+    alignContent: 'center',\n+  },\n+  button: {\n+    margin: 10,\n+  },\n+  buttonText: {\n+    fontSize: 20,\n+    fontWeight: 'bold',\n+    color: '#00D6FF',\n+    width: '100%',\n+  },\n+  buttonTextPressed: {\n+    fontSize: 20,\n+    fontWeight: 'bold',\n+    color: '#00D6FF77',\n+    width: '100%',\n+  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\nOpen the `App.tsx` file and modify it as it follows:\n\n```diff title=\"App.jsx\"\nimport React from 'react';\n-import {Alert, StyleSheet, View} from 'react-native';\n-import WebView from '../specs/WebViewNativeComponent';\n+import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';\n+import WebView, {Commands} from '../specs/WebViewNativeComponent';\n\nfunction App(): React.JSX.Element {\n+    const webViewRef = React.useRef<React.ElementRef<typeof View> | null>(null);\n+\n+    const refresh = () => {\n+        if (webViewRef.current) {\n+            Commands.reload(webViewRef.current);\n+        }\n+    };\n\n  return (\n    <View style={styles.container}>\n      <WebView\n+       ref={webViewRef}\n        sourceURL=\"https://react.dev/\"\n        style={styles.webview}\n        onScriptLoaded={() => {\n          Alert.alert('Page Loaded');\n        }}\n      />\n+      <View style={styles.tabbar}>\n+        <Pressable onPress={refresh} style={styles.button}>\n+            {({pressed}) => (\n+                !pressed ? <Text style={styles.buttonText}>Refresh</Text> : <Text style={styles.buttonTextPressed}>Refresh</Text>) }\n+        </Pressable>\n+      </View>\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    alignContent: 'center',\n  },\n  webview: {\n    width: '100%',\n-    height: '100%',\n+    height: '90%',\n  },\n+  tabbar: {\n+    flex: 1,\n+    backgroundColor: 'gray',\n+    width: '100%',\n+    alignItems: 'center',\n+    alignContent: 'center',\n+  },\n+  button: {\n+    margin: 10,\n+  },\n+  buttonText: {\n+    fontSize: 20,\n+    fontWeight: 'bold',\n+    color: '#00D6FF',\n+    width: '100%',\n+  },\n+  buttonTextPressed: {\n+    fontSize: 20,\n+    fontWeight: 'bold',\n+    color: '#00D6FF77',\n+    width: '100%',\n+  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ad029fbf606e70bf78700cb8365d268c2594c32cbc28d46d744eab4c18bc0b54",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_341c2c0e"
+      }
+    },
+    {
+      "segment_id": "715a86e2",
+      "source_content": "The relevant changes here are the following:",
+      "source_content_hash": "1e471a0fbc3b1c52183c39964e8e0cd125967ea420a3ee3781ce284f778e80d1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "相關變更如下："
+      }
+    },
+    {
+      "segment_id": "e9bb32a9",
+      "source_content": "1. Import the `Commands` const from the spec file. The Command is an object that let us call the methods we have in native.\n2. Declare a ref to the `WebView` custom native component using `useRef`. You need to pass this ref to the native command.\n3. Implement the `refresh` function. This function checks that the WebView's ref is not null and if not, it calls the command.\n4. Add a pressable to call the command when the user taps on the button.",
+      "source_content_hash": "3a8686de4b24480b8ac023c2cd9d084a228b3db221b616304812f67cb41fc136",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 從規格文件導入`Commands`常數。該指令物件讓我們能呼叫原生端的方法\n2. 使用`useRef`宣告`WebView`自訂原生元件的參考。需將此參考傳遞給原生指令\n3. 實作`refresh`函式。此函式檢查WebView的參考是否為null，若非null則呼叫指令\n4. 新增可點擊元件，讓使用者在點擊按鈕時呼叫指令"
+      }
+    },
+    {
+      "segment_id": "6085c028",
+      "source_content": "The remaining changes are regular React changes to add a `Pressable` and to style the view so it looks nicer.",
+      "source_content_hash": "960df139e22695ffde44a2aae226cd407130489b499a229b93b3a1b9788d2e6a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其餘變更為常規React調整，用於新增`Pressable`及美化視圖樣式。"
+      }
+    },
+    {
+      "segment_id": "16efe6ee",
+      "source_content": "## 3. Rerun Codegen",
+      "source_content_hash": "0962646b666be06c79f18abf23775d994de52363034deefc15c9922ca5ea4ecd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 3. 重新執行Codegen"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Now that the specs are updated and the code is ready to use the command, it is time to implement the Native code. However, before diving into writing native code, you have to rerun codegen, to let it generate the new types that are needed by the Native code.",
+      "source_content_hash": "43bcb6999b4129349cb2c3124b419f5a7043af4921a30ef351c08790956ca863",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在規格已更新且程式碼準備好使用指令，接下來需實作原生程式碼。但在編寫原生程式碼前，必須重新執行Codegen以生成原生程式碼所需的新類型。"
+      }
+    },
+    {
+      "segment_id": "3b9a15ad",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n<TabItem value=\"android\" label=\"Android\">\nCodegen is executed through the `generateCodegenArtifactsFromSchema` Gradle task:\n\n```bash\ncd android\n./gradlew generateCodegenArtifactsFromSchema\n\nBUILD SUCCESSFUL in 837ms\n14 actionable tasks: 3 executed, 11 up-to-date\n```\n\nThis is automatically run when you build your Android application.\n</TabItem>\n<TabItem value=\"ios\" label=\"iOS\">\nCodegen is run as part of the script phases that's automatically added to the project generated by CocoaPods.\n\n```bash\ncd ios\nbundle install\nbundle exec pod install\n```\n\nThe output will look like this:\n\n```shell\n...\nFramework build type is static library\n[Codegen] Adding script_phases to ReactCodegen.\n[Codegen] Generating ./build/generated/ios/ReactCodegen.podspec.json\n[Codegen] Analyzing /Users/me/src/TurboModuleExample/package.json\n[Codegen] Searching for codegen-enabled libraries in the app.\n[Codegen] Found TurboModuleExample\n[Codegen] Searching for codegen-enabled libraries in the project dependencies.\n[Codegen] Found react-native\n...\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b7e4a8124986cffcc1c6d79f180c2e782d8e102f35564cc2e98670b647b8ca1c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3b9a15ad"
+      }
+    },
+    {
+      "segment_id": "638164aa",
+      "source_content": "## 4. Implement the Native Code",
+      "source_content_hash": "66b188e9854313432d8ca7390a7d0e632296f5b52931a963840a79e57b83c607",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 4. 實作原生程式碼"
+      }
+    },
+    {
+      "segment_id": "9929329e",
+      "source_content": "Now it's time to implement the native changes that will enable your JS to directly invoke methods on your native view.",
+      "source_content_hash": "4d6b27125d5f1122cea054eb1bdd60baceff5144b1b08950dbf48cd32f5a8c14",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候實作原生端變更，讓您的JS能直接呼叫原生視圖上的方法。"
+      }
+    },
+    {
+      "segment_id": "c3d72a76",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n<TabItem value=\"android\" label=\"Android\">\n\nTo let your view respond to the Native Command, you only have to modify the ReactWebViewManager.\n\nIf you try to build right now, the build will fail, because the current `ReactWebViewManager` does not implement the new `reload` method.\nTo fix the build error, let's modify the `ReactWebViewManager` to implement it.\n\n<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```diff title=\"ReactWebViewManager.java\"\n\n//...\n  @ReactProp(name = \"sourceUrl\")\n  @Override\n  public void setSourceURL(ReactWebView view, String sourceURL) {\n    if (sourceURL == null) {\n      view.emitOnScriptLoaded(ReactWebView.OnScriptLoadedEventResult.error);\n      return;\n    }\n    view.loadUrl(sourceURL, new HashMap<>());\n  }\n\n+  @Override\n+  public void reload(ReactWebView view) {\n+    view.reload();\n+  }\n\n  public static final String REACT_CLASS = \"CustomWebView\";\n//...\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```diff title=\"ReactWebViewManager.kt\"\n  @ReactProp(name = \"sourceUrl\")\n  override fun setSourceURL(view: ReactWebView, sourceURL: String?) {\n    if (sourceURL == null) {\n      view.emitOnScriptLoaded(ReactWebView.OnScriptLoadedEventResult.error)\n      return;\n    }\n    view.loadUrl(sourceURL, emptyMap())\n  }\n\n+  override fun reload(view: ReactWebView) {\n+    view.reload()\n+  }\n\n  companion object {\n    const val REACT_CLASS = \"CustomWebView\"\n  }\n```\n\n</TabItem>\n</Tabs>\n\nIn this case, it's enough to call directly the `view.reload()` method because our ReactWebView inherits from the Android's `WebView` and it has a reload method directly available. If you are implementing a custom function, that is not available in your custom view, you might also have to implement the required method in the Android's View that is managed by the React Native's `ViewManager`.\n\n</TabItem>\n<TabItem value=\"ios\" label=\"iOS\">\n\nTo let your view respond to the Native Command, we need to implement a couple of methods on iOS.\n\nLet's open the `RCTWebView.mm` file and let's modify it as it follows:\n\n```diff title=\"RCTWebView.mm\"\n  // Event emitter convenience method\n  - (const CustomWebViewEventEmitter &)eventEmitter\n  {\n  return static_cast<const CustomWebViewEventEmitter &>(*_eventEmitter);\n  }\n\n+  - (void)handleCommand:(const NSString *)commandName args:(const NSArray *)args\n+  {\n+  RCTCustomWebViewHandleCommand(self, commandName, args);\n+  }\n+\n+  - (void)reload\n+  {\n+  [_webView reloadFromOrigin];\n+  }\n\n  + (ComponentDescriptorProvider)componentDescriptorProvider\n  {\n  return concreteComponentDescriptorProvider<CustomWebViewComponentDescriptor>();\n  }\n```\n\nTo make your view respond to the Native Commands, you need to apply the following changes:\n\n1. Add a `handleCommand:args` function. This function is invoked by the components infrastructure to handle the commands. The function implementation is similar for every component: you need to call an `RCT<componentNameInJS>HandleCommand` function that is generated by Codegen for you. The `RCT<componentNameInJS>HandleCommand` perform a bunch of validation, verifying that the command that we need to invoke is among the supported ones and that the parameters passed matches the one expected. If all the checks pass, the `RCT<componentNameInJS>HandleCommand` will then invoke the proper native method.\n2. Implement the `reload` method. In this example, the `reload` method calls the `reloadFromOrigin` function of the WebKit's WebView.\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ffcfec666560541ab63ad4a0ddf33b7c64dbf298d7aaa795cb3db19fbe328a56",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c3d72a76"
+      }
+    },
+    {
+      "segment_id": "81e59017",
+      "source_content": "## 5. Run your app",
+      "source_content_hash": "7784a08d55c7d8c379184cc86efe5a0084d9d3ae8679b596857ac237d78984cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 5. 執行您的應用程式"
+      }
+    },
+    {
+      "segment_id": "ca714988",
+      "source_content": "Finally, you can run your app with the usual commands. Once the app is running, you can tap on the refresh button to see the page getting reloaded.",
+      "source_content_hash": "6839949d6b7d31d61b9d27b28a9638c66be53cfa76ee2d722ad73fe45edf4a17",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，您可以使用常規指令執行應用程式。當應用程式運行後，點擊重新整理按鈕即可看到頁面重新載入。"
+      }
+    },
+    {
+      "segment_id": "e5eba26c",
+      "source_content": "| <center>Android</center>                                                                         | <center>iOS</center>                                                                         |\n| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |\n| <center><img src=\"/docs/assets/native-commands-android.gif\" height=\"75%\" width=\"75%\" /></center> | <center><img src=\"/docs/assets/native-commands-ios.gif\" height=\"75%\" width=\"75%\" /></center> |",
+      "source_content_hash": "4acb74a8dda2f2b9bac5d3834fe716474119cfc693e13549dbc35c82df193f86",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e5eba26c"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/the-new-architecture/fabric-component-native-commands.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.186799+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ab38fe20571b83dc987b1a2d599e65c228055082ed04ecb1e6526062488f7f23"
+  }
+}

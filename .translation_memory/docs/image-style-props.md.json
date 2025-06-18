@@ -1,0 +1,560 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/image-style-props.md",
+  "source_file_content_hash": "e20b15d4c806236c5c3c2f9119bdeef893767d7e833f5ddb0ca1adfe097506c4",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: image-style-props\ntitle: Image Style Props\n---",
+      "source_content_hash": "1176d4c168e94c9ceb9e0e5b1be58128b3fe3fcd941cb4d8a72218511d814852",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "b3de8742",
+      "source_content": "## Examples",
+      "source_content_hash": "0d19ab46319785768005536313f02bd3b9b779aaed82eeac5bf7a7f796ad3ef1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "### Image Resize Mode",
+      "source_content_hash": "66a396b0b5807452ac00e9f3d79e227db199adbe3f9e38fda6d85053c473d25b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=Image%20Resize%20Modes%20Example\nimport React from 'react';\nimport {View, Image, Text, StyleSheet, ScrollView} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst asset = require('@expo/snack-static/react-native-logo.png');\n\nconst DisplayAnImageWithStyle = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container} edges={['top']}>\n      <ScrollView style={styles.scrollView}>\n        <View>\n          <Image style={[styles.image, {resizeMode: 'cover'}]} source={asset} />\n          <Text style={styles.text}>resizeMode : cover</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {resizeMode: 'contain'}]}\n            source={asset}\n          />\n          <Text style={styles.text}>resizeMode : contain</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {resizeMode: 'stretch'}]}\n            source={asset}\n          />\n          <Text style={styles.text}>resizeMode : stretch</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {resizeMode: 'repeat'}]}\n            source={asset}\n          />\n          <Text style={styles.text}>resizeMode : repeat</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {resizeMode: 'center'}]}\n            source={asset}\n          />\n          <Text style={styles.text}>resizeMode : center</Text>\n        </View>\n      </ScrollView>\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  scrollView: {\n    padding: 12,\n    alignItems: 'center',\n    gap: 16,\n  },\n  image: {\n    borderWidth: 1,\n    borderColor: 'red',\n    height: 100,\n    width: 200,\n  },\n  text: {\n    textAlign: 'center',\n    marginBottom: 12,\n  },\n});\n\nexport default DisplayAnImageWithStyle;\n```",
+      "source_content_hash": "2e58f8be7e9c614cc7b542226c33e2eadb6a4b35675d74dff74bef7f6b79f693",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### Image Border",
+      "source_content_hash": "2044097bdd3998663205693fcc20eb8e6db458ce49508979b098a48f0d02f428",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d8159289",
+      "source_content": "```SnackPlayer name=Style%20BorderWidth%20and%20BorderColor%20Example\nimport React from 'react';\nimport {Image, StyleSheet, Text} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst DisplayAnImageWithStyle = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <Image\n        style={{\n          borderColor: 'red',\n          borderWidth: 5,\n          height: 100,\n          width: 200,\n        }}\n        source={require('@expo/snack-static/react-native-logo.png')}\n      />\n      <Text>borderColor & borderWidth</Text>\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    flexDirection: 'column',\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default DisplayAnImageWithStyle;\n```",
+      "source_content_hash": "2f9b6fd2726c6122d66710ee0c3e68367c2d2017960fec602895ca0768ba53d3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "### Image Border Radius",
+      "source_content_hash": "645dc798fe16434ccdeaab57faee0a7ba772b582ef9265321cc67138acd0bb77",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "353ca453",
+      "source_content": "```SnackPlayer name=Style%20Border%20Radius%20Example\nimport React from 'react';\nimport {View, Image, StyleSheet, Text, ScrollView} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst asset = require('@expo/snack-static/react-native-logo.png');\n\nconst DisplayAnImageWithStyle = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <ScrollView style={styles.scrollView}>\n        <View>\n          <Image\n            style={[styles.image, {borderTopRightRadius: 20}]}\n            source={asset}\n          />\n          <Text>borderTopRightRadius</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {borderBottomRightRadius: 20}]}\n            source={asset}\n          />\n          <Text>borderBottomRightRadius</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {borderBottomLeftRadius: 20}]}\n            source={asset}\n          />\n          <Text>borderBottomLeftRadius</Text>\n        </View>\n        <View>\n          <Image\n            style={[styles.image, {borderTopLeftRadius: 20}]}\n            source={asset}\n          />\n          <Text>borderTopLeftRadius</Text>\n        </View>\n      </ScrollView>\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  scrollView: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  image: {\n    borderWidth: 1,\n    borderColor: 'red',\n    height: 100,\n    width: 200,\n  },\n});\n\nexport default DisplayAnImageWithStyle;\n```",
+      "source_content_hash": "4f451dbeed6dea3cd120c03e7dfe9a96bbec54917a7a2d122f1a600c5467ff48",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "### Image Tint",
+      "source_content_hash": "e614ee6cc92f4d7de8f527fd1c864692cd79c915f29f1b09e8bb2133f87d9850",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "65ba7468",
+      "source_content": "```SnackPlayer name=Style%20tintColor%20Function%20Component\nimport React from 'react';\nimport {Image, StyleSheet, Text} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst DisplayAnImageWithStyle = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <Image\n        style={{\n          tintColor: '#000000',\n          resizeMode: 'contain',\n          height: 100,\n          width: 200,\n        }}\n        source={require('@expo/snack-static/react-native-logo.png')}\n      />\n      <Text>tintColor</Text>\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default DisplayAnImageWithStyle;\n```",
+      "source_content_hash": "7370091b446b26be9961f450672a721b58430080813b18d6cee6dbde7acb062e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c7ab93a8",
+      "source_content": "### `backfaceVisibility`",
+      "source_content_hash": "3620bdb63195587f688a3225ab293cb2461db191c5190e770b8981c06db16b88",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9ede513a",
+      "source_content": "The property defines whether or not the back face of a rotated image should be visible.",
+      "source_content_hash": "6be63c1f3174a1dc37bc1baac0bf50db9a590d68cd0689e4bfc1ccf40f27cb32",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "73f4cc36",
+      "source_content": "| Type                          | Default     |\n| ----------------------------- | ----------- |\n| enum(`'visible'`, `'hidden'`) | `'visible'` |",
+      "source_content_hash": "03bf4000ce8bf5fdfda8bca4002d857bfeb13b913240f00a36c92ed48cdc5579",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe61fa42",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c0f80a50",
+      "source_content": "### `backgroundColor`",
+      "source_content_hash": "025725f2b031ec6f9807ec405c4a8f8691ad8652446c7f936d6c8a5159d12237",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "759a3d15",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "dfdb0eb6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9f45ca3",
+      "source_content": "### `borderBottomLeftRadius`",
+      "source_content_hash": "ee885509d27d85a1dcf77e77edd7813225bba75de4fb9efc7d6eb70359eaef71",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0faad314",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "9c66f3e4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "52dd49af",
+      "source_content": "### `borderBottomRightRadius`",
+      "source_content_hash": "346cccf0e43f8d39e5e40bab049a97e574f6ebfaea5abedcd7f0dc16bd91fa5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ced7184f",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7b53658b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "365a11aa",
+      "source_content": "### `borderColor`",
+      "source_content_hash": "05d358f1a3464c75e98f67d38b39207716622b21313e1725ab4fb49b4ec3a9c6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "09d95d42",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e4121395",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4cb3b0aa",
+      "source_content": "### `borderRadius`",
+      "source_content_hash": "7dbc37af5adbd94c5b272112682d18b2245589b78619baeca0cb79b9a07fc085",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b62cf193",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "abafdef2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "519c654d",
+      "source_content": "### `borderTopLeftRadius`",
+      "source_content_hash": "7044c7f512d24eef82c739faafbc0b60ee07554f87a9b68d142bfa3dcb44274d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc283eca",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "33a73de5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "73eb56bc",
+      "source_content": "### `borderTopRightRadius`",
+      "source_content_hash": "c73a5e33d376db92cdc9514a4f404988641bb561cbd60cd4f362fecdc3bcce41",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "95799de0",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c650ddf9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c2db81f5",
+      "source_content": "### `borderWidth`",
+      "source_content_hash": "5a9271880e7079badb8f20d447e6bd664581fbc860af71c1c3dedaaf3ddc8832",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2d0c820f",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3d0a3a4b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "18b30a5c",
+      "source_content": "### `opacity`",
+      "source_content_hash": "4f3cdd0188b11a2ba2f8a2dd9231d898274eb9521d743fca406b6970740e0d44",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7ed923ee",
+      "source_content": "Set an opacity value for the image. The number should be in the range from `0.0` to `1.0`.",
+      "source_content_hash": "28419fa49f99458edd4c5006962ea6c918b20b7ca90780ca598815ba5c9d667a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "562528a3",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `1.0`   |",
+      "source_content_hash": "b2eadeebf015294b474e4f960b2804cd3e8c4b659d639bb23b5475397baaca47",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b6c570f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fd59095d",
+      "source_content": "### `overflow`",
+      "source_content_hash": "a4e25b76e471e66f036419ea14dc0f063171890a397212f1ca4e22e1aa74acdc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be040f81",
+      "source_content": "| Type                          | Default     |\n| ----------------------------- | ----------- |\n| enum(`'visible'`, `'hidden'`) | `'visible'` |",
+      "source_content_hash": "03bf4000ce8bf5fdfda8bca4002d857bfeb13b913240f00a36c92ed48cdc5579",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "35e25e10",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2567fe3c",
+      "source_content": "### `overlayColor` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1cb961d9f8c252071952ec08cabfce2a73da29e210518b81157385f51aea9e32",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b16b56a2",
+      "source_content": "When the image has rounded corners, specifying an overlayColor will cause the remaining space in the corners to be filled with a solid color. This is useful in cases which are not supported by the Android implementation of rounded corners:",
+      "source_content_hash": "5cfe9a05d7b96059f4915e50c435cdb67747a56daf4717274ca07dc134234a03",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0b30c085",
+      "source_content": "- Certain resize modes, such as `'contain'`\n- Animated GIFs",
+      "source_content_hash": "ed6d744aecc04d357d44491069fc43451822fb9c05ec2d6032d2ecc5d9abd3be",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b8954ec9",
+      "source_content": "A typical way to use this prop is with images displayed on a solid background and setting the `overlayColor` to the same color as the background.",
+      "source_content_hash": "fbe2be89d46177fe81f8eb6435b41c75b00acc351d5ebc7e13f16bec65d9e0cd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ebe673d6",
+      "source_content": "For details of how this works under the hood, see [Fresco documentation](https://frescolib.org/docs/rounded-corners-and-circles.html).",
+      "source_content_hash": "9487e45f84cd791a2e0a95162f1e01da5c3cff3933027c7c2b172d748833a2ed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5fb0296e",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f0b4515e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c48a3f55",
+      "source_content": "### `resizeMode`",
+      "source_content_hash": "572a9ddddaa7cf46e74b642534b3139e12c5e694ccdf79183611e92c2f57db77",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d6c9e4cd",
+      "source_content": "Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.",
+      "source_content_hash": "b4c2283f4bd5cf91c092a120cec32b877b85cb5b4bf59b53766d531c758b3c89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "66f7a840",
+      "source_content": "- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that:\n\n  - Both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding)\n  - At least one dimension of the scaled image will be equal to the corresponding dimension of the view (minus padding)\n\n- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).\n\n- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.\n\n- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.\n\n- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.",
+      "source_content_hash": "dfc36d5d0dbd68246d06c80cd59170b9cfd49ead4f8161cee4beeaa5068d91d6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `cover`: 均勻縮放圖片（保持圖片長寬比），使得：\n\n  - 圖片的兩個維度（寬度和高度）都將等於或大於視圖的相應維度（減去內邊距）\n  - 縮放後的圖片至少有一個維度會等於視圖的相應維度（減去內邊距）\n\n- `contain`: 均勻縮放圖片（保持圖片長寬比），使得圖片的兩個維度（寬度和高度）都將等於或小於視圖的相應維度（減去內邊距）。\n\n- `stretch`: 獨立縮放寬度和高度，這可能會改變原始圖片的長寬比。\n\n- `repeat`: 重複圖片以覆蓋視圖的框架。圖片將保持其大小和長寬比，除非它大於視圖，在這種情況下它將被均勻縮小以使其包含在視圖中。\n\n- `center`: 在兩個維度上將圖片置中於視圖中。如果圖片大於視圖，則將其均勻縮小以使其包含在視圖中。"
+      }
+    },
+    {
+      "segment_id": "866fc735",
+      "source_content": "| Type                                                              | Default   |\n| ----------------------------------------------------------------- | --------- |\n| enum(`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |",
+      "source_content_hash": "1d19caf563e1a2fd421f639a412d0f48350d39f968e0689bfb76271162ea8ec1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_866fc735"
+      }
+    },
+    {
+      "segment_id": "3bcb9b91",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7020a57c",
+      "source_content": "### `objectFit`",
+      "source_content_hash": "ebd955ac26e139a35c172801169f75febfeac0959d975e4f13b690f66894a4c0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `objectFit`"
+      }
+    },
+    {
+      "segment_id": "d58af824",
+      "source_content": "Determines how to resize the image when the frame doesn't match the raw image dimensions.",
+      "source_content_hash": "286abf25ecc4d07abeda4c999a54009023ca3c34ba6bf998a5e920de4682b78f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定當框架與原始圖片尺寸不匹配時如何調整圖片大小。"
+      }
+    },
+    {
+      "segment_id": "f83153b4",
+      "source_content": "| Type                                                   | Default   |\n| ------------------------------------------------------ | --------- |\n| enum(`'cover'`, `'contain'`, `'fill'`, `'scale-down'`) | `'cover'` |",
+      "source_content_hash": "773baa397436b2e342552ebc65737fd273039e4926cbad5728f004df30dbe323",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f83153b4"
+      }
+    },
+    {
+      "segment_id": "a35bb120",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ef0eaf79",
+      "source_content": "### `tintColor`",
+      "source_content_hash": "7014a43de5b69221e94c3f2011179d028d0492a926f4c0defddc02f3d0ed8a02",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `tintColor`"
+      }
+    },
+    {
+      "segment_id": "227b5df5",
+      "source_content": "Changes the color of all the non-transparent pixels to the tintColor.",
+      "source_content_hash": "ac2b88887aef9738b557df1722c005b97f953a4164d0070523529cf09f820cd5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將所有非透明像素的顏色更改為指定的 tintColor。"
+      }
+    },
+    {
+      "segment_id": "2ea79e57",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2ea79e57"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/image-style-props.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.162297+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "e20b15d4c806236c5c3c2f9119bdeef893767d7e833f5ddb0ca1adfe097506c4"
+  }
+}

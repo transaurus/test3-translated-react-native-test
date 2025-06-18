@@ -1,0 +1,372 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2021-10-26-toward-hermes-being-the-default.md",
+  "source_file_content_hash": "335b2cc02cc558699d960d58c7645870b7d3b49dd2a871992d086b762317cb6c",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Toward Hermes being the Default\nauthors: [huxpro]\ntags: [announcement]\n---",
+      "source_content_hash": "77cd2169822fdcb3b1e07aaa3a9fc9fcf9103c305f34af4ef38e68bca75d44fa",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Since [we announced Hermes in 2019](https://engineering.fb.com/2019/07/12/android/hermes/), it has been increasingly gaining adoption in the community. The team at [Expo](https://expo.dev/), who maintain a popular meta-framework for React Native apps, recently [announced experimental](https://blog.expo.dev/expo-sdk-42-579aee2348b6) [support](https://blog.expo.dev/expo-sdk-43-beta-is-now-available-47dc54a8d29f) for Hermes after being [one of the most requested features of Expo](https://expo.canny.io/feature-requests/p/enabling-hermes). The team at [Realm](https://realm.io/), a popular mobile database, also recently shipped its [alpha support](https://github.com/realm/realm-js/issues/3940) for Hermes. In this post, we want to highlight some of the most exciting progress we've made over the past two years to push Hermes towards being _the best_ JavaScript engine for React Native. Looking forward, we are confident that with these improvements and more to come, we can make Hermes the default JavaScript engine for React Native across all platforms.",
+      "source_content_hash": "3cc9bad3ec17d795a414e3b249c8927a4825315179d4c3a7be631f14b9319a91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自[我們於2019年宣布推出Hermes](https://engineering.fb.com/2019/07/12/android/hermes/)以來，它在社群中的採用率持續攀升。維護熱門React Native元框架的[Expo](https://expo.dev/)團隊，近期[宣布實驗性支援](https://blog.expo.dev/expo-sdk-42-579aee2348b6) [Hermes](https://blog.expo.dev/expo-sdk-43-beta-is-now-available-47dc54a8d29f)，這項功能原是[Expo使用者最常要求的功能之一](https://expo.canny.io/feature-requests/p/enabling-hermes)。熱門行動資料庫[Realm](https://realm.io/)的團隊也於近期發布了對Hermes的[alpha版支援](https://github.com/realm/realm-js/issues/3940)。在這篇文章中，我們想重點介紹過去兩年來，我們為推動Hermes成為React Native「最佳」JavaScript引擎所取得的一些最令人興奮的進展。展望未來，我們相信隨著這些改進及更多即將到來的優化，我們能讓Hermes成為所有平台上React Native的預設JavaScript引擎。"
+      }
+    },
+    {
+      "segment_id": "a2752550",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a2752550"
+      }
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "## Optimizing for React Native",
+      "source_content_hash": "16012deae00fbd7970cd390b4808324981c5b76d76c118191b3eb4b47aafb70c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 為React Native優化"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Hermes’s defining feature is how it performs compilation work ahead-of-time, meaning that React Native apps with Hermes enabled ship with precompiled optimized bytecode instead of plain JavaScript source. This drastically reduces the amount of work needed to start up your product for users. Measurements from both Facebook and community apps have suggested that enabling Hermes often cut a product’s TTI (or [Time-To-Interactive](https://web.dev/interactive/)) metric by nearly half.",
+      "source_content_hash": "298628edb92e6030c18045a81da0ce67ce9a43f0e9965aaed38d6f6622a26ad1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes的定義性特徵在於其提前執行編譯工作，這意味著啟用Hermes的React Native應用程式會預先載入經過優化的位元組碼，而非普通的JavaScript原始碼。這大幅減少了使用者啟動產品所需的工作量。來自Facebook和社群應用的測量數據表明，啟用Hermes通常能將產品的TTI（或[互動時間](https://web.dev/interactive/)）指標減少近一半。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "That being said, we’ve been working on improving Hermes in many other aspects to make it even better as a JavaScript engine specialized for React Native.",
+      "source_content_hash": "3a9581f5400de651eddf7e099a7589ea3d0a0200dbade5af2dcdebe44cce236c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "話雖如此，我們一直在從許多其他方面改進Hermes，使其作為專為React Native打造的JavaScript引擎更加出色。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### Building a New Garbage Collector for Fabric",
+      "source_content_hash": "a783e8bf2ab4ac729990da4097e355b1079c51c61603702b0b3ad7c82102b512",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 為Fabric構建新的垃圾回收器"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "With the upcoming [Fabric](https://github.com/react-native-community/discussions-and-proposals/issues/4) renderer in the new React Native architecture, it will be possible to synchronously call JavaScript on the UI thread. However, this means if the JavaScript thread takes too long to execute, it can cause noticeable UI frame drops and block user inputs. The [concurrent rendering](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html) enabled by React [Fiber](https://reactjs.org/docs/faq-internals.html#what-is-react-fiber) will avoid scheduling long JavaScript tasks by splitting rendering work into chunks. However, there is another common source of latency from the JavaScript thread — when the JavaScript engine has to “stop the world” to perform a garbage collection (GC).",
+      "source_content_hash": "74d119402c0f2fbf5c2aded05737bb53801a6f6663ca399674194c57b5c607da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著新React Native架構中即將推出的[Fabric](https://github.com/react-native-community/discussions-and-proposals/issues/4)渲染器，將有可能在UI線程上同步調用JavaScript。然而，這意味著如果JavaScript線程執行時間過長，可能會導致明顯的UI幀率下降並阻塞使用者輸入。由React [Fiber](https://reactjs.org/docs/faq-internals.html#what-is-react-fiber)啟用的[並行渲染](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html)將通過將渲染工作拆分為多個區塊來避免排程長時間的JavaScript任務。然而，JavaScript線程還有另一個常見的延遲來源——當JavaScript引擎必須「停止世界」以執行垃圾回收（GC）時。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "The previous default garbage collector in Hermes, [GenGC](https://hermesengine.dev/docs/gengc/), was a single-threaded generational garbage collector. The new generations uses a typical semi-space copying strategy, and the old generations uses a mark-compact strategy to make it really good at aggressively returning memory to the operating system. Due to its single-thread, GenGC has the downside of causing long GC pauses. On apps that are as complicated as Facebook for Android, we observed an average pause of 200ms, or 1.4s at p99. We have even seen it be as long as 7 seconds, considering the large and diverse user base of Facebook for Android.",
+      "source_content_hash": "69889e73605862cf07d1836099ba803c368ef551ee156d06f7b4dc1ebb7da7a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes中先前的預設垃圾回收器[GenGC](https://hermesengine.dev/docs/gengc/)是一個單線程的分代垃圾回收器。新生代使用典型的半空間複製策略，而老生代則使用標記-壓縮策略，使其非常擅長積極地將記憶體返還給操作系統。由於其單線程特性，GenGC的缺點是會導致長時間的GC暫停。在像Facebook for Android這樣複雜的應用上，我們觀察到平均暫停時間為200毫秒，或在p99時為1.4秒。考慮到Facebook for Android龐大且多樣化的使用者群體，我們甚至見過長達7秒的暫停。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "In order to mitigate this, we implemented a brand new _mostly concurrent_ GC named [Hades](https://hermesengine.dev/docs/hades). Hades collects its young generation exactly the same as GenGC, but it manages its old generation with a snapshot-at-the-beginning style mark-sweep collector. which can significantly reduce GC pause time by performing most of its work in a background thread without blocking the engine’s main thread from executing JavaScript code. **Our statistics show that Hades only pauses for 48ms at p99.9 on 64-bit devices (34x faster than GenGC!)** and around 88ms at p99.9 on 32-bit devices (where it operates as a single-threaded _incremental_ GC). These pause time improvements can come at the cost of overall throughput, due to the need for more expensive write barriers, slower freelist based allocation (as opposed to a bump pointer allocator), and increased heap fragmentation. We think those are the right trade-offs, and we were able to achieve overall lower memory consumption via coalescing and additional memory optimizations that we’ll talk about.",
+      "source_content_hash": "8b4156734d213f1a4562745189e3d52f4c75a078452389ad760993db1eaa67df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了解決這個問題，我們實作了一個全新的「大部分並行」垃圾回收器，名為[Hades](https://hermesengine.dev/docs/hades)。Hades的年輕代回收方式與GenGC完全相同，但其老年代則採用「開始時快照」風格的標記-清除回收器，這能大幅減少GC暫停時間，因為大部分工作都在背景執行緒中進行，不會阻擋引擎主執行緒執行JavaScript程式碼。**我們的統計數據顯示，Hades在64位元裝置上的p99.9暫停時間僅48毫秒（比GenGC快34倍！）**，而在32位元裝置上約為88毫秒（此時它以單執行緒的「增量式」GC模式運作）。這些暫停時間的改善可能會以整體吞吐量為代價，因為需要更昂貴的寫入屏障、基於自由列表的較慢記憶體配置（相對於指標遞增配置器），以及增加的堆碎片化。我們認為這些是合理的權衡，且透過合併與其他記憶體優化措施，我們成功實現了整體更低的記憶體消耗，後續將詳細說明。"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "### Striking on Performance Pain Points",
+      "source_content_hash": "65b3a680065a8445c506baa16100ed89ed5596f7d5654bfebbba183c03f07fa0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 直擊效能痛點"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "Startup time of applications is critical to the success of many apps, and we are continuously pushing the boundary for React Native. For any new JavaScript feature we implement in Hermes, we carefully monitor their impact on production performance and ensure that they don’t regress metrics. At Facebook, we are currently experimenting with a [dedicated Babel transform profile for Hermes in Metro](https://github.com/facebook/react-native/blob/main/packages/react-native-babel-preset/src/configs/main.js#L41) to replace a dozen Babel transforms with Hermes’s native ESNext implementations. We were able to observe **18-25% TTI improvements** on many surfaces and **overall bytecode size decreases** and we expect to see similar results for OSS.",
+      "source_content_hash": "db3de6c95f5ae8ae5e3e8da05af41252c094b7112f43913d4eb0de848cca6b8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "應用程式的啟動時間對許多產品的成功至關重要，我們持續為React Native突破界限。對於Hermes實作的任何新JavaScript功能，我們都會仔細監控其對生產效能的影響，確保不會導致指標倒退。在Facebook，我們目前正在實驗[Metro中專為Hermes設計的Babel轉換設定檔](https://github.com/facebook/react-native/blob/main/packages/react-native-babel-preset/src/configs/main.js#L41)，用Hermes的原生ESNext實作取代十多個Babel轉換。我們在許多介面觀察到**18-25%的TTI改善**與**整體位元組碼大小減少**，預期開源社群也能看到類似成果。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "In addition to startup performance, we identified memory footprint as an opportunity for improvement in React Native apps especially for [virtual reality.](https://reactnative.dev/blog/2021/08/26/many-platform-vision#expanding-to-new-platforms) Thanks to the low-level control we have as a JavaScript engine, we were able to deliver rounds of memory optimizations by squeezing bits and bytes out:",
+      "source_content_hash": "d6ba57e2605ca747d212a1b9eeb629490430ff6ffad21be3c95f718303956de3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了啟動效能，我們發現記憶體佔用是React Native應用程式（尤其是[虛擬實境](https://reactnative.dev/blog/2021/08/26/many-platform-vision#expanding-to-new-platforms)）的改進機會。得益於JavaScript引擎的低階控制能力，我們透過細微調整實現了多輪記憶體優化："
+      }
+    },
+    {
+      "segment_id": "c6dea11f",
+      "source_content": "1. Previously, all JavaScript values were represented as 64-bit NaN-boxing encoded tagged values to represent floating point doubles and pointers on 64-bit architecture. However, this is wasteful in practice because most numbers are small integers (SMI) and JavaScript heap of client-side applications is not expected to be larger than 4GiB generally. To address this, we introduced a new 32-bit encoding in which SMI and pointers are encoded in 29 bits (because pointers are 8-byte aligned, we can assume the bottom 3 bits are always zero), and the rest of JS numbers are boxed onto the heap. **This reduced the JavaScript heap size by ~30%.**\n2. Different kinds of JavaScript objects are represented as different kinds of GC-managed cells in the JavaScript heap. By aggressively optimizing the memory layout of headers for those cells, **we are able to reduce memory usage by another ~15%**.",
+      "source_content_hash": "2dfc66286879309f10bb61fbe7e10bf5ec5c5e265975a6d738c3e52aec2aa227",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 過去所有JavaScript值都以64位元NaN-boxing編碼標記值表示，用於在64位元架構上儲存浮點數雙精度與指標。但這在實際應用中浪費空間，因為多數數字是小整數（SMI），且客戶端應用的JavaScript堆通常不會超過4GiB。為此，我們引入新的32位元編碼，其中SMI與指標以29位元儲存（因指標為8位元對齊，可假設最低3位元始終為零），其餘JS數字則封裝到堆中。**這使JavaScript堆大小減少約30%。**\n2. 不同類型的JavaScript物件在堆中以不同GC管理單元表示。透過極致優化這些單元的標頭記憶體布局，**我們再降低約15%記憶體使用量**。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "One of our key decisions with Hermes was to not implement a [just-in-time (JIT) compiler](https://en.wikipedia.org/wiki/Just-in-time_compilation) because we believe that for most React Native apps, the additional warm-up costs and extra footprints on binary and memory would not actually be worthwhile. For years, we invested a lot of effort in optimizing interpreter performance and compiler optimizations to make Hermes’s throughput competitive with other engines for React Native workloads. We are continuing to focus on improving throughput by identifying performance bottlenecks from everywhere (interpreter dispatch loop, stack layout, object model, GC, etc.). Expect some more numbers in upcoming releases!",
+      "source_content_hash": "f92f76b1b4c7a44209e3b132293b14a0eb8e67956a99769cbc324b8fd7a9079d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes的關鍵決策之一是不實作[即時編譯器(JIT)](https://en.wikipedia.org/wiki/Just-in-time_compilation)，因為我們認為對多數React Native應用而言，額外的暖機成本與二進位檔/記憶體佔用並不划算。多年來，我們投入大量精力優化直譯器效能與編譯器最佳化，使Hermes的吞吐量在React Native工作負載上能與其他引擎競爭。我們持續透過識別各處效能瓶頸（直譯器調度循環、堆疊布局、物件模型、GC等）來提升吞吐量，請期待後續版本的數據！"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "### Pioneering at Vertical Integrations",
+      "source_content_hash": "10f61a8006a90dfe457ebbe6ef90b61b289a91b68c23843b6390a146b6507083",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 垂直整合的先鋒實踐"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "At Facebook, we prefer to colocate projects within a large [monorepo](https://en.wikipedia.org/wiki/Monorepo). By having the engine (Hermes) and the host (React Native) closely iterating together, we opened a lot of room for vertical integrations. To name a few:",
+      "source_content_hash": "eb30fe45fe0c584a4ba96263200888b239824ab0506d89b33e7790d4526423c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Facebook，我們偏好將專案集中於單一[monorepo](https://en.wikipedia.org/wiki/Monorepo)。透過讓引擎（Hermes）與宿主（React Native）緊密協同迭代，我們開創了許多垂直整合的可能性，例如："
+      }
+    },
+    {
+      "segment_id": "e7bc8c38",
+      "source_content": "- Hermes supports [on-device JavaScript debugging with the Chrome debugger](https://reactnative.dev/docs/hermes#debugging-js-on-hermes-using-google-chromes-devtools) by speaking the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/). It’s better than the legacy “[Remote JS Debugging](https://reactnative.dev/docs/debugging#chrome-developer-tools)” (which uses an in-app proxy to run JS in desktop Chrome) because it supports debugging synchronous native calls and guaranteed a consistent runtime environment. Together with React DevTools, Metro, Inspector, and so on, Hermes debugger is now part of [Flipper](https://reactnative.dev/blog/2020/03/26/version-0.62) to provide a one-stop developer experience.\n- Objects allocated during the initialization path of React Native apps are often long-lived and don’t follow the _generational_ _hypothesis_ leveraged by generational GCs. Therefore, we [configured Hermes in React Native](https://github.com/facebook/react-native/blob/main/ReactAndroid/src/main/java/com/facebook/hermes/reactexecutor/OnLoad.cpp#L37-L42) to allocate the first 32MiB directly into old generations (known as _pre-tenuring_) to avoid triggering GC pauses and delaying TTI.\n- The new React Native architecture is heavily based on [JSI (or JavaScript Interface)](https://github.com/react-native-community/discussions-and-proposals/issues/91), a lightweight, general-purposed API for embedding a JavaScript engine into a C++ program. By having the team maintaining the JS engine also maintains the JSI API implementation, we are confident in providing the best possible integration that is reliable, performant and battle-tested at the Facebook’s scale.\n- Getting JavaScript concurrency primitives (e.g. [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)) and platform concurrency primitives (e.g. [microtasks](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide)) both semantically correct and performant are critical to React concurrent rendering and the future of React Native apps. Historically, promises in React Native were [polyfilled](https://github.com/facebook/react-native/blob/main/Libraries/Core/polyfillPromise.js#L37) using non-standardized [`setImmediate`](https://developer.mozilla.org/en-US/docs/Web/API/Window/setImmediate) APIs. We are working on making native promises and microtasks from JS engines available via JSI, and introducing [`queueMicrotask`](https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask), a recent addition to the web standard, to the platform, to better support modern asynchronous JavaScript code.",
+      "source_content_hash": "91b6560c9f7ac1fce12163d317f13ecc332ff89c16e1cf98404c599d34b3edf7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- Hermes 支援[使用 Chrome 除錯工具進行裝置上的 JavaScript 除錯](https://reactnative.dev/docs/hermes#debugging-js-on-hermes-using-google-chromes-devtools)，透過實作 [Chrome DevTools 協定](https://chromedevtools.github.io/devtools-protocol/)。這比傳統的「[遠端 JS 除錯](https://reactnative.dev/docs/debugging#chrome-developer-tools)」（透過應用內代理在桌面版 Chrome 中執行 JS）更優越，因為它支援同步原生呼叫的除錯，並確保一致的執行環境。與 React DevTools、Metro、Inspector 等工具整合後，Hermes 除錯器現已成為 [Flipper](https://reactnative.dev/blog/2020/03/26/version-0.62) 的一部分，提供一站式的開發者體驗。\n- React Native 應用初始化路徑中分配的物件通常具有較長的生命週期，且不符合分代式 GC 所依賴的_分代假設_。因此，我們[在 React Native 中配置 Hermes](https://github.com/facebook/react-native/blob/main/ReactAndroid/src/main/java/com/facebook/hermes/reactexecutor/OnLoad.cpp#L37-L42)，將前 32MiB 直接分配至老年代（稱為_預先晉升_），以避免觸發 GC 暫停並延遲 TTI。\n- 新的 React Native 架構高度依賴 [JSI（JavaScript 介面）](https://github.com/react-native-community/discussions-and-proposals/issues/91)，這是一個輕量級、通用的 API，用於將 JavaScript 引擎嵌入 C++ 程式。由於維護 JS 引擎的團隊同時負責 JSI API 的實作，我們有信心提供最可靠的整合方案，並在 Facebook 的規模下經過效能與實戰驗證。\n- 確保 JavaScript 並行原語（如 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)）與平台並行原語（如 [微任務](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide)）在語意上正確且高效，對 React 並行渲染與 React Native 應用的未來至關重要。過去，React Native 中的 Promise 是透過非標準的 [`setImmediate`](https://developer.mozilla.org/en-US/docs/Web/API/Window/setImmediate) API [進行填充](https://github.com/facebook/react-native/blob/main/Libraries/Core/polyfillPromise.js#L37)。我們正致力於透過 JSI 提供 JS 引擎原生的 Promise 與微任務，並引入網頁標準的新成員 [`queueMicrotask`](https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask) 至平台，以更好地支援現代非同步 JavaScript 程式碼。"
+      }
+    },
+    {
+      "segment_id": "35a77014",
+      "source_content": "## Bringing Along the Whole Community",
+      "source_content_hash": "0b6a72b1cb44694095c5be7a5dc5f4eea16ea813614fce8aeb69e868c3ffb2c8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 攜手整個社群"
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "Hermes has been really great for us at Facebook. But our work is not done until our community can use Hermes to power experiences throughout the ecosystem, so that everyone leverage all of its features and to embrace its full potential.",
+      "source_content_hash": "d2512f3f09c9e41b83dbd0e42b1b6887c9a972da7fd4ce60886695f292fbeeb7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 對 Facebook 來說表現卓越，但我們的工作尚未完成，直到整個生態系統都能使用 Hermes 來驅動各種體驗，讓所有人充分發揮其功能與潛力。"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "### Expanding to New Platforms",
+      "source_content_hash": "466230cb8282e7a94674b531412e5bbe7035b5f8ba8bdeca34614dc57e255121",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 擴展至新平台"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Hermes was initially open sourced only for React Native on Android. Since then, we have been thrilled to see our members of the community expanding Hermes support into [many other platforms that React Native’s ecosystem has expanded](https://reactnative.dev/blog/2021/08/26/many-platform-vision).",
+      "source_content_hash": "85ba17f2133f3df70b2b873049ffba009a2b458ca639e247b96300a8e10a3b63",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 最初僅針對 Android 平台的 React Native 開源。此後，我們欣喜地看到社群成員將 Hermes 支援擴展至 [React Native 生態系統涵蓋的眾多其他平台](https://reactnative.dev/blog/2021/08/26/many-platform-vision)。"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "[Callstack](https://callstack.com/) led the effort of bringing [Hermes to iOS in React Native 0.64](https://reactnative.dev/blog/2021/03/12/version-0.64). They wrote a [series of articles](https://callstack.com/blog/bringing-hermes-to-ios-in-react-native/) and hosted a [podcast](https://callstack.com/podcasts/react-native-0-64-with-hermes-for-ios-ep-5) on how they achieved it. According to their benchmarks, Hermes was able to **consistently deliver ~40% improvement to startup and ~18% reduced memory on iOS** compared to JSC for the Mattermost app, with only 2.4 MiB of app size overhead. I encourage you to [see it live with your own eyes](https://callstack.com/blog/hermes-performance-on-ios/).",
+      "source_content_hash": "7f18efd2a7f091b14c30d63746b04d5ddde289441a4f9534d16040d3b6717f46",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Callstack](https://callstack.com/) 主導了在 [React Native 0.64 中將 Hermes 引入 iOS](https://reactnative.dev/blog/2021/03/12/version-0.64) 的工作。他們撰寫了[系列文章](https://callstack.com/blog/bringing-hermes-to-ios-in-react-native/)並舉辦了[播客](https://callstack.com/podcasts/react-native-0-64-with-hermes-for-ios-ep-5)，分享實現過程。根據他們的基準測試，在 Mattermost 應用中，Hermes 能**在 iOS 上持續帶來約 40% 的啟動效能提升與約 18% 的記憶體減少**，且僅增加 2.4 MiB 的應用大小開銷。建議您[親眼見證實際效果](https://callstack.com/blog/hermes-performance-on-ios/)。"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "Microsoft has been bringing [Hermes to React Native for Windows and macOS](https://microsoft.github.io/react-native-windows/docs/hermes). [At Microsoft Build 2020](https://youtu.be/QMFbrHZnvvw?t=389), Microsoft shared that Hermes’s memory impact ([working set](https://en.wikipedia.org/wiki/Working_set)) is 13% lower than the Chakra engine on React Native for Windows. Recently, on some synthetic benchmarks, they’ve found Hermes 0.8 (shipped with Hades and aforementioned SMI and pointer compression optimization) **uses 30%-40% less memory than other engines**. Not surprisingly, the [desktop Messenger](https://www.messenger.com/desktop) video calling experience built on React Native, is also powered by Hermes.",
+      "source_content_hash": "68d0bfd43ae9cf1cea3d240810a81f49e73d2a1c3ccbc4de5f3956debd7ff701",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "微軟正致力於將 [Hermes 引入 React Native for Windows 和 macOS](https://microsoft.github.io/react-native-windows/docs/hermes)。[在 Microsoft Build 2020](https://youtu.be/QMFbrHZnvvw?t=389) 上，微軟分享 Hermes 的記憶體影響（[工作集](https://en.wikipedia.org/wiki/Working_set)）比 React Native for Windows 上的 Chakra 引擎低 13%。最近，在一些合成基準測試中，他們發現 Hermes 0.8（搭載 Hades 及前述的 SMI 和指標壓縮優化）**比其他引擎少用 30%-40% 的記憶體**。毫不意外，基於 React Native 構建的 [桌面版 Messenger](https://www.messenger.com/desktop) 視訊通話體驗，同樣由 Hermes 驅動。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "Last but not least, Hermes has also been powering all virtual reality experiences built with the React family of technologies on Oculus, including Oculus Home.",
+      "source_content_hash": "ae58b363a4777830c3c30b72944ac49cdec3332a5ecc1a37317ee37fe36e1af7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後但同樣重要的是，Hermes 也驅動了所有在 Oculus 上使用 React 技術家族構建的虛擬實境體驗，包括 Oculus Home。"
+      }
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "### Supporting our Community",
+      "source_content_hash": "e9652bd9518084ae14e24fddbc51e3fd9fdbcb8db3144cd85af9484460b6ca38",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 支援我們的社群"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "We acknowledge there are still blockers that prevent parts of the community from adopting Hermes and we are committed to building support for these missing features. Our goal is to be fully featured so that Hermes is the right choice for most React Native apps. Here is how the community has already shaped the Hermes roadmap:",
+      "source_content_hash": "e93f4166d1aafec4e26d951383df67e9380f209286c7802a86b651fef1fa8575",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們承認仍有部分障礙阻止社群某些成員採用 Hermes，我們承諾將為這些缺失的功能建立支援。我們的目標是實現完整功能，使 Hermes 成為大多數 React Native 應用的正確選擇。以下是社群如何已經塑造了 Hermes 的路線圖："
+      }
+    },
+    {
+      "segment_id": "d54e007e",
+      "source_content": "<!-- alex ignore just fellowship -->",
+      "source_content_hash": "a0322f28fb97dbed25553ac7b7325eb513862800d9e88d64c37058d69a1a3981",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d54e007e"
+      }
+    },
+    {
+      "segment_id": "35f6931b",
+      "source_content": "- [`Proxy` and `Reflect`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Meta_programming) were originally excluded from Hermes because Facebook does not use them. We were also concerned that adding Proxy would hurt property lookup performance even when Proxy is not used. But Proxy quickly become [the most requested feature](https://github.com/facebook/hermes/issues/33) of Hermes due to popular libraries such as [MobX](https://mobx.js.org/README.html) and [Immer](https://immerjs.github.io/immer/). We carefully evaluated and decided to build it just for the community, and we managed to implement it with very low cost. Since this is a feature we don’t use, we relied on our community to prove its stability. We started by testing Proxy behind a flag and created opt-in npm packages for [release v0.4](https://github.com/facebook/hermes/issues/33#issuecomment-668374607) and [v0.5](https://github.com/facebook/hermes/issues/33#issuecomment-668374607), and it’s [enabled by default starting from v0.7](https://github.com/facebook/hermes/releases/tag/v0.7.0).\n- [ECMAScript Internationalization API Specification (ECMA-402, or `Intl`)](https://hermesengine.dev/docs/intl) was [the second most requested feature](https://github.com/facebook/hermes/issues/23). `Intl` is a huge set of APIs and often requires the implementation to include **6MB worth** of [Unicode CLDR](https://cldr.unicode.org/index) data. This is why polyfills like [FormatJS (a.k.a. `react-intl`)](https://github.com/formatjs/formatjs) and JS engines like the [international variant build of community JSC](https://github.com/react-native-community/jsc-android-buildscripts#international-variant) are so huge. To avoid substantially increasing the binary size of Hermes, we decided to implement it with another strategy by consuming and mapping the ICU facilities provided by the libraries included in the operating systems, at the cost of some (often minor) variance in behaviors across platforms.\n  - Microsoft collaborated to build support on Android. It covers almost everything from ECMA-402 up to ES2020, **with only a size impact as small as 3% (57-62K per ABI)**. We ran [a poll on Twitter](https://twitter.com/tmikov/status/1336442786694893568) and the results were strongly in favor of including `Intl` by default, so that’s what we did and it’s available starting from [release v0.8](https://github.com/facebook/hermes/releases/tag/v0.8.0).\n  - Facebook has sponsored [Major League Hacking](https://mlh.io/) to launch a [remote open source fellowship program](https://news.mlh.io/welcoming-facebook-back-as-a-sponsor-of-the-2020-2021-mlh-fellowship-08-12-2020). Last year, we launched the [Hermes sampling profiler](https://reactnative.dev/docs/profile-hermes). This year, our fellows will be working with members from Hermes, React Native, and Callstack, to add support for Hermes `Intl` on iOS. Stayed tuned!\n- We appreciate that people have been working with us to discover issues affecting the community.\n  - People have helped us identify critical spec divergence such as [stability of `Array.prototype.sort`](https://github.com/facebook/hermes/issues/212) amended in [ES2019](https://github.com/tc39/ecma262/pull/1340). This has been fixed and will be available in the next release.\n  - People found out that our default heap size limit was too small and caused [unnecessary GC pressure](https://github.com/facebook/hermes/issues/295) and [OOM crashes](https://github.com/facebook/hermes/issues/511) for many users who are not familiar with customizing Hermes’s GC configs. So we increased it from 512MiB to 3GiB to be more than sufficient for most users by default.\n  - People also reported that our specialized `Function.prototype.toString` implementation [caused performance to drop in libraries doing improper feature detection](https://github.com/facebook/hermes/issues/471#issuecomment-820123463) and [blocked users from doing source code injecting](https://github.com/facebook/hermes/issues/114#issuecomment-887106990). This helped us strengthen our stance that Hermes, whenever possible, should not get in the way of developers and to respect de-facto practices.",
+      "source_content_hash": "67b338bc4cdf19b7c7f928cff7ecf6b85834ef58c9a8622c21bfe70b60f041e9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`Proxy` 和 `Reflect`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Meta_programming) 最初被排除在 Hermes 之外，因為 Facebook 並未使用它們。我們也擔心添加 Proxy 會影響屬性查找性能，即使未使用 Proxy 時亦然。但由於 [MobX](https://mobx.js.org/README.html) 和 [Immer](https://immerjs.github.io/immer/) 等熱門函式庫的需求，Proxy 迅速成為 [Hermes 最受期待的功能](https://github.com/facebook/hermes/issues/33)。經過仔細評估，我們決定為社群實現此功能，並以極低成本完成。由於這是我們未使用的功能，我們依賴社群驗證其穩定性。我們先將 Proxy 設為可選功能進行測試，並為 [v0.4](https://github.com/facebook/hermes/issues/33#issuecomment-668374607) 和 [v0.5](https://github.com/facebook/hermes/issues/33#issuecomment-668374607) 版本發布了 npm 套件，[從 v0.7 開始預設啟用](https://github.com/facebook/hermes/releases/tag/v0.7.0)。\n- [ECMAScript 國際化 API 規範（ECMA-402，或稱 `Intl`）](https://hermesengine.dev/docs/intl) 是 [第二受期待的功能](https://github.com/facebook/hermes/issues/23)。`Intl` 是一組龐大的 API，通常需要包含 **6MB** 的 [Unicode CLDR](https://cldr.unicode.org/index) 資料。這就是為何 [FormatJS（即 `react-intl`）](https://github.com/formatjs/formatjs) 等 polyfill 和 [社群 JSC 的國際化版本](https://github.com/react-native-community/jsc-android-buildscripts#international-variant) 等 JS 引擎如此龐大。為避免大幅增加 Hermes 的二進位檔案大小，我們決定採用另一種策略：利用並映射作業系統函式庫提供的 ICU 功能，代價是不同平台間可能存在一些（通常較小的）行為差異。\n  - 微軟合作在 Android 上實現了此功能。它幾乎涵蓋了 ECMA-402 至 ES2020 的所有內容，**體積影響僅 3%（每個 ABI 57-62K）**。我們在 [Twitter 上進行了投票](https://twitter.com/tmikov/status/1336442786694893568)，結果顯示強烈支持預設包含 `Intl`，因此我們從 [v0.8 版本](https://github.com/facebook/hermes/releases/tag/v0.8.0) 開始提供此功能。\n  - Facebook 贊助了 [Major League Hacking](https://mlh.io/) 推出 [遠端開源獎學金計劃](https://news.mlh.io/welcoming-facebook-back-as-a-sponsor-of-the-2020-2021-mlh-fellowship-08-12-2020)。去年，我們發布了 [Hermes 取樣分析器](https://reactnative.dev/docs/profile-hermes)。今年，我們的獎學金獲得者將與 Hermes、React Native 和 Callstack 的成員合作，為 iOS 添加 Hermes `Intl` 支持。敬請期待！\n- 我們感謝社群與我們合作發現影響社群的問題。\n  - 有人幫助我們識別了關鍵的規範差異，例如 [ES2019 修訂的 `Array.prototype.sort` 穩定性問題](https://github.com/facebook/hermes/issues/212)。此問題已修復，將在下一版本中提供。\n  - 有人發現我們的預設堆大小限制過小，導致 [不必要的 GC 壓力](https://github.com/facebook/hermes/issues/295) 和 [OOM 崩潰](https://github.com/facebook/hermes/issues/511)，影響了許多不熟悉 Hermes GC 配置的用戶。因此，我們將預設值從 512MiB 增加到 3GiB，以滿足大多數用戶的需求。\n  - 也有人報告，我們特製的 `Function.prototype.toString` 實作 [導致某些函式庫在進行不當功能檢測時性能下降](https://github.com/facebook/hermes/issues/471#issuecomment-820123463)，並 [阻礙用戶進行原始碼注入](https://github.com/facebook/hermes/issues/114#issuecomment-887106990)。這促使我們更加堅定：Hermes 應盡可能不阻礙開發者，並尊重實際開發實踐。"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "## Summary",
+      "source_content_hash": "30ac03ff33731529441be8fbe52a3bd0d4c5ec830e806d54692168ebb7f98ada",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 總結"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "In summary, our vision is to make Hermes ready to be the default JavaScript engine across all React Native platforms. We’ve already started working towards it, and we want to hear from all of you about this direction.",
+      "source_content_hash": "d7ccf5ac61861f1388da2a29592cb55d9c60fcf81fdf82f043de1cd6991043e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "總結來說，我們的願景是讓 Hermes 成為所有 React Native 平台的預設 JavaScript 引擎。我們已開始朝此方向努力，並希望聽取各位對此方向的意見。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "It’s extremely important for us to prepare the ecosystem for a smooth adoption. We encourage you to try out Hermes, and file issues on our [GitHub repository](https://github.com/facebook/hermes) for any feedbacks, questions, feature requests and incompatibilities.",
+      "source_content_hash": "6cdb88fe6a1a3b3b1fbb19d2f5ad96e830e06fd8ea1beccc111a5a1e816f7726",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為生態系統做好順利採用的準備對我們極為重要。我們鼓勵您試用 Hermes，並在我們的 [GitHub 儲存庫](https://github.com/facebook/hermes) 提交任何反饋、問題、功能請求及不相容性的報告。"
+      }
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "## Thanks",
+      "source_content_hash": "1e57366f4f2b8342ce1186455878164e2c099d41b453de456c1a921520e0df59",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "We’d love to thank the Hermes team, the React Native team, and the many contributors from the React Native community for their work to improve Hermes.",
+      "source_content_hash": "1d16bc43afb23e9c443b7dd29546951dee311ba4234effade0e3bd8f967262e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們要衷心感謝 Hermes 團隊、React Native 團隊，以及來自 React Native 社群的眾多貢獻者，感謝他們為改進 Hermes 所做的努力。"
+      }
+    },
+    {
+      "segment_id": "8012610f",
+      "source_content": "<!-- alex ignore white -->",
+      "source_content_hash": "f9d98a9f0388433ab1a774f452a9392c1e693f60afd4c645c4f448e7ae614b2c",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8012610f"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "I’d also love to personally thank (in alphabetic order) Eli White, Luna Wei, Neil Dhar, Tim Yung, Tzvetan Mikov, and many others for their help during the writing.",
+      "source_content_hash": "bfb02b7e88d313f245a72a4c3a12f28e5a983fffbcca6383e8c457e54eaeac60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我個人還想特別感謝（按字母順序）Eli White、Luna Wei、Neil Dhar、Tim Yung、Tzvetan Mikov 等人在撰寫過程中提供的協助。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2021-10-26-toward-hermes-being-the-default.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.214554+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "335b2cc02cc558699d960d58c7645870b7d3b49dd2a871992d086b762317cb6c"
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "architecture/xplat-implementation.md",
+  "source_file_content_hash": "b14d7f83cefa6147bef30cd20e3c4f9759178e1e71ffb995eba21099f985d6b6",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: xplat-implementation\ntitle: Cross Platform Implementation\n---",
+      "source_content_hash": "5606627a3081aff9640354d8e9cec34ad1d95972632fda6abc4c31b09e59b59a",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import FabricWarning from './\\_fabric-warning.mdx';",
+      "source_content_hash": "a168f9bd30da9cdf9bd0e17ed1ea4be8bece553316bc143cb70869369fde84bc",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<FabricWarning />",
+      "source_content_hash": "4c8a380c6cadf80af09be6749221fcde360be9284e0671cfa791434949c8b3d2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_37387e33"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "#### The React Native renderer utilizes a core render implementation to be shared across platforms",
+      "source_content_hash": "b6081a53e7fb4f94c78917c7b16b70097100cec2a6848b294e7a7e8f7faae37a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### React Native 渲染器採用核心渲染實現以跨平台共享"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "In the previous render system of React Native, the **[React Shadow Tree](architecture-glossary.md#react-shadow-tree-and-react-shadow-node)**, layout logic, and **[View Flattening](view-flattening.md)** algorithm were implemented once for each platform. The current renderer was designed to be a cross-platform solution by sharing a core C++ implementation.",
+      "source_content_hash": "4a53dbf57ed1332fafcb935dbfd75f2287a94f33c1773698f995fc7efd6a56f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 先前的渲染系統中，**[React 陰影樹](architecture-glossary.md#react-shadow-tree-and-react-shadow-node)**、佈局邏輯與 **[視圖扁平化](view-flattening.md)** 演算法需針對每個平台各自實作。現行渲染器設計為跨平台解決方案，透過共享 C++ 核心實現達成此目標。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The React Native team intends to incorporate an animation system into the render system and also extend the React Native render system to new platforms such as Windows, and operating systems in game consoles, televisions, and more.",
+      "source_content_hash": "e4bc8273e0b429053004b68b29d9bba8e15e6d3bbc4907b844698fdd18c52f55",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 團隊計劃將動畫系統整合至渲染系統，並將渲染系統擴展至 Windows 等新平台，以及遊戲主機、電視等作業系統。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Leveraging C++ for the core render system introduces several advantages. A single implementation reduces the cost of development and maintenance. It improves the performance of creating React Shadow Trees and layout calculation because the overhead of integrating [Yoga](architecture-glossary.md#yoga-tree-and-yoga-node) with the renderer is minimized on Android (i.e. no more [JNI](architecture-glossary.md#java-native-interface-jni) for Yoga). Finally, the memory footprint of each React Shadow Node is smaller in C++ than it would be if allocated from Kotlin or Swift.",
+      "source_content_hash": "43d3ab6cff67a812f8c63ea67aeedb66e7125d71daee54873b435f2de2477ed1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "採用 C++ 作為核心渲染系統具備多重優勢：單一實現降低開發與維護成本；由於最小化 [Yoga](architecture-glossary.md#yoga-tree-and-yoga-node) 與渲染器的整合開銷（如 Android 端不再需要 [JNI](architecture-glossary.md#java-native-interface-jni)），可提升 React 陰影樹創建與佈局計算效能；此外，C++ 分配的 React 陰影節點記憶體佔用也低於 Kotlin 或 Swift 實現。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "The team is also leveraging C++ features that enforce immutability to ensure there are no issues related to concurrent access to shared but not protected resources.",
+      "source_content_hash": "fcd0cf78cc8f277b643850df6964f89c12b84262b65df57ff4a074fd87bea1b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "團隊同時運用 C++ 的不可變性特性，確保共享資源的並行存取不會引發安全問題。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "It is important to recognize that the renderer use case for Android still incurs the cost of [JNI](architecture-glossary.md#java-native-interface-jni) for two primary use cases:",
+      "source_content_hash": "bc4a1761488c1954a2ce20a8825024971b1c4044c3f2dbcae3a8cccac4dcd975",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需特別注意的是，Android 端的渲染器用例仍存在兩項主要 [JNI](architecture-glossary.md#java-native-interface-jni) 成本："
+      }
+    },
+    {
+      "segment_id": "da23c906",
+      "source_content": "- Layout calculation of complex views (e.g. `Text`, `TextInput`, etc.) requires sending props over JNI.\n- The mount phase requires sending mutation operations over JNI.",
+      "source_content_hash": "ff03b96e8ba571cf4c1da9757f819cff0aa87d8589acafae898a19b6663ba677",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 複雜視圖（如 `Text`、`TextInput` 等）的佈局計算需透過 JNI 傳遞屬性\n- 掛載階段需透過 JNI 傳送變異操作"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "The team is exploring replacing `ReadableMap` with a new mechanism to serialize data using `ByteBuffer` to reduce overhead of JNI. Our goal is to reduce overhead of JNI by 35–50%.",
+      "source_content_hash": "aa3b2e963c9977224d5b4729e1526ee78343237647792df49a54653d509138c3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "團隊正研究以 `ByteBuffer` 序列化機制取代 `ReadableMap`，目標將 JNI 開銷降低 35–50%。"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "The renderer provides two sides of its C++ APIs:",
+      "source_content_hash": "2d891598feb19600bd087af5a02f3bc2097f96439a87514b232f460cfef7df4a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "渲染器提供兩類 C++ API 介面："
+      }
+    },
+    {
+      "segment_id": "77bf3ec9",
+      "source_content": "- **(i)** to communicate with React\n- **(ii)** to communicate with the host platform",
+      "source_content_hash": "bc0d41bb9c5fc80e983dabcb82334cb684a06d2fcbcc86450f749e6b2717091c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **(i)** 與 React 通訊\n- **(ii)** 與宿主平台通訊"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "For **(i)**, React communicates with the renderer to **render** a React Tree and to “listen” for **events** (e.g. `onLayout`, `onKeyPress`, touch, etc).",
+      "source_content_hash": "b54ca9290923cef1d3baab264be9823fcdbecae5fca68645d2e2f0066bcd2968",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "針對 **(i)**，React 透過渲染器進行 **渲染** React 樹，並「監聽」**事件**（如 `onLayout`、`onKeyPress`、觸控等）。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "For **(ii)**, the React Native renderer communicates with the host platform to mount host views on the screen (create, insert, update or delete of host views) and it listens for **events** that are generated by the user on the host platform.",
+      "source_content_hash": "5dc920de4b44208b2b9aacf35e401fdfc4afe460cbb4ecb26ce228308cc7d99e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "針對 **(ii)**，React Native 渲染器與宿主平台通訊以掛載螢幕上的宿主視圖（創建、插入、更新或刪除宿主視圖），並監聽用戶在宿主平台觸發的 **事件**。"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "![Cross-platform implementation diagram](/docs/assets/Architecture/xplat-implementation/xplat-implementation-diagram.png)",
+      "source_content_hash": "1325229ad1cb518f575d605653943feeab0b76829c20867dc886881516daea7f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![跨平台實現示意圖](/docs/assets/Architecture/xplat-implementation/xplat-implementation-diagram.png)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-architecture/xplat-implementation.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.235096+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "b14d7f83cefa6147bef30cd20e3c4f9759178e1e71ffb995eba21099f985d6b6"
+  }
+}

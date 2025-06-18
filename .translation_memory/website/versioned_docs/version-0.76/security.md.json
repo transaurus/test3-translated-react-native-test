@@ -1,0 +1,552 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.76/security.md",
+  "source_file_content_hash": "4be7f2de642d380c05b1ea4f5e39c557eddddfdfecb09a6f9cef33064c0e5d64",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: security\ntitle: Security\n---",
+      "source_content_hash": "5d2ccdb25a87d11ee94d4c67da18f1ae4816ae4751c3b7c072eefb4c3279d2d3",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Security is often overlooked when building apps. It is true that it is impossible to build software that is completely impenetrable—we’ve yet to invent a completely impenetrable lock (bank vaults do, after all, still get broken into). However, the probability of falling victim to a malicious attack or being exposed for a security vulnerability is inversely proportional to the effort you’re willing to put in to protecting your application against any such eventuality. Although an ordinary padlock is pickable, it is still much harder to get past than a cabinet hook!",
+      "source_content_hash": "df0d98b0008b9e15405463c7a0c85dd7dda117b4e66d740164039ea411e23343",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在構建應用程式時，安全性往往被忽視。雖然確實無法打造完全無法攻破的軟體（畢竟銀行金庫也仍會被破解），但遭受惡意攻擊或暴露安全漏洞的機率，與你願意投入多少心力來保護應用程式成反比。普通掛鎖雖可被撬開，但總比櫥櫃掛鉤難突破得多！"
+      }
+    },
+    {
+      "segment_id": "775b7fa4",
+      "source_content": "<img src=\"/docs/assets/d_security_chart.svg\" width={283} alt=\" \" style={{float: 'right'}} />",
+      "source_content_hash": "76ce55f9528e4fdfa2f4a5185a22447e838e049ee410651c104e364bd6b39b52",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_775b7fa4"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "In this guide, you will learn about best practices for storing sensitive information, authentication, network security, and tools that will help you secure your app. This is not a preflight checklist—it is a catalogue of options, each of which will help further protect your app and users.",
+      "source_content_hash": "c336a438bc9f91206eb287a7c01363b95d4b42d551dd29e03ed7aac1a79564de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將介紹儲存敏感資訊、身份驗證、網路安全的最佳實踐，以及協助強化應用安全的工具。這並非起飛前檢查清單——而是一系列選項的目錄，每項都能為你的應用和用戶提供更進一步的保護。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Storing Sensitive Info",
+      "source_content_hash": "18cf6a030c2fc831898ddbf90fa7933bdfa7321e81d763e0854c11d22c2db5e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 儲存敏感資訊"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Never store sensitive API keys in your app code. Anything included in your code could be accessed in plain text by anyone inspecting the app bundle. Tools like [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv) and [react-native-config](https://github.com/luggit/react-native-config/) are great for adding environment-specific variables like API endpoints, but they should not be confused with server-side environment variables, which can often contain secrets and API keys.",
+      "source_content_hash": "24e9a8b4d3027622b6a9b01adcbcce8e44fbc3b2d6beb4bc067d987bb6e38fc3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "切勿將敏感API金鑰儲存在應用程式碼中。任何包含在程式碼中的內容，都可能被檢查應用套件的人以純文字形式存取。雖然像[react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv)和[react-native-config](https://github.com/luggit/react-native-config/)這類工具很適合用於添加環境變數（如API端點），但它們不應與伺服器端的環境變數混淆，後者常包含密鑰和API金鑰。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "If you must have an API key or a secret to access some resource from your app, the most secure way to handle this would be to build an orchestration layer between your app and the resource. This could be a serverless function (e.g. using AWS Lambda or Google Cloud Functions) which can forward the request with the required API key or secret. Secrets in server side code cannot be accessed by the API consumers the same way secrets in your app code can.",
+      "source_content_hash": "a41b6130338434f183833d4516b9f4ce7cee5341ca24afd71190204d8925d0ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若必須透過應用存取某項資源的API金鑰或密鑰，最安全的處理方式是建立應用與資源間的協調層。這可以是無伺服器函數（例如使用AWS Lambda或Google Cloud Functions），它能轉發請求並附上所需的API金鑰或密鑰。伺服器端程式碼中的密鑰，無法像應用程式碼中的密鑰那樣被API使用者存取。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "**For persisted user data, choose the right type of storage based on its sensitivity.** As your app is used, you’ll often find the need to save data on the device, whether to support your app being used offline, cut down on network requests or save your user’s access token between sessions so they wouldn’t have to re-authenticate each time they use the app.",
+      "source_content_hash": "1ccf30e82023fe3007018dc5b2f2d3870ac3cb9da1ea9815dcda4e326265b9af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**針對需持久化的用戶數據，根據其敏感性選擇合適的儲存類型。**隨著應用程式的使用，你會經常需要將數據儲存在裝置上——無論是為了支援離線使用、減少網路請求，或是保存用戶的存取權杖以避免每次使用時重新驗證。"
+      }
+    },
+    {
+      "segment_id": "4262047b",
+      "source_content": "> **Persisted vs unpersisted** — persisted data is written to the device’s disk, which lets the data be read by your app across application launches without having to do another network request to fetch it or asking the user to re-enter it. But this also can make that data more vulnerable to being accessed by attackers. Unpersisted data is never written to disk—so there's no data to access!",
+      "source_content_hash": "7b5de7d85e24f9499c23f7e7c35cc08b43f0aed14bee32b0bbd20b28e6501bbd",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **持久化 vs 非持久化**——持久化數據會被寫入裝置的磁碟，讓應用程式能在不同啟動間讀取數據，無需再次透過網路請求獲取或要求用戶重新輸入。但這也使得數據更容易被攻擊者存取。非持久化數據則從不會寫入磁碟——因此根本沒有數據可供存取！"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "### Async Storage",
+      "source_content_hash": "0f7a337608a24441fdcc64dc7e363c8860961b6064159ae6093057a2781ae821",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Async Storage"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "[Async Storage](https://github.com/react-native-async-storage/async-storage) is a community-maintained module for React Native that provides an asynchronous, unencrypted, key-value store. Async Storage is not shared between apps: every app has its own sandbox environment and has no access to data from other apps.",
+      "source_content_hash": "c275568c840032631cfadef66977f576cb33c969093b06dcdfd39b7204ea8fe3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Async Storage](https://github.com/react-native-async-storage/async-storage)是React Native的社群維護模組，提供非同步、未加密的鍵值儲存。Async Storage不會在應用間共享：每個應用都有自己的沙箱環境，無法存取其他應用的數據。"
+      }
+    },
+    {
+      "segment_id": "fec94f74",
+      "source_content": "| **Do** use async storage when...              | **Don't** use async storage for... |\n| --------------------------------------------- | ---------------------------------- |\n| Persisting non-sensitive data across app runs | Token storage                      |\n| Persisting Redux state                        | Secrets                            |\n| Persisting GraphQL state                      |                                    |\n| Storing global app-wide variables             |                                    |",
+      "source_content_hash": "ed3513f70c197d7abaa3a6ce2c42e5f921c3355dbebcd3ecaff234e6421c8e09",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fec94f74"
+      }
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "#### Developer Notes",
+      "source_content_hash": "6ed23c252eeaa073a44962113b6b35340f98964ec0d29ad7a46d5cebc4b78b66",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 開發者注意事項"
+      }
+    },
+    {
+      "segment_id": "7b66d6d6",
+      "source_content": "<Tabs groupId=\"guide\" queryString defaultValue=\"web\" values={constants.getDevNotesTabs([\"web\"])}>\n\n<TabItem value=\"web\">\n\n> Async Storage is the React Native equivalent of Local Storage from the web\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "d189a7e3b40f226692553759f138b95135fb66599099ad23b87296455658b17c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7b66d6d6"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "### Secure Storage",
+      "source_content_hash": "53c229a9e47f7b7739896f3e380d083b4a233e5f77c559595c061711d228a2cc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 安全儲存"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "React Native does not come bundled with any way of storing sensitive data. However, there are pre-existing solutions for Android and iOS platforms.",
+      "source_content_hash": "e728128a966c1973dc89f04e23f1d31f4b61889e9120db26b70dd7e9e8843ba6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native本身並未內建儲存敏感數據的方式，但Android和iOS平台已有現成解決方案。"
+      }
+    },
+    {
+      "segment_id": "6d28a77c",
+      "source_content": "#### iOS - Keychain Services",
+      "source_content_hash": "44606318d0a27977a6ebd55de29082350b02c9e7f2e55bfc3ec3d50ee9f96d07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### iOS - 鑰匙圈服務"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "[Keychain Services](https://developer.apple.com/documentation/security/keychain_services) allows you to securely store small chunks of sensitive info for the user. This is an ideal place to store certificates, tokens, passwords, and any other sensitive information that doesn’t belong in Async Storage.",
+      "source_content_hash": "271a8b048d731d58c541fc319301b9af905a7a8356cb58f753dca46e00e71460",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[鑰匙圈服務](https://developer.apple.com/documentation/security/keychain_services)允許你安全地儲存用戶的小型敏感資訊。這是儲存憑證、權杖、密碼等不應放入Async Storage之敏感數據的理想場所。"
+      }
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "#### Android - Secure Shared Preferences",
+      "source_content_hash": "ba108c27a71fb2d39be33b53f04c3161ba7aff8581519bb6423e4c854b60449e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android - 加密Shared Preferences"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "[Shared Preferences](https://developer.android.com/reference/android/content/SharedPreferences) is the Android equivalent for a persistent key-value data store. **Data in Shared Preferences is not encrypted by default**, but [Encrypted Shared Preferences](https://developer.android.com/topic/security/data) wraps the Shared Preferences class for Android, and automatically encrypts keys and values.",
+      "source_content_hash": "78d6fc17d99462b9180f8cf3f55d2336755978d702b0fa7be2290ad32c4b6e42",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Shared Preferences](https://developer.android.com/reference/android/content/SharedPreferences)是Android上等效的持久化鍵值數據儲存。**預設情況下，Shared Preferences中的數據並未加密**，但[加密型Shared Preferences](https://developer.android.com/topic/security/data)封裝了Android的Shared Preferences類別，會自動加密鍵與值。"
+      }
+    },
+    {
+      "segment_id": "1a316f80",
+      "source_content": "#### Android - Keystore",
+      "source_content_hash": "811ad8543965c065b13d1d5d87c03dd2adcf116ecd0d8d5e25369d22aeac632e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android - Keystore"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "The [Android Keystore](https://developer.android.com/training/articles/keystore) system lets you store cryptographic keys in a container to make it more difficult to extract from the device.",
+      "source_content_hash": "607c7ad189442dca6a3b2659bd10d4a6b576479cad17997815b7b712e7e754d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Android Keystore](https://developer.android.com/training/articles/keystore) 系統可讓您將加密金鑰儲存在容器中，使其更難從裝置中提取。"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "In order to use iOS Keychain services or Android Secure Shared Preferences, you can either write a bridge yourself or use a library which wraps them for you and provides a unified API at your own risk. Some libraries to consider:",
+      "source_content_hash": "f8a8e29efd35309271bd02a7e67b6ff91898b22f56fa1062473f51220d5c8803",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要使用 iOS Keychain 服務或 Android Secure Shared Preferences，您可以自行編寫橋接程式碼，或使用封裝這些功能的函式庫（需自行承擔風險），這些函式庫會提供統一的 API。以下是一些可考慮的函式庫："
+      }
+    },
+    {
+      "segment_id": "158e1f5d",
+      "source_content": "- [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)\n- [react-native-keychain](https://github.com/oblador/react-native-keychain)",
+      "source_content_hash": "66bb1ba9feed3a3d1f94eff2a28eb3fa42fe26a1be0f3315fa768fb1f96b0878",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)\n- [react-native-keychain](https://github.com/oblador/react-native-keychain)"
+      }
+    },
+    {
+      "segment_id": "52716def",
+      "source_content": "> **Be mindful of unintentionally storing or exposing sensitive info.** This could happen accidentally, for example saving sensitive form data in redux state and persisting the whole state tree in Async Storage. Or sending user tokens and personal info to an application monitoring service such as Sentry or Crashlytics.",
+      "source_content_hash": "4cb4471c305fcfccadc0d24fea287d103ccd219e67bb77695b52af3a949e2c75",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **注意避免無意中儲存或暴露敏感資訊。** 這種情況可能意外發生，例如將敏感表單資料儲存在 redux 狀態中，並將整個狀態樹持久化到 Async Storage。或將使用者令牌和個人資訊傳送到應用程式監控服務（如 Sentry 或 Crashlytics）。"
+      }
+    },
+    {
+      "segment_id": "3ef18741",
+      "source_content": "## Authentication and Deep Linking",
+      "source_content_hash": "dfd84d5b169344fb14d17e61d12b9f48875e4d40c128aaad2a00aaf8a4a69809",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 認證與深度連結"
+      }
+    },
+    {
+      "segment_id": "4b067dc3",
+      "source_content": "<img src=\"/docs/assets/d_security_deep-linking.svg\" width={225} alt=\" \" style={{float: 'right', margin: '0 0 1em 1em'}} />",
+      "source_content_hash": "0e0c84e893e36e2b094785163a32eae487c895b5b3bf4b835ccd496a3ef59196",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b067dc3"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "Mobile apps have a unique vulnerability that is non-existent in the web: **deep linking**. Deep linking is a way of sending data directly to a native application from an outside source. A deep link looks like `app://` where `app` is your app scheme and anything following the // could be used internally to handle the request.",
+      "source_content_hash": "b114964bf1bd676ca40774fd65296a5dfdd3bea99bc6dfee8e6fd445244abee7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "行動應用程式有一個網頁應用程式所沒有的獨特漏洞：**深度連結**。深度連結是一種從外部來源直接將資料傳送到原生應用程式的方式。深度連結的格式類似 `app://`，其中 `app` 是您的應用程式方案，而 `//` 之後的任何內容都可用於內部處理請求。"
+      }
+    },
+    {
+      "segment_id": "f01228d3",
+      "source_content": "For example, if you were building an ecommerce app, you could use `app://products/1` to deep link to your app and open the product detail page for a product with id 1. You can think of these kind of like URLs on the web, but with one crucial distinction:",
+      "source_content_hash": "a3196387824c64d3ecee43b4aefca247b88d178a17300134baa678a8a79ae225",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，如果您正在開發一個電子商務應用程式，您可以使用 `app://products/1` 來深度連結到您的應用程式，並開啟 id 為 1 的產品詳細頁面。您可以將這些連結視為網頁上的 URL，但有一個關鍵區別："
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Deep links are not secure and you should never send any sensitive information in them.",
+      "source_content_hash": "923482c5ad7859feb5c44ef4ab81276f273cc598e6f704f22d6668be7817ee17",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "深度連結並不安全，您絕不應該在其中傳送任何敏感資訊。"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "The reason deep links are not secure is because there is no centralized method of registering URL schemes. As an application developer, you can use almost any url scheme you choose by [configuring it in Xcode](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app) for iOS or [adding an intent on Android](https://developer.android.com/training/app-links/deep-linking).",
+      "source_content_hash": "617d151eddae5cca5196d2eb7cede40963028c6c0c4f1958e9f77ac26e3d73cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "深度連結不安全的原因是沒有統一的方法來註冊 URL 方案。作為應用程式開發人員，您可以透過在 iOS 的 [Xcode 中配置](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app) 或在 Android 的 [新增意圖](https://developer.android.com/training/app-links/deep-linking) 來使用幾乎任何 URL 方案。"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "There is nothing stopping a malicious application from hijacking your deep link by also registering to the same scheme and then obtaining access to the data your link contains. Sending something like `app://products/1` is not harmful, but sending tokens is a security concern.",
+      "source_content_hash": "54e63ab70b5838de863d7fd3029d9503b8a1e8f52c730a9b4cb9f9443b4e7924",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "惡意應用程式可以透過註冊相同的方案來劫持您的深度連結，從而取得連結中包含的資料。傳送像 `app://products/1` 這樣的內容並無害處，但傳送令牌則是一個安全問題。"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "When the operating system has two or more applications to choose from when opening a link, Android will show the user a [Disambiguation dialog](https://developer.android.com/training/basics/intents/sending#disambiguation-dialog) and ask them to choose which application to use to open the link. On iOS however, the operating system will make the choice for you, so the user will be blissfully unaware. Apple has made steps to address this issue in later iOS versions (iOS 11) where they instituted a first-come-first-served principle, although this vulnerability could still be exploited in different ways which you can read more about [here](https://thehackernews.com/2019/07/ios-custom-url-scheme.html). Using [universal links](https://developer.apple.com/ios/universal-links/) will allow linking to content within your app securely in iOS.",
+      "source_content_hash": "69bf3b3b60893530b75d598c96f36bb26bb0c9d9ef82b4176976f055f961b528",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當作業系統在開啟連結時有兩個或更多應用程式可選擇時，Android 會向使用者顯示 [歧義對話框](https://developer.android.com/training/basics/intents/sending#disambiguation-dialog)，並詢問他們要使用哪個應用程式來開啟連結。然而，在 iOS 上，作業系統會為您做出選擇，因此使用者將毫無察覺。Apple 在後續的 iOS 版本（iOS 11）中已採取措施解決此問題，實施了先到先得的原則，儘管此漏洞仍可能以其他方式被利用，您可以在[這裡](https://thehackernews.com/2019/07/ios-custom-url-scheme.html)閱讀更多相關資訊。使用 [通用連結](https://developer.apple.com/ios/universal-links/) 可以在 iOS 中安全地連結到您的應用程式內容。"
+      }
+    },
+    {
+      "segment_id": "0a103a02",
+      "source_content": "### OAuth2 and Redirects",
+      "source_content_hash": "95aced738d478ca1aa928fac113e842840f6be82ed722684d8a9da9ef8b28b3c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### OAuth2 與重新導向"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "The OAuth2 authentication protocol is incredibly popular nowadays, prided as the most complete and secure protocol around. The OpenID Connect protocol is also based on this. In OAuth2, the user is asked to authenticate via a third party. On successful completion, this third party redirects back to the requesting application with a verification code which can be exchanged for a JWT — a [JSON Web Token](https://jwt.io/introduction/). JWT is an open standard for securely transmitting information between parties on the web.",
+      "source_content_hash": "d89b0847d3e3cea1ce7dddd32e74758ab045513a252bee1b8d23e93f9e212f27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "OAuth2 認證協議現今非常流行，被譽為最完整且安全的協議。OpenID Connect 協議也基於此。在 OAuth2 中，使用者會被要求透過第三方進行認證。成功完成後，此第三方會重新導向回請求的應用程式，並帶有一個驗證碼，該驗證碼可兌換為 JWT — 一個 [JSON Web Token](https://jwt.io/introduction/)。JWT 是一種在網路上安全傳輸資訊的開放標準。"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "On the web, this redirect step is secure, because URLs on the web are guaranteed to be unique. This is not true for apps because, as mentioned earlier, there is no centralized method of registering URL schemes! In order to address this security concern, an additional check must be added in the form of PKCE.",
+      "source_content_hash": "c4f887206b69cc958312d0315c897f5881d49c718b1aa9715403d3848fb103aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在網頁上，這個重新導向步驟是安全的，因為網頁上的 URL 保證是唯一的。但這對應用程式來說並不成立，因為如前所述，沒有統一的方法來註冊 URL 方案！為了解決這個安全問題，必須以 PKCE 的形式新增額外的檢查。"
+      }
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "[PKCE](https://oauth.net/2/pkce/), pronounced “Pixy” stands for Proof of Key Code Exchange, and is an extension to the OAuth 2 spec. This involves adding an additional layer of security which verifies that the authentication and token exchange requests come from the same client. PKCE uses the [SHA 256](https://www.movable-type.co.uk/scripts/sha256.html) Cryptographic Hash Algorithm. SHA 256 creates a unique “signature” for a text or file of any size, but it is:",
+      "source_content_hash": "44b71df20d5376b4ef2ca3d647039bbb4f37fa3dcdcc0965a137a757a4680e7f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[PKCE](https://oauth.net/2/pkce/)（發音為「Pixy」）全稱為「Proof of Key Code Exchange」，是 OAuth 2 規範的擴充功能。它透過新增一層安全驗證機制，確保授權請求與令牌交換請求來自同一個客戶端。PKCE 採用 [SHA 256](https://www.movable-type.co.uk/scripts/sha256.html) 加密雜湊演算法，該演算法能為任意長度的文字或檔案產生獨特的「數位指紋」，並具有以下特性："
+      }
+    },
+    {
+      "segment_id": "d0b8a6db",
+      "source_content": "- Always the same length regardless of the input file\n- Guaranteed to always produce the same result for the same input\n- One way (that is, you can’t reverse engineer it to reveal the original input)",
+      "source_content_hash": "6a816cba7867f3f9316f9aa1d854f84609534f99c30e4185966e95a89356f20c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 無論輸入檔案大小，輸出長度固定不變\n- 相同輸入必定產生相同結果\n- 單向不可逆（無法從雜湊值反推原始輸入）"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "Now you have two values:",
+      "source_content_hash": "0183974e6a7ff5826c06f8f676d34b32d6a6dc9cb3d52eccd2e9ed6e9b262984",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "流程中會產生兩個關鍵值："
+      }
+    },
+    {
+      "segment_id": "dee20070",
+      "source_content": "- **code_verifier** - a large random string generated by the client\n- **code_challenge** - the SHA 256 of the code_verifier",
+      "source_content_hash": "c850bd9bbb09ded0d5493e82b2e256ec4afc25402c07156059346eb1e1591123",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **code_verifier**：由客戶端生成的隨機長字串\n- **code_challenge**：code_verifier 經過 SHA 256 運算後的值"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "During the initial `/authorize` request, the client also sends the `code_challenge` for the `code_verifier` it keeps in memory. After the authorize request has returned correctly, the client also sends the `code_verifier` that was used to generate the `code_challenge`. The IDP will then calculate the `code_challenge`, see if it matches what was set on the very first `/authorize` request, and only send the access token if the values match.",
+      "source_content_hash": "b93a521973651463210a9201aed5cfb3a198f6d260be9bbc079e9f17ab98f2d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在初始的 `/authorize` 請求階段，客戶端除了將 code_verifier 暫存於記憶體，還會同步傳送其對應的 code_challenge。當授權請求成功返回後，客戶端需再次提交當初用於生成 code_challenge 的 code_verifier。此時身份提供者（IDP）會重新計算 code_challenge，並與初始請求中的數值比對，只有完全匹配時才會發放存取令牌。"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "This guarantees that only the application that triggered the initial authorization flow would be able to successfully exchange the verification code for a JWT. So even if a malicious application gets access to the verification code, it will be useless on its own. To see this in action, check out [this example](https://aaronparecki.com/oauth-2-simplified/#mobile-apps).",
+      "source_content_hash": "be3e9ffb2983b89664eaff57be1d7b4984f00ae040a306732eb4cdd8fed3b56e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此機制確保僅有發起初始授權流程的應用程式能成功兌換驗證碼取得 JWT。即使惡意程式截獲驗證碼，單獨持有也毫無用處。實際運作範例可參考[此示範](https://aaronparecki.com/oauth-2-simplified/#mobile-apps)。"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "A library to consider for native OAuth is [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth). React-native-app-auth is an SDK for communicating with OAuth2 providers. It wraps the native [AppAuth-iOS](https://github.com/openid/AppAuth-iOS) and [AppAuth-Android](https://github.com/openid/AppAuth-Android) libraries and can support PKCE.",
+      "source_content_hash": "8d802a52a2f83cd7e341feb684802d5fe134daaffa3eae753ec12e0825f67476",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "針對原生 OAuth 實作，可考慮使用 [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth) 函式庫。該 SDK 封裝了原生 [AppAuth-iOS](https://github.com/openid/AppAuth-iOS) 與 [AppAuth-Android](https://github.com/openid/AppAuth-Android) 元件，能與 OAuth2 供應商對接並支援 PKCE 機制。"
+      }
+    },
+    {
+      "segment_id": "ceb1ddd1",
+      "source_content": "> React-native-app-auth can support PKCE only if your Identity Provider supports it.",
+      "source_content_hash": "5e41b4c2568b82b9829ed917594db8b80c942612197c7827c9eb40e17292ea8c",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：react-native-app-auth 的 PKCE 支援與否取決於您的身份供應商是否實作該功能。"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "![OAuth2 with PKCE](/docs/assets/diagram_pkce.svg)",
+      "source_content_hash": "07df9727c85d8225dfb3defc1e22291c526150e401028d4e42fd3725d638ae64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![OAuth2 搭配 PKCE 流程圖](/docs/assets/diagram_pkce.svg)"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "## Network Security",
+      "source_content_hash": "b81b7f6f226e5b3b182a55b99764490dd4cc13e7f24d33f8c5c48c015a4adb0d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 網路安全"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "Your APIs should always use [SSL encryption](https://www.ssl.com/faqs/faq-what-is-ssl/). SSL encryption protects against the requested data being read in plain text between when it leaves the server and before it reaches the client. You’ll know the endpoint is secure, because it starts with `https://` instead of `http://`.",
+      "source_content_hash": "734614cc17cac4080d86ed36b405d7ce8c0bac6ebf02143a3ba8d3348b548423",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "API 必須全程採用 [SSL 加密](https://www.ssl.com/faqs/faq-what-is-ssl/)。SSL 能防止資料在伺服器與客戶端傳輸過程中被以明文竊取，安全端點可透過 `https://` 開頭（而非 `http://`）的網址識別。"
+      }
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "### SSL Pinning",
+      "source_content_hash": "207202e2dcb7a8ff7b35d43b35fab68fc8bdefc7a17f69ca13bf7b88252daed4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### SSL 憑證綁定"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "Using https endpoints could still leave your data vulnerable to interception. With https, the client will only trust the server if it can provide a valid certificate that is signed by a trusted Certificate Authority that is pre-installed on the client. An attacker could take advantage of this by installing a malicious root CA certificate to the user’s device, so the client would trust all certificates that are signed by the attacker. Thus, relying on certificates alone could still leave you vulnerable to a [man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).",
+      "source_content_hash": "513f2edec70d5fb87b6e87f475b7cf188318b55882526ff73962bc3d6d19b18c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅使用 https 仍可能存在資料攔截風險。在標準 https 流程中，客戶端僅信任由預裝可信憑證機構（CA）簽署的伺服器憑證。攻擊者可能透過在用戶設備安裝惡意根憑證，使客戶端誤認攻擊者簽發的憑證為可信來源，導致仍可能遭受[中間人攻擊](https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB)。"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "**SSL pinning** is a technique that can be used on the client side to avoid this attack. It works by embedding (or pinning) a list of trusted certificates to the client during development, so that only the requests signed with one of the trusted certificates will be accepted, and any self-signed certificates will not be.",
+      "source_content_hash": "c279b7998f296a9f11ae89607aab0592b985ba9095f28703585ab6b22569fde9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**SSL 憑證綁定**技術可防範此類攻擊，其原理是在開發階段將受信任的憑證清單直接嵌入（綁定）至客戶端。此後應用程式只接受這些預存憑證的簽章請求，任何自簽憑證都會被拒絕。"
+      }
+    },
+    {
+      "segment_id": "1e8039e1",
+      "source_content": "> When using SSL pinning, you should be mindful of certificate expiry. Certificates expire every 1-2 years and when one does, it’ll need to be updated in the app as well as on the server. As soon as the certificate on the server has been updated, any apps with the old certificate embedded in them will cease to work.",
+      "source_content_hash": "e131ee13bc7c7f650b136554f9778c175537aa70f98ac4bcfecabbd1b45ba2bb",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 實作 SSL 綁定時需注意憑證有效期問題。伺服器憑證通常每 1-2 年會過期更新，屆時必須同步更新應用內嵌的憑證。若伺服器更新憑證後未及時更新客戶端，持有舊憑證的應用將完全無法連線。"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "## Summary",
+      "source_content_hash": "30ac03ff33731529441be8fbe52a3bd0d4c5ec830e806d54692168ebb7f98ada",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 總結"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "There is no bulletproof way to handle security, but with conscious effort and diligence, it is possible to significantly reduce the likelihood of a security breach in your application. Invest in security proportional to the sensitivity of the data stored in your application, the number of users, and the damage a hacker could do when gaining access to their account. And remember: it’s significantly harder to access information that was never requested in the first place.",
+      "source_content_hash": "4645ef3070e6810cf8b690653031b01adf8de06a95dcebd6ecc63da65d830867",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然沒有萬無一失的安全處理方式，但透過有意識的努力與嚴謹態度，仍能大幅降低應用程式遭受安全漏洞的風險。請根據應用程式儲存資料的敏感程度、用戶數量，以及駭客入侵可能造成的損害，投入相應的安全防護資源。切記：最安全的資料就是那些從未被請求過的資料。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.76/security.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.674645+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "4be7f2de642d380c05b1ea4f5e39c557eddddfdfecb09a6f9cef33064c0e5d64"
+  }
+}

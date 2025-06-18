@@ -1,0 +1,662 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/animatedvaluexy.md",
+  "source_file_content_hash": "a4a8844552b65b75dc078d57d285165a61a0fc265ed732a575eb135c03ab5f73",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: animatedvaluexy\ntitle: Animated.ValueXY\n---",
+      "source_content_hash": "9152d55c6b5a9f24463c1b4b639e28db12b7c660c752b7239e81190ff2ad5cfa",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "2D Value for driving 2D animations, such as pan gestures. Almost identical API to normal [`Animated.Value`](animatedvalue), but multiplexed. Contains two regular `Animated.Value`s under the hood.",
+      "source_content_hash": "5d5c6329f2abf14af658af81d501dd5b720999fbcfbd0ff32ef6443f6c6972e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於驅動2D動畫（如平移手勢）的2D數值。其API幾乎與常規[`Animated.Value`](animatedvalue)相同，但採用多路復用技術。底層包含兩個常規的`Animated.Value`。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=Animated.ValueXY\nimport React, {useRef} from 'react';\nimport {Animated, PanResponder, StyleSheet, View} from 'react-native';\n\nconst DraggableView = () => {\n  const pan = useRef(new Animated.ValueXY()).current;\n\n  const panResponder = PanResponder.create({\n    onStartShouldSetPanResponder: () => true,\n    onPanResponderMove: Animated.event([\n      null,\n      {\n        dx: pan.x, // x,y are Animated.Value\n        dy: pan.y,\n      },\n    ]),\n    onPanResponderRelease: () => {\n      Animated.spring(\n        pan, // Auto-multiplexed\n        {toValue: {x: 0, y: 0}, useNativeDriver: true}, // Back to zero\n      ).start();\n    },\n  });\n\n  return (\n    <View style={styles.container}>\n      <Animated.View\n        {...panResponder.panHandlers}\n        style={[pan.getLayout(), styles.box]}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  box: {\n    backgroundColor: '#61dafb',\n    width: 80,\n    height: 80,\n    borderRadius: 4,\n  },\n});\n\nexport default DraggableView;\n```",
+      "source_content_hash": "e6dfe3ba6bb3e20002422feed66c8252cdb65da678c7b433380dac454b28d7c7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "aa7d3f2b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9e95fc4a",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "126950d7",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "a5a4323e",
+      "source_content": "### `setValue()`",
+      "source_content_hash": "88ea02323b092846220c9a1ab9003f47247f2a315981a88e6131896f4959f9be",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setValue()`"
+      }
+    },
+    {
+      "segment_id": "29ad5b0e",
+      "source_content": "```tsx\nsetValue(value: {x: number; y: number});\n```",
+      "source_content_hash": "b774455093282bc5d54519f3a2181d9297a17828f970acc93ff5130eecc470fc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29ad5b0e"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "Directly set the value. This will stop any animations running on the value and update all the bound properties.",
+      "source_content_hash": "cea472a9038d46a3f889464b3e2af578d34bdb69af580c67b63c2578527f1592",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "直接設定數值。這將停止所有正在運行的動畫，並更新所有綁定的屬性。"
+      }
+    },
+    {
+      "segment_id": "f01228d3",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "543d317a",
+      "source_content": "| Name  | Type                     | Required | Description |\n| ----- | ------------------------ | -------- | ----------- |\n| value | `{x: number; y: number}` | Yes      | Value       |",
+      "source_content_hash": "f61a5f31f7b9f3d716176c9111619a3d3f9d966a29e539e9eeabbb2a13d3cf0f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_543d317a"
+      }
+    },
+    {
+      "segment_id": "aac83236",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "66819c78",
+      "source_content": "### `setOffset()`",
+      "source_content_hash": "df17fba742c1b1cb16bfe4fa9930ef6a097089e6199fdfe0e61840427a497a74",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setOffset()`"
+      }
+    },
+    {
+      "segment_id": "65400624",
+      "source_content": "```tsx\nsetOffset(offset: {x: number; y: number});\n```",
+      "source_content_hash": "d3cdcdceb73963e8fce5c19a77f22beb1af7eaecfe7757ebb35259e90b85f1e6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65400624"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "Sets an offset that is applied on top of whatever value is set, whether via `setValue`, an animation, or `Animated.event`. Useful for compensating things like the start of a pan gesture.",
+      "source_content_hash": "60a3e7f219dba18cad33145c6fdf5e3509f0614f529e1bb097b2feb3a4143193",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定一個偏移量，該偏移量會疊加到無論是通過`setValue`、動畫還是`Animated.event`所設定的數值上。對於補償平移手勢起始點等情況非常有用。"
+      }
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "5f4dd7e7",
+      "source_content": "| Name   | Type                     | Required | Description  |\n| ------ | ------------------------ | -------- | ------------ |\n| offset | `{x: number; y: number}` | Yes      | Offset value |",
+      "source_content_hash": "ed3f88081d2cc8569a68eb69336a5c93b7223ebcc8d69503544246de26bd34d8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5f4dd7e7"
+      }
+    },
+    {
+      "segment_id": "f7a7cb1b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e06c002e",
+      "source_content": "### `flattenOffset()`",
+      "source_content_hash": "c4067fcc70b76bca5906f483abe3215c0cca574d9ee430c0ee185b19fee0c02f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flattenOffset()`"
+      }
+    },
+    {
+      "segment_id": "efbe5e3f",
+      "source_content": "```tsx\nflattenOffset();\n```",
+      "source_content_hash": "3e9b16fe17cec29e2a1bf0dba26b51fd2fde57c7fb47f452229675d92cdf735c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_efbe5e3f"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "Merges the offset value into the base value and resets the offset to zero. The final output of the value is unchanged.",
+      "source_content_hash": "985fdce79bc34e32d79ad2edd5e27cc6c7bb6e494159b279d0d4a734b9f29106",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將偏移量合併到基礎值中，並將偏移量重置為零。最終輸出的數值保持不變。"
+      }
+    },
+    {
+      "segment_id": "f414353c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "### `extractOffset()`",
+      "source_content_hash": "47cf56cfbc6446b8ad23225072046f52298b4f16995bc763be49ee2bad702413",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `extractOffset()`"
+      }
+    },
+    {
+      "segment_id": "59534425",
+      "source_content": "```tsx\nextractOffset();\n```",
+      "source_content_hash": "32af78e9145fe79167643b9770f14509adbae3b4bff2f3648a531d2ffd8236b1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_59534425"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "Sets the offset value to the base value, and resets the base value to zero. The final output of the value is unchanged.",
+      "source_content_hash": "c137e82581acb1bbd5581389a54b6cc3d4a9ae11d18d022fea7fa0cbc287ab70",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將偏移量設定為基礎值，並將基礎值重置為零。最終輸出的數值保持不變。"
+      }
+    },
+    {
+      "segment_id": "510c9c5b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "37fca32e",
+      "source_content": "### `addListener()`",
+      "source_content_hash": "a50f03e5bde48e915a4c91b4c5babd8389cd47e2a74195fb91a3c391fe1103cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addListener()`"
+      }
+    },
+    {
+      "segment_id": "1a63b635",
+      "source_content": "```tsx\naddListener(callback: (value: {x: number; y: number}) => void);\n```",
+      "source_content_hash": "3401cb7ba8f6813f0eb8bc51a5bdb3da4db62ef89a545dfcd55d4b7742e0c852",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a63b635"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "Adds an asynchronous listener to the value so you can observe updates from animations. This is useful because there is no way to synchronously read the value because it might be driven natively.",
+      "source_content_hash": "9f14150b28dc3e4ae5042572c7f1b3ccb238a8b527fb4277cc870b4755163111",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為數值添加異步監聽器，以便觀察動畫的更新。由於數值可能由原生驅動而無法同步讀取，此功能非常實用。"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "Returns a string that serves as an identifier for the listener.",
+      "source_content_hash": "915b63c041308d0ea9df17c4b6e1e8ea4e302291abe1ad51d8cae442ee727005",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "返回一個作為監聽器標識符的字串。"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "873a1e9b",
+      "source_content": "| Name     | Type     | Required | Description                                                                                 |\n| -------- | -------- | -------- | ------------------------------------------------------------------------------------------- |\n| callback | function | Yes      | The callback function which will receive an object with a `value` key set to the new value. |",
+      "source_content_hash": "54de1739bd1cab3c1f575233ba4b5293190ed3c162efe4717b635685810cda63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_873a1e9b"
+      }
+    },
+    {
+      "segment_id": "dc45ba24",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a461a67b",
+      "source_content": "### `removeListener()`",
+      "source_content_hash": "d729a1fe733b3a2ab9a955bc0c1e962e6fccf17e80f517c3431f908a1da13a5f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeListener()`"
+      }
+    },
+    {
+      "segment_id": "4c6754b2",
+      "source_content": "```tsx\nremoveListener(id: string);\n```",
+      "source_content_hash": "f39788ff9900634f3f9ab6acae66631b9f6156cde3e42d350010728568d5dce8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4c6754b2"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "Unregister a listener. The `id` param shall match the identifier previously returned by `addListener()`.",
+      "source_content_hash": "c5f79147ef0c072125d3fd7dfdb4f21abdb2444b45ce24fe6fcc401bfea4a949",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取消註冊監聽器。`id`參數應與先前`addListener()`返回的標識符匹配。"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "bdbc15fe",
+      "source_content": "| Name | Type   | Required | Description                        |\n| ---- | ------ | -------- | ---------------------------------- |\n| id   | string | Yes      | Id for the listener being removed. |",
+      "source_content_hash": "6629335dc94e04ff001011cc73e069c0e14d9ef2f16f130d851587286b2f846e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bdbc15fe"
+      }
+    },
+    {
+      "segment_id": "ac00ead3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "671cbf7c",
+      "source_content": "### `removeAllListeners()`",
+      "source_content_hash": "b45c01815653c87af296a90446a0b1bdbedc532831970bd8f7e4752ba87e7c84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeAllListeners()`"
+      }
+    },
+    {
+      "segment_id": "d58c5dc0",
+      "source_content": "```tsx\nremoveAllListeners();\n```",
+      "source_content_hash": "266d41a75bc0831f3670f2202a20887494c13506d3ee56bf4aebe671e8f4d164",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d58c5dc0"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "Remove all registered listeners.",
+      "source_content_hash": "a07d928132a11e3fb5cb482964368d3084db74fc3c5cce02e1ebe4434ab778f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "移除所有已註冊的監聽器。"
+      }
+    },
+    {
+      "segment_id": "d26d4100",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7312e69e",
+      "source_content": "### `stopAnimation()`",
+      "source_content_hash": "b999a9b3fd678a9fc5c5001c1c8ea120d5ea205f18634e1d9e588cb49799d478",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `stopAnimation()`"
+      }
+    },
+    {
+      "segment_id": "7c894678",
+      "source_content": "```tsx\nstopAnimation(callback?: (value: {x: number; y: number}) => void);\n```",
+      "source_content_hash": "c01b80ff8a76f38689194cca11751f70f13d3b4db7a7e7982d20c0a0ec4a4bdb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7c894678"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "Stops any running animation or tracking. `callback` is invoked with the final value after stopping the animation, which is useful for updating state to match the animation position with layout.",
+      "source_content_hash": "22943837f6efec74963b7e5c4dff7f1c6b2724db1d1c96a27a91d322b8dc2b69",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "停止任何正在運行的動畫或追蹤。`callback`會在停止動畫後以最終值調用，這對於將狀態更新至與動畫位置和佈局匹配非常有用。"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "ea0b1e5c",
+      "source_content": "| Name     | Type     | Required | Description                                   |\n| -------- | -------- | -------- | --------------------------------------------- |\n| callback | function | No       | A function that will receive the final value. |",
+      "source_content_hash": "dee84b7d2b4987e6e491e229143102181fc389ffc383a1ae2c7340a37c4ace0b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ea0b1e5c"
+      }
+    },
+    {
+      "segment_id": "4b6c0556",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a75f8411",
+      "source_content": "### `resetAnimation()`",
+      "source_content_hash": "846aa6479311e852d5101024ffec131ce7330e810e33dead382660cef7f6117e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `resetAnimation()`"
+      }
+    },
+    {
+      "segment_id": "904df6eb",
+      "source_content": "```tsx\nresetAnimation(callback?: (value: {x: number; y: number}) => void);\n```",
+      "source_content_hash": "dc58f30e863fe278dfce595f9695d526a6d2cde945bd5edb6f73cf36ad7b3c85",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_904df6eb"
+      }
+    },
+    {
+      "segment_id": "e5821418",
+      "source_content": "Stops any animation and resets the value to its original.",
+      "source_content_hash": "a6d949ab5a5dc07edc1b275b788f0c335ffc8520fbc8886364bd235782234b3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "停止任何動畫並將數值重置為原始值。"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "24128ec4",
+      "source_content": "| Name     | Type     | Required | Description                                      |\n| -------- | -------- | -------- | ------------------------------------------------ |\n| callback | function | No       | A function that will receive the original value. |",
+      "source_content_hash": "c5dbc8e4daddaf1449ba8da46d1fd478476bf4c8c16ac6f28f9fb70c10aa617c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_24128ec4"
+      }
+    },
+    {
+      "segment_id": "dfdfd869",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6d75762",
+      "source_content": "### `getLayout()`",
+      "source_content_hash": "5c63f994f13f7d949c1c6014b842ef89740a9b280de1beb100c6e31836e17576",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getLayout()`"
+      }
+    },
+    {
+      "segment_id": "d7631ae3",
+      "source_content": "```tsx\ngetLayout(): {left: Animated.Value, top: Animated.Value};\n```",
+      "source_content_hash": "1844d42c7513ead5225b2127eff0c909280b7bc34f85efd5f3e1d147d4d8e336",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7631ae3"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "Converts `{x, y}` into `{left, top}` for use in style, e.g.",
+      "source_content_hash": "bab92ed651f6b23c0174ed7e17e5eca5c16e4b066450016bc03a923f6b4446d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將`{x, y}`轉換為樣式中可用的`{left, top}`，例如："
+      }
+    },
+    {
+      "segment_id": "3c6be27a",
+      "source_content": "```tsx\nstyle={this.state.anim.getLayout()}\n```",
+      "source_content_hash": "bdfada7a5a431ea99df00154caef3e95571e4c3da4f08b86e635bbb570384020",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3c6be27a"
+      }
+    },
+    {
+      "segment_id": "34b9291a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e457c208",
+      "source_content": "### `getTranslateTransform()`",
+      "source_content_hash": "c7670b08489306569b8f1eec7e91f539d959b8cb182cfe111ae5600fcf0bcb6e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getTranslateTransform()`"
+      }
+    },
+    {
+      "segment_id": "b3890715",
+      "source_content": "```tsx\ngetTranslateTransform(): [\n  {translateX: Animated.Value},\n  {translateY: Animated.Value},\n];\n```",
+      "source_content_hash": "debabb751d4207174f3e15933da26dd0e33fe2f46c9cc3b9b3bc26cf524230a5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b3890715"
+      }
+    },
+    {
+      "segment_id": "be0f7233",
+      "source_content": "Converts `{x, y}` into a useable translation transform, e.g.",
+      "source_content_hash": "12e22d830dff54c09238c882a8604b4d9dcfa8ead1b9947c8b925957c737184f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將`{x, y}`轉換為可用的平移變換，例如："
+      }
+    },
+    {
+      "segment_id": "eff3427d",
+      "source_content": "```tsx\nstyle={{\n  transform: this.state.anim.getTranslateTransform()\n}}\n```",
+      "source_content_hash": "1b762fcfa12f5540e9fe37b94b7401a1922fb4de39847f1cefb82c2c60fc1842",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eff3427d"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/animatedvaluexy.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.435858+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a4a8844552b65b75dc078d57d285165a61a0fc265ed732a575eb135c03ab5f73"
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/gesture-responder-system.md",
+  "source_file_content_hash": "2bf9f237d015af8910efa0108c66845b47ee9397a9aac9bcc0f49ccd201c6932",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: gesture-responder-system\ntitle: Gesture Responder System\n---",
+      "source_content_hash": "adfb28f70c9e35f149dc679c11064f41be907f2552b1cd7d19fc019a35687b1c",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The gesture responder system manages the lifecycle of gestures in your app. A touch can go through several phases as the app determines what the user's intention is. For example, the app needs to determine if the touch is scrolling, sliding on a widget, or tapping. This can even change during the duration of a touch. There can also be multiple simultaneous touches.",
+      "source_content_hash": "388d403a3b72776f2a08bf3382163756f01c472cc47714466ba14e448aa52757",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "手勢響應系統負責管理應用程式中的手勢生命週期。一個觸控操作可能會經歷多個階段，因為應用需要判斷使用者的意圖。例如，應用需要判斷該觸控是滾動、滑動某個元件，還是點擊。甚至在觸控持續期間，這個判斷也可能改變。同時也可能存在多個並行的觸控操作。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The touch responder system is needed to allow components to negotiate these touch interactions without any additional knowledge about their parent or child components.",
+      "source_content_hash": "fcb890061f2708d6df2e18b2d59f78621fa052989eddc3470c073a99fddafcf7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "觸控響應系統的存在，讓元件能在不需要了解其父元件或子元件的情況下，協調這些觸控互動。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### Best Practices",
+      "source_content_hash": "0d86894479677aba28cb58571a31658a2dc38d61f293773057aea07c536559f9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 最佳實踐"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "To make your app feel great, every action should have the following attributes:",
+      "source_content_hash": "9a1305970b7456c5c06e18b4396dfd3da0bdf3b573503436bd5aaf553e3ba000",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了讓應用體驗更佳，每個操作都應具備以下特性："
+      }
+    },
+    {
+      "segment_id": "9e760345",
+      "source_content": "- Feedback/highlighting- show the user what is handling their touch, and what will happen when they release the gesture\n- Cancel-ability- when making an action, the user should be able to abort it mid-touch by dragging their finger away",
+      "source_content_hash": "fc2d9a7778000cf6babdfe6135f131fc037541eef68f102a1f6a22c8dc7363f3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 反饋/高亮效果 - 向使用者展示當前正在處理其觸控的元件，以及釋放手勢後會發生的結果\n- 可取消性 - 當進行某個操作時，使用者應能透過將手指拖曳開來中途取消該操作"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "These features make users more comfortable while using an app, because it allows people to experiment and interact without fear of making mistakes.",
+      "source_content_hash": "72eb7133653e0075268fa4cedd29a1a837c71e47b470da3de85ca48ffca76ec7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些特性讓使用者在操作應用時更安心，因為它允許人們進行嘗試和互動，而無需擔心犯錯。"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "### TouchableHighlight and Touchable\\*",
+      "source_content_hash": "58cfaa7a491f393c87bdd07d68613add48dea21d17850608aac8d01b411fac07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### TouchableHighlight 與 Touchable* 元件"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "The responder system can be complicated to use. So we have provided an abstract `Touchable` implementation for things that should be \"tappable\". This uses the responder system and allows you to configure tap interactions declaratively. Use `TouchableHighlight` anywhere where you would use a button or link on web.",
+      "source_content_hash": "370642c71b8262df057fd963e6902af73c925c77bdae3bf3c13bc33be49fa1aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "響應系統可能較為複雜。因此我們為需要「可點擊」的元件提供了抽象的 `Touchable` 實現。它利用響應系統，並允許您以宣告式的方式配置點擊互動。在任何您會在網頁上使用按鈕或連結的地方，都可以使用 `TouchableHighlight`。"
+      }
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## Responder Lifecycle",
+      "source_content_hash": "3ac55789f111237c17de5f82073ed9e1165f2cc1e6070461b34db6ef12c1a912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 響應者生命週期"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "A view can become the touch responder by implementing the correct negotiation methods. There are two methods to ask the view if it wants to become responder:",
+      "source_content_hash": "e5cf4ce44bf3b5d6ee31d82f522acfc0bd49bbcf33e81177ec6606d69e165fae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個視圖可以透過實現正確的協商方法來成為觸控響應者。有兩個方法可以詢問視圖是否想成為響應者："
+      }
+    },
+    {
+      "segment_id": "b3f5c97c",
+      "source_content": "- `View.props.onStartShouldSetResponder: evt => true,` - Does this view want to become responder on the start of a touch?\n- `View.props.onMoveShouldSetResponder: evt => true,` - Called for every touch move on the View when it is not the responder: does this view want to \"claim\" touch responsiveness?",
+      "source_content_hash": "df9f6dac4e0a79d23122106d4258025fa969884a6f6efd11bfcecbd7e4263f0c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `View.props.onStartShouldSetResponder: evt => true,` - 這個視圖是否想在觸控開始時成為響應者？\n- `View.props.onMoveShouldSetResponder: evt => true,` - 當視圖不是響應者時，每次觸控移動都會呼叫此方法：這個視圖是否想「聲明」觸控響應權？"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "If the View returns true and attempts to become the responder, one of the following will happen:",
+      "source_content_hash": "993f13a11152c8ef6a6c4673c2865f3f71a5ca99c829f133a468968b1316737f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果視圖返回 true 並嘗試成為響應者，將會發生以下其中一種情況："
+      }
+    },
+    {
+      "segment_id": "86b525ab",
+      "source_content": "- `View.props.onResponderGrant: evt => {}` - The View is now responding for touch events. This is the time to highlight and show the user what is happening\n- `View.props.onResponderReject: evt => {}` - Something else is the responder right now and will not release it",
+      "source_content_hash": "ed3f6f73a3a8b30c0bc1e66da5f89282facf8d96bc4142cef2bbfc2a5364fb84",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `View.props.onResponderGrant: evt => {}` - 該視圖現在負責處理觸控事件。此時應顯示高亮效果，向使用者展示正在發生的操作\n- `View.props.onResponderReject: evt => {}` - 目前有其他元件是響應者，且不願釋放響應權"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "If the view is responding, the following handlers can be called:",
+      "source_content_hash": "0b4441e5c9b157b0ca371041238becc07d544426cadc993d70cb47d6572b60cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果視圖正在響應，可能會呼叫以下處理函數："
+      }
+    },
+    {
+      "segment_id": "5d66c9dc",
+      "source_content": "- `View.props.onResponderMove: evt => {}` - The user is moving their finger\n- `View.props.onResponderRelease: evt => {}` - Fired at the end of the touch, ie \"touchUp\"\n- `View.props.onResponderTerminationRequest: evt => true` - Something else wants to become responder. Should this view release the responder? Returning true allows release\n- `View.props.onResponderTerminate: evt => {}` - The responder has been taken from the View. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (happens with control center/ notification center on iOS)",
+      "source_content_hash": "77a7edb4aa61d628d525f216f67a1c4ccb4aab0a28c63a923fe362fc639520c2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `View.props.onResponderMove: evt => {}` - 使用者正在移動手指\n- `View.props.onResponderRelease: evt => {}` - 在觸控結束時觸發，即「觸控抬起」\n- `View.props.onResponderTerminationRequest: evt => true` - 其他元件想成為響應者。該視圖是否應釋放響應權？返回 true 表示允許釋放\n- `View.props.onResponderTerminate: evt => {}` - 響應權已從該視圖被奪走。可能是在呼叫 `onResponderTerminationRequest` 後被其他視圖奪走，也可能是作業系統未經詢問直接奪走（iOS 上的控制中心/通知中心會發生這種情況）"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "`evt` is a synthetic touch event with the following form:",
+      "source_content_hash": "f94d096f28ceaa21b4f8e7716b9789e280bbbd40e68bd38bbdbfd65a05c75160",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`evt` 是一個合成觸控事件，具有以下結構："
+      }
+    },
+    {
+      "segment_id": "aa83231c",
+      "source_content": "- `nativeEvent`\n  - `changedTouches` - Array of all touch events that have changed since the last event\n  - `identifier` - The ID of the touch\n  - `locationX` - The X position of the touch, relative to the element\n  - `locationY` - The Y position of the touch, relative to the element\n  - `pageX` - The X position of the touch, relative to the root element\n  - `pageY` - The Y position of the touch, relative to the root element\n  - `target` - The node id of the element receiving the touch event\n  - `timestamp` - A time identifier for the touch, useful for velocity calculation\n  - `touches` - Array of all current touches on the screen",
+      "source_content_hash": "10377db240d47a6abb26e9a777adae6161f43aedcb31d551734622513c7b6761",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `nativeEvent`\n  - `changedTouches` - 自上次事件以來所有發生變化的觸控事件陣列\n  - `identifier` - 觸控操作的 ID\n  - `locationX` - 觸控點的 X 座標，相對於元素\n  - `locationY` - 觸控點的 Y 座標，相對於元素\n  - `pageX` - 觸控點的 X 座標，相對於根元素\n  - `pageY` - 觸控點的 Y 座標，相對於根元素\n  - `target` - 接收觸控事件的元素節點 ID\n  - `timestamp` - 觸控操作的時間標識，可用於計算速度\n  - `touches` - 當前螢幕上所有觸控點的陣列"
+      }
+    },
+    {
+      "segment_id": "af52d59d",
+      "source_content": "### Capture ShouldSet Handlers",
+      "source_content_hash": "e850691885454d1ce080fb5c7f2e50d273cf25c51a82364d1c45f25eb35f8f5f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 捕獲 ShouldSet 處理函數"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "`onStartShouldSetResponder` and `onMoveShouldSetResponder` are called with a bubbling pattern, where the deepest node is called first. That means that the deepest component will become responder when multiple Views return true for `*ShouldSetResponder` handlers. This is desirable in most cases, because it makes sure all controls and buttons are usable.",
+      "source_content_hash": "2b235e494c44fec02de08bc73ef9db1edcd4ca8399e3c321686a35c65ff2fceb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`onStartShouldSetResponder` 和 `onMoveShouldSetResponder` 會以冒泡模式被呼叫，最深的節點會優先被觸發。這意味著當多個 View 對 `*ShouldSetResponder` 處理程序返回 true 時，最深的元件將成為響應者。在大多數情況下這是理想的，因為它能確保所有控制項和按鈕都可使用。"
+      }
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "However, sometimes a parent will want to make sure that it becomes responder. This can be handled by using the capture phase. Before the responder system bubbles up from the deepest component, it will do a capture phase, firing `on*ShouldSetResponderCapture`. So if a parent View wants to prevent the child from becoming responder on a touch start, it should have a `onStartShouldSetResponderCapture` handler which returns true.",
+      "source_content_hash": "10b89dfa300efa5a2853e46b0c81e9391aad1069c09eaea1074a56580964a55f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，有時父元件會希望確保自己成為響應者。這可以透過使用捕獲階段來處理。在響應系統從最深元件冒泡之前，它會先執行捕獲階段，觸發 `on*ShouldSetResponderCapture`。因此，如果父 View 希望阻止子元件在觸摸開始時成為響應者，它應該設置一個返回 true 的 `onStartShouldSetResponderCapture` 處理程序。"
+      }
+    },
+    {
+      "segment_id": "3df4f066",
+      "source_content": "- `View.props.onStartShouldSetResponderCapture: evt => true,`\n- `View.props.onMoveShouldSetResponderCapture: evt => true,`",
+      "source_content_hash": "fd5fb9fe9988ac349ec2518beaa48b2733c6449de76c2c878b13d194e72ee070",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `View.props.onStartShouldSetResponderCapture: evt => true,`\n- `View.props.onMoveShouldSetResponderCapture: evt => true,`"
+      }
+    },
+    {
+      "segment_id": "c315c636",
+      "source_content": "### PanResponder",
+      "source_content_hash": "809ef06907a3e4c87eafc99adec62c8c2f7f3a0a043e31ff0d1fec5cc0a47785",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### PanResponder"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "For higher-level gesture interpretation, check out [PanResponder](panresponder.md).",
+      "source_content_hash": "700b976bca24e4589a738e761e58607a3bdccf6619f9438294320c879467e0f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如需更高層級的手勢解譯，請參閱 [PanResponder](panresponder.md)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/gesture-responder-system.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.014035+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "2bf9f237d015af8910efa0108c66845b47ee9397a9aac9bcc0f49ccd201c6932"
+  }
+}

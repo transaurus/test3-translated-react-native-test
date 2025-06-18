@@ -1,0 +1,502 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.78/the-new-architecture/using-codegen.md",
+  "source_file_content_hash": "acfe893eeb8d13a0d9cbc2ee365ebea59847cea45dbafa6d22306de87bf3462f",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "# Using Codegen",
+      "source_content_hash": "ca540db78fdf11c9f0dce6b306663a3780092520f681d29f3ad7ef63045142f8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 使用 Codegen"
+      }
+    },
+    {
+      "segment_id": "faebdc62",
+      "source_content": "This guide teaches how to:",
+      "source_content_hash": "991a84e436102477c7e02047f20af75ddfd3f5d6b25def1751c33193132f5bc4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將教您如何："
+      }
+    },
+    {
+      "segment_id": "17ded777",
+      "source_content": "- Configure **Codegen**.\n- Invoke it manually for each platform.",
+      "source_content_hash": "a1722ebd33bf23cde28c1dbc9856b83e880732883d5accc6f8c5d0378a3ddc0d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 配置 **Codegen**。\n- 為每個平台手動調用它。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "It also describes the generated code.",
+      "source_content_hash": "f2d1d27ce2901bd84971b0924c73345b78152d49a0b3adcc3438eb8528c46fc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同時也描述了生成的程式碼。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Prerequisites",
+      "source_content_hash": "bbd3d4949a6f237efd8d4ff5c7c5f30d968e7a989ad12f3d7dcef69c98053912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 先決條件"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "You always need a React Native app to generate the code properly, even when invoking the **Codegen** manually.",
+      "source_content_hash": "09ad98a589439bfefdbf72fb058aa23b30bb80d6cfcab388e5c9659d00524d6b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "即使手動調用 **Codegen**，您始終需要一個 React Native 應用程式才能正確生成程式碼。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The **Codegen** process is tightly coupled with the build of the app, and the scripts are located in the `react-native` NPM package.",
+      "source_content_hash": "bf65f3e16ab85478ea7ff049fa7dfb834229bc900cd8539499a23d1a44016957",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**Codegen** 過程與應用程式的構建緊密耦合，且腳本位於 `react-native` NPM 套件中。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "For the sake of this guide, create a project using the React Native CLI as follows:",
+      "source_content_hash": "ce07c1e62af528aa6b102ff31fcbf169d539e4f92b017269d8bca464cb26cd9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了本指南的示範，請使用 React Native CLI 創建一個專案如下："
+      }
+    },
+    {
+      "segment_id": "6e5ba8fb",
+      "source_content": "```bash\nnpx @react-native-community/cli@latest init SampleApp --version 0.76.0\n```",
+      "source_content_hash": "60ffab9dd174fb7bfa09d6785ef65a185e28dc109ab44116ad6dd5ef9597adc4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6e5ba8fb"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "**Codegen** is used to generate the glue-code for your custom modules or components. See the guides for Turbo Native Modules and Fabric Native Components for more details on how to create them.",
+      "source_content_hash": "d6a7e13dc41873a001ada77bdb3ff63a523681c9905b2994942b34cec800c739",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**Codegen** 用於為您的自訂模組或元件生成粘合程式碼。有關如何創建它們的詳細資訊，請參閱 Turbo Native Modules 和 Fabric Native Components 的指南。"
+      }
+    },
+    {
+      "segment_id": "2a7f8824",
+      "source_content": "<!-- TODO: add links -->",
+      "source_content_hash": "b5e9f6cba192cfe565a4237397098454137c6dc90c77e251e08ec3324845dd13",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2a7f8824"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "## Configuring **Codegen**",
+      "source_content_hash": "09ec18829fea2c02eefc6cb224df354ceff3545a0181a84c34278cbc0b79772b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 配置 **Codegen**"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "**Codegen** can be configured in your app by modifying the `package.json` file. **Codegen** is controlled by a custom field called `codegenConfig`.",
+      "source_content_hash": "fe629a311a243fd93ab3965f851c0825a138e4972af6e669abc3cc91af6dc382",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以通過修改 `package.json` 文件來配置 **Codegen**。**Codegen** 由一個名為 `codegenConfig` 的自訂字段控制。"
+      }
+    },
+    {
+      "segment_id": "b7c3dbd1",
+      "source_content": "```json title=\"package.json\"\n  \"codegenConfig\": {\n    \"name\": \"<SpecName>\",\n    \"type\": \"<types>\",\n    \"jsSrcsDir\": \"<source_dir>\",\n    \"android\": {\n      \"javaPackageName\": \"<java.package.name>\"\n    },\n    \"ios\": {\n      \"modulesConformingToProtocol\": {\n        \"RCTImageURLLoader\": [\n          \"<iOS-class-conforming-to-RCTImageURLLoader>\",\n          // example from react-native-camera-roll: https://github.com/react-native-cameraroll/react-native-cameraroll/blob/8a6d1b4279c76e5682a4b443e7a4e111e774ec0a/package.json#L118-L127\n          // \"RNCPHAssetLoader\",\n        ],\n        \"RCTURLRequestHandler\": [\n          \"<iOS-class-conforming-to-RCTURLRequestHandler>\",\n          // example from react-native-camera-roll: https://github.com/react-native-cameraroll/react-native-cameraroll/blob/8a6d1b4279c76e5682a4b443e7a4e111e774ec0a/package.json#L118-L127\n          // \"RNCPHAssetUploader\",\n        ],\n        \"RCTImageDataDecoder\": [\n          \"<iOS-class-conforming-to-RCTImageDataDecoder>\",\n          // we don't have a good example for this, but it works in the same way. Pass the name of the class that implements the RCTImageDataDecoder. It must be a Native Module.\n        ]\n      },\n      \"componentProvider\": {\n        \"<componentName>\": \"<iOS-class-implementing-the-component>\"\n      },\n    }\n  },\n```",
+      "source_content_hash": "c2ee7bca0999ca0a2b3084c975a1847bda5153734b6759c1670a5c419005bcd7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7c3dbd1"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "You can add this snippet to your app and customize the various fields:",
+      "source_content_hash": "e65f3d247daed856c4736f95f5ec675a98bb27bef7b5f1bc9a0484165db5b482",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以將以下片段添加到您的應用程式中，並自訂各個字段："
+      }
+    },
+    {
+      "segment_id": "158e1f5d",
+      "source_content": "- `name:` This is the name that will be used to create files containing your specs. As a convention, It should have the suffix `Spec`, but this is not mandatory.\n- `type`: the type of code we need to generate. Allowed values are `modules`, `components`, `all`.\n  - `modules:` use this value if you only need to generate code for Turbo Native Modules.\n  - `components:` use this value if you only need to generate code for Native Fabric Components.\n  - `all`: use this value if you have a mixture of components and modules.\n- `jsSrcsDir`: this is the root folder where all your specs live.\n- `android.javaPackageName`: this is an Android specific setting to let **Codegen** generate the files in a custom package.\n- `ios`: the `ios` field is an object that can be used by app developers and library maintainers to provide some advanced functionalities. All the following fields are **optional**.\n  - `ios.modulesConformingToProtocol`: React Native offers some protocols that native modules can implement to customize some behaviors. These fields allow you to define the list of module that conforms to those protocols. These modules will be injected in the React Native runtime when the app starts.\n    - `ios.modulesConformingToProtocol.RCTImageURLLoader`: list of iOS native module that implements the [`RCTImageURLLoader` protocol](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageURLLoader.h#L26-L81). You need to pass the class names of iOS classes that implements the `RCTImageURLLoader`. They must be Native Modules.\n    - `ios.modulesConformingToProtocol.RCTURLRequestHandler`: list of iOS native module that implements the [`RCTURLRequestHandler` protocol](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/React/Base/RCTURLRequestHandler.h#L11-L52). You need to pass the class names of iOS classes that implements the `RCTURLRequestHandler`. They must be Native Modules.\n    - `ios.modulesConformingToProtocol.RCTImageDataDecoder`: list of iOS native module that implements the [`RCTImageDataDecoder` protocol](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageDataDecoder.h#L15-L53). You need to pass the class names of iOS classes that implements the `RCTImageDataDecoder`. They must be Native Modules.\n  - `ios.componentProvider`: this field is a map used to generate the association between a custom JS React component and the native class that implements it. The key of the map is the JS name of the component (for example `TextInput`), and the value is the iOS class that implements the component (for example `RCTTextInput`).",
+      "source_content_hash": "f68676b44ad8797e546fa91b2c0083e4017a58c0db7a4079081b5223144ac1d2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `name:` 這將用於創建包含您的規格的文件的名稱。按照慣例，它應該有後綴 `Spec`，但這不是強制性的。\n- `type`: 需要生成的程式碼類型。允許的值為 `modules`、`components`、`all`。\n  - `modules:` 如果只需要為 Turbo Native Modules 生成程式碼，請使用此值。\n  - `components:` 如果只需要為 Native Fabric Components 生成程式碼，請使用此值。\n  - `all`: 如果同時有元件和模組，請使用此值。\n- `jsSrcsDir`: 這是所有規格所在的根目錄。\n- `android.javaPackageName`: 這是一個 Android 特定的設置，讓 **Codegen** 在自訂套件中生成文件。\n- `ios`: `ios` 字段是一個物件，可供應用程式開發者和庫維護者使用，以提供一些進階功能。以下所有字段都是**可選的**。\n    - `ios.modulesConformingToProtocol`: React Native 提供了一些協議，原生模組可以實現這些協議以自訂某些行為。這些字段允許您定義符合這些協議的模組列表。這些模組將在應用程式啟動時注入到 React Native 運行時中。\n      - `ios.modulesConformingToProtocol.RCTImageURLLoader`: 實現 [`RCTImageURLLoader` 協議](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageURLLoader.h#L26-L81) 的 iOS 原生模組列表。您需要傳遞實現 `RCTImageURLLoader` 的 iOS 類別名稱。它們必須是原生模組。\n      - `ios.modulesConformingToProtocol.RCTURLRequestHandler`: 實現 [`RCTURLRequestHandler` 協議](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/React/Base/RCTURLRequestHandler.h#L11-L52) 的 iOS 原生模組列表。您需要傳遞實現 `RCTURLRequestHandler` 的 iOS 類別名稱。它們必須是原生模組。\n      - `ios.modulesConformingToProtocol.RCTImageDataDecoder`: 實現 [`RCTImageDataDecoder` 協議](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageDataDecoder.h#L15-L53) 的 iOS 原生模組列表。您需要傳遞實現 `RCTImageDataDecoder` 的 iOS 類別名稱。它們必須是原生模組。\n    - `ios.componentProvider`: 此字段是一個映射，用於生成自訂 JS React 元件與實現它的原生類別之間的關聯。映射的鍵是元件的 JS 名稱（例如 `TextInput`），值是實現該元件的 iOS 類別（例如 `RCTTextInput`）。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "When **Codegen** runs, it searches among all the dependencies of the app, looking for JS files that respects some specific conventions, and it generates the required code:",
+      "source_content_hash": "888ea08906be3b4c6bd1686b8d8889d22861d958aa66852bb76503be33e66928",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 **Codegen** 執行時，它會搜尋應用程式的所有依賴項，尋找符合特定慣例的 JS 檔案，並生成所需的程式碼："
+      }
+    },
+    {
+      "segment_id": "ca1573da",
+      "source_content": "- Turbo Native Modules require that the spec files are prefixed with `Native`. For example, `NativeLocalStorage.ts` is a valid name for a spec file.\n- Native Fabric Components require that the spec files are suffixed with `NativeComponent`. For example, `WebViewNativeComponent.ts` is a valid name for a spec file.",
+      "source_content_hash": "22613b45d84c54df70f8f60080806e65abf1b3e4ac6fbbb11f895fdb828ac1eb",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- Turbo Native Modules 要求規格檔案的前綴為 `Native`。例如，`NativeLocalStorage.ts` 是一個有效的規格檔案名稱。\n- Native Fabric Components 要求規格檔案的後綴為 `NativeComponent`。例如，`WebViewNativeComponent.ts` 是一個有效的規格檔案名稱。"
+      }
+    },
+    {
+      "segment_id": "66819c78",
+      "source_content": "## Running **Codegen**",
+      "source_content_hash": "2968cc569290e3702bf27014cb93e27df19182c467d18f0b9295f9905a1a1317",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 執行 **Codegen**"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "The rest of this guide assumes that you have a Native Turbo Module, a Native Fabric Component or both already set up in your project. We also assume that you have valid specification files in the `jsSrcsDir` specified in the `package.json`.",
+      "source_content_hash": "5169cc175ca58f62bfdb408628a80d2b7472f08a0e31fd4e7d9aeb70dd40c0ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南的其餘部分假設您已在專案中設置了 Native Turbo Module、Native Fabric Component 或兩者。我們還假設您在 `package.json` 中指定的 `jsSrcsDir` 中有有效的規格檔案。"
+      }
+    },
+    {
+      "segment_id": "759d12dd",
+      "source_content": "### Android",
+      "source_content_hash": "18508687aedd8506ac08685625c58c973d94225f52d4abdd8fc62e581c6da653",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "**Codegen** for Android is integrated with the React Native Gradle Plugin (RNGP). The RNGP contains a task that can be invoked that reads the configurations defined in the `package.json` file and execute **Codegen**. To run the gradle task, first navigate inside the `android` folder of your project. Then run:",
+      "source_content_hash": "9b60ba904e5e4b364cf86d96ae221afc4138777df32a7be7dda105b98a8a1e40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 的 **Codegen** 與 React Native Gradle Plugin (RNGP) 整合。RNGP 包含一個可執行的任務，該任務會讀取 `package.json` 檔案中定義的配置並執行 **Codegen**。要執行 gradle 任務，首先導航到專案的 `android` 資料夾，然後執行："
+      }
+    },
+    {
+      "segment_id": "5dd0e3a7",
+      "source_content": "```bash\n./gradlew generateCodegenArtifactsFromSchema\n```",
+      "source_content_hash": "3a55e544f498c3dc47ac78438a280e3a096f2d881de2ea883705fe9d9aafe81a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5dd0e3a7"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "This task invokes the `generateCodegenArtifactsFromSchema` command on all the imported projects of the app (the app and all the node modules which are linked to it). It generates the code in the corresponding `node_modules/<dependency>` folder. For example, if you have a Fabric Native Component whose Node module is called `my-fabric-component`, the generated code is located in the `SampleApp/node_modules/my-fabric-component/android/build/generated/source/codegen` path. For the app, the code is generated in the `android/app/build/generated/source/codegen` folder.",
+      "source_content_hash": "def4cd5ebe8d6bc2484f64d12f1787618f3e337cdf8a0c0d0da7a8365086a783",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此任務會在應用程式的所有導入專案（應用程式及其所有連結的 node modules）上執行 `generateCodegenArtifactsFromSchema` 命令。它會在相應的 `node_modules/<dependency>` 資料夾中生成程式碼。例如，如果您有一個名為 `my-fabric-component` 的 Fabric Native Component，生成的程式碼會位於 `SampleApp/node_modules/my-fabric-component/android/build/generated/source/codegen` 路徑。對於應用程式，程式碼會生成在 `android/app/build/generated/source/codegen` 資料夾中。"
+      }
+    },
+    {
+      "segment_id": "b10963d7",
+      "source_content": "#### The Generated Code",
+      "source_content_hash": "bf8bdf1fec89f195f6d5446c5fdcf16de0d2139f454943336a9ffa4453890036",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 生成的程式碼"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "After running the gradle command above, you will find the codegen code in the `SampleApp/android/app/build` folder. The structure will look like this:",
+      "source_content_hash": "7fa87a383af31d2381600f3af67da744a1893250ebc44d57294c6d9002dbe992",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行上述 gradle 命令後，您可以在 `SampleApp/android/app/build` 資料夾中找到生成的程式碼。結構如下："
+      }
+    },
+    {
+      "segment_id": "efbe5e3f",
+      "source_content": "```\nbuild\n└── generated\n    └── source\n        └── codegen\n            ├── java\n            │   └── com\n            │       ├── facebook\n            │       │   └── react\n            │       │       └── viewmanagers\n            │       │           ├── <nativeComponent>ManagerDelegate.java\n            │       │           └── <nativeComponent>ManagerInterface.java\n            │       └── sampleapp\n            │           └── NativeLocalStorageSpec.java\n            ├── jni\n            │   ├── <codegenConfig.name>-generated.cpp\n            │   ├── <codegenConfig.name>.h\n            │   ├── CMakeLists.txt\n            │   └── react\n            │       └── renderer\n            │           └── components\n            │               └── <codegenConfig.name>\n            │                   ├── <codegenConfig.name>JSI-generated.cpp\n            │                   ├── <codegenConfig.name>.h\n            │                   ├── ComponentDescriptors.cpp\n            │                   ├── ComponentDescriptors.h\n            │                   ├── EventEmitters.cpp\n            │                   ├── EventEmitters.h\n            │                   ├── Props.cpp\n            │                   ├── Props.h\n            │                   ├── ShadowNodes.cpp\n            │                   ├── ShadowNodes.h\n            │                   ├── States.cpp\n            │                   └── States.h\n            └── schema.json\n```",
+      "source_content_hash": "db74ad68bb34da155e849585c98466cecbaa37b48b31feaa2f8bd11909eef708",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_efbe5e3f"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "The generated code is split in two folders:",
+      "source_content_hash": "99aa04d1cb0aae887521cc6ff1562454899413d9bc931d1d5df357c307912396",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "生成的程式碼分為兩個資料夾："
+      }
+    },
+    {
+      "segment_id": "292df6cb",
+      "source_content": "- `java` which contains the platform specific code\n- `jni` which contains the C++ code required to let JS and Java interact correctly.",
+      "source_content_hash": "66baad589624807389fbadebfb4bed42b2b5dde5e1293a84f58edffc91ad52ff",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `java` 包含平台特定的程式碼\n- `jni` 包含讓 JS 和 Java 正確互動所需的 C++ 程式碼。"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "In the `java` folder, you can find the Fabric Native component generated code in the `com/facebook/viewmanagers` subfolder.",
+      "source_content_hash": "14d9e191e79ff79dd8634fadb2d212e54982f76244fecc1718bd99cc0be6f8c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 `java` 資料夾中，您可以在 `com/facebook/viewmanagers` 子資料夾中找到 Fabric Native Component 生成的程式碼。"
+      }
+    },
+    {
+      "segment_id": "6892c8d2",
+      "source_content": "- the `<nativeComponent>ManagerDelegate.java` contains the methods that the `ViewManager` can call on the custom Native Component\n- the `<nativeComponent>ManagerInterface.java` contains the interface of the `ViewManager`.",
+      "source_content_hash": "400122b94df2911a95567c11d1cce9ce5b5914eeefd086799a8744824071614c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `<nativeComponent>ManagerDelegate.java` 包含 `ViewManager` 可以呼叫自定義 Native Component 的方法\n- `<nativeComponent>ManagerInterface.java` 包含 `ViewManager` 的介面。"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "In the folder whose name was set up in the `codegenConfig.android.javaPackageName`, instead, you can find the abstract class that a Turbo Native Module has to implement to carry out its tasks.",
+      "source_content_hash": "e770aa7e789116be4e64ba9eb8d95010c44e06eb0f376fb323430d2231a9f39d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在名稱設定為 `codegenConfig.android.javaPackageName` 的資料夾中，您可以找到 Turbo Native Module 必須實作的抽象類別以執行其任務。"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "In the `jni` folder, finally, there is all the boilerplate code to connect JS to Android.",
+      "source_content_hash": "91d20ae267d9440e627248918797aa00767b30c34d1fd555386cbe94d9686a7f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 `jni` 資料夾中，最後，有所有連接 JS 和 Android 的樣板程式碼。"
+      }
+    },
+    {
+      "segment_id": "f4e38e16",
+      "source_content": "- `<codegenConfig.name>.h` this contains the interface of your custom C++ Turbo Native Modules.\n- `<codegenConfig.name>-generated.cpp` this contains the glue code of your custom C++ Turbo Native Modules.\n- `react/renderer/components/<codegenConfig.name>`: this folder contains all the glue-code required by your custom component.",
+      "source_content_hash": "e847e42f7f314b076546ee0f1c0deaae2de0331a8579693428b6dcd79bf87a4a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `<codegenConfig.name>.h` 包含自定義 C++ Turbo Native Modules 的介面。\n- `<codegenConfig.name>-generated.cpp` 包含自定義 C++ Turbo Native Modules 的粘合程式碼。\n- `react/renderer/components/<codegenConfig.name>`：此資料夾包含自定義元件所需的所有粘合程式碼。"
+      }
+    },
+    {
+      "segment_id": "619c3209",
+      "source_content": "This structure has been generated by using the value `all` for the `codegenConfig.type` field. If you use the value `modules`, expect to see no `react/renderer/components/` folder. If you use the value `components`, expect not to see any of the other files.",
+      "source_content_hash": "9cf261a7022a06131b87033897e38779c632c6485330799d3b018087a6a6a174",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此結構是使用 `codegenConfig.type` 欄位的值 `all` 生成的。如果使用值 `modules`，則不會看到 `react/renderer/components/` 資料夾。如果使用值 `components`，則不會看到其他檔案。"
+      }
+    },
+    {
+      "segment_id": "97afbaf0",
+      "source_content": "### iOS",
+      "source_content_hash": "b646a613d3c8a9a4ca1214eed895ef4f31b195bbc5c8456c23cc55e60cc49c95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "**Codegen** for iOS relies on some Node scripts that are invoked during the build process. The scripts are located in the `SampleApp/node_modules/react-native/scripts/` folder.",
+      "source_content_hash": "501c42df8851b4b3ccaa2434ee934e45c1fb4340eceb49bf8dd24254a68a22ed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 的 **Codegen** 依賴於在構建過程中呼叫的一些 Node 腳本。這些腳本位於 `SampleApp/node_modules/react-native/scripts/` 資料夾中。"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "The main script is the `generate-codegen-artifacts.js` script. To invoke the script, you can run this command from the root folder of your app:",
+      "source_content_hash": "046441688a9f2eb3127dfb28369c66a1816c7561dc3fb7d17b38e0342fa658e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "主要腳本是 `generate-codegen-artifacts.js` 腳本。要呼叫此腳本，您可以從應用程式的根資料夾執行以下命令："
+      }
+    },
+    {
+      "segment_id": "75daf40d",
+      "source_content": "```bash\nnode node_modules/react-native/scripts/generate-codegen-artifacts.js\n\nUsage: generate-codegen-artifacts.js -p [path to app] -t [target platform] -o [output path]\n\nOptions:\n      --help            Show help                                      [boolean]\n      --version         Show version number                            [boolean]\n  -p, --path            Path to the React Native project root.        [required]\n  -t, --targetPlatform  Target platform. Supported values: \"android\", \"ios\",\n                        \"all\".                                        [required]\n  -o, --outputPath      Path where generated artifacts will be output to.\n```",
+      "source_content_hash": "74610a652b4c92d7ac030393c91987992b27e976bfa6293c51c755528417f995",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_75daf40d"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "where:",
+      "source_content_hash": "53e44550b63d1f3210820d29879160b76e3bdb07a69815b260c6e20213a1ea99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其中："
+      }
+    },
+    {
+      "segment_id": "6df73775",
+      "source_content": "- `--path` is the path to the root folder of your app.\n- `--outputPath` is the destination where **Codegen** will write the generated files.\n- `--targetPlatform` is the platform you'd like to generate the code for.",
+      "source_content_hash": "18e4b1359d767f06110a924eeedda91af68a77b4fff771fb883bb4d40465fbed",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `--path` 參數指定應用程式的根目錄路徑。\n- `--outputPath` 參數指定 **Codegen** 生成檔案的輸出位置。\n- `--targetPlatform` 參數指定要生成程式碼的目標平台。"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "#### The Generated Code",
+      "source_content_hash": "bf8bdf1fec89f195f6d5446c5fdcf16de0d2139f454943336a9ffa4453890036",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 生成的程式碼"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "Running the script with these arguments:",
+      "source_content_hash": "edfdadd9eafa6ae382b70fba0182d6d4f363a0df1e3030d0b7924dad92fded04",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用以下參數執行腳本："
+      }
+    },
+    {
+      "segment_id": "f02969e0",
+      "source_content": "```shell\nnode node_modules/react-native/scripts/generate-codegen-artifacts.js \\\n    --path . \\\n    --outputPath ios/ \\\n    --targetPlatform ios\n```",
+      "source_content_hash": "73f3e1b5df0a1d72f865d816b33994eeab11a8fa637f2a9d0a553d8afaa375b4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f02969e0"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "Will generate these files in the `ios/build` folder:",
+      "source_content_hash": "7f20098d76e5b08a10e208434ed5ee408bf341a7714a275b62e4a45815660220",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將在 `ios/build` 資料夾中生成以下檔案："
+      }
+    },
+    {
+      "segment_id": "d7631ae3",
+      "source_content": "```\nbuild\n└── generated\n    └── ios\n        ├── <codegenConfig.name>\n        │   ├── <codegenConfig.name>-generated.mm\n        │   └── <codegenConfig.name>.h\n        ├── <codegenConfig.name>JSI-generated.cpp\n        ├── <codegenConfig.name>JSI.h\n        ├── FBReactNativeSpec\n        │   ├── FBReactNativeSpec-generated.mm\n        │   └── FBReactNativeSpec.h\n        ├── FBReactNativeSpecJSI-generated.cpp\n        ├── FBReactNativeSpecJSI.h\n        ├── RCTModulesConformingToProtocolsProvider.h\n        ├── RCTModulesConformingToProtocolsProvider.mm\n        └── react\n            └── renderer\n                └── components\n                    └── <codegenConfig.name>\n                        ├── ComponentDescriptors.cpp\n                        ├── ComponentDescriptors.h\n                        ├── EventEmitters.cpp\n                        ├── EventEmitters.h\n                        ├── Props.cpp\n                        ├── Props.h\n                        ├── RCTComponentViewHelpers.h\n                        ├── ShadowNodes.cpp\n                        ├── ShadowNodes.h\n                        ├── States.cpp\n                        └── States.h\n```",
+      "source_content_hash": "775bcd7fd6ea42f22657bc69a8958becf15dbbacc828e5c0b648fd21211bad0e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7631ae3"
+      }
+    },
+    {
+      "segment_id": "85821ad3",
+      "source_content": "Part of these generated files are used by React Native in the Core. Then there is a set of files which contains the same name you specified in the package.json `codegenConfig.name` field.",
+      "source_content_hash": "e025e868dbd0c2cbc49e66ea67e074f75ee3aeb7aab2f44fc067b9e7ababb71b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些生成的檔案中，部分會被 React Native 核心使用。其餘檔案名稱則對應 package.json 中 `codegenConfig.name` 欄位指定的名稱。"
+      }
+    },
+    {
+      "segment_id": "4f62aae3",
+      "source_content": "- `<codegenConfig.name>/<codegenConfig.name>.h`: this contains the interface of your custom iOS Turbo Native Modules.\n- `<codegenConfig.name>/<codegenConfig.name>-generated.mm`: this contains the glue code of your custom iOS Turbo Native Modules.\n- `<codegenConfig.name>JSI.h`: this contains the interface of your custom C++ Turbo Native Modules.\n- `<codegenConfig.name>JSI-generated.h`: this contains the glue code of your custom C++ Turbo Native Modules.\n- `react/renderer/components/<codegenConfig.name>`: this folder contains all the glue-code required by your custom component.",
+      "source_content_hash": "e3f15dc09e0e8525f0fc7e09e70c7db8607afe395bebcefef783ab7f4d39707c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `<codegenConfig.name>/<codegenConfig.name>.h`：包含自訂 iOS Turbo Native Modules 的介面。\n- `<codegenConfig.name>/<codegenConfig.name>-generated.mm`：包含自訂 iOS Turbo Native Modules 的黏合程式碼。\n- `<codegenConfig.name>JSI.h`：包含自訂 C++ Turbo Native Modules 的介面。\n- `<codegenConfig.name>JSI-generated.h`：包含自訂 C++ Turbo Native Modules 的黏合程式碼。\n- `react/renderer/components/<codegenConfig.name>`：此資料夾包含自訂元件所需的所有黏合程式碼。"
+      }
+    },
+    {
+      "segment_id": "2dbbb313",
+      "source_content": "This structure has been generated by using the value `all` for the `codegenConfig.type` field. If you use the value `modules`, expect to see no `react/renderer/components/` folder. If you use the value `components`, expect not to see any of the other files.",
+      "source_content_hash": "9cf261a7022a06131b87033897e38779c632c6485330799d3b018087a6a6a174",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此結構是將 `codegenConfig.type` 欄位設為 `all` 所生成。若設為 `modules`，則不會出現 `react/renderer/components/` 資料夾；若設為 `components`，則不會生成其他檔案。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.78/the-new-architecture/using-codegen.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.899214+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "acfe893eeb8d13a0d9cbc2ee365ebea59847cea45dbafa6d22306de87bf3462f"
+  }
+}

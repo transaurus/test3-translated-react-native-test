@@ -1,0 +1,182 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "architecture/view-flattening.md",
+  "source_file_content_hash": "7a2895c6d146365ef47fb9c5b6d4eaee2091a1d54e09112caa2bde05919ead08",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: view-flattening\ntitle: View Flattening\n---",
+      "source_content_hash": "374f2a8968a1cb87f04fcbb1c96c0bd2e1fbe523dc3d9d2c84646b4d4440ed21",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import FabricWarning from './\\_fabric-warning.mdx';",
+      "source_content_hash": "a168f9bd30da9cdf9bd0e17ed1ea4be8bece553316bc143cb70869369fde84bc",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<FabricWarning />",
+      "source_content_hash": "4c8a380c6cadf80af09be6749221fcde360be9284e0671cfa791434949c8b3d2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_37387e33"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "#### View Flattening is an optimization by the React Native renderer to avoid deep layout trees.",
+      "source_content_hash": "361cfda1f887951876b7ef173a6e00884c275684454d6f02b24406768d2cdff4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### React Native 渲染器通過視圖扁平化優化來避免深層佈局樹結構"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The React API is designed to be declarative and reusable through composition. This provides a great model for intuitive development. However, in implementation, these qualities of the API lead to the creation of deep [React Element Trees](architecture-glossary.md#react-element-tree-and-react-element), where a large majority of React Element Nodes only affect the layout of a View and don’t render anything on the screen. We call these types of nodes **“Layout-Only”** Nodes.",
+      "source_content_hash": "600c5dd2ff8d77681b6926d5862bdd4644fd82f05007aa17774ce69a3138b5db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React API 的設計理念是通過組合實現聲明式與可復用性，這為開發者提供了直觀的開發模式。但在實際實現中，這種 API 特性會導致生成深層的 [React 元素樹](architecture-glossary.md#react-element-tree-and-react-element)，其中大量 React 元素節點僅影響視圖佈局而無實際屏幕渲染效果，這類節點我們稱之為「僅佈局」節點。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "Conceptually, each of the Nodes of the React Element Tree have a 1:1 relationship with a view on the screen, therefore rendering a deep React Element Tree that is composed by a large amount of “Layout-Only” Node leads to poor performance during rendering.",
+      "source_content_hash": "9e49801c33ed63f2b809d1583623037b8c387ae6c81465138bede2a5738517dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "理論上，React 元素樹的每個節點與屏幕視圖應存在 1:1 對應關係。因此當深層 React 元素樹包含大量「僅佈局」節點時，會導致渲染效能顯著下降。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Here is a common use case that is affected by the cost of \"Layout Only\" views.",
+      "source_content_hash": "0272ebaffe25dcba78640bcb65d27417469046202a10ec9c6692cc08c3e9eaa3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是受「僅佈局」視圖效能影響的典型用例："
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Imagine you want to render an image and a title that is handled by the `TitleComponent`, and you include this component as a child of the `ContainerComponent` that has some margin styles. After decomposing the components, the React code would look like this:",
+      "source_content_hash": "d9dc1db4ccb2da847f4b977979aad53a233334da29c2e246b4bc6192182ccf1b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設您需要渲染一個圖像和由 `TitleComponent` 處理的標題，並將該組件作為帶有邊距樣式的 `ContainerComponent` 子組件。組件分解後，React 代碼如下所示："
+      }
+    },
+    {
+      "segment_id": "166426c2",
+      "source_content": "```jsx\nfunction MyComponent() {\n  return (\n    <View>                          // ReactAppComponent\n      <View style={{margin: 10}} /> // ContainerComponent\n        <View style={{margin: 10}}> // TitleComponent\n          <Image {...} />\n          <Text {...}>This is a title</Text>\n        </View>\n      </View>\n    </View>\n  );\n}\n```",
+      "source_content_hash": "3612dee18a07b465507a0dbe9d5b174efdbc9a6a5d7ee8c62953522a4e7621c2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_166426c2"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "As part of the render process, React Native will produce the following trees:",
+      "source_content_hash": "2a26ee29e091e9226923de114b0336e9705e1d325a973da67982d69c0fb71889",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在渲染過程中，React Native 將生成以下樹結構："
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "![Diagram one](/docs/assets/Architecture/view-flattening/diagram-one.png)",
+      "source_content_hash": "5e2f50abd82fa08a5bdb0184999b6ed51fadf89ba8680829c3f1e8044c268447",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![圖表一](/docs/assets/Architecture/view-flattening/diagram-one.png)"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "Note that the Views (2) and (3) are “Layout Only” views, because they are rendered on the screen but they only render a `margin` of `10 px` on top of their children.",
+      "source_content_hash": "8ad71b53ae6f2c514b5236022cdb218778f656b262ffabc5cd26fdc0929590ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意視圖 (2) 和 (3) 屬於「僅佈局」視圖，因為它們雖然參與屏幕渲染，但僅對子組件施加 `10 px` 的 `margin` 樣式。"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "To improve the performance of these types of React Element Trees, the renderer implements a View Flattening mechanism that merges or flattens these types of Nodes, reducing the depth of the [host view](architecture-glossary.md#host-view-tree-and-host-view) hierarchy that is rendered on the screen. This algorithm takes into consideration props like: `margin`, `padding`, `backgroundColor`, `opacity`, etc.",
+      "source_content_hash": "ae6f74056e9b761e82745a051a510fa7699424a2ac873a52e5c1b8626b87c79a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為提升此類 React 元素樹的效能，渲染器實現了視圖扁平化機制，通過合併這類節點來減少屏幕上渲染的 [宿主視圖](architecture-glossary.md#host-view-tree-and-host-view) 層級深度。該算法會綜合考慮 `margin`、`padding`、`backgroundColor`、`opacity` 等屬性。"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "The View Flattening algorithm is integrated by design as part of the diffing stage of the renderer, which means that we don’t use extra CPU cycles to optimize the React Element Tree flattening these types of views. As the rest of the core, the View flattening algorithm is implemented in C++ and its benefits are shared by default on all supported platforms.",
+      "source_content_hash": "3286a18563637f587489243688c31e4d3cddee30e986d1a639652ce64fd65da8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "視圖扁平化算法被設計為渲染器差異比較階段的核心組成部分，這意味著我們無需消耗額外 CPU 週期來優化 React 元素樹的扁平化處理。與渲染器其他核心組件相同，視圖扁平化算法採用 C++ 實現，其效能優勢默認適用於所有支持平台。"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "In the case of the previous example, the Views (2) and (3) would be flattened as part of the “diffing algorithm” and as a result their styles will be merged into the View (1):",
+      "source_content_hash": "68ca734708855487f9eba50fe237b65db711a5f920f611e08201fd944fb89159",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在前述示例中，視圖 (2) 和 (3) 將在「差異比較算法」過程中被扁平化，其樣式最終會合併至視圖 (1)："
+      }
+    },
+    {
+      "segment_id": "13d9cd70",
+      "source_content": "![Diagram two](/docs/assets/Architecture/view-flattening/diagram-two.png)",
+      "source_content_hash": "4183e0159e6b722a907db89452789a7ba9ac852a42cb9d967eec5c108cb8996b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![圖表二](/docs/assets/Architecture/view-flattening/diagram-two.png)"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "It is important to note that this optimization allows the renderer to avoid the creation and render of two host views. From the user’s perspective there are no visible changes on the screen.",
+      "source_content_hash": "623fb5e155ac0280b2111c6d729a566592d8c1cfdad9c0b4da2e32b8fedf2cea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需特別說明的是，此項優化使渲染器避免了兩個宿主視圖的創建與渲染過程，而用戶在屏幕上不會觀察到任何視覺變化。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-architecture/view-flattening.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.236184+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "7a2895c6d146365ef47fb9c5b6d4eaee2091a1d54e09112caa2bde05919ead08"
+  }
+}

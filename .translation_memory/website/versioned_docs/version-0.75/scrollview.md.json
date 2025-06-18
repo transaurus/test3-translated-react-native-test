@@ -1,0 +1,2786 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.75/scrollview.md",
+  "source_file_content_hash": "d26276ffddd802bbd33569377ede2444312feaea196dc597d03a1dbae99bb391",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: scrollview\ntitle: ScrollView\n---",
+      "source_content_hash": "4e288d729bfc7a5037add22b84f10453c38212eee4db7076493f5ebd2080ac8d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Component that wraps platform ScrollView while providing integration with touch locking \"responder\" system.",
+      "source_content_hash": "b69a7ff38341b1c69823effb5b9cfd0277fa715b6eb0af2b5b40526a10827304",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "封裝平台原生 ScrollView 並整合觸控鎖定「響應者」系統的元件。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Keep in mind that ScrollViews must have a bounded height in order to work, since they contain unbounded-height children into a bounded container (via a scroll interaction). In order to bound the height of a ScrollView, either set the height of the view directly (discouraged) or make sure all parent views have bounded height. Forgetting to transfer `{flex: 1}` down the view stack can lead to errors here, which the element inspector makes quick to debug.",
+      "source_content_hash": "fef381c1c9daf702701ac7e6517ece6e59b59b2d3b60bbb17fbaaf29e84dfbd0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，ScrollView 必須具有固定高度才能正常運作，因為它們將無限高度的子元件封裝在有限容器中（透過滾動互動）。要限制 ScrollView 的高度，可以直接設定視圖高度（不建議）或確保所有父視圖都具有固定高度。忘記將 `{flex: 1}` 傳遞至視圖結構下方可能導致錯誤，此時使用元素檢查器可快速除錯。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Doesn't yet support other contained responders from blocking this scroll view from becoming the responder.",
+      "source_content_hash": "8eed56809a9be9884403c37d577c43ba1659556670a9f83ba9b409371fd1cc09",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前尚不支援防止其他包含的響應者阻擋此滾動視圖成為主要響應者。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "`<ScrollView>` vs [`<FlatList>`](flatlist.md) - which one to use?",
+      "source_content_hash": "da41edc41e20f6dc825ce97d35c30c91b720bbeb6737db778aff4d463507396c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`<ScrollView>` 與 [`<FlatList>`](flatlist.md) 該如何選擇？"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "`ScrollView` renders all its react child components at once, but this has a performance downside.",
+      "source_content_hash": "cab77e8c62e9552bbc3ea49d4450a108aed7a256d995a5f01dbd0403c00d3228",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`ScrollView` 會一次性渲染所有子元件，但這會帶來效能上的缺點。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Imagine you have a very long list of items you want to display, maybe several screens worth of content. Creating JS components and native views for everything all at once, much of which may not even be shown, will contribute to slow rendering and increased memory usage.",
+      "source_content_hash": "b24e32d27d42543f830dca43ce4f2db29c678f02b69587a9eb7ea4f19c39115f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設您需要顯示一個非常長的項目列表，可能涵蓋多個螢幕的內容。一次性為所有內容建立 JS 元件和原生視圖（其中許多可能根本不會顯示），會導致渲染速度變慢並增加記憶體使用量。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "This is where `FlatList` comes into play. `FlatList` renders items lazily, when they are about to appear, and removes items that scroll way off screen to save memory and processing time.",
+      "source_content_hash": "9cb01372edfb5c7f9a4429fcf854409513b23668a45b16f7eef4969ead3c939b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這時 `FlatList` 就派上用場。`FlatList` 會惰性渲染項目，僅在它們即將出現時才渲染，並移除滾動超出螢幕範圍的項目以節省記憶體和處理時間。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "`FlatList` is also handy if you want to render separators between your items, multiple columns, infinite scroll loading, or any number of other features it supports out of the box.",
+      "source_content_hash": "2efcabed2ecfeee2e58ef8ce4ef1f290c716da6d8f640ee06a1a78c36cc08722",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您需要在項目間渲染分隔線、多欄佈局、無限滾動載入，或是其他開箱即用的功能，`FlatList` 也非常方便。"
+      }
+    },
+    {
+      "segment_id": "63622bf0",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```SnackPlayer name=ScrollView\nimport React from 'react';\nimport {\n  StyleSheet,\n  Text,\n  SafeAreaView,\n  ScrollView,\n  StatusBar,\n} from 'react-native';\n\nconst App = () => {\n  return (\n    <SafeAreaView style={styles.container}>\n      <ScrollView style={styles.scrollView}>\n        <Text style={styles.text}>\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\n          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad\n          minim veniam, quis nostrud exercitation ullamco laboris nisi ut\n          aliquip ex ea commodo consequat. Duis aute irure dolor in\n          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla\n          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\n          culpa qui officia deserunt mollit anim id est laborum.\n        </Text>\n      </ScrollView>\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    paddingTop: StatusBar.currentHeight,\n  },\n  scrollView: {\n    backgroundColor: 'pink',\n    marginHorizontal: 20,\n  },\n  text: {\n    fontSize: 42,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "0bbdc510554908ef0cee45a03bdbe9d62eddd5bd1f124dd3cb5d05fec927b5d9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "379d3a5b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考資料"
+      }
+    },
+    {
+      "segment_id": "d422fb13",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [View 屬性](view.md#props)"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Inherits [View Props](view#props).",
+      "source_content_hash": "728a59ec5a33ce4be2ffcbe3e86d44eb0b94d3f535bae6f8a1e98376c99bd5ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [View 屬性](view#props)。"
+      }
+    },
+    {
+      "segment_id": "f51aebdd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b936dd6a",
+      "source_content": "### `StickyHeaderComponent`",
+      "source_content_hash": "81cc1ea437c97262175ea0f4e703761bad19d52528479761ac72d8a9cad9270e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `StickyHeaderComponent`"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "A React Component that will be used to render sticky headers, should be used together with `stickyHeaderIndices`. You may need to set this component if your sticky header uses custom transforms, for example, when you want your list to have an animated and hidable header. If a component has not been provided, the default [`ScrollViewStickyHeader`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) component will be used.",
+      "source_content_hash": "300c044fb63a1953cad53424808db9512d4bc258cbddae7f0fe54722fa5d93a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於渲染黏性標頭的 React 元件，需與 `stickyHeaderIndices` 搭配使用。若您的黏性標頭使用自訂變形效果（例如想讓列表具有可動畫顯示/隱藏的標頭），可能需要設定此元件。若未提供元件，將使用預設的 [`ScrollViewStickyHeader`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) 元件。"
+      }
+    },
+    {
+      "segment_id": "d40dc481",
+      "source_content": "| Type               |\n| ------------------ |\n| component, element |",
+      "source_content_hash": "df5a548ec49cf7f31dddedda745586f85a7e4d4cfb0b31e087357232f1ab8b4a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d40dc481"
+      }
+    },
+    {
+      "segment_id": "2a9ed33d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "### `alwaysBounceHorizontal` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "1c1ab02f69fd467eaadbd3c21139d4ed8d1030fec6f8429498cd33828831ea97",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alwaysBounceHorizontal` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "When true, the scroll view bounces horizontally when it reaches the end even if the content is smaller than the scroll view itself.",
+      "source_content_hash": "45b1d9f906335d198105d5bb619d0aee0f123159c18e13b1e3ca5823bab8aaac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 true 時，即使內容小於滾動視圖本身，滾動視圖在水平滾動到底部時仍會彈跳。"
+      }
+    },
+    {
+      "segment_id": "b7841147",
+      "source_content": "| Type | Default                                               |\n| ---- | ----------------------------------------------------- |\n| bool | `true` when `horizontal={true}`<hr/>`false` otherwise |",
+      "source_content_hash": "b470b20fb8fcacea42713d6b82ae0656a52a20a1bc018df77dc88252b2beb768",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7841147"
+      }
+    },
+    {
+      "segment_id": "1742e28b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "### `alwaysBounceVertical` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "d0c733ac0f783c46307674853950aa7b09cd9304added0eefff589cd57d8c3f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alwaysBounceVertical` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "When true, the scroll view bounces vertically when it reaches the end even if the content is smaller than the scroll view itself.",
+      "source_content_hash": "bdd9fd73b5b53daa5f0891e3e61fb8af4532fa7fba656a3152710ecc0f285a21",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 true 時，即使內容小於滾動視圖本身，滾動視圖在垂直滾動到底部時仍會彈跳。"
+      }
+    },
+    {
+      "segment_id": "fc57ca98",
+      "source_content": "| Type | Default                                             |\n| ---- | --------------------------------------------------- |\n| bool | `false` when `vertical={true}`<hr/>`true` otherwise |",
+      "source_content_hash": "5ebbb189636ce9cc3ed8561fc59777d79e182401ecab2a44be2bb2b435d072ca",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fc57ca98"
+      }
+    },
+    {
+      "segment_id": "04837130",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "### `automaticallyAdjustContentInsets` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "909e25cd493f747a3dca182ec637020d296ff0a7009f568cf48afc1290523fff",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `automaticallyAdjustContentInsets` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "Controls whether iOS should automatically adjust the content inset for scroll views that are placed behind a navigation bar or tab bar/toolbar.",
+      "source_content_hash": "0668b37c12cd36306d5aeb4d277e3d638b387fee92dcf704546c493318a90f7c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制 iOS 是否應自動調整位於導覽列或標籤列/工具列後方的滾動視圖的內容插邊距。"
+      }
+    },
+    {
+      "segment_id": "d8ebd66a",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d8ebd66a"
+      }
+    },
+    {
+      "segment_id": "6ad15270",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "### `automaticallyAdjustKeyboardInsets` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "911a3c96ca31f49b08dbe85305bab699b165ed77779755d386d03d0adc76ea6e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `automaticallyAdjustKeyboardInsets` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "Controls whether the ScrollView should automatically adjust its `contentInset` and `scrollViewInsets` when the Keyboard changes its size.",
+      "source_content_hash": "243a84303b280fe89912182fc68eb5c2fb57e34ce1dcb6e447754c9734a8a8b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制當鍵盤大小變更時，ScrollView 是否應自動調整其 `contentInset` 和 `scrollViewInsets`。"
+      }
+    },
+    {
+      "segment_id": "fedc7286",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fedc7286"
+      }
+    },
+    {
+      "segment_id": "566c958b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c35e5786",
+      "source_content": "### `automaticallyAdjustsScrollIndicatorInsets` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "c5396df136fabadaa7dc6f2929de827abde2a8c53f871c1e996771fc2cf3f711",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `automaticallyAdjustsScrollIndicatorInsets` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "Controls whether iOS should automatically adjust the scroll indicator insets. See Apple's [documentation on the property](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica).",
+      "source_content_hash": "d0750489b6d62d65bc6f8306e96d0f5ad2a3a9721a16fd3368bfe09b1baeb233",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制 iOS 是否應自動調整滾動指示器的內邊距。詳見 Apple 的[屬性說明文件](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica)。"
+      }
+    },
+    {
+      "segment_id": "e0a862e3",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e0a862e3"
+      }
+    },
+    {
+      "segment_id": "8bafd2d7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fff17ff8",
+      "source_content": "### `bounces` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "458301e037395142d71c0e51029a1b063348671f139a8207ff87951615272332",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bounces` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "When true, the scroll view bounces when it reaches the end of the content if the content is larger than the scroll view along the axis of the scroll direction. When `false`, it disables all bouncing even if the `alwaysBounce*` props are `true`.",
+      "source_content_hash": "271b15434b32bf8757f515669989c38c033cb1cd5730551820bff56cf30de751",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為 `true` 時，若內容沿滾動方向超出滾動視圖範圍，滾動視圖會在到達內容邊界時反彈。設為 `false` 時，即使 `alwaysBounce*` 屬性為 `true` 也會禁用所有反彈效果。"
+      }
+    },
+    {
+      "segment_id": "4402cbf6",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4402cbf6"
+      }
+    },
+    {
+      "segment_id": "f97c407b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "### `bouncesZoom` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "26d6982975ce4729bbc2a31ef101a54dac378f1192159b1fab274891f17db8a7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `bouncesZoom` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "When `true`, gestures can drive zoom past min/max and the zoom will animate to the min/max value at gesture end, otherwise the zoom will not exceed the limits.",
+      "source_content_hash": "abfd4ab39ae6f9cfaaec14be13d5c93021b434a4645ad237c8274be861da7e62",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為 `true` 時，手勢操作可暫時超出最小/最大縮放限制，並在手勢結束時動畫回彈至限制值；否則縮放比例不會超過限制範圍。"
+      }
+    },
+    {
+      "segment_id": "afa7774a",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_afa7774a"
+      }
+    },
+    {
+      "segment_id": "e2bc0815",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3c6dd548",
+      "source_content": "### `canCancelContentTouches` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "a7d8faa49a52a6aa02af82c1f1c0321e75da01a31568a538917a078c38ec5a97",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `canCancelContentTouches` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "When `false`, once tracking starts, won't try to drag if the touch moves.",
+      "source_content_hash": "1be8fc96a03ceaee9d12ddd9a9ee846246039188ef720d097fe92f088d402873",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `false` 時，一旦開始追蹤觸控，即使手指移動也不會觸發拖動。"
+      }
+    },
+    {
+      "segment_id": "9fa6e97c",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9fa6e97c"
+      }
+    },
+    {
+      "segment_id": "7dfee470",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "16ae54ea",
+      "source_content": "### `centerContent` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "d3a624d5dc650443af4196fdc834fe1f341f3df6d676bfe057224c4a247dc000",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `centerContent` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "When `true`, the scroll view automatically centers the content when the content is smaller than the scroll view bounds; when the content is larger than the scroll view, this property has no effect.",
+      "source_content_hash": "914df99560a507d760c193ac4b688be07278117865856e823a20b7b14a2675b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `true` 時，當內容小於滾動視圖邊界時會自動居中；若內容大於滾動視圖則此屬性無效。"
+      }
+    },
+    {
+      "segment_id": "b6840b81",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b6840b81"
+      }
+    },
+    {
+      "segment_id": "f83eccd3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2b5df263",
+      "source_content": "### `contentContainerStyle`",
+      "source_content_hash": "98f0087ec9fd5a84ccab3d619569b264ff88d152a8cf8fa7264a609c42a0a278",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `contentContainerStyle`"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "These styles will be applied to the scroll view content container which wraps all of the child views. Example:",
+      "source_content_hash": "5245fa5b8bb3cdefa7977f2abe67d4593ad3c9eadc3bdaab3a8b877119a25a86",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些樣式將套用至包裹所有子視圖的滾動視圖內容容器。範例："
+      }
+    },
+    {
+      "segment_id": "44ecd2e3",
+      "source_content": "```\nreturn (\n  <ScrollView contentContainerStyle={styles.contentContainer}>\n  </ScrollView>\n);\n...\nconst styles = StyleSheet.create({\n  contentContainer: {\n    paddingVertical: 20\n  }\n});\n```",
+      "source_content_hash": "a3222af22f21a3a4a4d398263ddd924f27548886c37168cd0d11982dc99f67dc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_44ecd2e3"
+      }
+    },
+    {
+      "segment_id": "e9e27db3",
+      "source_content": "| Type                           |\n| ------------------------------ |\n| [View Style](view-style-props) |",
+      "source_content_hash": "3f5e7d47ed5fe1549f22190a423f07653ab9e06b85ac74a7d5143036b57ac753",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e9e27db3"
+      }
+    },
+    {
+      "segment_id": "2663a629",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### `contentInset` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "25cffc34192b0706005faef9888af84b5e07008a22c35d6b24be02bc28a089e9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `contentInset` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "The amount by which the scroll view content is inset from the edges of the scroll view.",
+      "source_content_hash": "2da45f23a1c40eb34c342013abe32768608cd8d4e2a505108041c1d2a8be213f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定滾動視圖內容與滾動視圖邊緣的內邊距量。"
+      }
+    },
+    {
+      "segment_id": "0542488c",
+      "source_content": "| Type                                                                 | Default                                  |\n| -------------------------------------------------------------------- | ---------------------------------------- |\n| object: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |",
+      "source_content_hash": "08f9c9eae07cc881e20981975627d761a8b8829938035090eece3064320e3835",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0542488c"
+      }
+    },
+    {
+      "segment_id": "dc651f09",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dd21637d",
+      "source_content": "### `contentInsetAdjustmentBehavior` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "b25118ff594339f8b03012c01bd00b0c5e5bdb528c562d5158778dabe28c0b1d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `contentInsetAdjustmentBehavior` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "09f901c3",
+      "source_content": "This property specifies how the safe area insets are used to modify the content area of the scroll view. Available on iOS 11 and later.",
+      "source_content_hash": "6a881dfc1e2f6127d9eba80e0fa1eb61f6211e49df951f86a05a0b85b2484dd2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此屬性指定如何利用安全區域內邊距來調整滾動視圖的內容區域。僅適用於 iOS 11 及以上版本。"
+      }
+    },
+    {
+      "segment_id": "3a00ac07",
+      "source_content": "| Type                                                           | Default   |\n| -------------------------------------------------------------- | --------- |\n| enum(`'automatic'`, `'scrollableAxes'`, `'never'`, `'always'`) | `'never'` |",
+      "source_content_hash": "ac56dc582e2c9873af30c6b0926c37bcb61fc43b2a492c2b7d9b8b7c8127f568",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3a00ac07"
+      }
+    },
+    {
+      "segment_id": "6c489d9e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2c3ad447",
+      "source_content": "### `contentOffset`",
+      "source_content_hash": "fa710c6b4da7e1b4b3691b949c6e1af274f7f417ad9b6ac32acdf43c7e9487f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `contentOffset`"
+      }
+    },
+    {
+      "segment_id": "61e5dad6",
+      "source_content": "Used to manually set the starting scroll offset.",
+      "source_content_hash": "07a7f269925404fbf2480acf9aa5eef6e7fd912ce818c6de72f41bae8fc14c37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於手動設定起始滾動偏移量。"
+      }
+    },
+    {
+      "segment_id": "c8d4c06e",
+      "source_content": "| Type  | Default        |\n| ----- | -------------- |\n| Point | `{x: 0, y: 0}` |",
+      "source_content_hash": "1a734497cefa2d56ce4a8fdbd383358aa2cea1be96cfe08c73c7f4e0dcece12d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c8d4c06e"
+      }
+    },
+    {
+      "segment_id": "b19b3a49",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fbdb880f",
+      "source_content": "### `decelerationRate`",
+      "source_content_hash": "4ef7ae6abe3b1e98efa6871734da57a60035c69684459813953ca03bf6c4e02c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `decelerationRate`"
+      }
+    },
+    {
+      "segment_id": "d3912b2e",
+      "source_content": "A floating-point number that determines how quickly the scroll view decelerates after the user lifts their finger. You may also use string shortcuts `\"normal\"` and `\"fast\"` which match the underlying iOS settings for `UIScrollViewDecelerationRateNormal` and `UIScrollViewDecelerationRateFast` respectively.",
+      "source_content_hash": "433a36a61fbd1d6ec72fb7822c06f1d56a16461bf06f1b8fcf7784e3c5164016",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此浮點數決定用戶鬆開手指後滾動視圖的減速速度。也可使用字串快捷參數 `\"normal\"` 和 `\"fast\"`，分別對應 iOS 底層設置的 `UIScrollViewDecelerationRateNormal` 和 `UIScrollViewDecelerationRateFast`。"
+      }
+    },
+    {
+      "segment_id": "d3c632bb",
+      "source_content": "- `'normal'` 0.998 on iOS, 0.985 on Android.\n- `'fast'`, 0.99 on iOS, 0.9 on Android.",
+      "source_content_hash": "44101d025006bb5b2105f7c4adce8ee500fae3084af2224827c5c7ec10f88fe3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'normal'`：iOS 為 0.998，Android 為 0.985\n- `'fast'`：iOS 為 0.99，Android 為 0.9"
+      }
+    },
+    {
+      "segment_id": "b2cb593a",
+      "source_content": "| Type                               | Default    |\n| ---------------------------------- | ---------- |\n| enum(`'fast'`, `'normal'`), number | `'normal'` |",
+      "source_content_hash": "1afd36227565e54438c55d2d8f060954e0e51c5150cb0430f3f481b26bf7f05c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b2cb593a"
+      }
+    },
+    {
+      "segment_id": "b9e2ddae",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "936707a1",
+      "source_content": "### `directionalLockEnabled` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "42fdeff549eb714163fb9feb0f93f2fd2ed95952aebd7ee59961965b7ebac861",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `directionalLockEnabled` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6dc3e423",
+      "source_content": "When true, the ScrollView will try to lock to only vertical or horizontal scrolling while dragging.",
+      "source_content_hash": "25a63234a1edf4637b8be02775ba43139e49847eaa9eb5a3007a54c9981f9510",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `true` 時，滾動視圖在拖曳時會嘗試鎖定僅垂直或水平滾動。"
+      }
+    },
+    {
+      "segment_id": "ced7184f",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ced7184f"
+      }
+    },
+    {
+      "segment_id": "7b53658b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "365a11aa",
+      "source_content": "### `disableIntervalMomentum`",
+      "source_content_hash": "d80c16aa74a9e9789bb45e74568d64968ed0cefdbcf9eb780674bb2c7e413cab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `disableIntervalMomentum`"
+      }
+    },
+    {
+      "segment_id": "15d5abf0",
+      "source_content": "When true, the scroll view stops on the next index (in relation to scroll position at release) regardless of how fast the gesture is. This can be used for pagination when the page is less than the width of the horizontal ScrollView or the height of the vertical ScrollView.",
+      "source_content_hash": "c0370308709f5a20bce6714653aed5e0c6f50482b93141d998732e312cb533dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8f6a7793",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "55e0e60b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "66a437ee",
+      "source_content": "### `disableScrollViewPanResponder`",
+      "source_content_hash": "52e647a19c201dcfe1208e9331286d83cfe9b14aecf5f6566e177a4cc3464047",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb5297fc",
+      "source_content": "When true, the default JS pan responder on the ScrollView is disabled, and full control over touches inside the ScrollView is left to its child components. This is particularly useful if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected touches to occur while scrolling.",
+      "source_content_hash": "cb3b736bf7d78e5b42052c032cbed75df47737aa34c553ae70c8fbf5bdad4aaa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "93d30302",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "34c51f55",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "846134ef",
+      "source_content": "### `endFillColor` <div class=\"label android\">Android</div>",
+      "source_content_hash": "c80bad86ef53126949d47f839e4a6f507ecac99f0336d2ba5a2a1f8ec35fed09",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "53e725dc",
+      "source_content": "Sometimes a scrollview takes up more space than its content fills. When this is the case, this prop will fill the rest of the scrollview with a color to avoid setting a background and creating unnecessary overdraw. This is an advanced optimization that is not needed in the general case.",
+      "source_content_hash": "712d9f7d2cd755dd0e4e778f4a130169eeb1b4d2eb26cdb629416ba7352e8b97",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ce7ed42",
+      "source_content": "| Type            |\n| --------------- |\n| [color](colors) |",
+      "source_content_hash": "5e0948d1063eb18700fbd0d2233d4c0a54ac9a0604eee32dfce0e00099c2fc3d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "47d25dfc",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1d7c4366",
+      "source_content": "### `fadingEdgeLength` <div class=\"label android\">Android</div>",
+      "source_content_hash": "fccbd760aac3b37f70b45e6278c46e0aba5865d37a10037f38bd6f4fbb98db26",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7fa65ec5",
+      "source_content": "Fades out the edges of the scroll content.",
+      "source_content_hash": "86b6c5e269e148035a25c7807f0cafb21c91dc3d9ae956f6b4dcfc26798d29d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7eb5b32d",
+      "source_content": "If the value is greater than `0`, the fading edges will be set accordingly to the current scroll direction and position, indicating if there is more content to show.",
+      "source_content_hash": "539682125b3841ed356ee37956bdeac91b83d7119cc7ad907e4be559653ff3e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "34ce3554",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `0`     |",
+      "source_content_hash": "83458482732eb55b223c31c4441b5e732f7b43832d88f094b44c374ebad3e557",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "768b4174",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "295e85da",
+      "source_content": "### `horizontal`",
+      "source_content_hash": "18badbaf70807da2ad88c29abe1ae1e5f988160baa044f61424ce714d5455ab6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a5a28988",
+      "source_content": "When `true`, the scroll view's children are arranged horizontally in a row instead of vertically in a column.",
+      "source_content_hash": "9a9c297760a19c10e1565ca17a970b4675bef6a7353aedad9fd5b06c8d33de01",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "829c4d3e",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "423d7e73",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4628837",
+      "source_content": "### `indicatorStyle` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "dc7ad9326c91e12ff843ba2f5796b9275560d33cbb205cb9e429bf91af427f69",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b2ffb658",
+      "source_content": "The style of the scroll indicators.",
+      "source_content_hash": "5838b5aa8a2e89b97cd86b05a94ef42814f2072741e10ec7ce69638c1c09b834",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b62fa668",
+      "source_content": "- `'default'` same as `black`.\n- `'black'`, scroll indicator is `black`. This style is good against a light background.\n- `'white'`, scroll indicator is `white`. This style is good against a dark background.",
+      "source_content_hash": "1166cdb8edef82b11cdc1cdeaa10880c8d8375f31aa59f5bd2f2195721409744",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "04724ba9",
+      "source_content": "| Type                                    | Default     |\n| --------------------------------------- | ----------- |\n| enum(`'default'`, `'black'`, `'white'`) | `'default'` |",
+      "source_content_hash": "87bf2bdced553b38e3d8d2d99ea3cb152cf8f7468aa3bac41627adb8d87544bb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "28c5256e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5cd80849",
+      "source_content": "### `invertStickyHeaders`",
+      "source_content_hash": "e8dbe9707910af1e7ad44188d7653e834b24880c7b24a77acc971a93890a604f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8862791b",
+      "source_content": "If sticky headers should stick at the bottom instead of the top of the ScrollView. This is usually used with inverted ScrollViews.",
+      "source_content_hash": "1bf667678d499be15a35c01e2da96611244df94d212e4141c77f8f4626492251",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1a9293f4",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9040f97",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7f6f3173",
+      "source_content": "### `keyboardDismissMode`",
+      "source_content_hash": "94a9ca0d35c25eb155e02e3b099d2ea45fbf9718c35c4eccc2bb17caa189f7f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e9a0d59a",
+      "source_content": "Determines whether the keyboard gets dismissed in response to a drag.",
+      "source_content_hash": "cf2d04d3b64f40e962fadf71ab1dab2a609d6593efec33e1a6f6d986dccde651",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "03b708ab",
+      "source_content": "- `'none'`, drags do not dismiss the keyboard.\n- `'on-drag'`, the keyboard is dismissed when a drag begins.",
+      "source_content_hash": "ba5125644b829fdbc95e765c117192d0a3ae933a224e7cfa821609626e33678c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a30b7214",
+      "source_content": "**iOS Only**",
+      "source_content_hash": "25ec99352afda272c7712235c8f649eea646dddc2b3809e29432822534038273",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0823e59c",
+      "source_content": "- `'interactive'`, the keyboard is dismissed interactively with the drag and moves in synchrony with the touch, dragging upwards cancels the dismissal. On Android this is not supported and it will have the same behavior as `'none'`.",
+      "source_content_hash": "13f6933e59a808e74bfb540305c32f75a69d936c91d4086daba67d6df8d76c03",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4917616e",
+      "source_content": "| Type                                                                                                                                                            | Default  |\n| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |\n| enum(`'none'`, `'on-drag'`) <div className=\"label android\">Android</div><hr />enum(`'none'`, `'on-drag'`, `'interactive'`) <div className=\"label ios\">iOS</div> | `'none'` |",
+      "source_content_hash": "4cfe1e44196ccf63cf01f055780f5a22be2335de0c46ec2b7ad794bd8b2d5319",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "237c617c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "acfd6cd9",
+      "source_content": "### `keyboardShouldPersistTaps`",
+      "source_content_hash": "67cb18d393c355567a13d2f53a8429a0cf15876e8b4ad5b8fde5220962bcc80c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44fd9885",
+      "source_content": "Determines when the keyboard should stay visible after a tap.",
+      "source_content_hash": "0d70c22ce661f0deff2cd7fb95e94cc2e0c81e35040415e43f576e5ec7305408",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e4073107",
+      "source_content": "- `'never'` tapping outside of the focused text input when the keyboard is up dismisses the keyboard. When this happens, children won't receive the tap.\n- `'always'`, the keyboard will not dismiss automatically, and the scroll view will not catch taps, but children of the scroll view can catch taps.\n- `'handled'`, the keyboard will not dismiss automatically when the tap was handled by children of the scroll view (or captured by an ancestor).\n- `false`, **_deprecated_**, use `'never'` instead\n- `true`, **_deprecated_**, use `'always'` instead",
+      "source_content_hash": "30247962a8d1ca61e6ceeae94eaa405efc56f3f1e6694e89e9c5b2bc35612e6a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'never'` 當鍵盤開啟時，點擊聚焦的文字輸入框外部會關閉鍵盤。此時子元件不會接收到點擊事件。\n- `'always'` 鍵盤不會自動關閉，且滾動視圖不會攔截點擊事件，但滾動視圖的子元件可以捕獲點擊。\n- `'handled'` 當點擊事件被滾動視圖的子元件（或被上層元件捕獲）處理時，鍵盤不會自動關閉。\n- `false`，**_已棄用_**，請改用 `'never'`\n- `true`，**_已棄用_**，請改用 `'always'`"
+      }
+    },
+    {
+      "segment_id": "210748fa",
+      "source_content": "| Type                                                      | Default   |\n| --------------------------------------------------------- | --------- |\n| enum(`'always'`, `'never'`, `'handled'`, `false`, `true`) | `'never'` |",
+      "source_content_hash": "300ce6c120e42c779f4b0fff69c23754e3bfa10aadfe6f0143c374e756f7806f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_210748fa"
+      }
+    },
+    {
+      "segment_id": "8ec80a23",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dbf99e1b",
+      "source_content": "### `maintainVisibleContentPosition`",
+      "source_content_hash": "3a62769787c153ff8356f15a08a1b79487170b978662ef0cafd33901b927572d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maintainVisibleContentPosition`"
+      }
+    },
+    {
+      "segment_id": "d04a3ef5",
+      "source_content": "When set, the scroll view will adjust the scroll position so that the first child that is currently visible and at or beyond `minIndexForVisible` will not change position. This is useful for lists that are loading content in both directions, e.g. a chat thread, where new messages coming in might otherwise cause the scroll position to jump. A value of 0 is common, but other values such as 1 can be used to skip loading spinners or other content that should not maintain position.",
+      "source_content_hash": "7e638e0f0f388d6dd4113d6a17d887f3faa807bd4dfbc9234e6b33e832452592",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定後，滾動視圖會調整滾動位置，使當前可見且位於或超過 `minIndexForVisible` 的第一個子元件保持位置不變。這適用於雙向載入內容的列表（例如聊天串），否則新訊息進入時可能導致滾動位置跳動。常見值為 0，但也可使用 1 等值來跳過不應保持位置的載入指示器或其他內容。"
+      }
+    },
+    {
+      "segment_id": "dd78ef80",
+      "source_content": "The optional `autoscrollToTopThreshold` can be used to make the content automatically scroll to the top after making the adjustment if the user was within the threshold of the top before the adjustment was made. This is also useful for chat-like applications where you want to see new messages scroll into place, but not if the user has scrolled up a ways and it would be disruptive to scroll a bunch.",
+      "source_content_hash": "4d5879a981ddde55b49958c88b5374776e4137fbf607558cf234ddf31fc80314",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可選參數 `autoscrollToTopThreshold` 可在調整後，若使用者原本位於頂部閾值範圍內時，自動將內容滾動至頂部。這同樣適用於聊天類應用，您希望看到新訊息滾動到位，但若使用者已向上滾動一段距離，突然滾動大量內容會造成干擾。"
+      }
+    },
+    {
+      "segment_id": "423bbb1a",
+      "source_content": "Caveat 1: Reordering elements in the scrollview with this enabled will probably cause jumpiness and jank. It can be fixed, but there are currently no plans to do so. For now, don't re-order the content of any ScrollViews or Lists that use this feature.",
+      "source_content_hash": "55c2cf94b0ce2e3980f38446ed846a0d817e3eede1d8bbde17e6a4890b62a187",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意事項 1：啟用此功能時在滾動視圖中重新排序元件可能會導致跳動和卡頓。此問題可修復，但目前無相關計劃。現階段請勿對使用此功能的 ScrollView 或 List 內容重新排序。"
+      }
+    },
+    {
+      "segment_id": "e91bdcd9",
+      "source_content": "Caveat 2: This uses `contentOffset` and `frame.origin` in native code to compute visibility. Occlusion, transforms, and other complexity won't be taken into account as to whether content is \"visible\" or not.",
+      "source_content_hash": "c842bcd490fff720cff7ad36189861c6d5ad1c35608f2ff126f6061a507d5c08",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意事項 2：此功能在原生代碼中使用 `contentOffset` 和 `frame.origin` 計算可見性。遮擋、變形等複雜因素不會被納入內容是否「可見」的判斷。"
+      }
+    },
+    {
+      "segment_id": "fd1acad4",
+      "source_content": "| Type                                                                     |\n| ------------------------------------------------------------------------ |\n| object: `{minIndexForVisible: number, autoscrollToTopThreshold: number}` |",
+      "source_content_hash": "d01d208ef70ae52f94ff936127b173381c59de1d99e48b195333c8f5b468db54",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fd1acad4"
+      }
+    },
+    {
+      "segment_id": "b3dd391a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "faaf88af",
+      "source_content": "### `maximumZoomScale` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "0108f5f8403bd2cfd411bdd30b417aa327adc7c46c5711561ebbcb79ce5d49a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `maximumZoomScale` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "d14a9e24",
+      "source_content": "The maximum allowed zoom scale.",
+      "source_content_hash": "8707cebd45b40922714aa9616315c82e0c52c38002b187989bc197c824d2ea01",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "允許的最大縮放比例。"
+      }
+    },
+    {
+      "segment_id": "f21758f8",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `1.0`   |",
+      "source_content_hash": "b2eadeebf015294b474e4f960b2804cd3e8c4b659d639bb23b5475397baaca47",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f21758f8"
+      }
+    },
+    {
+      "segment_id": "852823f8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9b9cfc44",
+      "source_content": "### `minimumZoomScale` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "b42e791d71098094afdc901d9b99c5e18d4becac3b94cb76ff0ca50443429391",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `minimumZoomScale` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "77f0732d",
+      "source_content": "The minimum allowed zoom scale.",
+      "source_content_hash": "cd7bf238e25907fa8156ee28356507bc95a9a10f35dad69ab08e11d04b0fa879",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "允許的最小縮放比例。"
+      }
+    },
+    {
+      "segment_id": "16028bdb",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `1.0`   |",
+      "source_content_hash": "b2eadeebf015294b474e4f960b2804cd3e8c4b659d639bb23b5475397baaca47",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_16028bdb"
+      }
+    },
+    {
+      "segment_id": "f3923244",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "20ca1bf3",
+      "source_content": "### `nestedScrollEnabled` <div class=\"label android\">Android</div>",
+      "source_content_hash": "b7da111ad930d17f6fbd807a860dc7fea5ee7bb856c5b278523ce25981b4cfa6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nestedScrollEnabled` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "7ba83bb3",
+      "source_content": "Enables nested scrolling for Android API level 21+.",
+      "source_content_hash": "385dc5bf5e9279e77a4081979f51a55bc7092709e43cd3fae3a8354dfbc0edfb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為 Android API 等級 21+ 啟用嵌套滾動。"
+      }
+    },
+    {
+      "segment_id": "8cede71b",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8cede71b"
+      }
+    },
+    {
+      "segment_id": "8b3ac7c7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "086e47bd",
+      "source_content": "### `onContentSizeChange`",
+      "source_content_hash": "7547e161cf4be8a2303b2173ec1005d2e6de54f91714530f71e23e4c0e9684fc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onContentSizeChange`"
+      }
+    },
+    {
+      "segment_id": "94a47b80",
+      "source_content": "Called when scrollable content view of the ScrollView changes.",
+      "source_content_hash": "bce877b3fa52703faf0f25ef0c0c998a713d7fb6653cb7623044a32a0267575f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 ScrollView 的可滾動內容視圖大小變化時呼叫。"
+      }
+    },
+    {
+      "segment_id": "51721da5",
+      "source_content": "The handler function will receive two parameters: the content width and content height `(contentWidth, contentHeight)`.",
+      "source_content_hash": "cbd4c1cea16ea651b6d2619f41d88e3bde7c2d6055398f8c9c535c1a9ba6ceea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "處理函數會接收兩個參數：內容寬度和內容高度 `(contentWidth, contentHeight)`。"
+      }
+    },
+    {
+      "segment_id": "7a210168",
+      "source_content": "It's implemented using onLayout handler attached to the content container which this ScrollView renders.",
+      "source_content_hash": "f9a488329c64048629ae9538efc600e104bb818f3fed7bf1796535525aade92d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其實現方式是透過附加到 ScrollView 渲染的內容容器的 onLayout 處理器。"
+      }
+    },
+    {
+      "segment_id": "a701d25d",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a701d25d"
+      }
+    },
+    {
+      "segment_id": "54c3b5ce",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b1e9700d",
+      "source_content": "### `onMomentumScrollBegin`",
+      "source_content_hash": "cbaa7ad587d2bd8a2c46c353a895afa27caa0f365cd715e54732055300d9d83f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMomentumScrollBegin`"
+      }
+    },
+    {
+      "segment_id": "4206c3f9",
+      "source_content": "Called when the momentum scroll starts (scroll which occurs as the ScrollView starts gliding).",
+      "source_content_hash": "0e3cee863b169d3e45e4fda65dcff4444da16d60548f28e761d9055b8af4560a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當動量滾動開始時呼叫（即 ScrollView 開始滑行時的滾動）。"
+      }
+    },
+    {
+      "segment_id": "8e555721",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8e555721"
+      }
+    },
+    {
+      "segment_id": "a299ee82",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "381a5950",
+      "source_content": "### `onMomentumScrollEnd`",
+      "source_content_hash": "4366b764f04b157278c085a8dc5318d212b7f45bdf9f1eed8e2e54f4a64b93d9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onMomentumScrollEnd`"
+      }
+    },
+    {
+      "segment_id": "1e0d7fbe",
+      "source_content": "Called when the momentum scroll ends (scroll which occurs as the ScrollView glides to a stop).",
+      "source_content_hash": "b3916ae13f0e08dd4a994f8ec0397f2cb33c8f7f13f321bb3bc6ea96c88268e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當動量滾動結束時呼叫（即 ScrollView 滑行停止時的滾動）。"
+      }
+    },
+    {
+      "segment_id": "cd5595fd",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cd5595fd"
+      }
+    },
+    {
+      "segment_id": "fe723c3c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a796dfea",
+      "source_content": "### `onScroll`",
+      "source_content_hash": "aa5d18a7769bf17efff68033c502384f86f58980c1d232c2d6006383bfd3340b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onScroll`"
+      }
+    },
+    {
+      "segment_id": "0400d81e",
+      "source_content": "Fires at most once per frame during scrolling. The event has the following shape (all values are numbers):",
+      "source_content_hash": "47ee13fad74ec7be9948b907c3680cfa03fe55a5bcdfca889c5faadae77e8e62",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動期間每幀最多觸發一次。事件結構如下（所有值均為數字）："
+      }
+    },
+    {
+      "segment_id": "8aed897e",
+      "source_content": "```js\n{\n  nativeEvent: {\n    contentInset: {bottom, left, right, top},\n    contentOffset: {x, y},\n    contentSize: {height, width},\n    layoutMeasurement: {height, width},\n    zoomScale\n  }\n}\n```",
+      "source_content_hash": "43d21396d1b4421feba7dfd799af862019b0af292fe293768161653ebf701ab7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8aed897e"
+      }
+    },
+    {
+      "segment_id": "992779f7",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_992779f7"
+      }
+    },
+    {
+      "segment_id": "2855e9a6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "86bedbf7",
+      "source_content": "### `onScrollBeginDrag`",
+      "source_content_hash": "ed803101423e82897ec0afa6617fbdf8f52bef88997f8db9ad2d519107517c08",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onScrollBeginDrag`"
+      }
+    },
+    {
+      "segment_id": "508bf572",
+      "source_content": "Called when the user begins to drag the scroll view.",
+      "source_content_hash": "010d597280697b99ccd8f0ce076793eb74933e7f3a511ca070b002a961834c7c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當用戶開始拖動滾動視圖時調用。"
+      }
+    },
+    {
+      "segment_id": "5b93e237",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5b93e237"
+      }
+    },
+    {
+      "segment_id": "54806a75",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ed6c5f16",
+      "source_content": "### `onScrollEndDrag`",
+      "source_content_hash": "8838331196cc38798126afb2c73e5200cc825819b05469ffe0e4ad45ebda593c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onScrollEndDrag`"
+      }
+    },
+    {
+      "segment_id": "9cfda36e",
+      "source_content": "Called when the user stops dragging the scroll view and it either stops or begins to glide.",
+      "source_content_hash": "891bdc244e82b1df713cdf943986643e385d540487df44442bc65dd4578f20c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當用戶停止拖動滾動視圖並使其停止或開始滑動時調用。"
+      }
+    },
+    {
+      "segment_id": "5c5950aa",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5c5950aa"
+      }
+    },
+    {
+      "segment_id": "a112bd6a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "88541947",
+      "source_content": "### `onScrollToTop` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "74d16a85ff1f60784b92159c8a73de298f13f6c22076f6d4f35f80ff8d5a979e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onScrollToTop` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "a1988152",
+      "source_content": "Fires when the scroll view scrolls to top after the status bar has been tapped.",
+      "source_content_hash": "f5e55db6792a1e41d8da2af5fffc5eb5edcd1d1a08ad3e245d0d81b8539b1b54",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當滾動視圖在點擊狀態欄後滾動至頂部時觸發。"
+      }
+    },
+    {
+      "segment_id": "251c12fe",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_251c12fe"
+      }
+    },
+    {
+      "segment_id": "3454def8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "31dac036",
+      "source_content": "### `overScrollMode` <div class=\"label android\">Android</div>",
+      "source_content_hash": "38b8816516abd6238ea6278a1ca399d24494f2b17f1f41c6bd2c8313dd281375",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `overScrollMode` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "2c676438",
+      "source_content": "Used to override default value of overScroll mode.",
+      "source_content_hash": "1f3e291fb5d473e6e65cd7bcb468e6e5f9aa4bc0cfd816c9b103d8a540f6a125",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於覆蓋默認的過度滾動模式值。"
+      }
+    },
+    {
+      "segment_id": "44314141",
+      "source_content": "Possible values:",
+      "source_content_hash": "60baf39ad7be5ed682b1ddf8115127dee8c77351019a0432acc3fd5f1fbdb1ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可能的值："
+      }
+    },
+    {
+      "segment_id": "79a1310d",
+      "source_content": "- `'auto'` - Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.\n- `'always'` - Always allow a user to over-scroll this view.\n- `'never'` - Never allow a user to over-scroll this view.",
+      "source_content_hash": "53ec2cd66552ed589ea161af21aa2f6d0498f2eb8d815e9019c58cbb4fab040c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'auto'` - 僅當內容足夠大以有意義地滾動時，才允許用戶對此視圖進行過度滾動。\n- `'always'` - 始終允許用戶對此視圖進行過度滾動。\n- `'never'` - 永不允許用戶對此視圖進行過度滾動。"
+      }
+    },
+    {
+      "segment_id": "189802a2",
+      "source_content": "| Type                                  | Default  |\n| ------------------------------------- | -------- |\n| enum(`'auto'`, `'always'`, `'never'`) | `'auto'` |",
+      "source_content_hash": "c7dcd16b85e777d6cd8c958658e4d3f35b316d83de0f224793f24fec75501309",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_189802a2"
+      }
+    },
+    {
+      "segment_id": "91f0716f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "400396d9",
+      "source_content": "### `pagingEnabled`",
+      "source_content_hash": "d7e6b9b68fe525881b8d633e01ce8cf6624c2a35a7150e6f1a5465ca4d680cd3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pagingEnabled`"
+      }
+    },
+    {
+      "segment_id": "1e1ccc8c",
+      "source_content": "When true, the scroll view stops on multiples of the scroll view's size when scrolling. This can be used for horizontal pagination.",
+      "source_content_hash": "64ef3c2dee7697bc0af7ba053af3ad2eeb89389f87526906472bfbbdb76971cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設置為 true 時，滾動視圖在滾動時會停在滾動視圖大小的倍數位置。這可用於水平分頁。"
+      }
+    },
+    {
+      "segment_id": "6b3677e9",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6b3677e9"
+      }
+    },
+    {
+      "segment_id": "006d06ed",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3a8e718b",
+      "source_content": "### `persistentScrollbar` <div class=\"label android\">Android</div>",
+      "source_content_hash": "fe8e10c7566d8680b5b721510e0939c6e95d8099b97ca56c3bc11488de9a98ef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `persistentScrollbar` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "7b046f1b",
+      "source_content": "Causes the scrollbars not to turn transparent when they are not in use.",
+      "source_content_hash": "5f6e86828b97b4a28627d7cc5a1efda59b5990ef967b2db13f568fc8968b69aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使滾動條在不使用時不會變透明。"
+      }
+    },
+    {
+      "segment_id": "8003e30c",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8003e30c"
+      }
+    },
+    {
+      "segment_id": "36a42514",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "76d60c63",
+      "source_content": "### `pinchGestureEnabled` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "2f9b18edca564d6ee2e97acf6a244550a645a2d2e38f304fcc0f2c2d41394c75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pinchGestureEnabled` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "4fa5605e",
+      "source_content": "When true, ScrollView allows use of pinch gestures to zoom in and out.",
+      "source_content_hash": "b2d10036a3a709a1284efcf1c897752042435087be6ca3cf03543c30858a1532",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設置為 true 時，ScrollView 允許使用捏合手勢進行縮放。"
+      }
+    },
+    {
+      "segment_id": "c5ace758",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c5ace758"
+      }
+    },
+    {
+      "segment_id": "da5fdd71",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d7ca1d9e",
+      "source_content": "### `refreshControl`",
+      "source_content_hash": "ec021dcbd3c69d7786b82b7801a0ee0063ee810910e7bf69905c1a03de3fee96",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `refreshControl`"
+      }
+    },
+    {
+      "segment_id": "3fce3636",
+      "source_content": "A RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView. Only works for vertical ScrollViews (`horizontal` prop must be `false`).",
+      "source_content_hash": "d43821cd277c3ec7ef2f694f467cf48a82b6ab9e88db2a9f461a3bae0b4babfc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個 RefreshControl 組件，用於為 ScrollView 提供下拉刷新功能。僅適用於垂直 ScrollView（`horizontal` 屬性必須為 `false`）。"
+      }
+    },
+    {
+      "segment_id": "b12a2e99",
+      "source_content": "See [RefreshControl](refreshcontrol).",
+      "source_content_hash": "78734b444000e8dff572a7d2d365c7db0f6b9b1a076c9b21ac45214423860106",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "參見 [RefreshControl](refreshcontrol)。"
+      }
+    },
+    {
+      "segment_id": "b9b64921",
+      "source_content": "| Type    |\n| ------- |\n| element |",
+      "source_content_hash": "570fdbb0ab508500a457d147a6e5a7ad7c19f3e90d5c40cc588dab0cd1a0bd2f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b9b64921"
+      }
+    },
+    {
+      "segment_id": "279acb5e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "85c87282",
+      "source_content": "### `removeClippedSubviews`",
+      "source_content_hash": "d2b01d5ab6351cea3ad1de31e0a03694c1e6f6ced6db1eea925e53d9c6a9c545",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeClippedSubviews`"
+      }
+    },
+    {
+      "segment_id": "0e5d7420",
+      "source_content": "Experimental: When `true`, offscreen child views (whose `overflow` value is `hidden`) are removed from their native backing superview when offscreen. This can improve scrolling performance on long lists.",
+      "source_content_hash": "5b1ad89c81884b0258ea1ec13d423d51d6bd5e5f53c9fe8b56445335a6ad2193",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實驗性功能：當設置為 `true` 時，離屏的子視圖（其 `overflow` 值為 `hidden`）將從其原生父視圖中移除。這可以提高長列表的滾動性能。"
+      }
+    },
+    {
+      "segment_id": "736333fe",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_736333fe"
+      }
+    },
+    {
+      "segment_id": "47b17d67",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "03461273",
+      "source_content": "### `scrollEnabled`",
+      "source_content_hash": "ca07293cc8ecf14c6402e8568458cc308cf1385ac4e5f2efed917b0868762d76",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollEnabled`"
+      }
+    },
+    {
+      "segment_id": "e93bb501",
+      "source_content": "When false, the view cannot be scrolled via touch interaction.",
+      "source_content_hash": "635e3f8f8dd220c6c190cf914ef3f421cbf01e4fb4873bdda9a496b420cf93ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設置為 false 時，視圖無法通過觸摸交互滾動。"
+      }
+    },
+    {
+      "segment_id": "5591470c",
+      "source_content": "Note that the view can always be scrolled by calling `scrollTo`.",
+      "source_content_hash": "0803a473aa5b040ec4079eaf2e8d7d9282718e043cafe6e23b7cc426fd8255db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意：視圖仍可通過調用 `scrollTo` 來滾動。"
+      }
+    },
+    {
+      "segment_id": "0dab06d8",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0dab06d8"
+      }
+    },
+    {
+      "segment_id": "4f1405c5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "169dc225",
+      "source_content": "### `scrollEventThrottle`",
+      "source_content_hash": "9f5314bee5d9ba7c048e7ac20e7c875d5ae0dc696a46c8a3b2fee12850ce7234",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollEventThrottle`"
+      }
+    },
+    {
+      "segment_id": "df08ff06",
+      "source_content": "Limits how often scroll events will be fired while scrolling, specified as a time interval in ms. This may be useful when expensive work is performed in response to scrolling. Values &le; `16` will disable throttling, regardless of the refresh rate of the device.",
+      "source_content_hash": "29d620f0aa4d93341623c7ccc37629c8b89015e7b99ea902094439746703455e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "限制滾動時觸發滾動事件的頻率，以毫秒為單位指定時間間隔。這在滾動時執行昂貴操作時可能有用。值 ≤ `16` 將禁用節流，無論設備的刷新率如何。"
+      }
+    },
+    {
+      "segment_id": "fec39f09",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `0`     |",
+      "source_content_hash": "83458482732eb55b223c31c4441b5e732f7b43832d88f094b44c374ebad3e557",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fec39f09"
+      }
+    },
+    {
+      "segment_id": "469e3061",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "08ad3c7d",
+      "source_content": "### `scrollIndicatorInsets` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "b34edd19b07073df5d398330c88ecacbfca4902e806f99b2190de49b91b8a576",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollIndicatorInsets` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "c6dee347",
+      "source_content": "The amount by which the scroll view indicators are inset from the edges of the scroll view. This should normally be set to the same value as the `contentInset`.",
+      "source_content_hash": "63d5b2f8921d612ca798a6ce200a773138b1564d108e8a699ae47b603505fcd1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動視圖指示器從滾動視圖邊緣的內嵌量。通常應設置為與 `contentInset` 相同的值。"
+      }
+    },
+    {
+      "segment_id": "0fdd9cbc",
+      "source_content": "| Type                                                                 | Default                                  |\n| -------------------------------------------------------------------- | ---------------------------------------- |\n| object: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |",
+      "source_content_hash": "08f9c9eae07cc881e20981975627d761a8b8829938035090eece3064320e3835",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0fdd9cbc"
+      }
+    },
+    {
+      "segment_id": "90c20e3d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9f1e5bd3",
+      "source_content": "### `scrollPerfTag` <div class=\"label android\">Android</div>",
+      "source_content_hash": "8a7c9f10a7a1d2cd9974f5b8a9886c86caeb5f5d0c67f6f84076c8ed1d7adf4d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollPerfTag` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "efd1b767",
+      "source_content": "Tag used to log scroll performance on this scroll view. Will force momentum events to be turned on (see sendMomentumEvents). This doesn't do anything out of the box and you need to implement a custom native FpsListener for it to be useful.",
+      "source_content_hash": "86fc70c95c1875f11893a7d4f6a7d4eb03d753e3f33e7ffbed29d4f934559ec4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於記錄此滾動視圖性能的標籤。將強制開啟動量事件（參見sendMomentumEvents）。此功能默認不生效，需實現自定義的原生FpsListener才能發揮作用。"
+      }
+    },
+    {
+      "segment_id": "d35523a8",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d35523a8"
+      }
+    },
+    {
+      "segment_id": "3057b00a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1212565e",
+      "source_content": "### `scrollToOverflowEnabled` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "ae132235544a724e73901f22ffc1607277abd001cff4a294f9fbad84be602051",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollToOverflowEnabled` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "52e54b91",
+      "source_content": "When `true`, the scroll view can be programmatically scrolled beyond its content size.",
+      "source_content_hash": "9ec3bc42201947cc5a4fdc07e4c86cf305bbea20bb3534561fee59444fdf35ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為`true`時，可通過程序控制滾動視圖超出其內容尺寸。"
+      }
+    },
+    {
+      "segment_id": "e7ac6393",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e7ac6393"
+      }
+    },
+    {
+      "segment_id": "c053e679",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c1d27079",
+      "source_content": "### `scrollsToTop` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "09efdaa95411eafdb8864399cff612d7205ae433983823eb53610f2d7b76a83d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollsToTop` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "5bd59085",
+      "source_content": "When `true`, the scroll view scrolls to top when the status bar is tapped.",
+      "source_content_hash": "611eed6a09cd9e99df81b323250267dd534135f895ed61df381b6a508ef10e20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為`true`時，點擊狀態欄會使滾動視圖滾動至頂部。"
+      }
+    },
+    {
+      "segment_id": "4e96edd6",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e96edd6"
+      }
+    },
+    {
+      "segment_id": "49236388",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6bc314bd",
+      "source_content": "### `showsHorizontalScrollIndicator`",
+      "source_content_hash": "f55563c1052ee9621768462e25dd1585852b7a39d69abd2b11689f48c3cb99c7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showsHorizontalScrollIndicator`"
+      }
+    },
+    {
+      "segment_id": "0756e68c",
+      "source_content": "When `true`, shows a horizontal scroll indicator.",
+      "source_content_hash": "7c760ed9951f6beb9825dd93c7f15c02c63ef18ccfc8e5841a56e540d9f75b42",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為`true`時，顯示水平滾動指示器。"
+      }
+    },
+    {
+      "segment_id": "fe299f82",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fe299f82"
+      }
+    },
+    {
+      "segment_id": "94209988",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dc6bd4f7",
+      "source_content": "### `showsVerticalScrollIndicator`",
+      "source_content_hash": "248bc08c1bb60e9a1734a6530789901c85afb0bcb5f90ed6ecd7250685de3c5a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showsVerticalScrollIndicator`"
+      }
+    },
+    {
+      "segment_id": "78d1234b",
+      "source_content": "When `true`, shows a vertical scroll indicator.",
+      "source_content_hash": "b21407d68baa7a7749a35f8240aa951a8799ec574f9738801fa73b7589c74aaa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設為`true`時，顯示垂直滾動指示器。"
+      }
+    },
+    {
+      "segment_id": "5f49c52f",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5f49c52f"
+      }
+    },
+    {
+      "segment_id": "ba25e1be",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "906620fd",
+      "source_content": "### `snapToAlignment`",
+      "source_content_hash": "f4ed06768e2344a3e141ffe95eb07b95d5189385c55fa41d488ca3f2dc075624",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `snapToAlignment`"
+      }
+    },
+    {
+      "segment_id": "538f8d2f",
+      "source_content": "When `snapToInterval` is set, `snapToAlignment` will define the relationship of the snapping to the scroll view.",
+      "source_content_hash": "46f4dd3743e23c5db981f8a41ab86ca565033b097fcf8d7a779a10e825226880",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當設置`snapToInterval`時，`snapToAlignment`將定義對齊方式與滾動視圖的關係。"
+      }
+    },
+    {
+      "segment_id": "8c09baeb",
+      "source_content": "Possible values:",
+      "source_content_hash": "60baf39ad7be5ed682b1ddf8115127dee8c77351019a0432acc3fd5f1fbdb1ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可能的值："
+      }
+    },
+    {
+      "segment_id": "8bf81227",
+      "source_content": "- `'start'` will align the snap at the left (horizontal) or top (vertical).\n- `'center'` will align the snap in the center.\n- `'end'` will align the snap at the right (horizontal) or bottom (vertical).",
+      "source_content_hash": "214a237904a3d6b01c40e9bb0647dcf6a4b91a8b908e26e5eeb4c5caa1e356e0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'start'` 將對齊到左側（水平）或頂部（垂直）。\n- `'center'` 將對齊到中心。\n- `'end'` 將對齊到右側（水平）或底部（垂直）。"
+      }
+    },
+    {
+      "segment_id": "60132f2b",
+      "source_content": "| Type                                 | Default   |\n| ------------------------------------ | --------- |\n| enum(`'start'`, `'center'`, `'end'`) | `'start'` |",
+      "source_content_hash": "57bb9d2fb104c0279ac4c890db8060e0ad040332a020ba254a66801e891059b6",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_60132f2b"
+      }
+    },
+    {
+      "segment_id": "e6875bfb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "185b49e4",
+      "source_content": "### `snapToEnd`",
+      "source_content_hash": "5769d0ef78879bf84c78b1b4d3522b8a4e3a9be96c49ea99d7af70ff88af722b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `snapToEnd`"
+      }
+    },
+    {
+      "segment_id": "f4f6cbea",
+      "source_content": "Use in conjunction with `snapToOffsets`. By default, the end of the list counts as a snap offset. Set `snapToEnd` to false to disable this behavior and allow the list to scroll freely between its end and the last `snapToOffsets` offset.",
+      "source_content_hash": "6677d855bcd2e14372e11e763e23b8ec2bb59f1ed38c875f964e009ffbb97e5d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與`snapToOffsets`配合使用。默認情況下，列表末端會作為吸附偏移點。設為`false`可禁用此行為，允許列表在末端與最後一個`snapToOffsets`偏移點之間自由滾動。"
+      }
+    },
+    {
+      "segment_id": "a3c96bf8",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a3c96bf8"
+      }
+    },
+    {
+      "segment_id": "cc40f05f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dfc5d601",
+      "source_content": "### `snapToInterval`",
+      "source_content_hash": "d5f88a9ed8defc5b588206f4e04fdcbb9a93d21eb4ee78f6ef692607a9196c1e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `snapToInterval`"
+      }
+    },
+    {
+      "segment_id": "4b874e17",
+      "source_content": "When set, causes the scroll view to stop at multiples of the value of `snapToInterval`. This can be used for paginating through children that have lengths smaller than the scroll view. Typically used in combination with `snapToAlignment` and `decelerationRate=\"fast\"`. Overrides less configurable `pagingEnabled` prop.",
+      "source_content_hash": "8f29943155517d52f4b7837eb244ceda3dde8fdbf6c605113ab77ddbcab0c140",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設置後，滾動視圖將在`snapToInterval`值的倍數處停止。可用於分頁瀏覽小於滾動視圖尺寸的子項。通常與`snapToAlignment`和`decelerationRate=\"fast\"`配合使用。會覆蓋配置較少的`pagingEnabled`屬性。"
+      }
+    },
+    {
+      "segment_id": "6009472d",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6009472d"
+      }
+    },
+    {
+      "segment_id": "59dba741",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c2191e4f",
+      "source_content": "### `snapToOffsets`",
+      "source_content_hash": "95c5ce59e514b0b5cb4803af2d7933d94a94de8b0da919c9b21feaa773171bbd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `snapToOffsets`"
+      }
+    },
+    {
+      "segment_id": "dd580565",
+      "source_content": "When set, causes the scroll view to stop at the defined offsets. This can be used for paginating through variously sized children that have lengths smaller than the scroll view. Typically used in combination with `decelerationRate=\"fast\"`. Overrides less configurable `pagingEnabled` and `snapToInterval` props.",
+      "source_content_hash": "3eeab665c2fc238e73bb4115222dd33b5c7c5658bed54e0953d0922064cf2b76",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設置後，滾動視圖將在定義的偏移點停止。可用於分頁瀏覽尺寸各異且小於滾動視圖的子項。通常與`decelerationRate=\"fast\"`配合使用。會覆蓋配置較少的`pagingEnabled`和`snapToInterval`屬性。"
+      }
+    },
+    {
+      "segment_id": "e819af1e",
+      "source_content": "| Type            |\n| --------------- |\n| array of number |",
+      "source_content_hash": "8bf172f27f990f1191c7cb9c54329b7bb49668b09f3b1cee58e93fd34fa56d98",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e819af1e"
+      }
+    },
+    {
+      "segment_id": "bd0b5153",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "52dca3f0",
+      "source_content": "### `snapToStart`",
+      "source_content_hash": "f5212e5b5c5e382cbfa7708bae5870c25a84316b88753dc86a002c7fdf529f90",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `snapToStart`"
+      }
+    },
+    {
+      "segment_id": "12532805",
+      "source_content": "Use in conjunction with `snapToOffsets`. By default, the beginning of the list counts as a snap offset. Set `snapToStart` to `false` to disable this behavior and allow the list to scroll freely between its start and the first `snapToOffsets` offset.",
+      "source_content_hash": "37e4c9e110cff4e50411ff7af503333e01c95dfcb2d887bb2b9d651cf66951ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與`snapToOffsets`配合使用。默認情況下，列表起始處會作為吸附偏移點。設為`false`可禁用此行為，允許列表在起始處與第一個`snapToOffsets`偏移點之間自由滾動。"
+      }
+    },
+    {
+      "segment_id": "39662b27",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_39662b27"
+      }
+    },
+    {
+      "segment_id": "c39b0631",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5b5ada40",
+      "source_content": "### `stickyHeaderHiddenOnScroll`",
+      "source_content_hash": "defae214847cb79f4d5e243dbc998a50fdd6ad02a77c5cbaea12bda9c5fdba92",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `stickyHeaderHiddenOnScroll`"
+      }
+    },
+    {
+      "segment_id": "b5e8628c",
+      "source_content": "When set to `true`, sticky header will be hidden when scrolling down the list, and it will dock at the top of the list when scrolling up.",
+      "source_content_hash": "6f8bcbe13ba276fb3eaea4fe7046790c336bb87589f19cf220ed7b7188740e44",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為`true`時，向下滾動列表會隱藏黏性標頭，向上滾動時會將標頭固定在列表頂部。"
+      }
+    },
+    {
+      "segment_id": "f2e92294",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2e92294"
+      }
+    },
+    {
+      "segment_id": "dee4fb68",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dd4e123f",
+      "source_content": "### `stickyHeaderIndices`",
+      "source_content_hash": "42d421bc0fd54037f3f0be36f93592e0acf1a9a6e936319550dee1077e054f5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `stickyHeaderIndices`"
+      }
+    },
+    {
+      "segment_id": "40d8315f",
+      "source_content": "An array of child indices determining which children get docked to the top of the screen when scrolling. For example, passing `stickyHeaderIndices={[0]}` will cause the first child to be fixed to the top of the scroll view. You can also use like [x,y,z] to make multiple items sticky when they are at the top. This property is not supported in conjunction with `horizontal={true}`.",
+      "source_content_hash": "e53ca670fbba0373e13e43f88073f44e081ad7121058ec580ef4d9345552756f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個子元素索引陣列，決定哪些子元素在滾動時會固定在螢幕頂部。例如，傳遞 `stickyHeaderIndices={[0]}` 會使第一個子元素固定在滾動視圖頂部。你也可以使用 [x,y,z] 格式讓多個項目在頂部時保持固定。此屬性不支援與 `horizontal={true}` 同時使用。"
+      }
+    },
+    {
+      "segment_id": "c406f485",
+      "source_content": "| Type            |\n| --------------- |\n| array of number |",
+      "source_content_hash": "8bf172f27f990f1191c7cb9c54329b7bb49668b09f3b1cee58e93fd34fa56d98",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c406f485"
+      }
+    },
+    {
+      "segment_id": "8c377fbf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "03d90a4b",
+      "source_content": "### `zoomScale` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "b02ba0bec000a31973711dbd82d4181016ee26ccab498c8bd413238f6aac43ed",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `zoomScale` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "81cabb68",
+      "source_content": "The current scale of the scroll view content.",
+      "source_content_hash": "810d9305a496081599db8ac99f71d8b83c8e67833929d34cac4f5ecf07172938",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動視圖內容的當前縮放比例。"
+      }
+    },
+    {
+      "segment_id": "7939702e",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `1.0`   |",
+      "source_content_hash": "b2eadeebf015294b474e4f960b2804cd3e8c4b659d639bb23b5475397baaca47",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7939702e"
+      }
+    },
+    {
+      "segment_id": "bf777df6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a4e536ef",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "18cb766f",
+      "source_content": "### `flashScrollIndicators()`",
+      "source_content_hash": "8221c0b097c283bbf09fc1bda0d28641a1fb54dd256ea070499e8ac497e9a3ba",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flashScrollIndicators()`"
+      }
+    },
+    {
+      "segment_id": "8c46963d",
+      "source_content": "```tsx\nflashScrollIndicators();\n```",
+      "source_content_hash": "a047294486a7ea7f6d43d35f66429435ae71c714ad4266f3b02cf5e588bb87f5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8c46963d"
+      }
+    },
+    {
+      "segment_id": "e72dbd94",
+      "source_content": "Displays the scroll indicators momentarily.",
+      "source_content_hash": "eb9be2699dbaddecf1162ff5bbaec42a0104d6766322e67f7233a52b7b734282",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "短暫顯示滾動指示器。"
+      }
+    },
+    {
+      "segment_id": "99e07907",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "08495385",
+      "source_content": "### `scrollTo()`",
+      "source_content_hash": "b4af6a30ef54f614a7ab1b4987c5e1a2f2c935c7901a782539fbc269104b737b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollTo()`"
+      }
+    },
+    {
+      "segment_id": "315959ec",
+      "source_content": "```tsx\nscrollTo(\n  options?: {x?: number, y?: number, animated?: boolean} | number,\n  deprecatedX?: number,\n  deprecatedAnimated?: boolean,\n);\n```",
+      "source_content_hash": "1a7d94f4adcf66d26b12eef8c2425be4fbd7736e638a9ed7494dafd51d0af29a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_315959ec"
+      }
+    },
+    {
+      "segment_id": "d4c07c1d",
+      "source_content": "Scrolls to a given x, y offset, either immediately, with a smooth animation.",
+      "source_content_hash": "b4ef3e5a2bb439c6598d5c15f09cbe153765f8d2d94bd72f88b0423dad813704",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動到指定的 x、y 偏移位置，可選擇立即執行或使用平滑動畫。"
+      }
+    },
+    {
+      "segment_id": "836aeded",
+      "source_content": "**Example:**",
+      "source_content_hash": "7cfe1b9c27bbfaa85c8030da8c6308bf8a1b92c6b8592754a77844c446e9722d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：**"
+      }
+    },
+    {
+      "segment_id": "5f4b614f",
+      "source_content": "`scrollTo({x: 0, y: 0, animated: true})`",
+      "source_content_hash": "9fdccb8c1340f1df1293a0d0b626f9b81d6b334221a2c833c73e9206b76c25ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`scrollTo({x: 0, y: 0, animated: true})`"
+      }
+    },
+    {
+      "segment_id": "d183436b",
+      "source_content": "> Note: The weird function signature is due to the fact that, for historical reasons, the function also accepts separate arguments as an alternative to the options object. This is deprecated due to ambiguity (y before x), and SHOULD NOT BE USED.",
+      "source_content_hash": "ac9fbc1e40110aecfe05f720c8e5b4727c352cbef97a55189a6702a510df1641",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：此函數的奇特簽名是由於歷史原因，它同時接受獨立參數作為選項物件的替代方案。由於存在歧義（y 在 x 之前），此用法已被棄用，不應繼續使用。"
+      }
+    },
+    {
+      "segment_id": "cd7cb1b5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "07866865",
+      "source_content": "### `scrollToEnd()`",
+      "source_content_hash": "eccf8af1ffef17331eb176ef79162a132d59ca5117619cafcfeb7aaf071b922f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scrollToEnd()`"
+      }
+    },
+    {
+      "segment_id": "3a133f42",
+      "source_content": "```tsx\nscrollToEnd(options?: {animated?: boolean});\n```",
+      "source_content_hash": "6129cafc9aea83c79dfb110416e9d0af4497c681dd23ff5809d25764e2df15f5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3a133f42"
+      }
+    },
+    {
+      "segment_id": "d295cd55",
+      "source_content": "If this is a vertical ScrollView scrolls to the bottom. If this is a horizontal ScrollView scrolls to the right.",
+      "source_content_hash": "a4a23f28b4c9d4dee60855fece02369bbf60c9c2f29f13f9f454d5b68dac9114",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果是垂直 ScrollView，則滾動到底部；如果是水平 ScrollView，則滾動到右側。"
+      }
+    },
+    {
+      "segment_id": "a54b7323",
+      "source_content": "Use `scrollToEnd({animated: true})` for smooth animated scrolling, `scrollToEnd({animated: false})` for immediate scrolling. If no options are passed, `animated` defaults to `true`.",
+      "source_content_hash": "3a38bd3a236f5556239d18d941b6fa0eb05beab55ef5e6859e3db104dd3aa451",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `scrollToEnd({animated: true})` 可實現平滑動畫滾動，使用 `scrollToEnd({animated: false})` 則立即滾動。若未傳遞選項，`animated` 預設為 `true`。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.75/scrollview.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.611268+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "d26276ffddd802bbd33569377ede2444312feaea196dc597d03a1dbae99bb391"
+  }
+}

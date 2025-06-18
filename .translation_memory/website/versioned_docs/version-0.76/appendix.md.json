@@ -1,0 +1,102 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.76/appendix.md",
+  "source_file_content_hash": "00df16acab4dfbdff6b6524271edb6b4c1d2394a51070b8607f1fdf3607388a6",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "# Appendix",
+      "source_content_hash": "da5468179b661343e2a9b776682b90b6bc01a2b8a76d4a93c2466b1876f41ae1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 附錄"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "## I. Terminology",
+      "source_content_hash": "9463e5681ebc3823572eab3168bf381856a8fde2588d3efb0cbf12f4d68d3a37",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## I. 術語"
+      }
+    },
+    {
+      "segment_id": "17ded777",
+      "source_content": "- **Spec** - TypeScript or Flow code that describes the API for a Turbo Native Module or Fabric Native component. Used by **Codegen** to generate boilerplate code.\n\n- **Native Modules** - Native libraries that have no User Interface (UI) for the user. Examples would be persistent storage, notifications, network events. These are accessible to your JavaScript application code as functions and objects.\n- **Native Component** - Native platform views that are available to your application JavaScript code through React Components.\n\n- **Legacy Native Components** - Components which are running on the old React Native architecture.\n- **Legacy Native Modules** - Modules which are running on the old React Native architecture.",
+      "source_content_hash": "ac9941da9bbbfd38f3d04302990a786e5762ca6cd659a13518b425b03fe06b48",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **Spec** - 用於描述 Turbo 原生模組或 Fabric 原生元件 API 的 TypeScript 或 Flow 程式碼。由 **Codegen** 用於生成樣板程式碼。\n\n- **原生模組** - 不包含使用者介面(UI)的原生函式庫。例如持久儲存、通知、網路事件等。這些可透過函式與物件讓您的 JavaScript 應用程式程式碼存取。\n- **原生元件** - 可透過 React 元件讓您的應用程式 JavaScript 程式碼使用的原生平台視圖。\n\n- **舊版原生元件** - 運行在舊版 React Native 架構上的元件。\n- **舊版原生模組** - 運行在舊版 React Native 架構上的模組。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## II. Codegen Typings",
+      "source_content_hash": "e7968c7cc2c9640736100dcbb6f002926b2bf68e739a0b9601da5dca890dcf93",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## II. Codegen 類型定義"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "You may use the following table as a reference for which types are supported and what they map to in each platform:",
+      "source_content_hash": "d95bae14ddf4f292069465cea34067e001c1a93bcab0a31c18c1bdcabedd324b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可參考以下表格了解支援的類型及其在各平台的對應關係："
+      }
+    },
+    {
+      "segment_id": "ac7ef717",
+      "source_content": "| Flow                                                                       | TypeScript                                          | Flow Nullable Support                                   | TypeScript Nullable Support                          | Android (Java)                       | iOS (ObjC)                                                     |\n| -------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------ | -------------------------------------------------------------- |\n| `string`                                                                   | `string`                                            | `?string`                                               | <code>string &#124; null</code>                      | `string`                             | `NSString`                                                     |\n| `boolean`                                                                  | `boolean`                                           | `?boolean`                                              | <code>boolean &#124; null</code>                     | `Boolean`                            | `NSNumber`                                                     |\n| Object Literal<br /><code>&#123;&#124; foo: string, ...&#124;&#125;</code> | <code>&#123; foo: string, ...&#125; as const</code> | <code>?&#123;&#124; foo: string, ...&#124;&#125;</code> | <code>?&#123; foo: string, ...&#125; as const</code> | \\-                                   | \\-                                                             |\n| Object [[1](#notes)]                                                       | Object [[1](#notes)]                                | `?Object`                                               | <code>Object &#124; null</code>                      | `ReadableMap`                        | `@` (untyped dictionary)                                       |\n| <code>Array&lt;T&gt;</code>                                                | <code>Array&lt;T&gt;</code>                         | <code>?Array&lt;T&gt;</code>                            | <code>Array&lt;T&gt; &#124; null</code>              | `ReadableArray`                      | `NSArray` (or `RCTConvertVecToArray` when used inside objects) |\n| `Function`                                                                 | `Function`                                          | `?Function`                                             | <code>Function &#124; null</code>                    | \\-                                   | \\-                                                             |\n| <code>Promise&lt;T&gt;</code>                                              | <code>Promise&lt;T&gt;</code>                       | <code>?Promise&lt;T&gt;</code>                          | <code>Promise&lt;T&gt; &#124; null</code>            | `com.facebook.react.bridge.Promise`  | `RCTPromiseResolve` and `RCTPromiseRejectBlock`                |\n| Type Unions<br /><code>'SUCCESS'&#124;'FAIL'</code>                        | Type Unions<br /><code>'SUCCESS'&#124;'FAIL'</code> | Only as callbacks                                       |                                                      | \\-                                   | \\-                                                             |\n| Callbacks<br />`() =>`                                                     | Callbacks<br />`() =>`                              | Yes                                                     |                                                      | `com.facebook.react.bridge.Callback` | `RCTResponseSenderBlock`                                       |\n| `number`                                                                   | `number`                                            | No                                                      |                                                      | `double`                             | `NSNumber`                                                     |",
+      "source_content_hash": "1037e38ff824d454a8874b620c2f828593ea6f14571caa1e43aac8a23a3f858b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ac7ef717"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### Notes:",
+      "source_content_hash": "cf0761961555426b72aa7562293d42c3e8ecb9ebcc14f1850c269493bb971489",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 注意事項："
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "<b>[1]</b> We strongly recommend using Object literals instead of Objects.",
+      "source_content_hash": "3dd38e08955f793169e8efee16f0b0d8ded086f51a9c945bb34cfcf9a633835b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "<b>[1]</b> 我們強烈建議使用物件字面值(Object literals)而非物件(Objects)。"
+      }
+    },
+    {
+      "segment_id": "b56ef571",
+      "source_content": ":::info\nYou may also find it useful to refer to the JavaScript specifications for the core modules in React Native. These are located inside the `Libraries/` directory in the React Native repository.\n:::",
+      "source_content_hash": "012fad9baeac803ad832112505186d4359dc1cb11b2b3fdee351e5966eb574b5",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n您可能也會發現參考 React Native 核心模組的 JavaScript 規格很有幫助。這些規格位於 React Native 儲存庫中的 `Libraries/` 目錄內。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.76/appendix.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.628990+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "00df16acab4dfbdff6b6524271edb6b4c1d2394a51070b8607f1fdf3607388a6"
+  }
+}

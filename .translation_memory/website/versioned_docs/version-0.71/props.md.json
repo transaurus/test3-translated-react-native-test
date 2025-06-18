@@ -1,0 +1,122 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/props.md",
+  "source_file_content_hash": "95c10fe4e84e4dfbb8789ae76bbc2dbea1c9e185ee3d1a2b830a4f34b046c251",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: props\ntitle: Props\n---",
+      "source_content_hash": "f4417eacbb67fcdfe40d9a1c0a7b0d357e7089f6cbf4a21a26e036c0eec6611d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Most components can be customized when they are created, with different parameters. These created parameters are called `props`, short for properties.",
+      "source_content_hash": "e1b0cf6f0f609a351dd5b419064a5e7e9ccb8859d4cfe589c2b2ed4fc62e6ea5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "大多數元件在創建時可以透過不同的參數進行自訂。這些創建參數稱為「props」（屬性的簡稱）。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "For example, one basic React Native component is the `Image`. When you create an image, you can use a prop named `source` to control what image it shows.",
+      "source_content_hash": "6a06aeab8d95f1eddd1df9a94f426a1d9c8647ab3fcf8c903dd33ac9d81771aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "舉例來說，React Native 的基本元件之一是 `Image`。當你創建一個圖片時，可以使用名為 `source` 的 prop 來控制它顯示的圖片。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=Props\nimport React from 'react';\nimport {Image} from 'react-native';\n\nconst Bananas = () => {\n  let pic = {\n    uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg',\n  };\n  return (\n    <Image source={pic} style={{width: 193, height: 110, marginTop: 50}} />\n  );\n};\n\nexport default Bananas;\n```",
+      "source_content_hash": "78bb99cea181ae4b1798e2bda4be6d15e5cba2715ba23023ab50f20a72705e0f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Notice the braces surrounding `{pic}` - these embed the variable `pic` into JSX. You can put any JavaScript expression inside braces in JSX.",
+      "source_content_hash": "b6017cff78d3cb1c4d4323cc11b0f4447f94886ccda3e849fc9dd6c2d48c2a6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意圍繞 `{pic}` 的大括號——這些大括號將變數 `pic` 嵌入到 JSX 中。你可以在 JSX 的大括號內放入任何 JavaScript 表達式。"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "Your own components can also use `props`. This lets you make a single component that is used in many different places in your app, with slightly different properties in each place by referring to `props` in your `render` function. Here's an example:",
+      "source_content_hash": "3e7a47a0e3d5d26fefc42b8cd73b7854feb580582a3d34feb43e8de50e98fe9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你自己的元件也可以使用 `props`。這讓你能夠創建一個在應用程式中多處使用的單一元件，並透過在 `render` 函數中引用 `props` 來在每個地方稍微調整屬性。以下是一個範例："
+      }
+    },
+    {
+      "segment_id": "99d14dfd",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Props&ext=js\nimport React from 'react';\nimport {Text, View} from 'react-native';\n\nconst Greeting = props => {\n  return (\n    <View style={{alignItems: 'center'}}>\n      <Text>Hello {props.name}!</Text>\n    </View>\n  );\n};\n\nconst LotsOfGreetings = () => {\n  return (\n    <View style={{alignItems: 'center', top: 50}}>\n      <Greeting name=\"Rexxar\" />\n      <Greeting name=\"Jaina\" />\n      <Greeting name=\"Valeera\" />\n    </View>\n  );\n};\n\nexport default LotsOfGreetings;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Props&ext=tsx\nimport React from 'react';\nimport {Text, View} from 'react-native';\n\ntype GreetingProps = {\n  name: string;\n};\n\nconst Greeting = (props: GreetingProps) => {\n  return (\n    <View style={{alignItems: 'center'}}>\n      <Text>Hello {props.name}!</Text>\n    </View>\n  );\n};\n\nconst LotsOfGreetings = () => {\n  return (\n    <View style={{alignItems: 'center', top: 50}}>\n      <Greeting name=\"Rexxar\" />\n      <Greeting name=\"Jaina\" />\n      <Greeting name=\"Valeera\" />\n    </View>\n  );\n};\n\nexport default LotsOfGreetings;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "e08a4b400f54b4820c06d2749c15c7bc3ebc4a40c94ecd5b379bba0f87841b5e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99d14dfd"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "Using `name` as a prop lets us customize the `Greeting` component, so we can reuse that component for each of our greetings. This example also uses the `Greeting` component in JSX, similar to the [Core Components](intro-react-native-components). The power to do this is what makes React so cool - if you find yourself wishing that you had a different set of UI primitives to work with, you can invent new ones.",
+      "source_content_hash": "33ce13ff4367f4cd20795458e39b21badf3b865f3ce0c214cc00bfe8b9f3a553",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `name` 作為 prop 讓我們能夠自訂 `Greeting` 元件，因此我們可以重複使用該元件來顯示每個問候語。這個範例也展示了如何在 JSX 中使用 `Greeting` 元件，類似於[核心元件](intro-react-native-components)。能夠做到這一點正是 React 的強大之處——如果你發現自己希望使用一組不同的 UI 基本元件，你可以創造新的元件。"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "The other new thing going on here is the [`View`](view.md) component. A [`View`](view.md) is useful as a container for other components, to help control style and layout.",
+      "source_content_hash": "cecf47726ce32fe579986446f5fc0f25ac64d0551832f2951eeb3feb90509d6d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這裡另一個新出現的東西是 [`View`](view.md) 元件。[`View`](view.md) 作為其他元件的容器非常有用，可以幫助控制樣式和佈局。"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "With `props` and the basic [`Text`](text.md), [`Image`](image.md), and [`View`](view.md) components, you can build a wide variety of static screens. To learn how to make your app change over time, you need to [learn about State](state.md).",
+      "source_content_hash": "c9f30ae7fe9cd04a59ccaadf6031df5799c5b5845150fcc66190e283eaf4d93c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過 `props` 和基本的 [`Text`](text.md)、[`Image`](image.md) 和 [`View`](view.md) 元件，你可以構建各種靜態畫面。要學習如何讓你的應用程式隨時間變化，你需要[學習關於 State](state.md)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/props.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.342936+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "95c10fe4e84e4dfbb8789ae76bbc2dbea1c9e185ee3d1a2b830a4f34b046c251"
+  }
+}

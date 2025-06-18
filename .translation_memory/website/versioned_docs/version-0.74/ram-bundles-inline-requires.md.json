@@ -1,0 +1,352 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/ram-bundles-inline-requires.md",
+  "source_file_content_hash": "5388e05991c46b82290d3100db57d3d698bf034b7700412f9003764c480b8908",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: ram-bundles-inline-requires\ntitle: RAM Bundles and Inline Requires\n---",
+      "source_content_hash": "b2d56af5a74de1d5afa3b3be18d1d14cc585ea0bb14ecf39e7250cb2c5d8fc64",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "If you have a large app you may want to consider the Random Access Modules (RAM) bundle format, and using inline requires. This is useful for apps that have a large number of screens which may not ever be opened during a typical usage of the app. Generally it is useful to apps that have large amounts of code that are not needed for a while after startup. For instance the app includes complicated profile screens or lesser used features, but most sessions only involve visiting the main screen of the app for updates. We can optimize the loading of the bundle by using the RAM format and requiring those features and screens inline (when they are actually used).",
+      "source_content_hash": "0874516411a650d60795ac989bf901996b3cb58311937b62c597bbf648a079db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您的應用程式規模較大，可考慮採用隨機存取模組(RAM)套件格式並使用內聯引入(inline requires)。這對於具有大量畫面、但在典型使用情境中可能永遠不會開啟的應用程式特別有用。通常這類優化適合啟動後長時間不需使用大量程式碼的應用程式，例如應用程式包含複雜的個人檔案畫面或較少使用的功能，但多數使用情境僅涉及主畫面更新。透過RAM格式和實際使用時才引入的功能(內聯引入)，我們能優化套件載入效率。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Loading JavaScript",
+      "source_content_hash": "a84d7c8869151dcb7547b33681dbbc16c0f18d2658cd5fa3a93f53fc4edc83ac",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## JavaScript載入機制"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Before react-native can execute JS code, that code must be loaded into memory and parsed. With a standard bundle if you load a 50mb bundle, all 50mb must be loaded and parsed before any of it can be executed. The optimization behind RAM bundles is that you can load only the portion of the 50mb that you actually need at startup, and progressively load more of the bundle as those sections are needed.",
+      "source_content_hash": "4aad4260866cace9c945d0343b89c83fcfe5db7b9cda7601494564361762d9a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在react-native執行JS程式碼前，必須先將程式碼載入記憶體並解析。標準套件若載入50mb的套件，必須完整載入並解析全部50mb後才能執行。RAM套件的優化原理是：啟動時僅載入實際需要的部分，後續再根據需求漸進式載入其他部分。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Inline Requires",
+      "source_content_hash": "0f6a45f8308c7e4f7e05c657430e006b3d714cc8cfc23c6d4ab3d17e3ade0d38",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 內聯引入"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "Inline requires delay the requiring of a module or file until that file is actually needed. A basic example would look like this:",
+      "source_content_hash": "8b72704f8ae738cbb45609938f78b0bcd151810253b31ca4486aa784d915bb5d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "內聯引入會延遲模組或檔案的引入時機，直到實際需要該檔案時才執行。基本範例如下："
+      }
+    },
+    {
+      "segment_id": "41ad46a6",
+      "source_content": "```tsx title=\"VeryExpensive.tsx\"\nimport React, {Component} from 'react';\nimport {Text} from 'react-native';\n// ... import some very expensive modules\n\n// You may want to log at the file level to verify when this is happening\nconsole.log('VeryExpensive component loaded');\n\nexport default class VeryExpensive extends Component {\n  // lots and lots of code\n  render() {\n    return <Text>Very Expensive Component</Text>;\n  }\n}\n```",
+      "source_content_hash": "4af2fbf30135d93f65540fca45332aa32929827dc9bd144e94c9a760ed4c617b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41ad46a6"
+      }
+    },
+    {
+      "segment_id": "b017063d",
+      "source_content": "```tsx title=\"Optimized.tsx\"\nimport React, {Component} from 'react';\nimport {TouchableOpacity, View, Text} from 'react-native';\n\nlet VeryExpensive = null;\n\nexport default class Optimized extends Component {\n  state = {needsExpensive: false};\n\n  didPress = () => {\n    if (VeryExpensive == null) {\n      VeryExpensive = require('./VeryExpensive').default;\n    }\n\n    this.setState(() => ({\n      needsExpensive: true,\n    }));\n  };\n\n  render() {\n    return (\n      <View style={{marginTop: 20}}>\n        <TouchableOpacity onPress={this.didPress}>\n          <Text>Load</Text>\n        </TouchableOpacity>\n        {this.state.needsExpensive ? <VeryExpensive /> : null}\n      </View>\n    );\n  }\n}\n```",
+      "source_content_hash": "723a16fb6b4b2d7ab60a9a4d3d3e50002159c0c43b080cdc464e3c3021577762",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b017063d"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "Even without the RAM format, inline requires can lead to startup time improvements, because the code within VeryExpensive.js will only execute once it is required for the first time.",
+      "source_content_hash": "49cf54ed1f3fbbe3511f6378962f9d046e56a87e1c18155394031527635a230f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "即使不使用RAM格式，內聯引入也能改善啟動時間，因為VeryExpensive.js中的程式碼只會在首次被引入時執行。"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "## Enable the RAM format",
+      "source_content_hash": "986a11ee208c7ce865e77754324016e23ea35abb77e1b049ab36f4af7f6e18cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 啟用RAM格式"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "On iOS using the RAM format will create a single indexed file that react native will load one module at a time. On Android, by default it will create a set of files for each module. You can force Android to create a single file, like iOS, but using multiple files can be more performant and requires less memory.",
+      "source_content_hash": "deaeab82924ca75b3fed21a190abd1f53d97b5344f14676b17db941e2c4bbbb6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在iOS平台，RAM格式會建立單一索引檔案，react native將逐個模組載入。Android平台預設會為每個模組建立獨立檔案。您可強制Android像iOS一樣建立單一檔案，但使用多個檔案通常更具效能且記憶體消耗更少。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "Enable the RAM format in Xcode by editing the build phase \"Bundle React Native code and images\". Before `../node_modules/react-native/scripts/react-native-xcode.sh` add `export BUNDLE_COMMAND=\"ram-bundle\"`:",
+      "source_content_hash": "dd9c4dd9aea4b9740e70a016d0371045429fb8670a0093dc3a878a360168b1be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Xcode中編輯「Bundle React Native code and images」建置階段以啟用RAM格式。於`../node_modules/react-native/scripts/react-native-xcode.sh`前添加`export BUNDLE_COMMAND=\"ram-bundle\"`："
+      }
+    },
+    {
+      "segment_id": "4fb3ded8",
+      "source_content": "```\nexport BUNDLE_COMMAND=\"ram-bundle\"\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n```",
+      "source_content_hash": "dacf045af2655bab811b5e13150f864770c7ac0ee0eefa9f500ac9a3229fc216",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fb3ded8"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "On Android enable the RAM format by editing your `android/app/build.gradle` file. Before the line `apply from: \"../../node_modules/react-native/react.gradle\"` add or amend the `project.ext.react` block:",
+      "source_content_hash": "1d7891429c88cb3d99d0abcce5cb7abdac2f3cf3c1f11a02e6ddb0a52b49320e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在Android平台編輯`android/app/build.gradle`檔案啟用RAM格式。於`apply from: \"../../node_modules/react-native/react.gradle\"`前添加或修改`project.ext.react`區塊："
+      }
+    },
+    {
+      "segment_id": "7b2110d8",
+      "source_content": "```\nproject.ext.react = [\n  bundleCommand: \"ram-bundle\",\n]\n```",
+      "source_content_hash": "37e281ee5965bf54d5ada9987ee66969dd2a59aa0317bc3e1cd220e9b034ff47",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7b2110d8"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "Use the following lines on Android if you want to use a single indexed file:",
+      "source_content_hash": "f8d8585da2342b8f3d5d7b26e7e884665eebb0dec6dd6887cf96f219ca725cac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要在Android平台使用單一索引檔案，請添加以下設定："
+      }
+    },
+    {
+      "segment_id": "26f7c825",
+      "source_content": "```\nproject.ext.react = [\n  bundleCommand: \"ram-bundle\",\n  extraPackagerArgs: [\"--indexed-ram-bundle\"]\n]\n```",
+      "source_content_hash": "1e3a19356f03209f3d142d045fc1ec6d757c64c2ebd69ac1ec4be730c583e8e4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_26f7c825"
+      }
+    },
+    {
+      "segment_id": "8a58dc39",
+      "source_content": ":::info\nIf you are using [Hermes JS Engine](https://github.com/facebook/hermes), you **should not** have RAM bundles feature enabled. In Hermes, when loading the bytecode, `mmap` ensures that the entire file is not loaded. Using Hermes with RAM bundles might lead to issues, because those mechanisms are not compatible with each other.\n:::",
+      "source_content_hash": "110ad4ca1ba8792cb5338d1e87885ccb50df7b8bafdca61088958cb7a9a91904",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n若使用[Hermes JS引擎](https://github.com/facebook/hermes)，**不應**啟用RAM套件功能。Hermes載入位元碼時，`mmap`會確保不會載入整個檔案。Hermes與RAM套件機制不相容，同時使用可能導致問題。\n:::"
+      }
+    },
+    {
+      "segment_id": "e06c002e",
+      "source_content": "## Configure Preloading and Inline Requires",
+      "source_content_hash": "d34d1a464fcd1cba3e537ceac31dfbaf7b1183d9a0655b559a766268e3fc84aa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 預載與內聯引入配置"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "Now that we have a RAM bundle, there is overhead for calling `require`. `require` now needs to send a message over the bridge when it encounters a module it has not loaded yet. This will impact startup the most, because that is where the largest number of require calls are likely to take place while the app loads the initial module. Luckily we can configure a portion of the modules to be preloaded. In order to do this, you will need to implement some form of inline require.",
+      "source_content_hash": "66b87ee0873aa235d146d7becc53a5e27c97ccbdd0c637b330359405b02cece5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用RAM套件後，呼叫`require`會產生額外開銷。當遇到尚未載入的模組時，`require`需透過橋接器發送訊息。這對啟動階段影響最大，因為此時會集中執行最多數量的require呼叫。所幸我們可配置部分模組進行預載，為此您需要實作某種形式的內聯引入。"
+      }
+    },
+    {
+      "segment_id": "94145a94",
+      "source_content": "## Investigating the Loaded Modules",
+      "source_content_hash": "8879dfefa729f8643dfd7a9af400a6e7121f744f5b551f13103a42e45cee7782",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 分析已載入模組"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "In your root file (index.(ios|android).js) you can add the following after the initial imports:",
+      "source_content_hash": "91de13fb6eb82b52a3c5c61b18689dccff19b8132ad99adb079a9921c79b3e8f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在根檔案(index.(ios|android).js)的初始引入後可添加以下程式碼："
+      }
+    },
+    {
+      "segment_id": "de26f08a",
+      "source_content": "```js\nconst modules = require.getModules();\nconst moduleIds = Object.keys(modules);\nconst loadedModuleNames = moduleIds\n  .filter(moduleId => modules[moduleId].isInitialized)\n  .map(moduleId => modules[moduleId].verboseName);\nconst waitingModuleNames = moduleIds\n  .filter(moduleId => !modules[moduleId].isInitialized)\n  .map(moduleId => modules[moduleId].verboseName);\n\n// make sure that the modules you expect to be waiting are actually waiting\nconsole.log(\n  'loaded:',\n  loadedModuleNames.length,\n  'waiting:',\n  waitingModuleNames.length,\n);\n\n// grab this text blob, and put it in a file named packager/modulePaths.js\nconsole.log(\n  `module.exports = ${JSON.stringify(\n    loadedModuleNames.sort(),\n    null,\n    2,\n  )};`,\n);\n```",
+      "source_content_hash": "d10d055cf0e48b76cac9e281905a2807d5db948406601e463c7249622837c4b8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de26f08a"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "When you run your app, you can look in the console and see how many modules have been loaded, and how many are waiting. You may want to read the moduleNames and see if there are any surprises. Note that inline requires are invoked the first time the imports are referenced. You may need to investigate and refactor to ensure only the modules you want are loaded on startup. Note that you can change the Systrace object on require to help debug problematic requires.",
+      "source_content_hash": "2ecd57bfae9d2f07ba1e481f10acc1dd745f72de141231bbd7de8008fb227c4d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "運行應用程式時，可透過控制台查看已載入/待載入模組數量。建議檢查moduleNames確認是否有異常模組。請注意內聯引入會在首次引用時觸發，可能需要重構程式碼以確保啟動時僅載入必要模組。您可修改require中的Systrace物件協助除錯有問題的引入。"
+      }
+    },
+    {
+      "segment_id": "f2f9d525",
+      "source_content": "```js\nrequire.Systrace.beginEvent = message => {\n  if (message.includes(problematicModule)) {\n    throw new Error();\n  }\n};\n```",
+      "source_content_hash": "aa7e9705e5a741a87d5d3414b67739c63bb17eb156e912d4b120e7ceed7d8ca0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2f9d525"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "Every app is different, but it may make sense to only load the modules you need for the very first screen. When you are satisfied, put the output of the loadedModuleNames into a file named `packager/modulePaths.js`.",
+      "source_content_hash": "4a0e62bce12d8ca70efbd5714a32fe9d18f3738bad73881bee23bb150a6f1e91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個應用程式的情況不同，但合理的做法是僅載入首屏所需的模組。當確認無誤後，將 `loadedModuleNames` 的輸出內容存入名為 `packager/modulePaths.js` 的檔案中。"
+      }
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "## Updating the metro.config.js",
+      "source_content_hash": "4cb700af9e2a2c44fab3966f1f27ddc71184e9d4340609da7b04fa61cd3151c1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 更新 metro.config.js"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "We now need to update `metro.config.js` in the root of the project to use our newly generated `modulePaths.js` file:",
+      "source_content_hash": "3b20b427b12d7eb58caf7d130419d0ca013835effa12c52d83ea8442d206cab9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們需要更新專案根目錄下的 `metro.config.js`，以使用新生成的 `modulePaths.js` 檔案："
+      }
+    },
+    {
+      "segment_id": "2cf0b8a3",
+      "source_content": "<!-- prettier-ignore -->",
+      "source_content_hash": "a94eeea12154992988ea88567eed85506a35d1f83e439a912e23fafd65191f47",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2cf0b8a3"
+      }
+    },
+    {
+      "segment_id": "3ad9440a",
+      "source_content": "```js\nconst {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');\nconst fs = require('fs');\nconst path = require('path');\nconst modulePaths = require('./packager/modulePaths');\n\nconst config = {\n  transformer: {\n    getTransformOptions: () => {\n      const moduleMap = {};\n      modulePaths.forEach(modulePath => {\n        if (fs.existsSync(modulePath)) {\n          moduleMap[path.resolve(modulePath)] = true;\n        }\n      });\n      return {\n        preloadedModules: moduleMap,\n        transform: {inlineRequires: {blockList: moduleMap}},\n      };\n    },\n  },\n};\n\nmodule.exports = mergeConfig(getDefaultConfig(__dirname), config);\n```",
+      "source_content_hash": "62e57e550264bebb40434254e2793d7bfabbd9edf81c92d30181cd2e40982f02",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ad9440a"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "See also [**Configuring Metro**](/docs/metro#configuring-metro).",
+      "source_content_hash": "54d265a81d810437b876b1b54993da51c92920dbcd5dcc6e4fc9cd9ae733a40b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另請參閱 [**設定 Metro**](/docs/metro#configuring-metro)。"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "The `preloadedModules` entry in the config indicates which modules should be marked as preloaded when building a RAM bundle. When the bundle is loaded, those modules are immediately loaded, before any requires have even executed. The `blockList` entry indicates that those modules should not be required inline. Because they are preloaded, there is no performance benefit from using an inline require. In fact the generated JavaScript spends extra time resolving the inline require every time the imports are referenced.",
+      "source_content_hash": "e44769b06e08fb5c2c58c3ec79c8df5b4f21e59ba55699e281159822469119e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "配置中的 `preloadedModules` 條目標記了哪些模組應在建置 RAM bundle 時預先載入。當 bundle 載入時，這些模組會立即載入，甚至在執行任何 require 之前。`blockList` 條目則標記了哪些模組不應使用內聯 require。由於它們已被預載，使用內聯 require 並不會帶來效能優勢。實際上，生成的 JavaScript 每次解析這些導入時，反而會花費額外時間處理內聯 require。"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "## Test and Measure Improvements",
+      "source_content_hash": "7f998450a3148bf798982e5f6f6cdc358f8acb143564ddaf7f0076be1350dab5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 測試與衡量改進效果"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "You should now be ready to build your app using the RAM format and inline requires. Make sure you measure the before and after startup times.",
+      "source_content_hash": "2fdb59ed76108b037f859bd8963422bc765f61da762158fce26f0c7010dc5c2c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您應該已準備好使用 RAM 格式和內聯 require 來建置應用程式。請務必測量並比較啟用前後的啟動時間。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/ram-bundles-inline-requires.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.546272+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "5388e05991c46b82290d3100db57d3d698bf034b7700412f9003764c480b8908"
+  }
+}

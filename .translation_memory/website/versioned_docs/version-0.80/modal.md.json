@@ -1,0 +1,702 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/modal.md",
+  "source_file_content_hash": "68faec52935bbf27abedecf3567d41bce045adc43082482b7c181d5bcad26fa1",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: modal\ntitle: Modal\n---",
+      "source_content_hash": "30e148815f74a83f44285b87a763f4c38eecc705dc628cdf98a38d4e17aa2755",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The Modal component is a basic way to present content above an enclosing view.",
+      "source_content_hash": "a3244bec49fc8380e655df3886d6791cdc5c157e58ee586a49c3557388b4726a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Modal 元件是將內容顯示在封裝視圖上方的基礎方式。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=Modal&supportedPlatforms=android,ios\nimport React, {useState} from 'react';\nimport {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const [modalVisible, setModalVisible] = useState(false);\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.centeredView}>\n        <Modal\n          animationType=\"slide\"\n          transparent={true}\n          visible={modalVisible}\n          onRequestClose={() => {\n            Alert.alert('Modal has been closed.');\n            setModalVisible(!modalVisible);\n          }}>\n          <View style={styles.centeredView}>\n            <View style={styles.modalView}>\n              <Text style={styles.modalText}>Hello World!</Text>\n              <Pressable\n                style={[styles.button, styles.buttonClose]}\n                onPress={() => setModalVisible(!modalVisible)}>\n                <Text style={styles.textStyle}>Hide Modal</Text>\n              </Pressable>\n            </View>\n          </View>\n        </Modal>\n        <Pressable\n          style={[styles.button, styles.buttonOpen]}\n          onPress={() => setModalVisible(true)}>\n          <Text style={styles.textStyle}>Show Modal</Text>\n        </Pressable>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst styles = StyleSheet.create({\n  centeredView: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  modalView: {\n    margin: 20,\n    backgroundColor: 'white',\n    borderRadius: 20,\n    padding: 35,\n    alignItems: 'center',\n    shadowColor: '#000',\n    shadowOffset: {\n      width: 0,\n      height: 2,\n    },\n    shadowOpacity: 0.25,\n    shadowRadius: 4,\n    elevation: 5,\n  },\n  button: {\n    borderRadius: 20,\n    padding: 10,\n    elevation: 2,\n  },\n  buttonOpen: {\n    backgroundColor: '#F194FF',\n  },\n  buttonClose: {\n    backgroundColor: '#2196F3',\n  },\n  textStyle: {\n    color: 'white',\n    fontWeight: 'bold',\n    textAlign: 'center',\n  },\n  modalText: {\n    marginBottom: 15,\n    textAlign: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "bb8103bf676dcb8bfba9b2f71d70cf1f75ecc0b209a2a63fb0b08f415ea83c5a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "b805e2c6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b10963d7",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "e06c002e",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [View 屬性](view.md#props)"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承自 [View 屬性](view.md#props)。"
+      }
+    },
+    {
+      "segment_id": "e9ae42a9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "42a5832e",
+      "source_content": "### `animated`",
+      "source_content_hash": "6d280bd9a9b7803880711cf3f5fc29f614badca2e9dce31827fa927fc2ae3305",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `animated`"
+      }
+    },
+    {
+      "segment_id": "428c90bf",
+      "source_content": "> **Deprecated.** Use the [`animationType`](modal.md#animationtype) prop instead.",
+      "source_content_hash": "d5f6218a107950bb419ff166761a9f1dc725c7669ed8effdc0827fec2c68e823",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **已棄用。** 請改用 [`animationType`](modal.md#animationtype) 屬性。"
+      }
+    },
+    {
+      "segment_id": "3c5a1374",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8574d51c",
+      "source_content": "### `animationType`",
+      "source_content_hash": "c20669dcc6663632f004aad3e6dd151fd53745eda680e676c1689c2479a89573",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `animationType`"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "The `animationType` prop controls how the modal animates.",
+      "source_content_hash": "246afc30a8cdaf8fcd0c45c886d275a1e97e5e0e18b49c2c00c88f039ca5e6c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`animationType` 屬性控制模態框的動畫效果。"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "Possible values:",
+      "source_content_hash": "60baf39ad7be5ed682b1ddf8115127dee8c77351019a0432acc3fd5f1fbdb1ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可能的值："
+      }
+    },
+    {
+      "segment_id": "2ddd26d5",
+      "source_content": "- `slide` slides in from the bottom\n- `fade` fades into view\n- `none` appears without an animation",
+      "source_content_hash": "ae059fdfd783671a63340053decd17794730d44d3127cc21a1b1b79aee4f2c9d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `slide` 從底部滑入\n- `fade` 淡入視圖\n- `none` 無動畫直接出現"
+      }
+    },
+    {
+      "segment_id": "4fdeb798",
+      "source_content": "| Type                                | Default |\n| ----------------------------------- | ------- |\n| enum(`'none'`, `'slide'`, `'fade'`) | `none`  |",
+      "source_content_hash": "b79e4788d92a7aa468cc6d50ec1ddf53bb4c896bfc0ccd4cba8303094be20891",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fdeb798"
+      }
+    },
+    {
+      "segment_id": "18fa676c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "### `backdropColor`",
+      "source_content_hash": "e6e8e32b8efcf9857782a8735148968f1d8dc7082d9dcd25f6e0e4ca2c70ecd1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `backdropColor`"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "The `backdropColor` of the modal (or background color of the modal's container.) Defaults to `white` if not provided and transparent is `false`. Ignored if `transparent` is `true`.",
+      "source_content_hash": "c9dd4c784135c8316d0794598464469a544065474e8998a57e60ce00e4837272",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "模態框的背景顏色（或模態框容器的背景色）。若未提供且 `transparent` 為 `false` 時預設為 `white`。當 `transparent` 為 `true` 時此屬性將被忽略。"
+      }
+    },
+    {
+      "segment_id": "71b314cb",
+      "source_content": "| Type            | Default |\n| --------------- | ------- |\n| [color](colors) | white   |",
+      "source_content_hash": "2c3e6490ef03cd1b69910f563dbc1e1bc46c0f4116b8fa03d56c2513e40601a0",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b314cb"
+      }
+    },
+    {
+      "segment_id": "efbc76b7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6868a9f",
+      "source_content": "### `hardwareAccelerated` <div class=\"label android\">Android</div>",
+      "source_content_hash": "7b9fbc6a28cb67fb3deff0ba56ac22a10752b898fd5f99cce4bab51c51a68cea",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hardwareAccelerated` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "The `hardwareAccelerated` prop controls whether to force hardware acceleration for the underlying window.",
+      "source_content_hash": "e26100645b2b0be8543a23b336603e1b3d9711d4ed4f7079b3f316f2d7a70e78",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`hardwareAccelerated` 屬性控制是否強制底層視窗啟用硬體加速。"
+      }
+    },
+    {
+      "segment_id": "9c3b8644",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9c3b8644"
+      }
+    },
+    {
+      "segment_id": "294e85af",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8b448c8b",
+      "source_content": "### `navigationBarTranslucent` <div class=\"label android\">Android</div>",
+      "source_content_hash": "a78495fac8f782afdde7307cd413ce0093da509d4ce98eec2fcd2823ecacebda",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `navigationBarTranslucent` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "The `navigationBarTranslucent` prop determines whether your modal should go under the system navigation bar. However, `statusBarTranslucent` also needs to be set to `true` to make navigation bar translucent.",
+      "source_content_hash": "4661646b34ed5703cccd706868e8fc79e5bc4b458e590019c634d511ae27da16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`navigationBarTranslucent` 屬性決定模態框是否應延伸至系統導覽列下方。但需同時將 `statusBarTranslucent` 設為 `true` 才能使導覽列透明化。"
+      }
+    },
+    {
+      "segment_id": "b3651501",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b3651501"
+      }
+    },
+    {
+      "segment_id": "c66a3543",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### `onDismiss` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "7a534b91fe3516e94c513d65d484088a458ee69114309bc2e599b7fe8d35ebbe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onDismiss` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "The `onDismiss` prop allows passing a function that will be called once the modal has been dismissed.",
+      "source_content_hash": "9f7e4932ee4f57392d8dc58cef833b6e1ca5f0fea354905c5392d5c2ca944cb1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`onDismiss` 屬性允許傳入一個函式，該函式將在模態框關閉後被呼叫。"
+      }
+    },
+    {
+      "segment_id": "03a09291",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a09291"
+      }
+    },
+    {
+      "segment_id": "c81952ce",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "657bde08",
+      "source_content": "### `onOrientationChange` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "ef60ff6519af84bc299c86d9a0bf8f5a41621e8dee21c3f2432453632b5145e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onOrientationChange` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "The `onOrientationChange` callback is called when the orientation changes while the modal is being displayed. The orientation provided is only 'portrait' or 'landscape'. This callback is also called on initial render, regardless of the current orientation.",
+      "source_content_hash": "0f79e6644e62e150cc51bf7454549115edaccba695e43fbde550915fa7fc0f31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`onOrientationChange` 回調函式會在模態框顯示期間裝置方向改變時被呼叫。提供的方向僅為 'portrait' 或 'landscape'。此回調也會在初始渲染時被呼叫，無論當前方向為何。"
+      }
+    },
+    {
+      "segment_id": "ea0b1e5c",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ea0b1e5c"
+      }
+    },
+    {
+      "segment_id": "4b6c0556",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a75f8411",
+      "source_content": "### `onRequestClose`",
+      "source_content_hash": "1d45897eda1f4d96466ad550d85ad718e22eb064c36df12f7b0a539002f08472",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onRequestClose`"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "The `onRequestClose` callback is called when the user taps the hardware back button on Android or the menu button on Apple TV. Because of this required prop, be aware that `BackHandler` events will not be emitted as long as the modal is open.\nOn iOS, this callback is called when a Modal is being dismissed using a drag gesture when `presentationStyle` is `pageSheet or formSheet`",
+      "source_content_hash": "ce5a8d3b612e12c9fd384d0c92577012042099eccadafec36107a4b14ccd332a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當用戶在 Android 上點擊硬體返回鍵或在 Apple TV 上點擊選單鍵時，會呼叫 `onRequestClose` 回調函式。由於此為必要屬性，請注意只要模態框處於開啟狀態，`BackHandler` 事件將不會被觸發。\n在 iOS 上，當使用拖動手勢關閉模態框且 `presentationStyle` 為 `pageSheet` 或 `formSheet` 時，此回調也會被呼叫。"
+      }
+    },
+    {
+      "segment_id": "db238cbc",
+      "source_content": "| Type                                                                                                                                                                                           |\n| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| function <div className=\"label basic required\">Required</div><div className=\"label android\">Android</div><div className=\"label tv\">TV</div><hr />function <div className=\"label ios\">iOS</div> |",
+      "source_content_hash": "27704709118f607888927c0d8d10bad1f0a69d195ca0cb1e9e2de6cf027f1ec4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_db238cbc"
+      }
+    },
+    {
+      "segment_id": "a5c10d06",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4b62f7d8",
+      "source_content": "### `onShow`",
+      "source_content_hash": "862b82da933a2902bc4cf45ab171d5c800fce7cf92105595c968ab0c3c2d6a7f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onShow`"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "The `onShow` prop allows passing a function that will be called once the modal has been shown.",
+      "source_content_hash": "3fd22ac1ac3831b4a7a81dd523c6049064ea02f2a9c23567890505b3e9f59f31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`onShow` 屬性允許傳入一個函式，該函式將在模態框顯示後被呼叫。"
+      }
+    },
+    {
+      "segment_id": "6f7967ab",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6f7967ab"
+      }
+    },
+    {
+      "segment_id": "ff3b26d5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8159e12a",
+      "source_content": "### `presentationStyle` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "009bcfd7a8a2d374e70190eb669a717464ffb8ce84ddc439569204ae3de81abe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `presentationStyle` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "The `presentationStyle` prop controls how the modal appears (generally on larger devices such as iPad or plus-sized iPhones). See https://developer.apple.com/reference/uikit/uimodalpresentationstyle for details.",
+      "source_content_hash": "4f56201011b445a83f64d3ca9c4c71247606e28168f22528a02d3c842f538467",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`presentationStyle` 屬性控制模態框的呈現方式（通常在較大裝置如 iPad 或加大版 iPhone 上）。詳見 https://developer.apple.com/reference/uikit/uimodalpresentationstyle。"
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "Possible values:",
+      "source_content_hash": "60baf39ad7be5ed682b1ddf8115127dee8c77351019a0432acc3fd5f1fbdb1ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可能的值："
+      }
+    },
+    {
+      "segment_id": "e73f1e25",
+      "source_content": "- `fullScreen` covers the screen completely\n- `pageSheet` covers portrait-width view centered (only on larger devices)\n- `formSheet` covers narrow-width view centered (only on larger devices)\n- `overFullScreen` covers the screen completely, but allows transparency",
+      "source_content_hash": "870bdde883acdbab71622a640fd432f222698a4c2377cff1f763735e2f786d50",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `fullScreen` 完全覆蓋整個螢幕\n- `pageSheet` 以直向寬度居中顯示（僅在較大裝置上）\n- `formSheet` 以窄幅寬度居中顯示（僅在較大裝置上）\n- `overFullScreen` 完全覆蓋螢幕但允許透明背景"
+      }
+    },
+    {
+      "segment_id": "f791c9dc",
+      "source_content": "| Type                                                                   | Default                                                                             |\n| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |\n| enum(`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen` if `transparent={false}`<hr />`overFullScreen` if `transparent={true}` |",
+      "source_content_hash": "0b2453417d2d13f70ac19d14cc61873e6d4b8d29e3bb64de0fd91fcb53bb4eb3",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f791c9dc"
+      }
+    },
+    {
+      "segment_id": "0b9aaa38",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "be106497",
+      "source_content": "### `statusBarTranslucent` <div class=\"label android\">Android</div>",
+      "source_content_hash": "c6951e14d82b9225863a5fcd7f45b9d65906cbd830b7beeb87c5f66bee2a0226",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `statusBarTranslucent` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "c277c3c0",
+      "source_content": "The `statusBarTranslucent` prop determines whether your modal should go under the system statusbar.",
+      "source_content_hash": "2928dd509689183f744c36d75422c254bbca8eb71d2672f2593c134e482f0392",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`statusBarTranslucent` 屬性決定模態視窗是否應延伸至系統狀態欄下方。"
+      }
+    },
+    {
+      "segment_id": "17216594",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_17216594"
+      }
+    },
+    {
+      "segment_id": "3ab26be7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "43ad2e31",
+      "source_content": "### `supportedOrientations` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "9388ffe9dbf9f4d1655931e771686a1b7bbc17b4d420832ec4c09daf3ec85bd9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `supportedOrientations` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "01902900",
+      "source_content": "The `supportedOrientations` prop allows the modal to be rotated to any of the specified orientations. On iOS, the modal is still restricted by what's specified in your app's Info.plist's UISupportedInterfaceOrientations field.",
+      "source_content_hash": "28da8aef2ec5dd39226b14e14d28fdc3f2fb5c192898415388836b4041182369",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`supportedOrientations` 屬性允許模態視窗旋轉至指定的任何方向。在 iOS 上，模態視窗仍受應用程式 Info.plist 中 UISupportedInterfaceOrientations 欄位設定的限制。"
+      }
+    },
+    {
+      "segment_id": "628a6f26",
+      "source_content": "> When using `presentationStyle` of `pageSheet` or `formSheet`, this property will be ignored by iOS.",
+      "source_content_hash": "c6297b4c36083260be7806f5cde43f06c655088c637eb105a77de3d58c319337",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 當使用 `pageSheet` 或 `formSheet` 的 `presentationStyle` 時，iOS 將忽略此屬性。"
+      }
+    },
+    {
+      "segment_id": "793b6449",
+      "source_content": "| Type                                                                                                           | Default        |\n| -------------------------------------------------------------------------------------------------------------- | -------------- |\n| array of enums(`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`) | `['portrait']` |",
+      "source_content_hash": "62ed3333fc3c488dda3f5399ce39a9293d64892dc642e54df2479bb545a861f7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_793b6449"
+      }
+    },
+    {
+      "segment_id": "7d0c5ba2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7eac7922",
+      "source_content": "### `transparent`",
+      "source_content_hash": "ab41a14afee5f42dc2149874164490cb96af07fe0da5efcf4a2a6befbfd10856",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `transparent`"
+      }
+    },
+    {
+      "segment_id": "8f4e752e",
+      "source_content": "The `transparent` prop determines whether your modal will fill the entire view. Setting this to `true` will render the modal over a transparent background.",
+      "source_content_hash": "8316d96dd6486a83027a27c287f75490c0a0fc0ee032b58464e5f417d8258cf6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`transparent` 屬性決定模態視窗是否填充整個視圖。設為 `true` 時將在透明背景上渲染模態視窗。"
+      }
+    },
+    {
+      "segment_id": "0faad314",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0faad314"
+      }
+    },
+    {
+      "segment_id": "9c66f3e4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "52dd49af",
+      "source_content": "### `visible`",
+      "source_content_hash": "fe852164e47f2ec131ea30f3d3224a5e9ada433c63aecb6ecce0a55a4c480de8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `visible`"
+      }
+    },
+    {
+      "segment_id": "ceb4fd26",
+      "source_content": "The `visible` prop determines whether your modal is visible.",
+      "source_content_hash": "4d483798b9814f3151f1cd2fbf9d7bac1bbcfb5bb85a63a2b83ea0327b8a549c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`visible` 屬性控制模態視窗的可見狀態。"
+      }
+    },
+    {
+      "segment_id": "cd7684b7",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `true`  |",
+      "source_content_hash": "541fe26d050b0d5d5b00b715b42428dd687e37fa333ec3a285c421a0cd008dd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cd7684b7"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/modal.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.046529+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "68faec52935bbf27abedecf3567d41bce045adc43082482b7c181d5bcad26fa1"
+  }
+}

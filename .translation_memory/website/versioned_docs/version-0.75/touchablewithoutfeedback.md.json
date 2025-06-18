@@ -1,0 +1,1772 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.75/touchablewithoutfeedback.md",
+  "source_file_content_hash": "b3aca9503335a1d235072a881ee31123f5e0ee39ac855b7d9444a3f15856be29",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: touchablewithoutfeedback\ntitle: TouchableWithoutFeedback\n---",
+      "source_content_hash": "0542d3c5294db7466f7a409b226f5d263678c89444f3523e96fcc0d884d2c9c5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "f1ef2f7d",
+      "source_content": "> If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.",
+      "source_content_hash": "c9d515386bf9edaef2daf3ce01492fdd7bec1ab2e38aa89fc9046fe60160b994",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果您正在尋找更全面且具未來性的觸控輸入處理方式，請參閱 [Pressable](pressable.md) API。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Do not use unless you have a very good reason. All elements that respond to press should have a visual feedback when touched.",
+      "source_content_hash": "8db20044683db6f7580980a771d588d1c1fcf7466a04cdb0bbb9185143ed1557",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除非有充分理由，否則請勿使用。所有響應按壓的元件在被觸碰時都應有視覺回饋。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "`TouchableWithoutFeedback` supports only one child. If you wish to have several child components, wrap them in a View. Importantly, `TouchableWithoutFeedback` works by cloning its child and applying responder props to it. It is therefore required that any intermediary components pass through those props to the underlying React Native component.",
+      "source_content_hash": "4ab5cfef020035deee9adbd9eecd5c88b8cbca661865b1fb56068249f2f3c01a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TouchableWithoutFeedback` 僅支援單一子元件。若需多個子元件，請將其包裹在 View 中。需特別注意，`TouchableWithoutFeedback` 的工作原理是克隆其子元件並套用回應器屬性，因此任何中介元件都必須將這些屬性傳遞給底層的 React Native 元件。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Usage Pattern",
+      "source_content_hash": "b316be990d83524d7f512039eeef30809dc388f6bac7c2c71fde66c83b94d061",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用模式"
+      }
+    },
+    {
+      "segment_id": "5564d81d",
+      "source_content": "```tsx\nfunction MyComponent(props: MyComponentProps) {\n  return (\n    <View {...props} style={{flex: 1, backgroundColor: '#fff'}}>\n      <Text>My Component</Text>\n    </View>\n  );\n}\n\n<TouchableWithoutFeedback onPress={() => alert('Pressed!')}>\n  <MyComponent />\n</TouchableWithoutFeedback>;\n```",
+      "source_content_hash": "533815503f7da9401e1f525a16fdae687abcaad4db71f8c5475229757a13e5bd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5564d81d"
+      }
+    },
+    {
+      "segment_id": "3c36424c",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "b7c3dbd1",
+      "source_content": "```SnackPlayer name=TouchableWithoutFeedback\nimport React, {useState} from 'react';\nimport {StyleSheet, TouchableWithoutFeedback, Text, View} from 'react-native';\n\nconst TouchableWithoutFeedbackExample = () => {\n  const [count, setCount] = useState(0);\n\n  const onPress = () => {\n    setCount(count + 1);\n  };\n\n  return (\n    <View style={styles.container}>\n      <View style={styles.countContainer}>\n        <Text style={styles.countText}>Count: {count}</Text>\n      </View>\n      <TouchableWithoutFeedback onPress={onPress}>\n        <View style={styles.button}>\n          <Text>Touch Here</Text>\n        </View>\n      </TouchableWithoutFeedback>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    paddingHorizontal: 10,\n  },\n  button: {\n    alignItems: 'center',\n    backgroundColor: '#DDDDDD',\n    padding: 10,\n  },\n  countContainer: {\n    alignItems: 'center',\n    padding: 10,\n  },\n  countText: {\n    color: '#FF00FF',\n  },\n});\n\nexport default TouchableWithoutFeedbackExample;\n```",
+      "source_content_hash": "ff563b9f3fc9984b404bfab74d14cb1000887aabcca48979c5489edc0ae5963a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7c3dbd1"
+      }
+    },
+    {
+      "segment_id": "254ea949",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "### `accessibilityIgnoresInvertColors`",
+      "source_content_hash": "34f284905c41dd8fd4ea8e6ceaffdc51a9959b162160f8189b2de4bf43d1d98f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityIgnoresInvertColors`"
+      }
+    },
+    {
+      "segment_id": "0d9b3b59",
+      "source_content": "| Type    |\n| ------- |\n| Boolean |",
+      "source_content_hash": "eea944cde10b7e1db781ce583cdbb144d6b6ea254fb3c08d28c3aa24d47e0810",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0d9b3b59"
+      }
+    },
+    {
+      "segment_id": "233bb60e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "### `accessible`",
+      "source_content_hash": "7e2f45d1c536354ff4e8f949668ed0b63fc433f315af4147b029c19a8259c830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessible`"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "When `true`, indicates that the view is an accessibility element. By default, all the touchable elements are accessible.",
+      "source_content_hash": "30cd458a31df10555fa2945cbb4c7e4bff610ded6db8663be7c8919c48ad9327",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當值為 `true` 時，表示該視圖是一個無障礙元素。預設情況下，所有可觸碰元件都具有無障礙功能。"
+      }
+    },
+    {
+      "segment_id": "ae037701",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ae037701"
+      }
+    },
+    {
+      "segment_id": "7fc4bca5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "### `accessibilityLabel`",
+      "source_content_hash": "4f55de35ce0c561187344a423b6279d22ada7d874f880caef84af52c16646758",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLabel`"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.",
+      "source_content_hash": "1fe23ddffef265929fbb351e955236a65e9e36826519eac34bfbf70bcc254ae9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "覆寫螢幕閱讀器在使用者與元件互動時朗讀的文字。預設情況下，標籤是通過遍歷所有子元件並累積以空格分隔的所有 `Text` 節點來構建的。"
+      }
+    },
+    {
+      "segment_id": "6dcde01a",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6dcde01a"
+      }
+    },
+    {
+      "segment_id": "bc8bc928",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "3dc0369a4635cd2313255713560a12e19a44f4ce4fde6140a6d2611dd0e6277d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLanguage` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).",
+      "source_content_hash": "30d5b47298f6a63225a0c59bf266ad065d26e09236f44289899f9e6efbba48ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此值指示螢幕閱讀器在使用者與元件互動時應使用的語言。應遵循 [BCP 47 規範](https://www.rfc-editor.org/info/bcp47)。"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.",
+      "source_content_hash": "d68609535930b1a80996cf1b5fb093608182de99a22cb49da46805464549191d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 [iOS `accessibilityLanguage` 文件](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) 以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "5d7070ce",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5d7070ce"
+      }
+    },
+    {
+      "segment_id": "256e0c86",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### `accessibilityHint`",
+      "source_content_hash": "bedd0a5bcd9baf72a419279154a2810f95389d1831588606f607037dbc93a9c3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityHint`"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.",
+      "source_content_hash": "a28e86300fde49260b1d879c349bbc48a31ed8492169472d6997c74c3c686cd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無障礙提示幫助使用者在無障礙標籤無法明確說明時，理解對無障礙元素執行操作後會發生的結果。"
+      }
+    },
+    {
+      "segment_id": "d03e4798",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d03e4798"
+      }
+    },
+    {
+      "segment_id": "44f53186",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8f1c1cd6",
+      "source_content": "### `accessibilityRole`",
+      "source_content_hash": "caaf5bfb084952597e44b24f22d7d856e62e4f400b44dea56540dda8a44ce327",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityRole`"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "`accessibilityRole` communicates the purpose of a component to the user of an assistive technology.",
+      "source_content_hash": "8a2ec9f02b933d49470b73010d8dea30a3209e3075dc9d5719310d70c8f4b551",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityRole` 向輔助技術的使用者傳達元件的用途。"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "`accessibilityRole` can be one of the following:",
+      "source_content_hash": "ccd1687fa3de1781f489ea29d5281a6e2eca88bc1df0037fba2d4a0f69a7609b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`accessibilityRole` 可以是以下之一："
+      }
+    },
+    {
+      "segment_id": "292df6cb",
+      "source_content": "- `'none'` - Used when the element has no role.\n- `'button'` - Used when the element should be treated as a button.\n- `'link'` - Used when the element should be treated as a link.\n- `'search'` - Used when the text field element should also be treated as a search field.\n- `'image'` - Used when the element should be treated as an image. Can be combined with button or link, for example.\n- `'keyboardkey'` - Used when the element acts as a keyboard key.\n- `'text'` - Used when the element should be treated as static text that cannot change.\n- `'adjustable'` - Used when an element can be \"adjusted\" (e.g. a slider).\n- `'imagebutton'` - Used when the element should be treated as a button and is also an image.\n- `'header'` - Used when an element acts as a header for a content section (e.g. the title of a navigation bar).\n- `'summary'` - Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.\n- `'alert'` - Used when an element contains important text to be presented to the user.\n- `'checkbox'` - Used when an element represents a checkbox which can be checked, unchecked, or have mixed checked state.\n- `'combobox'` - Used when an element represents a combo box, which allows the user to select among several choices.\n- `'menu'` - Used when the component is a menu of choices.\n- `'menubar'` - Used when a component is a container of multiple menus.\n- `'menuitem'` - Used to represent an item within a menu.\n- `'progressbar'` - Used to represent a component which indicates progress of a task.\n- `'radio'` - Used to represent a radio button.\n- `'radiogroup'` - Used to represent a group of radio buttons.\n- `'scrollbar'` - Used to represent a scroll bar.\n- `'spinbutton'` - Used to represent a button which opens a list of choices.\n- `'switch'` - Used to represent a switch which can be turned on and off.\n- `'tab'` - Used to represent a tab.\n- `'tablist'` - Used to represent a list of tabs.\n- `'timer'` - Used to represent a timer.\n- `'toolbar'` - Used to represent a tool bar (a container of action buttons or components).",
+      "source_content_hash": "05416252ab4a912c6ce3e34037e3613652da462a0be97b9158544979071d8929",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `'none'` - 當元素沒有角色時使用。\n- `'button'` - 當元素應被視為按鈕時使用。\n- `'link'` - 當元素應被視為連結時使用。\n- `'search'` - 當文字輸入框元素也應被視為搜尋欄位時使用。\n- `'image'` - 當元素應被視為圖片時使用。可與按鈕或連結等角色組合使用。\n- `'keyboardkey'` - 當元素作為鍵盤按鍵時使用。\n- `'text'` - 當元素應被視為不可變的靜態文字時使用。\n- `'adjustable'` - 當元素可被「調整」時使用（例如滑動條）。\n- `'imagebutton'` - 當元素應被視為按鈕且同時是圖片時使用。\n- `'header'` - 當元素作為內容區段的標題時使用（例如導覽列標題）。\n- `'summary'` - 當元素可用於提供應用程式啟動時當前條件的快速摘要時使用。\n- `'alert'` - 當元素包含需向用戶展示的重要文字時使用。\n- `'checkbox'` - 當元素代表可勾選、取消勾選或處於混合勾選狀態的核取方塊時使用。\n- `'combobox'` - 當元素代表組合框，允許用戶從多個選項中選擇時使用。\n- `'menu'` - 當元件是選單時使用。\n- `'menubar'` - 當元件是多個選單的容器時使用。\n- `'menuitem'` - 用於表示選單中的項目。\n- `'progressbar'` - 用於表示顯示任務進度的元件。\n- `'radio'` - 用於表示單選按鈕。\n- `'radiogroup'` - 用於表示一組單選按鈕。\n- `'scrollbar'` - 用於表示捲軸。\n- `'spinbutton'` - 用於表示開啟選項列表的按鈕。\n- `'switch'` - 用於表示可開啟或關閉的開關。\n- `'tab'` - 用於表示標籤頁。\n- `'tablist'` - 用於表示標籤頁列表。\n- `'timer'` - 用於表示計時器。\n- `'toolbar'` - 用於表示工具列（動作按鈕或元件的容器）。"
+      }
+    },
+    {
+      "segment_id": "62c9412b",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_62c9412b"
+      }
+    },
+    {
+      "segment_id": "d7603b33",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "191265da",
+      "source_content": "### `accessibilityState`",
+      "source_content_hash": "0bdd4e063a84d12800f47b3af7a48f24aa490be3f0a319e622aaed8a851fab2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityState`"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "Describes the current state of a component to the user of an assistive technology.",
+      "source_content_hash": "4576e049d883460e0ff7e7dd3f7b85a4f38f84e0099a2bb344152f8eec3ebb39",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "向輔助技術用戶描述元件的當前狀態。"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilitystate-ios-android) for more information.",
+      "source_content_hash": "10680687d8421799a58c492e7d60296aac3a1c078e5badaf202e48ef6e1b071e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙指南](accessibility.md#accessibilitystate-ios-android)以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "a815f635",
+      "source_content": "| Type                                                                                             |\n| ------------------------------------------------------------------------------------------------ |\n| object: `{disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool}` |",
+      "source_content_hash": "48f561bf9dfffde8c33723842c6674368a56697076c0ebbc1d8ceb46b81ab410",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a815f635"
+      }
+    },
+    {
+      "segment_id": "c45336f7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "188a0310",
+      "source_content": "### `accessibilityActions`",
+      "source_content_hash": "65ef3575ce8d838b086a5c2fd4b1081092142981debde17f9be061924f735a04",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityActions`"
+      }
+    },
+    {
+      "segment_id": "5cf1bce4",
+      "source_content": "Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.",
+      "source_content_hash": "54644c08572ef7e56bb3faee5c6bfecc2df56951e35195bb534e8886d86941e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無障礙操作允許輔助技術以程式化方式觸發元件的動作。`accessibilityActions`屬性應包含一個操作物件列表，每個操作物件應包含名稱和標籤欄位。"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.",
+      "source_content_hash": "1ecfd1939abbd0b9fbbf4aca4dc411e396b37a95ea49c57fc68dbd30ca09d3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙指南](accessibility.md#accessibility-actions)以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "fbe698de",
+      "source_content": "| Type  |\n| ----- |\n| array |",
+      "source_content_hash": "d367bc20920305bfca8041f5ae017ae39f43765585b7321d77aeb1d8a6108226",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fbe698de"
+      }
+    },
+    {
+      "segment_id": "e5e7e900",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3bff4086",
+      "source_content": "### `aria-busy`",
+      "source_content_hash": "2d7129d4b1ef33f5fb6834bebc39064f979bb22c9bc9b432d1ffa601bfefff8b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-busy`"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.",
+      "source_content_hash": "9def7a899263ea015f97bf76a19b3117a2428cfbc7774a4282235a04d4019b9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素正在被修改，輔助技術可能需要等待變更完成後再通知用戶。"
+      }
+    },
+    {
+      "segment_id": "ad7a8494",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ad7a8494"
+      }
+    },
+    {
+      "segment_id": "25543f66",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "778e087a",
+      "source_content": "### `aria-checked`",
+      "source_content_hash": "1ddb4bac483133b13df7ffe6a86f8c816c15f58317a05c6dee8e7f6727d4ae29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-checked`"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "Indicates the state of a checkable element. This field can either take a boolean or the \"mixed\" string to represent mixed checkboxes.",
+      "source_content_hash": "ee00810ca9f60817dfa81860d77c913a25c1592c90cdf81625831248bece7011",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可勾選元素的狀態。此欄位可接受布林值或\"mixed\"字串來表示混合狀態的核取方塊。"
+      }
+    },
+    {
+      "segment_id": "d7ed0393",
+      "source_content": "| Type             | Default |\n| ---------------- | ------- |\n| boolean, 'mixed' | false   |",
+      "source_content_hash": "35b713c4cc986c8b8e7daf0a70768426bc9f94663f227376941544b0bdd30e2d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7ed0393"
+      }
+    },
+    {
+      "segment_id": "94b03d55",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e594a4f9",
+      "source_content": "### `aria-disabled`",
+      "source_content_hash": "8f594923bce023c64d4fc2aee2a4c42ab34f87bdf7415694cb7ad9c12af72aa9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-disabled`"
+      }
+    },
+    {
+      "segment_id": "d8c366cc",
+      "source_content": "Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.",
+      "source_content_hash": "1e3ab9d887f87e2c70b2de3b929d2b081abf17a414c68440a3b6e9ffaa05ad16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素可感知但被禁用，因此不可編輯或操作。"
+      }
+    },
+    {
+      "segment_id": "b8bf77d8",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b8bf77d8"
+      }
+    },
+    {
+      "segment_id": "bb689d85",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "43662a16",
+      "source_content": "### `aria-expanded`",
+      "source_content_hash": "81570a1ec92ab2059c46a439c874fa3f93ee6f66baf451ea9c6aa69ca5e98e20",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-expanded`"
+      }
+    },
+    {
+      "segment_id": "85821ad3",
+      "source_content": "Indicates whether an expandable element is currently expanded or collapsed.",
+      "source_content_hash": "2ab2df61a604dfe4bc68b1ebd36184ebc1de1bce603f5c9ce5e00d563309e8fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示可展開元素當前是展開還是折疊狀態。"
+      }
+    },
+    {
+      "segment_id": "415e0013",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_415e0013"
+      }
+    },
+    {
+      "segment_id": "0af5bcab",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "67dfd717",
+      "source_content": "### `aria-hidden`",
+      "source_content_hash": "d4c26b2e1464907f95cce749168fccf41fc5dadf72126e6ef7f2dbb323854798",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-hidden`"
+      }
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "Indicates whether the accessibility elements contained within this accessibility element are hidden.",
+      "source_content_hash": "1e97043f98e2a14fd64bbc6e6ff804be4e39b6ed0f817070ba6b595a1c9004b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示此無障礙元素內包含的子元素是否隱藏。"
+      }
+    },
+    {
+      "segment_id": "4033c370",
+      "source_content": "For example, in a window that contains sibling views `A` and `B`, setting `aria-hidden` to `true` on view `B` causes VoiceOver to ignore the elements in the view `B`.",
+      "source_content_hash": "eaba936be96810eeeb0e184dcdceb6bd51e24052c28e664ee678b5bdf7496089",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在包含兄弟視圖 `A` 和 `B` 的視窗中，將視圖 `B` 的 `aria-hidden` 設為 `true` 會導致 VoiceOver 忽略視圖 `B` 中的元素。"
+      }
+    },
+    {
+      "segment_id": "6c82acb3",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6c82acb3"
+      }
+    },
+    {
+      "segment_id": "14781855",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13095ea3",
+      "source_content": "### `aria-label`",
+      "source_content_hash": "a00fb48b33ddc9a416be3c695411699edb748552c762cabf3a218884fefccd94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-label`"
+      }
+    },
+    {
+      "segment_id": "b0c30ab4",
+      "source_content": "Defines a string value that labels an interactive element.",
+      "source_content_hash": "833b7b7f2013c4efe8f0db65c63e6d4cfb1ff08cf03b33a641e54d5f17f9dffb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義一個字串值，用於標記互動式元素。"
+      }
+    },
+    {
+      "segment_id": "aaf8810e",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_aaf8810e"
+      }
+    },
+    {
+      "segment_id": "53e78d36",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cb2e9dbf",
+      "source_content": "### `aria-live` <div class=\"label android\">Android</div>",
+      "source_content_hash": "f3312596850f0827d3fdf53dfd4a95697596454838b31d16a1febf1da3121199",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-live` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "9c70c953",
+      "source_content": "Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.",
+      "source_content_hash": "90cc9783b52ded41df83aeb94fef0311fcd5ab10744da7efad50079dfdd293d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示元素將會更新，並描述用戶代理、無障礙技術和用戶可以預期的即時區域更新類型。"
+      }
+    },
+    {
+      "segment_id": "dae0c632",
+      "source_content": "- **off** Accessibility services should not announce changes to this view.\n- **polite** Accessibility services should announce changes to this view.\n- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.",
+      "source_content_hash": "882da3a0dee3132a4ba00ff12a4c11adf6f959862f7f55b263c736938fc43de2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **off** 無障礙服務不應宣佈此視圖的變更。\n- **polite** 無障礙服務應宣佈此視圖的變更。\n- **assertive** 無障礙服務應中斷正在進行的語音，立即宣佈此視圖的變更。"
+      }
+    },
+    {
+      "segment_id": "07c91b9a",
+      "source_content": "| Type                                     | Default |\n| ---------------------------------------- | ------- |\n| enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |",
+      "source_content_hash": "9e10cf9f97d738bb2a59906cd28b1029beeb84caf7305cc24ec051b828ddff09",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_07c91b9a"
+      }
+    },
+    {
+      "segment_id": "1fbbc73e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "16efe6ee",
+      "source_content": "### `aria-modal` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "fd30cd3cb003f3b9bc19dbb07333c9989bdd5fbeb01277c1c64d7da833f00d46",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-modal` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Has precedence over the [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) prop.",
+      "source_content_hash": "0b526a70a89fae1b6f5afdb39343912b714d21a3becd46bb77a94d301f764ea7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "布林值，指示 VoiceOver 是否應忽略與接收者同級的視圖中的元素。優先於 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 屬性。"
+      }
+    },
+    {
+      "segment_id": "53f1f452",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | false   |",
+      "source_content_hash": "e7fefac3d212d1b3b93e3f0f35163c257c2a703e00d102daded7d47412dad29f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_53f1f452"
+      }
+    },
+    {
+      "segment_id": "1e4fb8ad",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "38115c9a",
+      "source_content": "### `aria-selected`",
+      "source_content_hash": "326fe630abddf06fe498f4b493ea8e9261d66db3bfa8efffa30fa552d22d6d9e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-selected`"
+      }
+    },
+    {
+      "segment_id": "46e586a3",
+      "source_content": "Indicates whether a selectable element is currently selected or not.",
+      "source_content_hash": "b454a16cf5dc03042d2fe609cc3ba01bec5a1a44d18fd14c1bc66a587d206836",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指示可選元素當前是否被選中。"
+      }
+    },
+    {
+      "segment_id": "bbaaf77a",
+      "source_content": "| Type    |\n| ------- |\n| boolean |",
+      "source_content_hash": "afc5252fe97c3b4645cc839e72fb23555baeef211698715abd6b5ac8ee57a841",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bbaaf77a"
+      }
+    },
+    {
+      "segment_id": "f996c0b9",
+      "source_content": "### `onAccessibilityAction`",
+      "source_content_hash": "dc1fa5441c72b99fa55a0422042b127dc29f5dd2504f564005575aac5f2ced8d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onAccessibilityAction`"
+      }
+    },
+    {
+      "segment_id": "4e994fc3",
+      "source_content": "Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.",
+      "source_content_hash": "697cf8f7f183845f1281ba73335775299a1c74a3ef55ce41be43edc49c2c5c8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當用戶執行無障礙操作時調用。此函數的唯一參數是一個包含要執行操作名稱的事件。"
+      }
+    },
+    {
+      "segment_id": "60e22db4",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.",
+      "source_content_hash": "1ecfd1939abbd0b9fbbf4aca4dc411e396b37a95ea49c57fc68dbd30ca09d3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙指南](accessibility.md#accessibility-actions)以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "20c5b733",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_20c5b733"
+      }
+    },
+    {
+      "segment_id": "59ff3fde",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9cdf9229",
+      "source_content": "### `accessibilityValue`",
+      "source_content_hash": "cbedf783dfb2e42529ea0760cf4fb5081d51852d680f7c8d8dc08d4608313921",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityValue`"
+      }
+    },
+    {
+      "segment_id": "5e0ab881",
+      "source_content": "Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).",
+      "source_content_hash": "61fa1e8e3b29a12c60a6750ced40d31b0b56fc0a3d1887b52febb19c162c04fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示組件的當前值。可以是組件值的文字描述，或是基於範圍的組件（如滑塊和進度條）的範圍資訊（最小值、當前值和最大值）。"
+      }
+    },
+    {
+      "segment_id": "d1996877",
+      "source_content": "See the [Accessibility guide](accessibility.md#accessibilityvalue-ios-android) for more information.",
+      "source_content_hash": "daa9601fc0dde7afd885229abd529b327c006e1a571b1629308898111135e70d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[無障礙指南](accessibility.md#accessibilityvalue-ios-android)以獲取更多資訊。"
+      }
+    },
+    {
+      "segment_id": "7d97d99a",
+      "source_content": "| Type                                                            |\n| --------------------------------------------------------------- |\n| object: `{min: number, max: number, now: number, text: string}` |",
+      "source_content_hash": "07335fcdd70c91e0b8c54c8da80316fb8f5af26782de018a8a2c76f2f176aca8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d97d99a"
+      }
+    },
+    {
+      "segment_id": "883ad9ea",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e0e9d747",
+      "source_content": "### `aria-valuemax`",
+      "source_content_hash": "268b14b5873da3a2ac33edc44653ce7676fe0fbfa2e4570e4691a715c3daec34",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuemax`"
+      }
+    },
+    {
+      "segment_id": "2e76bd58",
+      "source_content": "Represents the maximum value for range-based components, such as sliders and progress bars. Has precedence over the `max` value in the `accessibilityValue` prop.",
+      "source_content_hash": "e1e5ed89d35814992f63b13daf583152823d271fa142859d286a94cc9831d7d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示基於範圍的組件（如滑塊和進度條）的最大值。優先於 `accessibilityValue` 屬性中的 `max` 值。"
+      }
+    },
+    {
+      "segment_id": "e622dd58",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e622dd58"
+      }
+    },
+    {
+      "segment_id": "f875b13d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### `aria-valuemin`",
+      "source_content_hash": "fb609f8a26b7b2db2702e6b1d5c22b47611f76e14338579d02042e8a807e7849",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuemin`"
+      }
+    },
+    {
+      "segment_id": "71e7acda",
+      "source_content": "Represents the minimum value for range-based components, such as sliders and progress bars. Has precedence over the `min` value in the `accessibilityValue` prop.",
+      "source_content_hash": "671c8fef48a27885f827dc63fa2c9827743c608f184dfaf5043bac56edcb567e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示基於範圍的組件（如滑塊和進度條）的最小值。優先於 `accessibilityValue` 屬性中的 `min` 值。"
+      }
+    },
+    {
+      "segment_id": "4d025145",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d025145"
+      }
+    },
+    {
+      "segment_id": "705d5eb7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7737b8a",
+      "source_content": "### `aria-valuenow`",
+      "source_content_hash": "7665766428ab6cf85136a07811d232bded83d8a46ba7ead882db0b0e4c7052e7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuenow`"
+      }
+    },
+    {
+      "segment_id": "7441a9ec",
+      "source_content": "Represents the current value for range-based components, such as sliders and progress bars. Has precedence over the `now` value in the `accessibilityValue` prop.",
+      "source_content_hash": "33e9d495e5d7ea2ef965c17574518057894857d445576a57b1728bdbb7aa93c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示基於範圍的組件（如滑塊和進度條）的當前值。優先於 `accessibilityValue` 屬性中的 `now` 值。"
+      }
+    },
+    {
+      "segment_id": "38c1f9c1",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_38c1f9c1"
+      }
+    },
+    {
+      "segment_id": "1d2e0593",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "06c38a62",
+      "source_content": "### `aria-valuetext`",
+      "source_content_hash": "dcace833d7618c1dc715194f717363e7d44fe1fe6906b36433799e44fb375dbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `aria-valuetext`"
+      }
+    },
+    {
+      "segment_id": "b3b952f2",
+      "source_content": "Represents the textual description of the component. Has precedence over the `text` value in the `accessibilityValue` prop.",
+      "source_content_hash": "04a48d11400f6d569938273bf5dc073c0ffa0ce68e1f372069b1b2c2981fc8fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示組件的文字描述。優先於 `accessibilityValue` 屬性中的 `text` 值。"
+      }
+    },
+    {
+      "segment_id": "404cc48b",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_404cc48b"
+      }
+    },
+    {
+      "segment_id": "d73211d9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "505664a6",
+      "source_content": "### `delayLongPress`",
+      "source_content_hash": "29e5ee1e4dc71b8427e0d66bb8166c5bc5a6ac109124e44687bba5a5b19f8a8f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `delayLongPress`"
+      }
+    },
+    {
+      "segment_id": "3d5e3f4c",
+      "source_content": "Duration (in milliseconds) from `onPressIn` before `onLongPress` is called.",
+      "source_content_hash": "4a79a338d98a46358a3ef1386df566f7b0e692421637c285aab28ec6222b19fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `onPressIn` 開始到呼叫 `onLongPress` 的持續時間（以毫秒為單位）。"
+      }
+    },
+    {
+      "segment_id": "210748fa",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_210748fa"
+      }
+    },
+    {
+      "segment_id": "8ec80a23",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dbf99e1b",
+      "source_content": "### `delayPressIn`",
+      "source_content_hash": "f824f7564743e3644570dfbed2f41a5b573d1988768029bc265e3bfc6dfc4897",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `delayPressIn`"
+      }
+    },
+    {
+      "segment_id": "d04a3ef5",
+      "source_content": "Duration (in milliseconds), from the start of the touch, before `onPressIn` is called.",
+      "source_content_hash": "b2238ce73bbbab242cacb80085c60bbd5e395b0566d3b3f513c4ef46b1b237eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從觸碰開始到呼叫 `onPressIn` 的持續時間（以毫秒為單位）。"
+      }
+    },
+    {
+      "segment_id": "7ac51ca9",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7ac51ca9"
+      }
+    },
+    {
+      "segment_id": "561c22a6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f7420cb5",
+      "source_content": "### `delayPressOut`",
+      "source_content_hash": "085db69912f964895390c91ed9349d6467dbfa733faa3620f196f621c9e9fc7f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `delayPressOut`"
+      }
+    },
+    {
+      "segment_id": "dbea1fe8",
+      "source_content": "Duration (in milliseconds), from the release of the touch, before `onPressOut` is called.",
+      "source_content_hash": "189dbc5ba9e97fb3afe99e34cf66fdfe083811cb259b108259be80554568bdd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從觸碰釋放到呼叫 `onPressOut` 的持續時間（以毫秒為單位）。"
+      }
+    },
+    {
+      "segment_id": "9e2a39e2",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9e2a39e2"
+      }
+    },
+    {
+      "segment_id": "1da485f4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b98aff93",
+      "source_content": "### `disabled`",
+      "source_content_hash": "e341f12bd3a5525b08ca6af0655cb7ecea49172a6a89af4f4757af19e4a43874",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `disabled`"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "If true, disable all interactions for this component.",
+      "source_content_hash": "7a86e1e38ec4d50ea518751d8cfd435a8502148f8180277ee7e60294ce3378c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若為 true，則停用此元件的所有互動。"
+      }
+    },
+    {
+      "segment_id": "7c1adbed",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7c1adbed"
+      }
+    },
+    {
+      "segment_id": "2b9eaaff",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "811ba0cd",
+      "source_content": "### `hitSlop`",
+      "source_content_hash": "26286f73e2dd5a9f4368223cf673cd055081b64745da2d570610b1325f508d40",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hitSlop`"
+      }
+    },
+    {
+      "segment_id": "639926e9",
+      "source_content": "This defines how far your touch can start away from the button. This is added to `pressRetentionOffset` when moving off of the button.",
+      "source_content_hash": "8960889b7d59b60b1dc7d5b09ec11c08f5b056bd9ce62938bb9e8ea5c8a0470f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義觸碰可以從按鈕多遠的距離開始。當移出按鈕時，此值會加到 `pressRetentionOffset` 上。"
+      }
+    },
+    {
+      "segment_id": "28c88d0c",
+      "source_content": "> The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.",
+      "source_content_hash": "d9c7f6d80c2b26318c9698ec385b8d9c6c10aa0cb4ff485369aa6bdc5ba9cb7e",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 觸碰區域永遠不會超出父視圖邊界，且當觸碰同時命中兩個重疊的視圖時，兄弟視圖的 Z-index 永遠具有優先權。"
+      }
+    },
+    {
+      "segment_id": "42ba4f20",
+      "source_content": "| Type                   |\n| ---------------------- |\n| [Rect](rect) or number |",
+      "source_content_hash": "857f7062294a2fbb49d2979d456d79d55fe504e6927a0a3aafa8964de94875a2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_42ba4f20"
+      }
+    },
+    {
+      "segment_id": "5d1aec8a",
+      "source_content": "### `id`",
+      "source_content_hash": "6fa10ecc5949d933365af59824901f344e8a5ed1c7d28cb9c17847fab685f567",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `id`"
+      }
+    },
+    {
+      "segment_id": "ff95ec03",
+      "source_content": "Used to locate this view from native code. Has precedence over `nativeID` prop.",
+      "source_content_hash": "d64f0d7280e09f430c7a414c496924de65d20cc4b3a0b1889727782e22e2c56f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於從原生程式碼中定位此視圖。優先於 `nativeID` 屬性。"
+      }
+    },
+    {
+      "segment_id": "d9d96683",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d9d96683"
+      }
+    },
+    {
+      "segment_id": "e75ec459",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7083d194",
+      "source_content": "### `onBlur`",
+      "source_content_hash": "6bf3a786fd93c508b37aac3d06cf5135ccba5e8fbe4448868388ab49bfc9272d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onBlur`"
+      }
+    },
+    {
+      "segment_id": "7a210168",
+      "source_content": "Invoked when the item loses focus.",
+      "source_content_hash": "902d4030ba77c447efc9cd442b6b1e1b2e8377e9aef710b66a324650d933206a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當項目失去焦點時呼叫。"
+      }
+    },
+    {
+      "segment_id": "a701d25d",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a701d25d"
+      }
+    },
+    {
+      "segment_id": "54c3b5ce",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b1e9700d",
+      "source_content": "### `onFocus`",
+      "source_content_hash": "819b1098d4e8c5d9b626b3e4df44e68d618c9fd7e788e90017167c396a21ac1b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onFocus`"
+      }
+    },
+    {
+      "segment_id": "4206c3f9",
+      "source_content": "Invoked when the item receives focus.",
+      "source_content_hash": "a331e474c1976bc98ffde259ae9b205d79e84503ea79272677deae8d12127795",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當項目獲得焦點時呼叫。"
+      }
+    },
+    {
+      "segment_id": "8e555721",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8e555721"
+      }
+    },
+    {
+      "segment_id": "a299ee82",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "381a5950",
+      "source_content": "### `onLayout`",
+      "source_content_hash": "4003ab8e4c09c2b682ab13f81e81b2827452db77e43f86621b1c3c7107f873ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLayout`"
+      }
+    },
+    {
+      "segment_id": "1e0d7fbe",
+      "source_content": "Invoked on mount and on layout changes.",
+      "source_content_hash": "290f35b58ac09874c73cf9c19bd00bc7285f2b644910877c66249e1c5fe2aa8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在掛載時和佈局變更時呼叫。"
+      }
+    },
+    {
+      "segment_id": "cd5595fd",
+      "source_content": "| Type                                                     |\n| -------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |",
+      "source_content_hash": "53882e7a75b7789bb4eca313c0bfd12b1d730533fe194f44b12dee8209224cb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cd5595fd"
+      }
+    },
+    {
+      "segment_id": "fe723c3c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a796dfea",
+      "source_content": "### `onLongPress`",
+      "source_content_hash": "6b1d8d3032b300badd63943086152b8e0894f22f57c2723599d35a8f7b19d3cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLongPress`"
+      }
+    },
+    {
+      "segment_id": "0400d81e",
+      "source_content": "Called if the time after `onPressIn` lasts longer than 370 milliseconds. This time period can be customized with [`delayLongPress`](#delaylongpress).",
+      "source_content_hash": "bf21038c2375fa52c3536ceeca236ca18822a92cc27d77768f8a32917944dca3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若 `onPressIn` 後的時間超過 370 毫秒則呼叫。此時間可透過 [`delayLongPress`](#delaylongpress) 自訂。"
+      }
+    },
+    {
+      "segment_id": "86197dff",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_86197dff"
+      }
+    },
+    {
+      "segment_id": "e2c1fbdd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "65863fe2",
+      "source_content": "### `onPress`",
+      "source_content_hash": "96ba311564eedff48b1fd9456762bcb4cf878275d059cfc91daef1956dc3b970",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPress`"
+      }
+    },
+    {
+      "segment_id": "db871df4",
+      "source_content": "Called when the touch is released, but not if cancelled (e.g. by a scroll that steals the responder lock). The first function argument is an event in form of [PressEvent](pressevent).",
+      "source_content_hash": "648bb1f5425a8f4007c6600e5e80cc441be3d4af79e902cd4a255242a11be66d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當觸碰釋放時呼叫，但若被取消（例如因滾動搶佔了回應者鎖）則不呼叫。第一個函數參數是 [PressEvent](pressevent) 形式的事件。"
+      }
+    },
+    {
+      "segment_id": "ce2d0eb2",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ce2d0eb2"
+      }
+    },
+    {
+      "segment_id": "d5a43dab",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c655c05b",
+      "source_content": "### `onPressIn`",
+      "source_content_hash": "ae65497c18a5296604bb4cfba2740bf13b9312197cdc31bf92aa808a5e62628f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressIn`"
+      }
+    },
+    {
+      "segment_id": "74bfaf8c",
+      "source_content": "Called as soon as the touchable element is pressed and invoked even before onPress. This can be useful when making network requests. The first function argument is an event in form of [PressEvent](pressevent).",
+      "source_content_hash": "158e3765c8eaabc8ff61905720a44e7ba484f89c4eade1025a372d9fdbaf19e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當可觸碰元件被按下時立即呼叫，甚至在 `onPress` 之前。這在發送網路請求時很有用。第一個函數參數是 [PressEvent](pressevent) 形式的事件。"
+      }
+    },
+    {
+      "segment_id": "dd9a86e6",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_dd9a86e6"
+      }
+    },
+    {
+      "segment_id": "a0ef6bb6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "14e3d5d7",
+      "source_content": "### `onPressOut`",
+      "source_content_hash": "ffc349eda93250705960dc02d87ba3d2a94f9465be883d516060a2eca5c7643f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressOut`"
+      }
+    },
+    {
+      "segment_id": "96bae975",
+      "source_content": "Called as soon as the touch is released even before onPress. The first function argument is an event in form of [PressEvent](pressevent).",
+      "source_content_hash": "9238b02898ccf8ad3fc5f2beba657b366c5ccd4fabf7aba33d8667eb9fe91643",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當觸碰釋放時立即呼叫，甚至在 `onPress` 之前。第一個函數參數是 [PressEvent](pressevent) 形式的事件。"
+      }
+    },
+    {
+      "segment_id": "9352031b",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9352031b"
+      }
+    },
+    {
+      "segment_id": "0966a140",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "76f5fa2a",
+      "source_content": "### `pressRetentionOffset`",
+      "source_content_hash": "d20a68973df1490b6b22c1e707dfffb6df43b8deaba16ee1d79c685f8fa65dd2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pressRetentionOffset`"
+      }
+    },
+    {
+      "segment_id": "16341c03",
+      "source_content": "When the scroll view is disabled, this defines how far your touch may move off of the button, before deactivating the button. Once deactivated, try moving it back and you'll see that the button is once again reactivated! Move it back and forth several times while the scroll view is disabled. Ensure you pass in a constant to reduce memory allocations.",
+      "source_content_hash": "380e98136b640f5dbe2d15d8da680c10d301c02bead10ee96a12f85e3d2522be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當滾動視圖被停用時，此值定義觸碰可以移出按鈕多遠的距離才會停用按鈕。一旦停用，嘗試移回按鈕會發現按鈕再次被啟用！在滾動視圖停用時來回移動多次。請傳入常數以減少記憶體配置。"
+      }
+    },
+    {
+      "segment_id": "0a712214",
+      "source_content": "| Type                   |\n| ---------------------- |\n| [Rect](rect) or number |",
+      "source_content_hash": "857f7062294a2fbb49d2979d456d79d55fe504e6927a0a3aafa8964de94875a2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0a712214"
+      }
+    },
+    {
+      "segment_id": "32e68869",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d88d3485",
+      "source_content": "### `nativeID`",
+      "source_content_hash": "157dbabe7da1e6477d223af8aea3d0045181cfaad08511e049648be26c80d1c8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nativeID`"
+      }
+    },
+    {
+      "segment_id": "7573bf76",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7573bf76"
+      }
+    },
+    {
+      "segment_id": "e6be6ff6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3ad6f5b1",
+      "source_content": "### `testID`",
+      "source_content_hash": "83bb1ecc3bce9cf38987403cbf0eee8440f9d30cfdf54fe124a9fc8228f9b47c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `testID`"
+      }
+    },
+    {
+      "segment_id": "7f0cded5",
+      "source_content": "Used to locate this view in end-to-end tests.",
+      "source_content_hash": "8358f089947ad586b55fd43eb0645023a4374ab9abb17f363cae443734b4a16e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於在端到端測試中定位此視圖。"
+      }
+    },
+    {
+      "segment_id": "189802a2",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_189802a2"
+      }
+    },
+    {
+      "segment_id": "91f0716f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "400396d9",
+      "source_content": "### `touchSoundDisabled` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1cf380e18016fb74acd09d6d28ffc05d1f4b511922db77b0f6f66356ca9134d6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `touchSoundDisabled` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "1e1ccc8c",
+      "source_content": "If true, doesn't play a system sound on touch.",
+      "source_content_hash": "4c8799274dd3e1765c0b1b05151009b418c2f6394d6e72d8da16ab51d69255ed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若為 true，觸碰時不會播放系統音效。"
+      }
+    },
+    {
+      "segment_id": "6b3677e9",
+      "source_content": "| Type    |\n| ------- |\n| Boolean |",
+      "source_content_hash": "eea944cde10b7e1db781ce583cdbb144d6b6ea254fb3c08d28c3aa24d47e0810",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6b3677e9"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.75/touchablewithoutfeedback.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.608429+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "b3aca9503335a1d235072a881ee31123f5e0ee39ac855b7d9444a3f15856be29"
+  }
+}

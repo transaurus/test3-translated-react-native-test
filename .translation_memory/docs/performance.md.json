@@ -1,0 +1,388 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/performance.md",
+  "source_file_content_hash": "003d09f06e88881980e6ac749adfc68eb43895f820c6c211ebf51b4116749aae",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: performance\ntitle: Performance Overview\n---",
+      "source_content_hash": "9200ee00fa8c09da75dacf98907e5ff667ae23ff541bb8721a9fb962d7c67c5a",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A compelling reason to use React Native instead of WebView-based tools is to achieve at least 60 frames per second and provide a native look and feel to your apps. Whenever feasible, we aim for React Native to handle optimizations automatically, allowing you to focus on your app without worrying about performance. However, there are certain areas where we haven't quite reached that level yet, and others where React Native (similar to writing native code directly) cannot determine the best optimization approach for you. In such cases, manual intervention becomes necessary. We strive to deliver buttery-smooth UI performance by default, but there may be instances where that isn't possible.",
+      "source_content_hash": "b03541bac1ecf3512705423ecbcdd5204e80ebc4e8f65a71bdb4cb7993409cf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "選擇使用 React Native 而非基於 WebView 的工具，其關鍵原因在於能實現至少 60 FPS 的流暢度，並為應用程式提供原生般的操作體驗。我們盡可能讓 React Native 自動處理優化工作，使開發者能專注於應用邏輯而無需擔心效能問題。但某些領域我們尚未完全實現此目標，也有些情況 React Native（如同直接編寫原生代碼）無法自動為您選擇最佳優化方案。此時便需要手動介入調整。雖然我們預設追求絲滑般的 UI 效能，但偶爾仍會出現無法達標的狀況。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "This guide is intended to teach you some basics to help you to [troubleshoot performance issues](profiling.md), as well as discuss [common sources of problems and their suggested solutions](performance.md#common-sources-of-performance-problems).",
+      "source_content_hash": "88c4138b7de79fa513420eeae74946b4140efae9e71dd36822970217a732f41d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南旨在傳授基礎知識，協助您[排查效能問題](profiling.md)，並探討[常見問題根源與對應解決方案](performance.md#common-sources-of-performance-problems)。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## What you need to know about frames",
+      "source_content_hash": "86bfed416e450cfde668ace0cc41891e1c4e557ef256f152b01527164c237015",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 關於影格的基本認知"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Your grandparents' generation called movies [\"moving pictures\"](https://www.youtube.com/watch?v=F1i40rnpOsA) for a reason: realistic motion in video is an illusion created by quickly changing static images at a consistent speed. We refer to each of these images as frames. The number of frames that is displayed each second has a direct impact on how smooth and ultimately life-like a video (or user interface) seems to be. iOS and Android devices display at least 60 frames per second, which gives you and the UI system at most 16.67ms to do all of the work needed to generate the static image (frame) that the user will see on the screen for that interval. If you are unable to do the work necessary to generate that frame within the allotted time slot, then you will \"drop a frame\" and the UI will appear unresponsive.",
+      "source_content_hash": "21a1d71f749515e26e9be7a2d1c62538fdc3fe344b59760db5e9a528a7fed1cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "老一輩人將電影稱為「活動影像」有其道理：影片中流暢的動態效果，實質上是透過快速切換靜態畫面所營造的視覺幻象。每一幅靜態畫面我們稱之為「影格」。每秒顯示的影格數（FPS）直接決定了影片（或使用者介面）的流暢度與真實感。iOS 和 Android 設備的顯示刷新率至少為 60 FPS，這意味著您與 UI 系統最多只有 16.67 毫秒的時間來完成生成單一影格所需的所有運算工作。若無法在該時間區間內完成影格渲染，就會發生「掉幀」現象，導致介面出現卡頓感。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "Now to confuse the matter a little bit, open up the [Dev Menu](debugging.md#opening-the-dev-menu) in your app and toggle `Show Perf Monitor`. You will notice that there are two different frame rates.",
+      "source_content_hash": "3344bc85a9f12675c51c1b1c70fa0171e6c4db89a7daaf06e450a3dcb9ebe313",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "補充說明：當您開啟應用程式的[開發者選單](debugging.md#opening-the-dev-menu)並啟用「顯示效能監測器」時，會注意到系統實際顯示兩種不同的幀率指標。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "![Performance Monitor screenshot](/docs/assets/PerfUtil.png)",
+      "source_content_hash": "e5dccc027c5e34bbaed864a5d42e264d6082ac6cee3fd67961046d1e1bc69c80",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![效能監測器截圖](/docs/assets/PerfUtil.png)"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### JS frame rate (JavaScript thread)",
+      "source_content_hash": "06c64f18ca130c2da372155ba3b2881033f9b2f388721d1917d5344b1b2a822c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### JS 影格率（JavaScript 執行緒）"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "For most React Native applications, your business logic will run on the JavaScript thread. This is where your React application lives, API calls are made, touch events are processed, and more. Updates to native-backed views are batched and sent over to the native side at the end of each iteration of the event loop, before the frame deadline (if all goes well). If the JavaScript thread is unresponsive for a frame, it will be considered a dropped frame. For example, if you were to set a new state on the root component of a complex application and it resulted in re-rendering computationally expensive component subtrees, it's conceivable that this might take 200ms and result in 12 frames being dropped. Any animations controlled by JavaScript would appear to freeze during that time. If enough frames are dropped, the user will feel it.",
+      "source_content_hash": "b9e51fd1b6efd2ce78151d567248d8899471fe949ee56ce9ce14a59fa7e82032",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在多數 React Native 應用中，業務邏輯主要運行於 JavaScript 執行緒。這裡是 React 應用核心所在——API 呼叫、觸控事件處理等操作均在此執行。對原生視圖的更新會批次處理，並在事件循環每次迭代結束時（若一切順利）趕在影格截止期限前發送至原生端。若 JavaScript 執行緒在某個影格週期內無響應，就會被視為掉幀。例如，當您對複雜應用的根組件設置新狀態，導致需要重新渲染計算密集的子組件樹時，可能耗費 200 毫秒並造成 12 影格丟失。此時所有由 JavaScript 控制的動畫都會出現凍結現象。若掉幀過於頻繁，使用者將明顯感受到卡頓。"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "An example is responding to touches: if you are doing work across multiple frames on the JavaScript thread, you might notice a delay in responding to `TouchableOpacity`, for example. This is because the JavaScript thread is busy and cannot process the raw touch events sent over from the main thread. As a result, `TouchableOpacity` cannot react to the touch events and command the native view to adjust its opacity.",
+      "source_content_hash": "805d4e198e3edab2792429cebe00700a81bacf6b8e216037ced9a2be4211677d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以觸控響應為例：若 JavaScript 執行緒持續處於忙碌狀態，您可能會注意到 `TouchableOpacity` 等組件對觸控的反應出現延遲。這是因為 JavaScript 執行緒無法及時處理從主執行緒傳遞過來的原始觸控事件，導致 `TouchableOpacity` 無法即時調用原生視圖來調整透明度。"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "### UI frame rate (main thread)",
+      "source_content_hash": "db30195649214120a00293951897ee834fa6a00827580824b632d984ca0ebf40",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### UI 影格率（主執行緒）"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "You may have noticed that performance of native stack navigators (such as the [@react-navigation/native-stack](https://reactnavigation.org/docs/native-stack-navigator) provided by React Navigation) is better out of the box than JavaScript-based stack navigators. This is because the transition animations are executed on the native main UI thread, so they are not interrupted by frame drops on the JavaScript thread.",
+      "source_content_hash": "6422cac11af715e7bbc4146fe7cf4c13d5f9418d46887ce00b4be4f3e4ae50b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Similarly, you can happily scroll up and down through a `ScrollView` when the JavaScript thread is locked up because the `ScrollView` lives on the main thread. The scroll events are dispatched to the JS thread, but their receipt is not necessary for the scroll to occur.",
+      "source_content_hash": "f6d3f49fbbb8a867c4dba917ec0838e73932250dd87b7e60038aae33ab1bf778",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同理，當 JavaScript 執行緒阻塞時，您仍能流暢滾動 `ScrollView`——因為滾動操作實際發生在主執行緒。雖然滾動事件會傳遞至 JS 執行緒處理，但滾動行為本身並不依賴這些事件的接收。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "## Common sources of performance problems",
+      "source_content_hash": "3ab79a2a4626da3c575a41dab23887cf2abcd94b8a005730b028aee62297e2c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 常見效能問題根源"
+      }
+    },
+    {
+      "segment_id": "b25f21be",
+      "source_content": "### Running in development mode (`dev=true`)",
+      "source_content_hash": "2793470032aa56027a30e01c72814a1beea7c98397cead64ea7fc0bcf816fb6c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 處於開發模式運行（dev=true）"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "JavaScript thread performance suffers greatly when running in dev mode. This is unavoidable: a lot more work needs to be done at runtime to provide you with good warnings and error messages. Always make sure to test performance in [release builds](running-on-device.md#building-your-app-for-production).",
+      "source_content_hash": "eb74470633a9c2c4e0d47c211bcf5f391f1babb9022559b848b9cd98bd4520a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在開發模式下運行時，JavaScript 執行緒的效能會大幅下降。這是不可避免的：為了提供良好的警告和錯誤訊息，運行時需要執行更多工作。請務必在[正式版本](running-on-device.md#building-your-app-for-production)中測試效能表現。"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "### Using `console.log` statements",
+      "source_content_hash": "6213444127b95584fb1aeab868a825da1c2e5915aab7c95f5c385fef0504ebac",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用 `console.log` 語句"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "When running a bundled app, these statements can cause a big bottleneck in the JavaScript thread. This includes calls from debugging libraries such as [redux-logger](https://github.com/evgenyrodionov/redux-logger), so make sure to remove them before bundling. You can also use this [babel plugin](https://babeljs.io/docs/plugins/transform-remove-console/) that removes all the `console.*` calls. You need to install it first with `npm i babel-plugin-transform-remove-console --save-dev`, and then edit the `.babelrc` file under your project directory like this:",
+      "source_content_hash": "1d5eb521dbec89e5f1566da9847fdbb517fdd0845b3d7205898bc80a10ba525e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當運行打包後的應用程式時，這些語句會嚴重阻塞 JavaScript 執行緒。這包括來自除錯函式庫（如 [redux-logger](https://github.com/evgenyrodionov/redux-logger)）的呼叫，因此請確保在打包前移除它們。你也可以使用這個 [Babel 插件](https://babeljs.io/docs/plugins/transform-remove-console/)來移除所有 `console.*` 呼叫。首先需透過 `npm i babel-plugin-transform-remove-console --save-dev` 安裝，然後編輯專案目錄下的 `.babelrc` 檔案如下："
+      }
+    },
+    {
+      "segment_id": "a11df754",
+      "source_content": "```json\n{\n  \"env\": {\n    \"production\": {\n      \"plugins\": [\"transform-remove-console\"]\n    }\n  }\n}\n```",
+      "source_content_hash": "404c6b02795f3b8bb68bc9ce60ce5e92457f76e737619510b6de25b46719e7a8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a11df754"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "This will automatically remove all `console.*` calls in the release (production) versions of your project.",
+      "source_content_hash": "e23415699812a418caac7a9ea461477d5efa5b9f996496e136c76ce0f5890c01",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這將自動移除專案正式（生產）版本中的所有 `console.*` 呼叫。"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "It is recommended to use the plugin even if no `console.*` calls are made in your project. A third party library could also call them.",
+      "source_content_hash": "571490cc84f21ab4a0b94eba1ef6126e8dcb8d543e395b1dcfc002c58e9cd1e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "即使專案中沒有使用 `console.*` 呼叫，也建議使用此插件。第三方函式庫也可能會呼叫它們。"
+      }
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "### `FlatList` rendering is too slow or scroll performance is bad for large lists",
+      "source_content_hash": "477de0c0779a3d741cba0df975500026efddc44892502a1713d752ba469270e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `FlatList` 渲染過慢或大型列表滾動效能不佳"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "If your [`FlatList`](flatlist.md) is rendering slowly, be sure that you've implemented [`getItemLayout`](flatlist.md#getitemlayout) to optimize rendering speed by skipping measurement of the rendered items.",
+      "source_content_hash": "731c3fa5670df2edb1cb1f5a4d767acc8c1802a76c81417bf59aeb2148f48da3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果 [`FlatList`](flatlist.md) 渲染速度緩慢，請確保實作了 [`getItemLayout`](flatlist.md#getitemlayout) 以跳過渲染項目的測量步驟來優化速度。"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "There are also other third-party list libraries that are optimized for performance, including [FlashList](https://github.com/shopify/flash-list) and [Legend List](https://github.com/legendapp/legend-list).",
+      "source_content_hash": "bb4d7005373d789657368c2505f49837de0f9ffec537436980f5da03f2e9dd28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "還有其他針對效能優化的第三方列表函式庫，包括 [FlashList](https://github.com/shopify/flash-list) 和 [Legend List](https://github.com/legendapp/legend-list)。"
+      }
+    },
+    {
+      "segment_id": "ab5fc5b5",
+      "source_content": "### Dropping JS thread FPS because of doing a lot of work on the JavaScript thread at the same time",
+      "source_content_hash": "cb95ab14fadbca4ec8e90cf3f58b76a97022d9c379b635078d4d65e6a3adc64c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "\"Slow Navigator transitions\" is the most common manifestation of this, but there are other times this can happen. Using [`InteractionManager`](interactionmanager.md) can be a good approach, but if the user experience cost is too high to delay work during an animation, then you might want to consider [`LayoutAnimation`](layoutanimation.md).",
+      "source_content_hash": "bb9ed9e3f4b203131cfa592ecf63c8de18e521836ba8a6a4618f564f53665e75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "「導覽器轉場緩慢」是最常見的表現形式，但其他情況也可能發生。使用 [`InteractionManager`](interactionmanager.md) 是個不錯的解決方案，但如果延遲動畫期間的工作對使用者體驗影響過大，可以考慮改用 [`LayoutAnimation`](layoutanimation.md)。"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "The [`Animated API`](animated.md) currently calculates each keyframe on-demand on the JavaScript thread unless you [set `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app), while [`LayoutAnimation`](layoutanimation.md) leverages Core Animation and is unaffected by JS thread and main thread frame drops.",
+      "source_content_hash": "d87248c1f48a8e83d66db887619a3218407975960c04a564ac73c464a6e083c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前 [`Animated API`](animated.md) 會在 JavaScript 執行緒上按需計算每個關鍵影格（除非[設定 `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app)），而 [`LayoutAnimation`](layoutanimation.md) 則利用 Core Animation 實現，不受 JavaScript 執行緒和主執行緒掉幀影響。"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "One case for using this is animating in a modal (sliding down from top and fading in a translucent overlay) while initializing and perhaps receiving responses for several network requests, rendering the contents of the modal, and updating the view where the modal was opened from. See the [Animations guide](animations.md) for more information about how to use `LayoutAnimation`.",
+      "source_content_hash": "6b83414a24c3384fdc4ea2cdbddf82993d27e6bd5295953e7dbcb802d3681814",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個適用場景是：當模態視窗以動畫形式呈現（從頂部滑下並淡入半透明遮罩）時，同時初始化多個網路請求、渲染模態內容並更新開啟模態的原始視圖。詳見[動畫指南](animations.md)瞭解如何使用 `LayoutAnimation`。"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "**Caveats:**",
+      "source_content_hash": "4a235c41d2b394789420cacaa4d9588d5925cffc33ea6487824abe346bf22aa0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**注意事項：**"
+      }
+    },
+    {
+      "segment_id": "af7d8a35",
+      "source_content": "- `LayoutAnimation` only works for fire-and-forget animations (\"static\" animations) -- if it must be interruptible, you will need to use [`Animated`](animated.md).",
+      "source_content_hash": "471f2b34807c29deb0b59568568c0ad484158f0cd77f3bb120b41fe8cb5d8fe7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `LayoutAnimation` 僅適用於「一次性動畫」（靜態動畫）——若需支援中斷操作，必須改用 [`Animated`](animated.md)。"
+      }
+    },
+    {
+      "segment_id": "047c2395",
+      "source_content": "### Moving a view on the screen (scrolling, translating, rotating) drops UI thread FPS",
+      "source_content_hash": "e92fba46c8f3c5a6cbb25b20d8ce063c0800c2c24e5dbe72cf0ca5665bdc9fa5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移動畫面中的視圖（滾動、平移、旋轉）導致 UI 執行緒 FPS 下降"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "This is especially true on Android when you have text with a transparent background positioned on top of an image, or any other situation where alpha compositing would be required to re-draw the view on each frame. You will find that enabling `renderToHardwareTextureAndroid` can help with this significantly. For iOS, `shouldRasterizeIOS` is already enabled by default.",
+      "source_content_hash": "158dd19809dc7d2c58d4540626adb92064e59520b91837de35e6c6dc734d7388",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 平台上尤其明顯：當文字帶有透明背景疊加在圖片上，或任何需要每幀重新合成 Alpha 通道的場景時。啟用 `renderToHardwareTextureAndroid` 屬性可顯著改善此問題。iOS 的 `shouldRasterizeIOS` 預設已啟用。"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "Be careful not to overuse this or your memory usage could go through the roof. Profile your performance and memory usage when using these props. If you don't plan to move a view anymore, turn this property off.",
+      "source_content_hash": "2c185a6c362eeca4fd11a08a848748e14b781068b58bc05d0935ae1ec2530a27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意避免過度使用這些屬性，否則記憶體佔用可能暴增。使用時請監控效能和記憶體狀況。若視圖不再需要移動，請關閉此屬性。"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "### Animating the size of an image drops UI thread FPS",
+      "source_content_hash": "a76e5d0dc319ce79d17d428efdb388e3ef93d95552187229fe0281d4598fe068",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 圖片尺寸動畫導致 UI 執行緒 FPS 下降"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "On iOS, each time you adjust the width or height of an [`Image` component](image.md) it is re-cropped and scaled from the original image. This can be very expensive, especially for large images. Instead, use the `transform: [{scale}]` style property to animate the size. An example of when you might do this is when you tap an image and zoom it in to full screen.",
+      "source_content_hash": "f2650e791f30d1d65a4a7e2f914208e71d63f135b2b9d0901d27003417ef8160",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 上，每次調整 [`Image` 元件](image.md) 的寬度或高度時，都會從原始圖片重新裁剪和縮放。這對於大型圖片來說可能非常耗費資源。建議改用 `transform: [{scale}]` 樣式屬性來實現尺寸動畫效果。一個典型的使用場景是點擊圖片後將其放大至全螢幕。"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### My TouchableX view isn't very responsive",
+      "source_content_hash": "ee29a8f748e94b6db503fdfd023b731753d970714015f7ffa7021adba7936a29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 我的 TouchableX 元件響應遲鈍"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Sometimes, if we do an action in the same frame that we are adjusting the opacity or highlight of a component that is responding to a touch, we won't see that effect until after the `onPress` function has returned. This may occur if `onPress` sets a state that results in a heavy re-render and a few frames are dropped as a result. A solution to this is to wrap any action inside of your `onPress` handler in `requestAnimationFrame`:",
+      "source_content_hash": "eec2ec456862193685022b3150caf2ff131740fe9b23ceab8d41a5665ce36c4b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時，如果我們在調整元件透明度或觸控高亮效果的同一幀中執行操作（該元件正在響應觸控事件），那麼在 `onPress` 函數執行完畢前，這些視覺效果不會立即顯現。當 `onPress` 觸發的狀態更新導致繁重的重新渲染並因此丟失幾幀時，就可能發生這種情況。解決方法是將 `onPress` 處理函數內的所有操作包裹在 `requestAnimationFrame` 中："
+      }
+    },
+    {
+      "segment_id": "8c3563d3",
+      "source_content": "```tsx\nfunction handleOnPress() {\n  requestAnimationFrame(() => {\n    this.doExpensiveAction();\n  });\n}\n```",
+      "source_content_hash": "cfe00db057c9855df50e9ff20ca68eed8a23be24deff635996843af9fdc4516e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8c3563d3"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/performance.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.174885+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "003d09f06e88881980e6ac749adfc68eb43895f820c6c211ebf51b4116749aae"
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/metro.md",
+  "source_file_content_hash": "46c82a2c1c94e1e299676ded81c499a184c46b13c4ca463e440cc34475f651e5",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: metro\ntitle: Metro\n---",
+      "source_content_hash": "ba86bb84ff5a1876689802ada30a865cdba4325f136aae1211acb06be7586d0c",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "React Native uses [Metro](https://facebook.github.io/metro/) to build your JavaScript code and assets.",
+      "source_content_hash": "33dc03c909995678faa5bcf67440eb28558f6bf78e6b1e0d21025caf319febff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 使用 [Metro](https://facebook.github.io/metro/) 來建構您的 JavaScript 程式碼與資源。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Configuring Metro",
+      "source_content_hash": "e47c22ccf15523217e04912a8bb415c07115ed28d01916e29baf293b1b070ea2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 設定 Metro"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Configuration options for Metro can be customized in your project's `metro.config.js` file. This can export either:",
+      "source_content_hash": "5115a242165d2bba5e1ef8b1f45f74c05d1afd2488160888dd217df79a041fa3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Metro 的設定選項可透過專案中的 `metro.config.js` 檔案進行自訂。該檔案可匯出以下兩種形式："
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- **An object (recommended)** that will be merged on top of Metro's internal config defaults.\n- [**A function**](#advanced-using-a-config-function) that will be called with Metro's internal config defaults and should return a final config object.",
+      "source_content_hash": "4bd5a594f415475bc770fff31fcb780bd868303aeda4069f4cdc23fe8584e2fb",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **物件形式（推薦）**：此物件會與 Metro 的內部預設設定進行合併。\n- [**函式形式**](#進階使用設定函式)：此函式會接收 Metro 的內部預設設定，並應回傳最終的設定物件。"
+      }
+    },
+    {
+      "segment_id": "ac44a45c",
+      "source_content": ":::tip\nPlease see [**Configuring Metro**](https://facebook.github.io/metro/docs/configuration) on the Metro website for documentation on all available config options.\n:::",
+      "source_content_hash": "9409b9c847a416446d7d6460f59092b7a41691e5abbf61ae43341f7e8e654e3e",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n請參閱 Metro 官方文件的 [**設定 Metro**](https://facebook.github.io/metro/docs/configuration) 章節，以瞭解所有可用的設定選項。\n:::"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "In React Native, your Metro config should extend either [`@react-native/metro-config`](https://www.npmjs.com/package/@react-native/metro-config) or [`@expo/metro-config`](https://www.npmjs.com/package/@expo/metro-config). These packages contain essential defaults necessary to build and run React Native apps.",
+      "source_content_hash": "21379eea8e0fb16c6b06f4962ffd12d0e11851f77d072106dc2a3c9065f168ed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 中，您的 Metro 設定應繼承 [`@react-native/metro-config`](https://www.npmjs.com/package/@react-native/metro-config) 或 [`@expo/metro-config`](https://www.npmjs.com/package/@expo/metro-config)。這些套件包含了建置與執行 React Native 應用程式所需的必要預設值。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Below is the default `metro.config.js` file in a React Native template project:",
+      "source_content_hash": "72046aee266355a20ad4f0060cdfa146c15f6afe45cd815e783a8aa8b90730c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是 React Native 範本專案中的預設 `metro.config.js` 檔案內容："
+      }
+    },
+    {
+      "segment_id": "29e01ec2",
+      "source_content": "<!-- prettier-ignore -->",
+      "source_content_hash": "a94eeea12154992988ea88567eed85506a35d1f83e439a912e23fafd65191f47",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29e01ec2"
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```js\nconst {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');\n\n/**\n * Metro configuration\n * https://facebook.github.io/metro/docs/configuration\n *\n * @type {import('metro-config').MetroConfig}\n */\nconst config = {};\n\nmodule.exports = mergeConfig(getDefaultConfig(__dirname), config);\n```",
+      "source_content_hash": "ccc82ecbd2b25169d506e75e03fbc4f4a824e0fa59bd3f6f31c862a2e3a1409f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Metro options you wish to customize can be done so within the `config` object.",
+      "source_content_hash": "995fd9ae789c63ce99d181389072aee4fe7a1b1b18f32993d0cc8c1c87e30df2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 `config` 物件中自訂所需的 Metro 選項。"
+      }
+    },
+    {
+      "segment_id": "782c902a",
+      "source_content": "### Advanced: Using a config function",
+      "source_content_hash": "d244ed1e00e70239cd7ffeb9ed7287b68cdf0ed0d47f64329c452113d8dac835",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 進階：使用設定函式"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "Exporting a config function is an opt-in to managing the final config yourself — **Metro will not apply any internal defaults**. This pattern can be useful when needing to read the base default config object from Metro or to set options dynamically.",
+      "source_content_hash": "409cadf0b39e12d80f483755ecb5fb6181c4c8385b28301c1f57b6d36bb4c8d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "匯出設定函式代表您選擇自行管理最終設定——**Metro 將不會套用任何內部預設值**。當需要從 Metro 讀取基礎預設設定物件，或需動態設定選項時，此模式會相當有用。"
+      }
+    },
+    {
+      "segment_id": "73f75a5c",
+      "source_content": ":::info\n**From `@react-native/metro-config` 0.72.1**, it is no longer necessary to use a config function to access the complete default config. See the **Tip** section below.\n:::",
+      "source_content_hash": "0ce6ecef5bf627d9ab3925ad2c66327ed7045333261c2f2881d4cdae1ac38114",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n**自 `@react-native/metro-config` 0.72.1 版本起**，已無需使用設定函式來取得完整的預設設定。請參閱下方的**提示**章節。\n:::"
+      }
+    },
+    {
+      "segment_id": "b2ebe640",
+      "source_content": "<!-- prettier-ignore -->",
+      "source_content_hash": "a94eeea12154992988ea88567eed85506a35d1f83e439a912e23fafd65191f47",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b2ebe640"
+      }
+    },
+    {
+      "segment_id": "229d6705",
+      "source_content": "```js\nconst {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');\n\nmodule.exports = function (baseConfig) {\n  const defaultConfig = mergeConfig(baseConfig, getDefaultConfig(__dirname));\n  const {resolver: {assetExts, sourceExts}} = defaultConfig;\n\n  return mergeConfig(\n    defaultConfig,\n    {\n      resolver: {\n        assetExts: assetExts.filter(ext => ext !== 'svg'),\n        sourceExts: [...sourceExts, 'svg'],\n      },\n    },\n  );\n};\n```",
+      "source_content_hash": "3edc9a7bc288096915a907d11e0887f05e53e73242ef8fb02ed17a4d461e9bea",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_229d6705"
+      }
+    },
+    {
+      "segment_id": "fc8cba88",
+      "source_content": ":::tip\nUsing a config function is for advanced use cases. A simpler method than the above, e.g. for customising `sourceExts`, would be to read these defaults from `@react-native/metro-config`.\n\n**Alternative**\n\n<!-- prettier-ignore -->\n```js\nconst defaultConfig = getDefaultConfig(__dirname);\n\nconst config = {\n  resolver: {\n    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],\n  },\n};\n\nmodule.exports = mergeConfig(defaultConfig, config);\n```\n\n**However!**, we recommend copying and editing when overriding these config values — placing the source of truth in your config file.\n\n✅ **Recommended**\n\n<!-- prettier-ignore -->\n```js\nconst config = {\n  resolver: {\n    sourceExts: ['js', 'ts', 'tsx', 'svg'],\n  },\n};\n```\n\n:::",
+      "source_content_hash": "c5e5b0934cf8852421da7b396e9efa52dfb4a3643871b3c9c488cfb23f498984",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n使用設定函式屬於進階使用情境。若僅需自訂 `sourceExts` 等簡單需求，可從 `@react-native/metro-config` 讀取這些預設值。\n\n**替代方案**\n\n<!-- prettier-ignore -->\n```js\nconst defaultConfig = getDefaultConfig(__dirname);\n\nconst config = {\n  resolver: {\n    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],\n  },\n};\n\nmodule.exports = mergeConfig(defaultConfig, config);\n```\n\n**但請注意！** 我們建議在覆寫這些設定值時，直接複製並編輯設定內容——將設定來源保留在您的設定檔案中。\n\n✅ **推薦做法**\n\n<!-- prettier-ignore -->\n```js\nconst config = {\n  resolver: {\n    sourceExts: ['js', 'ts', 'tsx', 'svg'],\n  },\n};\n```\n\n:::"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "## Learn more about Metro",
+      "source_content_hash": "9386e732f413a5ad1b63b5c9bbfee175d9e29a25a8e04217e5ea7e43de213fc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 深入瞭解 Metro"
+      }
+    },
+    {
+      "segment_id": "584b7213",
+      "source_content": "- [Metro website](https://facebook.github.io/metro/)\n- [Video: \"Metro & React Native DevX\" talk at App.js 2023](https://www.youtube.com/watch?v=c9D4pg0y9cI)",
+      "source_content_hash": "662bf59d30f048f622c31f6f758bc7a582e9c168be6e51b168dfd4d76a6687a6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Metro 官方網站](https://facebook.github.io/metro/)\n- [影片：App.js 2023 研討會「Metro & React Native 開發者體驗」演講](https://www.youtube.com/watch?v=c9D4pg0y9cI)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/metro.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.486962+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "46c82a2c1c94e1e299676ded81c499a184c46b13c4ca463e440cc34475f651e5"
+  }
+}

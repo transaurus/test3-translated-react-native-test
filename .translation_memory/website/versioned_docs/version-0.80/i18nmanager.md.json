@@ -1,0 +1,392 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/i18nmanager.md",
+  "source_file_content_hash": "0285466be5eea4ee6c2c703f36632d7920ae9cb1108be6f3d11bbb43cdd86d41",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: i18nmanager\ntitle: I18nManager\n---",
+      "source_content_hash": "767172134d559985e9169c13cc107666b02ed5cf9da5ba8e831812cf9c2b44fa",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "b3de8742",
+      "source_content": "# I18nManager",
+      "source_content_hash": "a5599889ae217f2fc68b85596549330dddec9b94ea5bccb7a1a88da173fef76e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# I18nManager"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The `I18nManager` module provides utilities for managing Right-to-Left (RTL) layout support for languages like Arabic, Hebrew, and others. It provides methods to control RTL behavior and check the current layout direction.",
+      "source_content_hash": "8492a08c9b885821efb2462c01586483061b3112b83fadaff730fb98e7a7d3b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`I18nManager` 模組提供管理從右至左（RTL）佈局支援的實用工具，適用於阿拉伯語、希伯來語等語言。它提供控制 RTL 行為及檢查當前佈局方向的方法。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Examples",
+      "source_content_hash": "0d19ab46319785768005536313f02bd3b9b779aaed82eeac5bf7a7f796ad3ef1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### Change positions and animations based on RTL",
+      "source_content_hash": "8abc09bc923486399adb0e46694defc11ae5160500e4adbced38d3c8da604d11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 根據 RTL 調整位置與動畫"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "If you absolutely position elements to align with other flexbox elements, they may not align in RTL languages. Using `isRTL` can be used to adjust alignment or animations.",
+      "source_content_hash": "784075280d155b6495668cb4d6bff473ab3aa3414f8a75b74bbfa886e9566bc3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用絕對定位元素來對齊其他 flexbox 元素，在 RTL 語言中可能無法正確對齊。可使用 `isRTL` 來調整對齊方式或動畫效果。"
+      }
+    },
+    {
+      "segment_id": "41ad46a6",
+      "source_content": "```SnackPlayer name=I18nManager%20Change%20Absolute%20Positions%20And%20Animations\nimport React from 'react';\nimport {I18nManager, Text, View} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  // Change to `true` to see the effect in a non-RTL language\n  const isRTL = I18nManager.isRTL;\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView>\n        <View style={{ position: 'absolute', left: isRTL ? undefined : 0, right: isRTL ? 0 : undefined }}>\n          {isRTL ? (\n            <Text>Back &gt;</Text>\n          ) : (\n            <Text>&lt; Back</Text>\n          )}\n        </View>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nexport default App;\n```",
+      "source_content_hash": "55b04868db5befd1f0935f4683e6293729c0f51a12210952d3f447958caf35d1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41ad46a6"
+      }
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "### During Development",
+      "source_content_hash": "a51bbb01349682007d6f7afbba659519f58d0625585350a44318aaab7c881959",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 開發期間"
+      }
+    },
+    {
+      "segment_id": "45022e4f",
+      "source_content": "```SnackPlayer name=I18nManager%20During%20Development\nimport React, {useState} from 'react';\nimport {Alert, I18nManager, StyleSheet, Switch, Text, View} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const [rtl, setRTL] = useState(I18nManager.isRTL);\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView>\n        <View style={styles.container}>\n          <View style={styles.forceRtl}>\n            <Text>Force RTL in Development:</Text>\n            <Switch value={rtl} onValueChange={(value) => {\n              setRTL(value);\n              I18nManager.forceRTL(value);\n              Alert.alert(\n                'Reload this page',\n                'Please reload this page to change the UI direction! ' +\n                  'All examples in this app will be affected. ' +\n                  'Check them out to see what they look like in RTL layout.',\n              );\n            }} />\n          </View>\n        </View>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 20,\n  },\n  forceRtl: {\n    flexDirection: 'row',\n    justifyContent: 'space-between',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "97446b94131e5a23e9290ecc9321000949c5485e6c1fd4a0604eae60e789809e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45022e4f"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "### `isRTL`",
+      "source_content_hash": "7c5c831eb6ffbc091b7499b78a2da91e26eaea011c9138a37dee680a28591da4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isRTL`"
+      }
+    },
+    {
+      "segment_id": "daa16011",
+      "source_content": "```typescript\nstatic isRTL: boolean;\n```",
+      "source_content_hash": "dab32758e6835feda16571649e8d5658a6e593c0c5c48696c26f7223124d1be0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_daa16011"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "A boolean value indicating whether the app is currently in RTL layout mode.",
+      "source_content_hash": "19b1f6d2366f6ce4367cdf749cf11fcd28604ded8208cd243672bcd9c4e7ad6b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "布林值，表示應用程式當前是否處於 RTL 佈局模式。"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "The value of `isRTL` is determined by the following logic:",
+      "source_content_hash": "44853a7a2559306ed860323e7837697364b7460484400fc8f807827317ece619",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`isRTL` 的值由以下邏輯決定："
+      }
+    },
+    {
+      "segment_id": "2d15468d",
+      "source_content": "- If `forceRTL` is `true`, `isRTL` returns `true`\n- If `allowRTL` is `false`, `isRTL` returns `false`\n- Otherwise, `isRTL` will be `true` given the following:\n  - **iOS:**\n    - The user-preferred language on the device is an RTL language\n    - The application-defined localizations include the user-chosen language (as defined in the Xcode project file (`knownRegions = (...)`)\n  - **Android:**\n    - The user-preferred language on the device is an RTL language\n    - The application's `AndroidManifest.xml` defines `android:supportsRTL=\"true\"` on the `<application>` element",
+      "source_content_hash": "1fd306ccb64740ca283dd2f0c708783df62d3e31e1abc42ead18e46ad6a94547",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 若 `forceRTL` 為 `true`，`isRTL` 返回 `true`\n- 若 `allowRTL` 為 `false`，`isRTL` 返回 `false`\n- 否則，`isRTL` 將在以下情況下為 `true`：\n  - **iOS：**\n    - 裝置上使用者偏好的語言是 RTL 語言\n    - 應用程式定義的本地化包含使用者選擇的語言（如 Xcode 專案檔中定義的 `knownRegions = (...)`\n  - **Android：**\n    - 裝置上使用者偏好的語言是 RTL 語言\n    - 應用程式的 `AndroidManifest.xml` 在 `<application>` 元素中定義了 `android:supportsRTL=\"true\"`"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "### `doLeftAndRightSwapInRTL`",
+      "source_content_hash": "d28a32c55038579f37ae71eb8eff921e63e8bc27608e32c9507d90281f01df8e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `doLeftAndRightSwapInRTL`"
+      }
+    },
+    {
+      "segment_id": "99070903",
+      "source_content": "```typescript\nstatic doLeftAndRightSwapInRTL: boolean;\n```",
+      "source_content_hash": "4ad267f6ae14a3e771fb2d9d82278045b2dc13547aacb2822bf8bfde4dc7e827",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99070903"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "A boolean value indicating whether left and right style properties should be automatically swapped when in RTL mode. When enabled, left becomes right and right becomes left in RTL layouts.",
+      "source_content_hash": "48959b0fdbfbe6307da0732c0b1b09fc756cb948fc8c78acfd60f27f37d7d14a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "布林值，表示在 RTL 模式下是否應自動交換左右樣式屬性。啟用時，在 RTL 佈局中左側會變為右側，右側變為左側。"
+      }
+    },
+    {
+      "segment_id": "638efb88",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "cbd60296",
+      "source_content": "### `allowRTL()`",
+      "source_content_hash": "3317ead6b1d4cfb49049f63d405d26cddf7d4601a487e88758d0053d134b024a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `allowRTL()`"
+      }
+    },
+    {
+      "segment_id": "6f605d92",
+      "source_content": "```typescript\nstatic allowRTL: (allowRTL: boolean) => void;\n```",
+      "source_content_hash": "611982819e25435b5507874d804248ac5303b2f9b77431dc0d27bab377f03635",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6f605d92"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "Enables or disables RTL layout support for the application.",
+      "source_content_hash": "946d5d5c3246364d0e61c19f4d3462777d85c59141c04cbef82cd575ca33a9eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "啟用或停用應用程式的 RTL 佈局支援。"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "cd2fd2f2",
+      "source_content": "- `allowRTL` (boolean): Whether to allow RTL layout",
+      "source_content_hash": "6aa61ae0ee6c6fd6ad58b67d40a86e9c4ce1a2ebd470c8214b881d7e831f569f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `allowRTL` (布林值)：是否允許 RTL 佈局"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "**Important Notes:**",
+      "source_content_hash": "032ba50e2f3b504ecda3319386ab6b6eea325f6d0178cfd50dc85e4c670a497b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**重要注意事項：**"
+      }
+    },
+    {
+      "segment_id": "c7ff42af",
+      "source_content": "- Changes take effect on the next application start, not immediately\n- This setting is persisted across app restarts",
+      "source_content_hash": "6887910a166ec81a6584a52a7d78d692b8a448faaa92ae9f0d7805561896ccab",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 變更將在下一次應用程式啟動時生效，而非立即\n- 此設定會跨應用程式重啟持續保存"
+      }
+    },
+    {
+      "segment_id": "c6868a9f",
+      "source_content": "### `forceRTL()`",
+      "source_content_hash": "77194e1f68529eb8b4e474c46329527bc81724d2d25825de0a405eb2ea485bc7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `forceRTL()`"
+      }
+    },
+    {
+      "segment_id": "6e57b94c",
+      "source_content": "```typescript\nstatic forceRTL: (forced: boolean) => void;\n```",
+      "source_content_hash": "7ad474ed8e664e3944375982dae130d8289ab129dc10502a2b8dd733db7df212",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6e57b94c"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "Forces the app to use RTL layout regardless of the device language settings. This is primarily useful for testing RTL layouts during development.",
+      "source_content_hash": "04a5b913b92113b21850dffa5c17a266ffa17f972c76c16a403b4d535a67d1ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "強制應用程式使用 RTL 佈局，無論裝置語言設定為何。主要用於開發期間測試 RTL 佈局。"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "Avoid forcing RTL in production apps as it requires a full app restart to take effect, which makes for a poor user-experience.",
+      "source_content_hash": "df492ece9818da8c1fb149d6579647168bcdc545c5c2bb505ce3fb0e367837f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "避免在正式版應用程式中強制 RTL，因為這需要完整重啟應用程式才能生效，會造成不佳的使用者體驗。"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "dd45f3ea",
+      "source_content": "- `forced` (boolean): Whether to force RTL layout",
+      "source_content_hash": "f33211cb2637ab05f6c29032adbf45b23df79646766bc9f8d80eb5eaab65f49a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `forced` (布林值)：是否強制 RTL 佈局"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "**Important Notes:**",
+      "source_content_hash": "032ba50e2f3b504ecda3319386ab6b6eea325f6d0178cfd50dc85e4c670a497b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**重要注意事項：**"
+      }
+    },
+    {
+      "segment_id": "1852dfef",
+      "source_content": "- Changes take full effect on the next application start, not immediately\n- The setting is persisted across app restarts\n- Only meant for development and testing. In production, you should either disallow RTL fully or handle it appropriately (see `isRTL`)",
+      "source_content_hash": "9483a83a90ef7e14510ac86f553401654916eb758f033a0fe6bfcaca86ace693",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 變更將在下一次應用程式啟動時完全生效，而非立即\n- 設定會跨應用程式重啟持續保存\n- 僅適用於開發與測試。正式環境中應完全停用 RTL 或適當處理（參見 `isRTL`）"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### `swapLeftAndRightInRTL()`",
+      "source_content_hash": "1993f19542dd2a3273589d9c9ee1be4a0b4baaf67ce38a2309016dde811b86d1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `swapLeftAndRightInRTL()`"
+      }
+    },
+    {
+      "segment_id": "b68d496b",
+      "source_content": "```typescript\nstatic swapLeftAndRightInRTL: (swapLeftAndRight: boolean) => void;\n```",
+      "source_content_hash": "042bbe5b0cb36f398bcb93add0bc383ab9b2b92118df6d207d6d382e4b757db2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b68d496b"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "Swap left and right style properties in RTL mode. When enabled, left becomes right and right becomes left in RTL layouts. Does not affect the value of `isRTL`.",
+      "source_content_hash": "9fe3ab66b3d95e215b4503b7e867b6cc8f309e7a84ca69b211f4f82201693c2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 RTL 模式下交換左右樣式屬性。啟用時，在 RTL 佈局中左側會變為右側，右側變為左側。不影響 `isRTL` 的值。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/i18nmanager.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.068566+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "0285466be5eea4ee6c2c703f36632d7920ae9cb1108be6f3d11bbb43cdd86d41"
+  }
+}

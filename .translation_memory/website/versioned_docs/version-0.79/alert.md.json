@@ -1,0 +1,532 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/alert.md",
+  "source_file_content_hash": "11c6e42415717e77aab6677b5c775014bd2e35ae4c5f1ec569a889ae3914f34f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: alert\ntitle: Alert\n---",
+      "source_content_hash": "aa471baf3f2ca60912a8e557fc0ff2982858f80f2b6997bd4b27810589ceb833",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Launches an alert dialog with the specified title and message.",
+      "source_content_hash": "cb13b8789fe62382a5016603d07c3043128eaeb2a118bfcf3120edc10ec2b822",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯示一個圓形的載入指示器。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button.",
+      "source_content_hash": "ce365ac4333617897902a420aec87d0355d9018e9dd9346e2c4ddf52d59ef6e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可選擇提供按鈕列表。點擊任一按鈕將觸發相應的 onPress 回調並關閉警示框。預設情況下，僅會顯示一個「確定」按鈕。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "This is an API that works both on Android and iOS and can show static alerts. Alert that prompts the user to enter some information is available on iOS only.",
+      "source_content_hash": "bedfe05a40d716383d846909aa1b72fe3dc3cc3ecc8cdfc60d62ed9aa98eca28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此為跨 Android 與 iOS 的 API，可顯示靜態警示框。僅 iOS 支援要求使用者輸入資訊的提示型警示框。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "5564d81d",
+      "source_content": "```SnackPlayer name=Alert%20Example&supportedPlatforms=ios,android\nimport React from 'react';\nimport {StyleSheet, Button, Alert} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const createTwoButtonAlert = () =>\n    Alert.alert('Alert Title', 'My Alert Msg', [\n      {\n        text: 'Cancel',\n        onPress: () => console.log('Cancel Pressed'),\n        style: 'cancel',\n      },\n      {text: 'OK', onPress: () => console.log('OK Pressed')},\n    ]);\n\n  const createThreeButtonAlert = () =>\n    Alert.alert('Alert Title', 'My Alert Msg', [\n      {\n        text: 'Ask me later',\n        onPress: () => console.log('Ask me later pressed'),\n      },\n      {\n        text: 'Cancel',\n        onPress: () => console.log('Cancel Pressed'),\n        style: 'cancel',\n      },\n      {text: 'OK', onPress: () => console.log('OK Pressed')},\n    ]);\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <Button title={'2-Button Alert'} onPress={createTwoButtonAlert} />\n        <Button title={'3-Button Alert'} onPress={createThreeButtonAlert} />\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'space-around',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "d30346df6bb25d189e1b64037e007063f98c74c4b2350594fb70e3926f9c8ff8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5564d81d"
+      }
+    },
+    {
+      "segment_id": "126950d7",
+      "source_content": "## iOS",
+      "source_content_hash": "ed38fffe0d0b2913784d94a7ab0a8b8a1f7832745f9877a145c934c2fad120c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## iOS"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "On iOS you can specify any number of buttons. Each button can optionally specify a style or be emphasized, available options are represented by the [AlertButtonStyle](#alertbuttonstyle-ios) enum and the `isPreferred` field on [AlertButton](alert#alertbutton).",
+      "source_content_hash": "696a1acd5e02be7d0e9cd60d9a0db3986fdd27119b3779e85f966e0f95d4b10a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 可指定任意數量按鈕。每個按鈕可選擇性設定樣式或強調顯示，選項參見 [AlertButtonStyle](#alertbuttonstyle-ios) 枚舉及 [AlertButton](alert#alertbutton) 的 `isPreferred` 欄位。"
+      }
+    },
+    {
+      "segment_id": "3ef18741",
+      "source_content": "## Android",
+      "source_content_hash": "316e75861152fcfa906997e1907c00f2f5d4b433627b3e340e68a8123ad35991",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Android"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "On Android at most three buttons can be specified. Android has a concept of a neutral, negative and a positive button:",
+      "source_content_hash": "c5e2a076563265f3e47aeb244739522efeeb12ab2f953b1d2d1b7e196d9bd234",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 最多指定三個按鈕，分為中性、負向與正向按鈕："
+      }
+    },
+    {
+      "segment_id": "69c1f590",
+      "source_content": "- If you specify one button, it will be the 'positive' one (such as 'OK')\n- Two buttons mean 'negative', 'positive' (such as 'Cancel', 'OK')\n- Three buttons mean 'neutral', 'negative', 'positive' (such as 'Later', 'Cancel', 'OK')",
+      "source_content_hash": "5a06f3d6fee909660d5d111c8ff988fe66e3318ef68a740678e3365f78e71956",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 單一按鈕為「正向」（如「確定」）\n- 雙按鈕為「負向」、「正向」（如「取消」、「確定」）\n- 三按鈕為「中性」、「負向」、「正向」（如「稍後」、「取消」、「確定」）"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Alerts on Android can be dismissed by tapping outside of the alert box. It is disabled by default and can be enabled by providing an optional [AlertOptions](alert#alertoptions) parameter with the cancelable property set to `true` i.e.<br/>`{cancelable: true}`.",
+      "source_content_hash": "c336528e092e4d6459e108f7316e8c3667f75bf2afddef1714a7a50034db967c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 警示框可透過點擊框外區域關閉。此功能預設禁用，可透過在 [AlertOptions](alert#alertoptions) 參數中設定 `{cancelable: true}` 啟用。"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "The cancel event can be handled by providing an `onDismiss` callback property inside the `options` parameter.",
+      "source_content_hash": "aafc832af0d33d531e4ba3ce9f0f53235b9739d56350569058ba57d3e7d288b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取消事件可透過在 `options` 參數中提供 `onDismiss` 回調函數處理。"
+      }
+    },
+    {
+      "segment_id": "b936dd6a",
+      "source_content": "### Example <div class=\"label android\">Android</div>",
+      "source_content_hash": "855342df06d719f7c3a31fe22eeaf300d7ca6abbd1e9d0c5e89a288a58d3853c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 範例 <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "092b29bb",
+      "source_content": "```SnackPlayer name=Alert%20Android%20Dissmissable%20Example&supportedPlatforms=android\nimport React from 'react';\nimport {StyleSheet, Button, Alert} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst showAlert = () =>\n  Alert.alert(\n    'Alert Title',\n    'My Alert Msg',\n    [\n      {\n        text: 'Cancel',\n        onPress: () => Alert.alert('Cancel Pressed'),\n        style: 'cancel',\n      },\n    ],\n    {\n      cancelable: true,\n      onDismiss: () =>\n        Alert.alert(\n          'This alert was dismissed by tapping outside of the alert dialog.',\n        ),\n    },\n  );\n\nconst App = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <Button title=\"Show alert\" onPress={showAlert} />\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "9cc6f9cc372c9832ba99c1e10299502c17e8535b0a4566310c129c9ef00b1597",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_092b29bb"
+      }
+    },
+    {
+      "segment_id": "18fa676c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "c35e5786",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "### `alert()`",
+      "source_content_hash": "41475639b112b19705134a1dafa1fc7b131d2f90df7c5b21984657ce40070a64",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alert()`"
+      }
+    },
+    {
+      "segment_id": "43cca4d3",
+      "source_content": "```tsx\nstatic alert (\n  title: string,\n  message?: string,\n  buttons?: AlertButton[],\n  options?: AlertOptions,\n);\n```",
+      "source_content_hash": "acbe4137aee56785c18534cdbac1bcf4152420519e23e05f3df5b9b466656c13",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_43cca4d3"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "60361e2c",
+      "source_content": "| Name                                                   | Type                               | Description                                                             |\n| ------------------------------------------------------ | ---------------------------------- | ----------------------------------------------------------------------- |\n| title <div class=\"label basic required\">Required</div> | string                             | The dialog's title. Passing `null` or empty string will hide the title. |\n| message                                                | string                             | An optional message that appears below the dialog's title.              |\n| buttons                                                | [AlertButton](alert#alertbutton)[] | An optional array containing buttons configuration.                     |\n| options                                                | [AlertOptions](alert#alertoptions) | An optional Alert configuration.                                        |",
+      "source_content_hash": "1fb1ad3725f6e1bba71da37ff95f054f6f96bf73d001004a125625f95d96230e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_60361e2c"
+      }
+    },
+    {
+      "segment_id": "d4b679d6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "55dc794c",
+      "source_content": "### `prompt()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "42aea4c677a410d1c7810b4b1eada93d7eae0ae33de4f31d7533ed19ab8cd458",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `prompt()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "520cfa65",
+      "source_content": "```tsx\nstatic prompt: (\n  title: string,\n  message?: string,\n  callbackOrButtons?: ((text: string) => void) | AlertButton[],\n  type?: AlertType,\n  defaultValue?: string,\n  keyboardType?: string,\n);\n```",
+      "source_content_hash": "1c66d6a10a1e8d75252d8c879c702e66325db989ef798c6f220b6d914f9c22f9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_520cfa65"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "Create and display a prompt to enter some text in form of Alert.",
+      "source_content_hash": "87defdc106c99990ff7dbcd1e6e375586dd223dc4ef4511c0aa2b26088930e7e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立並顯示文字輸入提示型警示框。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "12cc36d2",
+      "source_content": "| Name                                                   | Type                                            | Description                                                                                                                                                                                           |\n| ------------------------------------------------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| title <div class=\"label basic required\">Required</div> | string                                          | The dialog's title.                                                                                                                                                                                   |\n| message                                                | string                                          | An optional message that appears above the text input.                                                                                                                                                |\n| callbackOrButtons                                      | function<hr/>[AlertButton](alert#alertButton)[] | If passed a function, it will be called with the prompt's value<br/>`(text: string) => void`, when the user taps 'OK'.<hr/>If passed an array, buttons will be configured based on the array content. |\n| type                                                   | [AlertType](alert#alerttype-ios)                | This configures the text input.                                                                                                                                                                       |\n| defaultValue                                           | string                                          | The default text in text input.                                                                                                                                                                       |\n| keyboardType                                           | string                                          | The keyboard type of first text field (if exists). One of TextInput [keyboardTypes](textinput#keyboardtype).                                                                                          |\n| options                                                | [AlertOptions](alert#alertoptions)              | An optional Alert configuration.                                                                                                                                                                      |",
+      "source_content_hash": "cc1c7db566fa19ed6a87dd7d4f9fd664c6f7380041834db2ea0b780ae75f236c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12cc36d2"
+      }
+    },
+    {
+      "segment_id": "62d5dc64",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 型別定義"
+      }
+    },
+    {
+      "segment_id": "188a0310",
+      "source_content": "### AlertButtonStyle <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "3de3e53a71acf0efecc7989824e5d408b07210b5273608372807e9e245307b86",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### AlertButtonStyle <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "5cf1bce4",
+      "source_content": "An iOS Alert button style.",
+      "source_content_hash": "7debce36acc73dd83f30af7a12cc9680138a82e66c3dd90f83094a00ff8f4daf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 警示框按鈕樣式。"
+      }
+    },
+    {
+      "segment_id": "04e40597",
+      "source_content": "| Type |\n| ---- |\n| enum |",
+      "source_content_hash": "acce1a73aae91a3f42f93bf7861ba7e90bf77418c4ba1f67f0de2dca001d3380",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_04e40597"
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "**Constants:**",
+      "source_content_hash": "2d67b935d703c9e4a672891ff91c01f2a112534a57e26d8a9ca8fe12cf4dbdc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**常數：**"
+      }
+    },
+    {
+      "segment_id": "304aa33b",
+      "source_content": "| Value           | Description               |\n| --------------- | ------------------------- |\n| `'default'`     | Default button style.     |\n| `'cancel'`      | Cancel button style.      |\n| `'destructive'` | Destructive button style. |",
+      "source_content_hash": "3652e5e9b8392623060406764cdb7aa949fa41f38081880025a214942238be7f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_304aa33b"
+      }
+    },
+    {
+      "segment_id": "2663a629",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### AlertType <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "7a2362a0215cc6a625bd24450fa2332b4a3dabbd5878f4456ea948370c2af48c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### AlertType <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "An iOS Alert type.",
+      "source_content_hash": "628b35dd932a772f453454fa141060aa3d3492de96dda22a807567cd1aaf3c86",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "iOS 警示框類型。"
+      }
+    },
+    {
+      "segment_id": "0542488c",
+      "source_content": "| Type |\n| ---- |\n| enum |",
+      "source_content_hash": "acce1a73aae91a3f42f93bf7861ba7e90bf77418c4ba1f67f0de2dca001d3380",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0542488c"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "**Constants:**",
+      "source_content_hash": "2d67b935d703c9e4a672891ff91c01f2a112534a57e26d8a9ca8fe12cf4dbdc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**常數：**"
+      }
+    },
+    {
+      "segment_id": "ce712201",
+      "source_content": "| Value              | Description                  |\n| ------------------ | ---------------------------- |\n| `'default'`        | Default alert with no inputs |\n| `'plain-text'`     | Plain text input alert       |\n| `'secure-text'`    | Secure text input alert      |\n| `'login-password'` | Login and password alert     |",
+      "source_content_hash": "2e35fe0027a68cdccd1ad0daaa5eff4f3e1ff0b0447592ab6b7f587dbb33b007",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ce712201"
+      }
+    },
+    {
+      "segment_id": "378585a7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7ab93a8",
+      "source_content": "### AlertButton",
+      "source_content_hash": "1a7e7ac03d8e5e849b804226a368ac7d80f879b12d3a6ece441a7922688bc61f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### AlertButton"
+      }
+    },
+    {
+      "segment_id": "9ede513a",
+      "source_content": "An object describing the configuration of a button in the alert.",
+      "source_content_hash": "f60bc2e6a6f4955d66cc7842e888672a8ef6264efa997abd756183ffd140780c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "描述警示框按鈕配置的物件。"
+      }
+    },
+    {
+      "segment_id": "73f4cc36",
+      "source_content": "| Type             |\n| ---------------- |\n| array of objects |",
+      "source_content_hash": "86c9f8e5802b6c02e5f60a9e121e734fdb0331c555562b8a54508b9342487871",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_73f4cc36"
+      }
+    },
+    {
+      "segment_id": "dbeb30c1",
+      "source_content": "**Objects properties:**",
+      "source_content_hash": "ba6b3fb9dc5d923e07658b4e79b7a2554d25ad8834073e1b1ad5f9f54b715bc6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**物件屬性：**"
+      }
+    },
+    {
+      "segment_id": "793b6449",
+      "source_content": "| Name                                         | Type                                           | Description                                                                    |\n| -------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------ |\n| text                                         | string                                         | Button label.                                                                  |\n| onPress                                      | function                                       | Callback function when button is pressed.                                      |\n| style <div class=\"label ios\">iOS</div>       | [AlertButtonStyle](alert#alertbuttonstyle-ios) | Button style, on Android this property will be ignored.                        |\n| isPreferred <div class=\"label ios\">iOS</div> | boolean                                        | Whether button should be emphasized, on Android this property will be ignored. |",
+      "source_content_hash": "3a96d05d4dd44c7ee557b654bee24b694c32b2cd5059761e3afb38e24bed1fb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_793b6449"
+      }
+    },
+    {
+      "segment_id": "8897e43b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2f833a4d",
+      "source_content": "### AlertOptions",
+      "source_content_hash": "1e6431c67ca5ca767be3abb0d640b7e5fe66bf9aa76ea56ec1c1fa03d2f02492",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### AlertOptions"
+      }
+    },
+    {
+      "segment_id": "6c82acb3",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6c82acb3"
+      }
+    },
+    {
+      "segment_id": "d3f13bf4",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "2c73297c",
+      "source_content": "| Name                                                | Type     | Description                                                                                                               |\n| --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |\n| cancelable <div class=\"label android\">Android</div> | boolean  | Defines if alert can be dismissed by tapping outside of the alert box.                                                    |\n| userInterfaceStyle <div class=\"label ios\">iOS</div> | string   | The interface style used for the alert, can be set to `light` or `dark`, otherwise the default system style will be used. |\n| onDismiss <div class=\"label android\">Android</div>  | function | Callback function fired when alert has been dismissed.                                                                    |",
+      "source_content_hash": "118414db6f2fdc9ee7b1f2d7a81c66e82d86be90894c9cca36b3156ff1adebdf",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2c73297c"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/alert.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.978506+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "11c6e42415717e77aab6677b5c775014bd2e35ae4c5f1ec569a889ae3914f34f"
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/publishing-to-app-store.md",
+  "source_file_content_hash": "9a6e71482c49579b224de03ff15353c1604c9b55f51c88c6715cd0e96d026d00",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: publishing-to-app-store\ntitle: Publishing to Apple App Store\n---",
+      "source_content_hash": "605ceb73903c68c96af8084d3392bbcb2bafeceab8b091ecdffdd477e3ca2042",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The publishing process is the same as any other native iOS app, with some additional considerations to take into account.",
+      "source_content_hash": "ca97a59615f58eb6143239f62c0193259d357fbddd9c652a30038c92c9f560b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "發布流程與其他原生 iOS 應用程式相同，但需注意一些額外事項。"
+      }
+    },
+    {
+      "segment_id": "a239c14b",
+      "source_content": ":::info\nIf you are using Expo, read the Expo guide for [Deploying to App Stores](https://docs.expo.dev/distribution/app-stores/) to build and submit your app for the Apple App Store. This guide works with any React Native app to automate the deployment process.\n:::",
+      "source_content_hash": "d28e84aa31ed2f457d021ae7bd93c9bb9e48bf2cfc501cc21f6e8c75cfe513e9",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n若使用 Expo，請參閱 Expo 的[部署至應用商店指南](https://docs.expo.dev/distribution/app-stores/)來建置並提交應用至 Apple App Store。本指南適用於任何 React Native 應用程式，可自動化部署流程。\n:::"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### 1. Enable App Transport Security",
+      "source_content_hash": "e5f4820ccba40e065ac706bdd72b4ce4c8cb7aeea832949e74e032b927a1ea20",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 啟用應用程式傳輸安全性"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "App Transport Security is a security feature introduced in iOS 9 that rejects all HTTP requests that are not sent over HTTPS. This can result in HTTP traffic being blocked, including the developer React Native server. ATS is disabled for `localhost` by default in React Native projects in order to make development easier.",
+      "source_content_hash": "86935100c64e41e3ed83bee3b8ba32d24a3c6eb7b08b019de03a7832ceb5c055",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "應用程式傳輸安全性（ATS）是 iOS 9 引入的安全功能，會拒絕所有未透過 HTTPS 傳送的 HTTP 請求。這可能導致 HTTP 流量被阻擋，包括開發用的 React Native 伺服器。為簡化開發流程，React Native 專案預設會停用對 `localhost` 的 ATS 限制。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "You should re-enable ATS prior to building your app for production by removing the `localhost` entry from the `NSExceptionDomains` dictionary and setting `NSAllowsArbitraryLoads` to `false` in your `Info.plist` file in the `ios/` folder. You can also re-enable ATS from within Xcode by opening your target properties under the Info pane and editing the App Transport Security Settings entry.",
+      "source_content_hash": "a42a45ea4706c5b17f9cddf187d7f3dcd1b031b879ad5ce65e77ef5c835ea4a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在為生產環境建置應用程式前，應重新啟用 ATS：移除 `Info.plist` 檔案中 `NSExceptionDomains` 字典的 `localhost` 條目，並將 `NSAllowsArbitraryLoads` 設為 `false`。該檔案位於 `ios/` 資料夾。亦可透過 Xcode 重新啟用 ATS：開啟目標屬性中的 Info 面板，編輯「App Transport Security Settings」項目。"
+      }
+    },
+    {
+      "segment_id": "440191a5",
+      "source_content": ":::note\nIf your application needs to access HTTP resources on production, learn how to configure ATS on your project.\n:::",
+      "source_content_hash": "d8252364ed354e3a42e98ca58dab5d108f0b8e7d7132755daf41db94e17ebbbc",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n若應用程式需在生產環境存取 HTTP 資源，請學習如何設定專案的 ATS。\n:::"
+      }
+    },
+    {
+      "segment_id": "63622bf0",
+      "source_content": "### 2. Configure release scheme",
+      "source_content_hash": "0964f564e1934465eecbc88b7ab0521c4697174bdb358707e314a5a896c37fe4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 設定發布方案"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Building an app for distribution in the App Store requires using the `Release` scheme in Xcode. Apps built for `Release` will automatically disable the in-app Developer menu, which will prevent your users from inadvertently accessing the menu in production. It will also bundle the JavaScript locally, so you can put the app on a device and test whilst not connected to the computer.",
+      "source_content_hash": "ff441097c6a2ed5277c61859a652cdb016a1d6f01e78d2a9fe8bba71bbc33cde",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為 App Store 分發建置應用程式時，需使用 Xcode 的 `Release` 方案。採用 `Release` 方案建置的應用程式會自動停用開發者選單，避免使用者在生產環境誤觸。同時會將 JavaScript 程式碼本地打包，使應用程式可在未連接電腦的裝置上測試。"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "To configure your app to be built using the `Release` scheme, go to **Product** → **Scheme** → **Edit Scheme**. Select the **Run** tab in the sidebar, then set the Build Configuration dropdown to `Release`.",
+      "source_content_hash": "c3fa0486c6091dec84e6fe5a18cf2ccb119c04863c19a89f9b667eab85e0d0f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要設定應用程式使用 `Release` 方案建置，請前往 **Product** → **Scheme** → **Edit Scheme**。在側邊欄選擇 **Run** 標籤，然後將 Build Configuration 下拉選單設為 `Release`。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "![](/docs/assets/ConfigureReleaseScheme.png)",
+      "source_content_hash": "47e71668895b990c81c36be85175356e5719f455aab239355f8c38ccee9a92c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/docs/assets/ConfigureReleaseScheme.png)"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "#### Pro Tips",
+      "source_content_hash": "6f7937cc5fb6e2753412c0626b911a836dc9b061b057de1bb742deba3f18d940",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 專業建議"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "As your App Bundle grows in size, you may start to see a blank screen flash between your splash screen and the display of your root application view. If this is the case, you can add the following code to `AppDelegate.m` in order to keep your splash screen displayed during the transition.",
+      "source_content_hash": "f7c95bc3f08bf27b24066aca9294006de543434af6c6bdfe244b6b50489e4f10",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當應用程式套件體積增長時，可能會在啟動畫面與主應用畫面切換時看到空白閃屏。若發生此情況，可將以下程式碼加入 `AppDelegate.m`，使啟動畫面在過渡期間持續顯示。"
+      }
+    },
+    {
+      "segment_id": "6543a19e",
+      "source_content": "```objectivec\n  // Place this code after \"[self.window makeKeyAndVisible]\" and before \"return YES;\"\n  UIStoryboard *sb = [UIStoryboard storyboardWithName:@\"LaunchScreen\" bundle:nil];\n  UIViewController *vc = [sb instantiateInitialViewController];\n  rootView.loadingView = vc.view;\n```",
+      "source_content_hash": "b29bfc62cbb52b7401ff165ee7221cc536ffdd518849f85a592146a6b7b3542a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6543a19e"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "The static bundle is built every time you target a physical device, even in Debug. If you want to save time, turn off bundle generation in Debug by adding the following to your shell script in the Xcode Build Phase `Bundle React Native code and images`:",
+      "source_content_hash": "6626cc7adce2892083578a05e31919342e6202687cf9c848fcd7ca88fe0de9a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每次針對實體裝置建置時（即使是 Debug 模式）都會產生靜態套件。若要節省時間，可在 Debug 模式停用套件生成：於 Xcode 的 Build Phase「Bundle React Native code and images」中的 shell 腳本加入以下內容："
+      }
+    },
+    {
+      "segment_id": "d9330cd7",
+      "source_content": "```shell\n if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n  export SKIP_BUNDLING=true\n fi\n```",
+      "source_content_hash": "282139fc2c192d92e13fadbac4f82fff5eabf84fa8bc898132e4b90d61a61288",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d9330cd7"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "### 3. Build app for release",
+      "source_content_hash": "90944ea70596f7d339bb8428965c9ce9d9a7b259cce60a04015bbd8fc2537275",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 建置發布版應用程式"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "You can now build your app for release by tapping `⌘B` or selecting **Product** → **Build** from the menu bar. Once built for release, you'll be able to distribute the app to beta testers and submit the app to the App Store.",
+      "source_content_hash": "2bdb2236f069897a2c7ce41e822dc825e5efb66cbf7b02099b762772295b9a46",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在可透過按下 `⌘B` 或從選單選擇 **Product** → **Build** 來建置發布版應用程式。建置完成後，即可分發應用程式給測試人員或提交至 App Store。"
+      }
+    },
+    {
+      "segment_id": "17bc5bbf",
+      "source_content": ":::info\nYou can also use the `React Native CLI` to perform this operation using the option `--mode` with the value `Release` (e.g. `npx react-native run-ios --mode Release`).\n:::",
+      "source_content_hash": "69b337540cbd55f31bb64e77ca9c743ac5b81891acf9d979b30e1dba95ea439d",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n亦可使用 `React Native CLI` 執行此操作：透過 `--mode` 選項設定值為 `Release`（例如 `npx react-native run-ios --mode Release`）。\n:::"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "Once you are done with the testing and ready to publish to App Store, follow along with this guide.",
+      "source_content_hash": "4f16a149182b0b00895c0d21753317234de43b79a2cc45932ba671c2334672b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成測試並準備發布至 App Store 時，請按照本指南後續步驟操作。"
+      }
+    },
+    {
+      "segment_id": "30193704",
+      "source_content": "- Launch your terminal, and navigate into the iOS folder of your app and type `open .`.\n- Double click on YOUR_APP_NAME.xcworkspace. It should launch XCode.\n- Click on `Product` → `Archive`. Make sure to set the device to \"Any iOS Device (arm64)\".",
+      "source_content_hash": "b1b61f8c4a695a583ee46d1ef19a936dcd77f1c2ef57079250e522de28fb2e61",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 開啟終端機，導航至應用程式的 iOS 資料夾並輸入 `open .`。\n- 雙擊 YOUR_APP_NAME.xcworkspace，此操作會啟動 Xcode。\n- 點擊 `Product` → `Archive`。請確認裝置設定為「Any iOS Device (arm64)」。"
+      }
+    },
+    {
+      "segment_id": "3a4225d7",
+      "source_content": ":::note\nCheck your Bundle Identifier and make sure it is exactly same as the one you have created in the Identifiers in Apple Developer Dashboard.\n:::",
+      "source_content_hash": "2317b58645f53a845153fe67031dea972605754cc6d88420437b56e12146532f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n請檢查 Bundle Identifier 是否與 Apple Developer Dashboard 中建立的 Identifiers 完全一致。\n:::"
+      }
+    },
+    {
+      "segment_id": "180e9ce9",
+      "source_content": "- After the archive is completed, in the archive window, click on `Distribute App`.\n- Click on `App Store Connect` now (if you want to publish in App Store).\n- Click `Upload` → Make sure all the check boxes are selected, hit `Next`.\n- Choose between `Automatically manage signing` and `Manually manage signing` based on your needs.\n- Click on `Upload`.\n- Now you can find it in the App Store Connect under TestFlight.",
+      "source_content_hash": "cc147c83ff86c7da45a056fec0c979f779a64df9d4fd76f6c6c363e541291bf1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 歸檔完成後，在歸檔視窗中點擊「分發應用程式」。\n- 現在點擊「App Store Connect」（若您希望發佈至App Store）。\n- 點擊「上傳」→ 確保所有核取方塊均已勾選，點擊「下一步」。\n- 根據需求選擇「自動管理簽名」或「手動管理簽名」。\n- 點擊「上傳」。\n- 現在您可以在App Store Connect的TestFlight下找到該版本。"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Now fill up the necessary information and in the Build Section, select the build of the app and click on `Save` → `Submit For Review`.",
+      "source_content_hash": "e344bfba4e572f575b4274c91d79bfa36c6b05c5cc55af9f693ab8883e816542",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在填寫必要資訊，在「建置版本」區段中選擇應用程式的建置版本，點擊「儲存」→「提交審核」。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/publishing-to-app-store.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.338201+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "9a6e71482c49579b224de03ff15353c1604c9b55f51c88c6715cd0e96d026d00"
+  }
+}

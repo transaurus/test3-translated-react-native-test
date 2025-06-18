@@ -1,0 +1,492 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2017-02-14-using-native-driver-for-animated.md",
+  "source_file_content_hash": "6994fe1d151d3dd4c18655fd588cd0c7abb719f9cfc83a9e5ddaab92cc80e601",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Using Native Driver for Animated\nauthor: Janic Duplessis\nauthorTitle: Software Engineer at App & Flow\nauthorURL: 'https://twitter.com/janicduplessis'\nauthorImageURL: 'https://secure.gravatar.com/avatar/8d6b6c0f5b228b0a8566a69de448b9dd?s=128'\nauthorTwitter: janicduplessis\ntags: [engineering]\n---",
+      "source_content_hash": "dacac26e1df5e0e60001ef40af9407888f5cd4799bef103db6ec1c8eb6055138",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "For the past year, we've been working on improving performance of animations that use the Animated library. Animations are very important to create a beautiful user experience but can also be hard to do right. We want to make it easy for developers to create performant animations without having to worry about some of their code causing it to lag.",
+      "source_content_hash": "98a74b63509a0003da9f840d2d82fb43fc08dfef0c53185524323490adc3a9b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去一年來，我們持續優化使用 Animated 函式庫的動畫效能。動畫對於打造流暢的使用者體驗至關重要，但實作難度往往較高。我們的目標是讓開發者能輕鬆創建高效能動畫，無需擔心程式碼導致的卡頓問題。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## What is this?",
+      "source_content_hash": "2a75b08d979cc4b140b184c650679ba8a330e3d70b7349963bb2b3a3e84264ee",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 這是什麼？"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "The Animated API was designed with a very important constraint in mind, it is serializable. This means we can send everything about the animation to native before it has even started and allows native code to perform the animation on the UI thread without having to go through the bridge on every frame. It is very useful because once the animation has started, the JS thread can be blocked and the animation will still run smoothly. In practice this can happen a lot because user code runs on the JS thread and React renders can also lock JS for a long time.",
+      "source_content_hash": "4455bc3606ac3fdce181d822d783c7086bcce6335f5bc9ae236232d922bc5e2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Animated API 的設計核心在於「可序列化」的關鍵約束。這意味著我們能在動畫開始前就將所有參數傳送至原生端，讓原生程式碼直接在 UI 執行緒執行動畫，無需每幀都透過橋接層溝通。此機制特別實用，因為即使動畫開始後 JS 執行緒被阻塞，動畫仍能保持流暢。實務上這種情況很常見，因為使用者程式碼與 React 渲染都可能長時間佔用 JS 執行緒。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "## A bit of history...",
+      "source_content_hash": "0dbc71ead3ce3115a02bf61dd3d54eaf69746e3fec230582e2a471eefb453a61",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 歷史回顧..."
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "This project started about a year ago, when Expo built the li.st app on Android. [Krzysztof Magiera](https://twitter.com/kzzzf) was contracted to build the initial implementation on Android. It ended up working well and li.st was the first app to ship with native driven animations using Animated. A few months later, [Brandon Withrow](https://github.com/buba447) built the initial implementation on iOS. After that, [Ryan Gomba](https://twitter.com/ryangomba) and myself worked on adding missing features like support for `Animated.event` as well as squash bugs we found when using it in production apps. This was truly a community effort and I would like to thanks everyone that was involved as well as Expo for sponsoring a large part of the development. It is now used by `Touchable` components in React Native as well as for navigation animations in the newly released [React Navigation](https://github.com/react-community/react-navigation) library.",
+      "source_content_hash": "81590ea63b7778133f4d48e803d00fe75e5faf1caa5176182872336cd47021bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此專案始於一年前，當時 Expo 為 Android 版 li.st 應用進行開發。[Krzysztof Magiera](https://twitter.com/kzzzf) 受託建置 Android 端的初始實現，成果斐然使 li.st 成為首個採用 Animated 原生驅動動畫的應用。數月後，[Brandon Withrow](https://github.com/buba447) 完成 iOS 端實現。隨後 [Ryan Gomba](https://twitter.com/ryangomba) 與我陸續加入，補齊如 `Animated.event` 支援等缺失功能，並修復生產環境中發現的問題。這真正是社群協力的成果，我要感謝所有參與者以及贊助大部分開發工作的 Expo。該技術現已用於 React Native 的 `Touchable` 元件，以及新發布的 [React Navigation](https://github.com/react-community/react-navigation) 函式庫中的導航動畫。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## How does it work?",
+      "source_content_hash": "cabe7b4ea1251edc235dc25fdf3eef20e8c6fa0220386c0293c892724a4fb177",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 運作原理"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "First, let's check out how animations currently work using Animated with the JS driver. When using Animated, you declare a graph of nodes that represent the animations that you want to perform, and then use a driver to update an Animated value using a predefined curve. You may also update an Animated value by connecting it to an event of a `View` using `Animated.event`.",
+      "source_content_hash": "7b16f760b496b977329358f3b9d2dec90bb7fcea51a76d792a525b938a818a8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先了解現行 JS 驅動模式下 Animated 的運作方式。使用 Animated 時，您需宣告代表動畫效果的節點圖，再透過驅動程式依預定義曲線更新 Animated 值。也可透過 `Animated.event` 將 Animated 值連接至 `View` 的事件來更新數值。"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "![](/blog/assets/animated-diagram.png)",
+      "source_content_hash": "1486eb449aa1273835f657dc630fc8d0dacf5913f2ebd61df4897e0c193da728",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/animated-diagram.png)"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "Here's a breakdown of the steps for an animation and where it happens:",
+      "source_content_hash": "6f8fa952b1271593467c31b9c70d7597d91e9510f66ad94fea4caaa3811eb3a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是動畫執行步驟與發生位置的分解說明："
+      }
+    },
+    {
+      "segment_id": "77bf3ec9",
+      "source_content": "- JS: The animation driver uses `requestAnimationFrame` to execute on every frame and update the value it drives using the new value it calculates based on the animation curve.\n- JS: Intermediate values are calculated and passed to a props node that is attached to a `View`.\n- JS: The `View` is updated using `setNativeProps`.\n- JS to Native bridge.\n- Native: The `UIView` or `android.View` is updated.",
+      "source_content_hash": "9ffcb5e2632e224e95ca06a5bcf706dbdcc0801a5958c13e995983330fc551fc",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- JS: 動畫驅動程式使用 `requestAnimationFrame` 每幀執行，根據動畫曲線計算新值並更新驅動的數值。\n- JS: 計算中介值並傳遞至附加於 `View` 的屬性節點。\n- JS: 透過 `setNativeProps` 更新 `View`。\n- JS 至原生橋接層。\n- 原生端: 更新 `UIView` 或 `android.View`。"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "As you can see, most of the work happens on the JS thread. If it is blocked the animation will skip frames. It also needs to go through the JS to Native bridge on every frame to update native views.",
+      "source_content_hash": "9f9ef24c54062255f0ea8db6d030836cc405a98a3d5c5935d83b8368905868d8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由此可見，多數運算發生在 JS 執行緒。若該執行緒阻塞將導致動畫掉幀，且每幀都需透過 JS-Native 橋接層更新原生視圖。"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "What the native driver does is move all of these steps to native. Since Animated produces a graph of animated nodes, it can be serialized and sent to native only once when the animation starts, eliminating the need to callback into the JS thread; the native code can take care of updating the views directly on the UI thread on every frame.",
+      "source_content_hash": "021bc9f99e55a694999f21642e92c7fcc5fa32a4f09d0b8a4d6dc88d5f802fec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生驅動程式的改良在於將所有步驟移至原生端。由於 Animated 會產生動畫節點圖，這些節點可在動畫開始時序列化並一次性傳送至原生端，消除回調 JS 執行緒的需求；原生程式碼能直接於 UI 執行緒每幀更新視圖。"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "Here's an example of how we can serialize an animated value and an interpolation node (not the exact implementation, just an example).",
+      "source_content_hash": "86c7f17b4eb2f1c7cdfa168e07ed860555f21986a1513eb44b379eb2c9bc5de5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下示範如何序列化動畫值與插值節點（非實際實作，僅為範例）："
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "Create the native value node, this is the value that will be animated:",
+      "source_content_hash": "ca205ab539da3bf0d28f089bff1342d7df39b798c0c349e7856062d72d578e59",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立原生數值節點（即待動畫化的數值）："
+      }
+    },
+    {
+      "segment_id": "d9330cd7",
+      "source_content": "```\nNativeAnimatedModule.createNode({\n  id: 1,\n  type: 'value',\n  initialValue: 0,\n});\n```",
+      "source_content_hash": "2753dfa5009b744c57586c5022d4bd09f36a50e2fe6b5af6961f83bb04c98a14",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d9330cd7"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Create the native interpolation node, this tells the native driver how to interpolate a value:",
+      "source_content_hash": "790fb139187fc3cce3b06a01518b7cf097e191bb98b390f03471b4ebe21c7c31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立原生插值節點（告知原生驅動程式如何插值）："
+      }
+    },
+    {
+      "segment_id": "ac961110",
+      "source_content": "```\nNativeAnimatedModule.createNode({\n  id: 2,\n  type: 'interpolation',\n  inputRange: [0, 10],\n  outputRange: [10, 0],\n  extrapolate: 'clamp',\n});\n```",
+      "source_content_hash": "9cf61f45a3f440f40d716db7fa511c69bd20061b253606dd6622f59b5fa653a8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ac961110"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "Create the native props node, this tells the native driver which prop on the view it is attached to:",
+      "source_content_hash": "76ca9613138dee18d971266ca33ac54aff2ab9f71a5e9c61342d6e790bd10111",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立原生屬性節點（標明其附加於視圖的哪個屬性）："
+      }
+    },
+    {
+      "segment_id": "7a577a50",
+      "source_content": "```\nNativeAnimatedModule.createNode({\n  id: 3,\n  type: 'props',\n  properties: ['style.opacity'],\n});\n```",
+      "source_content_hash": "c8b358c29018bed194f6edbf00ab0a99e8a19eeb39c0fd28d1901da1d67457d3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7a577a50"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "Connect nodes together:",
+      "source_content_hash": "df7a9f092d7e504a2311051a37f343de374314a57a306172ec9487674f977e28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "連接節點："
+      }
+    },
+    {
+      "segment_id": "9f3b4022",
+      "source_content": "```\nNativeAnimatedModule.connectNodes(1, 2);\nNativeAnimatedModule.connectNodes(2, 3);\n```",
+      "source_content_hash": "e3b37b51839704ed3f57d5ad771b57e8594e4e84a5d5ab32aa4bb925e59fa218",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9f3b4022"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "Connect the props node to a view:",
+      "source_content_hash": "a2e225d62cc88a25186c4f6f96bd0c3a9aeedfe4416825f384edc3ddce707aa9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將屬性節點連接至視圖："
+      }
+    },
+    {
+      "segment_id": "a716abf2",
+      "source_content": "```\nNativeAnimatedModule.connectToView(3, ReactNative.findNodeHandle(viewRef));\n```",
+      "source_content_hash": "023a18bbd553923b4dc5fc82d21f0ab58c3fec5f0c73692e55cbeefe5fb16255",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a716abf2"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "With that, the native animated module has all the info it needs to update the native views directly without having to go to JS to calculate any value.",
+      "source_content_hash": "6bd974bed9652eb43b0d954dab9aac854e279f86fcf53c0c94ebfbbd563009e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如此一來，原生動畫模組便擁有直接更新原生視圖所需的所有資訊，無需再透過 JavaScript 計算任何數值。"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "All there is left to do is actually start the animation by specifying what type of animation curve we want and what animated value to update. Timing animations can also be simplified by calculating every frame of the animation in advance in JS to make the native implementation smaller.",
+      "source_content_hash": "06405cada7528b38a4f5ec48fff4292335bcc90e765185110042e27b9dc6b3a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "剩下的工作就是實際啟動動畫，指定我們想要的動畫曲線類型以及要更新的動畫數值。定時動畫也可以透過在 JavaScript 中預先計算動畫的每一幀來簡化，使原生實作更精簡。"
+      }
+    },
+    {
+      "segment_id": "7d898a0e",
+      "source_content": "```\nNativeAnimatedModule.startAnimation({\n  type: 'timing',\n  frames: [0, 0.1, 0.2, 0.4, 0.65, ...],\n  animatedValueId: 1,\n});\n```",
+      "source_content_hash": "c6b286ccabae50f0b65c1c875d0a9452b93c000af316cf8dc1ba75b3bb686419",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d898a0e"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "And now here's the breakdown of what happens when the animation runs:",
+      "source_content_hash": "1df0a1325cd0728ccdda3045293d0120f9141b370adb3590b05b60f0d273b507",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是動畫運行時的具體流程："
+      }
+    },
+    {
+      "segment_id": "85aeef6c",
+      "source_content": "- Native: The native animation driver uses `CADisplayLink` or `android.view.Choreographer` to execute on every frame and update the value it drives using the new value it calculates based on the animation curve.\n- Native: Intermediate values are calculated and passed to a props node that is attached to a native view.\n- Native: The `UIView` or `android.View` is updated.",
+      "source_content_hash": "7ad09f8a37fd5e9cbd61e8804092ec0db063dac4cec4b68ee0318b0b2776e52a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 原生端：原生動畫驅動器使用 `CADisplayLink` 或 `android.view.Choreographer` 在每一幀執行，並根據動畫曲線計算的新數值更新驅動的數值。\n- 原生端：計算中間值並傳遞給附加到原生視圖的屬性節點。\n- 原生端：更新 `UIView` 或 `android.View`。"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "As you can see, no more JS thread and no more bridge which means faster animations! 🎉🎉",
+      "source_content_hash": "0e5d9a2bbd8e7c8d19ee7da659a81132a42c78f898a29b7b4f540efe8d4f7ed6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如你所見，不再需要 JavaScript 執行緒和橋接層，這意味著更流暢的動畫！🎉🎉"
+      }
+    },
+    {
+      "segment_id": "c7c92a79",
+      "source_content": "## How do I use this in my app?",
+      "source_content_hash": "265bbc76f504b383f7e9c9ed9a59376dfec38581429be66b8529e00b14a65552",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 如何在應用程式中使用此功能？"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "For normal animations the answer is simple, just add `useNativeDriver: true` to the animation config when starting it.",
+      "source_content_hash": "f9d7f99914e07bf158506678516f390d6efa6131af01deb6d3d1bbe9bf00eabf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於一般動畫，答案很簡單：在啟動動畫時，只需在動畫配置中添加 `useNativeDriver: true`。"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "Before:",
+      "source_content_hash": "c19f75585adeb5ca6184f648a2bbd8c2979eac34b1135d335e05ed6d02dcb35e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "之前："
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```\nAnimated.timing(this.state.animatedValue, {\n  toValue: 1,\n  duration: 500,\n}).start();\n```",
+      "source_content_hash": "fc87ccf15c7a74400c00474c353cae4969bbb1e99341fc3290ca3da805f86b42",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "After:",
+      "source_content_hash": "13f844407f914a0f3ef3f9f929bf5ca81c5d32651040953af389729f4bd55cf1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "之後："
+      }
+    },
+    {
+      "segment_id": "1a63b635",
+      "source_content": "```\nAnimated.timing(this.state.animatedValue, {\n  toValue: 1,\n  duration: 500,\n  useNativeDriver: true, // <-- Add this\n}).start();\n```",
+      "source_content_hash": "0d75d350e327547ffc619227a5eafc9c71189413d0d138663176d3fc86bf4ca8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a63b635"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "Animated values are only compatible with one driver so if you use native driver when starting an animation on a value, make sure every animation on that value also uses the native driver.",
+      "source_content_hash": "4ac29f7a23b7e78f512afb0881ead998ddc0a12871777447c2fa0e7000a3b827",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫數值僅與一種驅動器相容，因此如果你在啟動某個數值的動畫時使用了原生驅動器，請確保該數值的所有動畫都使用原生驅動器。"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "It also works with `Animated.event`, this is very useful if you have an animation that must follow the scroll position because without the native driver it will always run a frame behind of the gesture because of the async nature of React Native.",
+      "source_content_hash": "ab9bb77fe982442730ca5e94161502c0592062647a9ef2ff2a782d4de3fb6630",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此功能也適用於 `Animated.event`，這對於必須跟隨滾動位置的動畫非常有用，因為如果沒有原生驅動器，由於 React Native 的非同步特性，動畫總是會比手勢慢一幀。"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "Before:",
+      "source_content_hash": "c19f75585adeb5ca6184f648a2bbd8c2979eac34b1135d335e05ed6d02dcb35e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "之前："
+      }
+    },
+    {
+      "segment_id": "43cca4d3",
+      "source_content": "```\n<ScrollView\n  scrollEventThrottle={16}\n  onScroll={Animated.event(\n    [{ nativeEvent: { contentOffset: { y: this.state.animatedValue } } }]\n  )}\n>\n  {content}\n</ScrollView>\n```",
+      "source_content_hash": "334ba8423fff043a4ec08cdbef9e137cc303ec41a7b2f7f886885f770de762d6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_43cca4d3"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "After:",
+      "source_content_hash": "13f844407f914a0f3ef3f9f929bf5ca81c5d32651040953af389729f4bd55cf1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "之後："
+      }
+    },
+    {
+      "segment_id": "e481745b",
+      "source_content": "```\n<Animated.ScrollView // <-- Use the Animated ScrollView wrapper\n  scrollEventThrottle={1} // <-- Use 1 here to make sure no events are ever missed\n  onScroll={Animated.event(\n    [{ nativeEvent: { contentOffset: { y: this.state.animatedValue } } }],\n    { useNativeDriver: true } // <-- Add this\n  )}\n>\n  {content}\n</Animated.ScrollView>\n```",
+      "source_content_hash": "ca1e15465a68617709428bd05f1a9f2285a28bfc3009b3aadee3fa4906fed019",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e481745b"
+      }
+    },
+    {
+      "segment_id": "531ec0bb",
+      "source_content": "## Caveats",
+      "source_content_hash": "689cebe2875bcec60d7e6c8dad2aa091dddf7a8bb3c242a652db9a0b62b18235",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 注意事項"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "Not everything you can do with Animated is currently supported in Native Animated. The main limitation is that you can only animate non-layout properties, things like `transform` and `opacity` will work but Flexbox and position properties won't. Another one is with `Animated.event`, it will only work with direct events and not bubbling events. This means it does not work with `PanResponder` but does work with things like `ScrollView#onScroll`.",
+      "source_content_hash": "bf3fe6e0b6bdde57bae2aab40a2bf8b63e27dc18d2c71b2bbe3ca41835a6a048",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "並非所有 Animated 的功能目前都支援原生動畫。主要的限制是你只能動畫非佈局屬性，例如 `transform` 和 `opacity` 可以正常工作，但 Flexbox 和位置屬性則不行。另一個限制是 `Animated.event` 僅適用於直接事件，不適用於冒泡事件。這意味著它不適用於 `PanResponder`，但適用於 `ScrollView#onScroll` 等事件。"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "Native Animated has also been part of React Native for quite a while but has never been documented because it was considered experimental. Because of that make sure you are using a recent version (0.40+) of React Native if you want to use this feature.",
+      "source_content_hash": "cbb1200baa7f110dff7c724da5c02c14e9de49f52621d40f2be2097a20782a1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生動畫功能雖然已經在 React Native 中存在一段時間，但由於被視為實驗性功能，一直未被正式記錄。因此，如果你想使用此功能，請確保你使用的是較新版本（0.40+）的 React Native。"
+      }
+    },
+    {
+      "segment_id": "a5905b07",
+      "source_content": "## Resources",
+      "source_content_hash": "75c6211de8f8951e8037d10289e3e5d0177b8a172b593345006b5b42a8e08e0e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 資源"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "For more information about animated I recommend watching [this talk](https://www.youtube.com/watch?v=xtqUJVqpKNo) by [Christopher Chedeau](https://twitter.com/Vjeux).",
+      "source_content_hash": "71cb1e75096e3317363f50bdee355972313ea001ccabc89305cc26c74c955646",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如需更多關於動畫的資訊，我推薦觀看 [Christopher Chedeau](https://twitter.com/Vjeux) 的[這場演講](https://www.youtube.com/watch?v=xtqUJVqpKNo)。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "If you want a deep dive into animations and how offloading them to native can improve user experience there is also [this talk](https://www.youtube.com/watch?v=qgSMjYWqBk4) by [Krzysztof Magiera](https://twitter.com/kzzzf).",
+      "source_content_hash": "2371845653eff64e99fe8dc73150e755806fe74fe0c2d7ea006b60de887433bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你想深入了解動畫以及如何透過將其卸載到原生端來提升使用者體驗，也可以觀看 [Krzysztof Magiera](https://twitter.com/kzzzf) 的[這場演講](https://www.youtube.com/watch?v=qgSMjYWqBk4)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2017-02-14-using-native-driver-for-animated.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.211662+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6994fe1d151d3dd4c18655fd588cd0c7abb719f9cfc83a9e5ddaab92cc80e601"
+  }
+}

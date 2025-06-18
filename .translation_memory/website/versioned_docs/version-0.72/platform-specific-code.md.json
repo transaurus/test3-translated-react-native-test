@@ -1,0 +1,372 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/platform-specific-code.md",
+  "source_file_content_hash": "aa530f331d1df9e0fd0e4e23c93a3a21253e98ca4459c9bb5d404540c1363f2d",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: platform-specific-code\ntitle: Platform-Specific Code\n---",
+      "source_content_hash": "183d09dab13746e90d410637b5cca5b78a63638a01a2bb2aff8fae77afd2a523",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "When building a cross-platform app, you'll want to re-use as much code as possible. Scenarios may arise where it makes sense for the code to be different, for example you may want to implement separate visual components for Android and iOS.",
+      "source_content_hash": "12379cab3f2798362a257517e34204f482b0661e3cf2fb4842af3161d75ca712",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在開發跨平台應用程式時，您會希望盡可能重複使用程式碼。但某些情況下可能需要針對不同平台實作差異化程式碼，例如您可能想為 Android 和 iOS 分別實作不同的視覺元件。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "React Native provides two ways to organize your code and separate it by platform:",
+      "source_content_hash": "3112d9cc7d04f7c39c1acc42279d149d96928044be400c9c7e49d79f0b9eb842",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 提供兩種方式來組織程式碼並依平台進行區分："
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- Using the [`Platform` module](platform-specific-code.md#platform-module).\n- Using [platform-specific file extensions](platform-specific-code.md#platform-specific-extensions).",
+      "source_content_hash": "711410701c7bf06af7d7570bbddf4ac15e8d73ea2fb18a104c912137a7795e44",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用 [`Platform` 模組](platform-specific-code.md#platform-module)\n- 使用 [平台特定副檔名](platform-specific-code.md#platform-specific-extensions)"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Certain components may have properties that work on one platform only. All of these props are annotated with `@platform` and have a small badge next to them on the website.",
+      "source_content_hash": "c939c97552974345c61c215067ef8d36899f355c1b6b18fd5a4ebbc2a6b6fe4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "某些元件可能含有僅在特定平台有效的屬性。這些屬性均標註有 `@platform` 標記，並在官方網站上顯示對應的平台標籤。"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## Platform module",
+      "source_content_hash": "011a4951a2c96c3f988b71af2a5e9ef97eaf9f5d410cfb684136efa1d21952bf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Platform 模組"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "React Native provides a module that detects the platform in which the app is running. You can use the detection logic to implement platform-specific code. Use this option when only small parts of a component are platform-specific.",
+      "source_content_hash": "cc64c212bc46e4a344da47780df1f7b8008c424b225929dc54a433462f485855",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 提供了一個能檢測應用程式運行平台的模組。您可運用此檢測邏輯來實作平台特定程式碼。當只有元件的小部分需要區分平台時，建議採用此方式。"
+      }
+    },
+    {
+      "segment_id": "940e34e3",
+      "source_content": "```tsx\nimport {Platform, StyleSheet} from 'react-native';\n\nconst styles = StyleSheet.create({\n  height: Platform.OS === 'ios' ? 200 : 100,\n});\n```",
+      "source_content_hash": "b739298b481b7401f7f940d5b6471b7c6598c790df698ba393f4a0fa35e289cc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_940e34e3"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "`Platform.OS` will be `ios` when running on iOS and `android` when running on Android.",
+      "source_content_hash": "6eeef2f1cb43182552b1b1623d0127e86cd6aa31063ee2d102a23d8c1fc2e047",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Platform.OS` 在 iOS 平台會回傳 `ios`，在 Android 平台則回傳 `android`。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "There is also a `Platform.select` method available, that given an object where keys can be one of `'ios' | 'android' | 'native' | 'default'`, returns the most fitting value for the platform you are currently running on. That is, if you're running on a phone, `ios` and `android` keys will take preference. If those are not specified, `native` key will be used and then the `default` key.",
+      "source_content_hash": "f7fca53c0ae6bc752e3544e329576d34be5633de7c0de9aea1a7e124e170da7c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另提供 `Platform.select` 方法，該方法接收一個鍵值為 `'ios' | 'android' | 'native' | 'default'` 的物件，會根據當前運行平台返回最匹配的值。具體而言，在手機環境下會優先採用 `ios` 和 `android` 鍵值；若未指定，則依序使用 `native` 和 `default` 鍵值。"
+      }
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```tsx\nimport {Platform, StyleSheet} from 'react-native';\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    ...Platform.select({\n      ios: {\n        backgroundColor: 'red',\n      },\n      android: {\n        backgroundColor: 'green',\n      },\n      default: {\n        // other platforms, web for example\n        backgroundColor: 'blue',\n      },\n    }),\n  },\n});\n```",
+      "source_content_hash": "d17a2a011ac4b6e295db4c0ef64fea2e77d2397606e764b206b45543e47ecd31",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cb57d798"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "This will result in a container having `flex: 1` on all platforms, a red background color on iOS, a green background color on Android, and a blue background color on other platforms.",
+      "source_content_hash": "2c0c44db94055b68f25b35030878974d93ecee2ab77d243fa5f875d752188852",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此範例會使容器在所有平台具有 `flex: 1` 樣式，在 iOS 顯示紅色背景、Android 顯示綠色背景，其他平台則顯示藍色背景。"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "Since it accepts `any` value, you can also use it to return platform-specific components, like below:",
+      "source_content_hash": "3f0d32e528fd6282d0521ed38144f1b72991a265ab27d07ed86b88e6dd459ada",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於該方法接受 `any` 型別值，您也可用它來返回平台特定元件，如下所示："
+      }
+    },
+    {
+      "segment_id": "c3955998",
+      "source_content": "```tsx\nconst Component = Platform.select({\n  ios: () => require('ComponentIOS'),\n  android: () => require('ComponentAndroid'),\n})();\n\n<Component />;\n```",
+      "source_content_hash": "f0656e2e5e598b34366cf28be2b2471dff8bcc526bdd34d9a5b74a6f3440a204",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c3955998"
+      }
+    },
+    {
+      "segment_id": "5d4925eb",
+      "source_content": "```tsx\nconst Component = Platform.select({\n  native: () => require('ComponentForNative'),\n  default: () => require('ComponentForWeb'),\n})();\n\n<Component />;\n```",
+      "source_content_hash": "13f918fec81bb90f82fd3b267a8edefb2cbf1f5a8fb79009ec7c696acd7deb19",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5d4925eb"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "### Detecting the Android version",
+      "source_content_hash": "7d4109223a40ff21015a4712b76df010ba2c9d4fe02b2291fb2b5f1762da0438",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 檢測 Android 版本"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "On Android, the `Platform` module can also be used to detect the version of the Android Platform in which the app is running:",
+      "source_content_hash": "02e9abb1fdebe188aabad6d38baf369b1b12ef12e972303297fb31b3812b4b25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 平台，`Platform` 模組還可用於檢測應用程式運行的 Android 平台版本："
+      }
+    },
+    {
+      "segment_id": "a89f84e1",
+      "source_content": "```tsx\nimport {Platform} from 'react-native';\n\nif (Platform.Version === 25) {\n  console.log('Running on Nougat!');\n}\n```",
+      "source_content_hash": "c5b8ca505c9be0b6b3c0ee73d00b4ffe4492bf31b6e94b5dbb27aca2986c3602",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a89f84e1"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "**Note**: `Version` is set to the Android API version not the Android OS version. To find a mapping please refer to [Android Version History](https://en.wikipedia.org/wiki/Android_version_history#Overview).",
+      "source_content_hash": "679d51ee1ec45c1e57045d908c91060d60a7dc08c922b79c636216e326948508",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**注意**：`Version` 對應的是 Android API 版本號，而非 Android 作業系統版本號。版本對照表請參閱 [Android 版本歷史](https://en.wikipedia.org/wiki/Android_version_history#Overview)。"
+      }
+    },
+    {
+      "segment_id": "3a8d2b95",
+      "source_content": "### Detecting the iOS version",
+      "source_content_hash": "1b3c9a690382e4030c89453c746eb53077c51ff35de3323a2da6e54056f3b988",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 檢測 iOS 版本"
+      }
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "On iOS, the `Version` is a result of `-[UIDevice systemVersion]`, which is a string with the current version of the operating system. An example of the system version is \"10.3\". For example, to detect the major version number on iOS:",
+      "source_content_hash": "7c21d633b3bcc6b0843ec489d3c3e361452643450bbfb89c2543fd4199d45c53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 平台，`Version` 是透過 `-[UIDevice systemVersion]` 取得的字串，表示當前作業系統版本（例如 \"10.3\"）。以下示範如何檢測 iOS 的主要版本號："
+      }
+    },
+    {
+      "segment_id": "5782e280",
+      "source_content": "```tsx\nimport {Platform} from 'react-native';\n\nconst majorVersionIOS = parseInt(Platform.Version, 10);\nif (majorVersionIOS <= 9) {\n  console.log('Work around a change in behavior');\n}\n```",
+      "source_content_hash": "245cabdf546863e655040e0d1b4295a4138b747bb470463934da96f6ff228231",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5782e280"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "## Platform-specific extensions",
+      "source_content_hash": "3de58322448619c16cdbed58ee98397cce1c037811899f7356095f862f1b6373",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 平台特定副檔名"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "When your platform-specific code is more complex, you should consider splitting the code out into separate files. React Native will detect when a file has a `.ios.` or `.android.` extension and load the relevant platform file when required from other components.",
+      "source_content_hash": "128ffb04983d0c5acc661803ce2a02fd54091f48191d667313980509c850fb63",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當平台特定程式碼較為複雜時，建議將程式碼拆分至獨立檔案。React Native 會自動識別 `.ios.` 或 `.android.` 副檔名，並在元件引用時載入對應的平台檔案。"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "For example, say you have the following files in your project:",
+      "source_content_hash": "d9ee34c8cacce319d7eaa0b690c5663a87a0e58100b96fff836ff2d606081038",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，假設專案中包含以下檔案："
+      }
+    },
+    {
+      "segment_id": "c4c0fc07",
+      "source_content": "```shell\nBigButton.ios.js\nBigButton.android.js\n```",
+      "source_content_hash": "3197bb255eb0ca4036b0247967de4c1fce94808b89bc88641e3c20a035816583",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c4c0fc07"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "You can then import the component as follows:",
+      "source_content_hash": "947f438394a33c14ab19a65b6f2d9c938e5e3918b60112e6052dff076ad3789d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可透過以下方式引入該元件："
+      }
+    },
+    {
+      "segment_id": "83537d8d",
+      "source_content": "```tsx\nimport BigButton from './BigButton';\n```",
+      "source_content_hash": "feaa0c367c36475430603930d81c4271daf1c484d79d61f07adb688c651fcad0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_83537d8d"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "React Native will automatically pick up the right file based on the running platform.",
+      "source_content_hash": "83709719c204dafd5eed40ac3db84115ab642b08c3143c18d633dd011937ee6b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 會根據運行平台自動選擇正確的檔案。"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "## Native-specific extensions (i.e. sharing code with NodeJS and Web)",
+      "source_content_hash": "7b7439a77105d2deae3327475eeac7b8c3a197dbbbf46c465da3efc57bf6e86d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 原生特定副檔名（與 NodeJS 及 Web 共用程式碼）"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "You can also use the `.native.js` extension when a module needs to be shared between NodeJS/Web and React Native but it has no Android/iOS differences. This is especially useful for projects that have common code shared among React Native and ReactJS.",
+      "source_content_hash": "e7bcad5746bac7b7ecdb0decec73af4552957b9a6e66032936516166e4bcf24c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當模組需在 NodeJS/Web 與 React Native 之間共用且無 Android/iOS 差異時，可使用 `.native.js` 副檔名。此方式特別適用於 React Native 與 ReactJS 共用程式碼的專案。"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "For example, say you have the following files in your project:",
+      "source_content_hash": "d9ee34c8cacce319d7eaa0b690c5663a87a0e58100b96fff836ff2d606081038",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，假設專案中包含以下檔案："
+      }
+    },
+    {
+      "segment_id": "4e583d18",
+      "source_content": "```shell\nContainer.js # picked up by webpack, Rollup or any other Web bundler\nContainer.native.js # picked up by the React Native bundler for both Android and iOS (Metro)\n```",
+      "source_content_hash": "4f0c873f6b9f054aee69b195b98c5292f6e9b201fc26daf82eba0a3f2fabc60f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e583d18"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "You can still import it without the `.native` extension, as follows:",
+      "source_content_hash": "54cf2f0a852dd7745e03deea191a5e90282179d1361f7ee5c55a7b3276f227a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您仍可省略 `.native` 副檔名來引入該模組，如下所示："
+      }
+    },
+    {
+      "segment_id": "136818ce",
+      "source_content": "```tsx\nimport Container from './Container';\n```",
+      "source_content_hash": "ba67d3e3dd65e20fccb77d7ee63b376b6b14c0ed1c4a8af32682452e4419fff1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_136818ce"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "**Pro tip:** Configure your Web bundler to ignore `.native.js` extensions in order to avoid having unused code in your production bundle, thus reducing the final bundle size.",
+      "source_content_hash": "c8c5fccc067e225589a4634b26cb59ab38ac5083f8b242946c840acaa747464b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**專業建議：** 設定您的網頁打包工具忽略 `.native.js` 副檔名，以避免在生產環境打包中包含未使用的程式碼，從而減少最終打包體積。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/platform-specific-code.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.416506+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "aa530f331d1df9e0fd0e4e23c93a3a21253e98ca4459c9bb5d404540c1363f2d"
+  }
+}

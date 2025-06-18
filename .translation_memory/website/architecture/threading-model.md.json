@@ -1,0 +1,312 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "architecture/threading-model.md",
+  "source_file_content_hash": "1c67c26f4a3276be76af86ef24a8923ba111ade10f857310a57e2775966997df",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: threading-model\ntitle: Threading Model\n---",
+      "source_content_hash": "1f2011818fe921723540a1e43cbb63a9fb13b14b9d16764975f9a8e8a96a747f",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import FabricWarning from './\\_fabric-warning.mdx';",
+      "source_content_hash": "a168f9bd30da9cdf9bd0e17ed1ea4be8bece553316bc143cb70869369fde84bc",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<FabricWarning />",
+      "source_content_hash": "4c8a380c6cadf80af09be6749221fcde360be9284e0671cfa791434949c8b3d2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_37387e33"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "#### The React Native renderer distributes the work of the [render pipeline](render-pipeline) across multiple threads.",
+      "source_content_hash": "f5231032f04b1579f2ce80642db314837ef92c57da98a3c6f33149b43a9b3caf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### React Native 渲染器將[渲染管線](render-pipeline)的工作分配至多個執行緒"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Here we define the threading model and provide some examples to illustrate thread usage of the render pipeline.",
+      "source_content_hash": "a77307b0341942507a07d14f5379ca4cb9dd2b6673f3eb36980c1b4c73f08a15",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此處我們定義執行緒模型，並提供範例說明渲染管線的執行緒使用方式"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "React Native renderer is designed to be thread safe. At a high level thread safety is guaranteed by using immutable data structures in the internals of the framework (enforced by C++ “const correctness” feature). This means that every update in React creates or clones new objects in the renderer instead of updating data structures. This allows the framework to expose thread safe and synchronous APIs to React.",
+      "source_content_hash": "4c380a08a49a0c6277f7dfc032120c8b9432ec677b55adbe3f589af84d3a8243",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 渲染器設計為執行緒安全。高層級上，透過在框架內部使用不可變資料結構（由 C++「const correctness」特性強制實施）來保證執行緒安全。這意味著 React 中的每次更新都會在渲染器中創建或克隆新物件，而非修改現有資料結構。此設計讓框架能向 React 提供執行緒安全且同步的 API"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "The renderer uses two different threads:",
+      "source_content_hash": "52f05e33c314de9d15354719d0faf9cacdf032850dbf226d1d741781eb4d4d1d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "渲染器使用兩種不同執行緒："
+      }
+    },
+    {
+      "segment_id": "11c829ab",
+      "source_content": "- **UI thread** (often called main): The only thread that can manipulate host views.\n- **JavaScript thread**: This is where React’s render phase, as well as layout, are executed.",
+      "source_content_hash": "582ec82812370b40ad714e77125f343e91379d6859533fcf333d61a55429e731",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **UI 執行緒**（常稱為主執行緒）：唯一能操作宿主視圖的執行緒\n- **JavaScript 執行緒**：執行 React 渲染階段與布局計算的執行緒"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Let’s review the supported scenarios of execution for each phase:",
+      "source_content_hash": "c3bf50a42be78a360998e2637c622cb6935ffe74544f5e7217bf5e4d09bae790",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下檢視各階段支援的執行情境："
+      }
+    },
+    {
+      "segment_id": "b7a64917",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/Architecture/threading-model/symbols.png\" alt=\"Threading model symbols\" />\n</figure>",
+      "source_content_hash": "da45692a99aa4ceb7a01eec84cb2ef3b107d219532c144e2e4e23d5b844582fb",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7a64917"
+      }
+    },
+    {
+      "segment_id": "fa430ad4",
+      "source_content": "## Render Scenarios",
+      "source_content_hash": "688dadc990ad5a6ac5acbf9820b36571445fe843e0d5c39719b1e79e5afca2ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 渲染情境"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "### Render in a JS Thread",
+      "source_content_hash": "4fdfadac7c7a756bb9c6fe7f5608f7a06b910c1bd332d8193d8579cf51f5277a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 JS 執行緒中渲染"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "This is the most common scenario where most of the render pipeline happens on JavaScript thread.",
+      "source_content_hash": "2a0d0256869524986fb28f61e3b069dc843c2e40918eb26ce9663955b234ef1f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是最常見的情境，多數渲染管線流程發生在 JavaScript 執行緒"
+      }
+    },
+    {
+      "segment_id": "2a70bec8",
+      "source_content": "<figure>\n\t<img src=\"/docs/assets/Architecture/threading-model/case-1.jpg\" alt=\"Threading model use case one\" />\n</figure>",
+      "source_content_hash": "d2ac54addb5d4824fff063f7b0f73d3d9dc3a86c46e28e812994935955a3af32",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2a70bec8"
+      }
+    },
+    {
+      "segment_id": "4fdcb1ee",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "62a6890b",
+      "source_content": "### Render in the UI Thread",
+      "source_content_hash": "f32737d1e5e303946bddbd748346fd5a6373d4dd71c6b144cbcd8702d772076f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 UI 執行緒中渲染"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "When there is a high priority event on the UI Thread, the renderer is able to execute all the render pipeline synchronously on the UI thread.",
+      "source_content_hash": "f62af57f44cca8e2c4407be7c206afc53b11397137f517978c65da82789f36b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 UI 執行緒有高優先級事件時，渲染器能同步在 UI 執行緒執行完整渲染管線"
+      }
+    },
+    {
+      "segment_id": "f4a3226e",
+      "source_content": "<figure>\n\t<img src=\"/docs/assets/Architecture/threading-model/case-2.jpg\" alt=\"Threading model use case two\" />\n</figure>",
+      "source_content_hash": "14da9c3d4e1f4236930222a1598f9f3be87a81c14166f4efa2a6413846811b85",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f4a3226e"
+      }
+    },
+    {
+      "segment_id": "94f98fb8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "### Default or continuous event interruption",
+      "source_content_hash": "de85f53e493b74676cb6b32752bd13335b0fd5c014fc739844541a0023f04432",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 預設或連續事件中斷"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "This scenario shows the interruption of the render phase by a low priority event in the UI thread. React and the React Native renderer are able to interrupt the render phase and merge its state with a low priority event that is executed on the UI thread. In this case the render process continues executing in the JS thread.",
+      "source_content_hash": "9979eb7ec66bd99bf6156bd85aac8613433110864851fca0c8f34c28b7e61122",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此情境展示 UI 執行緒低優先級事件中斷渲染階段。React 與 React Native 渲染器能中斷渲染階段，並將其狀態與 UI 執行緒執行的低優先級事件合併。此時渲染流程會繼續在 JS 執行緒執行"
+      }
+    },
+    {
+      "segment_id": "8296bd42",
+      "source_content": "<figure>\n\t<img src=\"/docs/assets/Architecture/threading-model/case-3.jpg\" alt=\"Threading model use case three\" />\n</figure>",
+      "source_content_hash": "4d93a39b1be1d038daa5179e94c29c8f15fb8ffd6f57ed0cfdd53fa279c40b63",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8296bd42"
+      }
+    },
+    {
+      "segment_id": "6e9a41d8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "### Discrete event interruption",
+      "source_content_hash": "6ece0bd44c9a7e1856b76a612c96fb8fd7886b200da2ae2fbcd2b0b3adeffef2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 離散事件中斷"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "The render phase is interruptible. This scenario shows the interruption of the render phase by a high priority event in the UI thread. React and the renderer are able to interrupt the render phase and merge its state with a high priority event that was executed on the UI thread. The render phase executes synchronously on the UI thread.",
+      "source_content_hash": "0a3e84bbb90d556f6ce9923da0b213b0764953db6c137e7cab9c6c1da9e29a30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "渲染階段可被中斷。此情境展示 UI 執行緒高優先級事件中斷渲染階段。React 與渲染器能中斷渲染階段，並將其狀態與 UI 執行緒執行的高優先級事件合併。渲染階段會同步在 UI 執行緒執行"
+      }
+    },
+    {
+      "segment_id": "abc45ff5",
+      "source_content": "<figure>\n\t<img src=\"/docs/assets/Architecture/threading-model/case-4.jpg\" alt=\"Threading model use case four\" />\n</figure>",
+      "source_content_hash": "372dcee4783ec5c6035371618de95725e28a0d939759ff08b61f547a54885e80",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_abc45ff5"
+      }
+    },
+    {
+      "segment_id": "379f9c7b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3ef18741",
+      "source_content": "### C++ State update",
+      "source_content_hash": "ab789500ca65074d749ec643e4bc05501d192f33c6d3a70f6d5bd4d19bd525ac",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### C++ 狀態更新"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "Update originating on UI thread and skips rendering phase. See [React Native Renderer State Updates](render-pipeline#react-native-renderer-state-updates) for more details.",
+      "source_content_hash": "9445d2e34c50f54858e0aeaa7ee85ed13ab55c0135c5e9db9dc62dbb08f83552",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "源自 UI 執行緒的更新會跳過渲染階段。詳見 [React Native 渲染器狀態更新](render-pipeline#react-native-renderer-state-updates)"
+      }
+    },
+    {
+      "segment_id": "32db7046",
+      "source_content": "<figure>\n\t<img src=\"/docs/assets/Architecture/threading-model/case-6.jpg\" alt=\"Threading model use case six\" />\n</figure>",
+      "source_content_hash": "42f529f7bf12b8aa203fd4d58f9ae518b8235134c2f41cb56719e79455774f71",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_32db7046"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-architecture/threading-model.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.239764+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "1c67c26f4a3276be76af86ef24a8923ba111ade10f857310a57e2775966997df"
+  }
+}

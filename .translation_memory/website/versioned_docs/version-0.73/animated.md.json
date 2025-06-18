@@ -1,0 +1,1692 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/animated.md",
+  "source_file_content_hash": "8de18b179b93ab56049a92d9ecf2a2c5ec597959f2d0788df85e094278b6da7e",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: animated\ntitle: Animated\n---",
+      "source_content_hash": "2231a0824c63afb4305416ffaf586ce3d8c875fdb6df4b90a6ad89754bdfc8eb",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The `Animated` library is designed to make animations fluid, powerful, and painless to build and maintain. `Animated` focuses on declarative relationships between inputs and outputs, configurable transforms in between, and `start`/`stop` methods to control time-based animation execution.",
+      "source_content_hash": "e4e5e788ecb610ba01e7308c1b0ab93aa7791091a7f69d6b17dfd26906add8bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 函式庫專為打造流暢、強大且易於建置維護的動畫而設計。它聚焦於輸入與輸出間的宣告式關係，可配置的中間轉換過程，以及透過 `start`/`stop` 方法來控制基於時間軸的動畫執行。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The core workflow for creating an animation is to create an `Animated.Value`, hook it up to one or more style attributes of an animated component, and then drive updates via animations using `Animated.timing()`.",
+      "source_content_hash": "26dcd454f836aa197911dedfe52e7333b5cf2751f0d03785893711b3521ec4b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立動畫的核心流程是：創建一個 `Animated.Value`，將其綁定至動畫元件的一個或多個樣式屬性，然後透過 `Animated.timing()` 驅動動畫更新。"
+      }
+    },
+    {
+      "segment_id": "2f796981",
+      "source_content": "> Don't modify the animated value directly. You can use the [`useRef` Hook](https://reactjs.org/docs/hooks-reference.html#useref) to return a mutable ref object. This ref object's `current` property is initialized as the given argument and persists throughout the component lifecycle.",
+      "source_content_hash": "54f77088ebf56f95a868eef9329997eece84f57c1ad523d097ee0dbbed722e47",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請勿直接修改動畫值。您可以使用 [`useRef` Hook](https://reactjs.org/docs/hooks-reference.html#useref) 返回一個可變的 ref 物件，該物件的 `current` 屬性會被初始化為傳入參數，並在元件生命週期內持續存在。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The following example contains a `View` which will fade in and fade out based on the animated value `fadeAnim`",
+      "source_content_hash": "310fefa3ab7e6b9ec06f185b59f8807bb5136d0ea1b80c3832db4abd314d86b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下範例包含一個 `View`，其透明度會根據動畫值 `fadeAnim` 進行淡入淡出效果："
+      }
+    },
+    {
+      "segment_id": "41ad46a6",
+      "source_content": "```SnackPlayer name=Animated&supportedPlatforms=ios,android\nimport React from 'react';\nimport {\n  Animated,\n  Text,\n  View,\n  StyleSheet,\n  Button,\n  SafeAreaView,\n  useAnimatedValue,\n} from 'react-native';\n\nconst App = () => {\n  // fadeAnim will be used as the value for opacity. Initial Value: 0\n  const fadeAnim = useAnimatedValue(0);\n\n  const fadeIn = () => {\n    // Will change fadeAnim value to 1 in 5 seconds\n    Animated.timing(fadeAnim, {\n      toValue: 1,\n      duration: 5000,\n      useNativeDriver: true,\n    }).start();\n  };\n\n  const fadeOut = () => {\n    // Will change fadeAnim value to 0 in 3 seconds\n    Animated.timing(fadeAnim, {\n      toValue: 0,\n      duration: 3000,\n      useNativeDriver: true,\n    }).start();\n  };\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <Animated.View\n        style={[\n          styles.fadingContainer,\n          {\n            // Bind opacity to animated value\n            opacity: fadeAnim,\n          },\n        ]}>\n        <Text style={styles.fadingText}>Fading View!</Text>\n      </Animated.View>\n      <View style={styles.buttonRow}>\n        <Button title=\"Fade In View\" onPress={fadeIn} />\n        <Button title=\"Fade Out View\" onPress={fadeOut} />\n      </View>\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  fadingContainer: {\n    padding: 20,\n    backgroundColor: 'powderblue',\n  },\n  fadingText: {\n    fontSize: 28,\n  },\n  buttonRow: {\n    flexBasis: 100,\n    justifyContent: 'space-evenly',\n    marginVertical: 16,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "84cd80f771e1ae10f23d90e63b13f3ea4951b8829f8ff1f62d92718e96fe6a86",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41ad46a6"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "Refer to the [Animations](animations#animated-api) guide to see additional examples of `Animated` in action.",
+      "source_content_hash": "d5c5b530aa1fbf77793ae79c42440303e130257cd557686ed0175a53d0936dcc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請參閱 [動畫指南](animations#animated-api) 以查看更多實際運用 `Animated` 的範例。"
+      }
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "## Overview",
+      "source_content_hash": "7337f3d0aa29e9a82b8f1650b743a98eef90794631fa763a319686e69c546821",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 概覽"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "There are two value types you can use with `Animated`:",
+      "source_content_hash": "6f0ce0d20a027f6c1e0e87974d17d90b10dbbbf4b262a041147505863e93e13c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 提供兩種數值類型可供使用："
+      }
+    },
+    {
+      "segment_id": "dee20070",
+      "source_content": "- [`Animated.Value()`](animated#value) for single values\n- [`Animated.ValueXY()`](animated#valuexy) for vectors",
+      "source_content_hash": "54feaf9b2aaeb3be85bf91e6253d5c9128d35e4d8cd1f882f63a86e13cada4bf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`Animated.Value()`](animated#value) 用於單一數值\n- [`Animated.ValueXY()`](animated#valuexy) 用於向量"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "`Animated.Value` can bind to style properties or other props, and can be interpolated as well. A single `Animated.Value` can drive any number of properties.",
+      "source_content_hash": "f1d45439bc6a1d0c8bb3388b06f6c4c5af3d97aea53de9e2272c19f92831bff2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated.Value` 可綁定至樣式屬性或其他屬性，並可進行插值計算。單一 `Animated.Value` 能驅動任意數量的屬性。"
+      }
+    },
+    {
+      "segment_id": "71169a2d",
+      "source_content": "### Configuring animations",
+      "source_content_hash": "593875e88306417de19107bda268eeaf6ce5761ebc436177607362e9b9821305",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 設定動畫"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "`Animated` provides three types of animation types. Each animation type provides a particular animation curve that controls how your values animate from their initial value to the final value:",
+      "source_content_hash": "00d05d3786fb7c653053fe44e16bc1afd535b1f06eda26791ada491ecc6b03b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 提供三種動畫類型，每種類型都有特定的動畫曲線，控制數值如何從初始值變化至最終值："
+      }
+    },
+    {
+      "segment_id": "7a3b7c62",
+      "source_content": "- [`Animated.decay()`](animated#decay) starts with an initial velocity and gradually slows to a stop.\n- [`Animated.spring()`](animated#spring) provides a basic spring physics model.\n- [`Animated.timing()`](animated#timing) animates a value over time using [easing functions](easing).",
+      "source_content_hash": "140352a99706f63109c1ef109091e4d0663eb1d32fdd53d10b4d05bd8acd21ce",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`Animated.decay()`](animated#decay) 以初始速度開始並逐漸減速至停止\n- [`Animated.spring()`](animated#spring) 提供基礎彈簧物理模型\n- [`Animated.timing()`](animated#timing) 使用[緩動函式](easing)隨時間變化動畫數值"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "In most cases, you will be using `timing()`. By default, it uses a symmetric easeInOut curve that conveys the gradual acceleration of an object to full speed and concludes by gradually decelerating to a stop.",
+      "source_content_hash": "1db7f1a8d4f67cf1bddf387b7a028b3addbedf077aa5b6c4156f677ade20b23b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "多數情況下會使用 `timing()`。預設採用對稱的 easeInOut 曲線，模擬物體逐漸加速至全速後再減速停止的過程。"
+      }
+    },
+    {
+      "segment_id": "ab39e8a7",
+      "source_content": "### Working with animations",
+      "source_content_hash": "4441b1ffa9e4ad4798e33b15c2b3874cf593dd60cd85aeb54c7e4e2cc5e8e8ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 動畫操作"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "Animations are started by calling `start()` on your animation. `start()` takes a completion callback that will be called when the animation is done. If the animation finished running normally, the completion callback will be invoked with `{finished: true}`. If the animation is done because `stop()` was called on it before it could finish (e.g. because it was interrupted by a gesture or another animation), then it will receive `{finished: false}`.",
+      "source_content_hash": "87b443fb9208a922376aee4d34530e724969757bc9bfcf1272320fd33a700ad1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過呼叫動畫的 `start()` 方法啟動動畫。`start()` 接受一個完成回調函式，當動畫結束時會被呼叫。若動畫正常完成，回調函式會收到 `{finished: true}`；若因中途呼叫 `stop()` 而中止（例如被手勢或其他動畫打斷），則會收到 `{finished: false}`。"
+      }
+    },
+    {
+      "segment_id": "5347a9b5",
+      "source_content": "```tsx\nAnimated.timing({}).start(({finished}) => {\n  /* completion callback */\n});\n```",
+      "source_content_hash": "45c349c6551aabc17716234964768619d9b5320d49b24b1acf756927a817f64a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5347a9b5"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### Using the native driver",
+      "source_content_hash": "5d8075c6531f059e469ed970a361af8eebaa94518f8a4244ab19f1de3d5bc989",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用原生驅動"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "By using the native driver, we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.",
+      "source_content_hash": "ba679ce92946851d89a9d9aca165d8e07d1005424e3b4213874fd0af95492dc9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "啟用原生驅動後，系統會在動畫開始前將所有動畫參數傳送至原生端，讓原生代碼能在 UI 線程執行動畫，無需每幀都透過橋接通訊。動畫啟動後，即使 JS 線程阻塞也不會影響動畫運行。"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. See the [Animations](animations#using-the-native-driver) guide to learn more.",
+      "source_content_hash": "f5755428364ab72a477287112aa6a856d89facd7397730a9fc45e076241ca250",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在動畫配置中指定 `useNativeDriver: true` 即可啟用原生驅動。詳見[動畫指南](animations#using-the-native-driver)。"
+      }
+    },
+    {
+      "segment_id": "4dd6a631",
+      "source_content": "### Animatable components",
+      "source_content_hash": "7544c03c68d1dfc660230246fbcb7df9902e226ba2acd8a43d4e65419fd0a96e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 可動畫化元件"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "Only animatable components can be animated. These unique components do the magic of binding the animated values to the properties, and do targeted native updates to avoid the cost of the React render and reconciliation process on every frame. They also handle cleanup on unmount so they are safe by default.",
+      "source_content_hash": "3b0fe83aa8b69e3cef6aab8468c15012a5eb06e73f3c5c00c5243d51b6af0623",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "只有可動畫化元件才能應用動畫效果。這些特殊元件會將動畫值綁定至屬性，並透過針對性的原生更新來避免每幀都觸發 React 渲染與協調過程的開銷，同時會在卸載時自動處理清理工作確保安全性。"
+      }
+    },
+    {
+      "segment_id": "d30a9380",
+      "source_content": "- [`createAnimatedComponent()`](animated#createanimatedcomponent) can be used to make a component animatable.",
+      "source_content_hash": "54e2ce5486d0c552840c73360269a4de57a846c104db3c8ce15bb14f5e4cdeca",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用 [`createAnimatedComponent()`](animated#createanimatedcomponent) 可將元件轉為可動畫化。"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "`Animated` exports the following animatable components using the above wrapper:",
+      "source_content_hash": "8cf0315faaa6791bcd5e846af11e43c6e271ccc5b3e51c53ce4d74923a1b537c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated` 導出以下透過上述封裝器處理的可動畫化元件："
+      }
+    },
+    {
+      "segment_id": "9ceae896",
+      "source_content": "- `Animated.Image`\n- `Animated.ScrollView`\n- `Animated.Text`\n- `Animated.View`\n- `Animated.FlatList`\n- `Animated.SectionList`",
+      "source_content_hash": "6d50887f750b6e214e2169ea8021b3aa37187cbc8b1387e253f47390b09022e4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `Animated.Image`\n- `Animated.ScrollView`\n- `Animated.Text`\n- `Animated.View`\n- `Animated.FlatList`\n- `Animated.SectionList`"
+      }
+    },
+    {
+      "segment_id": "af843cee",
+      "source_content": "### Composing animations",
+      "source_content_hash": "60f8b794928e38f67e12e381e02c208987ccbdce67e54f833d8421b0794542f7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 動畫組合"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "Animations can also be combined in complex ways using composition functions:",
+      "source_content_hash": "c30e56c5af3dbf242301c0daa15e410b22bc42ce9bc0df6db9cd883c47b77b64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫也可以透過組合函數以複雜的方式結合："
+      }
+    },
+    {
+      "segment_id": "739843fe",
+      "source_content": "- [`Animated.delay()`](animated#delay) starts an animation after a given delay.\n- [`Animated.parallel()`](animated#parallel) starts a number of animations at the same time.\n- [`Animated.sequence()`](animated#sequence) starts the animations in order, waiting for each to complete before starting the next.\n- [`Animated.stagger()`](animated#stagger) starts animations in order and in parallel, but with successive delays.",
+      "source_content_hash": "7cae979ea0e2826a0216481ee2cbc6509cf49e117d4ff5cb3afc7ebb3dd7d4c3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`Animated.delay()`](animated#delay) 在指定延遲後開始動畫。\n- [`Animated.parallel()`](animated#parallel) 同時開始多個動畫。\n- [`Animated.sequence()`](animated#sequence) 按順序開始動畫，等待每個動畫完成後才開始下一個。\n- [`Animated.stagger()`](animated#stagger) 按順序並行開始動畫，但具有連續的延遲。"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "Animations can also be chained together by setting the `toValue` of one animation to be another `Animated.Value`. See [Tracking dynamic values](animations#tracking-dynamic-values) in the Animations guide.",
+      "source_content_hash": "cfd94a94c7729554d150e2c55a54c63c09fb32d8ff8fd99320c635b55b3182c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫也可以透過將一個動畫的 `toValue` 設為另一個 `Animated.Value` 來串聯。請參閱動畫指南中的[追蹤動態值](animations#tracking-dynamic-values)。"
+      }
+    },
+    {
+      "segment_id": "619c3209",
+      "source_content": "By default, if one animation is stopped or interrupted, then all other animations in the group are also stopped.",
+      "source_content_hash": "3f7efa20ec585f352c0db0816e5fbca2543d9d9502b9783abada8d5550a4b7c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，如果一個動畫被停止或中斷，則群組中的所有其他動畫也會停止。"
+      }
+    },
+    {
+      "segment_id": "97afbaf0",
+      "source_content": "### Combining animated values",
+      "source_content_hash": "d5725af6ad6addb4fa0f6f0576624474ac53434215e19209506205e6fdf871ed",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 結合動畫值"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "You can combine two animated values via addition, subtraction, multiplication, division, or modulo to make a new animated value:",
+      "source_content_hash": "1bb02501f09ccb3a204d59aa32870478cfd23f11fc5d001c3637000cc9a38a7d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以透過加法、減法、乘法、除法或取模來結合兩個動畫值，以創建新的動畫值："
+      }
+    },
+    {
+      "segment_id": "db343862",
+      "source_content": "- [`Animated.add()`](animated#add)\n- [`Animated.subtract()`](animated#subtract)\n- [`Animated.divide()`](animated#divide)\n- [`Animated.modulo()`](animated#modulo)\n- [`Animated.multiply()`](animated#multiply)",
+      "source_content_hash": "e5f96ec94addf4688dc5f62e0e954964d8b8890d7aaced0d13a788c064aa161a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`Animated.add()`](animated#add)\n- [`Animated.subtract()`](animated#subtract)\n- [`Animated.divide()`](animated#divide)\n- [`Animated.modulo()`](animated#modulo)\n- [`Animated.multiply()`](animated#multiply)"
+      }
+    },
+    {
+      "segment_id": "08f73f73",
+      "source_content": "### Interpolation",
+      "source_content_hash": "d754974511f9e5dfafe9487e64ac23adb03a9c3eab32484fb848b9efd14475ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 插值"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "The `interpolate()` function allows input ranges to map to different output ranges. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value. It uses linear interpolation by default but also supports easing functions.",
+      "source_content_hash": "c98b3264f9c906838afe1f6762aaff2148bb5c27575f1d6666f53e8caecb3886",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`interpolate()` 函數允許將輸入範圍映射到不同的輸出範圍。預設情況下，它會將曲線外推到給定的範圍之外，但您也可以讓它限制輸出值。它預設使用線性插值，但也支援緩動函數。"
+      }
+    },
+    {
+      "segment_id": "8a75aa33",
+      "source_content": "- [`interpolate()`](animated#interpolate)",
+      "source_content_hash": "fb89df347da3603d7ce246c8b6c26468390c47afdd2ac379376fd34019f6450d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`interpolate()`](animated#interpolate)"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Read more about interpolation in the [Animation](animations#interpolation) guide.",
+      "source_content_hash": "e302281f18c11ce431b4be3cdb2327d2298931bc462b591c2ffebb94b73dc7ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有關插值的更多資訊，請參閱[動畫](animations#interpolation)指南。"
+      }
+    },
+    {
+      "segment_id": "a6b29dc7",
+      "source_content": "### Handling gestures and other events",
+      "source_content_hash": "f7cabe758609abf64c7157a533758f549dbea116be0ff73c61b1675a698c4c46",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 處理手勢和其他事件"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "Gestures, like panning or scrolling, and other events can map directly to animated values using `Animated.event()`. This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.",
+      "source_content_hash": "6685438425c35687a44f90e2c52b1f0eca159cb7ed3f2146c4329af5ad31d9a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "手勢（如平移或滾動）和其他事件可以使用 `Animated.event()` 直接映射到動畫值。這是透過結構化映射語法完成的，以便可以從複雜的事件對象中提取值。第一層是一個數組，允許跨多個參數進行映射，該數組包含嵌套的對象。"
+      }
+    },
+    {
+      "segment_id": "6df73775",
+      "source_content": "- [`Animated.event()`](animated#event)",
+      "source_content_hash": "1527fb87d4001c1a191210b42f84eb59ce8fc6b0f8705484a78c3c9c4b58fb77",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`Animated.event()`](animated#event)"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):",
+      "source_content_hash": "a51325d2b0923e7ac6a21c69b70c54ece615c7a54a420dd6a077b3e6d6e9a719",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，在處理水平滾動手勢時，您可以將 `event.nativeEvent.contentOffset.x` 映射到 `scrollX`（一個 `Animated.Value`）："
+      }
+    },
+    {
+      "segment_id": "8185786b",
+      "source_content": "```tsx\n onScroll={Animated.event(\n   // scrollX = e.nativeEvent.contentOffset.x\n   [{nativeEvent: {\n        contentOffset: {\n          x: scrollX\n        }\n      }\n    }]\n )}\n```",
+      "source_content_hash": "683c8602997b91de6f726a3febe6ee5db3f4216e882286d92ffb6e3bc21293b1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8185786b"
+      }
+    },
+    {
+      "segment_id": "e5e7e900",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3bff4086",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "8159e12a",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "When the given value is a ValueXY instead of a Value, each config option may be a vector of the form `{x: ..., y: ...}` instead of a scalar.",
+      "source_content_hash": "17ee730f185d158b7cd8b6c5717b2d3303afeed3a1f431ddb797ac25974b4c59",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當給定的值是 ValueXY 而不是 Value 時，每個配置選項可以是向量形式 `{x: ..., y: ...}` 而不是標量。"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### `decay()`",
+      "source_content_hash": "246910e1978675a1a1139c47b8a6a56cce3f2df82256f006975e1a3d821b2fe8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `decay()`"
+      }
+    },
+    {
+      "segment_id": "cf50de8a",
+      "source_content": "```tsx\nstatic decay(value, config): CompositeAnimation;\n```",
+      "source_content_hash": "4f765990426878d0c69086e6241daf83052e532166558257179fa35cf90b61de",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cf50de8a"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "Animates a value from an initial velocity to zero based on a decay coefficient.",
+      "source_content_hash": "a6c7310ef135206cc9b00fe1bc22ef16da38174649e183338a1f7b6376b64237",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "根據衰減係數，從初始速度到零動畫化一個值。"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "Config is an object that may have the following options:",
+      "source_content_hash": "c2a7d5f1a2407a9f7a21659a4065c71336ef12f66a783c6df855907ed1ae801d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "配置是一個可能具有以下選項的對象："
+      }
+    },
+    {
+      "segment_id": "fc1505a1",
+      "source_content": "- `velocity`: Initial velocity. Required.\n- `deceleration`: Rate of decay. Default 0.997.\n- `isInteraction`: Whether or not this animation creates an \"interaction handle\" on the `InteractionManager`. Default true.\n- `useNativeDriver`: Uses the native driver when true. Required.",
+      "source_content_hash": "40cec226985d0bca04d63b12087d2bd1ae7c59b8132cc8cdce27a3ee6e576b82",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `velocity`: 初始速度。必需。\n- `deceleration`: 衰減率。預設 0.997。\n- `isInteraction`: 此動畫是否在 `InteractionManager` 上創建「互動句柄」。預設 true。\n- `useNativeDriver`: 為 true 時使用原生驅動。必需。"
+      }
+    },
+    {
+      "segment_id": "6db567c3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "### `timing()`",
+      "source_content_hash": "d25c5ba664f98b8d148009f974596e991bd8d58f8dc62c40e8b25a444ae31b59",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `timing()`"
+      }
+    },
+    {
+      "segment_id": "93bf74a6",
+      "source_content": "```tsx\nstatic timing(value, config): CompositeAnimation;\n```",
+      "source_content_hash": "46d7d2b8f1916aa432979e3f7aeb3030e0af7e55c5b44ffc4aa4ba136d46c6ed",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93bf74a6"
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "Animates a value along a timed easing curve. The [`Easing`](easing) module has tons of predefined curves, or you can use your own function.",
+      "source_content_hash": "259f4b5ebe0868a4fd08aa2132cd28b3e7bc7ba07ccb5ad20fc43fba8795de6b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "沿著定時緩動曲線動畫化一個值。[`Easing`](easing) 模組有許多預定義的曲線，或者您可以使用自己的函數。"
+      }
+    },
+    {
+      "segment_id": "01902900",
+      "source_content": "Config is an object that may have the following options:",
+      "source_content_hash": "c2a7d5f1a2407a9f7a21659a4065c71336ef12f66a783c6df855907ed1ae801d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "配置是一個可能具有以下選項的對象："
+      }
+    },
+    {
+      "segment_id": "070cad33",
+      "source_content": "- `duration`: Length of animation (milliseconds). Default 500.\n- `easing`: Easing function to define curve. Default is `Easing.inOut(Easing.ease)`.\n- `delay`: Start the animation after delay (milliseconds). Default 0.\n- `isInteraction`: Whether or not this animation creates an \"interaction handle\" on the `InteractionManager`. Default true.\n- `useNativeDriver`: Uses the native driver when true. Required.",
+      "source_content_hash": "fad6f34ff9bcd75c9b5fd5c69344645ea686b95372707a78f0dd165c9e87b243",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `duration`: 動畫長度（毫秒）。預設 500。\n- `easing`: 定義曲線的緩動函數。預設為 `Easing.inOut(Easing.ease)`。\n- `delay`: 在延遲後開始動畫（毫秒）。預設 0。\n- `isInteraction`: 此動畫是否在 `InteractionManager` 上創建「互動句柄」。預設 true。\n- `useNativeDriver`: 為 true 時使用原生驅動。必需。"
+      }
+    },
+    {
+      "segment_id": "7d0c5ba2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7eac7922",
+      "source_content": "### `spring()`",
+      "source_content_hash": "259bc416473e44bcb3273916b87f2e356cac0632984f0bcff82cfb0a696fbed5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `spring()`"
+      }
+    },
+    {
+      "segment_id": "bce471ae",
+      "source_content": "```tsx\nstatic spring(value, config): CompositeAnimation;\n```",
+      "source_content_hash": "a99bef71ad534f86781f63a3dca150d67cb71d95cdffb5780a122ba3f3d0adc8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bce471ae"
+      }
+    },
+    {
+      "segment_id": "face5559",
+      "source_content": "Animates a value according to an analytical spring model based on [damped harmonic oscillation](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator). Tracks velocity state to create fluid motions as the `toValue` updates, and can be chained together.",
+      "source_content_hash": "d0cfd8ca0694421ce314bd18ecc79d7eb6561846e9232a5636f021734eb7aeef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "根據[阻尼諧振子](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator)的解析彈簧模型動畫化數值。追蹤速度狀態以在`toValue`更新時創建流暢運動，並可串聯使用。"
+      }
+    },
+    {
+      "segment_id": "43287462",
+      "source_content": "Config is an object that may have the following options.",
+      "source_content_hash": "d0e622e11095dd1e5c742fff1962436f93400aa74682e2b6a7da3789e8b19668",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "配置為一個物件，可能包含以下選項。"
+      }
+    },
+    {
+      "segment_id": "6dc3e423",
+      "source_content": "Note that you can only define one of bounciness/speed, tension/friction, or stiffness/damping/mass, but not more than one:",
+      "source_content_hash": "af42b61ce55d406e12e6568a7123478d1e38c4376d5f1f0b5681b7682fed9c2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意您只能定義以下其中一組參數，不可同時定義多組："
+      }
+    },
+    {
+      "segment_id": "ceb4fd26",
+      "source_content": "The friction/tension or bounciness/speed options match the spring model in [`Facebook Pop`](https://github.com/facebook/pop), [Rebound](https://github.com/facebookarchive/rebound), and [Origami](https://origami.design/).",
+      "source_content_hash": "61febca830c9e33fb52418cdda34e8875c7a95ece687b9fe8f0527700996c1c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "摩擦/張力或彈性/速度選項與[`Facebook Pop`](https://github.com/facebook/pop)、[Rebound](https://github.com/facebookarchive/rebound)和[Origami](https://origami.design/)中的彈簧模型匹配。"
+      }
+    },
+    {
+      "segment_id": "5257b095",
+      "source_content": "- `friction`: Controls \"bounciness\"/overshoot. Default 7.\n- `tension`: Controls speed. Default 40.\n- `speed`: Controls speed of the animation. Default 12.\n- `bounciness`: Controls bounciness. Default 8.",
+      "source_content_hash": "3c271235e00f1de3c572a8f22011ea9ec2873c4c1dedb962f7d7e0334fb96c76",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `friction`: 控制「彈性」/過衝。預設值7。\n- `tension`: 控制速度。預設值40。\n- `speed`: 控制動畫速度。預設值12。\n- `bounciness`: 控制彈性。預設值8。"
+      }
+    },
+    {
+      "segment_id": "5d3138c7",
+      "source_content": "Specifying stiffness/damping/mass as parameters makes `Animated.spring` use an analytical spring model based on the motion equations of a [damped harmonic oscillator](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator). This behavior is slightly more precise and faithful to the physics behind spring dynamics, and closely mimics the implementation in iOS's CASpringAnimation.",
+      "source_content_hash": "9670b575b1b91e6de2b3e67964aaf9b8cdec1cf8393bfa6e0fbab6bffba82063",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定剛度/阻尼/質量作為參數會使`Animated.spring`使用基於[阻尼諧振子](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator)運動方程的解析彈簧模型。此行為更精確且忠實於彈簧動力學背後的物理原理，並密切模仿iOS中CASpringAnimation的實現。"
+      }
+    },
+    {
+      "segment_id": "fca5e491",
+      "source_content": "- `stiffness`: The spring stiffness coefficient. Default 100.\n- `damping`: Defines how the spring’s motion should be damped due to the forces of friction. Default 10.\n- `mass`: The mass of the object attached to the end of the spring. Default 1.",
+      "source_content_hash": "8376bef3120435547cd7363497898ebf0663e51d4c854c61971d4a6e95a33f8e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `stiffness`: 彈簧剛度係數。預設值100。\n- `damping`: 定義彈簧運動應如何因摩擦力而衰減。預設值10。\n- `mass`: 附著在彈簧末端的物體質量。預設值1。"
+      }
+    },
+    {
+      "segment_id": "93f7c834",
+      "source_content": "Other configuration options are as follows:",
+      "source_content_hash": "44c646c460b21fdf27a7f61362229787a4e641f09a0fda55d30394b86c487517",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其他配置選項如下："
+      }
+    },
+    {
+      "segment_id": "437c16c8",
+      "source_content": "- `velocity`: The initial velocity of the object attached to the spring. Default 0 (object is at rest).\n- `overshootClamping`: Boolean indicating whether the spring should be clamped and not bounce. Default false.\n- `restDisplacementThreshold`: The threshold of displacement from rest below which the spring should be considered at rest. Default 0.001.\n- `restSpeedThreshold`: The speed at which the spring should be considered at rest in pixels per second. Default 0.001.\n- `delay`: Start the animation after delay (milliseconds). Default 0.\n- `isInteraction`: Whether or not this animation creates an \"interaction handle\" on the `InteractionManager`. Default true.\n- `useNativeDriver`: Uses the native driver when true. Required.",
+      "source_content_hash": "cb2c70c99bca15c38b586994df20653f32c318348ccbecfa41ee37331b6e4ddf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `velocity`: 附著在彈簧上物體的初始速度。預設0（物體靜止）。\n- `overshootClamping`: 布林值，指示彈簧是否應夾緊且不反彈。預設false。\n- `restDisplacementThreshold`: 靜止位移閾值，低於此值彈簧應視為靜止。預設0.001。\n- `restSpeedThreshold`: 彈簧應視為靜止的速度，單位為像素/秒。預設0.001。\n- `delay`: 延遲後開始動畫（毫秒）。預設0。\n- `isInteraction`: 此動畫是否在`InteractionManager`上創建「交互句柄」。預設true。\n- `useNativeDriver`: 為true時使用原生驅動。必需。"
+      }
+    },
+    {
+      "segment_id": "8d0188f6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d59d3f3c",
+      "source_content": "### `add()`",
+      "source_content_hash": "9024b20d950d93151516be6c44e3b510ccce635659214dcc8cdb043d214a4576",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `add()`"
+      }
+    },
+    {
+      "segment_id": "099d21ed",
+      "source_content": "```tsx\nstatic add(a: Animated, b: Animated): AnimatedAddition;\n```",
+      "source_content_hash": "59e96780051411cd868afd5e91dea149e49cdcc252c80dac0687e2efd9aaa9a1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_099d21ed"
+      }
+    },
+    {
+      "segment_id": "1d39fdbf",
+      "source_content": "Creates a new Animated value composed from two Animated values added together.",
+      "source_content_hash": "78019afc8bd612fe7afcb1eb07cc3b81b1c175509ed090307ac956396c3d899d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建一個由兩個動畫值相加組成的新動畫值。"
+      }
+    },
+    {
+      "segment_id": "1685fa07",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cc33bff5",
+      "source_content": "### `subtract()`",
+      "source_content_hash": "59c717c61dabdf3d24009f989fe692fc26e7c92459897e13256366e4cd4b05c0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `subtract()`"
+      }
+    },
+    {
+      "segment_id": "3753b81e",
+      "source_content": "```tsx\nstatic subtract(a: Animated, b: Animated): AnimatedSubtraction;\n```",
+      "source_content_hash": "cd7db9d6ab3edcc1b715b7b583c399976c619cbd8017d75b198cad55403cfd90",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3753b81e"
+      }
+    },
+    {
+      "segment_id": "f0db2ff1",
+      "source_content": "Creates a new Animated value composed by subtracting the second Animated value from the first Animated value.",
+      "source_content_hash": "83de27ecca86e31deb2d12ad40761e6185611a64a83c175d109d96c28615a91b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建一個由第一個動畫值減去第二個動畫值組成的新動畫值。"
+      }
+    },
+    {
+      "segment_id": "f3f517b3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a99db0f6",
+      "source_content": "### `divide()`",
+      "source_content_hash": "863b9a9d9986e805c12670ce652cc953b04034fa749aa4c9d502987b9574d62d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `divide()`"
+      }
+    },
+    {
+      "segment_id": "d0a5d100",
+      "source_content": "```tsx\nstatic divide(a: Animated, b: Animated): AnimatedDivision;\n```",
+      "source_content_hash": "e8989d2be80d8fb9b5ec7f1827733cfae937b0d58cf66429ecec424ebc653037",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d0a5d100"
+      }
+    },
+    {
+      "segment_id": "4786f22b",
+      "source_content": "Creates a new Animated value composed by dividing the first Animated value by the second Animated value.",
+      "source_content_hash": "7d1a04f1a13121b4b9ebc12e1132bccfc8fc929f44964720994bc8c054e06880",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建一個由第一個動畫值除以第二個動畫值組成的新動畫值。"
+      }
+    },
+    {
+      "segment_id": "1eb2c35a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ca32a808",
+      "source_content": "### `multiply()`",
+      "source_content_hash": "fc2714a9987549e3fd898cd5c755c1477398403f12d17b0cdeffebb37f6dec94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `multiply()`"
+      }
+    },
+    {
+      "segment_id": "7a5ad31f",
+      "source_content": "```tsx\nstatic multiply(a: Animated, b: Animated): AnimatedMultiplication;\n```",
+      "source_content_hash": "eede0f55b8b8dfc8598a3dce10df5bf0c1e5c57fc7422cd16e7d9a7dfeb4e143",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7a5ad31f"
+      }
+    },
+    {
+      "segment_id": "1f92e934",
+      "source_content": "Creates a new Animated value composed from two Animated values multiplied together.",
+      "source_content_hash": "157f20d168291160b8d844a77123eb27d3e43f5b9df42e70fc94fae8ea665eb5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建一個由兩個動畫值相乘組成的新動畫值。"
+      }
+    },
+    {
+      "segment_id": "883ad9ea",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e0e9d747",
+      "source_content": "### `modulo()`",
+      "source_content_hash": "786f5c9d2c4c5d2b0c8bdecdeee2435838c7ae73c9f5bcc4e2367a8dba0cb086",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `modulo()`"
+      }
+    },
+    {
+      "segment_id": "f24a5721",
+      "source_content": "```tsx\nstatic modulo(a: Animated, modulus: number): AnimatedModulo;\n```",
+      "source_content_hash": "725269829cfad84e6fd065e6b074a1dccf6cedbf84a4d287e46813ea31a8c85d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f24a5721"
+      }
+    },
+    {
+      "segment_id": "b8954ec9",
+      "source_content": "Creates a new Animated value that is the (non-negative) modulo of the provided Animated value",
+      "source_content_hash": "09c77a18cd6eba7e678f6ef31c6d6b69e3b0eed722c23014d04ce265efa990cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建一個新動畫值，該值是所提供動畫值的（非負）模數。"
+      }
+    },
+    {
+      "segment_id": "f875b13d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### `diffClamp()`",
+      "source_content_hash": "d9586a61ca4045f5bf9a48668ce72349fa2b90198aa3ffe23170b8fd1e0ba224",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `diffClamp()`"
+      }
+    },
+    {
+      "segment_id": "31df1954",
+      "source_content": "```tsx\nstatic diffClamp(a: Animated, min: number, max: number): AnimatedDiffClamp;\n```",
+      "source_content_hash": "0aa721c4389596d5af082b2174197351f04eb7f37c6e69d36c16533b4150e281",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_31df1954"
+      }
+    },
+    {
+      "segment_id": "a6c4ab41",
+      "source_content": "Create a new Animated value that is limited between 2 values. It uses the difference between the last value so even if the value is far from the bounds it will start changing when the value starts getting closer again. (`value = clamp(value + diff, min, max)`).",
+      "source_content_hash": "7f866194beb11bd8c4c2b26adbcd8dd85bb4d5a66431323723ce618a8586569e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建一個新的動畫值，該值被限制在兩個值之間。它使用最後一個值的差異，因此即使該值遠離邊界，當值開始再次接近時，它也會開始變化（`value = clamp(value + diff, min, max)`）。"
+      }
+    },
+    {
+      "segment_id": "d6c9e4cd",
+      "source_content": "This is useful with scroll events, for example, to show the navbar when scrolling up and to hide it when scrolling down.",
+      "source_content_hash": "76119af4b2294faa6b8adaa4ddc5045cbf0da2d72b1a2bc183c28256e8d390e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這在滾動事件中非常有用，例如，在向上滾動時顯示導航欄，向下滾動時隱藏它。"
+      }
+    },
+    {
+      "segment_id": "3d9b49ef",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "40a24bf2",
+      "source_content": "### `delay()`",
+      "source_content_hash": "5b31e145fe7d3acb11a3197ac4294f96871e68bfbdd46301efb92dd1a9473c12",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `delay()`"
+      }
+    },
+    {
+      "segment_id": "ee5332da",
+      "source_content": "```tsx\nstatic delay(time: number): CompositeAnimation;\n```",
+      "source_content_hash": "81539c2db59c4909191596cea8dc188beb6ef01c582497c26bf4a58a90c98776",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee5332da"
+      }
+    },
+    {
+      "segment_id": "6c135b48",
+      "source_content": "Starts an animation after the given delay.",
+      "source_content_hash": "8dd6b9164500161ff4fdcf50003faf19fe9cc10048647a5c24f72b5b37ab54ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在給定的延遲後開始動畫。"
+      }
+    },
+    {
+      "segment_id": "12b8efbb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fe45329d",
+      "source_content": "### `sequence()`",
+      "source_content_hash": "4138b93240c3be9aa03167817e2c64216ffc2fe1def53ad1eb6522e7efed8570",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `sequence()`"
+      }
+    },
+    {
+      "segment_id": "e85c5032",
+      "source_content": "```tsx\nstatic sequence(animations: CompositeAnimation[]): CompositeAnimation;\n```",
+      "source_content_hash": "85193a9df117bfdc804f3324a8287b92764d2fdc76352a642891243abf5e1530",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e85c5032"
+      }
+    },
+    {
+      "segment_id": "eb398072",
+      "source_content": "Starts an array of animations in order, waiting for each to complete before starting the next. If the current running animation is stopped, no following animations will be started.",
+      "source_content_hash": "dca003e4d21c619a300fc70a6ebc155e475f39175b722f2fb6093838321361ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "按順序啟動一系列動畫，等待每個動畫完成後再開始下一個。如果當前運行的動畫被停止，後續的動畫將不會啟動。"
+      }
+    },
+    {
+      "segment_id": "c43686a1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fb79182e",
+      "source_content": "### `parallel()`",
+      "source_content_hash": "38302beba0371766a1cce94a6abdac2306dc060ab40a43005b17c3b9cee0fb36",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `parallel()`"
+      }
+    },
+    {
+      "segment_id": "4c0c56cd",
+      "source_content": "```tsx\nstatic parallel(\n  animations: CompositeAnimation[],\n  config?: ParallelConfig\n): CompositeAnimation;\n```",
+      "source_content_hash": "a237dd83bc5cadbfa0636c3203b437e4790b4668442b0c5677af59da89ae166b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4c0c56cd"
+      }
+    },
+    {
+      "segment_id": "227b5df5",
+      "source_content": "Starts an array of animations all at the same time. By default, if one of the animations is stopped, they will all be stopped. You can override this with the `stopTogether` flag.",
+      "source_content_hash": "5f16cdcd7492943d9a7f4976d09b4e3a2965dc5829683b82e7fa25e56cf87e6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同時啟動一系列動畫。默認情況下，如果其中一個動畫被停止，所有動畫都會被停止。你可以通過 `stopTogether` 標誌來覆蓋此行為。"
+      }
+    },
+    {
+      "segment_id": "37772f05",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dbd99edb",
+      "source_content": "### `stagger()`",
+      "source_content_hash": "d1612e070ec7c49d488b54495e6eea1847f7fba51cab57596ca26b2987ad130e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `stagger()`"
+      }
+    },
+    {
+      "segment_id": "b4d188d4",
+      "source_content": "```tsx\nstatic stagger(\n  time: number,\n  animations: CompositeAnimation[]\n): CompositeAnimation;\n```",
+      "source_content_hash": "0cfc11348ff6442b23fbe385d6b10319e56293350bf77c5a7e2f3123e78bb0de",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b4d188d4"
+      }
+    },
+    {
+      "segment_id": "ebea2db8",
+      "source_content": "Array of animations may run in parallel (overlap), but are started in sequence with successive delays. Nice for doing trailing effects.",
+      "source_content_hash": "9c22ad18bbc9bc365a0d98101d958d7961a28ae025aa84a7613e3c193e82468d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一系列動畫可以並行運行（重疊），但會按順序以連續的延遲啟動。非常適合製作拖尾效果。"
+      }
+    },
+    {
+      "segment_id": "dbef9cf5",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fa461c90",
+      "source_content": "### `loop()`",
+      "source_content_hash": "6e6264511717dd3d6fccd879a2807d70ea34bcddd6966191ca22b186f919212b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `loop()`"
+      }
+    },
+    {
+      "segment_id": "0a6336a7",
+      "source_content": "```tsx\nstatic loop(\n  animation: CompositeAnimation[],\n  config?: LoopAnimationConfig\n): CompositeAnimation;\n```",
+      "source_content_hash": "ae78f8aceb618ebbaf299c9bee81166f02a525bb2600f2e47b5d9d8a5dce68cb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0a6336a7"
+      }
+    },
+    {
+      "segment_id": "991164fd",
+      "source_content": "Loops a given animation continuously, so that each time it reaches the end, it resets and begins again from the start. Will loop without blocking the JS thread if the child animation is set to `useNativeDriver: true`. In addition, loops can prevent `VirtualizedList`-based components from rendering more rows while the animation is running. You can pass `isInteraction: false` in the child animation config to fix this.",
+      "source_content_hash": "d5a4452b67b53a92746bbff6b61ba755bf8b67b5fa41afaf23f2283926c807ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "循環播放給定的動畫，每次到達結束時重置並從頭開始。如果子動畫設置為 `useNativeDriver: true`，則不會阻塞 JS 線程。此外，循環可能會阻止基於 `VirtualizedList` 的組件在動畫運行時渲染更多行。你可以在子動畫配置中傳遞 `isInteraction: false` 來解決這個問題。"
+      }
+    },
+    {
+      "segment_id": "c4d69fe4",
+      "source_content": "Config is an object that may have the following options:",
+      "source_content_hash": "c2a7d5f1a2407a9f7a21659a4065c71336ef12f66a783c6df855907ed1ae801d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "配置是一個可能包含以下選項的對象："
+      }
+    },
+    {
+      "segment_id": "7755a5f1",
+      "source_content": "- `iterations`: Number of times the animation should loop. Default `-1` (infinite).",
+      "source_content_hash": "0510546138f72a098a9c3a41e6d15acb0d09ca2e5eb7b7cdc6a1cc5a4a0899b5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `iterations`: 動畫應該循環的次數。默認為 `-1`（無限）。"
+      }
+    },
+    {
+      "segment_id": "efa12c64",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "53cdd80b",
+      "source_content": "### `event()`",
+      "source_content_hash": "8608f151d3f6b753608f87cc0ea73b5d4c3ae5e1ac73722dd015db5fb17d5f9f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `event()`"
+      }
+    },
+    {
+      "segment_id": "eeb25400",
+      "source_content": "```tsx\nstatic event(\n  argMapping: Mapping[],\n  config?: EventConfig\n): (...args: any[]) => void;\n```",
+      "source_content_hash": "640c55f440a80bce86434bb43bf8de93db604c98cf3231edc989f227ffb74150",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eeb25400"
+      }
+    },
+    {
+      "segment_id": "80b10d5a",
+      "source_content": "Takes an array of mappings and extracts values from each arg accordingly, then calls `setValue` on the mapped outputs. e.g.",
+      "source_content_hash": "7e881e463b85ae0fe00bb7d26985deec62132ed4445e21ac2236597e10fd80af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接受一個映射數組，並從每個參數中提取相應的值，然後在映射的輸出上調用 `setValue`。例如："
+      }
+    },
+    {
+      "segment_id": "56f9cf87",
+      "source_content": "```tsx\nonScroll={Animated.event(\n  [{nativeEvent: {contentOffset: {x: this._scrollX}}}],\n  {listener: (event: ScrollEvent) => console.log(event)}, // Optional async listener\n)}\n ...\nonPanResponderMove: Animated.event(\n  [\n    null, // raw event arg ignored\n    {dx: this._panX},\n  ], // gestureState arg\n  {\n    listener: (\n      event: GestureResponderEvent,\n      gestureState: PanResponderGestureState\n    ) => console.log(event, gestureState),\n  } // Optional async listener\n);\n```",
+      "source_content_hash": "5a642009d4d36a3a31644a224f3a34f3b85abace46b5ac22ab883864708a5178",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_56f9cf87"
+      }
+    },
+    {
+      "segment_id": "ac91a2d7",
+      "source_content": "Config is an object that may have the following options:",
+      "source_content_hash": "c2a7d5f1a2407a9f7a21659a4065c71336ef12f66a783c6df855907ed1ae801d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "配置是一個可能包含以下選項的對象："
+      }
+    },
+    {
+      "segment_id": "582a8b53",
+      "source_content": "- `listener`: Optional async listener.\n- `useNativeDriver`: Uses the native driver when true. Required.",
+      "source_content_hash": "33f49481675b3e432a2df1baefd9d158401c5ad420ab828d14354d0d33441406",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `listener`: 可選的異步監聽器。\n- `useNativeDriver`: 為 true 時使用原生驅動。必需。"
+      }
+    },
+    {
+      "segment_id": "8907713c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "489e5683",
+      "source_content": "### `forkEvent()`",
+      "source_content_hash": "6a4361fe692f81d0d27963376c818a9f33230c04324d7fb925f0715fa32d2f5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `forkEvent()`"
+      }
+    },
+    {
+      "segment_id": "5ceeeefa",
+      "source_content": "```jsx\nstatic forkEvent(event: AnimatedEvent, listener: Function): AnimatedEvent;\n```",
+      "source_content_hash": "f6aa3f69eb83e3e0137766078b672e33e2c20c4c2e1b41a18360c3ab19ccd21b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5ceeeefa"
+      }
+    },
+    {
+      "segment_id": "f894b163",
+      "source_content": "Advanced imperative API for snooping on animated events that are passed in through props. It permits to add a new javascript listener to an existing `AnimatedEvent`. If `animatedEvent` is a javascript listener, it will merge the 2 listeners into a single one, and if `animatedEvent` is null/undefined, it will assign the javascript listener directly. Use values directly where possible.",
+      "source_content_hash": "3417ca6d4be532ab977be2c13b039c78d79100571a1a27def484e6c154c70856",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於監聽通過 props 傳遞的動畫事件的高級命令式 API。它允許向現有的 `AnimatedEvent` 添加新的 JavaScript 監聽器。如果 `animatedEvent` 是一個 JavaScript 監聽器，它會將兩個監聽器合併為一個；如果 `animatedEvent` 為 null/undefined，則會直接分配 JavaScript 監聽器。盡可能直接使用值。"
+      }
+    },
+    {
+      "segment_id": "45c49b1b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c300008c",
+      "source_content": "### `unforkEvent()`",
+      "source_content_hash": "3467d985aae06dcb708d82375daca2b5c4252218a673f2be46085ae79af37eb8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `unforkEvent()`"
+      }
+    },
+    {
+      "segment_id": "07bba194",
+      "source_content": "```jsx\nstatic unforkEvent(event: AnimatedEvent, listener: Function);\n```",
+      "source_content_hash": "f2301171987e5fcb5b81258b6df32cb90c85d6ef2e5892398704a9a0519e9f15",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_07bba194"
+      }
+    },
+    {
+      "segment_id": "de80ca42",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e60b0fa0",
+      "source_content": "### `start()`",
+      "source_content_hash": "38a9269cb5f288272638fbae9f7ec8300ae1d272f07d3b8a23bb27dceeae5a75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `start()`"
+      }
+    },
+    {
+      "segment_id": "d5b02573",
+      "source_content": "```tsx\nstatic start(callback?: (result: {finished: boolean}) => void);\n```",
+      "source_content_hash": "dec6c06173bb85531757a9b193fb5ac0610151252260166e785110794968c8f0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d5b02573"
+      }
+    },
+    {
+      "segment_id": "0dcd0a42",
+      "source_content": "Animations are started by calling start() on your animation. start() takes a completion callback that will be called when the animation is done or when the animation is done because stop() was called on it before it could finish.",
+      "source_content_hash": "1441efa6d23e23af985a9073616d40dcea4e37f1ab61c1f17abd7a5b2a995263",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通過在動畫上調用 start() 來啟動動畫。start() 接受一個完成回調，該回調將在動畫完成時或在動畫完成之前調用 stop() 時被調用。"
+      }
+    },
+    {
+      "segment_id": "8be3f6dc",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "c9728689",
+      "source_content": "| Name     | Type                                    | Required | Description                                                                                                                                                     |\n| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| callback | `(result: {finished: boolean}) => void` | No       | Function that will be called after the animation finished running normally or when the animation is done because stop() was called on it before it could finish |",
+      "source_content_hash": "010500f104302a7c7dcda9c746c01b45fd16cad6830820f9c0489baef73a4ee3",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9728689"
+      }
+    },
+    {
+      "segment_id": "c829cc4b",
+      "source_content": "Start example with callback:",
+      "source_content_hash": "e71ec524894e47efb8ae4a7bdc0352a9952c4a570c1e99b38e5e3bb542ca7f5d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "帶回調的啟動示例："
+      }
+    },
+    {
+      "segment_id": "d27cbc80",
+      "source_content": "```tsx\nAnimated.timing({}).start(({finished}) => {\n  /* completion callback */\n});\n```",
+      "source_content_hash": "45c349c6551aabc17716234964768619d9b5320d49b24b1acf756927a817f64a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d27cbc80"
+      }
+    },
+    {
+      "segment_id": "1df014b1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8ebe732c",
+      "source_content": "### `stop()`",
+      "source_content_hash": "64fa3077ae27e2a5ed49c0ccff8c46e5d7050d7d694fc75f20668cfc5774060d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `stop()`"
+      }
+    },
+    {
+      "segment_id": "86aac3bf",
+      "source_content": "```tsx\nstatic stop();\n```",
+      "source_content_hash": "bb37ab608cad9d961d822b8db7f46c3a538c756e400830e3190bbafd4facfd0a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_86aac3bf"
+      }
+    },
+    {
+      "segment_id": "beec49ed",
+      "source_content": "Stops any running animation.",
+      "source_content_hash": "2cf6d7f1f6c36bdd63a4f0307e840b287079c5d50e451340cbd938233135739c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "停止所有正在執行的動畫。"
+      }
+    },
+    {
+      "segment_id": "39fa8687",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dd33c745",
+      "source_content": "### `reset()`",
+      "source_content_hash": "ac62841a129949aeb2306a7d4053130a94c6c67109a08493492c07d9010313fd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `reset()`"
+      }
+    },
+    {
+      "segment_id": "de546337",
+      "source_content": "```tsx\nstatic reset();\n```",
+      "source_content_hash": "80f0829fbbe5e53d8f0de59ab72ceea92177cc51ca4253cf36519a10d27823f6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de546337"
+      }
+    },
+    {
+      "segment_id": "865bbe8d",
+      "source_content": "Stops any running animation and resets the value to its original.",
+      "source_content_hash": "dff0e53ce7fb224bb8262ba2a1e34d604ddd88bfb37d42efeb41407393405626",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "停止所有正在執行的動畫並將值重置為原始狀態。"
+      }
+    },
+    {
+      "segment_id": "d44c41e4",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "0b6179bc",
+      "source_content": "### `Value`",
+      "source_content_hash": "88cc2aad2552a400803b9a116bc5de916313283f0e88e91de236a4179636aedf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `Value`"
+      }
+    },
+    {
+      "segment_id": "d6ee8a64",
+      "source_content": "Standard value class for driving animations. Typically initialized with `useAnimatedValue(0)` or `new Animated.Value(0);` in class components.",
+      "source_content_hash": "fc39947568093f6ff019ed17625ac727ef1e869fa7c3edad15f4ba9467fc5fc7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "驅動動畫的標準值類別。通常在類別元件中初始化為 `useAnimatedValue(0)` 或 `new Animated.Value(0);`。"
+      }
+    },
+    {
+      "segment_id": "11a78230",
+      "source_content": "You can read more about `Animated.Value` API on the separate [page](animatedvalue).",
+      "source_content_hash": "73606cef82e3a7f429cb15bd0b6945d07c9d777f8d8a410be28a7368e31f15bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在專屬的 [頁面](animatedvalue) 上閱讀更多關於 `Animated.Value` API 的資訊。"
+      }
+    },
+    {
+      "segment_id": "d2517a2b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4439f5f5",
+      "source_content": "### `ValueXY`",
+      "source_content_hash": "4eb0630c9d51486b81f5c4f90adbdf10dcacc552ede10c6647bf69d2474b4b29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `ValueXY`"
+      }
+    },
+    {
+      "segment_id": "d82906fc",
+      "source_content": "2D value class for driving 2D animations, such as pan gestures.",
+      "source_content_hash": "2e8cd078e4b00a46cb2c0ec9d04fd4bb6166e7d52a1ac4c6676c603b2ce9427e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於驅動 2D 動畫（例如平移手勢）的 2D 值類別。"
+      }
+    },
+    {
+      "segment_id": "e67afabd",
+      "source_content": "You can read more about `Animated.ValueXY` API on the separate [page](animatedvaluexy).",
+      "source_content_hash": "d308c14570c248ef8e62322e01ea3f554af8e61c2162adabfedeb7eb1a06bd02",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在專屬的 [頁面](animatedvaluexy) 上閱讀更多關於 `Animated.ValueXY` API 的資訊。"
+      }
+    },
+    {
+      "segment_id": "c84f6fc7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "18813374",
+      "source_content": "### `Interpolation`",
+      "source_content_hash": "723ee4201cc331bc5cc1c1f30be0215e7dc612e515cc2ecf0a744385f72a28aa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `Interpolation`"
+      }
+    },
+    {
+      "segment_id": "9dd7d40a",
+      "source_content": "Exported to use the Interpolation type in flow.",
+      "source_content_hash": "8069b8197e808f3711451a66f9b4377ecbebf0d42d4e72e5a4905980d56b0f56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "導出以在流程中使用 Interpolation 類型。"
+      }
+    },
+    {
+      "segment_id": "4de138e4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "923bccf9",
+      "source_content": "### `Node`",
+      "source_content_hash": "e5732733b2465e97f5227d453dcb3af69a2f36ac9cf1e24382f1c093e3bae69c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `Node`"
+      }
+    },
+    {
+      "segment_id": "50cd4f87",
+      "source_content": "Exported for ease of type checking. All animated values derive from this class.",
+      "source_content_hash": "8574accc20c89c7ba04070f9b657109e26859482aa10e551382934b2fc69a1cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "導出以便於類型檢查。所有動畫值均派生自此類別。"
+      }
+    },
+    {
+      "segment_id": "df1dff1c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b7644a77",
+      "source_content": "### `createAnimatedComponent`",
+      "source_content_hash": "f95ec1ae066e511fa13a5167c1e6c0c38230598660389602f80d2ac9b5ccf574",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `createAnimatedComponent`"
+      }
+    },
+    {
+      "segment_id": "b5bd7d92",
+      "source_content": "Make any React component Animatable. Used to create `Animated.View`, etc.",
+      "source_content_hash": "e51dbb9eb328ccc3ee8ec09bf388a9ce34f736a28b22f9401e7c3009ec8e333e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使任何 React 元件可動畫化。用於創建 `Animated.View` 等。"
+      }
+    },
+    {
+      "segment_id": "9e4306dc",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0e97e13b",
+      "source_content": "### `attachNativeEvent`",
+      "source_content_hash": "8717c91f638140e472ff0e7039bebf5fbe214db6aa2db9f370fbd9c030f62fd3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `attachNativeEvent`"
+      }
+    },
+    {
+      "segment_id": "6342da55",
+      "source_content": "Imperative API to attach an animated value to an event on a view. Prefer using `Animated.event` with `useNativeDriver: true` if possible.",
+      "source_content_hash": "9f2c46278a50a3e12155051894473709c0b7f51f6b8dbf7fecb820aed1b7ec5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將動畫值附加到視圖事件的命令式 API。如果可能，建議使用帶有 `useNativeDriver: true` 的 `Animated.event`。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/animated.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.456499+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "8de18b179b93ab56049a92d9ecf2a2c5ec597959f2d0788df85e094278b6da7e"
+  }
+}

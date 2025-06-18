@@ -1,0 +1,282 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/custom-webview-android.md",
+  "source_file_content_hash": "8ac3775530a8eb726377d95bc87a594d3357ada5d3276e6a9f7605f0f141b807",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: custom-webview-android\ntitle: Custom WebView\n---",
+      "source_content_hash": "2d2e42e74afca3758f5f1a8704da7ace58aa1c390b72b117fb734b8a2b9de792",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "While the built-in web view has a lot of features, it is not possible to handle every use-case in React Native. You can, however, extend the web view with native code without forking React Native or duplicating all the existing web view code.",
+      "source_content_hash": "a28d0025a76f89e5b9ffcac80e3c1c2845a8f0603003631ddd6fc4ddc60a0250",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6cae1da3",
+      "source_content": ":::info\nThe React Native WebView component has been extracted to [`react-native-webview`](https://github.com/react-native-webview/react-native-webview) package as part of the [Lean Core effort](https://github.com/facebook/react-native/issues/23313).\nThat is the recommended way to use WebView in React Native as of today. You should not use the [WebView](https://reactnative-archive-august-2023.netlify.app/docs/0.61/webview) component as that was deprecated and removed from React Native.  \n:::",
+      "source_content_hash": "74890d72b44cf4f194ae29d7759306c41ad2aec0d42edc2d390c161174966340",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "Before you do this, you should be familiar with the concepts in [native UI components](native-components-android). You should also familiarise yourself with the [native code for web views](https://github.com/react-native-webview/react-native-webview/blob/master/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManagerImpl.kt), as you will have to use this as a reference when implementing new features—although a deep understanding is not required.",
+      "source_content_hash": "6da1a29e228549ceb0f9743492776029865b972bd1458250879473ac9fda6e4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "## Native Code",
+      "source_content_hash": "04df0b84c8de69419654e019d9c42547958b02f75e3bf84245a8f1d1a30522d3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f55b9485",
+      "source_content": ":::info\nThis example assumes you already have [`react-native-webview`](https://github.com/react-native-webview/react-native-webview) installed, if not please follow their [Getting Started guide](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md) first.\n:::",
+      "source_content_hash": "f4b144b5057766377a535bd561de6653990af435ff47bfd08569a30281edcf5b",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "To get started, you'll need to create a subclass of `RNCWebViewManager`, `RNCWebView`, and `RNCWebViewClient`. In your view manager, you'll then need to override:",
+      "source_content_hash": "748081074057b8a1ea63c290a2ebf5cd5db53a7659ae0a4f251f335a196e6100",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44d89370",
+      "source_content": "- `createRNCWebViewInstance`\n- `getName`\n- `addEventEmitters`",
+      "source_content_hash": "23dbf7c256409bf6d6912b8703408412d00b0505b3e975296a85a5d36852a542",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9329e3e0",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@ReactModule(name = CustomWebViewManager.REACT_CLASS)\npublic class CustomWebViewManager extends RNCWebViewManager {\n  /* This name must match what we're referring to in JS */\n  protected static final String REACT_CLASS = \"RCTCustomWebView\";\n\n  protected static class CustomWebViewClient extends RNCWebViewClient { }\n\n  protected static class CustomWebView extends RNCWebView {\n    public CustomWebView(ThemedReactContext reactContext) {\n      super(reactContext);\n    }\n  }\n\n  @Override\n  protected RNCWebView createRNCWebViewInstance(ThemedReactContext reactContext) {\n    return new CustomWebView(reactContext);\n  }\n\n  @Override\n  public String getName() {\n    return REACT_CLASS;\n  }\n\n  @Override\n  protected void addEventEmitters(ThemedReactContext reactContext, WebView view) {\n    view.setWebViewClient(new CustomWebViewClient());\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n@ReactModule(name = CustomWebViewManager.REACT_CLASS)\nclass CustomWebViewManager : RNCWebViewManager() {\n    protected class CustomWebViewClient : RNCWebViewClient()\n    protected inner class CustomWebView(reactContext: ThemedReactContext?) :\n        RNCWebView(reactContext)\n\n    override fun createRNCWebViewInstance(reactContext: ThemedReactContext?): RNCWebView {\n        return CustomWebView(reactContext)\n    }\n\n    override fun addEventEmitters(reactContext: ThemedReactContext, view: WebView) {\n        view.webViewClient = CustomWebViewClient()\n    }\n\n    companion object {\n        /* This name must match what we're referring to in JS */\n        const val REACT_CLASS = \"RCTCustomWebView\"\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "8ac99d867775a0531817d0868d501fb6edc91cce73d44cbdab38dfec7fa2878a",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "You'll need to follow the usual steps to [register the module](native-modules-android.md#register-the-module).",
+      "source_content_hash": "cf15ef2eaf6a792fe3784768276f9f0b5189510a9e0e127ca494e35757a21dfe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "39db08de",
+      "source_content": "### Adding New Properties",
+      "source_content_hash": "ead59d008a912c7df2c93799059db48bdb58625cc10b3d9cadf80f0f58e6e1b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "To add a new property, you'll need to add it to `CustomWebView`, and then expose it in `CustomWebViewManager`.",
+      "source_content_hash": "44c672350037f97163d70a0feabfaf098788d39d952b7ddd5b8b541184c625f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42626972",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npublic class CustomWebViewManager extends RNCWebViewManager {\n  ...\n  protected static class CustomWebView extends RNCWebView {\n    public CustomWebView(ThemedReactContext reactContext) {\n      super(reactContext);\n    }\n\n    protected @Nullable String mFinalUrl;\n\n    public void setFinalUrl(String url) {\n        mFinalUrl = url;\n    }\n\n    public String getFinalUrl() {\n        return mFinalUrl;\n    }\n  }\n\n  ...\n\n  @ReactProp(name = \"finalUrl\")\n  public void setFinalUrl(WebView view, String url) {\n    ((CustomWebView) view).setFinalUrl(url);\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass CustomWebViewManager : RNCWebViewManager() {\n    protected inner class CustomWebView(\n        reactContext: ThemedReactContext?,\n        var finalUrl: String? = null\n    ) : RNCWebView(reactContext)\n\n    @ReactProp(name = \"finalUrl\")\n    fun setFinalUrl(view: WebView, url: String?) {\n        (view as CustomWebView).finalUrl = url\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "2d901baf129b463426825ea301eed430e6a49c2d72f595e394c621dc5a439fd1",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "### Adding New Events",
+      "source_content_hash": "7dded362da553a6982b5e94bbda51baa9505ee4cc7d183036436035f73304561",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "For events, you'll first need to make create event subclass.",
+      "source_content_hash": "87167da4e1bdf60d2894bf5adca2f2d34af6326f59fa0101ea699dd0dfd6bd99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9e0ba9d0",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n// NavigationCompletedEvent.java\npublic class NavigationCompletedEvent extends Event<NavigationCompletedEvent> {\n  private WritableMap mParams;\n\n  public NavigationCompletedEvent(int viewTag, WritableMap params) {\n    super(viewTag);\n    this.mParams = params;\n  }\n\n  @Override\n  public String getEventName() {\n    return \"navigationCompleted\";\n  }\n\n  @Override\n  public void dispatch(RCTEventEmitter rctEventEmitter) {\n    init(getViewTag());\n    rctEventEmitter.receiveEvent(getViewTag(), getEventName(), mParams);\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n// NavigationCompletedEvent.kt\nclass NavigationCompletedEvent(viewTag: Int, val params: WritableMap) :\n    Event<NavigationCompletedEvent>(viewTag) {\n    override fun getEventName(): String = \"navigationCompleted\"\n\n    override fun dispatch(rctEventEmitter: RCTEventEmitter) {\n        init(viewTag)\n        rctEventEmitter.receiveEvent(viewTag, eventName, params)\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "65e4308f24a69910b1034cdb25afe05fd67b823377cbae08875106b3308de097",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "You can trigger the event in your web view client. You can hook existing handlers if your events are based on them.",
+      "source_content_hash": "ece163272729e3bb1686807c095900ce68e0809023a78962c079701bd37078de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "You should refer to [RNCWebViewManagerImpl.kt](https://github.com/react-native-webview/react-native-webview/blob/master/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManagerImpl.kt) in the React Native WebView codebase to see what handlers are available and how they are implemented. You can extend any methods here to provide extra functionality.",
+      "source_content_hash": "8ac29aa04e07f0c863e7c5b54f921496dcf3aa97f75c84b63921a42b5308759c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2d9a67ec",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npublic class NavigationCompletedEvent extends Event<NavigationCompletedEvent> {\n  private WritableMap mParams;\n\n  public NavigationCompletedEvent(int viewTag, WritableMap params) {\n    super(viewTag);\n    this.mParams = params;\n  }\n\n  @Override\n  public String getEventName() {\n    return \"navigationCompleted\";\n  }\n\n  @Override\n  public void dispatch(RCTEventEmitter rctEventEmitter) {\n    init(getViewTag());\n    rctEventEmitter.receiveEvent(getViewTag(), getEventName(), mParams);\n  }\n}\n\n// CustomWebViewManager.java\nprotected static class CustomWebViewClient extends RNCWebViewClient {\n  @Override\n  public boolean shouldOverrideUrlLoading(WebView view, String url) {\n    boolean shouldOverride = super.shouldOverrideUrlLoading(view, url);\n    String finalUrl = ((CustomWebView) view).getFinalUrl();\n\n    if (!shouldOverride && url != null && finalUrl != null && new String(url).equals(finalUrl)) {\n      final WritableMap params = Arguments.createMap();\n      dispatchEvent(view, new NavigationCompletedEvent(view.getId(), params));\n    }\n\n    return shouldOverride;\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass NavigationCompletedEvent(viewTag: Int, val params: WritableMap) :\n    Event<NavigationCompletedEvent>(viewTag) {\n\n    override fun getEventName(): String = \"navigationCompleted\"\n\n    override fun dispatch(rctEventEmitter: RCTEventEmitter) {\n        init(viewTag)\n        rctEventEmitter.receiveEvent(viewTag, eventName, params)\n    }\n}\n\n// CustomWebViewManager.kt\n\nprotected class CustomWebViewClient : RNCWebViewClient() {\n    override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {\n        val shouldOverride: Boolean = super.shouldOverrideUrlLoading(view, url)\n        val finalUrl: String? = (view as CustomWebView).finalUrl\n        if (!shouldOverride && url != null && finalUrl != null && url == finalUrl) {\n            val params: WritableMap = Arguments.createMap()\n            dispatchEvent(view, NavigationCompletedEvent(view.getId(), params))\n        }\n        return shouldOverride\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "4ce7e272f40a662a6697b8be7202dff978ed7ad59a68d2848031714ae38de5ad",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2d5a3f2f",
+      "source_content": "Finally, you'll need to expose the events in `CustomWebViewManager` through `getExportedCustomDirectEventTypeConstants`. Note that currently, the default implementation returns `null`, but this may change in the future.",
+      "source_content_hash": "642cad727f8f1cafcea851002543d794e4e3ca3c0c96e9f4bbc59751d86690d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "005d858b",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npublic class CustomWebViewManager extends RNCWebViewManager {\n  ...\n\n  @Override\n  public @Nullable\n  Map getExportedCustomDirectEventTypeConstants() {\n    Map<String, Object> export = super.getExportedCustomDirectEventTypeConstants();\n    if (export == null) {\n      export = MapBuilder.newHashMap();\n    }\n    export.put(\"navigationCompleted\", MapBuilder.of(\"registrationName\", \"onNavigationCompleted\"));\n    return export;\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass CustomWebViewManager : RNCWebViewManager() {\n    override fun getExportedCustomDirectEventTypeConstants(): MutableMap<Any?, Any?>? {\n        val superTypeConstants = super.getExportedCustomDirectEventTypeConstants()\n        val export = superTypeConstants ?: MapBuilder.newHashMap<Any, Any?>()\n        export[\"navigationCompleted\"] = MapBuilder.of(\"registrationName\", \"onNavigationCompleted\")\n        return export\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "79db5db2fb042d12e7c94b969fe29cc30f2fabf39ffe9c424d42a2409446dcb7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "92d715c2",
+      "source_content": "## JavaScript Interface",
+      "source_content_hash": "b6ec99a36340acb35a427eaceea530a51eca6dbe8a5421a90c607e04e3325061",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "83d7d3bc",
+      "source_content": "To use your custom web view, you'll need to create a class for it. Your class must:",
+      "source_content_hash": "1d13de28c0786c165e63427d57d973d18a3f59a8a548fda84f7c429c6b955178",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7da4d077",
+      "source_content": "- Export all the prop types from `WebView.propTypes`\n- Return a `WebView` component with the prop `nativeConfig.component` set to your native component (see below)",
+      "source_content_hash": "2120efef8e43671685f7dff198cb206d9bc3aaed5c3b10ee85bcac6e47346481",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9929329e",
+      "source_content": "To get your native component, you must use `requireNativeComponent`: the same as for regular custom components. However, you must pass in an extra third argument, `WebView.extraNativeComponentConfig`. This third argument contains prop types that are only required for native code.",
+      "source_content_hash": "461b67eb583c21a54d8d29402135cb0812eff85aa33209e4df7ff9383e1f736c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b628553",
+      "source_content": "```jsx\nimport React, {Component, PropTypes} from 'react';\nimport {WebView, requireNativeComponent} from 'react-native';\n\nexport default class CustomWebView extends Component {\n  static propTypes = WebView.propTypes;\n\n  render() {\n    return (\n      <WebView\n        {...this.props}\n        nativeConfig={{component: RCTCustomWebView}}\n      />\n    );\n  }\n}\n\nconst RCTCustomWebView = requireNativeComponent(\n  'RCTCustomWebView',\n  CustomWebView,\n  WebView.extraNativeComponentConfig,\n);\n```",
+      "source_content_hash": "96ad062a9c9ec64cdfd0ab8726509a38c661f349d56b5e32364da06aa278442f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "9cbb5424",
+      "source_content": "If you want to add custom props to your native component, you can use `nativeConfig.props` on the web view.",
+      "source_content_hash": "c1071c1dc40d20a80e469d298d5ab3b62a318d14ae6a0629f5c3d394c13b0bff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dbd18971",
+      "source_content": "For events, the event handler must always be set to a function. This means it isn't safe to use the event handler directly from `this.props`, as the user might not have provided one. The standard approach is to create an event handler in your class, and then invoking the event handler given in `this.props` if it exists.",
+      "source_content_hash": "7cfaee623aa536281b7cef327bb3b9e8bc36df137e3763add9ee1609b95fc80c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d8492b16",
+      "source_content": "If you are unsure how something should be implemented from the JS side, look at [WebView.android.js](https://github.com/react-native-webview/react-native-webview/blob/master/src/WebView.android.tsx) in the React Native WebView source.",
+      "source_content_hash": "ff730f0d0af7aa1af87228084c8423f6d8468e5d8dcc68e771297bda36d94290",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "606e259f",
+      "source_content": "```jsx\nexport default class CustomWebView extends Component {\n  static propTypes = {\n    ...WebView.propTypes,\n    finalUrl: PropTypes.string,\n    onNavigationCompleted: PropTypes.func,\n  };\n\n  static defaultProps = {\n    finalUrl: 'about:blank',\n  };\n\n  _onNavigationCompleted = event => {\n    const {onNavigationCompleted} = this.props;\n    onNavigationCompleted && onNavigationCompleted(event);\n  };\n\n  render() {\n    return (\n      <WebView\n        {...this.props}\n        nativeConfig={{\n          component: RCTCustomWebView,\n          props: {\n            finalUrl: this.props.finalUrl,\n            onNavigationCompleted: this._onNavigationCompleted,\n          },\n        }}\n      />\n    );\n  }\n}\n```",
+      "source_content_hash": "85a82c55a3565f4c04b43df7bb7b4dae6b28c0e48cfca8441b4be1f6daf9e106",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1697776c",
+      "source_content": "Similar to regular native components, you must provide all your prop types in the component to have them forwarded on to the native component. However, if you have some prop types that are only used internally in component, you can add them to the `nativeOnly` property of the third argument previously mentioned. For event handlers, you have to use the value `true` instead of a regular prop type.",
+      "source_content_hash": "26add6f96b797f7f0aaf3a0886665456fa260c165a2c9575fba0bc6f6e469bb7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fd40deab",
+      "source_content": "For example, if you wanted to add an internal event handler called `onScrollToBottom`, you would use,",
+      "source_content_hash": "a1ed03da1f746d28b05ef88aa99883a7e4576cf029edc5c48ddacc2d90f8c6d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d1c28c8f",
+      "source_content": "```jsx\nconst RCTCustomWebView = requireNativeComponent(\n  'RCTCustomWebView',\n  CustomWebView,\n  {\n    ...WebView.extraNativeComponentConfig,\n    nativeOnly: {\n      ...WebView.extraNativeComponentConfig.nativeOnly,\n      onScrollToBottom: true,\n    },\n  },\n);\n```",
+      "source_content_hash": "efec27bd36ef4ed120a51287258e1f94a0fe12b43ff64ddc957df759a8b387b5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/custom-webview-android.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.772651+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

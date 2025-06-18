@@ -1,0 +1,788 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2024-10-23-release-0.76-new-architecture.md",
+  "source_file_content_hash": "d0f1e18ffbe3aa11be98b1aaba21ca9fb00f0d0ac94b8b29cf271e08c8423c28",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.76 - New Architecture by default, React Native DevTools, and more'\nauthors: [blakef, cipolleschi, frankcalise, gabrieldonadel]\ntags: [announcement, release]\ndate: 2024-10-23T16:00\n---",
+      "source_content_hash": "b7d1b344dfa38bf65b31134de4aa8b5b2d5200b17d5df475e514d122a4df1e27",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Today we are excited to release React Native 0.76!",
+      "source_content_hash": "2afb3698e06d9dc98da7ef6c8c3cd0c2ecae14e97e1591320856df7faf152a9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們興奮地宣布 React Native 0.76 正式發布！"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "This is a major milestone for React Native, as we’re enabling the New Architecture by default, and we’re introducing React Native DevTools. This has been the culmination of 6 years of hard work from our team, together with the support of our incredible community of developers.",
+      "source_content_hash": "8092c791824ef5fab47020c0ac150538ff8bf92e6a50b0f944ce96413ccccb26",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是 React Native 的重要里程碑，我們預設啟用了新架構（New Architecture），並推出了 React Native DevTools。這項成果凝聚了團隊六年來的努力，以及廣大開發者社群的支持。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "9e760345",
+      "source_content": "- [React Native New Architecture by default](/blog/2024/10/23/release-0.76-new-architecture#react-native-new-architecture-by-default)\n- [React Native DevTools](/blog/2024/10/23/release-0.76-new-architecture#react-native-devtools)\n- [Faster Metro resolution](#faster-metro-resolution)\n- [Box Shadow and Filter style props](/blog/2024/10/23/release-0.76-new-architecture#box-shadow-and-filter-style-props)",
+      "source_content_hash": "0cd316e0037cd1872cb6a643e5e8c26e33f97cc5a38359a7ae2ac63f95e49883",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [預設啟用 React Native 新架構](/blog/2024/10/23/release-0.76-new-architecture#react-native-new-architecture-by-default)\n- [React Native DevTools](/blog/2024/10/23/release-0.76-new-architecture#react-native-devtools)\n- [更快的 Metro 解析速度](#faster-metro-resolution)\n- [盒陰影與濾鏡樣式屬性](/blog/2024/10/23/release-0.76-new-architecture#box-shadow-and-filter-style-props)"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "### Breaking Changes",
+      "source_content_hash": "b20bc465acc06c0341aa5cea47dcbd02f8d0db580f667ab00da54cd49654879a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "0787cf7f",
+      "source_content": "- [Removed the dependency on the react-native-community/cli](/blog/2024/10/23/release-0.76-new-architecture#removed-the-dependency-on-the-react-native-communitycli)\n- [Android Apps are ~3.8Mb smaller thanks to Native Library merging](/blog/2024/10/23/release-0.76-new-architecture#android-apps-are-38mb-smaller-thanks-to-native-library-merging)\n- [Updates to Minimum iOS and Android SDK requirements](/blog/2024/10/23/release-0.76-new-architecture#updates-to-minimum-ios-and-android-sdk-requirements)",
+      "source_content_hash": "937fabc5a6e396f8967c3b8ad77e415f2f2eea44e61509003c2bfeec489066ac",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [移除對 react-native-community/cli 的依賴](/blog/2024/10/23/release-0.76-new-architecture#removed-the-dependency-on-the-react-native-communitycli)\n- [透過原生函式庫合併使 Android 應用縮小約 3.8Mb](/blog/2024/10/23/release-0.76-new-architecture#android-apps-are-38mb-smaller-thanks-to-native-library-merging)\n- [更新最低 iOS 與 Android SDK 需求](/blog/2024/10/23/release-0.76-new-architecture#updates-to-minimum-ios-and-android-sdk-requirements)"
+      }
+    },
+    {
+      "segment_id": "c0bf612b",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c0bf612b"
+      }
+    },
+    {
+      "segment_id": "fa430ad4",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點功能"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "### React Native New Architecture by default",
+      "source_content_hash": "b497a4fd5f5739bf49e975ae07f23233147cd2ea9d5506279c6591bba25ae2ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 預設啟用 React Native 新架構"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "Starting from React Native 0.76, the New Architecture is enabled by default in your projects. The New Architecture is a rewrite of the internals of React Native to enable app developers to develop high quality native applications using React.",
+      "source_content_hash": "e8912194ba473cad66886e8b22aa5668ffb498f6e81c2e581193a717a3d6d4f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 React Native 0.76 開始，新專案將預設啟用新架構。新架構是 React Native 內部架構的重構，旨在讓開發者能使用 React 開發高品質的原生應用程式。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "Today, we’re excited to declare the New Architecture ready for production use.",
+      "source_content_hash": "634e189fbadced99940352e032b9b31f86f190bf97b23ab18f2e9dade7f0c246",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們今天正式宣布新架構已準備好投入生產環境使用。"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "This change is a milestone in the evolution of React Native, and we invite you to read the dedicated blogpost to understand what's included in the New Architecture and how it will shape the future of React Native: [The New Architecture is Here](/blog/2024/10/23/the-new-architecture-is-here).",
+      "source_content_hash": "d0bcd4107f9d925383a026d020c675cb05d85692ad009d58b5089cde092154e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這項變更是 React Native 演進的重要里程碑，歡迎閱讀專文了解新架構的內容與未來發展：[新架構正式登場](/blog/2024/10/23/the-new-architecture-is-here)。"
+      }
+    },
+    {
+      "segment_id": "3b7478ea",
+      "source_content": "### React Native DevTools",
+      "source_content_hash": "f8905d971faaf39e835f09d3b013b123a1e9e84e9fdddba20c99264b4820caea",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### React Native DevTools"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "![React Native DevTools front-end](/blog/assets/0.76-react-native-devtools.jpg)",
+      "source_content_hash": "a0d785fce3e1ce8951ff9c159967f197b4a3a4b870df0bd513e5583172a1c9bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React Native DevTools 前端介面](/blog/assets/0.76-react-native-devtools.jpg)"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "We're releasing the first stable version of React Native DevTools, our new default debugging experience.",
+      "source_content_hash": "f31fc11a6fd17725d9f8ddedaff4275e06d986f0b558880d0629db4c82761eda",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們發布了 React Native DevTools 的首個穩定版本，這是我們全新的預設除錯體驗。"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "We want the tooling you use to debug React across all platforms to be reliable, familiar, simple, and cohesive. React Native DevTools delivers on these principles — browser-aligned developer tools that are deeply integrated with React Native. Key features include:",
+      "source_content_hash": "a2b69245fa3845461869b05682328fe64981235ac87b3a26c9736e3aa6686aea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們致力於讓跨平台 React 除錯工具具備可靠性、熟悉度、簡潔性與一致性。React Native DevTools 實現了這些原則——深度整合 React Native 且與瀏覽器工具對齊的開發者工具。主要功能包括："
+      }
+    },
+    {
+      "segment_id": "4c077b92",
+      "source_content": "- **Familiar, web-aligned tooling** — A fully featured debugger based on Chrome DevTools with reliable breakpoints, watch values, step-through debugging, stack inspection, and a rich JavaScript console. These core features now work reliably and across reloads.\n- **Improved and integrated React DevTools** — The built-in React Components Inspector and Profiler work seamlessly, with faster and more reliable component highlighting.\n- **Improved UX** — See a new _Paused in Debugger_ overlay, making it clear when your app is paused on a breakpoint. Warnings in LogBox are now displayed as a summary, and hidden when DevTools is attached.\n- **Fixed reconnection behaviour** — JavaScript breakpoints now work reliably across reloads and when DevTools is disconnected and reattached. DevTools can even reconnect to the same app after a native rebuild.\n- **Instant launch** — React Native DevTools is ready by default with zero config. Open it from the in-app Dev Menu or via <kbd>j</kbd> to debug in the CLI server, which now supports multiple emulators and devices.",
+      "source_content_hash": "c3bebf889192060f03a684e0d4749c8856046a694a01d0abbafcbe533c6e2f40",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **熟悉的網頁式工具**：基於 Chrome DevTools 的完整除錯器，提供可靠的中斷點、監看值、逐步執行、堆疊檢查與豐富的 JavaScript 控制台。這些核心功能現在能穩定運作並支援重新載入。\n- **強化整合的 React DevTools**：內建的 React 元件檢查器與分析器無縫協作，元件高亮顯示更快速可靠。\n- **改進的使用體驗**：新增「除錯暫停」疊加層，明確顯示應用程式中斷狀態。LogBox 的警告訊息現在會以摘要形式顯示，並在 DevTools 連接時隱藏。\n- **修正重新連接行為**：JavaScript 中斷點現在能可靠地跨重新載入運作，且在 DevTools 斷線重連後仍可恢復。DevTools 甚至能在原生重建後重新連接至同一應用程式。\n- **立即啟動**：React Native DevTools 預設零配置即可使用。透過應用程式內的開發者選單或 CLI 伺服器的 <kbd>j</kbd> 快捷鍵開啟，現在支援多模擬器與裝置同時除錯。"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "React Native DevTools is fundamentally different from our previous debugging options, including being different from the Experimental Debugger experience first shipped in 0.73. It switches to a new backend debugging stack that we’ve rebuilt over the last year. This means that compatibility with previous tooling [has changed](https://github.com/react-native-community/discussions-and-proposals/discussions/819#:~:text=announcement%20talk%20%F0%9F%8E%AC.-,Compatibility,-React%20Native%20DevTools), and you should also expect a much more reliable experience end-to-end. We intend to build upon this new stack to allow us to reliably implement more features in future, such as the Performance and Network panels.",
+      "source_content_hash": "401fa38569a8f84bcdf488d39bcfce65180df53d8c324abebea7a92edb7aeabb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native DevTools 與我們先前的除錯選項有根本上的不同，包括與 0.73 版本首次推出的實驗性除錯器體驗也有所差異。它切換到我們過去一年重建的全新後端除錯堆疊。這意味著與先前工具的[相容性已發生變化](https://github.com/react-native-community/discussions-and-proposals/discussions/819#:~:text=announcement%20talk%20%F0%9F%8E%AC.-,Compatibility,-React%20Native%20DevTools)，同時您也應預期整體體驗會更加可靠。我們計劃基於此新堆疊，未來可靠地實現更多功能，例如效能與網路面板。"
+      }
+    },
+    {
+      "segment_id": "c6cc90a0",
+      "source_content": "#### Phasing out logs in Metro",
+      "source_content_hash": "8c6cac05b8bf3700d7464682e83ccd02f10832b75ecd6a85a328037260ef2527",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 逐步淘汰 Metro 中的日誌"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "In our next release, we're removing forwarded logs in Metro to align with modern browser tooling, and remove old debugging integrations. Instead, use React Native DevTools' fully featured Console panel for logging. See more under our [FAQs](https://github.com/react-native-community/discussions-and-proposals/discussions/819#:~:text=point%20is%20deprecated.-,FAQs,-React%20Native%20DevTools).",
+      "source_content_hash": "0b9c48896c502264d55e086bc4bb5bc8286798d58bda17abe011effbad506db1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在下一個版本中，我們將移除 Metro 中轉發的日誌，以與現代瀏覽器工具對齊，並移除舊的除錯整合。請改用 React Native DevTools 功能完整的控制台面板進行日誌記錄。詳見我們的[常見問題](https://github.com/react-native-community/discussions-and-proposals/discussions/819#:~:text=point%20is%20deprecated.-,FAQs,-React%20Native%20DevTools)。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "**Links**",
+      "source_content_hash": "645534083e83556b8b872e9b31b3433e0ae172d556ae4ccabc21b0f7f7996ae4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**相關連結**"
+      }
+    },
+    {
+      "segment_id": "30193704",
+      "source_content": "- [Updated debugging docs](/docs/debugging)\n- [Announcement talk at React Universe Conf](https://www.youtube.com/watch?v=OwivVpg6Luc)\n- [Feedback thread and FAQs](https://github.com/react-native-community/discussions-and-proposals/discussions/819)",
+      "source_content_hash": "59937635b54f0bb46d288053ae213c4dfa1be6c670c0dab7740c74687ff17ac4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [更新後的除錯文件](/docs/debugging)\n- [React Universe Conf 上的發布演講](https://www.youtube.com/watch?v=OwivVpg6Luc)\n- [意見回饋討論串與常見問題](https://github.com/react-native-community/discussions-and-proposals/discussions/819)"
+      }
+    },
+    {
+      "segment_id": "9e95fc4a",
+      "source_content": "### Faster Metro resolution",
+      "source_content_hash": "e42c6641c910c1a0e604f33f05c6172f471763141527cd9c2842530fc2695144",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 更快的 Metro 解析"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "We've shipped several performance improvements to Metro's resolver, the component responsible for finding a module from an import path, making it around [15x faster](https://x.com/MetroBundler/status/1831709057670861260). This improves the overall performance of Metro, particularly for warm builds, which we've seen at around 4x faster.",
+      "source_content_hash": "47cb57bcfb7a1d1ea94264e1f2006fbe4841b4152df184e6be9d2574c9bb192b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已對 Metro 的解析器（負責從導入路徑查找模組的組件）進行了多項效能改進，使其速度提升約[15倍](https://x.com/MetroBundler/status/1831709057670861260)。這提升了 Metro 的整體效能，特別是熱建置（warm builds）的速度，我們觀察到約有4倍的提升。"
+      }
+    },
+    {
+      "segment_id": "9032d03f",
+      "source_content": "<div class=\"tweet\">\n    <iframe style={{ \"border\": \"none\" }} scrolling=\"no\" width=\"550\" height=\"870\" data-tweet-url=\"https://twitter.com/MetroBundler/status/1831709057670861260\" src=\"data:text/html;charset=utf-8,%3Cblockquote%20class%3D%22twitter-tweet%22%3E%3Cp%20lang%3D%22en%22%20dir%3D%22ltr%22%3EFaster%20resolution%2C%20faster%20builds%3Cbr%3E%3Cbr%3EYesterday%26%2339%3Bs%20Metro%20release%20included%20a%20bunch%20of%20performance%20improvements%20to%20our%20resolver%2C%20making%20it%20around%2015x%20faster.%20That%26%2339%3Bs%20especially%20good%20news%20for%20warm%20builds.%20%3Ca%20href%3D%22https%3A//t.co/huPD5CW5bu%22%3Epic.twitter.com/huPD5CW5bu%3C/a%3E%3C/p%3E%26mdash%3B%20Metro%20%28@MetroBundler%29%20%3Ca%20href%3D%22https%3A//twitter.com/MetroBundler/status/1831709057670861260%3Fref_src%3Dtwsrc%255Etfw%22%3ESeptember%205%2C%202024%3C/a%3E%3C/blockquote%3E%0A%3Cscript%20async%20src%3D%22https%3A//platform.twitter.com/widgets.js%22%20charset%3D%22utf-8%22%3E%3C/script%3E%0A%0A\"></iframe>\n</div>",
+      "source_content_hash": "6ea4553f76b44fa6b1de14b012e8259104ba997a187f62044fe63c72d9954ecd",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "### Box Shadow and Filter style props",
+      "source_content_hash": "bf6b1fbacd10bb0a747be93b96eab2effe24e9f08a5c501329c31273a0e5fe05",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 陰影方框與濾鏡樣式屬性"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "We’ve added two New Architecture only style props in 0.76 - `boxShadow` and `filter`. Both of these props exist on the web, and the team stick to the specs when possible so that these props are predictable, familiar, and ultimately easier to adopt (see the limitations and spec deviations sections for the exceptions).\nAs a result, you can look up the web documentation to fully understand how these work, but there are a few important differences which are noted below.",
+      "source_content_hash": "239b4a6e55e01b7664f33634522e5be76a1e989ba91574bb658cb05ff40435f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們在 0.76 版本中新增了兩個僅限新架構的樣式屬性——`boxShadow` 和 `filter`。這兩個屬性在網頁上已存在，團隊在可能的情況下遵循規範，使這些屬性具有可預測性、熟悉度，最終更易於採用（例外情況請參閱限制與規範偏差部分）。\n因此，您可以查閱網頁文件以全面了解其運作方式，但以下會說明幾個重要的差異點。"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "#### `boxShadow`",
+      "source_content_hash": "9450324334d4e4e84f30680cef2b181ff045c4cc38ae36127a8963cd7a917813",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### `boxShadow`"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "`boxShadow` adds a shadow to an element, with the ability to control the position, color, size, and blurriness of the shadow. Check out the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) for a full overview of each of these arguments, along with a fiddle to try them out for yourself. Below are a few examples of the shadows you can make.",
+      "source_content_hash": "a09e11f45d36e8f1803df0d3e0f52cbd9b7a4a3fee12a4cef7b01e7225b343ca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`boxShadow` 為元素添加陰影，並可控制陰影的位置、顏色、大小和模糊程度。查閱 [MDN 文件](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow)以獲取這些參數的完整概述，並透過互動範例親自嘗試。下方是幾個可實現的陰影範例。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "![New boxShadow style prop](/blog/assets/0.76-boxshadow-example.png)",
+      "source_content_hash": "05ecddfc4e6ed4b7a57c059cb1d8ff0c8bea698eb055ab6f19dc977227e46c5b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![新增的 boxShadow 樣式屬性](/blog/assets/0.76-boxshadow-example.png)"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "`boxShadow` can take either a string, which mimics the CSS syntax, or JS objects which can embed variables. For example the string `‘5 5 5 0 rgba(255, 0, 0, 0.5)’` and the object `{offsetX: 5, offsetY: 5, blurRadius: 5, spreadDistance: 0, color: ‘rgba(255, 0, 0, 0.5)’}` would yield the same box shadow.",
+      "source_content_hash": "1142447a164db29833af77e8feb0a991b5ab6bfecfe614187d4d08146e367764",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`boxShadow` 可接受字串（模仿 CSS 語法）或可嵌入變數的 JS 物件。例如，字串 `‘5 5 5 0 rgba(255, 0, 0, 0.5)’` 與物件 `{offsetX: 5, offsetY: 5, blurRadius: 5, spreadDistance: 0, color: ‘rgba(255, 0, 0, 0.5)’}` 會產生相同的方框陰影。"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "The [previous shadow functionality](https://reactnative.dev/docs/shadow-props) had some shortcomings addressed now addressed by `boxShadow`:",
+      "source_content_hash": "3837b1f6b003f6b3df5aa4353e9d80f08744918d51a1791f92066612a9ce3402",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[先前的陰影功能](https://reactnative.dev/docs/shadow-props)存在一些不足，現已由 `boxShadow` 解決："
+      }
+    },
+    {
+      "segment_id": "cc9271fb",
+      "source_content": "- Does not work on Android\n- Cannot be [inset](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#inset)\n- Does not have [spread](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#length)\n- Does not work on `View`s if there is no background color\n- Is a separate prop, so it cannot share the same web syntax",
+      "source_content_hash": "304b7f6c056735dbf05c7af4b510c15097e5a574a25c5a88ec93888940a03e10",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在 Android 上無法運作\n- 無法[內嵌](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#inset)\n- 不支援[擴散](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#length)\n- 若無背景色則無法在 `View` 上運作\n- 是獨立屬性，因此無法共享相同的網頁語法"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "#### Limitations & Spec Deviations",
+      "source_content_hash": "8acdb93e025fe6a954dfcd5d435ba993bafcf49ed78f54d2877ec6cf3e7fab41",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 限制與規範偏差"
+      }
+    },
+    {
+      "segment_id": "7fd14cb9",
+      "source_content": "<!--alex ignore black -->",
+      "source_content_hash": "98d3ee8823ce95a409c249bd27765a799b4c6dbdfbda13ad1c17e3345f70597e",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e0019b35",
+      "source_content": "- The default shadow color is black, not the parent’s color\n- Android normal shadows are supported on **Android 9+**\n- Android inset shadows are supported on **Android 10+**",
+      "source_content_hash": "90b411865d809989ceca9edbf62e9af8f85e26ebe362b8a54b0fa27e93ebf242",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 預設陰影顏色為黑色，而非父元素的顏色\n- Android 9+ 支援一般陰影效果\n- Android 10+ 支援內嵌陰影效果"
+      }
+    },
+    {
+      "segment_id": "c19de48a",
+      "source_content": "#### `filter`",
+      "source_content_hash": "f4e5718f784030793da4b6882f2a3e5ec19d0a282d69627aaf027fef10358c15",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### `filter` 濾鏡效果"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "`filter` adds certain graphical filters to an element. There are a mix of color filters that let you modify things like brightness, saturation, and hue as well as non-color filters that let you add blurs and shadows. Check out the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/filter) for a full overview of each individual filter function, along with a fiddle to try them out for yourself. Below is a hot dog image with various filters applied to it.",
+      "source_content_hash": "4d200d9e7a845a567f7333a478bae017f90affc94f4c63caed79ff5067b091af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`filter` 可為元素添加圖形濾鏡效果，包含可調整亮度、飽和度與色調的顏色濾鏡，以及能添加模糊與陰影的非顏色濾鏡。詳見 [MDN 文件](https://developer.mozilla.org/en-US/docs/Web/CSS/filter)了解各濾鏡函數的完整說明與互動範例。下圖為套用不同濾鏡效果的熱狗圖片。"
+      }
+    },
+    {
+      "segment_id": "341c2c0e",
+      "source_content": "<figure>\n    <img alt=\"Filters demonstration\" src=\"/blog/assets/0.76-filter-example.png\" />\n    <figcaption>From left to right: no filter, <code>saturate</code> filter, <code>blur</code> filter, <code>invert</code> filter</figcaption>\n</figure>",
+      "source_content_hash": "433af74390ae17c3433baf5b2069c0219461e41c7ba86cafb70091f5c57c49f1",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_341c2c0e"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "Like `boxShadow`, `filter` can take either a string, which mimics the CSS syntax, or an array of JS objects which can embed variables. For example the string `‘saturate(0.5) grayscale(0.25)’` and the array `[{saturate: 0.5}, {grayscale: 0.25}]` would yield the same filter.\n`filter` has a `dropShadow` value which varies slightly from `boxShadow`. The biggest difference is that `dropShadow` is an alpha mask - so the shadow will only be cast by a pixel if it has a nonzero alpha component. `boxShadow`, on the other hand, will cast around the border box of the element, even if nothing is inside of it. Additionally, dropShadow does not have a spread distance parameter and cannot be inset (shadow cast inside of the element).",
+      "source_content_hash": "6cf2e2ff38148646033a011a4af974f8e66524a3b7b6f836d3d25bd1052ec698",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與 `boxShadow` 類似，`filter` 可接受模仿 CSS 語法的字串，或嵌入變數的 JS 物件陣列。例如字串 `'saturate(0.5) grayscale(0.25)'` 與陣列 `[{saturate: 0.5}, {grayscale: 0.25}]` 會產生相同濾鏡效果。\n`filter` 的 `dropShadow` 值與 `boxShadow` 略有差異，主要區別在於 `dropShadow` 是 alpha 遮罩——僅當像素具有非零 alpha 分量時才會投射陰影。而 `boxShadow` 則會圍繞元素的邊框盒投射陰影，即使內部為空。此外，dropShadow 不具備擴散距離參數且無法設定為內嵌陰影（元素內部陰影）。"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "#### Limitations and Spec Deviations",
+      "source_content_hash": "e7c0b062d57eb852289d634ac520d273516aa9479bd378dcc8e72fcbc22b75d5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 限制與規格差異"
+      }
+    },
+    {
+      "segment_id": "1b8037f4",
+      "source_content": "- iOS `filter` only supports brightness and opacity\n- iOS `filter` will not apply to shadows, outlines, or any other graphical elements outside the bounds of the element\n- Android `blur` and `drop-shadow` are only supported on **Android 12+**\n- `filter` implies `overflow: hidden`, so children of an element with a `filter` will be clipped if they are positioned outside of the parents bounds.",
+      "source_content_hash": "696dd2ecd2710f6f0c511d333b347fad7f2f95adbcd1ca53175cbb2d2dfd10ff",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- iOS 的 `filter` 僅支援亮度和透明度調整\n- iOS 的 `filter` 不會作用於陰影、輪廓線或元素邊界外的任何圖形元素\n- Android 的 `blur` 和 `drop-shadow` 僅在 **Android 12+** 支援\n- `filter` 隱含 `overflow: hidden` 屬性，因此若子元素定位超出父元素邊界，將被裁切"
+      }
+    },
+    {
+      "segment_id": "37fca32e",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重大變更"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "### Removed the dependency on the @react-native-community/cli",
+      "source_content_hash": "bbc59914bdf6fa5965d0380d776b24853080e3ab55ddb8440693f58039acaff4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除 @react-native-community/cli 依賴項"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "As previosly shared in 0.75, our vision is for React Native to be [framework agnostic](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md). Therefore, we completed the work to remove @react-native-community/cli as a direct dependency of React Native.",
+      "source_content_hash": "a0c4e7b59559b00573dd05d956964d63b1612b0318c83585a66b297dd77362b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如 0.75 版本所述，我們的目標是讓 React Native 成為[框架無關](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md)的技術。因此我們已完成移除 React Native 對 @react-native-community/cli 的直接依賴。"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "Decoupling React Native from the CLI allows us to move faster through releasing these projects independently and to better separate the responsibilities of both projects.",
+      "source_content_hash": "63e18bce8455587d18b134c09c478c2383e5a428884872701048b32c2ce65d32",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 CLI 與 React Native 解耦，能讓兩個專案更靈活地獨立發布版本，並更清晰地劃分職責範圍。"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "If you are relying on the CLI in your daily workflow, make sure to explicitly [add the dependency](https://react-native-community.github.io/upgrade-helper/?from=0.75.4&to=0.76.0#RnDiffApp-package.json) on the CLI in your `package.json`:",
+      "source_content_hash": "968d2f63e76abe2b4389fe79b99e8de9d6f667ff784832d4bb3b7534a6d378be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若日常工作流程需依賴 CLI，請務必在 `package.json` 中[明確添加依賴項](https://react-native-community.github.io/upgrade-helper/?from=0.75.4&to=0.76.0#RnDiffApp-package.json)："
+      }
+    },
+    {
+      "segment_id": "2f34b0ad",
+      "source_content": "```diff\n//…\n  “devDependencies”: {\n   // …\n+  “@react-native-community/cli”: “15.0.0”,\n+  \"@react-native-community/cli-platform-android\": “15.0.0”,\n+  \"@react-native-community/cli-platform-ios\": “15.0.0”,\n  },\n```",
+      "source_content_hash": "a3a1b41524f90d611d3d9203fe64cc84f42ce91524008e42295e903c6d7faa99",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2f34b0ad"
+      }
+    },
+    {
+      "segment_id": "c6868a9f",
+      "source_content": "### Android Apps are ~3.8Mb smaller thanks to Native Library merging",
+      "source_content_hash": "1deec5c56ca3e62b1aaecdd8acc59abdbb25e65ae9e98e2108588ed8a1e3fc33",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 合併原生函式庫使 Android 應用縮小約 3.8MB"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "React Native 0.76 will ship with a reduced number of native libraries, as we merged a lot of our native code into a single library called `libreactnative.so`.",
+      "source_content_hash": "6f8feded80e0fd70060dab51b1ab7be96b5c9cfdd564c6df849eba2411e0c830",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.76 將減少原生函式庫數量，我們已將大量原生程式碼合併至單一函式庫 `libreactnative.so`。"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "This change comes with reduction in app size, and improvement in app startup performance on Android. From our benchmarks, we found out that App size will be reduced by ~3.8MB (20% of the total) and median App startup time will be reduced by ~15ms (~8%) ([source](https://github.com/react-native-community/discussions-and-proposals/discussions/816)).",
+      "source_content_hash": "ad17b5f1e493d36aad9f3710dbac11bf1e34452e4b74bdf11bb2cbb449dc5026",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更帶來應用體積縮減與 Android 應用啟動效能提升。根據基準測試，應用體積將減少約 3.8MB（總體積的 20%），中位數應用啟動時間縮短約 15ms（約 8%）（[來源](https://github.com/react-native-community/discussions-and-proposals/discussions/816)）。"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "On the other hand, this is a breaking change for both app and library developers.",
+      "source_content_hash": "4ec72cddfd8280f5f6ec1aa226602fea1e9940246cea68f786c4446caddcfcf1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但此變更對應用程式與函式庫開發者均屬重大變更。"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "App developers will have to update their Application’s `onCreate` as follows:",
+      "source_content_hash": "f231962defce945b8215d185f471031caa53b0d95f1d94d6afb9e48e01809245",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "應用程式開發者需按以下方式更新 Application 的 `onCreate` 方法："
+      }
+    },
+    {
+      "segment_id": "eb25bb8c",
+      "source_content": "```diff\n+import com.facebook.react.soloader.OpenSourceMergedSoMapping\nimport com.facebook.soloader.SoLoader\n\nclass MainApplication : Application(), ReactApplication {\n\n  override fun onCreate() {\n    super.onCreate()\n+   SoLoader.init(this, OpenSourceMergedSoMapping)\n-   SoLoader.init(this, false)\n  }\n}\n```",
+      "source_content_hash": "148f6ec1736cf0ffcc397d192fc5389798a760b10f4bd7f6b0b724c1f8a03618",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb25bb8c"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "This change is necessary in order to properly load libreactnative.so and is [included in the upgrade-helper](https://react-native-community.github.io/upgrade-helper/).",
+      "source_content_hash": "939d8681a522328d550e22925f6b654ab66e1140bfa9904b7f8e6addd98f2f52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更為正確載入 libreactnative.so 的必要調整，[已包含在升級輔助工具中](https://react-native-community.github.io/upgrade-helper/)。"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "Library authors won’t be affected by this change, unless you have custom C++ code.",
+      "source_content_hash": "ae4a9b58c7ada4de58031556b114ef7c8627a09fdf62d99fd197a72670c257bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "函式庫作者不會受到此變更影響，除非您有自訂的 C++ 程式碼。"
+      }
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "For a technical deep dive into this change, and suggestions for library authors, you can read more about it [in the dedicated post](https://github.com/react-native-community/discussions-and-proposals/discussions/816).",
+      "source_content_hash": "ffb38f1f25acd8d3a936c571781e9a2dbc9b629023050d710d1c428d24014e05",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如需此變更的技術深入探討以及對函式庫作者的建議，可參閱[專文說明](https://github.com/react-native-community/discussions-and-proposals/discussions/816)。"
+      }
+    },
+    {
+      "segment_id": "657bde08",
+      "source_content": "### Updates to Minimum iOS and Android SDK requirements",
+      "source_content_hash": "30a9a51a2d2ca0c5659912a6ca0ed7ed73f2a2045a190937dcbee9377bf9b694",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 最低 iOS 與 Android SDK 需求更新"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "We have updated our minimum platform and SDK versions:",
+      "source_content_hash": "aaab84917c700f3f578812024b07fa7c2295a74c8b576e2ea7a1e134c0723d90",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已更新最低平台與 SDK 版本需求："
+      }
+    },
+    {
+      "segment_id": "35b64b93",
+      "source_content": "- iOS - from 13.4 to [15.1](https://support.apple.com/en-gb/108051#151)\n- Android - from SDK 23 to [SDK 24](https://developer.android.com/tools/releases/platforms#7.0) (Android 7)",
+      "source_content_hash": "cf015ffc934a32ae6221e983bdbfd2fb05d912b74b5ec950ff5eec506d296a36",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- iOS - 從 13.4 提升至 [15.1](https://support.apple.com/en-gb/108051#151)\n- Android - 從 SDK 23 提升至 [SDK 24](https://developer.android.com/tools/releases/platforms#7.0) (Android 7)"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "This change was announced earlier in the year when 0.75 [was released](/blog/2024/08/12/release-0.75#last-version-supporting-minsdk-23-and-miniosversion-134). For more background, please see the dedicated posts for [Android](https://github.com/react-native-community/discussions-and-proposals/discussions/802) and [iOS](https://github.com/react-native-community/discussions-and-proposals/discussions/812).",
+      "source_content_hash": "ecbbdce27a4a2c581a98dc681cd6635369be654485c8498fdbcd73851044528c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更已於今年 0.75 [版本發佈時](/blog/2024/08/12/release-0.75#last-version-supporting-minsdk-23-and-miniosversion-134)預先公告。更多背景資訊請參閱 [Android](https://github.com/react-native-community/discussions-and-proposals/discussions/802) 與 [iOS](https://github.com/react-native-community/discussions-and-proposals/discussions/812) 專文說明。"
+      }
+    },
+    {
+      "segment_id": "e1642ab4",
+      "source_content": "### Other Breaking Changes",
+      "source_content_hash": "39a3fee4305e149be253dd5d52033d827569d41d307326f83607c634f65347a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他重大變更"
+      }
+    },
+    {
+      "segment_id": "6df73775",
+      "source_content": "- **Animation**\n  - Stop sending state updates to React in looping animation. This was causing unnecessary re-rendering with looping animations.\n- **devtools:**\n  - Remove Inspector Panel perf + network tabs under New Arch. ([RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0777-remove-legacy-element-inspector-features.md))\n- **text engine**\n  - Always use AttributedStringBox instead of AttributedString in TextLayoutManager",
+      "source_content_hash": "ba36b8a6a784706daa8d396535831be6d06a774da4736e3983c062dfa7b33114",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **動畫**\n  - 停止在循環動畫中向 React 發送狀態更新。此行為會導致循環動畫產生不必要的重新渲染。\n- **開發工具:**\n  - 在新架構下移除 Inspector 面板的效能與網路分頁 ([RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0777-remove-legacy-element-inspector-features.md))\n- **文字引擎**\n  - 在 TextLayoutManager 中一律使用 AttributedStringBox 取代 AttributedString"
+      }
+    },
+    {
+      "segment_id": "c4ac6a6f",
+      "source_content": "#### Android",
+      "source_content_hash": "d434cf037d9a11db57371fb85c4a8113f8b135cc2cdab4ed9f593392e905b8d4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android"
+      }
+    },
+    {
+      "segment_id": "fc7b5b3c",
+      "source_content": "- **rendering:**\n  - View backgrounds are no longer directly `ReactViewBackgroundDrawable` or `CSSBackgroundDrawable`",
+      "source_content_hash": "b4a91a337fe88e59befefc5dd78d8e4ffc6f6c9dc2d67619915c5073f366e12d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **渲染:**\n  - 視圖背景不再直接使用 `ReactViewBackgroundDrawable` 或 `CSSBackgroundDrawable`"
+      }
+    },
+    {
+      "segment_id": "be4b1cbf",
+      "source_content": "#### iOS",
+      "source_content_hash": "34a7cbb85edc6939bf27aaa6adfe7891a150036196a0a9e20e457d95a4c05872",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### iOS"
+      }
+    },
+    {
+      "segment_id": "458ab9ae",
+      "source_content": "- **turbomodule**\n  - Removed the `RCT_EXPORT_CXX_MODULE_EXPERIMENTAL` Macro for autolinking pure Cxx module.",
+      "source_content_hash": "03c819da05b4a6df7a4e06343633999be7107976a0d096f94abfb48d1273ecf5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **turbomodule**\n  - 移除用於自動連結純 Cxx 模組的 `RCT_EXPORT_CXX_MODULE_EXPERIMENTAL` 巨集"
+      }
+    },
+    {
+      "segment_id": "dfa23ddf",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "React Native 0.76 contains over [1070 commits](https://github.com/facebook/react-native/compare/v0.75.4...v0.76.0) from 156 contributors. Thanks for all of your hard work!",
+      "source_content_hash": "69803959060c3313c1582a6aa9122c295542e4d2be4a33e4dfdc5560635a630f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.76 包含來自 156 位貢獻者的超過 [1070 次提交](https://github.com/facebook/react-native/compare/v0.75.4...v0.76.0)。感謝所有人的辛勤付出！"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "Thanks to all the additional authors that worked on documenting features in this release post:",
+      "source_content_hash": "d238edb562844e7d53eb091c098caacdb00c5573aabfde63efacea8ad1dd58ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "特別感謝以下作者為本版本文檔撰寫功能說明："
+      }
+    },
+    {
+      "segment_id": "d796d443",
+      "source_content": "- [Joe Vilches](https://github.com/joevilches) and [Nick Gerleman](https://github.com/NickGerleman) box-shadow and filter style props.\n- [Alex Hunt](https://github.com/huntie) React Native DevTools.\n- [Nicola Corti](https://github.com/cortinico) Android shipping as a single library.",
+      "source_content_hash": "ebadb26fc80ade6666522f5868c6f4ad3ccea03039d406d0df36eb5ebdf98e91",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Joe Vilches](https://github.com/joevilches) 與 [Nick Gerleman](https://github.com/NickGerleman) 的 box-shadow 和 filter 樣式屬性\n- [Alex Hunt](https://github.com/huntie) 的 React Native 開發工具\n- [Nicola Corti](https://github.com/cortinico) 的 Android 單一函式庫打包"
+      }
+    },
+    {
+      "segment_id": "428f235a",
+      "source_content": "## Upgrade to 0.76",
+      "source_content_hash": "40c219a1acb4c66c0b22002b5a46fe8e5e5ff9ae9bb942c551fc6642c9bcc1b9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 升級至 0.76"
+      }
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.",
+      "source_content_hash": "0638260e20da230691670b567610c6c2be87ab53adb865a0f30305b52bfbd5c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native 升級助手](https://react-native-community.github.io/upgrade-helper/) 查看現有專案在 React Native 版本間的程式碼變更，並參閱升級文件。"
+      }
+    },
+    {
+      "segment_id": "eeeea5ce",
+      "source_content": "If you use Expo, React Native 0.76 will be supported in Expo SDK 52.",
+      "source_content_hash": "1eeea668c7a75aed725eb1c4bbd0f2f77d947cabc4155c7b971f6549bf7907f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 Expo，React Native 0.76 將在 Expo SDK 52 中獲得支援。"
+      }
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "If you need to create a new project using the CLI, you can run this command:",
+      "source_content_hash": "a1fdec5db1532f92debc04dd28a8642af896727352836dd148a96a288fb877dd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如需透過 CLI 建立新專案，可執行以下指令："
+      }
+    },
+    {
+      "segment_id": "ff27b4c2",
+      "source_content": "```\nnpx @react-native-community/cli@latest init MyProject --version latest\n```",
+      "source_content_hash": "d4d4818494e8b2d86a8e2e708fa32bf5ea749a2b154bad211c32907e17370fe6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ff27b4c2"
+      }
+    },
+    {
+      "segment_id": "b59cbf61",
+      "source_content": ":::info\n0.76 is now the latest stable version of React Native and 0.73.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md). We aim to publish a final end-of-life update of 0.73 in the near future.\n:::",
+      "source_content_hash": "e7ec4dea64376284c5edc2f6f12c5d21c837d55c68b91427f51818a9c90c3ed5",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.76 版現為 React Native 最新穩定版本，0.73.x 轉為不受支援狀態。詳情請參閱 [React Native 支援政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。我們預計在近期發布 0.73 的最終終止支援更新。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2024-10-23-release-0.76-new-architecture.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.236924+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "d0f1e18ffbe3aa11be98b1aaba21ca9fb00f0d0ac94b8b29cf271e08c8423c28"
+  }
+}

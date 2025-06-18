@@ -1,0 +1,722 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/pressable.md",
+  "source_file_content_hash": "ad3b916e8292a6cc55796469f06caaefde6497f30c2aa0259ea6da2e56781045",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: pressable\ntitle: Pressable\n---",
+      "source_content_hash": "fd20ffa3ed0d45b80f19e5f8641f78a501f56878f0dfe16bf5c7e416642c7bb2",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Pressable is a Core Component wrapper that can detect various stages of press interactions on any of its defined children.",
+      "source_content_hash": "9c40921c56faf6c91477880e416a30fd3a26c871134bd755a382f77dd4ce204e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Pressable 是一個核心組件包裝器，能夠檢測其定義的子元素上各種按壓互動的階段。"
+      }
+    },
+    {
+      "segment_id": "e6a5da7c",
+      "source_content": "```tsx\n<Pressable onPress={onPressFunction}>\n  <Text>I'm pressable!</Text>\n</Pressable>\n```",
+      "source_content_hash": "7ccacacd8da93e1affdaf47a9f6ab4cd30d87284d44f14b08b97325049bd9ab0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6a5da7c"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## How it works",
+      "source_content_hash": "5ae438610cf16e31eb584a453d76f45d94f6d1bb14751446ac4e99e3e37c33a8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 運作原理"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "On an element wrapped by `Pressable`:",
+      "source_content_hash": "2be3eaa3abb35f2190428b55196f9561e7cc49aea507fb20148b98212aa61e8b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在被 `Pressable` 包裹的元素上："
+      }
+    },
+    {
+      "segment_id": "11c829ab",
+      "source_content": "- [`onPressIn`](#onpressin) is called when a press is activated.\n- [`onPressOut`](#onpressout) is called when the press gesture is deactivated.",
+      "source_content_hash": "62681e3612cc7aea0cbd9e8da82eb5f9bc4a3f5b3089666b70c688b771da2228",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 當按壓被激活時，[`onPressIn`](#onpressin) 會被呼叫。\n- 當按壓手勢被取消激活時，[`onPressOut`](#onpressout) 會被呼叫。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "After pressing [`onPressIn`](#onpressin), one of two things will happen:",
+      "source_content_hash": "7df3aeb5cc359053f29013991833f998bd928b089d0df7fe854e8252025ca59b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在按下 [`onPressIn`](#onpressin) 後，會發生以下兩種情況之一："
+      }
+    },
+    {
+      "segment_id": "1b8c1887",
+      "source_content": "1. The person will remove their finger, triggering [`onPressOut`](#onpressout) followed by [`onPress`](#onpress).\n2. If the person leaves their finger longer than 500 milliseconds before removing it, [`onLongPress`](#onlongpress) is triggered. ([`onPressOut`](#onpressout) will still fire when they remove their finger.)",
+      "source_content_hash": "800509be99d9c79a018c2d66929cdd2e4d49f1079f4982272b6ad31e1527a780",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 使用者移開手指，觸發 [`onPressOut`](#onpressout) 接著是 [`onPress`](#onpress)。\n2. 如果使用者在移開手指前按壓超過 500 毫秒，則會觸發 [`onLongPress`](#onlongpress)。（當他們移開手指時，[`onPressOut`](#onpressout) 仍會觸發。）"
+      }
+    },
+    {
+      "segment_id": "1941846d",
+      "source_content": "<img src=\"/docs/assets/d_pressable_pressing.svg\" width=\"1000\" alt=\"Diagram of the onPress events in sequence.\" />",
+      "source_content_hash": "7c5b4f3c38cb656012206b5b41c902cfa08a9e147da78fa8cb003fd3a20dff07",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1941846d"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Fingers are not the most precise instruments, and it is common for users to accidentally activate the wrong element or miss the activation area. To help, `Pressable` has an optional `HitRect` you can use to define how far a touch can register away from the wrapped element. Presses can start anywhere within a `HitRect`.",
+      "source_content_hash": "20fb05299353f817f6e259129f6e274baf595e9d52949f8d9a2cc5e958a42bc1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "手指並非最精確的工具，使用者常會意外激活錯誤元素或錯過激活區域。為此，`Pressable` 提供了一個可選的 `HitRect`，可用於定義觸碰能夠註冊的距離範圍。按壓可以在 `HitRect` 內的任何地方開始。"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "`PressRect` allows presses to move beyond the element and its `HitRect` while maintaining activation and being eligible for a \"press\"—think of sliding your finger slowly away from a button you're pressing down on.",
+      "source_content_hash": "33e11a7748e4d8b364e01aa58cf9530a9b34eb01c45caec34549c263157e0010",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`PressRect` 允許按壓移動超出元素及其 `HitRect`，同時保持激活狀態並有資格成為「按壓」——想像一下將手指慢慢從你按下的按鈕上滑開。"
+      }
+    },
+    {
+      "segment_id": "adb6a20b",
+      "source_content": "> The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.",
+      "source_content_hash": "d9c7f6d80c2b26318c9698ec385b8d9c6c10aa0cb4ff485369aa6bdc5ba9cb7e",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 觸碰區域永遠不會超出父視圖邊界，且如果觸碰同時命中兩個重疊的視圖，兄弟視圖的 Z-index 總是優先。"
+      }
+    },
+    {
+      "segment_id": "d0d484a6",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/d_pressable_anatomy.svg\" width=\"1000\" alt=\"Diagram of HitRect and PressRect and how they work.\" />\n  <figcaption>\n    You can set <code>HitRect</code> with <code>hitSlop</code> and set <code>PressRect</code> with <code>pressRetentionOffset</code>.\n  </figcaption>\n</figure>",
+      "source_content_hash": "e6c0c3f8ccc56e750048f8d5f29456ea5668e254b0ef4ab7ef1d48dd8c5047e0",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d0d484a6"
+      }
+    },
+    {
+      "segment_id": "0b717733",
+      "source_content": "> `Pressable` uses React Native's `Pressability` API. For more information around the state machine flow of Pressability and how it works, check out the implementation for [Pressability](https://github.com/facebook/react-native/blob/16ea9ba8133a5340ed6751ec7d49bf03a0d4c5ea/Libraries/Pressability/Pressability.js#L347).",
+      "source_content_hash": "92c466c2ce61e12c55ebef1a5f0ef7126560c52c347ebdb64be6df174b163b79",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> `Pressable` 使用 React Native 的 `Pressability` API。有關 Pressability 的狀態機流程及其運作方式的更多信息，請查看 [Pressability](https://github.com/facebook/react-native/blob/16ea9ba8133a5340ed6751ec7d49bf03a0d4c5ea/Libraries/Pressability/Pressability.js#L347) 的實現。"
+      }
+    },
+    {
+      "segment_id": "06c0f776",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "6648a219",
+      "source_content": "```SnackPlayer name=Pressable\nimport React, {useState} from 'react';\nimport {Pressable, StyleSheet, Text, View} from 'react-native';\n\nconst App = () => {\n  const [timesPressed, setTimesPressed] = useState(0);\n\n  let textLog = '';\n  if (timesPressed > 1) {\n    textLog = timesPressed + 'x onPress';\n  } else if (timesPressed > 0) {\n    textLog = 'onPress';\n  }\n\n  return (\n    <View style={styles.container}>\n      <Pressable\n        onPress={() => {\n          setTimesPressed(current => current + 1);\n        }}\n        style={({pressed}) => [\n          {\n            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',\n          },\n          styles.wrapperCustom,\n        ]}>\n        {({pressed}) => (\n          <Text style={styles.text}>{pressed ? 'Pressed!' : 'Press Me'}</Text>\n        )}\n      </Pressable>\n      <View style={styles.logBox}>\n        <Text testID=\"pressable_press_console\">{textLog}</Text>\n      </View>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n  text: {\n    fontSize: 16,\n  },\n  wrapperCustom: {\n    borderRadius: 8,\n    padding: 6,\n  },\n  logBox: {\n    padding: 20,\n    margin: 10,\n    borderWidth: StyleSheet.hairlineWidth,\n    borderColor: '#f0f0f0',\n    backgroundColor: '#f9f9f9',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "f057d1d1b51681c33fb2f93d33205e2a838453cf2e48d1c0c4a87a4ff451793d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6648a219"
+      }
+    },
+    {
+      "segment_id": "c7c92a79",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "### `android_disableSound` <div class=\"label android\">Android</div>",
+      "source_content_hash": "5573da7c2b57b2c193dcaf8501073213311fcb4c6ab5649c4f3d1ecc8431715a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `android_disableSound` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "If true, doesn't play Android system sound on press.",
+      "source_content_hash": "50ed5b1884e2fb4dbbfaadf1adeb6d8d427902811e39e10e36593a8a8ef1c22b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果為 true，按壓時不會播放 Android 系統聲音。"
+      }
+    },
+    {
+      "segment_id": "818af932",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_818af932"
+      }
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "### `android_ripple` <div class=\"label android\">Android</div>",
+      "source_content_hash": "52a2b7272308f97e017b641e760c998100e66ac59a46e634ce40b4eb10cc8bce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `android_ripple` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "Enables the Android ripple effect and configures its properties.",
+      "source_content_hash": "137bbdf6db99b5e923036e8bc260ec7f427d53cddb1d6b90d356bcf3edabcdac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "啟用 Android 漣漪效果並配置其屬性。"
+      }
+    },
+    {
+      "segment_id": "a47b9b70",
+      "source_content": "| Type                                   |\n| -------------------------------------- |\n| [RippleConfig](pressable#rippleconfig) |",
+      "source_content_hash": "d5859c8ebe340a69905bdee952bcd00e9a0e329fb147278474da91b775dde0bb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a47b9b70"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### `children`",
+      "source_content_hash": "23573efb39dc3fbe95dbb2dd733d954c316cd722d655f2403a1d61226ba47d63",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `children`"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "Either children or a function that receives a boolean reflecting whether the component is currently pressed.",
+      "source_content_hash": "ec2df01e222f198535e326ea30d9b6e9a431ded53b1f073ba4ca96a257754820",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可以是子元素，或是一個接收布林值的函數，該值反映組件當前是否被按壓。"
+      }
+    },
+    {
+      "segment_id": "d03e4798",
+      "source_content": "| Type                     |\n| ------------------------ |\n| [React Node](react-node) |",
+      "source_content_hash": "99e11a646ebe946756595541f5476281ca187e71ee138cbb85df6f92e9fce925",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d03e4798"
+      }
+    },
+    {
+      "segment_id": "47cd8dd6",
+      "source_content": "### `unstable_pressDelay`",
+      "source_content_hash": "8e49a54b9acd39433bb672a1e77b87f3ae10af5156c2a16d261e938c95f540f0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `unstable_pressDelay`"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "Duration (in milliseconds) to wait after press down before calling `onPressIn`.",
+      "source_content_hash": "e583306bb8b117bfcdcc7513a6b3121a9f3c1c6daa9fdbd40b7c9121227bbe97",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在呼叫 `onPressIn` 前等待按下的持續時間（以毫秒為單位）。"
+      }
+    },
+    {
+      "segment_id": "584eb487",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_584eb487"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "### `delayLongPress`",
+      "source_content_hash": "29e5ee1e4dc71b8427e0d66bb8166c5bc5a6ac109124e44687bba5a5b19f8a8f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `delayLongPress`"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "Duration (in milliseconds) from `onPressIn` before `onLongPress` is called.",
+      "source_content_hash": "4a79a338d98a46358a3ef1386df566f7b0e692421637c285aab28ec6222b19fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `onPressIn` 到呼叫 `onLongPress` 的持續時間（以毫秒為單位）。"
+      }
+    },
+    {
+      "segment_id": "a016bba9",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `500`   |",
+      "source_content_hash": "7d7fedd0fe33390e5205285db2a6d3d3d1d8b697e8e2744e5f3530dd2f8a7603",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a016bba9"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "### `disabled`",
+      "source_content_hash": "e341f12bd3a5525b08ca6af0655cb7ecea49172a6a89af4f4757af19e4a43874",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `disabled`"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "Whether the press behavior is disabled.",
+      "source_content_hash": "11c00c28103bd1482f14dc73a4a36f213272af8da17e7603eb4bfb91fd6c4641",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "是否禁用按壓行為。"
+      }
+    },
+    {
+      "segment_id": "acafaaec",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_acafaaec"
+      }
+    },
+    {
+      "segment_id": "2f2d5f01",
+      "source_content": "### `hitSlop`",
+      "source_content_hash": "26286f73e2dd5a9f4368223cf673cd055081b64745da2d570610b1325f508d40",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hitSlop`"
+      }
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "Sets additional distance outside of element in which a press can be detected.",
+      "source_content_hash": "f83d9c8676df8ccbb602faea1cb763ef3959d4f74d307856eed5fe7b9a01aa4c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設置元素外可檢測到按壓的額外距離。"
+      }
+    },
+    {
+      "segment_id": "4fd59dff",
+      "source_content": "| Type                   |\n| ---------------------- |\n| [Rect](rect) or number |",
+      "source_content_hash": "857f7062294a2fbb49d2979d456d79d55fe504e6927a0a3aafa8964de94875a2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fd59dff"
+      }
+    },
+    {
+      "segment_id": "d4eab4a6",
+      "source_content": "### `onHoverIn`",
+      "source_content_hash": "18854b8334cdce824543fa217c7d6bcf64ddbbf47ecc947643e456a153b9288e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onHoverIn`"
+      }
+    },
+    {
+      "segment_id": "0ddaa835",
+      "source_content": "Called when the hover is activated to provide visual feedback.",
+      "source_content_hash": "e81c390306269e495067f14b7a7399ac6df5a93ed0ab7e46b53e5b451669cd9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當懸停被激活以提供視覺反饋時呼叫。"
+      }
+    },
+    {
+      "segment_id": "62c9412b",
+      "source_content": "| Type                                                                                                      |\n| --------------------------------------------------------------------------------------------------------- |\n| `md ({ nativeEvent: [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) }) => void` |",
+      "source_content_hash": "a68504dc66d55c0257905802fbad23d6ad452422325ef1573e6a22f61cb8fef9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_62c9412b"
+      }
+    },
+    {
+      "segment_id": "89b740fe",
+      "source_content": "### `onHoverOut`",
+      "source_content_hash": "8e7724ee42309ba8eb6061b27684f24490743015ad11530d73964e2123e25815",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onHoverOut`"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Called when the hover is deactivated to undo visual feedback.",
+      "source_content_hash": "08107452200dca5a447aa493f0e446b2eb2009f9e648af4235a5c3ab48ed604c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當懸停被取消激活以撤銷視覺反饋時呼叫。"
+      }
+    },
+    {
+      "segment_id": "48564f44",
+      "source_content": "| Type                                                                                                      |\n| --------------------------------------------------------------------------------------------------------- |\n| `md ({ nativeEvent: [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) }) => void` |",
+      "source_content_hash": "a68504dc66d55c0257905802fbad23d6ad452422325ef1573e6a22f61cb8fef9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48564f44"
+      }
+    },
+    {
+      "segment_id": "445c72bd",
+      "source_content": "### `onLongPress`",
+      "source_content_hash": "6b1d8d3032b300badd63943086152b8e0894f22f57c2723599d35a8f7b19d3cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLongPress`"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "Called if the time after `onPressIn` lasts longer than 500 milliseconds. This time period can be customized with [`delayLongPress`](#delaylongpress).",
+      "source_content_hash": "3c194e79201e5d1f94230c7e72382d14191a121a8bcf1c76413d4ac9cb96a564",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `onPressIn` 觸發後持續超過 500 毫秒時呼叫。此時間閾值可透過 [`delayLongPress`](#delaylongpress) 自訂。"
+      }
+    },
+    {
+      "segment_id": "db238cbc",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_db238cbc"
+      }
+    },
+    {
+      "segment_id": "e63d69ef",
+      "source_content": "### `onPress`",
+      "source_content_hash": "96ba311564eedff48b1fd9456762bcb4cf878275d059cfc91daef1956dc3b970",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPress`"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "Called after `onPressOut`.",
+      "source_content_hash": "80242b5207290aa609ab0e2e02a7be4d88cd7d7d774c6d2a2bbf5937e726f30f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "於 `onPressOut` 之後呼叫。"
+      }
+    },
+    {
+      "segment_id": "fbe698de",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fbe698de"
+      }
+    },
+    {
+      "segment_id": "de588fa2",
+      "source_content": "### `onPressIn`",
+      "source_content_hash": "ae65497c18a5296604bb4cfba2740bf13b9312197cdc31bf92aa808a5e62628f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressIn`"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "Called immediately when a touch is engaged, before `onPressOut` and `onPress`.",
+      "source_content_hash": "e3d1ad06cc9f162fcb7428c379ca3a2546de2ac88d85645af49fea0cdedde109",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當觸碰開始時立即呼叫，優先於 `onPressOut` 和 `onPress`。"
+      }
+    },
+    {
+      "segment_id": "c9347d38",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9347d38"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### `onPressOut`",
+      "source_content_hash": "ffc349eda93250705960dc02d87ba3d2a94f9465be883d516060a2eca5c7643f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPressOut`"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "Called when a touch is released.",
+      "source_content_hash": "db69def24e8f42f0705db1fc2ba88cbf366308b7e9bd71663196a41623b37c14",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當觸碰結束時呼叫。"
+      }
+    },
+    {
+      "segment_id": "0542488c",
+      "source_content": "| Type                                                   |\n| ------------------------------------------------------ |\n| `md ({nativeEvent: [PressEvent](pressevent)}) => void` |",
+      "source_content_hash": "551172105cca1e4659b39c45de6712d44d7de968be9a1ffcc076edce5b77ce4f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0542488c"
+      }
+    },
+    {
+      "segment_id": "197e1a1b",
+      "source_content": "### `pressRetentionOffset`",
+      "source_content_hash": "d20a68973df1490b6b22c1e707dfffb6df43b8deaba16ee1d79c685f8fa65dd2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `pressRetentionOffset`"
+      }
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "Additional distance outside of this view in which a touch is considered a press before `onPressOut` is triggered.",
+      "source_content_hash": "d708b376a3cbe20990e22e95e2746d261fe60609b4ed956af2fc7d5031e65219",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 `onPressOut` 觸發前，定義可視為按壓的觸碰範圍超出元件邊界的額外距離。"
+      }
+    },
+    {
+      "segment_id": "0ef6e712",
+      "source_content": "| Type                   | Default                                      |\n| ---------------------- | -------------------------------------------- |\n| [Rect](rect) or number | `{bottom: 30, left: 20, right: 20, top: 20}` |",
+      "source_content_hash": "71ec6f69c2105c457d7f841356e39a174d699d51da24e210046a0794414d3b92",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0ef6e712"
+      }
+    },
+    {
+      "segment_id": "dc825187",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `style`"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "Either view styles or a function that receives a boolean reflecting whether the component is currently pressed and returns view styles.",
+      "source_content_hash": "029c26daf9e23a009656eccff14b10a1134b19446e84b27af2a611eee5ccd01a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可為樣式物件或接收元件當前按壓狀態（布林值）並回傳樣式物件的函式。"
+      }
+    },
+    {
+      "segment_id": "f41bd436",
+      "source_content": "| Type                                                                                            |\n| ----------------------------------------------------------------------------------------------- |\n| [View Style](view-style-props) or `md ({ pressed: boolean }) => [View Style](view-style-props)` |",
+      "source_content_hash": "554bd5cc1e5811d3f193ccf6bac1119c4d3eab857be1a1cfdf93fb9bcc53d51e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f41bd436"
+      }
+    },
+    {
+      "segment_id": "43662a16",
+      "source_content": "### `testOnly_pressed`",
+      "source_content_hash": "76a3df1d266a1988d0e44238bbd4d51f2a5d1ce1f179aee6078201ac6a016b1a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `testOnly_pressed`"
+      }
+    },
+    {
+      "segment_id": "85821ad3",
+      "source_content": "Used only for documentation or testing (e.g. snapshot testing).",
+      "source_content_hash": "a6f134384e3de859a91d9c785ebd8a4f25c2bbc7b1e12792b927c2ee2ceaa7f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅用於文件說明或測試（例如快照測試）。"
+      }
+    },
+    {
+      "segment_id": "415e0013",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| boolean | `false` |",
+      "source_content_hash": "82f186f9d9444d2e2689ad09fab9bc549128876b32521e598b80eada9be00d88",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_415e0013"
+      }
+    },
+    {
+      "segment_id": "f210f942",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 型別定義"
+      }
+    },
+    {
+      "segment_id": "67dfd717",
+      "source_content": "### RippleConfig",
+      "source_content_hash": "5b8164db334c9155b52024e0df0b641e10e1d8fc6cda3a9662142ef30efb8844",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### RippleConfig"
+      }
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "Ripple effect configuration for the `android_ripple` property.",
+      "source_content_hash": "117375a6b27aa9a5b2625786bb4c07b5ae0dcb5c65a995b4ab6d891b44b48765",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於設定 `android_ripple` 屬性的漣漪效果配置。"
+      }
+    },
+    {
+      "segment_id": "72704001",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_72704001"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "47f1ba32",
+      "source_content": "| Name       | Type            | Required | Description                                                                                                                                                                                                                                                  |\n| ---------- | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| color      | [color](colors) | No       | Defines the color of the ripple effect.                                                                                                                                                                                                                      |\n| borderless | boolean         | No       | Defines if ripple effect should not include border.                                                                                                                                                                                                          |\n| radius     | number          | No       | Defines the radius of the ripple effect.                                                                                                                                                                                                                     |\n| foreground | boolean         | No       | Set to true to add the ripple effect to the foreground of the view, instead of the background. This is useful if one of your child views has a background of its own, or you're e.g. displaying images, and you don't want the ripple to be covered by them. |",
+      "source_content_hash": "ebfe9a337f9a2d5e5dd52dd6737e7701443c2898f260acce8e3c3d85ce06aac4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_47f1ba32"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/pressable.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.340519+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ad3b916e8292a6cc55796469f06caaefde6497f30c2aa0259ea6da2e56781045"
+  }
+}

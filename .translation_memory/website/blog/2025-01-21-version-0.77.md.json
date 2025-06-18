@@ -1,0 +1,1016 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2025-01-21-version-0.77.md",
+  "source_file_content_hash": "26ead12027ff1d8bef57dcc9c5bd306e4ce3e49691c8a64e3cea6fc90e2b5709",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.77 - New Styling Features, Android’s 16KB page support, Swift Template'\nauthors: [vonovak, mazen, blakef, robhogan]\ntags: [engineering]\ndate: 2025-01-21\n---",
+      "source_content_hash": "257ccd5499edd7b0e35439eef1660ae631d0bbd1256e9007b8aa97ba3c74beef",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Today we are excited to release React Native 0.77!",
+      "source_content_hash": "cb67107294665ff42c04f29afe63fffac48e9c50a76d6d539137cbab78d2adef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們很興奮地發布 React Native 0.77 版本！"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "This release ships several features: new styling capabilities such as support for `display: contents`, `boxSizing`, `mixBlendMode`, and `outline`-related properties to provide a more powerful layout options; Android 16KB page support to be compatible with the newer Android devices. We are also modernizing the community template by migrating it to Swift, while continuing to support and maintain compatibility with Objective-C for developers who prefer it.",
+      "source_content_hash": "fad0da8426470766bb7a139f561a65ef545d82f1931c190c77b30636f65e41b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本帶來多項新功能：新增樣式能力如支援 `display: contents`、`boxSizing`、`mixBlendMode` 及 `outline` 相關屬性，提供更強大的佈局選項；新增 Android 16KB 頁面支援以相容新版 Android 裝置。我們同時將社群模板現代化，遷移至 Swift 語言，並持續為偏好 Objective-C 的開發者提供支援與相容性維護。"
+      }
+    },
+    {
+      "segment_id": "b7b09f68",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b7b09f68"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "4ddf6ae7",
+      "source_content": "- [New CSS Features for better layouts, sizing and blending](#new-css-features-for-better-layouts-sizing-and-blending)\n- [Android version 15 support & 16KB page support](#android-version-15-support--16kb-page-support)\n- [Community CLI and Template Updates](#community-cli-and-template-updates)",
+      "source_content_hash": "e266da71bbb5f31f47d7e48fe520494b1d1c2435d05c76992df683ec7c633879",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [強化佈局、尺寸與混色的新 CSS 功能](#new-css-features-for-better-layouts-sizing-and-blending)\n- [Android 15 版本支援 & 16KB 頁面支援](#android-version-15-support--16kb-page-support)\n- [社群 CLI 與模板更新](#community-cli-and-template-updates)"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "### Breaking Changes",
+      "source_content_hash": "b20bc465acc06c0341aa5cea47dcbd02f8d0db580f667ab00da54cd49654879a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "da23c906",
+      "source_content": "- [Removal of `console.log()` streaming in Metro](#removal-of-consolelog-streaming-in-metro)",
+      "source_content_hash": "0527a8d4316aadc6f3f79885bd168a14a18b746f944a115ed78e08b6dd4758b0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [移除 Metro 中的 `console.log()` 串流功能](#removal-of-consolelog-streaming-in-metro)"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點功能詳述"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "### New CSS Features for better layouts, sizing and blending",
+      "source_content_hash": "a8857132bd3f4d1220cce1b7b1936aac1cb18acd7331e744efd077f01dfeaa70",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 強化佈局、尺寸與混色的新 CSS 功能"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "React Native 0.77 furthers our goal of aligning React Native with the web. We've added support for new CSS properties to give you more control over your app's layout, sizing, and blending. These changes can help simplify complex layouts, add texture, and make your app more accessible.",
+      "source_content_hash": "824e0205ed344d4359fe802806754ae5b23f1e5c6a7e3fcd0696f413a358d21c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.77 持續推進與網頁標準對齊的目標，新增多項 CSS 屬性支援，讓您更精準控制應用程式的佈局、尺寸與色彩混合。這些變更有助簡化複雜佈局、增添質感，並提升應用程式無障礙性。"
+      }
+    },
+    {
+      "segment_id": "f79f5ed0",
+      "source_content": ":::info\nAll these new features are available only for the [New Architecture](/blog/2024/10/23/the-new-architecture-is-here#how-to-upgrade).\n:::",
+      "source_content_hash": "15eed4bd2861dccd887280a51c4b8c81fa1c7092584104712337beb42658abc1",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n所有新功能僅適用於[新架構](/blog/2024/10/23/the-new-architecture-is-here#how-to-upgrade)。\n:::"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "#### Simpler layouts with `display: contents`",
+      "source_content_hash": "344d6dc13be4c44bf700c6ce1632c7c44c54b8177ba224bc79a27b5cc91bb4d9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 透過 `display: contents` 簡化佈局"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "The [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) prop allows an element to disappear from the layout structure while its children are still rendered as if they were direct children of the parent element. It can be useful for styling purposes where you want to apply styles to child elements without affecting the layout, when building wrapper components which must handle events, or if you need to interact with the ShadowTree.",
+      "source_content_hash": "4d07797933e672eebfa4bb006d92094773f13c359adfc11bbe7fe69f0e729601",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) 屬性可讓元素從佈局結構中消失，同時其子元素仍會如同直接隸屬於父元素般被渲染。此特性適用於以下情境：需對子元素套用樣式但不影響佈局時、建構需處理事件的包裝元件時，或需與 ShadowTree 互動時。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Technically speaking, `display: contents` renders an element without generating a layout box, but it preserves the layout boxes of the element’s children. The element with `display: contents` is effectively flattened out of the view hierarchy.",
+      "source_content_hash": "d39ec5f926c3823e96c523859e73fa7cc762f52953a43b4631b8b6072df5ebba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "技術上而言，`display: contents` 會渲染元素但不產生佈局框（layout box），同時保留該元素子級的佈局框。設有此屬性的元素實際上會從視圖層級結構中扁平化。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "Let’s have a look at this example where we want to display an alert when a widget is pressed. We have a red `Widget` inside of a container view:",
+      "source_content_hash": "8373520f508ee250113cb2c6878fbaed5c07181377ed6b0456723b7b0d6aeecb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下範例展示當 widget 被點擊時顯示警示訊息的情境。我們在容器視圖內有一個紅色 `Widget`："
+      }
+    },
+    {
+      "segment_id": "026f2f3e",
+      "source_content": "```jsx title=\"Container.jsx\"\nfunction Container() {\n  return (\n    <View style={styles.container}>\n      <Widget />\n    </View>\n  );\n}\n```",
+      "source_content_hash": "21205edf72ef435b73933b1ed459c02c658b485996812756f7166460966a15c2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_026f2f3e"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "![display contents - setup](/blog/assets/0.77-display-contents-1.png)",
+      "source_content_hash": "b2e90d605c8a4f8d0ad871678571106c26e4b8459149f9d43ae3b226a378a289",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![display contents - 初始設定](/blog/assets/0.77-display-contents-1.png)"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "Now, let's build a new `Alerting` wrapper component, with the goal of alerting the user when a component beneath it is pressed, using [experimental pointer events](/blog/2022/12/13/pointer-events-in-react-native). For clarity, the background of this component is made blue. That might look something like the component below:",
+      "source_content_hash": "0aa6383ef6e8a181791ccb973f2c1f649ef485580132e14857c2aa55234b9a74",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們建立新的 `Alerting` 包裝元件，目標是當其下方的元件被點擊時透過[實驗性指標事件](/blog/2022/12/13/pointer-events-in-react-native)觸發使用者警示。為清晰起見，此元件背景設為藍色。元件結構可能如下："
+      }
+    },
+    {
+      "segment_id": "eb80afe1",
+      "source_content": "```jsx title=\"Container.jsx\"\nfunction Alerting({children}) {\n  return (\n    <View\n      style={{backgroundColor: 'blue'}}\n      onPointerDown={() => alert('Hello World!')}>\n      {children}\n    </View>\n}\n\nfunction Container() {\n  return (\n    <View style={styles.container}>\n      // highlight-next-line\n      <Alerting>\n        <Widget />\n      </Alerting>\n    </View>\n  );\n}\n```",
+      "source_content_hash": "5ce882e24fca15aed6beb94f1731e5e5dbf7219a04dd8d6d4e592ae90cf45fdc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb80afe1"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "This doesn’t do quite what we want it to. `Alerting` adds a new layout box, with its own bounds, separate from the child `Widget`. Depending on the styling of the element it is wrapping, this may result in significant visual and functional changes. In this example, the blue background responds to taps with an alert when we want for only the red \"Hello World\" box to alert when tapped.",
+      "source_content_hash": "1c3f37800617562eaef31b3e11d1e7301c6a72e24c3d8f1fb6f332cf050bec53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此設定未完全符合預期。`Alerting` 會新增獨立的佈局框與邊界範圍，與子級 `Widget` 分離。根據包裝元素的樣式，可能導致顯著的視覺與功能差異。在此範例中，藍色背景區域點擊會觸發警示，但我們實際希望只有紅色「Hello World」方塊被點擊時才觸發警示。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "![before display contents](/blog/assets/0.77-display-contents-2.gif)",
+      "source_content_hash": "bcfac0229c2075a5aa0e795df24028d6d3cce7a3d665de1021635e3c6b4430cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![display contents 使用前](/blog/assets/0.77-display-contents-2.gif)"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "If we try this again, while setting `display: contents` on the `View` wrapper of `Alerting`, we only see alerts when the user presses within the original bounds of the `Widget`. This is because `Alerting` no longer adds its own box, but can still observe the pointer events bubbled from `Widget`.",
+      "source_content_hash": "724bc77b40ab4ea51ea4ff7cfb167cf8ac9655b1ff024fb551212de0495609c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若我們在 `Alerting` 的 `View` 包裝層設定 `display: contents` 後再次嘗試，將發現只有點擊原始 `Widget` 範圍內才會觸發警示。這是因為 `Alerting` 不再新增獨立佈局框，但仍能監聽從 `Widget` 冒泡傳遞的指標事件。"
+      }
+    },
+    {
+      "segment_id": "d8159289",
+      "source_content": "```jsx title=\"Container.jsx\"\nfunction Alerting({children}) {\n  return (\n    <View\n      // highlight-next-line\n      style={{display: 'contents'}}\n      onPointerDown={() => alert('Hello World!')}>\n      {children}\n    </View>\n  );\n}\n\n// ... function Container ...\n```",
+      "source_content_hash": "aab1c4b7c3c3b43c18f6cba32989a640e3410570d51c79bc3caab2130a64e125",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d8159289"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "![after display contents](/blog/assets/0.77-display-contents-3.gif)",
+      "source_content_hash": "71ff147dde961b0000505b24dd20af7c359ccd7675d15552033685f1c16cfd28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![after display contents](/blog/assets/0.77-display-contents-3.gif)"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "#### Box sizing",
+      "source_content_hash": "8eed1aab2dd9d935dd452ef5de13e6b9edb0c4ba91fc8c4a63242711ea9be78c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 盒模型尺寸計算"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "The `boxSizing` prop defines how the element's various sizing props (`width`, `height`, `minWidth`, `minHeight`, etc.) are computed. If `boxSizing` is `border-box`, these sizes apply to the border box of the element. If it is `content-box` they apply to the content box of the element. The default value is `border-box`, this is different from the default value on the web. The [web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) is a good source of information if you wish to learn more about how this prop works.",
+      "source_content_hash": "616eff73840fc3d96618cf8b80b310d5bf5bad6573222ad7f594ca5ec656b336",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`boxSizing` 屬性定義了元素各種尺寸屬性（`width`、`height`、`minWidth`、`minHeight` 等）的計算方式。若設為 `border-box`，這些尺寸會套用至元素的邊框盒；若設為 `content-box` 則套用至內容盒。預設值為 `border-box`，這與網頁端的預設值不同。如需深入了解此屬性運作原理，[MDN 網頁文件](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)是絕佳參考資源。"
+      }
+    },
+    {
+      "segment_id": "0a395b7e",
+      "source_content": ":::warning\n`border-box` has been the default forever at this point, and has been the only `boxSizing` value up until we added `content-box`. Changing the default would have been a breaking change that would suddenly break several layouts. We decided to keep `border-box` as default value to ensure backward compatibility.\n:::",
+      "source_content_hash": "83dc62e9dff16fdb906a22ceccb1861b406a11881dcfa9b918d408bfa0cbc257",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n`border-box` 長久以來一直是預設值，且在我們新增 `content-box` 前是唯一支援的 `boxSizing` 數值。變更預設值將導致重大破壞性更新，可能瞬間使多種版面配置失效。為確保向後兼容性，我們決定維持 `border-box` 作為預設值。\n:::"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "To understand the difference between `border-box` and `content-box`, have a look at these example, where both `View`s have `padding: 20` and `borderWidth: 10`. When using `border-box`, we consider border and padding for the sizing; when using `content-box`, we consider only the content for the sizing.",
+      "source_content_hash": "b882ec94f32adfcb1cc1c31f5cf46c45847d30de976bba2bd770fa2702dd46ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要理解 `border-box` 與 `content-box` 的差異，請觀察以下範例：兩個 `View` 皆設有 `padding: 20` 和 `borderWidth: 10`。使用 `border-box` 時，尺寸計算會包含邊框與內距；使用 `content-box` 時，則僅考量內容區域尺寸。"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "![after display contents](/blog/assets/0.77-border-box.png)",
+      "source_content_hash": "dfbc80d0339ded76188fc0ddca49dae3ed52a2990cc97115acd4233df7eabc3c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![after display contents](/blog/assets/0.77-border-box.png)"
+      }
+    },
+    {
+      "segment_id": "8574d51c",
+      "source_content": "#### CSS mixBlendMode",
+      "source_content_hash": "f26f348c7ff1c41c9f50934843d0bd3ba9a47a4d29469557da4276c94d0a50e0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### CSS 混合模式"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "The `mixBlendMode` prop lets you control how an element blends its colors with the other elements in its **stacking context**. Check out the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode) for a full overview of each blending function.",
+      "source_content_hash": "8bff7a40795621524d6145b3e0501fdd6e7a256b3ba6509992363090c04e801f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`mixBlendMode` 屬性可控制元素與其**堆疊上下文**中其他元素的色彩混合方式。詳閱 [MDN 文件](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode)以獲取各混合函式的完整說明。"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "To help have more granular control about what is blending together, we also added the `isolation` property. Setting `isolation: isolate` on a `View` will force it to form a **stacking context**. So, you can set this on some ancestor `View` to ensure that some descendent `View` with `mixBlendMode` does not blend beyond the **isolated** `View`.",
+      "source_content_hash": "fcaa9dd6af55fee107ee39594ae4e9017c7709be8a962403d033b753d3bea126",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為提供更精細的混合範圍控制，我們同步新增 `isolation` 屬性。在 `View` 上設定 `isolation: isolate` 將強制其形成**堆疊上下文**。您可在祖先層級 `View` 設定此屬性，確保帶有 `mixBlendMode` 的子代 `View` 不會與**隔離區**外的元素混合。"
+      }
+    },
+    {
+      "segment_id": "37fca32e",
+      "source_content": "##### mixBlendMode Values",
+      "source_content_hash": "404bdbb9165ec5629b422d3fef3f77b01fd8d4d143ab84bce8b25d1dd0970d8e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 混合模式數值"
+      }
+    },
+    {
+      "segment_id": "bcc700e8",
+      "source_content": "- `normal`: The element is drawn on top of its background without blending.\n- `multiply`: The source color is multiplied by the destination color and replaces the destination.\n- `screen`: Multiplies the complements of the backdrop and source color values, then complements the result.\n- `overlay`: Multiplies or screens the colors, depending on the backdrop color value.\n- `darken`: Selects the darker of the backdrop and source colors.\n- `lighten`: Selects the lighter of the backdrop and source colors.",
+      "source_content_hash": "a202dc165fb2c31956d6bc7ae3c173938ad64e0bae647d173d8dbfd7ebe276a9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `normal`：元素直接繪製於背景上，不進行混合。\n- `multiply`：將來源色與目標色相乘後取代目標色。\n- `screen`：將背景與來源色的補色相乘後再取補色。\n- `overlay`：依據背景色值決定相乘或濾色混合。\n- `darken`：選取背景與來源色中較深者。\n- `lighten`：選取背景與來源色中較淺者。"
+      }
+    },
+    {
+      "segment_id": "fcf8aa38",
+      "source_content": "<!--alex ignore black-->",
+      "source_content_hash": "34440f6a4ed180a9afdf89c0e03fa77a1abce33a82fbacfa3107025532625187",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fcf8aa38"
+      }
+    },
+    {
+      "segment_id": "683a33d9",
+      "source_content": "- `color-dodge`: Brightens the backdrop color to reflect the source color. Painting with black produces no changes.",
+      "source_content_hash": "2b131065a8428432b9ed230a8e2d505d2e624d3eae445281705ca3a439035c45",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `color-dodge`：提亮背景色以反映來源色，使用黑色繪製無變化。"
+      }
+    },
+    {
+      "segment_id": "1b692667",
+      "source_content": "<!--alex ignore white-->",
+      "source_content_hash": "4ae104d7d965e57b22b6c2dc8311b0f008355ff943e49a2149e14698629d37ec",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1b692667"
+      }
+    },
+    {
+      "segment_id": "d9b1e67e",
+      "source_content": "- `color-burn`: Darkens the backdrop color to reflect the source color. Painting with white produces no change.\n- `hard-light`: Multiplies or screens the colors, depending on the source color value. The effect is similar to shining a harsh spotlight on the backdrop.\n- `soft-light`: Darkens or lightens the colors, depending on the source color value. The effect is similar to shining a diffused spotlight on the backdrop.\n- `difference`: Subtracts the darker of the two constituent colors from the lighter color.\n- `exclusion`: Produces an effect similar to that of the Difference mode but lower in contrast.\n- `hue`: Creates a color with the hue of the source color and the saturation and luminosity of the backdrop color.\n- `saturation`: Creates a color with the saturation of the source color and the hue and luminosity of the backdrop color.\n- `color`: Creates a color with the hue and saturation of the source color and the luminosity of the backdrop color. This preserves the gray levels of the backdrop and is useful for coloring monochrome images or tinting color images.\n- `luminosity`: Creates a color with the luminosity of the source color and the hue and saturation of the backdrop color. This produces an inverse effect to that of the Color mode.",
+      "source_content_hash": "cc2f96e43757baa74635c445e5375df6f7ec0c54fafb2c8c9b4d89bdf1035c2e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `color-burn`：加深背景色以反映來源色，使用白色繪製無變化。\n- `hard-light`：依據來源色值決定相乘或濾色，效果類似於對背景投射強烈聚光燈。\n- `soft-light`：依據來源色值決定增亮或減暗，效果類似於對背景投射柔光燈。\n- `difference`：從較亮色中減去較暗的組成色。\n- `exclusion`：產生類似差值模式但對比較低的效果。\n- `hue`：採用來源色相，並保留背景色的飽和度與明度。\n- `saturation`：採用來源飽和度，並保留背景色相與明度。\n- `color`：採用來源色相與飽和度，並保留背景明度，適用於單色圖像上色或彩色圖像調色。\n- `luminosity`：採用來源明度，並保留背景色相與飽和度，產生與色彩模式相反的效果。"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "![blend mode](/blog/assets/0.77-blend-mode.png)",
+      "source_content_hash": "be3210f63ca3b832491a19c5cb49b8e89a32a0358ab6bdb35297022df2905dac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![混合模式](/blog/assets/0.77-blend-mode.png)"
+      }
+    },
+    {
+      "segment_id": "9c2ab4c8",
+      "source_content": "#### Outline props",
+      "source_content_hash": "a30b999d394b8491c5cbc28eb66b91bb1db929f702e90fa7f8bc8d37c4e6ca77",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 輪廓屬性"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "We’ve also introduced `outlineWidth`, `outlineStyle`, `outlineSpread` and `outlineColor`. These outline props work very similar to the respective `border` props, but it is rendered around the **border box** as opposed to around the **padding box**. These props allow to highlight elements by drawing their outline without affecting their layout.",
+      "source_content_hash": "8f3c196a82c8997b281f632fada1ac348319700687bc246ba04172948045a7e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們還引入了 `outlineWidth`、`outlineStyle`、`outlineSpread` 和 `outlineColor`。這些輪廓屬性的運作方式與對應的 `border` 屬性非常相似，但它是圍繞**邊框盒（border box）**而非**填充盒（padding box）**渲染的。這些屬性允許通過繪製元素的輪廓來突出顯示元素，而不影響其佈局。"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "Check out the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/outline) for more details.",
+      "source_content_hash": "0b308df0ab8b18fbb33014b5cad9f643b4be502949868d6171c399db8a52fa3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳情請參閱 [MDN 文檔](https://developer.mozilla.org/en-US/docs/Web/CSS/outline)。"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "![outline props](/blog/assets/0.77-outline-props.png)",
+      "source_content_hash": "c76e2d0ca3c2d3f3fca70ce8ede5682bec5af5a11d63e25705c3f99e8586e688",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![輪廓屬性](/blog/assets/0.77-outline-props.png)"
+      }
+    },
+    {
+      "segment_id": "35353302",
+      "source_content": "### Android version 15 support & 16KB page support",
+      "source_content_hash": "1f779adaf5bc41ed6e3240b18ff31e5d23e9dc47e43404937bdd1614f012540c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android 15 支援與 16KB 頁面支援"
+      }
+    },
+    {
+      "segment_id": "6ab1b234",
+      "source_content": "#### Forced edge-to-edge on Android 15",
+      "source_content_hash": "cb0c9db70896400794e8f5594f24b926b17fa5ccfd8bd880347d41b7474ce6de",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android 15 強制邊到邊顯示"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "We’ve already done some work to support Android 15 on the prior release. One of the noticeable changes in Android 15 is forced edge-to-edge display when you build apps with `targetSdk` 35.",
+      "source_content_hash": "3de25873cdbde0a3f800ab213db624e6d32dd5a899a020ef759b6be92c78bdee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已經在之前的版本中做了一些工作來支援 Android 15。Android 15 中一個顯著的變化是，當你使用 `targetSdk` 35 構建應用時，會強制啟用邊到邊顯示。"
+      }
+    },
+    {
+      "segment_id": "619c3209",
+      "source_content": "If you have not looked into this yet, please refer to our prior [recommendation](https://github.com/react-native-community/discussions-and-proposals/discussions/827) on how this should be handled as ignoring this can potentially break your UI in the app.",
+      "source_content_hash": "b6e33aaa3b8cac2511ae189fd406aa78ff2291efaadff105356037061b89a525",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你還沒有研究這一點，請參考我們之前的[建議](https://github.com/react-native-community/discussions-and-proposals/discussions/827)，了解如何處理這一變化，因為忽略這一點可能會破壞應用中的 UI。"
+      }
+    },
+    {
+      "segment_id": "90808c0b",
+      "source_content": ":::note\nIf you are using the [`react-native-safe-area-context`](https://www.npmjs.com/package/react-native-safe-area-context) in your app, the library is already handling the forced edge-to-edge for you.\n:::",
+      "source_content_hash": "2a52ced37ada91ecc0204a623b1896c0159fe4fa04d3418d6c30a338cd03d3b4",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n如果你在應用中使用 [`react-native-safe-area-context`](https://www.npmjs.com/package/react-native-safe-area-context)，該庫已經為你處理了強制邊到邊顯示的問題。\n:::"
+      }
+    },
+    {
+      "segment_id": "ee213c98",
+      "source_content": "#### 16 KB page size support for Android",
+      "source_content_hash": "08dd0ea8cbb77fc894a2eb85ab96dd5845aa3a7b412a17fb3e4f479d20b49da4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android 的 16KB 頁面大小支援"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "Android 15 introduces support for 16KB memory page size enabling [performance improvements](https://developer.android.com/guide/practices/page-sizes#benefits) for apps and more, but making previous 4KB-based apps potentially incompatible on future devices; it's currently an opt-in feature for developers to test on select devices to prepare for 16 KB page size being the OS default.",
+      "source_content_hash": "e848a3faa3b5a6e44795e9213ba08363947520c89e7b05e10e05698c155b5fbc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 15 引入了對 16KB 記憶體頁面大小的支援，這為應用帶來了[性能改進](https://developer.android.com/guide/practices/page-sizes#benefits)等好處，但也可能導致基於 4KB 的應用在未來的設備上不相容；目前這是一個開發者可以選擇測試的功能，以便為 16KB 頁面大小成為操作系統默認值做準備。"
+      }
+    },
+    {
+      "segment_id": "0ddaa835",
+      "source_content": "With the 0.77 release, React Native is ready to fully support 16 KB page size and developers will be able to test and ship apps for 16 KB devices using it.",
+      "source_content_hash": "5472d687331a63d71deff4d9fcff66573a40dba04af4f381a59ee05f411a9951",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著 0.77 版本的發布，React Native 已準備好全面支援 16KB 頁面大小，開發者將能夠使用它來測試和發布適用於 16KB 設備的應用。"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "Please refer to [the official Android Developers site](https://developer.android.com/guide/practices/page-sizes) for further information on 16 KB support.",
+      "source_content_hash": "e25874d1b8e26564c47d5899e359fba60d6738bb291ba5ab7b0adc03e16a8a71",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有關 16KB 支援的更多信息，請參閱 [Android 開發者官方網站](https://developer.android.com/guide/practices/page-sizes)。"
+      }
+    },
+    {
+      "segment_id": "58f98d22",
+      "source_content": "### Community CLI and Template Updates",
+      "source_content_hash": "dac91343b7cb8f3ae0e8b58591690f92786c8984b5409c076a05379801dd55f6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 社群 CLI 與模板更新"
+      }
+    },
+    {
+      "segment_id": "89b740fe",
+      "source_content": "#### Community CLI: react-native init deprecation",
+      "source_content_hash": "56e9e6842f297dc9fb2a1cdccab124a3c8328be94a390ee4a22f02737c6e8235",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 社群 CLI：棄用 react-native init"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "This version fully completes the deprecation of the `react-native init` command that was [introduced in React Native 0.75](/blog/2024/08/12/release-0.75#sunsetting-react-native-init).",
+      "source_content_hash": "c505845d3f2d44fad57a4f5cae52f9243d9b8df7d00dc181d23b674ef4ebea38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本完全完成了對 `react-native init` 命令的棄用，該棄用是[在 React Native 0.75 中引入的](/blog/2024/08/12/release-0.75#sunsetting-react-native-init)。"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "As a reminder, you won’t be able to use the `react-native init` command anymore, but you’ll have to either:",
+      "source_content_hash": "c3c11a092532bf27cc379d38db5d2537e5845a1e89ae0f0a27d83ee0c32cb2c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提醒一下，你將無法再使用 `react-native init` 命令，而是需要："
+      }
+    },
+    {
+      "segment_id": "db79148c",
+      "source_content": "- [Use a framework](/blog/2024/06/25/use-a-framework-to-build-react-native-apps) such as Expo, with its own dedicated command to create a new project: `npx create-expo-app`\n- Invoke the Community CLI directly with `npx @react-native-community/cli init`",
+      "source_content_hash": "979b6d6046248cbc3a59f195fdde845ed9c264e0f6507477cb5aa3f8363378b8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [使用框架](/blog/2024/06/25/use-a-framework-to-build-react-native-apps)，例如 Expo，並使用其專用的命令來創建新項目：`npx create-expo-app`\n- 直接調用社群 CLI：`npx @react-native-community/cli init`"
+      }
+    },
+    {
+      "segment_id": "2b5df263",
+      "source_content": "#### Community CLI: Removal of \"run on iOS/Android\" key handlers from Metro",
+      "source_content_hash": "255c5f0af42ad82812735d3cb40078a6042ab9f620d776b59b15f6f951b7ef7a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 社群 CLI：從 Metro 中移除「在 iOS/Android 上運行」的鍵盤快捷鍵"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "In this version, we removed the ‘a’ and ‘i’ keyboard shortcuts from Metro. Those shortcuts were used to invoke the `run-android` & `run-ios` community CLI commands.\nThose keyboard shortcuts provided worse developer experience and were rarely used. Moreover, we believe that frameworks are better suited to orchestrate the terminal outputs.",
+      "source_content_hash": "93b6c9e28f0b51dc197e6ae2aba2cc38386633826c887c7b0af3ef4d27eb6b9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此版本中，我們移除了 Metro 中的 'a' 和 'i' 鍵盤快捷鍵。這些快捷鍵用於調用 `run-android` 和 `run-ios` 社群 CLI 命令。\n這些鍵盤快捷鍵提供了較差的開發者體驗，並且很少被使用。此外，我們認為框架更適合協調終端輸出。"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "You can read more about this change [in this dedicated post](https://github.com/react-native-community/discussions-and-proposals/discussions/821).",
+      "source_content_hash": "079d977b46e7a08b8727836909181c65e6f6033d5d13b69c5efce83ee15e710e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以在[這篇專文](https://github.com/react-native-community/discussions-and-proposals/discussions/821)中閱讀更多關於此變更的信息。"
+      }
+    },
+    {
+      "segment_id": "e63d69ef",
+      "source_content": "#### Community Template: Swift as programming language for iOS apps",
+      "source_content_hash": "6cebf98b2e89c66b7e67668b3d9c93b441c70fc22e059004554797540526be46",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 社群模板：Swift 作為 iOS 應用的編程語言"
+      }
+    },
+    {
+      "segment_id": "fe76c8d2",
+      "source_content": ":::info\nProjects using Expo should not be affected by this change.\n:::",
+      "source_content_hash": "216434fe07c472283a8b939cd031b37b14cf2193a6ce451db0721f55d40718dd",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n使用 Expo 的項目不應受此變更影響。\n:::"
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "This change let us slim down the community template by replacing three files (`main.m`, `AppDelegate.h` and `AppDelegate.mm`) with a single, new [`AppDelegate.swift`](https://github.com/react-native-community/template/blob/main/template/ios/HelloWorld/AppDelegate.swift).",
+      "source_content_hash": "c853d00e6ebc82701a333c3abc4a03e1fe73e1920a9ae7718c9b8da81dd1e097",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這項變更讓我們能精簡社群模板，將三個檔案（`main.m`、`AppDelegate.h` 和 `AppDelegate.mm`）替換為單一的新檔案 [`AppDelegate.swift`](https://github.com/react-native-community/template/blob/main/template/ios/HelloWorld/AppDelegate.swift)。"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "This is technically a breaking change: you’ll see the change from Objective-C to Swift in the upgrade helper like this:",
+      "source_content_hash": "44d47fdde2af8af373a85bf4b42cd9bd76f8089f2e762e670d8880622860b675",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這在技術上是一項破壞性變更：您會在升級輔助工具中看到從 Objective-C 轉換為 Swift 的變化，如下所示："
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "![Swift Upgrade Helper](/blog/assets/0.77-swift-upgrade-helper.png)",
+      "source_content_hash": "5a8a351ae451920a489b9899d14d137e3d4db71151dd4d7697d2be5c05feda3c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Swift 升級輔助工具](/blog/assets/0.77-swift-upgrade-helper.png)"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "You don’t have to migrate to Swift: the Objective-C++ variant of the iOS community template is still supported (note that you still need to integrate the [`RCTAppDependencyProvider`](#rctappdependencyprovider)). New projects will be generated by using Swift as the iOS app language, although you can always migrate back to Objective-C if you need to.",
+      "source_content_hash": "ec63cb56e4c8caf08b765c33214fd005e715d5724658b4fdbabc85b4719521ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您無需遷移到 Swift：iOS 社群模板的 Objective-C++ 變體仍受支援（請注意，您仍需整合 [`RCTAppDependencyProvider`](#rctappdependencyprovider)）。新專案將使用 Swift 作為 iOS 應用語言生成，但您仍可隨時遷回 Objective-C（如有需要）。"
+      }
+    },
+    {
+      "segment_id": "b7d7a8d8",
+      "source_content": "##### Limitations",
+      "source_content_hash": "47051782a6a707169e7acc13293a5437db045345199f914b93c0ff64f9a2cd67",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 限制"
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "If your app has some local modules that are written in C++, you would not be able to register them in Swift as shown in [this guide](/docs/next/the-new-architecture/pure-cxx-modules#3-registering-the-cxx-turbo-native-module-in-your-app).",
+      "source_content_hash": "7d2bf9efd930d3bca483d5e2e526fa22258dde387eabbbbe3db4f511401a2a79",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您的應用程式包含以 C++ 編寫的本地模組，您將無法如[本指南](/docs/next/the-new-architecture/pure-cxx-modules#3-registering-the-cxx-turbo-native-module-in-your-app)所示在 Swift 中註冊它們。"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "If your app falls in this category, please skip the migration of the AppDelegate to Swift, and keep using Objective-C++ for your app.",
+      "source_content_hash": "c3b2721edd814cddc749e18a292f1a9be16bd3a551083a5b37797b8367f0324c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您的應用程式屬於此類別，請跳過 AppDelegate 遷移至 Swift 的步驟，並繼續使用 Objective-C++ 開發您的應用程式。"
+      }
+    },
+    {
+      "segment_id": "7e563909",
+      "source_content": "React Native core is mostly developed using C++ to encourage code sharing between iOS and Android and other platforms. The interoperability between Swift and C++ is not mature nor stable, yet. We are looking into ways to fill this gap and let you migrate to Swift too.",
+      "source_content_hash": "546b1582d171de19cb118885dff4aacdd71ff7d6b670ab3775b2dcb18507effc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 核心主要使用 C++ 開發，以促進 iOS、Android 和其他平台間的程式碼共享。Swift 與 C++ 的互操作性尚未成熟或穩定。我們正在尋找方法填補這一缺口，讓您也能遷移至 Swift。"
+      }
+    },
+    {
+      "segment_id": "bf3eb388",
+      "source_content": "##### RCTAppDependencyProvider",
+      "source_content_hash": "1c9dc74fe4dbb914f34deb93fdc0f5024bfe9c2475074d833b04894ef279d800",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### RCTAppDependencyProvider"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "React Native 0.77 slightly changes how the app loads third party dependencies. This is a new line in the community template that, if missed, can cause some runtime issues. Make sure to add it to your app.",
+      "source_content_hash": "fd7ac840c4ab07d2deac6b3cf8a5025c3965bbbccc7a42f436c59687ca784f76",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.77 略微變更了應用程式載入第三方依賴項的方式。這是社群模板中的新程式碼行，若遺漏可能導致某些運行時問題。請確保將其加入您的應用程式。"
+      }
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "The equivalent Objective-C lines are the following:",
+      "source_content_hash": "fd4bfc9afd1294fb0bfa4921a0bc8b76f2c87481cf87eb748351b0d1b126e035",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "等效的 Objective-C 程式碼行如下："
+      }
+    },
+    {
+      "segment_id": "af7c5c4e",
+      "source_content": "```objc title=\"AppDelegate.mm\"\n#import \"AppDelegate.h\"\n\n#import <React/RCTBundleURLProvider.h>\n// highlight-next-line\n#import <ReactAppDependencyProvider/RCTAppDependencyProvider.h>\n\n\n@implementation AppDelegate\n\n- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions\n{\n  self.moduleName = @\"<Your app Name>\";\n  // highlight-next-line\n  self.dependencyProvider = [RCTAppDependencyProvider new];\n  // You can add your custom initial props in the dictionary below.\n  // They will be passed down to the ViewController used by React Native.\n  self.initialProps = @{};\n\n  return [super application:application didFinishLaunchingWithOptions:launchOptions];\n}\n\n// remaining of the AppDelegate\n\n```",
+      "source_content_hash": "f8b9e3846103ec5315f3e6015a0261201f10696b1a7062d6fcbd0cab780b811e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af7c5c4e"
+      }
+    },
+    {
+      "segment_id": "2f833a4d",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 破壞性變更"
+      }
+    },
+    {
+      "segment_id": "5f4381f8",
+      "source_content": "### Removal of `console.log()` streaming in Metro",
+      "source_content_hash": "46c3f49ab64066d9a32e5c70801079c0b5ac9abe145ccf959b98c0c94b812b02",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除 Metro 中的 `console.log()` 串流功能"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "We want every aspect of React Native debugging to behave reliably and to match the functionality of modern browser tooling. To meet this quality bar, log forwarding via Metro, originally deprecated in 0.76, is removed in 0.77.",
+      "source_content_hash": "3040f10e0e8f56095a40854768d3d31b3b476c91268696e2df4f8e6bcb844143",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們希望 React Native 除錯的每個環節都能可靠運作，並符合現代瀏覽器工具的功能標準。為達此品質要求，原在 0.76 版棄用的透過 Metro 轉發日誌功能，已在 0.77 版中移除。"
+      }
+    },
+    {
+      "segment_id": "d3f13bf4",
+      "source_content": "This integration relied on a custom approach to communicate with the debugging target on device. With this change, we are moving exclusively to the Chrome DevTools Protocol (CDP).",
+      "source_content_hash": "f93d180b00bf55d6af69d59740a12e9f0b95b1b2131b62e0e9bb7eded19a748c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此整合功能依賴自訂方法與裝置上的除錯目標通訊。透過此變更，我們將完全轉用 Chrome DevTools Protocol (CDP)。"
+      }
+    },
+    {
+      "segment_id": "9e72d297",
+      "source_content": "- To view JS logs, please use [React Native DevTools](/docs/react-native-devtools) and its fully featured Console panel — supporting log filtering, rich object inspection, Live Expressions, and more.\n- You can also connect VS Code as a CDP debugger, via third party extensions such as [Expo Tools](https://github.com/expo/vscode-expo) and [Radon IDE](https://ide.swmansion.com/).\n  - Please note that these integrations are not directly supported by the React team. However, we are working on first party VS Code support in 2025.\n- Expo continues to offer log streaming in Expo CLI.",
+      "source_content_hash": "1f217ad9f85df94e7d3efa6cfe791f8b112c86ac2ef880ebc894212eeed4c18d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 若要檢視 JS 日誌，請使用 [React Native DevTools](/docs/react-native-devtools) 及其功能完整的控制台面板——支援日誌篩選、豐富物件檢查、即時運算式等功能。\n- 您也可透過第三方擴充功能（如 [Expo Tools](https://github.com/expo/vscode-expo) 和 [Radon IDE](https://ide.swmansion.com/)）將 VS Code 連接為 CDP 除錯工具。\n  - 請注意，React 團隊不直接支援這些整合功能。但我們正著手開發 2025 年的第一方 VS Code 支援。\n- Expo 仍會在 Expo CLI 中提供日誌串流功能。"
+      }
+    },
+    {
+      "segment_id": "32fb7230",
+      "source_content": "For more info, see [_Why are JavaScript logs leaving Metro?_](https://github.com/react-native-community/discussions-and-proposals/discussions/819#:~:text=Why%20are%20JavaScript%20logs%20leaving%20Metro%3F)",
+      "source_content_hash": "4a127e8e8d118df169f2b737be55512c7e9ffc382e6c33d2b462b0156c2fe908",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多資訊，請參閱 [_為何 JavaScript 日誌要離開 Metro？_](https://github.com/react-native-community/discussions-and-proposals/discussions/819#:~:text=Why%20are%20JavaScript%20logs%20leaving%20Metro%3F)"
+      }
+    },
+    {
+      "segment_id": "365a11aa",
+      "source_content": "### Other Breaking Changes",
+      "source_content_hash": "39a3fee4305e149be253dd5d52033d827569d41d307326f83607c634f65347a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他破壞性變更"
+      }
+    },
+    {
+      "segment_id": "371cb514",
+      "source_content": "#### General",
+      "source_content_hash": "a652c8903779e13b8030ea50e992a86d34da8b29cfb21c48c8ce69e536687cad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 一般"
+      }
+    },
+    {
+      "segment_id": "9bef1009",
+      "source_content": "- Animation\n  - Native looping animation do not send a React state update every time the loop ends.\n- Layout\n  - `position` of sticky headers on `ScrollView` will now be taken into account.\n  - Absolute positioning is now behaving in a more compliant way\n- JS Modules:\n  - Remove `ReactFabricInternals` module\n    - This is not going to be accessible anymore\n- Native Modules\n  - `NativeModules` object can now be used to load turbomodules in JS .\n    - This improves compatibility between Native Modules and Turbo Native Modules\n- Packages\n  - dev-middleware: Frameworks should specify `serverBaseUrl` relative to the middleware host\n- API Changes:\n  - Removed type for `useConcurrentRoot` from `AppRegistry`, as it was already ignored\n  - Removed `refs` property from `NativeMethods` TypeScript definition.\n- UX Changes:\n  - Remove \"run on iOS\" and \"run on Android\" from the dev server key commands",
+      "source_content_hash": "f95a15fbcc2ab70388a29e5a74f4dae8270da56fd5d7e5512d613c3e525e640d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 動畫\n  - 原生循環動畫不再在每次循環結束時發送 React 狀態更新。\n- 佈局\n  - `ScrollView` 上黏性標頭的 `position` 現在會被納入考量。\n  - 絕對定位現在的行為更加符合規範。\n- JS 模組：\n  - 移除 `ReactFabricInternals` 模組\n    - 此模組將不再可存取。\n- 原生模組\n  - `NativeModules` 物件現在可用於在 JS 中載入 turbomodules。\n    - 這提升了原生模組與 Turbo 原生模組之間的相容性。\n- 套件\n  - dev-middleware：框架應指定相對於中介軟體主機的 `serverBaseUrl`。\n- API 變更：\n  - 從 `AppRegistry` 移除 `useConcurrentRoot` 的類型，因其已被忽略。\n  - 從 `NativeMethods` TypeScript 定義中移除 `refs` 屬性。\n- UX 變更：\n  - 從開發伺服器鍵盤指令中移除「在 iOS 上執行」和「在 Android 上執行」。"
+      }
+    },
+    {
+      "segment_id": "04f25754",
+      "source_content": "#### Android",
+      "source_content_hash": "d434cf037d9a11db57371fb85c4a8113f8b135cc2cdab4ed9f593392e905b8d4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android"
+      }
+    },
+    {
+      "segment_id": "941578d7",
+      "source_content": "- Kotlin\n  - This is the first version of React Native that builds against Kotlin 2.0.21. You can read more about the changes coming with Kotlin 2.0 on the [language release notes](https://kotlinlang.org/docs/whatsnew2020.html).\n- API Changes:\n  - Nullability:\n    - Non-primitive getters in `ReadableArray` are now correctly typed as optional\n    - Make `ReactHost.createSurface()` method non nullable\n  - Renamed:\n    - `DevSupportManagerBase.getCurrentContext()` to `DevSupportManagerBase.getCurrentReactContext()`",
+      "source_content_hash": "18a5ce0c250f181d788a0b1ad991f96dd3317e05ce029447a4352e1368858662",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- Kotlin\n  - 這是首個針對 Kotlin 2.0.21 建置的 React Native 版本。您可以在[語言發布說明](https://kotlinlang.org/docs/whatsnew2020.html)中閱讀更多關於 Kotlin 2.0 帶來的變更。\n- API 變更：\n  - 可空性：\n    - `ReadableArray` 中的非基本型別 getter 現在正確地標記為可選。\n    - 將 `ReactHost.createSurface()` 方法標記為不可空。\n  - 重新命名：\n    - `DevSupportManagerBase.getCurrentContext()` 更名為 `DevSupportManagerBase.getCurrentReactContext()`。"
+      }
+    },
+    {
+      "segment_id": "7eb5b32d",
+      "source_content": "Additionally, several APIs have been removed or restricted in visibility, so they can’t be accessed anymore. Those APIs were internal and not needed to React Native developers directly. You can find the full list below:",
+      "source_content_hash": "c88ad751de93deb2dc30a331bd06384a8090a29b9ff72f28530262980330936e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，多個 API 已被移除或限制可見性，因此無法再存取。這些 API 是內部使用，React Native 開發者無需直接使用。您可以在下方找到完整清單："
+      }
+    },
+    {
+      "segment_id": "f4ff860d",
+      "source_content": "<details>\n<summary>List of Removed Android APIs:</summary>\n\nThe following packages are now internal and can’t be accessed anymore:\n\n- `com.facebook.react.views.progressbar`\n- `com.facebook.react.views.safeareaview`\n- `com.facebook.react.modules.accessibilityinfo`\n- `com.facebook.react.modules.appstate`\n- `com.facebook.react.modules.clipboard`\n- `com.facebook.react.modules.devmodule`\n- `com.facebook.react.modules.reactdevtoolssettings`\n- `com.facebook.react.views.unimplementedview`\n\nThe following classes are now either internal or have been removed, so can’t be accessed anymore:\n\n- `BackHandler.removeEventListener`\n- `BaseViewManagerInterface`\n- `BindingImpl`\n- `CompositeReactPackage`\n- `DebugOverlayTags`\n- Method `create()` from `DefaultDevSupportManagerFactory`\n- `DevToolsReactPerfLogger`\n- `FabricComponents`\n- `ImageStoreManager`\n- `InteropModuleRegistry`\n- `NativeModulePerfLogger`\n- `NoopPrinter`\n- `NotThreadSafeViewHierarchyUpdateDebugListener`\n- `OkHttpCallUtil`\n- `PrinterHolder`\n- `Printer`\n- `ReactDebugOverlayTags`\n- `ReactNativeFlipper`\n- `ReactViewBackgroundManager`\n- `ReactViewGroup.getBackgroundColor()`\n- `ReactVirtualTextShadowNode`\n- `ReactVirtualTextViewManager`\n- `SimpleSettableFuture`\n- `SwipeRefreshLayoutManager`\n- `TaskCompletionSource`\n- Parameter `jsBundleLoader` from DefaultReactHost.getDefaultReactHost()\n</details>",
+      "source_content_hash": "e434be0a2f7da8a9e0618fc7c2126c73336a2589f865c2f705832e575f91c871",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "6c2c7917",
+      "source_content": "#### iOS",
+      "source_content_hash": "34a7cbb85edc6939bf27aaa6adfe7891a150036196a0a9e20e457d95a4c05872",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### iOS"
+      }
+    },
+    {
+      "segment_id": "4b578d9c",
+      "source_content": "- API Changes\n  - Removed\n    - `RCTConstants.RCTGetMemoryPressureUnloadLevel`\n    - `partialBatchDidFlush`\n    - `RCTRuntimeExecutor`\n    - `UseNativeViewConfigsInBridgelessMode`\n      - Replaced by a proper feature flag\n    - `UseTurboModuleInteropForAllTurboModules`\n      - Interop layer is always on for TMs\n  - Changed\n    - Replace uses of `CGColorRef` with `UIColor`\n- `RCTAppDelegate` now requires to use the `RCTDependencyProvider` to load third party dependencies\n- CocoaPods sets C++ version for all the 3rd party dependencies to avoid compilation issues.",
+      "source_content_hash": "26433be0305e769cf3d5973a700a82482eb8e8a0710e33bcc8a2dec53bc84732",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- API 變更\n  - 移除\n    - `RCTConstants.RCTGetMemoryPressureUnloadLevel`\n    - `partialBatchDidFlush`\n    - `RCTRuntimeExecutor`\n    - `UseNativeViewConfigsInBridgelessMode`\n      - 由適當的功能標記取代。\n    - `UseTurboModuleInteropForAllTurboModules`\n      - 互操作層現在對所有 TM 啟用。\n  - 變更\n    - 將 `CGColorRef` 的使用替換為 `UIColor`。\n- `RCTAppDelegate` 現在需要使用 `RCTDependencyProvider` 來載入第三方依賴。\n- CocoaPods 為所有第三方依賴設定 C++ 版本以避免編譯問題。"
+      }
+    },
+    {
+      "segment_id": "ac8d269d",
+      "source_content": "<details>\n<summary>**React 19?**</summary>\n\nReact 19 was released the 6th of December 2024.\nAt the time, we already cut the branch for React Native 0.77 and we already released three RCs for React Native 0.77.\nIt was too late in the release of React Native 0.77 to introduce React 19 in this release.\n\nReact 19 will be shipped in React Native 0.78, and we already cut the branch for this version. You can try it by creating a new app with the command:\n\n```no-syntax\nnpx @react-native-community/cli init YourReact19App --version 0.78.0-rc.0\n```\n\n</details>",
+      "source_content_hash": "29d16817a3dea21ff67beea3578ffcfffe19d0d2da7dacb0e2f45b99e18f6842",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "99e44af3",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "dd78ef80",
+      "source_content": "React Native 0.77 contains over **1061** commits from **161** contributors. Thanks for all your hard work!",
+      "source_content_hash": "6833e1356948c34a33654597431145f3cd846cf6adce5b2b5b38c725ffe5a690",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.77 包含來自 **161** 位貢獻者的超過 **1061** 次提交。感謝所有人的辛勤付出！"
+      }
+    },
+    {
+      "segment_id": "423bbb1a",
+      "source_content": "Thanks to all the additional authors that worked on documenting features in this release post:",
+      "source_content_hash": "d238edb562844e7d53eb091c098caacdb00c5573aabfde63efacea8ad1dd58ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝所有在本發布文章中撰寫功能文件的額外作者："
+      }
+    },
+    {
+      "segment_id": "73ff4964",
+      "source_content": "- [Jakub Piasecki](https://github.com/j-piasecki) for contributing to the `display: contents` feature\n- [Nick Gerleman](https://github.com/NickGerleman), [Joe Vilches](https://github.com/joevilches) and [Jorge Cabiedes Acosta](https://github.com/jorge-cab) for releasing the new styling features\n- [Alan Lee](https://github.com/alanleedev) for the Android 16Kb page support content\n- [Riccardo Cipolleschi](https://github.com/cipolleschi) and [Oskar Kwaśniewski](https://github.com/okwasniewski) for supporting the migration of the template to Swift\n- [Nicola Corti](https://github.com/cortinico) for the `react-native init` deprecation cycle content\n- [Alex Hunt](https://github.com/huntie) for the content on the removal of `console.log` from metro",
+      "source_content_hash": "d48c4fd0a5053d3a2f02ea6bdf1d4b2aebf6417a8d944459e0b99e1831d6ed10",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Jakub Piasecki](https://github.com/j-piasecki) 貢獻了 `display: contents` 功能。\n- [Nick Gerleman](https://github.com/NickGerleman)、[Joe Vilches](https://github.com/joevilches) 和 [Jorge Cabiedes Acosta](https://github.com/jorge-cab) 發布了新的樣式功能。\n- [Alan Lee](https://github.com/alanleedev) 提供了 Android 16Kb 頁面支援的內容。\n- [Riccardo Cipolleschi](https://github.com/cipolleschi) 和 [Oskar Kwaśniewski](https://github.com/okwasniewski) 支援了模板遷移至 Swift。\n- [Nicola Corti](https://github.com/cortinico) 提供了 `react-native init` 棄用週期的內容。\n- [Alex Hunt](https://github.com/huntie) 提供了關於從 metro 移除 `console.log` 的內容。"
+      }
+    },
+    {
+      "segment_id": "5176651f",
+      "source_content": "### Upgrade to 0.77",
+      "source_content_hash": "1c897c27fb765934e1d5f897d2dc484891baa8e85bea6816f5645abdf067803b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 升級至 0.77"
+      }
+    },
+    {
+      "segment_id": "475959f2",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.",
+      "source_content_hash": "0638260e20da230691670b567610c6c2be87ab53adb865a0f30305b52bfbd5c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 來查看現有專案在 React Native 版本間的程式碼變更，並參考升級文件。"
+      }
+    },
+    {
+      "segment_id": "4da1b99c",
+      "source_content": "To create a new project:",
+      "source_content_hash": "556b556603ebc735e5193d4598f99a66d8ca11d2cbdc58dd6e21bac27a143f9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要建立新專案："
+      }
+    },
+    {
+      "segment_id": "fb74007a",
+      "source_content": "```sh\nnpx @react-native-community/cli@latest init MyProject --version latest\n```",
+      "source_content_hash": "2bf42b678988e03575eb4c8d6b17d78b7b8274700ef784f80ded96abe6728bd0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3e2af19c",
+      "source_content": "If you use Expo, React Native 0.77 will be supported in Expo SDK 52 (instructions on how to update React Native inside your Expo project to 0.77.0 will be available in a separate Expo blog post in the near future).",
+      "source_content_hash": "962bd90cbe442797eeaecab793f1f49b75a1050ab2d14afc7076147b57d3817f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 Expo，React Native 0.77 將在 Expo SDK 52 中獲得支援（關於如何在您的 Expo 專案中將 React Native 更新至 0.77.0 的說明，將於近期在另一篇 Expo 部落格文章中提供）。"
+      }
+    },
+    {
+      "segment_id": "3ce5ca48",
+      "source_content": ":::info\n0.77 is now the latest stable version of React Native and 0.74.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md#releases-support-policy). We aim to publish a final end-of-life update of 0.74 in the near future.\n:::",
+      "source_content_hash": "39dbf2a4f2634b235b7f7aa02583edae0ff5a9bd5fe1597d46e8150e014b0fff",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.77 版現為 React Native 的最新穩定版本，而 0.74.x 版將轉為不受支援狀態。更多資訊請參閱 [React Native 的支援政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md#releases-support-policy)。我們預計在近期發布 0.74 版的最終終止支援更新。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2025-01-21-version-0.77.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.237565+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "26ead12027ff1d8bef57dcc9c5bd306e4ce3e49691c8a64e3cea6fc90e2b5709"
+  }
+}

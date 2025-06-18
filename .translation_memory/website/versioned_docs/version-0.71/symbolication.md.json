@@ -1,0 +1,132 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/symbolication.md",
+  "source_file_content_hash": "fa9c9b81426b7103c4b06b546155bd99023d1a85b02fe24626c3e16d0bddf8ff",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: symbolication\ntitle: Symbolicating a stack trace\n---",
+      "source_content_hash": "9c903feec1d7b5f90cc325301eb49e67285700f4df2046777dd009304c575ec7",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "If a React Native app throws an unhandled exception in a release build, the output may be obfuscated and hard to read:",
+      "source_content_hash": "2e95f6cae5e4912439211c5a28d2f9149f7079b7ecbb91733ea79588d48b4714",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若 React Native 應用程式在正式版本中拋出未處理的例外，輸出內容可能經過混淆而難以閱讀："
+      }
+    },
+    {
+      "segment_id": "e6a5da7c",
+      "source_content": "```shell\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: FATAL EXCEPTION: mqt_native_modules\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: Process: com.awesomeproject, PID: 18979 07-15 10:58:25.820 18979 18998 E AndroidRuntime: com.facebook.react.common.JavascriptException: Failed, js engine: hermes, stack:\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: p@1:132161\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: p@1:132084\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: f@1:131854\n07-15 10:58:25.820 18979 18998 E AndroidRuntime: anonymous@1:131119\n```",
+      "source_content_hash": "c0a1e958df9d8848859375934dfd2fb31e9ef0b55612678135611518fab6b428",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6a5da7c"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "The sections like `p@1:132161` are minified function names and bytecode offsets. To debug the problem, you would instead want to translate it into file, line and function name: `AwesomeProject/App.js:54:initializeMap`. This is known as **symbolication.** You can symbolicate minified function names and bytecode like the above by passing `metro-symbolicate` a generated source map and the stack trace.",
+      "source_content_hash": "277335bf509646e4f2f4f1087416f3e13b2a5db29aaedcf6204e877aec01360f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "區段如 `p@1:132161` 是經過最小化的函數名稱與位元組碼偏移量。要偵錯此問題，您會需要將其轉換為檔案、行數與函數名稱，例如：`AwesomeProject/App.js:54:initializeMap`。此過程稱為**符號化 (symbolication)**。您可以透過將產生的原始碼對應檔 (source map) 與堆疊追蹤傳遞給 `metro-symbolicate`，來對上述最小化的函數名稱與位元組碼進行符號化。"
+      }
+    },
+    {
+      "segment_id": "27514802",
+      "source_content": "> The `metro-symbolicate` package is installed by default in the React Native template project from [setting up your development environment](environment-setup).",
+      "source_content_hash": "c3a212cb51ed60ca15042cebb11592bc1af3618085d31d3539f26e0503877dd8",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> `metro-symbolicate` 套件預設已安裝於 React Native 模板專案中，該專案來自[設定開發環境](environment-setup)。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "From a file containing the stacktrace:",
+      "source_content_hash": "3690164d651b5df7536fd19e6b0620d381fc4e6c572ed06c3d16c3b7e70612f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從包含堆疊追蹤的檔案："
+      }
+    },
+    {
+      "segment_id": "41a8ae85",
+      "source_content": "```shell\nnpx metro-symbolicate android/app/build/generated/sourcemaps/react/release/index.android.bundle.map < stacktrace.txt\n```",
+      "source_content_hash": "5780fb1012ae0f3110b96a11e6fc9433984035377d023d3e2285d0f209472eca",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41a8ae85"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "From `adb logcat`directly:",
+      "source_content_hash": "9680631a19246a355505da3abbeed259df80992274ad88aaca09656541d0e193",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "直接從 `adb logcat`："
+      }
+    },
+    {
+      "segment_id": "0c911872",
+      "source_content": "```shell\nadb logcat -d | npx metro-symbolicate android/app/build/generated/sourcemaps/react/release/index.android.bundle.map\n```",
+      "source_content_hash": "62a53f7bd2e619fbb5708eca4e5f2c76ba2488b389ff22bde962f06d520b8c63",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0c911872"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "This will turn each minified function name and offset like `p@1:132161` into the actual file- and function name `AwesomeProject/App.js:54:initializeMap`.",
+      "source_content_hash": "864c8b5360c7db7d87fb902c0792f4acf4fa80af9c9a49cc223fb5b6ed081ff4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這會將每個最小化的函數名稱與偏移量（如 `p@1:132161`）轉換為實際的檔案與函數名稱（如 `AwesomeProject/App.js:54:initializeMap`）。"
+      }
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "## Notes on Sourcemaps",
+      "source_content_hash": "7c51b7331e27ecb608ce6a1fa40bec7e4a2344806e949d085f1db23d49198e51",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 原始碼對應檔注意事項"
+      }
+    },
+    {
+      "segment_id": "5d66c9dc",
+      "source_content": "- Multiple source maps may be generated by the build process. Make sure to use the one in the location shown in the examples.\n- Make sure that the source map you use corresponds to the exact commit of the crashing app. Small changes in source code can cause large differences in offsets.\n- If `metro-symbolicate` exits immediately with success, make sure the input comes from a pipe or redirection and not from a terminal.",
+      "source_content_hash": "4164e97d1dd05194812898a604da2a6f564e7a3935ad97bd82c0686e46408d24",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 建置過程可能產生多個原始碼對應檔。請確保使用範例中所示位置的對應檔。\n- 請確認使用的原始碼對應檔與當機應用程式的提交版本完全相符。原始碼的微小變更可能導致偏移量大幅差異。\n- 若 `metro-symbolicate` 立即成功退出，請確認輸入來自管道或重新導向，而非終端機。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/symbolication.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.359786+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "fa9c9b81426b7103c4b06b546155bd99023d1a85b02fe24626c3e16d0bddf8ff"
+  }
+}

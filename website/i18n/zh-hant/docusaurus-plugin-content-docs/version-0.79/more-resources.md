@@ -1,0 +1,47 @@
+---
+id: more-resources
+title: More Resources
+---
+
+永遠有更多知識等待探索：開發者工作流程、應用商店上架、國際化、安全性等等。
+
+## 下一步該學什麼
+
+- [設定開發環境](environment-setup)
+- [設定開發工作流程](running-on-device)
+- [設計應用程式版面](flexbox)
+- [除錯應用程式](debugging)
+- [實現跨平台相容](platform-specific-code)
+- [參與React Native社群](/community/overview)
+
+## 深入學習
+
+- [React官方文件](https://react.dev/learn)
+- [MDN的JavaScript教學與參考指南](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Android](https://developer.android.com/docs)與[iOS](https://developer.apple.com/documentation/uikit)平台文件
+
+## 推薦IDE
+
+我們推薦使用[VS Code](https://code.visualstudio.com/)程式碼編輯器及其方便的[React Native工具套件](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)。
+
+## 可嘗試的平台
+
+[Expo](https://docs.expo.dev/)是一套專為React Native打造的工具與服務框架，專注於協助您建構、發布與迭代應用程式。它提供類似網頁開發的預覽部署流程，並能自動化開發工作流程。Expo讓您無需接觸Xcode或Android Studio即可開發React Native應用，同時也完全相容這些工具的整合使用。
+
+[Ignite](https://github.com/infinitered/ignite)是一個包含多種React Native樣板的CLI工具。最新版本Ignite Maverick採用MobX-State-Tree狀態管理、React Navigation等常用函式庫，內建畫面與模型的生成器，並原生支援Expo。Ignite還提供專為自訂設計調校的元件庫，包含主題支援與測試功能。若您需要預先配置的技術堆疊，Ignite會是理想選擇。
+
+## 範例應用程式
+
+試用[展示區](https://reactnative.dev/showcase)的應用程式，見證React Native的強大功能！想更深入實作？查看[GitHub上的範例應用程式集](https://github.com/ReactNativeNews/React-Native-Apps)，您可以檢視原始碼並在模擬器或實機上運行。
+
+## 尋找、開發與分享原生元件和TurboModules
+
+React Native擁有數千名開發者組成的社群，持續產出教學內容、工具與原生元件！
+
+在核心元件中找不到所需功能？造訪[React Native資源目錄](https://reactnative.directory)，探索社群開發的豐富資源。
+
+:::caution
+本文件涉及舊版API參考資料，需更新以反映新架構內容
+:::
+
+有興趣開發自己的原生元件或模組嗎？為特定用例開發模組並透過NPM和GitHub分享，能壯大React Native生態系！請參閱開發指南：[原生模組開發（Android](legacy/native-modules-android.md)、[iOS](legacy/native-modules-ios.md)）與[原生元件開發（Android](legacy/native-components-android.md)、[iOS](legacy/native-components-ios.md)）。

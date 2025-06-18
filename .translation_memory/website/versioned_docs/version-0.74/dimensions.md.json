@@ -1,0 +1,332 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/dimensions.md",
+  "source_file_content_hash": "ca6103d7ec8004a32618b60d9fcb5e9a295d73c26d9c0460ce0a5ea18d6c154c",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: dimensions\ntitle: Dimensions\n---",
+      "source_content_hash": "dea540ee1a2d9ea76e63c980e232b7eb247879218ea1ff89f1ba4f961c1c5bf4",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "f1ef2f7d",
+      "source_content": "> [`useWindowDimensions`](usewindowdimensions) is the preferred API for React components. Unlike `Dimensions`, it updates as the window's dimensions update. This works nicely with the React paradigm.",
+      "source_content_hash": "19fdbe5ff841b0c8831cc539376a50cf414c6a1d117f3a407c11176acf4edbb0",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 對於 React 元件來說，[`useWindowDimensions`](usewindowdimensions) 是更推薦使用的 API。與 `Dimensions` 不同，它會隨著視窗尺寸的變化而自動更新，這更符合 React 的設計模式。"
+      }
+    },
+    {
+      "segment_id": "e6a5da7c",
+      "source_content": "```tsx\nimport {Dimensions} from 'react-native';\n```",
+      "source_content_hash": "80b1a07c7fda8adf1c3b2b9c64cfb5e6464dc0f00976d28b2fee7367cb271d86",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6a5da7c"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "You can get the application window's width and height using the following code:",
+      "source_content_hash": "a36e7bc6a7998549cceb57f6cbc0159aee495bc9a41e143b9722e595003e6608",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以透過以下程式碼取得應用程式視窗的寬度和高度："
+      }
+    },
+    {
+      "segment_id": "5564d81d",
+      "source_content": "```tsx\nconst windowWidth = Dimensions.get('window').width;\nconst windowHeight = Dimensions.get('window').height;\n```",
+      "source_content_hash": "5ccf12fcb2b034e7aed63292d0ea01bb6584af2531b3a8b73e081bad34fcdf08",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5564d81d"
+      }
+    },
+    {
+      "segment_id": "27514802",
+      "source_content": "> Although dimensions are available immediately, they may change (e.g due to device rotation, foldable devices etc) so any rendering logic or styles that depend on these constants should try to call this function on every render, rather than caching the value (for example, using inline styles rather than setting a value in a `StyleSheet`).",
+      "source_content_hash": "155218017a86818105bab4b0dbadbe7f795228685592d013dae137174fa98a67",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 雖然尺寸資訊可以立即取得，但它們可能會發生變化（例如由於設備旋轉、折疊式設備等），因此任何依賴這些常數的渲染邏輯或樣式都應該在每次渲染時調用此函數，而不是緩存該值（例如使用內聯樣式而非在 `StyleSheet` 中設定值）。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "If you are targeting foldable devices or devices which can change the screen size or app window size, you can use the event listener available in the Dimensions module as shown in the below example.",
+      "source_content_hash": "8f7565e341124c36185859b833271bd152c5a8c536bdfa865649e59eea7d97a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您針對的是折疊式設備或可以改變螢幕尺寸或應用視窗大小的設備，可以使用 Dimensions 模組中提供的事件監聽器，如下例所示。"
+      }
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "3569d545",
+      "source_content": "```SnackPlayer name=Dimensions\nimport React, {useState, useEffect} from 'react';\nimport {View, StyleSheet, Text, Dimensions} from 'react-native';\n\nconst windowDimensions = Dimensions.get('window');\nconst screenDimensions = Dimensions.get('screen');\n\nconst App = () => {\n  const [dimensions, setDimensions] = useState({\n    window: windowDimensions,\n    screen: screenDimensions,\n  });\n\n  useEffect(() => {\n    const subscription = Dimensions.addEventListener(\n      'change',\n      ({window, screen}) => {\n        setDimensions({window, screen});\n      },\n    );\n    return () => subscription?.remove();\n  });\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.header}>Window Dimensions</Text>\n      {Object.entries(dimensions.window).map(([key, value]) => (\n        <Text>\n          {key} - {value}\n        </Text>\n      ))}\n      <Text style={styles.header}>Screen Dimensions</Text>\n      {Object.entries(dimensions.screen).map(([key, value]) => (\n        <Text>\n          {key} - {value}\n        </Text>\n      ))}\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  header: {\n    fontSize: 16,\n    marginVertical: 10,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "babeb2f56ef4bbbd00f6bca782d65034e5fa198fcb509e98f50516f1c9d1a755",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3569d545"
+      }
+    },
+    {
+      "segment_id": "b936dd6a",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "66819c78",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "0a103a02",
+      "source_content": "### `addEventListener()`",
+      "source_content_hash": "c14ee61a90cacc6adff71fa9f1ff675bde58b04df64bfe24a80a9a4a21f7ced0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addEventListener()`"
+      }
+    },
+    {
+      "segment_id": "b73a4a7a",
+      "source_content": "```tsx\nstatic addEventListener(\n  type: 'change',\n  handler: ({\n    window,\n    screen,\n  }: DimensionsValue) => void,\n): EmitterSubscription;\n```",
+      "source_content_hash": "a0c86969c78dc387ae779b90d25c9c47e335186c25d6fa13f9c5e2b390191276",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b73a4a7a"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "Add an event handler. Supported events:",
+      "source_content_hash": "0a52122e4c2f07735c9afc527b9c3c81a70c66ad0dbd3f2343290f9f6aa6c7b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "添加事件處理程序。支援的事件："
+      }
+    },
+    {
+      "segment_id": "dee20070",
+      "source_content": "- `change`: Fires when a property within the `Dimensions` object changes. The argument to the event handler is a [`DimensionsValue`](#dimensionsvalue) type object.",
+      "source_content_hash": "fb1ad29a8774288ccdc332dd64372ccefcf400ef2174150a7cc1f68a6be4e97a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `change`：當 `Dimensions` 物件中的屬性發生變化時觸發。事件處理程序的參數是一個 [`DimensionsValue`](#dimensionsvalue) 類型的物件。"
+      }
+    },
+    {
+      "segment_id": "fc25fa9c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "94145a94",
+      "source_content": "### `get()`",
+      "source_content_hash": "04407c6234a6dbf551a10247fba76eec5a5be79af34783fe2ca41892cc035956",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `get()`"
+      }
+    },
+    {
+      "segment_id": "64071bcc",
+      "source_content": "```tsx\nstatic get(dim: 'window' | 'screen'): ScaledSize;\n```",
+      "source_content_hash": "ddaf77f114c0233843daf6bdf9aa2d728a1312bc74f2729450e3902d579f8246",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_64071bcc"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "Initial dimensions are set before `runApplication` is called so they should be available before any other require's are run, but may be updated later.",
+      "source_content_hash": "24500fe52994b6d28e7479278579b2eae2eedfafabf94f7561fe08c58ad7fa22",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "初始尺寸在 `runApplication` 被調用之前就已設定，因此它們應該在其他 require 執行之前就可取得，但可能會在之後更新。"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Example: `const {height, width} = Dimensions.get('window');`",
+      "source_content_hash": "f458fc1c8dafb65b48a1078462679630227727d985e3dfd53457d20da45ffa1c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例：`const {height, width} = Dimensions.get('window');`"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "d8ebd66a",
+      "source_content": "| Name                                                               | Type   | Description                                                                       |\n| ------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------- |\n| dim <div className=\"label basic required two-lines\">Required</div> | string | Name of dimension as defined when calling `set`. Returns value for the dimension. |",
+      "source_content_hash": "0b55b4de0bea0e7877ad15b26d525be7e43a13640222fbe09a0fc1f2993995e6",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d8ebd66a"
+      }
+    },
+    {
+      "segment_id": "fcc9030a",
+      "source_content": "> For Android the `window` dimension will exclude the size used by the `status bar` (if not translucent) and `bottom navigation bar`",
+      "source_content_hash": "0e103e489e9a3fd16852b6caa3c10f92d1801fc2850d5399b48bac84b13356a9",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 對於 Android 來說，`window` 的尺寸將排除狀態欄（如果不是半透明的）和底部導航欄所使用的空間。"
+      }
+    },
+    {
+      "segment_id": "0bee36ce",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b9b8694c",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 類型定義"
+      }
+    },
+    {
+      "segment_id": "ed644f52",
+      "source_content": "### DimensionsValue",
+      "source_content_hash": "b3c662d52ed21702b45598728711fba18dd92f694b87bfd4dd40f37be6fabce6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### DimensionsValue"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "0b49f11e",
+      "source_content": "| Name   | Type                                | Description                             |\n| ------ | ----------------------------------- | --------------------------------------- |\n| window | [ScaledSize](dimensions#scaledsize) | Size of the visible Application window. |\n| screen | [ScaledSize](dimensions#scaledsize) | Size of the device's screen.            |",
+      "source_content_hash": "32e740d13e806970bdeeb422b34c675b344123e74898656a56cace96b6054b65",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0b49f11e"
+      }
+    },
+    {
+      "segment_id": "8f1c1cd6",
+      "source_content": "### ScaledSize",
+      "source_content_hash": "113080ff90e5b50b6ddaf2ec526a8048197f5a924b520ec780f5704345003542",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### ScaledSize"
+      }
+    },
+    {
+      "segment_id": "584eb487",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_584eb487"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "e016853e",
+      "source_content": "| Name      | Type   |\n| --------- | ------ |\n| width     | number |\n| height    | number |\n| scale     | number |\n| fontScale | number |",
+      "source_content_hash": "1901c940de709dd0def38dfcf90519a4077fa5e5085dbc5cdf427adc8b31567b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e016853e"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/dimensions.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.547386+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ca6103d7ec8004a32618b60d9fcb5e9a295d73c26d9c0460ce0a5ea18d6c154c"
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/backhandler.md",
+  "source_file_content_hash": "44042edd497a81096b3801cd0906abce807e355ded56234c88ad9ada50cfad96",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: backhandler\ntitle: BackHandler\n---",
+      "source_content_hash": "c96bbd4d9601b7e09e3185b960529ff38e8d571f2ec79c76ab6b70fc044bb8f7",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The Backhandler API detects hardware button presses for back navigation, lets you register event listeners for the system's back action, and lets you control how your application responds. It is Android-only.",
+      "source_content_hash": "5663125fbb10b4b7878df9179bd4245533608cb43f395f57cf8ba25a8fd6c623",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Backhandler API 用於偵測 Android 裝置的實體返回按鈕操作，允許您註冊系統返回動作的事件監聽器，並控制應用程式的回應行為。此功能僅限 Android 平台使用。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The event subscriptions are called in reverse order (i.e. the last registered subscription is called first).",
+      "source_content_hash": "1a01e116adaa15aef8466c874ee4745045dbf3b852d643e78653a4a5e363c404",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "事件監聽器的觸發順序為反向（即最後註冊的監聽器會最先被呼叫）。"
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- **If one subscription returns true,** then subscriptions registered earlier will not be called.\n- **If no subscription returns true or none are registered,** it programmatically invokes the default back button functionality to exit the app.",
+      "source_content_hash": "4826f62885c6c790606347e20c5d1a7d4e598e42ec82b6057b89f642fe7bb80c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **若某個監聽器返回 true**，則先前註冊的監聽器將不會被呼叫。\n- **若沒有任何監聽器返回 true 或未註冊監聽器**，系統將預設執行返回按鈕功能來關閉應用程式。"
+      }
+    },
+    {
+      "segment_id": "511c851a",
+      "source_content": "> **Warning for modal users:** If your app shows an opened `Modal`, `BackHandler` will not publish any events ([see `Modal` docs](modal#onrequestclose)).",
+      "source_content_hash": "7c05390a27782a155d47523783f9b85359a14872eb659d2fb931664a17a65fe5",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **模態視窗使用者請注意**：若應用程式正在顯示開啟的 `Modal`，`BackHandler` 將不會發布任何事件（參見 [`Modal` 文件](modal#onrequestclose)）。"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## Pattern",
+      "source_content_hash": "0dfb3d2abf93b8b2607e2ab902e544de57a0bfc593f66c74166273f3f8625806",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用模式"
+      }
+    },
+    {
+      "segment_id": "93be3c14",
+      "source_content": "```tsx\nBackHandler.addEventListener('hardwareBackPress', function () {\n  /**\n   * this.onMainScreen and this.goBack are just examples,\n   * you need to use your own implementation here.\n   *\n   * Typically you would use the navigator here to go to the last state.\n   */\n\n  if (!this.onMainScreen()) {\n    this.goBack();\n    /**\n     * When true is returned the event will not be bubbled up\n     * & no other back action will execute\n     */\n    return true;\n  }\n  /**\n   * Returning false will let the event to bubble up & let other event listeners\n   * or the system's default back action to be executed.\n   */\n  return false;\n});\n```",
+      "source_content_hash": "36d5c23d88d47538f98df17bcf2f78bd0266680be78a1b854fb6563fbc49451c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93be3c14"
+      }
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "The following example implements a scenario where you confirm if the user wants to exit the app:",
+      "source_content_hash": "0633aff0676d58b5be9e8fd5414f769ccce0af0765ad068fb831e6693ca08d83",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下範例實作確認使用者是否要退出應用程式的場景："
+      }
+    },
+    {
+      "segment_id": "4ec2920d",
+      "source_content": "```SnackPlayer name=BackHandler&supportedPlatforms=android\nimport React, {useEffect} from 'react';\nimport {Text, View, StyleSheet, BackHandler, Alert} from 'react-native';\n\nconst App = () => {\n  useEffect(() => {\n    const backAction = () => {\n      Alert.alert('Hold on!', 'Are you sure you want to go back?', [\n        {\n          text: 'Cancel',\n          onPress: () => null,\n          style: 'cancel',\n        },\n        {text: 'YES', onPress: () => BackHandler.exitApp()},\n      ]);\n      return true;\n    };\n\n    const backHandler = BackHandler.addEventListener(\n      'hardwareBackPress',\n      backAction,\n    );\n\n    return () => backHandler.remove();\n  }, []);\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.text}>Click Back button!</Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  text: {\n    fontSize: 18,\n    fontWeight: 'bold',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "10593e6f8352c5236488a53a8d4af66304d5ed18163305f3854dab295668a426",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4ec2920d"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "`BackHandler.addEventListener` creates an event listener & returns a `NativeEventSubscription` object which should be cleared using `NativeEventSubscription.remove` method.",
+      "source_content_hash": "8dac4e6cfa6b4ace6cf8d86011b84b1150d1611abac3e2b818d66a54b5e85d23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`BackHandler.addEventListener` 會建立事件監聽器並返回一個 `NativeEventSubscription` 物件，需透過 `NativeEventSubscription.remove` 方法清除。"
+      }
+    },
+    {
+      "segment_id": "5baf88e2",
+      "source_content": "## Usage with React Navigation",
+      "source_content_hash": "66ef36b8bb8323e6aea64bec2f99712c7b77de94a7ac763f16d1aa6542a64a0f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 與 React Navigation 搭配使用"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "If you are using React Navigation to navigate across different screens, you can follow their guide on [Custom Android back button behaviour](https://reactnavigation.org/docs/custom-android-back-button-handling/)",
+      "source_content_hash": "3f6c3d859038aa49714213155b33efd97565b3bbef5f8365c9f7b86d8f001531",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 React Navigation 進行畫面導航，可參閱其指南 [自訂 Android 返回按鈕行為](https://reactnavigation.org/docs/custom-android-back-button-handling/)。"
+      }
+    },
+    {
+      "segment_id": "c19de48a",
+      "source_content": "## Backhandler hook",
+      "source_content_hash": "5abc5df3152e95453a590df3149757c683646bf5ad95bf24641a443da84c7a03",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Backhandler 鉤子"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) has a nice `useBackHandler` hook which will simplify the process of setting up event listeners.",
+      "source_content_hash": "f18851af19bc6d6cf85a1e808a843cca40f00be60b8d62b42177edc721418ef8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) 提供便利的 `useBackHandler` 鉤子，可簡化事件監聽器的設定流程。"
+      }
+    },
+    {
+      "segment_id": "dd8754e7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7c92a79",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文件"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "### `addEventListener()`",
+      "source_content_hash": "c14ee61a90cacc6adff71fa9f1ff675bde58b04df64bfe24a80a9a4a21f7ced0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addEventListener()`"
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```tsx\nstatic addEventListener(\n  eventName: BackPressEventName,\n  handler: () => boolean | null | undefined,\n): NativeEventSubscription;\n```",
+      "source_content_hash": "70a229bf23de97c11c96f3698ea7a7e1786c134c5e06ba638e72d4f986d1e140",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    },
+    {
+      "segment_id": "6ad15270",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "### `exitApp()`",
+      "source_content_hash": "f2dc9dae6746ed350f6f8a360f3ce926a5d9b020b760eb6a65616f226fd77914",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `exitApp()`"
+      }
+    },
+    {
+      "segment_id": "7102653e",
+      "source_content": "```tsx\nstatic exitApp();\n```",
+      "source_content_hash": "9f6117ceca201c76a90dcfaf3a88fd7de2349b4de71ab1ffdf95c31e9c4c9483",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7102653e"
+      }
+    },
+    {
+      "segment_id": "18fa676c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "### `removeEventListener()`",
+      "source_content_hash": "580d5f83b079715fc27c51f759bd020e5e7276577bfa7a851e15dd88c9386f43",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeEventListener()`"
+      }
+    },
+    {
+      "segment_id": "5be4f25e",
+      "source_content": "```tsx\nstatic removeEventListener(\n  eventName: BackPressEventName,\n  handler: () => boolean | null | undefined,\n);\n```",
+      "source_content_hash": "ff9f7a094d4d57d68c8155ef84a8103c5ed28890244134f94e3eb695f49e2ef5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5be4f25e"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/backhandler.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.421236+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "44042edd497a81096b3801cd0906abce807e355ded56234c88ad9ada50cfad96"
+  }
+}

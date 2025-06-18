@@ -1,0 +1,1052 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2024-08-12-release-0.75.md",
+  "source_file_content_hash": "59a82140fb5b1482cad59d234085612b67084723fbd7c005852e338beb655f7e",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.75 - Support for Percentage Values in Layout, New Architecture Stabilization, Template & init Updates, and more'\nauthors:\n  [\n    gabrieldonadel,\n    siddharthkul,\n    titozzz,\n    blakef,\n    cipolleschi,\n    cortinico,\n  ]\ntags: [engineering]\ndate: 2024-08-14\n---",
+      "source_content_hash": "f958b814b4f54061b4cc77608a1b1220d1973c6f6c777ae628502b6e70702535",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Today we are excited to release React Native 0.75!",
+      "source_content_hash": "bca7b8a3ca339dfae4d6bef2756e63401985419cf8c60bf7511e65cce37fe238",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們興奮地宣布 React Native 0.75 正式發布！"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "This release ships several features, such as Yoga 3.1 with support for `%` values, several stabilization fixes for the New Architecture, and the introduction of the recommendation for users to use a React Native Framework.",
+      "source_content_hash": "62640e37c9760f0306de6dae407d57828863e347980c8364128b8592d6f52f33",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本帶來多項新功能，包括支援百分比值的 Yoga 3.1 排版引擎、新架構的穩定性修復，以及建議開發者使用 React Native 框架的官方指引。"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "da23c906",
+      "source_content": "- [Yoga 3.1 and Layout Improvements](/blog/2024/08/12/release-0.75#yoga-31-and-layout-improvements)\n- [New Architecture Stabilization](/blog/2024/08/12/release-0.75#new-architecture-stabilization)\n- [Using Frameworks](/blog/2024/08/12/release-0.75#using-frameworks)",
+      "source_content_hash": "5363805dbb9836d64861cd6407b6137a881d45099c2cd1d48c5c383678a44a25",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Yoga 3.1 與排版改進](/blog/2024/08/12/release-0.75#yoga-31-and-layout-improvements)\n- [新架構穩定性強化](/blog/2024/08/12/release-0.75#new-architecture-stabilization)\n- [使用框架開發](/blog/2024/08/12/release-0.75#using-frameworks)"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "### Breaking Changes",
+      "source_content_hash": "b20bc465acc06c0341aa5cea47dcbd02f8d0db580f667ab00da54cd49654879a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "1d13125b",
+      "source_content": "- [Touchables in TypeScript can’t be used as types in Generic expressions anymore](/blog/2024/08/12/release-0.75#touchables-in-typescript-cant-be-used-as-types-in-generic-expressions-anymore)\n- [Last version supporting minSdk 23 and minIOSVersion 13.4](/blog/2024/08/12/release-0.75#last-version-supporting-minsdk-23-and-miniosversion-134)\n- [Android: JSIModule has been deleted](/blog/2024/08/12/release-0.75#android-jsimodule-has-been-deleted)\n- [Android: PopUp Menu removed from core](/blog/2024/08/12/release-0.75#android-popup-menu-moved-to-separate-package)\n- [iOS: Finalized Push Notifications deprecation work](/blog/2024/08/12/release-0.75#ios-finalized-pushnotificationios-deprecation-work)\n- [Community CLI: Removal of ram-bundle and profile-hermes commands](/blog/2024/08/12/release-0.75#community-cli-removal-of-ram-bundle-and-profile-hermes-commands)",
+      "source_content_hash": "edbcae95ea97d8895aac90ccf3750a97bcdc0104f5f4b6b82061a87c3e581b24",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [TypeScript 中的 Touchable 元件不可再作為泛型類型參數](/blog/2024/08/12/release-0.75#touchables-in-typescript-cant-be-used-as-types-in-generic-expressions-anymore)\n- [最後支援 minSdk 23 與 minIOSVersion 13.4 的版本](/blog/2024/08/12/release-0.75#last-version-supporting-minsdk-23-and-miniosversion-134)\n- [Android: 已移除 JSIModule](/blog/2024/08/12/release-0.75#android-jsimodule-has-been-deleted)\n- [Android: 彈出式選單從核心模組移出](/blog/2024/08/12/release-0.75#android-popup-menu-moved-to-separate-package)\n- [iOS: 完成推送通知模組的棄用工作](/blog/2024/08/12/release-0.75#ios-finalized-pushnotificationios-deprecation-work)\n- [社群 CLI: 移除 ram-bundle 與 profile-hermes 指令](/blog/2024/08/12/release-0.75#community-cli-removal-of-ram-bundle-and-profile-hermes-commands)"
+      }
+    },
+    {
+      "segment_id": "8d303d33",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8d303d33"
+      }
+    },
+    {
+      "segment_id": "3b7478ea",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點功能詳解"
+      }
+    },
+    {
+      "segment_id": "62a6890b",
+      "source_content": "### Yoga 3.1 and Layout Improvements",
+      "source_content_hash": "b0229418a3d9162a0a85c5801c77053ce171e5d101b28a282377cf5a679371da",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Yoga 3.1 與排版改進"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "Since we last shipped Yoga [version 3.0](https://reactnative.dev/blog/2024/04/22/release-0.74#yoga-30) in React Native 0.74, we kept on pushing many improvements and new layout capabilities for your applications. React Native 0.75 ships with Yoga 3.1 and you can learn more about what’s new in the official Yoga’s [release blog post](https://www.yogalayout.dev/blog/announcing-yoga-3.1).",
+      "source_content_hash": "605ae216f62961134abe465c0a002fe56a35f37c5f6d7fef38f9a13921016bfb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自 React Native 0.74 搭載 [Yoga 3.0](https://reactnative.dev/blog/2024/04/22/release-0.74#yoga-30) 以來，我們持續優化佈局功能。0.75 版本升級至 Yoga 3.1，詳細更新內容請參閱 Yoga 官方[發布公告](https://www.yogalayout.dev/blog/announcing-yoga-3.1)。"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "One notable and highly requested feature is the support for `%` values in various places, such as `gaps` and `translation`",
+      "source_content_hash": "23245f77ac7fe469ecbe74341e8eaf83d8afe5d02a0a959a2954636df4a4bfd4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其中最受期待的功能是全面支援百分比值（`%`），現可應用於間距（gaps）與位移（translation）等屬性"
+      }
+    },
+    {
+      "segment_id": "6b421e57",
+      "source_content": ":::info\nThese features are available only for the New Architecture. If you are keen to use them, please consider migrating to it.\n:::",
+      "source_content_hash": "4205e41426b815be88c93e5311331b46df1ef542f5521baf473d79d57020c689",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n注意：這些功能僅在新架構中可用。若需使用，請考慮遷移至新架構。\n:::"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "#### Percentage Values in Gaps",
+      "source_content_hash": "59f708b0bb34ca55dc0a5eb443427dcabc6555afcadb27318f493757c8103603",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 間距屬性支援百分比值"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "With 0.75, the `gap`, `columnGap` and `rowGap` props described [here](https://reactnative.dev/docs/flexbox#row-gap-column-gap-and-gap) now support a string with a `%` value.",
+      "source_content_hash": "3a1259c06473c07f864f3db9f0f2b0c8805ae4afbc618cd5c77423e1d9d15d83",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "0.75 版本中，[彈性盒模型文件](https://reactnative.dev/docs/flexbox#row-gap-column-gap-and-gap)所述的 `gap`、`columnGap` 和 `rowGap` 屬性現可接受含 `%` 的字串值。"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "For example:",
+      "source_content_hash": "652744a2ab28954bbafd780fd76c15c2bd557594532f907f10ead1989727af95",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如："
+      }
+    },
+    {
+      "segment_id": "f275f5fd",
+      "source_content": "```tsx\nfunction App(): React.JSX.Element {\n  return (\n    <SafeAreaView\n      style={{\n        marginTop: 20,\n        alignItems: 'center',\n        flex: 1,\n        rowGap: '20%',\n      }}>\n      <View\n        style={{flex: 1, flexDirection: 'row', columnGap: '10%'}}>\n        <View\n          style={{\n            backgroundColor: 'purple',\n            width: 100,\n            height: 100,\n          }}\n        />\n        <View\n          style={{\n            backgroundColor: 'blue',\n            width: 100,\n            height: 100,\n          }}\n        />\n        <View\n          style={{\n            backgroundColor: 'green',\n            width: 100,\n            height: 100,\n          }}\n        />\n      </View>\n      <View\n        style={{flex: 1, flexDirection: 'row', columnGap: '10%'}}>\n        <View\n          style={{\n            backgroundColor: 'lime',\n            width: 100,\n            height: 100,\n          }}\n        />\n        <View\n          style={{\n            backgroundColor: 'yellow',\n            width: 100,\n            height: 100,\n          }}\n        />\n        <View\n          style={{\n            backgroundColor: 'orange',\n            width: 100,\n            height: 100,\n          }}\n        />\n      </View>\n      <View\n        style={{flex: 1, flexDirection: 'row', columnGap: '10%'}}>\n        <View\n          style={{\n            backgroundColor: 'red',\n            width: 100,\n            height: 100,\n          }}\n        />\n        <View\n          style={{\n            backgroundColor: 'violet',\n            width: 100,\n            height: 100,\n          }}\n        />\n        <View\n          style={{\n            backgroundColor: 'magenta',\n            width: 100,\n            height: 100,\n          }}\n        />\n      </View>\n    </SafeAreaView>\n  );\n}\n```",
+      "source_content_hash": "8364f2c4eea4a3288a18218e3f253454aed2165ecd5452103cdc9287a780c48c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f275f5fd"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "Will be rendered as follows:",
+      "source_content_hash": "4d20a14ccfa84e693f5910205b24fc4d408fb1a6dc26f6f81ab8cd03174585c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將呈現如下效果："
+      }
+    },
+    {
+      "segment_id": "a016bba9",
+      "source_content": "| Android                                                      | iOS                                                  |\n| ------------------------------------------------------------ | ---------------------------------------------------- |\n| ![Android Gaps](/blog/assets/0.75-android-gaps.png) | ![iOS Gaps](/blog/assets/0.75-ios-gaps.png) |",
+      "source_content_hash": "4d59028f34468a579a0150cb45e2a4e299d2209cf6cf6781b99161fd3e0f8d62",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a016bba9"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "#### Percentage values in Translation",
+      "source_content_hash": "cbfd935523d2b2071de4341ad2c8dcd8afe57c78fcf0aaf3b7b1ed1142df6f86",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 位移變換支援百分比值"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "The [`transform` prop](https://reactnative.dev/docs/transforms) can also now accept `%` as values for the `translate` transformations.",
+      "source_content_hash": "525e71fcc2dbc2a266dfdf44ac433e7d173ca900e77281ac8531e32a93d63db0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[變形屬性](https://reactnative.dev/docs/transforms)中的 `translate` 變換現在也可使用百分比值。"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "For example, the following component would move the red square’s X coordinate by 100% of its width and the Y coordinate by 100% of its height:",
+      "source_content_hash": "ae8497b0b4c0047246ece43422fc4afe446866fce6c81b65baaec016fdafcfb4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下範例會將紅色方塊沿 X 軸移動自身寬度的 100%，沿 Y 軸移動自身高度的 100%："
+      }
+    },
+    {
+      "segment_id": "5d30fd9b",
+      "source_content": "```tsx\nfunction Translated() {\n  return (\n    <SafeAreaView\n      style={{\n        marginTop: 20,\n        flex: 1,\n        rowGap: '20%',\n      }}>\n      <View\n        style={{\n          backgroundColor: 'red',\n          width: 100,\n          height: 100,\n          transform: [{translateY: '100%'}, {translateX: '100%'}],\n        }}\n      />\n    </SafeAreaView>\n  );\n}\n```",
+      "source_content_hash": "8a5a909b7c93d506cd20c7099f8fcb5e6b84cd037c271898fd742beb0cce4442",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5d30fd9b"
+      }
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "Will be rendered as follows:",
+      "source_content_hash": "4d20a14ccfa84e693f5910205b24fc4d408fb1a6dc26f6f81ab8cd03174585c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實際渲染效果："
+      }
+    },
+    {
+      "segment_id": "bddedd57",
+      "source_content": "| Android                                                                     | iOS                                                                |\n| --------------------------------------------------------------------------- | ------------------------------------------------------------------ |\n| ![Android Translation](/blog/assets/0.75-android-translations.png) | ![iOS Translation](/blog/assets/0.75-ios-translation.png) |",
+      "source_content_hash": "2c2fa2f2f63d54ff15383d58c393bda550feca81266fa82f18c82004b0078b7b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bddedd57"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "### New Architecture Stabilization",
+      "source_content_hash": "f326f45ab48648884210db7c33b7738ad05d7e3e7e2d2451ea1e7694e8c7e29b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新架構穩定性強化"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "Since our announcement of the [New Architecture being in Beta](https://github.com/reactwg/react-native-new-architecture/discussions/189) at React Conf, we shipped several bug fixes and improvements to its stability.",
+      "source_content_hash": "dcb6e0114c37506bd09f5ae65e9ecbb76bcb12463e4c07ea4c3b9bc13bd6c2d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自從我們在React Conf上宣布[新架構進入Beta階段](https://github.com/reactwg/react-native-new-architecture/discussions/189)以來，我們已針對其穩定性發布了多項錯誤修正與改進。"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "Our goal is for the New Architecture to be considered stable in the near future. Therefore, in the last few months we focused on bridging the gaps between the Old and the New Architecture. Some examples of bugs and missing features we fixed are:",
+      "source_content_hash": "df283a1986a2457b2b8742c5e06259c5bccbc9074eca7efa4f854a2b483fda35",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們的目標是讓新架構在不久的將來被視為穩定版本。因此，過去幾個月我們專注於彌合舊架構與新架構之間的差距。以下是我們修復的部分錯誤與缺失功能範例："
+      }
+    },
+    {
+      "segment_id": "aa3dd15d",
+      "source_content": "- Fix `adjustsFontSizeToFit` on Android ([#44075](https://github.com/facebook/react-native/pull/44075))\n- Fix `textAlign` not working with inline views on Android ([#44146](https://github.com/facebook/react-native/pull/44146))\n- Fix text baseline being moved up on iOS ([#44932](https://github.com/facebook/react-native/pull/44932))",
+      "source_content_hash": "5ebc94b0c3c5333685a73295013a09810356b14d05909751cdec6326f6291b40",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 修正Android上的`adjustsFontSizeToFit`問題 ([#44075](https://github.com/facebook/react-native/pull/44075))\n- 修正Android上`textAlign`與行內視圖無法配合使用的問題 ([#44146](https://github.com/facebook/react-native/pull/44146))\n- 修正iOS文字基線上移問題 ([#44932](https://github.com/facebook/react-native/pull/44932))"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "Together with the folks at Expo, we also worked on adding information about New Architecture support in the [React Native Directory](https://reactnative.directory/), so it will be immediately clear for you if a library already supports the New Architecture or not:",
+      "source_content_hash": "1e65c97929c030f97a7a4770485a928c9083d9d92f219182a433132b2173bfa1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們也與Expo團隊合作，在[React Native目錄](https://reactnative.directory/)中新增了新架構支援資訊，讓您能立即判斷某個函式庫是否已支援新架構："
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "![React Native Directory](/blog/assets/0.75-rn-directory.png)",
+      "source_content_hash": "21068cd4b885ffc36ec479a13bcd4a88abd360ef10dcd33f1224311caabe570e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React Native目錄](/blog/assets/0.75-rn-directory.png)"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "We also invite you to take part in the [New Architecture survey](https://t.co/ucAA58hnFu). This survey is key for us to collect precious feedback on the next steps for the New Architecture rollout.",
+      "source_content_hash": "672278a3540a590fc1d4959f0b2a0723d8f1036f58881a358e0bad548365c2d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同時誠摯邀請您參與[新架構問卷調查](https://t.co/ucAA58hnFu)。這份問卷對我們收集新架構推展下一步的寶貴意見至關重要。"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "We also want to share a post we published in the New Architecture Working Group about [Supporting UIManager in the New Architecture](https://github.com/reactwg/react-native-new-architecture/discussions/201). This post offers an API overview of the `UIManager` API on Android and how it can help the migration of more advanced apps & libraries.",
+      "source_content_hash": "3a72f3cefd2472b5acfa1cdd07c07f953a0c65025bafdac1b6a3433cd9dfc229",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們也想分享新架構工作小組發布的[在新架構中支援UIManager](https://github.com/reactwg/react-native-new-architecture/discussions/201)一文。該文概述了Android上`UIManager` API的設計，以及它如何協助進階應用與函式庫的遷移。"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "This release contains also a new API which is now the blessed way to access the `jsi::Runtime`.",
+      "source_content_hash": "9c93a2c362947461abd65ff047314ec64b4aa39da625c2b0c73ffd2efccc70d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本還包含一個新API，現已成為存取`jsi::Runtime`的推薦方式。"
+      }
+    },
+    {
+      "segment_id": "b7d7a8d8",
+      "source_content": "#### Accessing `jsi::Runtime` in TurboModules",
+      "source_content_hash": "9756bfcf7012e378a2d81b2477a7b357acf60e460d87ba23259a882191df374e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 在TurboModules中存取`jsi::Runtime`"
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "In the past, there has never been a recommended way from native modules to access the `jsi::Runtime`, and consumers would work around the framework to do so in risky ways. In 0.74, we introduced experimental APIs providing safe access to the `jsi::Runtime`, and we’re happy to announce their stability for 0.75.",
+      "source_content_hash": "09af0bb0dd54460a355002210c1170a16f11310311e5976e65d82d3f614f453b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去，原生模組從未有推薦方式來存取`jsi::Runtime`，開發者需繞過框架以風險較高的方式實現。在0.74版中，我們引入了實驗性API來安全存取`jsi::Runtime`，很高興宣布這些API在0.75版已趨於穩定。"
+      }
+    },
+    {
+      "segment_id": "48e2392c",
+      "source_content": "<details>\n<summary>Examples on how to access the jsi::Runtime</summary>\n\nOn iOS, you can make your Turbo Native Module conform to the protocol `RCTTurboModuleWithJSIBindings`. You can now implement `installJSIBindingsWithRuntime`, which will give you thread-safe access to the runtime.\n\n```objc\n@interface RCTSampleTurbo Module () <RCTTurboModuleWithJSIBindings>\n@end\n\n#pragma mark - RCTTurboModuleWithJSIBindings\n- (void)installJSIBindingsWithRuntime:(jsi::Runtime &)runtime {\n  runtime.global().setProperty(\n    runtime,\n    \"myGlobalFunction\",\n    jsi:: Function::createFromHost Function(...));\n}\n```\n\nOn Android, you can make your Turbo Native Module conform to the interface `TurboModuleWithBindings`. You can now implement the JNI method `getBindingsInstaller`, which will give you thread-safe access to the runtime in C++.\n\n```java\npublic class SampleTurboModule extends NativeSampleTurboModuleSpec implements TurboModuleWithJSIBindings\n\n@Override\npublic native BindingsInstallerHolder getBindingsInstaller();\n```\n\n```cpp\n// C++\njni::local_ref<BindingsInstallerHolder::javaobject> SampleTurboModuleJSIBindings::getBindingsInstaller(jni::alias_ref<jni::object> jobj) {\n  return BindingsInstallerHolder::newObjectCxxArgs(\n    [](jsi::Runtime& runtime) {\n      runtime.global().setProperty(\n        runtime,\n        “myGlobalFunction”,\n        jsi::Function::createFromHostFunction(...));\n    }\n  );\n}\n```\n\nIf you’re on the UI thread and you need to access the runtime, we introduced a new API: `CallInvoker`. It consists of a single method, `invokeAsync`, that will jump onto the JS thread to safely execute some work using the JS runtime. These APIs are forward compatible.\n\nOn iOS, we’ve provided the protocol `RCTCallInvokerModule`. After conforming to this protocol, our infrastructure will decorate the module with access to the `CallInvoker`.\n\n```objc\n@interface RCTSampleTurboModule() <RCTCallInvokerModule>\n\n[self.callInvoker callInvoker].invokeAsync([&](jsi::Runtime& runtime) {\n  // do stuff on JS thread\n}\n```\n\nOn Android, the `CallInvoker` is accessible through the `ReactContext` in a JNI wrapper called `CallInvokerHolder`, where you can then call `invokeAsync` after crossing the JNI boundary.\n\n```java\n// Java\npublic abstract CallInvokerHolder getJSCallInvokerHolder();\n```\n\n```cpp\n// C++\njsCallInvokerHolder->cthis()->getCallInvoker()->invokeAsync([&](jsi::Runtime& rt) {\n  // do stuff on JS thread\n});\n```\n\n</details>",
+      "source_content_hash": "4ffc49b2ba3e8838298bece6499aa38b0d241da08a8321167efa6146d681dc03",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48e2392c"
+      }
+    },
+    {
+      "segment_id": "2b20caf3",
+      "source_content": "### Using Frameworks",
+      "source_content_hash": "4932b9e574be8d4efb4f8490d6a7f496685e2e699c7bf174d0eb5503a1df111a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用框架開發"
+      }
+    },
+    {
+      "segment_id": "52d45a2c",
+      "source_content": "As we shared at React Conf earlier this year, the recommended way to build a React Native app is now through a framework, such as Expo.",
+      "source_content_hash": "67aff3f4b99defcb59b66df87edb6ed27c0bc31a637199288ad7ea4a642e7278",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如同我們今年稍早在React Conf分享的，現在推薦透過框架（如Expo）來建構React Native應用程式。"
+      }
+    },
+    {
+      "segment_id": "53e725dc",
+      "source_content": "You can read more about this guidance on our previous blog-post: \"[Use a framework to build React Native apps](https://reactnative.dev/blog/2024/06/25/use-a-framework-to-build-react-native-apps)\".",
+      "source_content_hash": "0e2f0ba8db93b7cbdd927392550cab6016191007acaae0f098f4125a72c82736",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在我們先前的部落格文章\"[使用框架開發React Native應用](https://reactnative.dev/blog/2024/06/25/use-a-framework-to-build-react-native-apps)\"中閱讀更多相關指引。"
+      }
+    },
+    {
+      "segment_id": "5014d30c",
+      "source_content": "We want to set up new React Native users for success. We believe that using a framework makes you as productive as possible, and offers you the best developer experience when building new apps.",
+      "source_content_hash": "88da211f24e04071796e94832378d023e195e17bf8571e8399517d9a724eaebd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們希望為新接觸React Native的開發者奠定成功基礎。相信使用框架能最大化您的生產力，並在開發新應用時提供最佳開發者體驗。"
+      }
+    },
+    {
+      "segment_id": "e962484d",
+      "source_content": "To reflect those recommendations, this version includes the following changes:",
+      "source_content_hash": "036de2e573dd69412e50d9e441679ad01fe8bdf95967b9a0374e19393ec0e43b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為體現這些建議，此版本包含以下變更："
+      }
+    },
+    {
+      "segment_id": "ae8baca1",
+      "source_content": "- We moved the `/template` folder from the `react-native` package to a separate repository: [`react-native-community/template`](https://github.com/react-native-community/template).\n- We’re sunsetting the `react-native init` command as of December 31st 2024.",
+      "source_content_hash": "249fab14a28924883645a61dc164dc21c96e52224ea675800ed96b537eb21344",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 我們將`/template`資料夾從`react-native`套件移至獨立儲存庫：[`react-native-community/template`](https://github.com/react-native-community/template)\n- 我們將於2024年12月31日逐步淘汰`react-native init`指令"
+      }
+    },
+    {
+      "segment_id": "66e62938",
+      "source_content": "If you’re already using a framework such as Expo, those changes won’t impact you at all. You’ll be able to use React Native 0.75 together with Expo SDK 51 (you can find instructions on how to do it in [this dedicated Expo post](https://expo.dev/changelog/2024/08-14-react-native-0.75)).",
+      "source_content_hash": "2ae83503ea1f5e059f269dd31a65c282fb0be0700e59fccdf537b33cce3c8617",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您已使用Expo等框架，這些變更完全不會影響您。您可將React Native 0.75與Expo SDK 51配合使用（具體操作指南請參閱[這篇Expo專文](https://expo.dev/changelog/2024/08-14-react-native-0.75)）。"
+      }
+    },
+    {
+      "segment_id": "aa705b4d",
+      "source_content": "If you’re not using a framework or you’re building your own framework, let’s see how those changes will impact you.",
+      "source_content_hash": "d49288a81ec3a376e85251db24e0ed6b9347211cb985baca84f465c857f0a8a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您未使用框架或正在建置自有框架，以下說明這些變更將如何影響您。"
+      }
+    },
+    {
+      "segment_id": "f996c0b9",
+      "source_content": "#### Moving the template to react-native-community/template",
+      "source_content_hash": "5c0c202520c5b48a031cca8d0ca39a5b0205ce42da90e21ca9b2c0bf188eaf04",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 將模板遷移至react-native-community/template"
+      }
+    },
+    {
+      "segment_id": "4e994fc3",
+      "source_content": "Historically, `react-native` used to ship a `/template` folder inside the NPM package which was used by the Community CLI to create new projects. This made updating the template quite slow as we needed a new React Native release for every template change.",
+      "source_content_hash": "59fb66f1e06213688d527cc215c9b6a6e96ca202a88cb94a2c2efd21372ea6de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去，`react-native`會在NPM套件中包含`/template`資料夾，供社群CLI建立新專案使用。這使得模板更新相當緩慢，因為每個模板變更都需要發布新的React Native版本。"
+      }
+    },
+    {
+      "segment_id": "60e22db4",
+      "source_content": "With our latest recommendation to use a framework, we feel that shipping an opinionated template inside our core NPM package was not aligned with [our vision](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md).",
+      "source_content_hash": "397400c52b57bfb07625fcd344a7aa3f8250b9037a49b464285429ff29af3b98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著我們最新推薦使用框架的建議，我們認為在核心 NPM 套件中提供一個帶有特定立場的模板並不符合[我們的願景](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md)。"
+      }
+    },
+    {
+      "segment_id": "2ab62b74",
+      "source_content": "Therefore, we decided to move the template to the [`@react-native-community/template`](https://www.npmjs.com/package/@react-native-community/template) package.",
+      "source_content_hash": "6d973709a25d6eff0c77fb4e43549537015ea7f9aeb19b82a72c705439760992",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此，我們決定將模板移至 [`@react-native-community/template`](https://www.npmjs.com/package/@react-native-community/template) 套件中。"
+      }
+    },
+    {
+      "segment_id": "c9e08343",
+      "source_content": "This will make it easier for the community to maintain and evolve the template, without having to rely on a React Native release for every change. Moreover, this brings the template closer to the Community CLI and will make it easier for everyone to inspect and depend on the template as a separate package.",
+      "source_content_hash": "2aea764aff80377b055f0bb97d72c191d8375993895a6cbce472bba86511b0b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這將使社群更容易維護和演進模板，而無需依賴每次變更都發布 React Native 版本。此外，這也讓模板更接近社群 CLI，並使所有人更容易檢查和依賴這個獨立的套件。"
+      }
+    },
+    {
+      "segment_id": "4786f22b",
+      "source_content": "This change should be completely transparent to users who create new projects using the Community CLI. From now on, new issues related to the template should be reported on the [template issue tracker](https://github.com/react-native-community/template/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen). All the various tools that depend on the template, such as the upgrade-helper, have also been updated accordingly and will continue working as usual.",
+      "source_content_hash": "c50fe9d441c67161b013381ba8a2b2bb2c532540fdab19dca5a7ac7e708bf877",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於使用社群 CLI 創建新專案的用戶來說，這項變更應該是透明的。從現在開始，與模板相關的新問題應報告在[模板問題追蹤器](https://github.com/react-native-community/template/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)上。所有依賴模板的工具，例如 upgrade-helper，也已相應更新並將繼續正常運作。"
+      }
+    },
+    {
+      "segment_id": "9cdf9229",
+      "source_content": "#### Sunsetting react-native init",
+      "source_content_hash": "3dcde1eef385923967282ce42b59e97a1df53786aa3153726e9b31b783b1f96f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 淘汰 react-native init"
+      }
+    },
+    {
+      "segment_id": "5e0ab881",
+      "source_content": "Similarly to the template, the `react-native init` command was also adapted to align with the new recommendation.",
+      "source_content_hash": "527a50371dc37c427a74cf6060bae15452d27cba3960a844cdffc5451d7f22d6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與模板類似，`react-native init` 命令也進行了調整以符合新的推薦做法。"
+      }
+    },
+    {
+      "segment_id": "d1996877",
+      "source_content": "Historically, `react-native init` was the default command to create new React Native projects. However, in 2024, we feel this command does not provide the same onboarding experience that a framework would offer you. That is why we are not recommending it anymore, instead you should use a framework like Expo.",
+      "source_content_hash": "e2b33f0e68bbc35c250fa6ae388c32e80e1041a063a4ab1a878f2c88dd32d18f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "歷史上，`react-native init` 是創建新 React Native 專案的預設命令。然而，在 2024 年，我們認為這個命令無法提供與框架相同的入門體驗。這就是為什麼我們不再推薦使用它，而是建議使用像 Expo 這樣的框架。"
+      }
+    },
+    {
+      "segment_id": "95b3e282",
+      "source_content": "You can still use `react-native init` to create new projects using the Community CLI & template today, but you will see the following warning:",
+      "source_content_hash": "7a1509e78564cde8776730a5b4eea97c5a7a2d359b536ef9d737c666782f36fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您仍然可以使用 `react-native init` 通過社群 CLI 和模板創建新專案，但您會看到以下警告："
+      }
+    },
+    {
+      "segment_id": "1f92e934",
+      "source_content": "![Init Deprecation](/blog/assets/0.75-deprecation.png)",
+      "source_content_hash": "a71cc778e7b5d6a9e97d433386b0e3fe56de8011d8196fcc41d680b055191790",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Init 棄用警告](/blog/assets/0.75-deprecation.png)"
+      }
+    },
+    {
+      "segment_id": "45d5dee4",
+      "source_content": "Starting from December 31st 2024, the `init` command won’t create a project anymore. You will have to either:",
+      "source_content_hash": "68d96d83376b4b2312641b281865b772d9157c0875a3eb2d155cfeb6764f0252",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 2024 年 12 月 31 日開始，`init` 命令將不再創建專案。您必須選擇以下方式之一："
+      }
+    },
+    {
+      "segment_id": "163514c3",
+      "source_content": "- Use a framework such as Expo, with its own dedicate command to create a new project, such as `npx create-expo-app`\n- Invoke the Community CLI directly with `npx @react-native-community/cli init`",
+      "source_content_hash": "b61a79f42a8db66c4d2720632d03181cf06347419146fa37a02a7cef8cf84f17",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用像 Expo 這樣的框架，並使用其專用的命令創建新專案，例如 `npx create-expo-app`\n- 直接調用社群 CLI 使用 `npx @react-native-community/cli init`"
+      }
+    },
+    {
+      "segment_id": "27f3a471",
+      "source_content": "Please note that `react-native config` and all the other commands than `init` will continue working as usual.",
+      "source_content_hash": "4474aacd0d68ecc462c1f51020012aa1310e1ee5173166e9a24b6c05c9715fcb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，`react-native config` 和除 `init` 之外的所有其他命令將繼續正常運作。"
+      }
+    },
+    {
+      "segment_id": "8d220982",
+      "source_content": ":::info\nIn order to offer a smoother migration experience, the `react-native@0.75.0` package is still depending on `@react-native-community/cli` but we’re planning on removing this dependency in the near future.\n:::",
+      "source_content_hash": "04a0ae939f8e179dd34947a4fb873675ee1c83f298f5951080502cd161217693",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n為了提供更順暢的遷移體驗，`react-native@0.75.0` 套件仍然依賴 `@react-native-community/cli`，但我們計劃在不久的將來移除這個依賴。\n:::"
+      }
+    },
+    {
+      "segment_id": "89da6bb6",
+      "source_content": "#### Auto-linking performance improvements",
+      "source_content_hash": "96f29ba09d232875df95c0a992c7097913c7ca01d06834a388d946e3b55f0138",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 自動連結效能改進"
+      }
+    },
+    {
+      "segment_id": "e8bf4d18",
+      "source_content": "During this work in updating the `init` command, we also spent time rewriting the auto-linking logic to be more performant. This results in faster build speed for both Android and iOS.",
+      "source_content_hash": "58cce50db7ddda23548a9cfb6bb597b5ad17b70ed0625ad46291ac8e9487cf8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在更新 `init` 命令的工作中，我們也花時間重寫了自動連結邏輯以提高效能。這使得 Android 和 iOS 的建構速度更快。"
+      }
+    },
+    {
+      "segment_id": "b682f1ac",
+      "source_content": "With React Native 0.75, if you are using Expo, the auto-linking step could now run ~6.5x faster on Android and ~1.5x faster on iOS. You can read more about these improvements [here](https://github.com/react-native-community/discussions-and-proposals/discussions/814).",
+      "source_content_hash": "dead90bfe2920b4b8e833e71ef57d335368a7ffb18b9d8b0cd2d7422c02ffa99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.75 中，如果您使用 Expo，自動連結步驟在 Android 上可能快約 6.5 倍，在 iOS 上快約 1.5 倍。您可以[在此](https://github.com/react-native-community/discussions-and-proposals/discussions/814)閱讀更多關於這些改進的資訊。"
+      }
+    },
+    {
+      "segment_id": "4632603c",
+      "source_content": "### Breaking changes",
+      "source_content_hash": "22d2643a9cc72467ce676b2837b3f3f329a458265c1068ef6750df13ae72cb60",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "9802de48",
+      "source_content": "While this upcoming section seems lengthy, we expect that the breaking changes here will mostly impact a small group of users that are using React Native in more advanced ways.",
+      "source_content_hash": "87bd78b3eb1c5f658798c92c0fcaf32897d4e2e619f102687f59d62c6c511acb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然接下來的部分看起來很長，但我們預計這裡的重大變更主要會影響一小部分以更進階方式使用 React Native 的用戶。"
+      }
+    },
+    {
+      "segment_id": "e9a0d59a",
+      "source_content": "We want to present them here for the sake of completeness and for reference.",
+      "source_content_hash": "71241aa53c5bcb5d5b141bd2a30ff005d77774fafa1f106df534d26d904ddff8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們在此列出它們是為了完整性和參考。"
+      }
+    },
+    {
+      "segment_id": "6c2c7917",
+      "source_content": "#### Touchables in TypeScript can’t be used as types in Generic expressions anymore",
+      "source_content_hash": "535c35f2585a066d3f15727351dad76479ae7e89a20c5ed96a576554ee90aef9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### TypeScript 中的 Touchables 不能再作為泛型表達式中的類型使用"
+      }
+    },
+    {
+      "segment_id": "c1e7eaab",
+      "source_content": "`TouchablesOpacity` and `TouchableHighlights` components have been converted to functional components. This means that they cannot be used as `value & type` anymore. So, for example, the following is not valid anymore:",
+      "source_content_hash": "c1d8de65e008764c8769b1490845193d846d6e01066b814abb02d9997c99b766",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TouchablesOpacity` 和 `TouchableHighlights` 元件已轉換為函數式元件。這意味著它們不能再作為 `value & type` 使用。因此，例如以下代碼不再有效："
+      }
+    },
+    {
+      "segment_id": "88b052dd",
+      "source_content": "```tsx\nimport {TouchableHighlight} from 'react-native';\nconst ref = useRef<TouchableHighlight>();\n//                ^^^ TS2749: TouchableHighlight refers to a value, but is being used as a type here.\n//                            Did you mean typeof TouchableHighlight?\n```",
+      "source_content_hash": "2a989a5a3d29a299d7e404ec22e26d5dbaabdce5202155cbf0ad93779f7d0e70",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_88b052dd"
+      }
+    },
+    {
+      "segment_id": "b3b952f2",
+      "source_content": "Instead, you should use the built-in React type `React.ElementRef` or, alternatively, the `View` type:",
+      "source_content_hash": "59bcfc950c4a8f0b5ec9ad7cba4419d6179243e673f6f423e8b378dd7773c42e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "相反，您應該使用 React 內建的類型 `React.ElementRef` 或替代方案 `View` 類型："
+      }
+    },
+    {
+      "segment_id": "e85c5032",
+      "source_content": "```tsx\nimport {TouchableHighlight} from 'react-native';\nconst ref1 =\n  useRef<React.ElementRef<typeof TouchableHighlight>>();\n// or\nconst ref2 = useRef<View>();\n```",
+      "source_content_hash": "71c4c5fc4b5c9b01d3c6f84aaffdd68733634931234328e59cb2d9fe3c39189c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e85c5032"
+      }
+    },
+    {
+      "segment_id": "fb79182e",
+      "source_content": "#### Last version supporting minSdk 23 and minIOSVersion 13.4",
+      "source_content_hash": "f5fd60a45834747643519c86b019df25711f2ee39938cae92f354b7c1708b592",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4667c154",
+      "source_content": "These are not breaking changes in 0.75 _per se_, but we want to share that React Native 0.75 will be the last version of React Native to support minSdk 23 (Android 6.0) and minIOSVersion 13.4.",
+      "source_content_hash": "a5057b829a68d10d4eb63f89f64c49c1d0b6ab8ae4f262bd120aff02ec130464",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b6abd1ad",
+      "source_content": "Starting from React Native 0.76, the minSdk version will be 24 (Android 7.0) and the minIOSVersion will be 15.1.",
+      "source_content_hash": "ab13e473caa8affbdf821623c51a7523896c15aade290255ba352bae3b7e2eb8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4792de79",
+      "source_content": "You can read more about it in our official announcement [for Android](https://github.com/react-native-community/discussions-and-proposals/discussions/802) and [for iOS](https://github.com/react-native-community/discussions-and-proposals/discussions/812).",
+      "source_content_hash": "760cce30c59c7f357f330d5d23b6a336f03f2b0fb578e86935c4cf03a24010ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dbf99e1b",
+      "source_content": "#### Android: JSIModule has been deleted",
+      "source_content_hash": "cdd39deb2aad76f33b78b3cd1d01ec6cd67440134afcb18b88ff3b1990593600",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d04a3ef5",
+      "source_content": "The `com.facebook.react.bridge.JSIModule` ([source](https://github.com/facebook/react-native/blob/0.73-stable/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/JSIModule.java)) was an API that we temporarily introduced to allow a Native Module to access JSI directly on Android.\nThe accessors for this API [were deprecated in 0.74](https://reactnative.dev/blog/2024/04/22/release-0.74#other-breaking-changes), and we verified that there was no meaningful usage of this API in Open Source so we’re removing it in 0.75.\nYou can use [Turbo Native Modules](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/turbo-modules.md) instead as an alternative.",
+      "source_content_hash": "ad96554fd28d6a2b099d811634927c9be5e93eb97da78285ac79035a8209bf6d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3f6b512a",
+      "source_content": "#### Android: PopUp Menu moved to separate package",
+      "source_content_hash": "b5072a40c4ab4fed52bddb9b4f5dbd81d3f8c0821cef80ed2cef2a2a09098b65",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e91bdcd9",
+      "source_content": "In 0.74, [we moved the Android’s `PopUpMenu` to a separate package](https://reactnative.dev/blog/2024/04/22/release-0.74#other-breaking-changes) under the `@react-native` scope.\nIn 0.75, we are removing the remaining methods that were still in core:",
+      "source_content_hash": "e81cfd45c748d5eb53ae4a0c8a91a5a8088b804c515a2ed1edc2052bb85960cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "aaddedb4",
+      "source_content": "- `UIManagerModule.showPopupMenu()`\n- `UIManagerModule.dismissPopupMenu()`",
+      "source_content_hash": "5503e8e17d434cb65fb0d5e669cae652b7390f5711b9c1b110d6ea55715cbbe6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ebea2db8",
+      "source_content": "As an alternative, please use the please use the `<PopupMenuAndroid />` component, which lives in the [`@react-native/popup-menu-android`](https://www.npmjs.com/search?q=%40react-native%2Fpopup-menu-android) package.",
+      "source_content_hash": "09faa406368a3f6bc5cac005bf00dc50c1e2df2552ed0af9763e1cdd6346d92f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "faaf88af",
+      "source_content": "#### iOS: Finalized PushNotificationIOS deprecation work",
+      "source_content_hash": "327f69d565efe6e4e645e3e8945a0dc9b260e9c6b4bb6b363c0c125a6ff8f755",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d14a9e24",
+      "source_content": "In 0.74, we [deprecated](https://reactnative.dev/blog/2024/04/22/release-0.74#api-changes-to-pushnotificationios-deprecated) some APIs from the `PushNotificationIOS` module.",
+      "source_content_hash": "8bfe51d610440d2c307cd2b126449accd5a89250c8c791f4683266552b962841",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe2c7f95",
+      "source_content": "In 0.75, we’ve deleted these APIs to migrate off legacy representations of notifications metadata.",
+      "source_content_hash": "92e172f31181ebbf26e7d8d85fa64f82403518df57ea3f190370fb5c77e72b20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "The APIs that have been deleted are:",
+      "source_content_hash": "5ab99d4c276d829fc40ae960236051951eca7904e1a98e9e3f0d19896ea95ecc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9affc65",
+      "source_content": "```objc\n  + (void)didReceiveLocalNotification:(UILocalNotification *)notification;\n  + (void)didReceiveRemoteNotification:(NSDictionary *)notification;\n```",
+      "source_content_hash": "2d26603da0b95145bae0d5bc680afcd28b09258b99137865a15934d0b791209c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c4d69fe4",
+      "source_content": "Instead, use `didReceiveNotification:(UNNotification *)notification`.",
+      "source_content_hash": "64f91b8df7216e8ab346d5d8ca67134e69c54c84738db852b08143aeefd0fd34",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c489a644",
+      "source_content": "#### Community CLI: Removal of ram-bundle and profile-hermes commands",
+      "source_content_hash": "940dafa6a47ec51358eab8a7f3b87e29db7bf540bad81b27a87eed458965d9f6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b63b9ccf",
+      "source_content": "We would like to announce two significant removals coming from the Community CLI: the commands `ram-bundle` and `profile-hermes`.",
+      "source_content_hash": "e06daa019f008c71b0a1d208e5ebecc489befd2585498cc6eb609eb860f5e687",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a290533e",
+      "source_content": "The `ram-bundle` command was introduced in React Native 0.59 to let you run your bundles by loading them directly in memory. This functionality is now superseded by Hermes, our default JS engine. You should not use the `ram-bundle` command.",
+      "source_content_hash": "f4b6d55fbf542a31bec7b45f272f66ad7b62b51848c218379566ee73c6456fca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "26b95748",
+      "source_content": "The `profile-hermes` command was a tool to help you profile the CPU performance of your JavaScript code. This used the old `.cpuprofile` format, which is no longer supported in recent versions of Chrome. Including this capability as a standalone command is also something we are moving away from as we work on raising the quality bar of our debugging tools. CPU profiling can now be accessed from the \"Profiler\" panel in the [Experimental New Debugger](https://reactnative.dev/docs/0.74/debugging?js-debugger=new-debugger#opening-the-debugger) (Note: this is not accessible if connecting to Hermes from Chrome).",
+      "source_content_hash": "a486fc78014ea215c726a5351cdecb4995489fe337d01599d425c09885f3c362",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fa8c4ad8",
+      "source_content": "## Other Breaking changes",
+      "source_content_hash": "5d9cb2fa1cc85257feb63319bc7e604b4448ee8cbfdd10b31689861b2f585cb0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他重大變更"
+      }
+    },
+    {
+      "segment_id": "0d14771f",
+      "source_content": "### General",
+      "source_content_hash": "083faa00fd6465a6b5784ffd0c5bff3a53ca64cb06ceedef3c3af2d9fc25f5eb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 一般性變更"
+      }
+    },
+    {
+      "segment_id": "c24286ad",
+      "source_content": "- **Codegen**\n  - Changed slightly the name of pure C++ TurboModules generated classes and structs. We dropped the `Cxx` token from their names\n  - Float enums are not supported anymore due to possible precision errors\n  - Throw an error when passing `null` in JS to a non nullable argument in Native\n- **Linting**\n  - ESLint config no longer run prettier when linting\n- **C++**\n  - `ScrollViewShadowNode` now requires a new `bool includeTransform` parameter in the constructor\n  - Removed `executeAsynchronously` and `executeSynchronously_CAN_DEADLOCK` from RuntimeExecutor\n  - Renamed `JsErrorHandlingFunc` to `OnJsError` in `JsErrorHandler.h`\n  - Renamed `handleJsError` to `OnJsError` in `handleFatalError.h`\n  - Removed unused `import` from `ReactPrimitives.h`\n  - `LongLivedObjectCollection` and `LongLivedObject` get methods now accepts a Runtime parameter\n  - Renamed the `utils/jsi.h` file to `jsi-utils.h`\n- **TextInput**\n  - Removed deprecated `onTextInput` callback\n- **Pressability**\n  - Removed `onLongPressShouldCancelPress_DEPRECATED`, `onResponderTerminationRequest_DEPRECATED`, and `onStartShouldSetResponder_DEPRECATED` method",
+      "source_content_hash": "a4be3300ec75769da81ec0f8d924b0ad69bc002e1eaa3012d4c4105856aed9de",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **Codegen**\n  - 微調純C++ TurboModules生成類別與結構體的名稱，移除名稱中的`Cxx`標記\n  - 不再支援浮點數列舉型別，以避免可能的精度誤差\n  - 當在JS中向非可空參數傳遞`null`時會拋出錯誤\n- **Linting**\n  - ESLint配置不再在lint時執行prettier\n- **C++**\n  - `ScrollViewShadowNode`建構函數現在需要新增`bool includeTransform`參數\n  - 從RuntimeExecutor移除`executeAsynchronously`和`executeSynchronously_CAN_DEADLOCK`\n  - 在`JsErrorHandler.h`中將`JsErrorHandlingFunc`更名為`OnJsError`\n  - 在`handleFatalError.h`中將`handleJsError`更名為`OnJsError`\n  - 移除`ReactPrimitives.h`中未使用的`import`\n  - `LongLivedObjectCollection`和`LongLivedObject`的get方法現在接受Runtime參數\n  - 將`utils/jsi.h`檔案更名為`jsi-utils.h`\n- **TextInput**\n  - 移除已棄用的`onTextInput`回調\n- **Pressability**\n  - 移除`onLongPressShouldCancelPress_DEPRECATED`、`onResponderTerminationRequest_DEPRECATED`和`onStartShouldSetResponder_DEPRECATED`方法"
+      }
+    },
+    {
+      "segment_id": "51fd5537",
+      "source_content": "#### Android",
+      "source_content_hash": "d434cf037d9a11db57371fb85c4a8113f8b135cc2cdab4ed9f593392e905b8d4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Android"
+      }
+    },
+    {
+      "segment_id": "e251c882",
+      "source_content": "- **ReactViewBackgroundDrawable**\n  - Deprecated in favor of `CSSBackgroundDrawable`. This also remove some APIs from `ReactViewBackgroundDrawable` and from `ColorUtil`\n- **ReactContext**\n  - `ReactContext` and `ReactApplicationContext` are now abstract. Use `BridgeReactContext` and `BridgelessReactContext` instead\n  - Delete `ReactContext.initializeWithInstance()`. Please use `BridgeReactInstance` instead\n  - Remove `BridgelessReactContext.getJavaScriptContextHolder()` from. Please use `BridgelessCatalystInstance` instead\n  - Remove `ReactContext.getRuntimeExecutor()`. Please use `BridgelessCatalystInstance`\n- **Layout**\n  - Support percentage flex gap values. This changes the parameters of some methods like `setGap`, `setRowGap` and `setColumnGap` from float to dynamic\n  - Requires `supportsRTL` in Android Manifest\n- **Runtime**\n  - Removed `ReactJsExceptionHandler` from ReactHostImpl\n  - Make the app responsible to return the core turbomodules when not using the default template\n- **DevSupport**\n  - Changed the `DevSupportManagerFactory.create()` to accept a new `PausedInDebuggerOverlayManager` parameter\n- **Measurement**\n  - Deleted `UIManagerModule.measureLayoutRelativeToParent()`",
+      "source_content_hash": "7b2cade7a74263016ef2b1708e53d0981c4659e73e46fd95167f0ff8e78ae931",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **ReactViewBackgroundDrawable**\n  - 棄用並以`CSSBackgroundDrawable`取代，同時移除`ReactViewBackgroundDrawable`和`ColorUtil`中的部分API\n- **ReactContext**\n  - `ReactContext`和`ReactApplicationContext`改為抽象類別，請改用`BridgeReactContext`和`BridgelessReactContext`\n  - 刪除`ReactContext.initializeWithInstance()`，請改用`BridgeReactInstance`\n  - 移除`BridgelessReactContext.getJavaScriptContextHolder()`，請改用`BridgelessCatalystInstance`\n  - 移除`ReactContext.getRuntimeExecutor()`，請改用`BridgelessCatalystInstance`\n- **Layout**\n  - 支援百分比flex間距值，這會將`setGap`、`setRowGap`和`setColumnGap`等方法的參數從float改為dynamic\n  - 要求在Android Manifest中聲明`supportsRTL`\n- **Runtime**\n  - 從ReactHostImpl移除`ReactJsExceptionHandler`\n  - 當不使用預設模板時，應用需負責返回核心turbomodules\n- **DevSupport**\n  - 修改`DevSupportManagerFactory.create()`以接受新的`PausedInDebuggerOverlayManager`參數\n- **Measurement**\n  - 刪除`UIManagerModule.measureLayoutRelativeToParent()`"
+      }
+    },
+    {
+      "segment_id": "db274ff9",
+      "source_content": "#### iOS",
+      "source_content_hash": "34a7cbb85edc6939bf27aaa6adfe7891a150036196a0a9e20e457d95a4c05872",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### iOS"
+      }
+    },
+    {
+      "segment_id": "eb1519a3",
+      "source_content": "- **Runtime**\n  - Remove `[RCTHost getSurfacePresenter]` and `[RCTHost getModuleRegistry]`\n  - Remove `EventPriority` class and always use the default `EventPriority::AsynchronousBatched`. If build fails, please remove any use of `EventPriority`\n- **Image**\n  - Remove unused `RCTImageLoadingPerfInstrumentationEnabled`\n- **Error Handling**\n  - Remove `RCTRedBox` access through `RCTBridge`\n- **CocoaPods**\n  - Renamed `BUILD_FROM_SOURCE` to `RCT_BUILD_HERMES_FROM_SOURCE`\n  - Renamed `React-Codegen` to `ReactCodegen` for better compatibility with `use_frameworks` and Swift\n- **TextInput**\n  - Remove deprecated `onTextInput` callback",
+      "source_content_hash": "898a68ceabe296e1ef8a9d099158b20c5c7be18efd4b2002b4b8d8361a7dcb97",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **Runtime**\n  - 移除`[RCTHost getSurfacePresenter]`和`[RCTHost getModuleRegistry]`\n  - 移除`EventPriority`類別並始終使用預設的`EventPriority::AsynchronousBatched`。若建置失敗，請移除所有`EventPriority`的使用\n- **Image**\n  - 移除未使用的`RCTImageLoadingPerfInstrumentationEnabled`\n- **Error Handling**\n  - 移除透過`RCTBridge`存取`RCTRedBox`的功能\n- **CocoaPods**\n  - 將`BUILD_FROM_SOURCE`更名為`RCT_BUILD_HERMES_FROM_SOURCE`\n  - 為更好兼容`use_frameworks`和Swift，將`React-Codegen`更名為`ReactCodegen`\n- **TextInput**\n  - 移除已棄用的`onTextInput`回調"
+      }
+    },
+    {
+      "segment_id": "486ab0ab",
+      "source_content": "### Acknowledgements",
+      "source_content_hash": "84ae2de7040ff3635c968e238edc1dbda12f73f73371a6b6ade98a51277beb3d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 致謝"
+      }
+    },
+    {
+      "segment_id": "8be3f6dc",
+      "source_content": "React Native 0.75 contains over **1491 commits** from **165 contributors**. Thanks for all your hard work!",
+      "source_content_hash": "9b63e30e449564e617ca17ac1ce17481c9c36096ce13bcbcca945c6ed37a1e25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.75包含來自**165位貢獻者**的超過**1491次提交**。感謝所有人的辛勤付出！"
+      }
+    },
+    {
+      "segment_id": "ceff655b",
+      "source_content": "Thanks to all the additional authors that worked on documenting features in this release post:",
+      "source_content_hash": "d238edb562844e7d53eb091c098caacdb00c5573aabfde63efacea8ad1dd58ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝所有在本版本發布文章中參與功能文件撰寫的額外作者："
+      }
+    },
+    {
+      "segment_id": "a530c3b4",
+      "source_content": "- [Nick Gerleman](https://github.com/NickGerleman) and [Joe Vilches](https://github.com/joevilches) for _Yoga 3.1 and Layout Improvements_\n- [Arushi Kesarwani](https://github.com/arushikesarwani94) for Supporting UIManager in the New Architecture\n- [Phillip Pan](https://github.com/philIip) for Accessing jsi::Runtime in TurboModules\n- [Alan Lee](https://github.com/alanleedev) and [Soe Lynn](https://github.com/realsoelynn) for Last version supporting minSdk 23 and minIOSVersion 13.4\n- [Kudo Chien](https://github.com/kudo) for Auto-linking performance improvements\n- [Alex Hunt](https://github.com/huntie) for Removal of `ram-bundle` and `profile-hermes` commands",
+      "source_content_hash": "42edfdab9b61917ced807d551f65b263162dc830b372c40540b61fb52c8c5b86",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Nick Gerleman](https://github.com/NickGerleman) 和 [Joe Vilches](https://github.com/joevilches) 貢獻了《Yoga 3.1 與佈局改進》\n- [Arushi Kesarwani](https://github.com/arushikesarwani94) 實現了新架構中對 UIManager 的支援\n- [Phillip Pan](https://github.com/philIip) 完成了 TurboModules 中 jsi::Runtime 的存取功能\n- [Alan Lee](https://github.com/alanleedev) 與 [Soe Lynn](https://github.com/realsoelynn) 負責最後一個支援 minSdk 23 和 minIOSVersion 13.4 的版本\n- [Kudo Chien](https://github.com/kudo) 優化了自動連結效能\n- [Alex Hunt](https://github.com/huntie) 移除了 `ram-bundle` 和 `profile-hermes` 指令"
+      }
+    },
+    {
+      "segment_id": "14e3d5d7",
+      "source_content": "### Upgrade to 0.75",
+      "source_content_hash": "a6bd49f4b816adbd04387573c25089fd64fa6261de37be166cdab30654762a14",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 升級至 0.75 版本"
+      }
+    },
+    {
+      "segment_id": "96bae975",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.",
+      "source_content_hash": "0638260e20da230691670b567610c6c2be87ab53adb865a0f30305b52bfbd5c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看現有專案在 React Native 版本間的程式碼變更，並參閱升級文件。"
+      }
+    },
+    {
+      "segment_id": "9cfda36e",
+      "source_content": "To create a new project:",
+      "source_content_hash": "556b556603ebc735e5193d4598f99a66d8ca11d2cbdc58dd6e21bac27a143f9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立新專案："
+      }
+    },
+    {
+      "segment_id": "3cdd0a68",
+      "source_content": "```bash\nnpx @react-native-community/cli@latest init MyProject --version latest\n```",
+      "source_content_hash": "79da068caa168ef37e455e6125eafd457ec614bb82ae08b4f8af2a522a742f69",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3cdd0a68"
+      }
+    },
+    {
+      "segment_id": "6d93952b",
+      "source_content": "If you use Expo, React Native 0.75 will be supported in Expo SDK 51 (instructions on how to updated React Native inside your Expo project to 0.75.0 are available [in this dedicated post](https://expo.dev/changelog/2024/08-14-react-native-0.75)).",
+      "source_content_hash": "ad5a1b4e850d4732774620b15d89721e4b5b4d9aab1cfc78db4f91262da3ef53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若使用 Expo，React Native 0.75 將在 Expo SDK 51 中獲得支援（如何將 Expo 專案內的 React Native 更新至 0.75.0 的說明請參閱[這篇專文](https://expo.dev/changelog/2024/08-14-react-native-0.75)）。"
+      }
+    },
+    {
+      "segment_id": "a674d90b",
+      "source_content": ":::info\n0.75 is now the latest stable version of React Native and 0.72.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md). We aim to publish a final end-of-life update of 0.72 in the near future.\n:::",
+      "source_content_hash": "4e3b2901d864a339079935b26e5c9063bd40c290831d8e6c4b8a95a345989d5c",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.75 版現為 React Native 最新穩定版本，0.72.x 系列將不再獲得支援。詳情請參閱 [React Native 支援政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。我們預計在近期發布 0.72 版的最終終止支援更新。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2024-08-12-release-0.75.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.233085+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "59a82140fb5b1482cad59d234085612b67084723fbd7c005852e338beb655f7e"
+  }
+}

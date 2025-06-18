@@ -1,0 +1,1252 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/appregistry.md",
+  "source_file_content_hash": "089de183741d36276a9938b13292a15dbfc855693bc872e0b159952ca78cf251",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: appregistry\ntitle: AppRegistry\n---",
+      "source_content_hash": "fc3bc02655d4dffe14304b875b5b42cb729a24e0720dc9bd1602f48039a7b049",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "c9ed38fc",
+      "source_content": "<div className=\"banner-native-code-required\">\n  <h3>Project with Native Code Required</h3>\n  <p>If you are using the managed Expo workflow there is only ever one entry component registered with <code>AppRegistry</code> and it is handled automatically (or through <a href=\"https://docs.expo.dev/versions/latest/sdk/register-root-component/\">registerRootComponent</a>). You do not need to use this API.</p>\n</div>",
+      "source_content_hash": "2b400216ad4c8cb30a7bd6365d320a5a58f68e3d79a7de77cf26aae3c5709d94",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9ed38fc"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "`AppRegistry` is the JS entry point to running all React Native apps. App root components should register themselves with `AppRegistry.registerComponent`, then the native system can load the bundle for the app and then actually run the app when it's ready by invoking `AppRegistry.runApplication`.",
+      "source_content_hash": "aaacd3f58f9f1905c9fd2e9fc064f27e33cd7e900be6e4edd79f76963afd36a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`AppRegistry` 是所有 React Native 應用程式的 JavaScript 進入點。應用程式的根元件應透過 `AppRegistry.registerComponent` 註冊自身，之後原生系統便能載入該應用的程式包，並在準備就緒時透過呼叫 `AppRegistry.runApplication` 實際執行應用程式。"
+      }
+    },
+    {
+      "segment_id": "b9c7a144",
+      "source_content": "```tsx\nimport {Text, AppRegistry} from 'react-native';\n\nconst App = () => (\n  <View>\n    <Text>App1</Text>\n  </View>\n);\n\nAppRegistry.registerComponent('Appname', () => App);\n```",
+      "source_content_hash": "2b710790844cb15d251eae209b93616de7f58f50a6fcd1b595c4ae38557e315c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b9c7a144"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "To \"stop\" an application when a view should be destroyed, call `AppRegistry.unmountApplicationComponentAtRootTag` with the tag that was passed into `runApplication`. These should always be used as a pair.",
+      "source_content_hash": "79c61158080fcd951e9ad8ea8add7d3a3dc7b67a01d0df41e7196446dc1cbe81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要「停止」應用程式（當視圖需要銷毀時），請呼叫 `AppRegistry.unmountApplicationComponentAtRootTag` 並傳入當初執行 `runApplication` 時使用的標籤。這些方法應始終配對使用。"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "`AppRegistry` should be required early in the `require` sequence to make sure the JS execution environment is setup before other modules are required.",
+      "source_content_hash": "d5f0f95c234f1f1b84ad05f2f03fd3b9d2466bbf96ef82e3b44646b7ef0f4364",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`AppRegistry` 應在 `require` 序列的早期階段引入，以確保 JavaScript 執行環境在其他模組被引入前就已設定完成。"
+      }
+    },
+    {
+      "segment_id": "8b52fbba",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "48847fd4",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "0037ff70",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "### `getAppKeys()`",
+      "source_content_hash": "c3f2422e6ed34aa145e1b2a22b2ddf5e2acd48dee418184a0c2ac19c114ec2fb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getAppKeys()`"
+      }
+    },
+    {
+      "segment_id": "be2d5397",
+      "source_content": "```tsx\nstatic getAppKeys(): string[];\n```",
+      "source_content_hash": "a0d598db59d415cd5738a5ae1633fd1b82b8898a40c8a1a1262ed6198317b8b7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_be2d5397"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "Returns an array of strings.",
+      "source_content_hash": "baeb5b38fe5934050ae386e5928c8efb75570bf74967f2c90df708bbe64e35ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回傳一個字串陣列。"
+      }
+    },
+    {
+      "segment_id": "76a8033c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "35a77014",
+      "source_content": "### `getRegistry()`",
+      "source_content_hash": "f2b4315fe38d501b6d440c0510e826cdc55167b755536d603f10fc092d6c8b2a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getRegistry()`"
+      }
+    },
+    {
+      "segment_id": "b75ddc12",
+      "source_content": "```tsx\nstatic getRegistry(): {sections: string[]; runnables: Runnable[]};\n```",
+      "source_content_hash": "cb847e960a827e95b7084ffe2158dc2b25b2c3f8eeae7d09b87c0459581adb66",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b75ddc12"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Returns a [Registry](appregistry#registry) object.",
+      "source_content_hash": "f6296e45f4769daf67d81401806d637d0feed8787f911ea061fb9c5d3171e00b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回傳一個 [Registry](appregistry#registry) 物件。"
+      }
+    },
+    {
+      "segment_id": "5f01394b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "af52d59d",
+      "source_content": "### `getRunnable()`",
+      "source_content_hash": "96fd13ea3bc47e0b054ec01c497715741d931cf351c00a2d3a50d72deb12be7a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getRunnable()`"
+      }
+    },
+    {
+      "segment_id": "c3955998",
+      "source_content": "```tsx\nstatic getRunnable(appKey: string): : Runnable | undefined;\n```",
+      "source_content_hash": "aa8686998d6daf66c117362240fca84fc441abc7a2c48f4d760a2dbce8f9f197",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c3955998"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "Returns a [Runnable](appregistry#runnable) object.",
+      "source_content_hash": "17c4b226dfca90bda8a8729c3e13aff643f39df81437f3d869c58f64f3fca26f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回傳一個 [Runnable](appregistry#runnable) 物件。"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "faba0bc9",
+      "source_content": "| Name                                                        | Type   |\n| ----------------------------------------------------------- | ------ |\n| appKey <div className=\"label basic required\">Required</div> | string |",
+      "source_content_hash": "a582590fbe5824a05f30a7df4361c876c7e9a652b1282584e1c1bb4648fb90b5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_faba0bc9"
+      }
+    },
+    {
+      "segment_id": "379d3a5b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "### `getSectionKeys()`",
+      "source_content_hash": "fbdfa27c174425cfa40ae5ac53f443d0032138f6d6c1703e74a88d6bdb18c008",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getSectionKeys()`"
+      }
+    },
+    {
+      "segment_id": "bc137a19",
+      "source_content": "```tsx\nstatic getSectionKeys(): string[];\n```",
+      "source_content_hash": "a4f7f85d79d1a3df52aea5e9482a418a256dac98b70442636536865fe3f51e83",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bc137a19"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Returns an array of strings.",
+      "source_content_hash": "baeb5b38fe5934050ae386e5928c8efb75570bf74967f2c90df708bbe64e35ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回傳一個字串陣列。"
+      }
+    },
+    {
+      "segment_id": "f51aebdd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b936dd6a",
+      "source_content": "### `getSections()`",
+      "source_content_hash": "28f70ec66280e3e3226f5ccb694d02733fd6c6818195a7bc3fc77e139a73e25e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getSections()`"
+      }
+    },
+    {
+      "segment_id": "092b29bb",
+      "source_content": "```tsx\nstatic getSections(): Record<string, Runnable>;\n```",
+      "source_content_hash": "e8ceb76faa2435596521591fdea9acccadc4960b5bfdfe4eb39de5728fa78384",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_092b29bb"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "Returns a [Runnables](appregistry#runnables) object.",
+      "source_content_hash": "ab8c975e2c05282fd758c4f7f8b01778ea1321a2b84ddcda029c99c482bb4807",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回傳一個 [Runnables](appregistry#runnables) 物件。"
+      }
+    },
+    {
+      "segment_id": "2a9ed33d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "### `registerCancellableHeadlessTask()`",
+      "source_content_hash": "4992296699435cd2b237abe5015dc06efd8d1b84717008a2a71f4aec4183a459",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `registerCancellableHeadlessTask()`"
+      }
+    },
+    {
+      "segment_id": "5782e280",
+      "source_content": "```tsx\nstatic registerCancellableHeadlessTask(\n  taskKey: string,\n  taskProvider: TaskProvider,\n  taskCancelProvider: TaskCancelProvider,\n);\n```",
+      "source_content_hash": "3e2e71426844c87b039594313433506f3802c0f2982d111d4f51a43e804d4043",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5782e280"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "Register a headless task which can be cancelled. A headless task is a bit of code that runs without a UI.",
+      "source_content_hash": "610c75c744606e90c3ade093e5aa1af771380299de69f81054bf5a5540e24161",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "註冊一個可取消的無介面任務。無介面任務是指不需使用者介面即可執行的程式碼片段。"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "fc57ca98",
+      "source_content": "| Name                                                                                  | Type                                                 | Description                                                                                                                                                                                                                         |\n| ------------------------------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| taskKey<br/><div className=\"label basic required two-lines\">Required</div>            | string                                               | The native id for this task instance that was used when startHeadlessTask was called.                                                                                                                                               |\n| taskProvider<br/><div className=\"label basic required two-lines\">Required</div>       | [TaskProvider](appregistry#taskprovider)             | A promise returning function that takes some data passed from the native side as the only argument. When the promise is resolved or rejected the native side is notified of this event and it may decide to destroy the JS context. |\n| taskCancelProvider<br/><div className=\"label basic required two-lines\">Required</div> | [TaskCancelProvider](appregistry#taskcancelprovider) | a void returning function that takes no arguments; when a cancellation is requested, the function being executed by taskProvider should wrap up and return ASAP.                                                                    |",
+      "source_content_hash": "6cfcbbb879761c9be750c65656a27281e5980f8baa8f5186196678dc44246d7f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fc57ca98"
+      }
+    },
+    {
+      "segment_id": "3c5a1374",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8574d51c",
+      "source_content": "### `registerComponent()`",
+      "source_content_hash": "e0f343d66935f55b6d05674fd18e3437c1e43c8678b7cbe13ed264cb2f8917b0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `registerComponent()`"
+      }
+    },
+    {
+      "segment_id": "83537d8d",
+      "source_content": "```tsx\nstatic registerComponent(\n  appKey: string,\n  getComponentFunc: ComponentProvider,\n  section?: boolean,\n): string;\n```",
+      "source_content_hash": "c2e742bd7e78c87e12ac0bdbb79b80c59d9c3512423d8b25e35d2c3708674474",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_83537d8d"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "fedc7286",
+      "source_content": "| Name                                                                   | Type              |\n| ---------------------------------------------------------------------- | ----------------- |\n| appKey <div className=\"label basic required\">Required</div>            | string            |\n| componentProvider <div className=\"label basic required\">Required</div> | ComponentProvider |\n| section                                                                | boolean           |",
+      "source_content_hash": "44cfe9ea561cf584ae09436c1b31453fdd08f65c66c51cc8856b8cda24974ab3",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fedc7286"
+      }
+    },
+    {
+      "segment_id": "75603060",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "### `registerConfig()`",
+      "source_content_hash": "6997f951c981914711a9bfcf3cd5f8a65098612ad59c742dfa2c311d037bf3c1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `registerConfig()`"
+      }
+    },
+    {
+      "segment_id": "43cca4d3",
+      "source_content": "```tsx\nstatic registerConfig(config: AppConfig[]);\n```",
+      "source_content_hash": "9fe3282a3524ea8a7a387494ca10429a634328529e28e145f7bc6e498099628a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_43cca4d3"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "d416f13f",
+      "source_content": "| Name                                                        | Type                                 |\n| ----------------------------------------------------------- | ------------------------------------ |\n| config <div className=\"label basic required\">Required</div> | [AppConfig](appregistry#appconfig)[] |",
+      "source_content_hash": "e0b8b368e66e45f22eb1c7dc9a98f75fd9773ea4f97983b6fb7c9fb719a61334",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d416f13f"
+      }
+    },
+    {
+      "segment_id": "ce87f480",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "### `registerHeadlessTask()`",
+      "source_content_hash": "fc1d4834b0e2fdbd6c7a53dce59352cb648d47a3eb5544f60a63e6d005966b09",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `registerHeadlessTask()`"
+      }
+    },
+    {
+      "segment_id": "eb25bb8c",
+      "source_content": "```tsx\nstatic registerHeadlessTask(\n  taskKey: string,\n  taskProvider: TaskProvider,\n);\n```",
+      "source_content_hash": "50f7891893df96a16f344308fb45b97558b8b472727a3d0d2cc6e70c481abf7b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb25bb8c"
+      }
+    },
+    {
+      "segment_id": "619c3209",
+      "source_content": "Register a headless task. A headless task is a bit of code that runs without a UI.",
+      "source_content_hash": "da54588e5a1991e6ef6fc8174ab5818ce079b06c596fc13cd5ecbc2aefb01a24",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "註冊無介面任務。無介面任務是指不需使用者介面即可執行的程式碼片段。"
+      }
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "This is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music.",
+      "source_content_hash": "129c2bfa4fb1dc4f9131c1d4c0b0c516ee5bcc0ffa780e2649148a7e75d6a611",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法可讓應用程式在後台執行 JavaScript 任務，例如同步最新資料、處理推播通知或播放音樂。"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "1f4353f2",
+      "source_content": "| Name                                                                        | Type                                     | Description                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| taskKey <div className=\"label basic required two-lines\">Required</div>      | string                                   | The native id for this task instance that was used when startHeadlessTask was called.                                                                                                                                               |\n| taskProvider <div className=\"label basic required two-lines\">Required</div> | [TaskProvider](appregistry#taskprovider) | A promise returning function that takes some data passed from the native side as the only argument. When the promise is resolved or rejected the native side is notified of this event and it may decide to destroy the JS context. |",
+      "source_content_hash": "08dabdaf9742b8705b636f508fa41f6c88624ff1e02f4f477541a0e8cea10521",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1f4353f2"
+      }
+    },
+    {
+      "segment_id": "c81952ce",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "657bde08",
+      "source_content": "### `registerRunnable()`",
+      "source_content_hash": "f72b72cd7e031c2f14608d90a11f9daafd91c01aa050419425565881a5b06c8b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `registerRunnable()`"
+      }
+    },
+    {
+      "segment_id": "8ecb92db",
+      "source_content": "```tsx\nstatic registerRunnable(appKey: string, func: Runnable): string;\n```",
+      "source_content_hash": "5a31d78b91e769d8f7798f2318584340ac7f6f776a612baacd018088fc9d032a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8ecb92db"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "41321865",
+      "source_content": "| Name                                                        | Type     |\n| ----------------------------------------------------------- | -------- |\n| appKey <div className=\"label basic required\">Required</div> | string   |\n| run <div className=\"label basic required\">Required</div>    | function |",
+      "source_content_hash": "b203e0dbc17bdcc8ede4e9c68dbb5d766de124e6cc4b4867f52dca0647cabce3",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41321865"
+      }
+    },
+    {
+      "segment_id": "62d5dc64",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "### `registerSection()`",
+      "source_content_hash": "40bbc833ca65b07d4c5832049aa577147d65c3ebe794fbc933a5f98a299a7e06",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `registerSection()`"
+      }
+    },
+    {
+      "segment_id": "65ba7468",
+      "source_content": "```tsx\nstatic registerSection(\n  appKey: string,\n  component: ComponentProvider,\n);\n```",
+      "source_content_hash": "e68b385eaaa5c0bacac5e5d5f7bde42cb78f90040c6201547080c8038931b5e7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65ba7468"
+      }
+    },
+    {
+      "segment_id": "295367fa",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "144fc2d3",
+      "source_content": "| Name                                                           | Type              |\n| -------------------------------------------------------------- | ----------------- |\n| appKey <div className=\"label basic required\">Required</div>    | string            |\n| component <div className=\"label basic required\">Required</div> | ComponentProvider |",
+      "source_content_hash": "5b52ce1726bce4a877b8a7b124c29e9d397455c1571cf4dd1e28d887dbfaea4b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_144fc2d3"
+      }
+    },
+    {
+      "segment_id": "bc4b67a1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b7d7a8d8",
+      "source_content": "### `runApplication()`",
+      "source_content_hash": "275d3311447160ab924da4956671e3180c72092b1b105f07d85f8646ae591571",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `runApplication()`"
+      }
+    },
+    {
+      "segment_id": "bf3146e1",
+      "source_content": "```tsx\nstatic runApplication(appKey: string, appParameters: any): void;\n```",
+      "source_content_hash": "a84aca4f4dba8caa05c7799f1eba9cf2849ed2e3be62935741441689866d89fe",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bf3146e1"
+      }
+    },
+    {
+      "segment_id": "7e563909",
+      "source_content": "Loads the JavaScript bundle and runs the app.",
+      "source_content_hash": "a5bdde552329c990e01506843c59aac635eb0534fa36220e3baf2abfceac816e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "載入 JavaScript 程式包並執行應用程式。"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "d7ed0393",
+      "source_content": "| Name                                                               | Type   |\n| ------------------------------------------------------------------ | ------ |\n| appKey <div className=\"label basic required\">Required</div>        | string |\n| appParameters <div className=\"label basic required\">Required</div> | any    |",
+      "source_content_hash": "a06cb70dfadf8d76797e81e9afd034d0aebd8c4e94e64006cad4945da0dcf8c7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7ed0393"
+      }
+    },
+    {
+      "segment_id": "254ff1c3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "### `setComponentProviderInstrumentationHook()`",
+      "source_content_hash": "d8c4c4396fe824c6ecb23c3a2a08eb01ba7991d9be84ee82516a6a6a6fd7843a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setComponentProviderInstrumentationHook()`"
+      }
+    },
+    {
+      "segment_id": "7f271936",
+      "source_content": "```tsx\nstatic setComponentProviderInstrumentationHook(\n  hook: ComponentProviderInstrumentationHook,\n);\n```",
+      "source_content_hash": "35b24464816a535427fb113b98f695fc71c5b2ee87df3d1c37880bd710456093",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7f271936"
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "46f9cb25",
+      "source_content": "| Name                                                      | Type     |\n| --------------------------------------------------------- | -------- |\n| hook <div className=\"label basic required\">Required</div> | function |",
+      "source_content_hash": "4d1b6eb101391ca21c6ee9fc03b13a72b96748db810011beab1909cc30d009b5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_46f9cb25"
+      }
+    },
+    {
+      "segment_id": "09d52457",
+      "source_content": "A valid `hook` function accepts the following as arguments:",
+      "source_content_hash": "67434db4820c3bc155481202f60349d98029d503bb0f2f8b85cd9b8b2e051f25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有效的 `hook` 函數需接受以下參數："
+      }
+    },
+    {
+      "segment_id": "759a3d15",
+      "source_content": "| Name                                                                         | Type               |\n| ---------------------------------------------------------------------------- | ------------------ |\n| component <div className=\"label basic required\">Required</div>               | ComponentProvider  |\n| scopedPerformanceLogger <div className=\"label basic required\">Required</div> | IPerformanceLogger |",
+      "source_content_hash": "228c30e9f24e1f195ba01f1542e62c15a965b866d40f495853c3e0d3bc92116f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_759a3d15"
+      }
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "The function must also return a React Component.",
+      "source_content_hash": "93f85b31b9618c9b70c1bc7f89867186e734b1e9a9d870c331a9faf2799333d8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該函數必須返回一個 React 組件。"
+      }
+    },
+    {
+      "segment_id": "56f3dd31",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5f4381f8",
+      "source_content": "### `setWrapperComponentProvider()`",
+      "source_content_hash": "88541ffca1b2406fcfc2911252d0cb9dae08111c4b28a22b8f12616ba47b7890",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setWrapperComponentProvider()`"
+      }
+    },
+    {
+      "segment_id": "2de995af",
+      "source_content": "```tsx\nstatic setWrapperComponentProvider(\n  provider: WrapperComponentProvider,\n);\n```",
+      "source_content_hash": "b1d3361fb51fcc412974cda452f0af9068f09215785c46c3764101436b8c11fb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2de995af"
+      }
+    },
+    {
+      "segment_id": "b0c30ab4",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "aaf8810e",
+      "source_content": "| Name                                                          | Type              |\n| ------------------------------------------------------------- | ----------------- |\n| provider <div className=\"label basic required\">Required</div> | ComponentProvider |",
+      "source_content_hash": "4ce21931a408c8fa46c2f0f13e80858d246fc2169ff390acd9d88af438bcd8d5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_aaf8810e"
+      }
+    },
+    {
+      "segment_id": "53e78d36",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cb2e9dbf",
+      "source_content": "### `startHeadlessTask()`",
+      "source_content_hash": "90c7deaccd3875c29d0f6f7b47b796dba11e213eab9e8b1bd30b394d9e87119a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `startHeadlessTask()`"
+      }
+    },
+    {
+      "segment_id": "1ee98bc6",
+      "source_content": "```tsx\nstatic startHeadlessTask(\n  taskId: number,\n  taskKey: string,\n  data: any,\n);\n```",
+      "source_content_hash": "0f988f73c9396409ad1c5367276894b2c10471ca72ec0b35b10520c5295d0dc3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1ee98bc6"
+      }
+    },
+    {
+      "segment_id": "30aa9816",
+      "source_content": "Only called from native code. Starts a headless task.",
+      "source_content_hash": "97f5fe9493bef7fe9ffbfe14905a5bf410a9b48f930f3a51caf729edd62944de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅由原生代碼調用。啟動一個無界面任務。"
+      }
+    },
+    {
+      "segment_id": "6085c028",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "adb7fe41",
+      "source_content": "| Name                                                         | Type   | Description                                                          |\n| ------------------------------------------------------------ | ------ | -------------------------------------------------------------------- |\n| taskId <div className=\"label basic required\">Required</div>  | number | The native id for this task instance to keep track of its execution. |\n| taskKey <div className=\"label basic required\">Required</div> | string | The key for the task to start.                                       |\n| data <div className=\"label basic required\">Required</div>    | any    | The data to pass to the task.                                        |",
+      "source_content_hash": "f65c8258139474d64f58d87fef352f2c84e7c54f79126df1eb6d0210e5efeea5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_adb7fe41"
+      }
+    },
+    {
+      "segment_id": "715fde23",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9a53bcb1",
+      "source_content": "### `unmountApplicationComponentAtRootTag()`",
+      "source_content_hash": "b21725d99147f02d1853945e331135a094653b5527c1d483e3c10c29f9cb3087",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `unmountApplicationComponentAtRootTag()`"
+      }
+    },
+    {
+      "segment_id": "0430f224",
+      "source_content": "```tsx\nstatic unmountApplicationComponentAtRootTag(rootTag: number);\n```",
+      "source_content_hash": "ed6c4ff2b1d22ca4783f58dd8c04af7f8b740a16ea4899bdf6f39def2dbbe635",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0430f224"
+      }
+    },
+    {
+      "segment_id": "66e62938",
+      "source_content": "Stops an application when a view should be destroyed.",
+      "source_content_hash": "bd511f823f9061036b81316b3308d7db8213723f47410e6f49a15da4bcf3d55c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當視圖需要銷毀時停止應用程序。"
+      }
+    },
+    {
+      "segment_id": "aa705b4d",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "5348e32b",
+      "source_content": "| Name                                                         | Type   |\n| ------------------------------------------------------------ | ------ |\n| rootTag <div className=\"label basic required\">Required</div> | number |",
+      "source_content_hash": "395cf0f1bffcba0c0dd03d1345b93183aa6abc067a31a7ec02e7a58d57a7e2b1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5348e32b"
+      }
+    },
+    {
+      "segment_id": "a99db0f6",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 類型定義"
+      }
+    },
+    {
+      "segment_id": "e93ab8a6",
+      "source_content": "### AppConfig",
+      "source_content_hash": "66d0804d79280453bf8f8543b5d752f6b8f0b3e69d15fe018e081e9a810bad53",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### AppConfig"
+      }
+    },
+    {
+      "segment_id": "c9e08343",
+      "source_content": "Application configuration for the `registerConfig` method.",
+      "source_content_hash": "30bc5bb963b4faf13e99cc71e449d0b25a18d31319e81478b33f5d774065a951",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`registerConfig` 方法的應用程序配置。"
+      }
+    },
+    {
+      "segment_id": "2b6d6f41",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2b6d6f41"
+      }
+    },
+    {
+      "segment_id": "5e0ab881",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "beee08cc",
+      "source_content": "| Name                                                        | Type              |\n| ----------------------------------------------------------- | ----------------- |\n| appKey <div className=\"label basic required\">Required</div> | string            |\n| component                                                   | ComponentProvider |\n| run                                                         | function          |\n| section                                                     | boolean           |",
+      "source_content_hash": "0806cbdebaf57284643f6fdee0c4f2b7205ec96e111eac5c11398e1c14c6f600",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_beee08cc"
+      }
+    },
+    {
+      "segment_id": "08cc69d2",
+      "source_content": "> **Note:** Every config is expected to set either `component` or `run` function.",
+      "source_content_hash": "39a55036d9b787f930f89baacec269d34d89420827f31c469ad177fcd57f0026",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **注意：** 每個配置都應設置 `component` 或 `run` 函數。"
+      }
+    },
+    {
+      "segment_id": "6946e2b2",
+      "source_content": "### Registry",
+      "source_content_hash": "27ffd405bc884f9c58b570c87a32c289a371b8f389950195ad139496b9ba917c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Registry"
+      }
+    },
+    {
+      "segment_id": "8f89cb4c",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f89cb4c"
+      }
+    },
+    {
+      "segment_id": "1dffcdf5",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "a7248b56",
+      "source_content": "| Name      | Type                                       |\n| --------- | ------------------------------------------ |\n| runnables | array of [Runnables](appregistry#runnable) |\n| sections  | array of strings                           |",
+      "source_content_hash": "92055efd8f6ec3dd69125ddd842e527fbe5d08b9cfd0e5cb53a593d826e44a2b",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a7248b56"
+      }
+    },
+    {
+      "segment_id": "450f22b0",
+      "source_content": "### Runnable",
+      "source_content_hash": "a1ed7251b9afe466533dee65b81e4f7fc32adf2357ce22871ef88978befe8406",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Runnable"
+      }
+    },
+    {
+      "segment_id": "2f4a2def",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2f4a2def"
+      }
+    },
+    {
+      "segment_id": "4443801b",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "54bf46fb",
+      "source_content": "| Name      | Type              |\n| --------- | ----------------- |\n| component | ComponentProvider |\n| run       | function          |",
+      "source_content_hash": "d875583f9d06f110f37723a675e9165bfba33cef67172a827543bb44194b322f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54bf46fb"
+      }
+    },
+    {
+      "segment_id": "5bc50701",
+      "source_content": "### Runnables",
+      "source_content_hash": "f581f99fd41588447233af08de0d5a5c85a7035cd2c511f3709ab2132017fa1d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Runnables"
+      }
+    },
+    {
+      "segment_id": "d70ad719",
+      "source_content": "An object with key of `appKey` and value of type of [`Runnable`](appregistry#runnable).",
+      "source_content_hash": "b1450ab1b76436222f44e6cc81f699971a8862867963e70dbff16b316dd2aaef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個鍵為 `appKey`、值為 [`Runnable`](appregistry#runnable) 類型的對象。"
+      }
+    },
+    {
+      "segment_id": "71e7940f",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71e7940f"
+      }
+    },
+    {
+      "segment_id": "4e36860d",
+      "source_content": "### Task",
+      "source_content_hash": "70c917d50a925a92c4b21a153aee7f9e075b957e3952d8cc0f0f671456017d1b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Task"
+      }
+    },
+    {
+      "segment_id": "4cba7b8e",
+      "source_content": "A `Task` is a function that accepts any data as argument and returns a Promise that resolves to `undefined`.",
+      "source_content_hash": "e77d0256f1fde0cc5b7ec9865f2df2e2aef3296a037f6f55596b8309dea06ff9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Task` 是一個接受任意數據作為參數並返回解析為 `undefined` 的 Promise 的函數。"
+      }
+    },
+    {
+      "segment_id": "2bfc0aff",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2bfc0aff"
+      }
+    },
+    {
+      "segment_id": "b5b0d360",
+      "source_content": "### TaskCanceller",
+      "source_content_hash": "bfc44829e0617a5da8b8588f6fe9c828b1c679b22ae19bb9e532a81e8625aaf1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### TaskCanceller"
+      }
+    },
+    {
+      "segment_id": "f7f08e35",
+      "source_content": "A `TaskCanceller` is a function that accepts no argument and returns void.",
+      "source_content_hash": "391c9b53d453b6593941781fd2999fac116b7e448ca382ccf19e07c967de9dcc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TaskCanceller` 是一個不接受參數且返回 void 的函數。"
+      }
+    },
+    {
+      "segment_id": "1d8ee83f",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1d8ee83f"
+      }
+    },
+    {
+      "segment_id": "ccc4a3de",
+      "source_content": "### TaskCancelProvider",
+      "source_content_hash": "8d3b0997a3abd7f9e8a7f33ef60a56b0e502da0ac3c093ba95892373e32a68e9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### TaskCancelProvider"
+      }
+    },
+    {
+      "segment_id": "56f32447",
+      "source_content": "A valid `TaskCancelProvider` is a function that returns a [`TaskCanceller`](appregistry#taskcanceller).",
+      "source_content_hash": "e9bf23f9fa81743c8e208a5e7e487bef6f3b2845bebdd09cc95d72da2fa858df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有效的 `TaskCancelProvider` 是一個返回 [`TaskCanceller`](appregistry#taskcanceller) 的函數。"
+      }
+    },
+    {
+      "segment_id": "bb2149a1",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bb2149a1"
+      }
+    },
+    {
+      "segment_id": "d89dd60e",
+      "source_content": "### TaskProvider",
+      "source_content_hash": "f8fa43db584b99dec1f186cb371ee8674320677abb32dcbc1e060b9d8154ac8a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### TaskProvider"
+      }
+    },
+    {
+      "segment_id": "b0c7a884",
+      "source_content": "A valid `TaskProvider` is a function that returns a [`Task`](appregistry#task).",
+      "source_content_hash": "a735247c43cb057b18f36bb286606ed9f9fda922c9d3e11a4e9f3ac29008454f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有效的 `TaskProvider` 是一個返回 [`Task`](appregistry#task) 的函數。"
+      }
+    },
+    {
+      "segment_id": "9f73283e",
+      "source_content": "| Type     |\n| -------- |\n| function |",
+      "source_content_hash": "d5891e80e274cd9f9474b68befae24bcabea76d31b7b1d648d334793da075552",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9f73283e"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/appregistry.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.344343+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "089de183741d36276a9938b13292a15dbfc855693bc872e0b159952ca78cf251"
+  }
+}

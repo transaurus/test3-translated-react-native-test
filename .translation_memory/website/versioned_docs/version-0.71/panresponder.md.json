@@ -1,0 +1,272 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/panresponder.md",
+  "source_file_content_hash": "75fcd7447358ca1e40dc9f34f6d6d9152ce6732a6a73261b751ebeafd5bf71d2",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: panresponder\ntitle: PanResponder\n---",
+      "source_content_hash": "757a0ad58182ffd7ec017e738d1bba5959533c23814c83de2988bc2df8c2c22a",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`PanResponder` reconciles several touches into a single gesture. It makes single-touch gestures resilient to extra touches, and can be used to recognize basic multi-touch gestures.",
+      "source_content_hash": "c481494529384695f641f66e37de4c125e2d70e80e29734c9f93b132049cb3f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`PanResponder` 將多個觸控點協調為單一手勢。它使單點觸控手勢能抵抗額外觸點的干擾，並可用於識別基本的多點觸控手勢。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "By default, `PanResponder` holds an `InteractionManager` handle to block long-running JS events from interrupting active gestures.",
+      "source_content_hash": "d6aaa695cebfde5985ab3fe81a456399734393aafc2d1730c2ad2b401e45f4a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，`PanResponder` 會持有 `InteractionManager` 的控制權，以阻止長時間運行的 JavaScript 事件中斷正在進行的手勢。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "It provides a predictable wrapper of the responder handlers provided by the [gesture responder system](gesture-responder-system.md). For each handler, it provides a new `gestureState` object alongside the native event object:",
+      "source_content_hash": "64bf77c196f28564d93028537705866cf54537a86a997a1c38f898b4a07d9eef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "它為[手勢響應系統](gesture-responder-system.md)提供的響應處理程序提供了一個可預測的封裝。對於每個處理程序，它會在原生事件對象之外提供一個新的 `gestureState` 對象："
+      }
+    },
+    {
+      "segment_id": "5564d81d",
+      "source_content": "```\nonPanResponderMove: (event, gestureState) => {}\n```",
+      "source_content_hash": "038cfac72efedae79f99cd273e95b936efd2c1904cc192f0b406ad26724b270d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5564d81d"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "A native event is a synthetic touch event with form of [PressEvent](pressevent).",
+      "source_content_hash": "47e69c7e6d1a0a559ac7a495cab4f9629e85eb4cdef0e6dc3bcf8e98483a0341",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生事件是一個合成觸控事件，形式為 [PressEvent](pressevent)。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "A `gestureState` object has the following:",
+      "source_content_hash": "ca558138b6262c28d384af050aec61bdc6bb4859afb9a3a0057db7bf7e11382b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`gestureState` 對象包含以下屬性："
+      }
+    },
+    {
+      "segment_id": "da23c906",
+      "source_content": "- `stateID` - ID of the gestureState- persisted as long as there's at least one touch on screen\n- `moveX` - the latest screen coordinates of the recently-moved touch\n- `moveY` - the latest screen coordinates of the recently-moved touch\n- `x0` - the screen coordinates of the responder grant\n- `y0` - the screen coordinates of the responder grant\n- `dx` - accumulated distance of the gesture since the touch started\n- `dy` - accumulated distance of the gesture since the touch started\n- `vx` - current velocity of the gesture\n- `vy` - current velocity of the gesture\n- `numberActiveTouches` - Number of touches currently on screen",
+      "source_content_hash": "eeb2fc8534d3321835e37db93d76f1f56221910977c76ce23064cd74dca0e6b9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `stateID` - gestureState 的 ID，只要螢幕上至少有一個觸點就會持續存在\n- `moveX` - 最近移動觸點的最新螢幕座標 X\n- `moveY` - 最近移動觸點的最新螢幕座標 Y\n- `x0` - 響應授予時的螢幕座標 X\n- `y0` - 響應授予時的螢幕座標 Y\n- `dx` - 自觸控開始以來手勢的累積水平距離\n- `dy` - 自觸控開始以來手勢的累積垂直距離\n- `vx` - 手勢當前的水平速度\n- `vy` - 手勢當前的垂直速度\n- `numberActiveTouches` - 當前螢幕上的觸點數量"
+      }
+    },
+    {
+      "segment_id": "0037ff70",
+      "source_content": "## Usage Pattern",
+      "source_content_hash": "b316be990d83524d7f512039eeef30809dc388f6bac7c2c71fde66c83b94d061",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用模式"
+      }
+    },
+    {
+      "segment_id": "ef6eebef",
+      "source_content": "```tsx\nconst ExampleComponent = () => {\n  const panResponder = React.useRef(\n    PanResponder.create({\n      // Ask to be the responder:\n      onStartShouldSetPanResponder: (evt, gestureState) => true,\n      onStartShouldSetPanResponderCapture: (evt, gestureState) =>\n        true,\n      onMoveShouldSetPanResponder: (evt, gestureState) => true,\n      onMoveShouldSetPanResponderCapture: (evt, gestureState) =>\n        true,\n\n      onPanResponderGrant: (evt, gestureState) => {\n        // The gesture has started. Show visual feedback so the user knows\n        // what is happening!\n        // gestureState.d{x,y} will be set to zero now\n      },\n      onPanResponderMove: (evt, gestureState) => {\n        // The most recent move distance is gestureState.move{X,Y}\n        // The accumulated gesture distance since becoming responder is\n        // gestureState.d{x,y}\n      },\n      onPanResponderTerminationRequest: (evt, gestureState) =>\n        true,\n      onPanResponderRelease: (evt, gestureState) => {\n        // The user has released all touches while this view is the\n        // responder. This typically means a gesture has succeeded\n      },\n      onPanResponderTerminate: (evt, gestureState) => {\n        // Another component has become the responder, so this gesture\n        // should be cancelled\n      },\n      onShouldBlockNativeResponder: (evt, gestureState) => {\n        // Returns whether this component should block native components from becoming the JS\n        // responder. Returns true by default. Is currently only supported on android.\n        return true;\n      },\n    }),\n  ).current;\n\n  return <View {...panResponder.panHandlers} />;\n};\n```",
+      "source_content_hash": "20b175cc59253f66b57053149fd5856a9f09361f7240cd7f3ace649c01400a0b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ef6eebef"
+      }
+    },
+    {
+      "segment_id": "58ed925f",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "`PanResponder` works with `Animated` API to help build complex gestures in the UI. The following example contains an animated `View` component which can be dragged freely across the screen",
+      "source_content_hash": "7f98723e175aa3c64bc84d87bf907d73d6b460130b63e6679ac0d6cb69a6bfd2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`PanResponder` 與 `Animated` API 協同工作，幫助構建 UI 中的複雜手勢。以下範例包含一個可動畫的 `View` 組件，可以在螢幕上自由拖動："
+      }
+    },
+    {
+      "segment_id": "688f86d6",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=PanResponder\nimport React, {useRef} from 'react';\nimport {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';\n\nconst App = () => {\n  const pan = useRef(new Animated.ValueXY()).current;\n\n  const panResponder = useRef(\n    PanResponder.create({\n      onMoveShouldSetPanResponder: () => true,\n      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),\n      onPanResponderRelease: () => {\n        pan.extractOffset();\n      },\n    }),\n  ).current;\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.titleText}>Drag this box!</Text>\n      <Animated.View\n        style={{\n          transform: [{translateX: pan.x}, {translateY: pan.y}],\n        }}\n        {...panResponder.panHandlers}>\n        <View style={styles.box} />\n      </Animated.View>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  titleText: {\n    fontSize: 14,\n    lineHeight: 24,\n    fontWeight: 'bold',\n  },\n  box: {\n    height: 150,\n    width: 150,\n    backgroundColor: 'blue',\n    borderRadius: 5,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=PanResponder\nimport React, {Component} from 'react';\nimport {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';\n\nclass App extends Component {\n  pan = new Animated.ValueXY();\n  panResponder = PanResponder.create({\n    onMoveShouldSetPanResponder: () => true,\n    onPanResponderMove: Animated.event([\n      null,\n      {dx: this.pan.x, dy: this.pan.y},\n    ]),\n    onPanResponderRelease: () => {\n      this.pan.extractOffset();\n    },\n  });\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Text style={styles.titleText}>Drag this box!</Text>\n        <Animated.View\n          style={{\n            transform: [{translateX: this.pan.x}, {translateY: this.pan.y}],\n          }}\n          {...this.panResponder.panHandlers}>\n          <View style={styles.box} />\n        </Animated.View>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  titleText: {\n    fontSize: 14,\n    lineHeight: 24,\n    fontWeight: 'bold',\n  },\n  box: {\n    height: 150,\n    width: 150,\n    backgroundColor: 'blue',\n    borderRadius: 5,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "07101b698a533c99739d33d2da8d0a93403851a502eeaf030f72fd4142b94945",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_688f86d6"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "Try the [PanResponder example in RNTester](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/js/examples/PanResponder/PanResponderExample.js).",
+      "source_content_hash": "0b1b535051c40791e9167c016bde58d501c9c33345f5535a237d58c5d183748d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "試試 [RNTester 中的 PanResponder 範例](https://github.com/facebook/react-native/blob/0.71-stable/packages/rn-tester/js/examples/PanResponder/PanResponderExample.js)。"
+      }
+    },
+    {
+      "segment_id": "2663a629",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "a7628008",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "778e087a",
+      "source_content": "### `create()`",
+      "source_content_hash": "129d96bef642b0bba6f4d5ce6bd151173ad439089228f7a4bd67c0166a8ca4c5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `create()`"
+      }
+    },
+    {
+      "segment_id": "7079d2d5",
+      "source_content": "```tsx\nstatic create(config: PanResponderCallbacks): PanResponderInstance;\n```",
+      "source_content_hash": "b4a58dbe645fbd58f8d05aaaed01c30f16c8440864f5f2e0ca84c7763e3a9a3c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7079d2d5"
+      }
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "0ef6e712",
+      "source_content": "| Name                                                        | Type   | Description |\n| ----------------------------------------------------------- | ------ | ----------- |\n| config <div className=\"label basic required\">Required</div> | object | Refer below |",
+      "source_content_hash": "c3d235eb44fd4f447e9358d7d11dcf37a1ee994f3d6fc684e70214f3a2c09755",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0ef6e712"
+      }
+    },
+    {
+      "segment_id": "d8c366cc",
+      "source_content": "The `config` object provides enhanced versions of all of the responder callbacks that provide not only the [`PressEvent`](pressevent), but also the `PanResponder` gesture state, by replacing the word `Responder` with `PanResponder` in each of the typical `onResponder*` callbacks. For example, the `config` object would look like:",
+      "source_content_hash": "5a4c9a79e8af0a7df0003dc34658802be4c145a616f4c3d0703bf26f6504f287",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`config` 對象提供了所有響應回調的增強版本，不僅提供 [`PressEvent`](pressevent)，還提供 `PanResponder` 手勢狀態，方法是將典型 `onResponder*` 回調中的 `Responder` 替換為 `PanResponder`。例如，`config` 對象可能如下所示："
+      }
+    },
+    {
+      "segment_id": "3c76cc8e",
+      "source_content": "- `onMoveShouldSetPanResponder: (e, gestureState) => {...}`\n- `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`\n- `onStartShouldSetPanResponder: (e, gestureState) => {...}`\n- `onStartShouldSetPanResponderCapture: (e, gestureState) => {...}`\n- `onPanResponderReject: (e, gestureState) => {...}`\n- `onPanResponderGrant: (e, gestureState) => {...}`\n- `onPanResponderStart: (e, gestureState) => {...}`\n- `onPanResponderEnd: (e, gestureState) => {...}`\n- `onPanResponderRelease: (e, gestureState) => {...}`\n- `onPanResponderMove: (e, gestureState) => {...}`\n- `onPanResponderTerminate: (e, gestureState) => {...}`\n- `onPanResponderTerminationRequest: (e, gestureState) => {...}`\n- `onShouldBlockNativeResponder: (e, gestureState) => {...}`",
+      "source_content_hash": "11d4e2773e5ced6e8bb3ad052682bf876b91fb0f56ac53f82fb75ad4b3d83985",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `onMoveShouldSetPanResponder: (e, gestureState) => {...}`\n- `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`\n- `onStartShouldSetPanResponder: (e, gestureState) => {...}`\n- `onStartShouldSetPanResponderCapture: (e, gestureState) => {...}`\n- `onPanResponderReject: (e, gestureState) => {...}`\n- `onPanResponderGrant: (e, gestureState) => {...}`\n- `onPanResponderStart: (e, gestureState) => {...}`\n- `onPanResponderEnd: (e, gestureState) => {...}`\n- `onPanResponderRelease: (e, gestureState) => {...}`\n- `onPanResponderMove: (e, gestureState) => {...}`\n- `onPanResponderTerminate: (e, gestureState) => {...}`\n- `onPanResponderTerminationRequest: (e, gestureState) => {...}`\n- `onShouldBlockNativeResponder: (e, gestureState) => {...}`"
+      }
+    },
+    {
+      "segment_id": "d3912b2e",
+      "source_content": "In general, for events that have capture equivalents, we update the gestureState once in the capture phase and can use it in the bubble phase as well.",
+      "source_content_hash": "d84e1af650d828c8250bb75d8af123f5fa4db44d658f12cc62230b60b48d66eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通常情況下，對於具有捕獲階段等效事件的情況，我們會在捕獲階段更新一次 gestureState，並可以在冒泡階段同樣使用它。"
+      }
+    },
+    {
+      "segment_id": "2dbbb313",
+      "source_content": "Be careful with `onStartShould*` callbacks. They only reflect updated `gestureState` for start/end events that bubble/capture to the Node. Once the node is the responder, you can rely on every start/end event being processed by the gesture and `gestureState` being updated accordingly. (numberActiveTouches) may not be totally accurate unless you are the responder.",
+      "source_content_hash": "483fc4d516b553cc861cf136675784500faaab7ef4194660f960444bda1f63fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `onStartShould*` 回調時需格外謹慎。這些回調僅反映冒泡/捕獲到節點的開始/結束事件所更新的 `gestureState`。一旦節點成為響應者，您可以確信每個開始/結束事件都會由手勢處理，且 `gestureState` 會相應更新。（numberActiveTouches）可能不完全準確，除非您當前是響應者。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/panresponder.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.389611+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "75fcd7447358ca1e40dc9f34f6d6d9152ce6732a6a73261b751ebeafd5bf71d2"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/transforms.md",
+  "source_file_content_hash": "ad11492bd25f3fe772755f1443c5a0cd6fa0d52556b6295c38d8d2439bdc978d",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: transforms\ntitle: Transforms\n---",
+      "source_content_hash": "35bec70963048b934bbb8d69d036cae0f32601311d05a24f4b2aaf58c8251fce",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Transforms are style properties that will help you modify the appearance and position of your components using 2D or 3D transformations. However, once you apply transforms, the layouts remain the same around the transformed component hence it might overlap with the nearby components. You can apply margin to the transformed component, the nearby components or padding to the container to prevent such overlaps.",
+      "source_content_hash": "63456467474dec6985a15c1f03d4f0b15b6a098be5e05d119fd5fbca25a2c15e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "變形（Transforms）是能幫助您使用 2D 或 3D 轉換來修改元件外觀與位置的樣式屬性。但需注意，當您套用變形效果後，元件周圍的佈局會保持原狀，這可能導致變形元件與鄰近元件發生重疊。您可以透過為變形元件添加邊距（margin）、調整鄰近元件間距，或為容器設置內距（padding）來避免此類重疊問題。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "321c5251",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=Transforms\nimport React from \"react\";\nimport { SafeAreaView, ScrollView, StyleSheet, Text, View } from \"react-native\";\n\nconst App = () => (\n  <SafeAreaView style={styles.container}>\n    <ScrollView\n      contentContainerStyle={styles.scrollContentContainer}\n    >\n      <View style={styles.box}>\n        <Text style={styles.text}>Original Object</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ scale: 2 }]\n      }]}>\n        <Text style={styles.text}>Scale by 2</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ scaleX: 2 }]\n      }]}>\n        <Text style={styles.text}>ScaleX by 2</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ scaleY: 2 }]\n      }]}>\n        <Text style={styles.text}>ScaleY by 2</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ rotate: \"45deg\" }]\n      }]}>\n        <Text style={styles.text}>Rotate by 45 deg</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [\n          { rotateX: \"45deg\" },\n          { rotateZ: \"45deg\" }\n        ]\n      }]}>\n        <Text style={styles.text}>Rotate X&Z by 45 deg</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [\n          { rotateY: \"45deg\" },\n          { rotateZ: \"45deg\" }\n        ]\n      }]}>\n        <Text style={styles.text}>Rotate Y&Z by 45 deg</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ skewX: \"45deg\" }]\n      }]}>\n        <Text style={styles.text}>SkewX by 45 deg</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ skewY: \"45deg\" }]\n      }]}>\n        <Text style={styles.text}>SkewY by 45 deg</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [\n          { skewX: \"30deg\" },\n          { skewY: \"30deg\" }\n        ]\n      }]}>\n        <Text style={styles.text}>Skew X&Y by 30 deg</Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ translateX: -50 }]\n      }]}>\n        <Text style={styles.text}>TranslateX by -50 </Text>\n      </View>\n\n      <View style={[styles.box, {\n        transform: [{ translateY: 50 }]\n      }]}>\n        <Text style={styles.text}>TranslateY by 50 </Text>\n      </View>\n    </ScrollView>\n  </SafeAreaView>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1\n  },\n  scrollContentContainer: {\n    alignItems: \"center\",\n    paddingBottom: 60\n  },\n  box: {\n    height: 100,\n    width: 100,\n    borderRadius: 5,\n    marginVertical: 40,\n    backgroundColor: \"#61dafb\",\n    alignItems: \"center\",\n    justifyContent: \"center\"\n  },\n  text: {\n    fontSize: 14,\n    fontWeight: \"bold\",\n    margin: 8,\n    color: \"#000\",\n    textAlign: \"center\"\n  }\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=Transforms\nimport React, { Component } from \"react\";\nimport { SafeAreaView, ScrollView, StyleSheet, Text, View } from \"react-native\";\n\nclass App extends Component {\n  render() {\n    return (\n      <SafeAreaView style={styles.container}>\n        <ScrollView\n          contentContainerStyle={styles.scrollContentContainer}\n        >\n          <View style={styles.box}>\n            <Text style={styles.text}>Original Object</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ scale: 2 }]\n          }]}>\n            <Text style={styles.text}>Scale by 2</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ scaleX: 2 }]\n          }]}>\n            <Text style={styles.text}>ScaleX by 2</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ scaleY: 2 }]\n          }]}>\n            <Text style={styles.text}>ScaleY by 2</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ rotate: \"45deg\" }]\n          }]}>\n            <Text style={styles.text}>Rotate by 45 deg</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [\n              { rotateX: \"45deg\" },\n              { rotateZ: \"45deg\" }\n            ]\n          }]}>\n            <Text style={styles.text}>Rotate X&Z by 45 deg</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [\n              { rotateY: \"45deg\" },\n              { rotateZ: \"45deg\" }\n            ]\n          }]}>\n            <Text style={styles.text}>Rotate Y&Z by 45 deg</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ skewX: \"45deg\" }]\n          }]}>\n            <Text style={styles.text}>SkewX by 45 deg</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ skewY: \"45deg\" }]\n          }]}>\n            <Text style={styles.text}>SkewY by 45 deg</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [\n              { skewX: \"30deg\" },\n              { skewY: \"30deg\" }\n            ]\n          }]}>\n            <Text style={styles.text}>Skew X&Y by 30 deg</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ translateX: -50 }]\n          }]}>\n            <Text style={styles.text}>TranslateX by -50</Text>\n          </View>\n\n          <View style={[styles.box, {\n            transform: [{ translateY: 50 }]\n          }]}>\n            <Text style={styles.text}>TranslateY by 50</Text>\n          </View>\n        </ScrollView>\n      </SafeAreaView>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1\n  },\n  scrollContentContainer: {\n    alignItems: \"center\",\n    paddingBottom: 60\n  },\n  box: {\n    height: 100,\n    width: 100,\n    borderRadius: 5,\n    marginVertical: 40,\n    backgroundColor: \"#61dafb\",\n    alignItems: \"center\",\n    justifyContent: \"center\"\n  },\n  text: {\n    fontSize: 14,\n    fontWeight: \"bold\",\n    margin: 8,\n    color: \"#000\",\n    textAlign: \"center\"\n  }\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b8e0d96ce24e89b651fbd822ef8c2c2aeed60537bef207a73249a9024997e7f6",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_321c5251"
+      }
+    },
+    {
+      "segment_id": "55e0e60b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "66a437ee",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文件"
+      }
+    },
+    {
+      "segment_id": "68dbdf68",
+      "source_content": "## Transform",
+      "source_content_hash": "d90361ba2c89bde3151252027350db73472034b68b230abed1fb9d12494e4bc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 變形屬性（Transform）"
+      }
+    },
+    {
+      "segment_id": "2cfc0629",
+      "source_content": "`transform` accepts an array of transformation objects. Each object specifies the property that will be transformed as the key, and the value to use in the transformation. Objects should not be combined. Use a single key/value pair per object.",
+      "source_content_hash": "b85732ca3c604a7656cb985177e8312546fa6fbb19167bc803c0f346cee5bf3c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`transform` 接受一個由變形物件組成的陣列。每個物件需以要變形的屬性作為鍵（key），並以變形值作為對應值（value）。請勿合併多個屬性於單一物件中，每個物件應僅包含一組鍵/值配對。"
+      }
+    },
+    {
+      "segment_id": "f4b938fe",
+      "source_content": "The rotate transformations require a string so that the transform may be expressed in degrees (deg) or radians (rad). For example:",
+      "source_content_hash": "24143081d2a2aa8cacbd49d594d1eb68a0ac0d5c896bdf9a81e8287aa4e2b235",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "旋轉變形（rotate）需使用字串來指定角度單位，可選擇度數（deg）或弧度（rad）。例如："
+      }
+    },
+    {
+      "segment_id": "229a037e",
+      "source_content": "```js\n{\n  transform: [{rotateX: '45deg'}, {rotateZ: '0.785398rad'}],\n}\n```",
+      "source_content_hash": "3ad3343479c40a5f11546f59d832b91073a9f5399a70f521467fdc748042f4c8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_229a037e"
+      }
+    },
+    {
+      "segment_id": "5014d30c",
+      "source_content": "The skew transformations require a string so that the transform may be expressed in degrees (deg). For example:",
+      "source_content_hash": "efafd24258f18ff2854b29894e7c09e622d18f1af5bcdcca46bd09015b7e77c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "傾斜變形（skew）需使用字串來指定度數（deg）。例如："
+      }
+    },
+    {
+      "segment_id": "a54efbd2",
+      "source_content": "```js\n{\n  transform: [{skewX: '45deg'}],\n}\n```",
+      "source_content_hash": "a41b55924f9ba8108abca50d7f2b4599e622deac6608ee17de794a6ec9deadc7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a54efbd2"
+      }
+    },
+    {
+      "segment_id": "67cb77d0",
+      "source_content": "| Type                                                                                                                                                                                                                                                                                                | Required |\n| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |\n| array of objects: `{matrix: number[]}`, `{perspective: number}`, `{rotate: string}`, `{rotateX: string}`, `{rotateY: string}`, `{rotateZ: string}`, `{scale: number}`, `{scaleX: number}`, `{scaleY: number}`, `{translateX: number}`, `{translateY: number}`, `{skewX: string}`, `{skewY: string}` | No       |",
+      "source_content_hash": "6bb52a82901c2675884009077ff36c972b86bf9374b00d562d99ada19ceefb1d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_67cb77d0"
+      }
+    },
+    {
+      "segment_id": "a49874ee",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f8d1807a",
+      "source_content": "### `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`",
+      "source_content_hash": "1bf3b70ff6e93e60d2b1cf5d208dbdd12714634b42a4bbd9a4b4dad22425518e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`"
+      }
+    },
+    {
+      "segment_id": "d5323607",
+      "source_content": "> **Deprecated.** Use the [`transform`](transforms#transform) prop instead.",
+      "source_content_hash": "cb6ec416b1542a9b80730f0d7a9c015b0662f6be8d34028e8a2634913cd8d724",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **已棄用。** 請改用 [`transform`](transforms#transform) 屬性。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/transforms.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.323640+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ad11492bd25f3fe772755f1443c5a0cd6fa0d52556b6295c38d8d2439bdc978d"
+  }
+}

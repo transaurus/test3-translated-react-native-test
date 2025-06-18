@@ -1,0 +1,530 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/drawerlayoutandroid.md",
+  "source_file_content_hash": "0459516da868f8088537e1c4abaa558a9ebc85b08a2138d4bcbaca733346eb5c",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: drawerlayoutandroid\ntitle: DrawerLayoutAndroid\n---",
+      "source_content_hash": "ad3f679051142dce6aec68f54318d13fb5dcbb99921b5911323100d16b84308f",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "React component that wraps the platform `DrawerLayout` (Android only). The Drawer (typically used for navigation) is rendered with `renderNavigationView` and direct children are the main view (where your content goes). The navigation view is initially not visible on the screen, but can be pulled in from the side of the window specified by the `drawerPosition` prop and its width can be set by the `drawerWidth` prop.",
+      "source_content_hash": "994ab4fc83756734225ff476e7770f2feff0201e64211d038b8a5d9e4875dee8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android\nimport React, { useRef, useState } from \"react\";\nimport { Button, DrawerLayoutAndroid, Text, StyleSheet, View } from \"react-native\";\n\nconst App = () => {\n  const drawer = useRef(null);\n  const [drawerPosition, setDrawerPosition] = useState(\"left\");\n  const changeDrawerPosition = () => {\n    if (drawerPosition === \"left\") {\n      setDrawerPosition(\"right\");\n    } else {\n      setDrawerPosition(\"left\");\n    }\n  };\n\n  const navigationView = () => (\n    <View style={[styles.container, styles.navigationContainer]}>\n      <Text style={styles.paragraph}>I'm in the Drawer!</Text>\n      <Button\n        title=\"Close drawer\"\n        onPress={() => drawer.current.closeDrawer()}\n      />\n    </View>\n  );\n\n  return (\n    <DrawerLayoutAndroid\n      ref={drawer}\n      drawerWidth={300}\n      drawerPosition={drawerPosition}\n      renderNavigationView={navigationView}\n    >\n      <View style={styles.container}>\n        <Text style={styles.paragraph}>\n          Drawer on the {drawerPosition}!\n        </Text>\n        <Button\n          title=\"Change Drawer Position\"\n          onPress={() => changeDrawerPosition()}\n        />\n        <Text style={styles.paragraph}>\n          Swipe from the side or press button below to see it!\n        </Text>\n        <Button\n          title=\"Open drawer\"\n          onPress={() => drawer.current.openDrawer()}\n        />\n      </View>\n    </DrawerLayoutAndroid>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: \"center\",\n    justifyContent: \"center\",\n    padding: 16\n  },\n  navigationContainer: {\n    backgroundColor: \"#ecf0f1\"\n  },\n  paragraph: {\n    padding: 16,\n    fontSize: 15,\n    textAlign: \"center\"\n  }\n});\n\nexport default App;\n```",
+      "source_content_hash": "3ab0c674275a9053275d7d82e274154168db0501b9da3bc349bd76212ed27796",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "678c3938",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9006437d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### `drawerBackgroundColor`",
+      "source_content_hash": "a4d26279e4ddb3c20882bb6604317fa3ccac8da51092fa50fc07d0a9e426d77a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "Specifies the background color of the drawer. The default value is `white`. If you want to set the opacity of the drawer, use rgba. Example:",
+      "source_content_hash": "678209257e440e6405c71de4a55ab25f3f822571dbe4c27defc1e209a150f0e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7fa46732",
+      "source_content": "```jsx\nreturn (\n  <DrawerLayoutAndroid drawerBackgroundColor=\"rgba(0,0,0,0.5)\" />\n);\n```",
+      "source_content_hash": "b8325268a39facdf69a301c2472a5177ed88e02b6021e5139ed985308e4509b2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f4f901d3",
+      "source_content": "| Type               | Required |\n| ------------------ | -------- |\n| [color](colors.md) | No       |",
+      "source_content_hash": "8e6246d1c315c61d8055ed8fe71f67fe0769817a9ce45ee4bf0d53c4f0477bb9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4fc5e34f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "### `drawerLockMode`",
+      "source_content_hash": "008c3a1d07e8dd036384fddb095e4478415146ea3bf4abad6500c29dc714b4d5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "Specifies the lock mode of the drawer. The drawer can be locked in 3 states:",
+      "source_content_hash": "8c36a1a492e674ea18bb0adcf31d842e28227e0053a0e56477cdeddc6ff983c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1b8037f4",
+      "source_content": "- unlocked (default), meaning that the drawer will respond (open/close) to touch gestures.\n- locked-closed, meaning that the drawer will stay closed and not respond to gestures.\n- locked-open, meaning that the drawer will stay opened and not respond to gestures. The drawer may still be opened and closed programmatically (`openDrawer`/`closeDrawer`).",
+      "source_content_hash": "def0637ef668462c35f2aad5f3721b9ad081c048416b070b6758cb50ebb8d75e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5d7070ce",
+      "source_content": "| Type                                             | Required |\n| ------------------------------------------------ | -------- |\n| enum('unlocked', 'locked-closed', 'locked-open') | No       |",
+      "source_content_hash": "c52e2ac7ebd5e43c0e25a4027551963ec525d13a3acba0273cea783c12857966",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "256e0c86",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### `drawerPosition`",
+      "source_content_hash": "2d718e70ac451d06dfbcb57da18045fec8dfe3f6f05e1440eccf5d2db66c6e70",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "Specifies the side of the screen from which the drawer will slide in. By default it is set to `left`.",
+      "source_content_hash": "017af90561ea3c299395b8e7c8bb3a494b8ccab64174780abaf6a40e1d01ed11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d03e4798",
+      "source_content": "| Type                  | Required |\n| --------------------- | -------- |\n| enum('left', 'right') | No       |",
+      "source_content_hash": "fdfdf5276948353d8af7e04d77619167c5163075dbd69d21abaf6f2a34b26e36",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "44f53186",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8f1c1cd6",
+      "source_content": "### `drawerWidth`",
+      "source_content_hash": "88ffdc5915aaa991f52105a27e59246896580394343c803788d86a9c5ac6ea4d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "Specifies the width of the drawer, more precisely the width of the view that be pulled in from the edge of the window.",
+      "source_content_hash": "3e834574513b892fc90ee4427e072ae481a0c69b9ae1b1ea7082c007065add8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b5b5da74",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8144f6e8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0d5321b7",
+      "source_content": "### `keyboardDismissMode`",
+      "source_content_hash": "94a9ca0d35c25eb155e02e3b099d2ea45fbf9718c35c4eccc2bb17caa189f7f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "Determines whether the keyboard gets dismissed in response to a drag.",
+      "source_content_hash": "cf2d04d3b64f40e962fadf71ab1dab2a609d6593efec33e1a6f6d986dccde651",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b304caa",
+      "source_content": "- 'none' (the default), drags do not dismiss the keyboard.\n- 'on-drag', the keyboard is dismissed when a drag begins.",
+      "source_content_hash": "899787f8d9e8bf9c548eb12f2e977f0710fbb9a5cd4eb322e99866d5fc0966e0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5f541006",
+      "source_content": "| Type                    | Required |\n| ----------------------- | -------- |\n| enum('none', 'on-drag') | No       |",
+      "source_content_hash": "5ac59a70b138ba6b955ee1495015ed2b699981edd323780fcacf7620ee9ffefb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c6c98a21",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b50cf7ff",
+      "source_content": "### `onDrawerClose`",
+      "source_content_hash": "6833e5a3e0384acb8d13e119db856247218b1be81916ea2abfd13abc5135591c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "Function called whenever the navigation view has been closed.",
+      "source_content_hash": "c3bac87360c08d8496b2b43f799ae9152b1eb53928c6e3de780e6d4e361b18de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1603328c",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1af652fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "### `onDrawerOpen`",
+      "source_content_hash": "f84c7f5297a6d5803864b6207dc33b81cbbc2061e1ff99f5e0509421a89daed5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "Function called whenever the navigation view has been opened.",
+      "source_content_hash": "2059fa65a6e529ecff4dcba0d857f0329a1c92251c0b605e8ed7fac80e121734",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "961dee84",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f28724b0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "67edbbc4",
+      "source_content": "### `onDrawerSlide`",
+      "source_content_hash": "b4f66efbf060fb88a9849b197fd4d49cae7a6b9f0a4a28b09fd4302bc79336ca",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "61a78cbe",
+      "source_content": "Function called whenever there is an interaction with the navigation view.",
+      "source_content_hash": "457d757085b2a50c8614682594c41546f9e646ca0333450feb0eb70f53f6fa73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dda3514e",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "96311fc6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c4ac6a6f",
+      "source_content": "### `onDrawerStateChanged`",
+      "source_content_hash": "650abdf7220c8f720898bbe5b37b0fb0c91c1fcb9a4ee22c758748bb0d768fce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b49a7009",
+      "source_content": "Function called when the drawer state has changed. The drawer can be in 3 states:",
+      "source_content_hash": "df7b7e8fdc0b6a52ee81a189410798d52b9d46e8a5299420ca7c815dfdd894c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "84432a64",
+      "source_content": "- idle, meaning there is no interaction with the navigation view happening at the time\n- dragging, meaning there is currently an interaction with the navigation view\n- settling, meaning that there was an interaction with the navigation view, and the navigation view is now finishing its closing or opening animation",
+      "source_content_hash": "6188c9dd11ab801f0001eab935d183085fc9b3f2bae7d11315eba58dae8f753c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "144fc2d3",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7a9140d4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d7a4554",
+      "source_content": "### `renderNavigationView`",
+      "source_content_hash": "5afec9336cba1702ade9406aa71a6cd6878044dd1ec98e43ef919a04a75de857",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "The navigation view that will be rendered to the side of the screen and can be pulled in.",
+      "source_content_hash": "52022373b66cbc651ad28b7fc67f2f74f386235911b0606b0e6a7a9ed332f929",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8ed03d97",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | Yes      |",
+      "source_content_hash": "b8efdc3ebb570e54d65022bcfbe09d44d5d47f72768095186658c7adfe6706b4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7c4902d8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e8f71c1",
+      "source_content": "### `statusBarBackgroundColor`",
+      "source_content_hash": "2ade203700fccd2546190ace9592b3f57b301ff8f50e3108dac54478c4b9dbbb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "Make the drawer take the entire screen and draw the background of the status bar to allow it to open over the status bar. It will only have an effect on API 21+.",
+      "source_content_hash": "6336f0203d6b3cb5e8a6379e559834d7161d65287fe563e17826df14bbf01586",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc8e786f",
+      "source_content": "| Type               | Required |\n| ------------------ | -------- |\n| [color](colors.md) | No       |",
+      "source_content_hash": "8e6246d1c315c61d8055ed8fe71f67fe0769817a9ce45ee4bf0d53c4f0477bb9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "### `closeDrawer()`",
+      "source_content_hash": "684f45914226111515036007b26f92c95cfe9c91f002fd793387c0943eef5575",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "93bf74a6",
+      "source_content": "```jsx\ncloseDrawer();\n```",
+      "source_content_hash": "988cd67665da285152a9b7c83577b48f683b3590ed5a736b0fcd1c6db976df2a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "Closes the drawer.",
+      "source_content_hash": "8dc61085babd1065f2784f5ff89b3784019073db815e9175e86cb1a0c09980ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f8e4cb90",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "200685d4",
+      "source_content": "### `openDrawer()`",
+      "source_content_hash": "f8daba566aad6896a5e72d6f7f15b3c2423db1ab21e39e76c673dc68a1a6ba57",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "489cbec9",
+      "source_content": "```jsx\nopenDrawer();\n```",
+      "source_content_hash": "abcfb2a5ea63d4cbe5a17372ce6b04be313e8478237c6cff1e18aab0a1e9aa66",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "Opens the drawer.",
+      "source_content_hash": "71027a1351d68e3c418261fca834374f6e4ded67bcbc82c6a2e373728283e2d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/drawerlayoutandroid.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.868387+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

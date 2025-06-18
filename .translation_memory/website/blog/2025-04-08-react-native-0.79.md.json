@@ -1,0 +1,610 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2025-04-08-react-native-0.79.md",
+  "source_file_content_hash": "841b05b8cf11f080c36abb371bf607ecd2cdd41826e332f5c3443f4e78b3342a",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.79 - Faster tooling and much more'\nauthors: [alanjhughes, shubham, fabriziocucci, cortinico]\ntags: [engineering]\ndate: 2025-04-08\n---",
+      "source_content_hash": "06e1e6cc94c78ebb0807b34661560a13f58b737f8650ce58ebc99941b7b6faf3",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "# React Native 0.79 - Faster tooling, faster startup and much more",
+      "source_content_hash": "630287eb5c02e8126497e9630d4b63cff810d7ef42c477f93de49cf2ba8cfd89",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Today we are excited to release React Native 0.79!",
+      "source_content_hash": "2d79c7b816d32b642f8933efaa698d33cc6ddb8b38996bdd8518117b0991e923",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "This release ships with performance improvements on various fronts, as well as several bugfixes. First, Metro is now faster to start thanks to deferred hashing, and has stable support for package exports. Startup time in Android will also be improved thanks to changes in the JS bundle compressions and much more.",
+      "source_content_hash": "24bc9e1aa68ab9b1c9ed2a41795a94be5f64d1f5ec384ac499011888a9ad880c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4ddf6ae7",
+      "source_content": "- [New Metro Features](/blog/2025/04/08/react-native-0.79#metro-faster-startup-and-package-exports-support)\n- [JSC moving to a Community Package](/blog/2025/04/08/react-native-0.79#jsc-moving-to-community-package)\n- [iOS: Swift-Compatible Native Modules registration](/blog/2025/04/08/react-native-0.79#ios-swift-compatible-native-modules-registration)\n- [Android: Faster App Startup](/blog/2025/04/08/react-native-0.79#android-faster-app-startup)\n- [Removal of Remote JS Debugging](/blog/2025/04/08/react-native-0.79#removal-of-remote-js-debugging)",
+      "source_content_hash": "9882a10b55aaacd624521b006f8fdb5d6479b587d5914d79e09bd0c79d970a6d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ea978e4d",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "### Metro: Faster startup and package exports support",
+      "source_content_hash": "b86f44605f12c0b6314721a82e5c1a0efd6a568f04cc564582c88ac886ce7424",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "This release ships with [Metro 0.82](https://github.com/facebook/metro/releases/tag/v0.82.0).This version uses deferred hashing to improve the speed of first `yarn start` typically by over 3x (more in larger projects and monorepos) making your development experience and CI builds faster on a daily basis.",
+      "source_content_hash": "27857756f2d53acbd7a783c808573f47ed6bc9d7d25d667fcbe0d8da015dc63d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "![metro startup comparison](/blog/assets/0.79-metro-startup-comparison.gif)",
+      "source_content_hash": "8dd06a67275e1c9c6fa96e8baf167163f5e47eb983278b256602a48f374f82cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "Also in Metro 0.82, we’re promoting `package.json` `\"exports\"` and `\"imports\"` field resolution to stable. `\"exports\"` resolution was [introduced in React Native 0.72](/blog/2023/06/21/package-exports-support), and `\"imports\"` support was added in a community contribution - both will now be enabled by default for all the projects on React Native 0.79.",
+      "source_content_hash": "99dbf691d091cab5d65568081558329372373340fb8c4572321921c4ee6c5320",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "This improves compatibility with modern npm dependencies, and opens up new, standards-compliant ways to organise your projects.",
+      "source_content_hash": "cc90974ac9275898e3352fff7e858fc23597b5908d537df6cfc07cd67b58986a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cd591557",
+      "source_content": ":::warning[Breaking change]\n\nWhile we've been testing `package.json` `\"exports\"` in the community for a while, this switchover can be a breaking change for certain packages and project setups.\n\nIn particular, we're aware of user reported incompatibilities for some popular packages including Firebase and AWS Amplify, and are working to get these fixed at source.\n\nIf you're encountering issues:\n\n- Please update to the Metro [0.81.5 hotfix](https://github.com/facebook/metro/releases/tag/v0.81.5), or set [`resolver.unstable_enablePackageExports = false`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) to opt out.\n- See [expo/expo#36551](https://github.com/expo/expo/discussions/36551) for affected packages and future updates.\n\n:::",
+      "source_content_hash": "79360397bfcdfeea448c5b1cbc7d026cd368d701a647538541e0036b03d92d76",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "### JSC moving to Community Package",
+      "source_content_hash": "46c2d2931659d39ed7e9e4acadb4c105c1d45eac0c4913e4d6d83623c61297c5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "As part of our effort to reduce the API surface of React Native, we're in the process of moving the JavaScriptCore (JSC) engine to a community-maintained package: `@react-native-community/javascriptcore`",
+      "source_content_hash": "7f646533504af36986d60b62452285d4e8c43f567e78ee76144a2706b8997899",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "This change will not affect users that are using Hermes.",
+      "source_content_hash": "9258e3516f50229524a6778d6a7aadb980faf4dd5044e800d1fbafc6e708a2c3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "Starting with React Native 0.79, you can use a community supported version of JSC by following the [installation instructions in the readme](https://github.com/react-native-community/javascriptcore#installation). The JSC version provided by React Native core will still be available in 0.79, but we’re planning to remove it [in the near future](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0836-lean-core-jsc.md).",
+      "source_content_hash": "dcc6d5fd1ad23b5a362c79dbbdb777306cfce2ddc0320b3d28e51cf6711398bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "Moving JSC to a community maintained package will allow us to update the JSC version more frequently and offer you the latest features. The community maintained JSC will follow a separate release schedule from React Native.",
+      "source_content_hash": "f00cf04fae275049d5482124bfe1c29dc1b8df2fb4cca46138fbe87ac21b7f4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將JSC移至社群維護的套件將使我們能更頻繁地更新JSC版本，並提供您最新功能。社群維護的JSC將遵循與React Native不同的發佈週期。"
+      }
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "### iOS: Swift-Compatible Native Modules registration",
+      "source_content_hash": "e6096527b0eda31d72178977d49dd630253b26fc9c15ce8b404483176ed83c25",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS：相容Swift的原生模組註冊"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "In this release, we are revamping the way in which you can register your Native Module into the React Native runtime. The new approach follows the same approach of components, described in the [official documentation](/docs/next/the-new-architecture/using-codegen#configuring-codegen).",
+      "source_content_hash": "25d9b6f5c4d1e5119ec6173c216aa9d595fcfb7759d988ea0ca51f99805e35f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此版本中，我們重新設計了將原生模組註冊到React Native運行時的方式。新方法遵循與元件相同的途徑，詳見[官方文件](/docs/next/the-new-architecture/using-codegen#configuring-codegen)。"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "Starting from this version of React Native, you can register your modules by modifying the `package.json` file. We introduced a new `modulesProvider` field in the `ios` property:",
+      "source_content_hash": "c2a5f4f33d4f90ff8fa53a4caa6822a8e23e283589928031f6bcd00d0b2359fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從此版本開始，您可以透過修改`package.json`檔案來註冊模組。我們在`ios`屬性中新增了`modulesProvider`欄位："
+      }
+    },
+    {
+      "segment_id": "7a577a50",
+      "source_content": "```diff\n\"codegenConfig\": {\n     \"ios\": {\n+       \"modulesProvider\": {\n+         \"JS Name for the module\": \"ObjC Module provider for the pure C++ TM or a class conforming to RCTTurboModule\"\n+     }\n    }\n}\n```",
+      "source_content_hash": "773a8bdc2f148c45cd409f1c5c35cabe281f5cf716d9ea504456b2912b4529e4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f01228d3",
+      "source_content": "Codegen will take care to create all the relevant code starting from your `package.json` file.",
+      "source_content_hash": "4359b688f517e21497f66cbf38dbfa9421b653bfc37bde1210c10b2370500d81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Codegen將負責從您的`package.json`檔案生成所有相關程式碼。"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "If you do use a pure C++ Native Module you will have to follow this recommended configuration:",
+      "source_content_hash": "adb5afb890b91ac5a523a06f5e90fe2a4cdb209871942330bef7009e7ed6954e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用純C++原生模組，則需遵循以下建議配置："
+      }
+    },
+    {
+      "segment_id": "5f852894",
+      "source_content": "<details>\n<summary>Configure pure C++Native Modules in your app</summary>\n\nFor pure C++ Native Modules, you need to add a new ObjectiveC++ class to glue together the C++ Native Module with the rest of the App:\n\n```objc title=\"CppNativeModuleProvider.h\"\n#import <Foundation/Foundation.h>\n#import <ReactCommon/RCTTurboModule.h>\n\nNS_ASSUME_NONNULL_BEGIN\n\n@interface <YourNativeModule>Provider : NSObject <RCTModuleProvider>\n\n@end\n```\n\n```objc title=\"CppNativeModuleProvider.mm\"\nNS_ASSUME_NONNULL_END\n\n#import \"<YourNativeModule>Provider.h\"\n#import <ReactCommon/CallInvoker.h>\n#import <ReactCommon/TurboModule.h>\n#import \"<YourNativeModule>.h\"\n\n@implementation NativeSampleModuleProvider\n\n- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:\n    (const facebook::react::ObjCTurboModule::InitParams &)params\n{\n  return std::make_shared<facebook::react::NativeSampleModule>(params.jsInvoker);\n}\n```\n\n</details>",
+      "source_content_hash": "2cc9b433eb7f26561f8a03cf71d3f5596aece619a281db64ecf052858d77a369",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "With this new approach, we unified the registration of Native Modules for both app developers and library maintainers. Libraries can specify the same properties in their `package.json` and Codegen will take care of the rest.",
+      "source_content_hash": "b41890be693ade7e4a0deb375ccd9bdc0e19a30ccbefaae9f44f818628343867",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過這種新方法，我們統一了應用程式開發者和函式庫維護者的原生模組註冊流程。函式庫可在其`package.json`中指定相同屬性，Codegen將處理後續工作。"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "This approach solves the limitation we introduced in 0.77 that prevented the registration of a pure C++ Native Module with a Swift `AppDelegate`. As you can see, none of these changes modifies the `AppDelegate` and the generated code will work for `AppDelegate` implemented with both Swift and Objective-C.",
+      "source_content_hash": "4f710a0fcc83180529a71e43ab4eca1f02241b7e7209f32fb667a445e8529316",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法解決了我們在0.77版本中引入的限制，該限制曾阻礙純C++原生模組與Swift`AppDelegate`的註冊。如您所見，這些變更均未修改`AppDelegate`，生成的程式碼將適用於以Swift和Objective-C實現的`AppDelegate`。"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "### Android: Faster App Startup",
+      "source_content_hash": "2724232da7cba5f1e9cf21aabda55549eebadfd849a36e942b6823f1f48888a0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android：更快的應用啟動"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "We’re also shipping a change to improve your Android startup time by a significant amount.",
+      "source_content_hash": "9e8be887de17979dd3c8723f3407ef943bf80072f6d93bffa13acbceb1ff7693",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們還推出了一項變更，可大幅改善Android應用的啟動時間。"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "Starting with this version, we won’t be compressing the JavaScript bundle anymore inside the APK. Previously, the Android system needed to uncompress the JavaScript bundle before your app could start. This was causing a significant slowdown during the app startup.",
+      "source_content_hash": "14a96bb6247dc7532ff41f58dac00843254ec75fdd860cdf32da55415810b906",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從此版本開始，我們將不再壓縮APK內的JavaScript套件。先前Android系統需在應用啟動前解壓縮JavaScript套件，這導致應用啟動時明顯變慢。"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "Starting from this release, we will be shipping the JavaScript Bundle uncompressed by default, so your Android apps will be generally faster to start.",
+      "source_content_hash": "2db82910402b8262aae242e76ff5e74eba05c5b492606ef6b521c8ae00f1b2be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自本版本起，我們預設將以未壓縮形式提供JavaScript套件，因此您的Android應用啟動速度通常會更快。"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "The [Margelo](https://margelo.com) team tested this feature on the Discord app and got a significant performance boost: Discord’s time-to-interactive (TTI) was reduced by 400ms, which was a 12% speedup with a one-line change (tested on a Samsung A14).",
+      "source_content_hash": "efc4812462134e7ff791452d8a29c6f8415907e62f38bdfbea976ae41a0c93e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Margelo](https://margelo.com)團隊在Discord應用上測試此功能後獲得顯著效能提升：Discord的互動時間(TTI)減少了400毫秒，僅透過一行變更就實現了12%的加速（測試設備為三星A14）。"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "On the other hand, storing the bundle uncompressed, will result in a higher space consumption for your application on the user device. If this is a concern to you, you can toggle this behavior using the `enableBundleCompression` property in your `app/build.gradle` file.",
+      "source_content_hash": "7b96ef36503e57c16155867f8929e1c9d11d798d0a7b565c5701c62f7fe1c335",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一方面，以未壓縮形式儲存套件會導致應用在用戶設備上佔用更多空間。若您對此有顧慮，可透過修改`app/build.gradle`檔案中的`enableBundleCompression`屬性來切換此行為。"
+      }
+    },
+    {
+      "segment_id": "a3a1b8eb",
+      "source_content": "```kotlin title=\"app/build.gradle\"\nreact {\n  // ...\n  // If you want to compress the JS bundle (slower startup, less\n  // space consumption)\n  enableBundleCompression = true\n  // If don't you want to compress the JS bundle (faster startup,\n  // higher space consumption)\n  enableBundleCompression = false\n\n  // Default is `false`\n}\n```",
+      "source_content_hash": "e89e95bb8e755c418f4ee3de139f35d6b02bc122ef349d6d25dff43864a25578",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "Please note that the APK size will increase in this release, but your users won’t be paying the extra cost in APK download size, as the APKs are compressed when downloaded from the network.",
+      "source_content_hash": "ffc3f5e648014c8bd4c2939f43431e8888e21c94228c01ec69d2c7039a806e4c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，此版本中APK大小將會增加，但用戶在從網路下載APK時不會承擔額外的下載大小成本，因為APK在下載時會被壓縮。"
+      }
+    },
+    {
+      "segment_id": "73776161",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重大變更"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "### Removal of Remote JS Debugging",
+      "source_content_hash": "65ccbc314e40dd582b52ce5215e08c3cb1850c578e049b15bba9015ec8661763",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除遠端JS偵錯"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "As part of our ongoing efforts to improve debugging, we're removing Remote JS Debugging via Chrome. This legacy debugging method was deprecated, [and moved to a runtime opt-in, in React Native 0.73](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#remote-javascript-debugging). Please use [React Native DevTools](/docs/react-native-devtools) for modern and reliable debugging.",
+      "source_content_hash": "19bdfc174393df943a54cbc7fd2dd7d08447a3ff4664de663a523a5ff94b82be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "作為持續改進偵錯體驗的一部分，我們移除了透過Chrome進行的遠端JS偵錯功能。此傳統偵錯方法已在[React Native 0.73中被棄用並改為運行時選擇加入](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#remote-javascript-debugging)。請使用[React Native開發者工具](/docs/react-native-devtools)進行現代化且可靠的偵錯。"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "This also means that React Native is no longer compatible with the [react-native-debugger](https://github.com/jhen0409/react-native-debugger) community project. For developers that want to use third party debugging extensions, such as Redux DevTools, we recommend [Expo DevTools Plugins](https://github.com/expo/dev-plugins), or integrating the standalone versions of these tools.",
+      "source_content_hash": "d714ea3fa08a7f9a5c766fa5f5ecbd3b9b61dfeb7f1e7fd7fcc6754af19c2755",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這也意味著React Native不再相容[react-native-debugger](https://github.com/jhen0409/react-native-debugger)社群專案。對於想使用第三方偵錯擴充功能（如Redux DevTools）的開發者，我們推薦使用[Expo開發者工具外掛](https://github.com/expo/dev-plugins)，或整合這些工具的獨立版本。"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "Read more in [this dedicated post](https://github.com/react-native-community/discussions-and-proposals/discussions/872).",
+      "source_content_hash": "3dc8ee47905b3c39dba2116cf2d673adcd7a26de48c5681eaf4962e1c12f7778",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見[此專文討論](https://github.com/react-native-community/discussions-and-proposals/discussions/872)。"
+      }
+    },
+    {
+      "segment_id": "2f2d5f01",
+      "source_content": "### Internal modules updated to `export` syntax",
+      "source_content_hash": "5e12f9ff67e89655e0724b5bf4ea9bef6b2027a27c21ee36c5b70fc4f6e6bd92",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 內部模組更新為`export`語法"
+      }
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "As part of modernizing our JavaScript codebase, we've updated a number of implementation modules within `react-native` to consistently use `export` syntax instead of `module.exports`.",
+      "source_content_hash": "664220f9553d742ffcfea815dbde7cd0393e240b56f4be34ecf1ca98f08d391a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "作為現代化 JavaScript 程式碼庫的一部分，我們已將 `react-native` 中多個實作模組更新為統一使用 `export` 語法，取代原有的 `module.exports`。"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "We've updated around **46 APIs** in total, which can be found in the [changelog](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0790).",
+      "source_content_hash": "e9e15de9b7590f0cdfb68211de9c54adb1adbf888ac1ab5d31ffa6a9c1688c29",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們總共更新了約 **46 個 API**，詳細清單可參閱[更新日誌](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0790)。"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "This change has a subtle impact on existing imports:",
+      "source_content_hash": "d0d9a4ae89ecdc0fb8cf023a9289ef01f9d9665108bd20a1da85df8d5d7f61b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更對現有導入方式有細微影響："
+      }
+    },
+    {
+      "segment_id": "e59d0121",
+      "source_content": "<details>\n<summary>**Case 1: Default export**</summary>\n\n```diff\n  // CHANGED - require() syntax\n- const ImageBackground = require('react-native/Libraries/Image/ImageBackground');\n+ const ImageBackground = require('react-native/Libraries/Image/ImageBackground').default;\n\n// Unchanged - import syntax\nimport ImageBackground from 'react-native/Libraries/Image/ImageBackground';\n\n// RECOMMENDED - root import\nimport {ImageBackground} from 'react-native';\n\n```\n\n</details>",
+      "source_content_hash": "610bac2025b03d69cec07abb5ebe18998e89c294d72ecde402b369b145595d4c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e59d0121"
+      }
+    },
+    {
+      "segment_id": "4727185d",
+      "source_content": "<details>\n\n<summary>**Case 2: Secondary exports**</summary>\n\nThere are very few cases of this pattern, again unaffected when using the root `'react-native'` import.\n\n```diff\n  // Unchanged - require() syntax\n  const BlobRegistry = require('react-native/Libraries/Blob/BlobRegistry');\n\n  // Unchanged - require() syntax with destructuring\n  const {register, unregister} = require('react-native/Libraries/Blob/BlobRegistry');\n\n  // CHANGED - import syntax as single object\n- import BlobRegistry from 'react-native/Libraries/Blob/BlobRegistry';\n+ import * as BlobRegistry from 'react-native/Libraries/Blob/BlobRegistry';\n\n\n  // Unchanged - import syntax with destructuring\n  import {register, unregister} from 'react-native/Libraries/Blob/BlobRegistry';\n\n  // RECOMMENDED - root import\n  import {BlobRegistry} from 'react-native';\n```\n\n</details>",
+      "source_content_hash": "d9cf54dc1894ed4a102197fe715e5fac130fd1d951cadf607497ccc70b2f3768",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4727185d"
+      }
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "We expect the impact of this change to be extremely limited, particularly for projects written in TypeScript and using `import` syntax. Please check for any type errors to update your code.",
+      "source_content_hash": "0781d28d5d018edfb803c800c50085f02da76a3d4138285ddef9d67f50ecf2fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們預期此變更的影響範圍極小，特別是對於使用 TypeScript 和 `import` 語法的專案。請檢查並修正任何類型錯誤以更新您的程式碼。"
+      }
+    },
+    {
+      "segment_id": "fe459619",
+      "source_content": ":::tip\n\n**The root `react-native` import is strongly recommended**\n\nAs a general takeaway, we strongly recommend importing from the root `'react-native'` path, to avoid extraneous breaking changes in the future. In our next release, we will be deprecating deep imports, as part of better defining React Native's public JavaScript API ([see the RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)).\n\n:::",
+      "source_content_hash": "02240368487a4d946da4e9c07a42d70fe6ae385f2688203d2d0ff6efa9ce9739",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n\n**強烈建議使用根路徑 `react-native` 導入**\n\n作為通用建議，我們強烈建議從根路徑 `'react-native'` 導入，以避免未來非必要的破壞性變更。在下個版本中，我們將棄用深層導入，作為明確定義 React Native 公共 JavaScript API 的一部分（參閱 [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)）。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "### Other Breaking Changes",
+      "source_content_hash": "39a3fee4305e149be253dd5d52033d827569d41d307326f83607c634f65347a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他破壞性變更"
+      }
+    },
+    {
+      "segment_id": "5eedf0a1",
+      "source_content": "This list contains a series of other breaking changes we suspect could have a minor impact to your product code and are worth noting.",
+      "source_content_hash": "71b1e2e94f0617f59c97dd188bf48fd8cebb4c989c0a5e835dc1fd555110a724",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下清單列舉了可能對產品程式碼產生輕微影響的其他破壞性變更，值得特別注意。"
+      }
+    },
+    {
+      "segment_id": "876a99dd",
+      "source_content": "- **Invalid unitless lengths in box shadows and filters**:\n  - In order to make React Native more compliant with the CSS/Web specs, we now don’t support anymore unitless lengths in `box-shadow` and `filter`. This means that if you were using a `box-shadow` of `1 1 black` we won’t be rendering. You should instead specify units such as `1px 1px black`\n- **Remove incorrect hwb() syntax support from normalize-color:**\n  - In order to make React Native more compliant with the CSS/Web specs, we now restrict some invalid syntax for `hwb()`. Historically React Native used to support comma separated values (e.g. `hwb(0, 0%, 100%)`) which we now don’t support anymore (you should migrate to `hwb(0 0% 100%)`). You can read more about this change [here](https://github.com/facebook/react-native/commit/676359efd9e478d69ad430cff213acc87b273580).\n- **Libraries/Core/ExceptionsManager exports update**\n  - As part of our effort to modernize the React Native JS API, we updated <code>[ExceptionsManager](https://github.com/facebook/react-native/blob/0.79-stable/packages/react-native/Libraries/Core/ExceptionsManager.js)</code> to now export a default `ExceptionsManager` object, and `SyntheticError` as a secondary export.",
+      "source_content_hash": "9ecd5854448cb0427a25b3f16444b8f209f367fe2d62082063a7c95b7b007b6a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **陰影框與濾鏡中無單位長度的失效**：\n  - 為使 React Native 更符合 CSS/Web 規範，我們不再支援在 `box-shadow` 和 `filter` 中使用無單位長度。這意味著若您曾使用如 `1 1 black` 的陰影設定，現在將無法渲染。您應改用帶單位的數值，例如 `1px 1px black`。\n- **從 normalize-color 移除錯誤的 hwb() 語法支援**：\n  - 為符合 CSS/Web 規範，我們現在限制 `hwb()` 的某些無效語法。過去 React Native 曾支援逗號分隔值（如 `hwb(0, 0%, 100%)`），現已不再支援（應遷移至 `hwb(0 0% 100%)`）。詳情請參閱[此提交](https://github.com/facebook/react-native/commit/676359efd9e478d69ad430cff213acc87b273580)。\n- **Libraries/Core/ExceptionsManager 導出方式更新**：\n  - 作為現代化 React Native JS API 的一部分，我們將 <code>[ExceptionsManager](https://github.com/facebook/react-native/blob/0.79-stable/packages/react-native/Libraries/Core/ExceptionsManager.js)</code> 改為導出預設的 `ExceptionsManager` 物件，並將 `SyntheticError` 作為次要導出。"
+      }
+    },
+    {
+      "segment_id": "63daebc9",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "228d01d5",
+      "source_content": "React Native 0.79 contains over 944 commits from 100 contributors. Thanks for all your hard work!",
+      "source_content_hash": "7cde8d71af332b0988d9437828767d84eedebb4de25be1dfe8e7a71315e955e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.79 版本包含來自 100 位貢獻者的超過 944 次提交。感謝所有人的辛勤付出！"
+      }
+    },
+    {
+      "segment_id": "85b17c36",
+      "source_content": "We want to send a thank you to those community members that shipped significant contributions in this release:",
+      "source_content_hash": "84835ba8ab1fd22d43014d96444a649c0366de851e8185f87af8e42020bec7b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們特別感謝在此版本中貢獻顯著的社群成員："
+      }
+    },
+    {
+      "segment_id": "c97d46ef",
+      "source_content": "- [Marc Rousavy](https://github.com/mrousavy) for developing and documenting the “Android: Faster App Startup” feature\n- [Kudo Chien](https://github.com/Kudo) and [Oskar Kwaśniewski](https://github.com/okwasniewski)for working on the `@react-native-community/javascriptcore` package and writing the “JSC moving to Community Package” section\n- [James Lawson](https://github.com/facebook/metro/pull/1302) for adding support for import subpath resolution [in Metro](https://github.com/facebook/metro/pull/1302).",
+      "source_content_hash": "531044f4482b3a21f81f1b30bedce451bbfb4f1a194fab1ae2de8892483d1333",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Marc Rousavy](https://github.com/mrousavy) 開發並撰寫「Android：更快的應用啟動」功能文件\n- [Kudo Chien](https://github.com/Kudo) 與 [Oskar Kwaśniewski](https://github.com/okwasniewski) 負責 `@react-native-community/javascriptcore` 套件及「JSC 遷移至社群套件」章節\n- [James Lawson](https://github.com/facebook/metro/pull/1302) 在 [Metro](https://github.com/facebook/metro/pull/1302) 中新增子路徑解析支援"
+      }
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "Moreover, we also want to thank the additional authors that worked on documenting features in this release post:",
+      "source_content_hash": "aac6b9d8280eda8c650a5c10b5b9c68b106c0afc9ce40e2e0e532b8e2734460b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，我們也感謝為此版本發布文件撰寫功能的作者："
+      }
+    },
+    {
+      "segment_id": "735cb1a2",
+      "source_content": "- [Rob Hogan](https://github.com/robhogan) for the “New Metro Features” section\n- [Alex Hunt](https://github.com/huntie) for the “Removal of Remote JS Debugging” and “Internal modules updated to export syntax” sections\n- [Riccardo Cipolleschi](https://github.com/cipolleschi) for the work on iOS Native Module registration",
+      "source_content_hash": "887aaafce22d6994d0cb9d17bb16d83e900320f74c27ebf78789148ecebe7fe3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Rob Hogan](https://github.com/robhogan) 撰寫「新 Metro 功能」章節\n- [Alex Hunt](https://github.com/huntie) 負責「移除遠端 JS 偵錯」與「內部模組更新為 export 語法」章節\n- [Riccardo Cipolleschi](https://github.com/cipolleschi) 實作 iOS 原生模組註冊功能"
+      }
+    },
+    {
+      "segment_id": "a9950191",
+      "source_content": "## Upgrade to 0.79",
+      "source_content_hash": "39d827b31a404bb40238c89742559d29e27616ed9b2f35eb45deaca201a2adf1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 升級至 0.79"
+      }
+    },
+    {
+      "segment_id": "d3f13bf4",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.",
+      "source_content_hash": "0638260e20da230691670b567610c6c2be87ab53adb865a0f30305b52bfbd5c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看現有專案在 React Native 版本間的程式碼變更，並參閱升級文件。"
+      }
+    },
+    {
+      "segment_id": "e636ba62",
+      "source_content": "To create a new project:",
+      "source_content_hash": "556b556603ebc735e5193d4598f99a66d8ca11d2cbdc58dd6e21bac27a143f9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立新專案："
+      }
+    },
+    {
+      "segment_id": "7f3d1f07",
+      "source_content": "```sh\nnpx @react-native-community/cli@latest init MyProject --version latest\n```",
+      "source_content_hash": "2bf42b678988e03575eb4c8d6b17d78b7b8274700ef784f80ded96abe6728bd0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7f3d1f07"
+      }
+    },
+    {
+      "segment_id": "13440cd7",
+      "source_content": "If you use Expo, React Native 0.79 will be supported in the upcoming Expo SDK 53 as the default version of React Native.",
+      "source_content_hash": "4f22d04b687982923b4435276440eedb7b767ddc7f0412a46244f7a56c968f18",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 Expo，React Native 0.79 將在即將發布的 Expo SDK 53 中作為預設的 React Native 版本獲得支援。"
+      }
+    },
+    {
+      "segment_id": "ade28a80",
+      "source_content": ":::info\n\n0.79 is now the latest stable version of React Native and 0.76.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md). We aim to publish a final end-of-life update of 0.76 in the near future.\n\n:::",
+      "source_content_hash": "9533d69f96cfbcb053b0c218d548214905f2fb83781249dbd3bd77d56a3641d8",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n\n0.79 現為 React Native 的最新穩定版本，0.76.x 版本將不再獲得支援。更多資訊請參閱 [React Native 的支援政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。我們預計在近期發布 0.76 版本的最終終止支援更新。\n\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2025-04-08-react-native-0.79.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.241502+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "841b05b8cf11f080c36abb371bf607ecd2cdd41826e332f5c3443f4e78b3342a"
+  }
+}

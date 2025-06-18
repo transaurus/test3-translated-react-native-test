@@ -1,0 +1,756 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2023-12-06-0.73-debugging-improvements-stable-symlinks.md",
+  "source_file_content_hash": "d85f228146faf8a812411acbf8596c7d90ee5df7b9377865aaaee27f979a6dea",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.73 - Debugging Improvements, Stable Symlink Support, and more'\nauthors: [fortmarek, titozzz, hurali, lunaleaps, huntie]\ntags: [announcement, release, debugging]\ndate: 2023-12-06\n---",
+      "source_content_hash": "f6d43f438939ee0f096d4ce1abedcf1203a1b36bed6178d03b385256c2c45991",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Today we're releasing React Native 0.73! This release adds improvements to debugging with Hermes, stable symlink support, Android 14 support, and new experimental features. We are also deprecating legacy debugging features, and are releasing the next pillar of the New Architecture: Bridgeless Mode!",
+      "source_content_hash": "f5933ef0fc2f2744a0d450a49bc5738197d0cbf20512029ec6465d1506bcb49d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們正式發佈 React Native 0.73 版本！此版本針對 Hermes 除錯功能進行了多項改進，新增穩定符號連結支援、Android 14 相容性，以及多項實驗性功能。同時我們也將逐步淘汰舊版除錯功能，並推出新架構的重要里程碑：無橋接模式（Bridgeless Mode）！"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- [Debugging Improvements](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#debugging-improvements)\n- [Stable Symlink Support in Metro](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#stable-symlink-support-in-metro)\n- [Kotlin Template on Android](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#kotlin-template-on-android)\n- [Android 14 Support](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#android-14-support)\n- [New Architecture Updates](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#new-architecture-updates)\n- [Deprecated Debugging Features](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#deprecated-debugging-features)",
+      "source_content_hash": "d876b21d3b42c30e20775bb72ad7a30440e419b40dd400d555d6bebb56ca0314",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [除錯功能改進](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#debugging-improvements)\n- [Metro 穩定符號連結支援](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#stable-symlink-support-in-metro)\n- [Android 預設 Kotlin 範本](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#kotlin-template-on-android)\n- [Android 14 支援](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#android-14-support)\n- [新架構更新](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#new-architecture-updates)\n- [廢棄的除錯功能](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#deprecated-debugging-features)"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "### Breaking Changes",
+      "source_content_hash": "b20bc465acc06c0341aa5cea47dcbd02f8d0db580f667ab00da54cd49654879a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "0787cf7f",
+      "source_content": "- [Babel Package Renames](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#babel-package-renames)\n- [Other Breaking Changes](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#other-breaking-changes)\n- [React Native CLI Changes](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#react-native-cli-changes)\n- [Deprecated @types/react-native](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#deprecated-typesreact-native)",
+      "source_content_hash": "c9c82c52c601b9038d2a50ce1656c002a227270d9bcc951d624b6a8c6b84ef56",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Babel 套件更名](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#babel-package-renames)\n- [其他重大變更](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#other-breaking-changes)\n- [React Native CLI 變更](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#react-native-cli-changes)\n- [廢棄 @types/react-native](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#deprecated-typesreact-native)"
+      }
+    },
+    {
+      "segment_id": "27878640",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_27878640"
+      }
+    },
+    {
+      "segment_id": "3c36424c",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點功能詳述"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### Debugging Improvements",
+      "source_content_hash": "8ad3a32c33b220baed8b8933ce34d2f13c38cc94a1ab6678d5a7df38fee4f676",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 除錯功能改進"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "The React Native and Hermes teams are committed to improving the debugging experience in React Native. In 0.73, we're happy to share some initial progress out of this ongoing investment.",
+      "source_content_hash": "6f740836428dce81e8463a25ef5e353f1133b1bc3f528b971d9adb77444d20fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 與 Hermes 團隊持續致力於提升除錯體驗。在 0.73 版本中，我們很高興能分享這項長期投入的初步成果。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "#### Console Log History in Hermes",
+      "source_content_hash": "19ea3054d04189e77a86a9c689503f7cc0091fbf3098a4512bcf2ac1bd55b98b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Hermes 主控台紀錄歷史"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "`console.log()` is an ever popular way for developers to quickly debug their JavaScript code. In previous releases, console logs in React Native apps would not be recorded until a debugger was connected. This made it hard to observe logs that occur early during app load.",
+      "source_content_hash": "4954505d589643dfd7d6ab3436c3936a5ec6e221dc023f6183f51481ddc0f6ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`console.log()` 是開發者快速除錯的常用工具。過往版本中，React Native 應用程式的 console 紀錄必須在連接除錯器後才會開始記錄，導致應用程式啟動初期的紀錄無法被捕捉。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "In React Native 0.73 we've addressed this issue. Hermes now captures all `console.log()` calls in the background, which will be sent to the Console tab when a debugger is first connected — matching the debugging experience in web browsers. This new behaviour works across Flipper, Chrome DevTools connected to Hermes, and the experimental New Debugger.",
+      "source_content_hash": "5f77690f520d86a83d2a7fe676e157527105fe56dbaf13ba8e3a1e7dd6ff717b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.73 已解決此問題。Hermes 現在會於背景持續捕獲所有 `console.log()` 呼叫，並在首次連接除錯器時將紀錄傳送至主控台分頁——此行為與網頁瀏覽器的除錯體驗一致。這項新功能同時支援 Flipper、連接 Hermes 的 Chrome DevTools 以及實驗性新除錯器。"
+      }
+    },
+    {
+      "segment_id": "782c902a",
+      "source_content": "#### Updated Debugging Docs",
+      "source_content_hash": "8ef4fcaa5e679779ad1bda9a0a267610be4039a1e275c5dfa711053525addfcd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 更新除錯文件"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "We've refreshed the [Debugging](/docs/debugging) section of our docs, which now includes up-to-date information on how to connect all supported debuggers, more info on React DevTools, and refreshed visuals.",
+      "source_content_hash": "91ab94a71b2aca4561a61b17f37cfdb390e29503eb7d6460b9655c237b6c19d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已全面翻新 [除錯指南](/docs/debugging) 文件，內容包含最新支援的除錯器連接方式、React DevTools 進階說明，並更新了視覺化教學素材。"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "![Overview of the Debugging docs as of 0.73](/blog/assets/0.73-debugging-docs.jpg)",
+      "source_content_hash": "ff4e4242404d4f7e63d5d0e8ecbf6ee68cd7d64bebe6dea101a1d09b8dd974dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![0.73 版本除錯文件概覽](/blog/assets/0.73-debugging-docs.jpg)"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "#### Experimental New Debugger",
+      "source_content_hash": "f74b3b56d4f0f4d0fde1c5f2a5e3f41942d5bac9b5cf5b215507600b050edadb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 實驗性新除錯器"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "The React Native team is working on a new JavaScript debugger experience, intended to replace Flipper, with a Technical Preview available as of React Native 0.73. The new debugger opens immediately, and features a stripped-back Chrome DevTools UI customized for debugging React Native with Hermes.",
+      "source_content_hash": "4fbb8a2f8abec544de775a86ab9d996857887eb396bc4f36459d956bb99c7528",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 團隊正在開發新一代 JavaScript 除錯工具，目標取代 Flipper，其技術預覽版已隨 0.73 版本釋出。新除錯器能立即啟動，採用精簡版 Chrome DevTools 介面，並針對 Hermes 除錯需求進行客製化優化。"
+      }
+    },
+    {
+      "segment_id": "7d0728d9",
+      "source_content": ":::note\nThe new debugger is **experimental** and has some [known issues](https://github.com/react-native-community/discussions-and-proposals/discussions/733) we are actively working to solve in a future release of React Native. If you are trying it out, please use the [same discussion thread](https://github.com/react-native-community/discussions-and-proposals/discussions/733) to report feedback.\n:::",
+      "source_content_hash": "3a86fe9c9285d51c9b4173a9b14eaa2f4710ffe8186cc9e37fe240ab60bb2800",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n新調試器目前處於**實驗階段**，存在一些[已知問題](https://github.com/react-native-community/discussions-and-proposals/discussions/733)，我們正積極在未來的React Native版本中解決。若您試用此功能，請透過[相同討論串](https://github.com/react-native-community/discussions-and-proposals/discussions/733)回報意見。\n:::"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "![The new debugger frontend opened to the \"Welcome\" pane](/docs/assets/debugging-debugger-welcome.jpg)",
+      "source_content_hash": "f5a2847b929c8b9e0b0429428ab10258c9699a7eb13e675656ea54271d2a3a13",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![新調試器前端介面顯示「歡迎」面板](/docs/assets/debugging-debugger-welcome.jpg)"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "Learn more about enabling this experience [in the docs](/docs/next/debugging?js-debugger=new-debugger#opening-the-debugger).",
+      "source_content_hash": "b92d9924ca359dd0a02f638c1b513854e0f135c7630e7f19c04a6b79a8886924",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳細啟用方式請參閱[文件說明](/docs/next/debugging?js-debugger=new-debugger#opening-the-debugger)。"
+      }
+    },
+    {
+      "segment_id": "1a316f80",
+      "source_content": "### Stable Symlink Support in Metro",
+      "source_content_hash": "63dcc0f36675d1e0fd8804a7fd2e88b66bf10e443710fa545f5506379004e5dc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Metro穩定支援符號連結"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "Support for resolving symlinks in Metro is now **enabled by default**. Symlink support enables React Native to work with monorepo setups when containing directories are configured with [`watchFolders`](https://metrobundler.dev/docs/configuration/#watchfolders).",
+      "source_content_hash": "b4af7d4c71a3e0566aa3ed156c431f56c01fec396b62188cc512f489a4f7c2ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Metro解析符號連結的功能現已**預設啟用**。此功能使React Native能在monorepo架構中運作，只要透過[`watchFolders`](https://metrobundler.dev/docs/configuration/#watchfolders)設定包含目錄即可。"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "Symlinks are deeply represented in Metro's internals, meaning they work with features such as [Fast Refresh](/docs/fast-refresh), and incur little performance overhead during bundling. Symlinks are supported on all desktop platforms, with and without Watchman.",
+      "source_content_hash": "e09bce44dec8ac031a86a1d668615ab06203de359baa8b448e7763e326b8d68d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "符號連結已深度整合至Metro核心，可與[快速重新整理](/docs/fast-refresh)等功能協作，且對打包效能影響極低。所有桌面平台皆支援符號連結，無論是否使用Watchman。"
+      }
+    },
+    {
+      "segment_id": "f695969b",
+      "source_content": ":::info\n\n#### Monorepo workarounds\n\nWe are aware there are still edge cases when using React Native in a monorepo layout. We have planned work to address some of these, which didn't quite make it into 0.73 — but which we aim to ship as soon as possible.\n\n**For React Native template projects (`npx react-native init`)**, you will need to configure any [`watchFolders`](https://metrobundler.dev/docs/configuration/#watchfolders) outside of the project root in order for Metro to discover them ([more info](https://metrobundler.dev/docs/configuration/#unstable_enablesymlinks-experimental)). You may also need to update file paths if your `react-native` dependency is installed to a folder at a different level.\n\n**For Expo apps**, support for Yarn (Classic) workspaces is configured out of the box. See also the [Work with monorepos](https://docs.expo.dev/guides/monorepos/) guide in the Expo docs.\n:::",
+      "source_content_hash": "0793e5bc33225fafd50929fa8c2f5f5db294f870e52f3b8fd53bc32a89e309d1",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n\n#### Monorepo臨時解決方案\n\n我們已知React Native在monorepo佈局中仍有邊緣案例未解決。相關修正雖未納入0.73版，但我們計劃盡快發布更新。\n\n**React Native模板專案（`npx react-native init`）**需在專案根目錄外設定[`watchFolders`](https://metrobundler.dev/docs/configuration/#watchfolders)才能讓Metro偵測到（[詳情](https://metrobundler.dev/docs/configuration/#unstable_enablesymlinks-experimental)）。若`react-native`依賴安裝在不同層級的目錄中，可能還需調整檔案路徑。\n\n**Expo應用**已預設支援Yarn（Classic）workspaces。另請參閱Expo文件中的[Monorepo協作指南](https://docs.expo.dev/guides/monorepos/)。\n:::"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "### Kotlin Template on Android",
+      "source_content_hash": "071a2bb507b2513246acbe1a0c5567baef5f362033545b8eb8dd5216fbc05a14",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android Kotlin模板"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "We're excited to announce that, starting from 0.73, Kotlin is now the **recommended language** for Android apps built with React Native. This follows the direction that the Android ecosystem has been moving in for several years and allows you to write your app using a modern language.",
+      "source_content_hash": "aa801533b7c0448cdafed27def9ad17590b752df52d0440be9dbef41b372553d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們宣布自0.73版起，Kotlin正式成為React Native建構Android應用的**推薦語言**。此決策符合Android生態系近年發展趨勢，讓您能使用現代化語言開發應用。"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "We've updated React Native's template on Android to use Kotlin instead of Java. The new `MainActivity.kt` and `MainApplication.kt` files are 36% smaller in size.",
+      "source_content_hash": "bcfde4fc2974ce64d0ed306815299fea95cac30cf86dbb3d0231088efcb3e41c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已將Android模板中的Java檔案更新為Kotlin版本。新版`MainActivity.kt`與`MainApplication.kt`檔案體積縮減了36%。"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "The [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) has also been updated to make it easier to migrate your `.java` files to `.kt` files.\nIf you've previously modified the Java files in your project and you need support migrating them to Kotlin, you can use the `Code > Convert Java file to Kotlin File` utility of Android Studio (also accessible with the shortcut <kbd>Cmd ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>Option ⌥</kbd> + <kbd>K</kbd>).",
+      "source_content_hash": "be902ab32753c7aa02df457d9683c0af02cafc32ea836a47d7ae52316d5e9a2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[升級助手](https://react-native-community.github.io/upgrade-helper/)也已更新，可協助您將`.java`檔案遷移至`.kt`格式。若您曾修改過專案中的Java檔案，可使用Android Studio的`程式碼 > 轉換Java檔案為Kotlin檔案`工具（快捷鍵<kbd>Cmd ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>Option ⌥</kbd> + <kbd>K</kbd>）進行轉換。"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "### Android 14 Support",
+      "source_content_hash": "ac479fefdba46e65b476652dcf69f9f97299d11ac49626c488f0ecbdd8c2a011",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android 14支援"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "We've updated React Native to fully support Android 14. Starting from 0.73, React Native developers can now target the latest Android SDK version, [API Level 34](https://developer.android.com/guide/topics/manifest/uses-sdk-element?hl=en#ApiLevels) (_Upside Down Cake_).",
+      "source_content_hash": "9a0c5b5a120cfd880dd2cf5ea380d844954dc1848c4428965832ef70f53b15c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已更新React Native以完整支援Android 14。自0.73版起，開發者現可設定目標版本為最新Android SDK [API等級34](https://developer.android.com/guide/topics/manifest/uses-sdk-element?hl=en#ApiLevels)（代號_Upside Down Cake_）。"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "#### Java 17 and Android Gradle Plugin upgrade",
+      "source_content_hash": "98b4b387e7da48f8a85e066010b0bfb0cf9fd3ce79c60e7b75dc16b133d4c0e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Java 17與Android Gradle Plugin升級"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "In order to support Android 14, we've updated the version of Android Gradle Plugin (AGP) used to build Android apps from `7.4.x` to `8.1.x`.",
+      "source_content_hash": "652c8f6caddd27b000b3e1d46ef4a1537d08b5beda440df70a34c2b92cb37094",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為支援Android 14，我們將Android Gradle Plugin（AGP）版本從`7.4.x`升級至`8.1.x`。"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "This major version bump of AGP comes with a series of breaking changes that are available in the release notes from Google ([8.0.0](https://developer.android.com/build/releases/past-releases/agp-8-0-0-release-notes) and [8.1.0](https://developer.android.com/build/releases/past-releases/agp-8-1-0-release-notes)).",
+      "source_content_hash": "6cf53ceef2ec754e27cd1286dd23c8506ddddf9007ae4abf96993b631030ad66",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Most importantly, **Java 17** is now a requirement to build Android apps. You can update your Java version to 17 by running:",
+      "source_content_hash": "f4409a983a595c9d0a9246d4b44c8cec4588a5bc9ccfe772d8d4862df8e0323f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "19913a56",
+      "source_content": "```sh\nbrew install --cask zulu@17\n```",
+      "source_content_hash": "653d8639033798299b87744fca52558ea9a2a10e29618d2eabf910583ab1ad2d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "and by updating your `JAVA_HOME` as documented in the [Getting Started guide](https://reactnative.dev/docs/environment-setup).",
+      "source_content_hash": "ec8f0b7fd2b485bbfa0141d4c53b2b60e7afa49cf9776777ca23d0d962e0a7b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "If you're a library developer, your libraries should work with React Native 0.73 without changes. Earlier this year, [we published a note](https://github.com/react-native-community/discussions-and-proposals/issues/671) with a clarification on what the AGP bump means for you as a library author.",
+      "source_content_hash": "bb2501252285bc7d99012ae059d0a522c1dd4c2d7e12eab274d86fcfb448e37f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71169a2d",
+      "source_content": "#### Grant partial access to photos and videos",
+      "source_content_hash": "d352604c813c82ef931adf6cb7ea626da1d973435391b6d90ebf86a090d77dc7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "[Selected Photos Access](https://developer.android.com/about/versions/14/changes/partial-photo-video-access) allows Android 14 users to grant apps access to specific items in their media library, rather than access to all media. In 0.73, React Native apps now support this capability, by using the `READ_MEDIA_VISUAL_USER_SELECTED` permission in the [`PermissionsAndroid`](/docs/permissionsandroid) API.",
+      "source_content_hash": "eefaf74563b22e8d3a9ad2525ac7f98febdf9b2430ae1156d3e021296a9b6fce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "![Selected Photos Access in Android 14](/blog/assets/0.73-android-media-picker.jpg)",
+      "source_content_hash": "0a8c5d63e04080842d140c4db5899eb41ab5b0b7c16c14a18fa4ece46f8141cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "#### Min SDK bump",
+      "source_content_hash": "3a1c8c2ec238780726aa2671994a48f45cbc13cb2f28c1aebd99c1521341f234",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "React Native 0.73 will be the final version which supports Android 5.0 (API Level 21). The next version of React Native will have a minimum SDK version of 23 (Android 6.0). Read more about the upcoming changes to min SDK bump [here](https://github.com/react-native-community/discussions-and-proposals/discussions/740).",
+      "source_content_hash": "e4f443162a7847823fb6d5ec5d138d63211e3d23982fe4fa9aaa7fc77f6682f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ab39e8a7",
+      "source_content": "### New Architecture Updates",
+      "source_content_hash": "a517ed978dc60ce08344cd6d614ed517ee123e67feb68b509dad1779ce6da227",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "We continue the rollout of React Native's New Architecture, to make it available to everyone in the Open Source community.",
+      "source_content_hash": "cc8650682cb2103bef379d6b7c891eebca72dc3e897a465040c5a271c16a32b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "Since React Native 0.68, both the New Renderer (Fabric) and the New Native Module System (TurboModules) were available to users to experiment and evaluate. We want to thank the community for the feedback we've received so far.",
+      "source_content_hash": "2cc01e22599c0532b4ea53f87c888b9e2a65a9c46da978bdcb3786dc51e40500",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "Today we're releasing another piece of the New Architecture: [**Bridgeless Mode**](https://github.com/reactwg/react-native-new-architecture/discussions/154). Up until now, when you enable the New Architecture in your app, the Bridge would still be available to support backward compatibility with older components and modules. However, our vision is to fully sunset the bridge. Starting from React Native 0.73, you can enable Bridgeless Mode which will disable the creation of the bridge entirely.",
+      "source_content_hash": "7034ec6a76ee6566c55c904d518ef715f244e691d60a141af27462046ae0623b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "Together with Bridgeless Mode, we're shipping a Native Module Interop Layer, that will allow you to reuse your old modules when in Bridgeless Mode. The [Renderer Interop Layer](https://github.com/reactwg/react-native-new-architecture/discussions/135) introduced in React Native 0.72 has also been adapted to work with Bridgeless Mode.",
+      "source_content_hash": "dfe4cbda6a0678b00cd9a2260cdf11fa0bd7f49c13389f2d43a6f2afada0f6bb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "As with the rest of the New Architecture, Bridgeless Mode is initially experimental. We invite interested users to enable it and report any problems and incompatibilities you face in the [New Architecture working group](https://github.com/reactwg/react-native-new-architecture/discussions).",
+      "source_content_hash": "794171cbc2ea76549650469b00c835e5523bdcf843462064b9f6eb20fe564bb9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "47516512",
+      "source_content": "### Deprecated Debugging Features",
+      "source_content_hash": "aff40a2fdc8002d054a8c3104b0c6db5545e92e434e225376dafaf85b1ba84ce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "#### Flipper ↔ React Native integration",
+      "source_content_hash": "4a14d48e46eb3301b3116ad1dcaf071694d6e7b7337ff44a7fd426fedddf924b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "We are gradually moving away from Flipper as the default tool for debugging React Native apps. In 0.73, this begins by deprecating the native Flipper integration included with React Native (bootstrap code which wires up Flipper's core plugins). We will be removing this integration and dependency in the next release — meaning parts of Flipper such as the Network plugin will cease to work.",
+      "source_content_hash": "2a98417bb17280acc59d32289bea28bb856490393e041990fd3e705d6754a0ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "**Unchanged**: Flipper as a standalone product for native app debugging will continue to exist. Even after its removal from new React Native projects in the future, developers will be able to [manually add Flipper to their app](https://fbflipper.com/docs/getting-started/android-native/) if they wish.",
+      "source_content_hash": "057b01e759e77fbb63ee4fc645103d1e63fa7c40ddc54c3be1c3680d4acfb1f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "For more information on why we are moving away from Flipper, [view the RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0641-decoupling-flipper-from-react-native-core.md).",
+      "source_content_hash": "2d8fa83f34375601377512d086ac5022ee1a4836a622c1a2d624517662e885d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c83259bb",
+      "source_content": "#### Remote JavaScript Debugging",
+      "source_content_hash": "fb40cdd7580672638e6fca6f5dfedfad3167a47c7cc76c7f988dacd8430926d0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "Remote JavaScript Debugging is a legacy debugging mode that connects an external web browser (Chrome) to your app and runs your JavaScript code inside a web page, i.e. `http://localhost:8081/debugger-ui`. This model could lead to inconsistent app behaviour while debugging, and is incompatible with native modules under the New Architecture.",
+      "source_content_hash": "8563521506d604397c40140af9107879052c2a61998c45ec0019c486a6deaa98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "In 0.73, [Remote JavaScript Debugging is deprecated](https://github.com/react-native-community/discussions-and-proposals/discussions/734) and has been removed from the Dev Menu. Enabling the remote debugger must now be done manually via the `NativeDevSettings` API. Doing this is covered in the [Other Debugging Methods docs](/docs/next/other-debugging-methods#remote-js-debugging).",
+      "source_content_hash": "0cbbe307dd6288ec2721b029d0cd12709e87fbe9e8260d072a515005acd56892",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c68501e5",
+      "source_content": ":::info\nRemote JavaScript Debugging was previously the default debugging experience for apps using JavaScriptCore (JSC). We recommend [Safari Developer Tools (direct JSC debugging)](/docs/next/other-debugging-methods#safari-developer-tools-direct-jsc-debugging) instead, for iOS apps.\n\nWe recommend using [Hermes](/docs/hermes) for a consistent debugging experience on all platforms.\n:::",
+      "source_content_hash": "bd769b227272399d4e69b16a8152f7ad8209cc9064eda45c61cd08184f9ab233",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "35353302",
+      "source_content": "### Babel Package Renames",
+      "source_content_hash": "be83a7553c480180bd1151104379d6f523ecaba968823643b89da8389c4d3bb6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "We've relocated two Babel-related packages out of Metro and into React Native's repository and versioning scheme, enabling us to simplify maintenance and upgrades. The new versions of these packages support New Architecture features in 0.73, meaning these dependencies must be updated.",
+      "source_content_hash": "9758f9d453456f6e8e450cf229fbda76541fea446a25c33f5f28541fcac95e15",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "Please follow the [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) when upgrading, to ensure you have updated these dependencies. Some packages have been renamed:",
+      "source_content_hash": "333d747619d83996e0b20a7279b6365a7ea5f011faec392390a7dbe2a677d70e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "51c5cf39",
+      "source_content": "| Old Package Name                       | New Package Name                        |\n| -------------------------------------- | --------------------------------------- |\n| `metro-react-native-babel-preset`      | `@react-native/babel-preset`            |\n| `metro-react-native-babel-transformer` | `@react-native/metro-babel-transformer` |",
+      "source_content_hash": "ff3721df6b3492b3ff5b2020edc83c057b4010b4fd0ac280e58444a1aeaa8e27",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2c6699bc",
+      "source_content": ":::info\n`@react-native/babel-preset` now includes `@react-native/babel-plugin-codegen`, this no longer needs to be specified separately in your Babel config file.\n:::",
+      "source_content_hash": "40857318674ed3d3ec24e664046fb0fd825f2144e920844cb8582ca8e1b69928",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6a06609",
+      "source_content": "### Other Breaking Changes",
+      "source_content_hash": "39a3fee4305e149be253dd5d52033d827569d41d307326f83607c634f65347a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "These are some of the key breaking changes in 0.73. Please consult the [full changelog](https://github.com/facebook/react-native/blob/main/CHANGELOG.md) for the complete list of breaking changes.",
+      "source_content_hash": "e84dbe56729d8f3b0598278304a1bb7f44cd23c3af7ce1c602c70add730b0a25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "af7b7e3f",
+      "source_content": "- Raise minimum Node.js requirement to 18.x ([#37709](https://github.com/facebook/react-native/pull/37709)) (see also [Node.js 16 EOL](https://nodejs.org/en/blog/announcements/nodejs16-eol)).\n- The template now uses TypeScript 5.0 ([#36862](https://github.com/facebook/react-native/pull/36862)).\n  - React Native types continue working on TypeScript 4.8.\n- **Android**: Java 17 is now a requirement to build Android apps ([see above](#java-17-and-android-gradle-plugin-upgrade)).\n- **Android**: Major bump of Fresco to 3.0 ([#38275](https://github.com/facebook/react-native/pull/38275)).\n- **iOS**: Raise minimum iOS version to 13.4 ([#36795](https://github.com/facebook/react-native/pull/36795)).\n- **iOS**: Metro will no longer be automatically started when running builds via Xcode ([#38242](https://github.com/facebook/react-native/pull/38242)).",
+      "source_content_hash": "8ec0d935015605e93c343e32795d471899e4dd902ad47eff476dc5e6c9e8b3ce",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "808b0414",
+      "source_content": "For library authors:",
+      "source_content_hash": "80437f00f58b5d4cb2c01adcc136f7c118ef71a2aa00cfa00c1921b8acacb554",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5b1ccdc9",
+      "source_content": "- **Android**: Bump to AGP 8.1.1 ([discussion](https://github.com/react-native-community/discussions-and-proposals/issues/671))",
+      "source_content_hash": "cea066720f7be327453f5e2782f3c4bf5ed587de5ed90ac08ad2e32713b48036",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2b5df263",
+      "source_content": "### React Native CLI Changes",
+      "source_content_hash": "0668143b322a6b3776b99130dba16fc6ccbab106edf9eb4400e5683c36cbc97a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d279c43",
+      "source_content": "#### Highlighted breaking changes",
+      "source_content_hash": "95a2f533e529bf4e569e1a0b44ac17934ac664144f662d82aea4effb77b9b2a4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b7b9c9f6",
+      "source_content": "- Change default task prefix in `build-android` command. From now on, when you run `build-android`, the `bundle` task will be run instead of `assemble` ([#1913](https://github.com/react-native-community/cli/pull/1913)).\n- Remove fallback flow for Metro config defaults ([#1972](https://github.com/react-native-community/cli/pull/1972)).\n  - The [updated `metro.config.js` format](/blog/2023/06/21/0.72-metro-package-exports-symlinks#new-metroconfigjs-setup) from 0.72 is now required in 0.73, as we have removed the fallback copy of these defaults from CLI.\n- Remove `--configuration` option from `run-ios` (replaced with `--mode`) ([#2028](https://github.com/react-native-community/cli/pull/2028)).\n- Remove `--variant` option from `build-android` command (replaced with `--mode`) ([#2026](https://github.com/react-native-community/cli/pull/2026)).",
+      "source_content_hash": "008e03b95e3c5e44fcf3e2adcf8edf845575c3bd16111a7f3184b43835545033",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 變更 `build-android` 指令的預設任務前綴。從現在開始，當你執行 `build-android` 時，將會執行 `bundle` 任務而非 `assemble` ([#1913](https://github.com/react-native-community/cli/pull/1913))。\n- 移除 Metro 設定預設值的後備流程 ([#1972](https://github.com/react-native-community/cli/pull/1972))。\n  - 從 0.72 開始的[更新版 `metro.config.js` 格式](/blog/2023/06/21/0.72-metro-package-exports-symlinks#new-metroconfigjs-setup)現在在 0.73 中成為必要，因為我們已從 CLI 中移除了這些預設值的後備副本。\n- 從 `run-ios` 移除 `--configuration` 選項（已由 `--mode` 取代）([#2028](https://github.com/react-native-community/cli/pull/2028))。\n- 從 `build-android` 指令移除 `--variant` 選項（已由 `--mode` 取代）([#2026](https://github.com/react-native-community/cli/pull/2026))。"
+      }
+    },
+    {
+      "segment_id": "9ebd9d9b",
+      "source_content": "[See full changelog for v12.0.0](https://github.com/react-native-community/cli/releases/tag/v12.0.0).",
+      "source_content_hash": "645579631c45ef305558b8a171710046804bea89ae134f1b469c6b31b40877ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[查看 v12.0.0 的完整變更記錄](https://github.com/react-native-community/cli/releases/tag/v12.0.0)。"
+      }
+    },
+    {
+      "segment_id": "6d457467",
+      "source_content": "### Deprecated `@types/react-native`",
+      "source_content_hash": "210927c83cb967a46346443202eb6535ab78ea908d60cacb3920d7844b9787c2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 已棄用 `@types/react-native`"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "As mentioned in [First-class Support for TypeScript](/blog/2023/01/03/typescript-first#declarations-shipped-with-react-native), we have shipped TypeScript types with `react-native` since 0.71 and we are now deprecating `@types/react-native` for 0.73.",
+      "source_content_hash": "78b818846e2c85f472d989e1645b47d9275a05b41002f77df147c6b2e23fb8f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如[對 TypeScript 的一流支援](/blog/2023/01/03/typescript-first#declarations-shipped-with-react-native)所述，我們從 0.71 開始隨 `react-native` 發布 TypeScript 類型定義，現在我們將在 0.73 中棄用 `@types/react-native`。"
+      }
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "We will not ship any future patches for existing versions. The guidance is to migrate away from `@types/react-native`. See instructions on [how to migrate](/blog/2023/01/03/typescript-first#how-to-migrate).",
+      "source_content_hash": "82a9bde6056451df81bd75e699fd3ce1dfd37ae50021e0d89f12625a23ad45ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們不會為現有版本發布任何未來的修補程式。建議是遷移離開 `@types/react-native`。請參閱[如何遷移](/blog/2023/01/03/typescript-first#how-to-migrate)的說明。"
+      }
+    },
+    {
+      "segment_id": "17fd5988",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "React Native 0.73 contains over [2259 commits](https://github.com/facebook/react-native/compare/v0.72.7...v0.73.0) from 68 contributors. Thanks for all your hard work!",
+      "source_content_hash": "89814ffad309a9c7b00271b9b314ada82164973bba82c7a62e96f8ed62054eb0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.73 包含來自 68 位貢獻者的超過 [2259 次提交](https://github.com/facebook/react-native/compare/v0.72.7...v0.73.0)。感謝大家的辛勤工作！"
+      }
+    },
+    {
+      "segment_id": "6ac93c98",
+      "source_content": "## Upgrade to 0.73",
+      "source_content_hash": "0c6ffb92973dce69a2e88c235774b114c68c2092e5351327db2a82f1fa90dc97",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 升級至 0.73"
+      }
+    },
+    {
+      "segment_id": "b4204c03",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the [Upgrading docs](/docs/upgrading). You can also create a new project with `npx react-native@latest init MyProject`.",
+      "source_content_hash": "6d9633891825c13e6176f1bf1759e8fd5cc57f1c3068fc288e1c52d2fd68ef0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 來查看現有專案在 React Native 版本之間的程式碼變更，並參考[升級文件](/docs/upgrading)。你也可以使用 `npx react-native@latest init MyProject` 建立一個新專案。"
+      }
+    },
+    {
+      "segment_id": "e6ac016e",
+      "source_content": "If you use Expo, React Native 0.73 will be supported in the Expo SDK 50 release.",
+      "source_content_hash": "7e3372712d4e296bb88188e81569988bf334c410b4ae1fd437afa9cb4ed452bb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你使用 Expo，React Native 0.73 將在 Expo SDK 50 版本中得到支援。"
+      }
+    },
+    {
+      "segment_id": "e6432e52",
+      "source_content": ":::info\n0.73 is now the latest stable version of React Native and **0.70.x now moves to unsupported**. For more information see [React Native’s support policy](https://github.com/reactwg/react-native-releases#releases-support-policy).\n:::",
+      "source_content_hash": "a65c2080f8b337c8ac3f7c47d307f3c35c0c4f5ef48110ad5052813c5484c5b5",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.73 現在是 React Native 的最新穩定版本，**0.70.x 現在轉為不受支援**。更多資訊請參閱 [React Native 的支援政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2023-12-06-0.73-debugging-improvements-stable-symlinks.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.234398+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "d85f228146faf8a812411acbf8596c7d90ee5df7b9377865aaaee27f979a6dea"
+  }
+}

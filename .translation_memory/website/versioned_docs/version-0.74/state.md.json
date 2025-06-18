@@ -1,0 +1,102 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/state.md",
+  "source_file_content_hash": "ead4f6f2bb036942e5872924d03da522ddf4e58796ac300837165c5e52f0cece",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: state\ntitle: State\n---",
+      "source_content_hash": "5fcef3b4c74e37e45d3321b3f9574fe0f548e59671d381fb6d0b6e3bc3258650",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "There are two types of data that control a component: `props` and `state`. `props` are set by the parent and they are fixed throughout the lifetime of a component. For data that is going to change, we have to use `state`.",
+      "source_content_hash": "812c50d203c1930f50b40605bf12c0edd4885a840633a0d75ba5434c1dbf8550",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制組件的數據有兩種類型：`props` 和 `state`。`props` 由父組件設置，並且在組件的整個生命週期中是固定的。對於會變化的數據，我們必須使用 `state`。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "In general, you should initialize `state` in the constructor, and then call `setState` when you want to change it.",
+      "source_content_hash": "99e601c9b17b7de571dab106f88e46b7128a4b579b4e14f5eb8cbe483ab45298",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一般來說，你應該在構造函數中初始化 `state`，然後在需要改變時調用 `setState`。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "For example, let's say we want to make text that blinks all the time. The text itself gets set once when the blinking component gets created, so the text itself is a `prop`. The \"whether the text is currently on or off\" changes over time, so that should be kept in `state`.",
+      "source_content_hash": "639d7187796e587e1a8e87f2db337f2431e356c2377a557d8a16c5a0b3436439",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "舉例來說，假設我們想製作一個不斷閃爍的文字。文字本身在閃爍組件創建時設置一次，因此文字本身是一個 `prop`。而「文字當前是開啟還是關閉」的狀態會隨時間變化，所以應該保存在 `state` 中。"
+      }
+    },
+    {
+      "segment_id": "899bc9b4",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=State&ext=js\nimport React, {useState, useEffect} from 'react';\nimport {Text, View} from 'react-native';\n\nconst Blink = props => {\n  const [isShowingText, setIsShowingText] = useState(true);\n\n  useEffect(() => {\n    const toggle = setInterval(() => {\n      setIsShowingText(!isShowingText);\n    }, 1000);\n\n    return () => clearInterval(toggle);\n  });\n\n  if (!isShowingText) {\n    return null;\n  }\n\n  return <Text>{props.text}</Text>;\n};\n\nconst BlinkApp = () => {\n  return (\n    <View style={{marginTop: 50}}>\n      <Blink text=\"I love to blink\" />\n      <Blink text=\"Yes blinking is so great\" />\n      <Blink text=\"Why did they ever take this out of HTML\" />\n      <Blink text=\"Look at me look at me look at me\" />\n    </View>\n  );\n};\n\nexport default BlinkApp;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=State&ext=tsx\nimport React, {useState, useEffect} from 'react';\nimport {Text, View} from 'react-native';\n\ntype BlinkProps = {\n  text: string;\n};\n\nconst Blink = (props: BlinkProps) => {\n  const [isShowingText, setIsShowingText] = useState(true);\n\n  useEffect(() => {\n    const toggle = setInterval(() => {\n      setIsShowingText(!isShowingText);\n    }, 1000);\n\n    return () => clearInterval(toggle);\n  });\n\n  if (!isShowingText) {\n    return null;\n  }\n\n  return <Text>{props.text}</Text>;\n};\n\nconst BlinkApp = () => {\n  return (\n    <View style={{marginTop: 50}}>\n      <Blink text=\"I love to blink\" />\n      <Blink text=\"Yes blinking is so great\" />\n      <Blink text=\"Why did they ever take this out of HTML\" />\n      <Blink text=\"Look at me look at me look at me\" />\n    </View>\n  );\n};\n\nexport default BlinkApp;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "438d3a7361058712b7a4a6ae2df6bc1afa43fe9cd8e1d93e6762dee958422a60",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_899bc9b4"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "In a real application, you probably won't be setting state with a timer. You might set state when you have new data from the server, or from user input. You can also use a state container like [Redux](https://redux.js.org/) or [MobX](https://mobx.js.org/) to control your data flow. In that case you would use Redux or MobX to modify your state rather than calling `setState` directly.",
+      "source_content_hash": "6c100cc019a6cf4fd190263f1379e19355641719b0e92db0eab3710f085a1209",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在實際應用中，你可能不會用定時器來設置狀態。你可能會在從服務器獲取新數據或用戶輸入時設置狀態。你也可以使用像 [Redux](https://redux.js.org/) 或 [MobX](https://mobx.js.org/) 這樣的狀態容器來控制數據流。在這種情況下，你會使用 Redux 或 MobX 來修改狀態，而不是直接調用 `setState`。"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "When setState is called, BlinkApp will re-render its Component. By calling setState within the Timer, the component will re-render every time the Timer ticks.",
+      "source_content_hash": "acaec5b76236bc48632c3f9cbe254c99a9875734b2f9764857285a302a72f4a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當調用 setState 時，BlinkApp 會重新渲染其組件。通過在定時器中調用 setState，組件會在每次定時器觸發時重新渲染。"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "State works the same way as it does in React, so for more details on handling state, you can look at the [React.Component API](https://react.dev/reference/react/Component#setstate). At this point, you may have noticed that most of our examples use the default text color. To customize the text color, you will have to [learn about Style](style.md).",
+      "source_content_hash": "28768d5d4c7f1a05f7899737039cb5d9fdc2c6e57cbac25d4ae00da6e817e554",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "State 的工作方式與 React 中相同，因此有關處理狀態的更多細節，你可以查看 [React.Component API](https://react.dev/reference/react/Component#setstate)。此時，你可能已經注意到我們的大多數示例都使用默認的文字顏色。要自定義文字顏色，你必須[學習樣式](style.md)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/state.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.578244+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ead4f6f2bb036942e5872924d03da522ddf4e58796ac300837165c5e52f0cece"
+  }
+}

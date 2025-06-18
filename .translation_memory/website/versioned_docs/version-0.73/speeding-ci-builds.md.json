@@ -1,0 +1,202 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/speeding-ci-builds.md",
+  "source_file_content_hash": "87547ec5b760bb18d47cc50eec97bdf974099a9753a776626dae678843f9e536",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: speeding-ci-builds\ntitle: Speeding Up CI Builds\n---",
+      "source_content_hash": "20f2ab4489ab2e338ce5907fda3d4d0569b113ba1a2e9f43fb8704c5d3032aeb",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "You or your company may have set up a Continuous Integration (CI) environment to test your React Native application.",
+      "source_content_hash": "e213ae598cf6790b24fbbd5a90e8f7a32ef361ff616f09a3fb85f85f3b108cb7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您或您的公司可能已設置了持續整合（CI）環境來測試您的 React Native 應用程式。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "A fast CI service is important for 2 reasons:",
+      "source_content_hash": "5bbb7fc48923a8e0bc68512a659625a183922e28ea4bdf762f03ea3ecb6fc2ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "快速的 CI 服務之所以重要，主要有兩個原因："
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- The more time CI machines are running, the more they cost.\n- The longer the CI jobs take to run, the longer the development loop.",
+      "source_content_hash": "8a43efda83edd82187233f3d01f8117093848c27a8f000e84c8e9dc11b61c18d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- CI 機器運行的時間越長，成本就越高。\n- CI 任務運行的時間越長，開發循環的時間也就越長。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "It is therefore important to try and minimize the time the CI environment spends building React Native.",
+      "source_content_hash": "8ee24b35788397259f5c3ed7f0764c460066b0ffcf7af8d661e6f071132654c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此，盡量減少 CI 環境構建 React Native 的時間是非常重要的。"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## Disable Flipper for iOS",
+      "source_content_hash": "9d711656236cf10e3af3076bc31f7ca7eb068631313a3d0a69490f2c5e6f9912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 為 iOS 停用 Flipper"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "[Flipper](https://github.com/facebook/flipper) is a debugging tool shipped by default with React Native, to help developers debug and profile their React Native applications. However, Flipper is not required in CI: it is very unlikely that you or one of your collegue would have to debug the app built in the CI environment.",
+      "source_content_hash": "cfdace525f6879b546616e9c632ad7a10a39bfb50d48d911bb1d104d16fd2844",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Flipper](https://github.com/facebook/flipper) 是 React Native 預設提供的除錯工具，用於幫助開發者除錯和分析他們的 React Native 應用程式。然而，在 CI 環境中並不需要 Flipper：您或您的同事不太可能需要除錯在 CI 環境中構建的應用程式。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "For iOS apps, Flipper is built every time the React Native framework is built and it may require some time to build, and this is time you can save.",
+      "source_content_hash": "285efec4c4e0669ba8e0b491458803870f2d91744ae027663c7bce50ecaed672",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於 iOS 應用程式，每次構建 React Native 框架時都會構建 Flipper，這可能需要一些時間，而這些時間是可以節省的。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Starting from React Native 0.71, we introduced a new flag in the template's Podfile: the [`NO_FLIPPER` flag](https://github.com/facebook/react-native/blob/main/packages/react-native/template/ios/Podfile#L20).",
+      "source_content_hash": "791c9240d7f579ac64c56dd95d22604f6657431b8599c9b286ade295d98df729",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 React Native 0.71 開始，我們在模板的 Podfile 中引入了一個新標誌：[`NO_FLIPPER` 標誌](https://github.com/facebook/react-native/blob/main/packages/react-native/template/ios/Podfile#L20)。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "By default, the `NO_FLIPPER` flag is not set, therefore Flipper will be included by default in your app.",
+      "source_content_hash": "e182158019c76b2aea0e07459d88630828bb97fb8ee0ecd4a912b2c04ae63f4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，`NO_FLIPPER` 標誌並未設置，因此 Flipper 會預設包含在您的應用程式中。"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "You can specify `NO_FLIPPER=1` when installing your iOS pods, to instruct React Native not to install Flipper. Typically, the command would look like this:",
+      "source_content_hash": "1b53cb57f3b72118bea557ec1bf464cc1d47a564829cf14ea855ba7e00db047b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在安裝 iOS pods 時指定 `NO_FLIPPER=1`，以指示 React Native 不安裝 Flipper。通常，命令會如下所示："
+      }
+    },
+    {
+      "segment_id": "08021a08",
+      "source_content": "```shell\n# from the root folder of the react native project\nNO_FLIPPER=1 bundle exec pod install --project-directory=ios\n```",
+      "source_content_hash": "0c0996bb47725168a77e50fcaa519a80d69988e18cd9b628e32d4268a8aeb915",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_08021a08"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "Add this command in your CI environment to skip the installation of Flipper dependencies and thus saving time and money.",
+      "source_content_hash": "e078538969c7ea6d1352eba250538920b462ea7e292c2c317f040b3862cdba89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 CI 環境中添加此命令，以跳過 Flipper 依賴項的安裝，從而節省時間和金錢。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "### Handle Transitive Dependencies",
+      "source_content_hash": "f3ce26a9b6ab843856c1b02d3c80737225411c59cb6cc4a5daef51def0c95e5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 處理傳遞依賴"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "Your app may be using some libraries which depends on the Flipper pods. If that's your case, disabling flipper with the `NO_FLIPPER` flag may not be enough: your app may fail to build in this case.",
+      "source_content_hash": "fb05b73a2d7a3673fa9878d4b96b1afd27adfd0e42fac435a3649140e791e4e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您的應用程式可能使用了一些依賴於 Flipper pods 的函式庫。如果是這種情況，僅使用 `NO_FLIPPER` 標誌停用 Flipper 可能不夠：您的應用程式可能會因此無法構建。"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "The proper way to handle this case is to add a custom configuration for react native, instructing the app to properly install the transitive dependency. To achieve that:",
+      "source_content_hash": "42a2af75e1cc31cee48b0c17dd9cbbcb86868f3023a00d494f0ef9d5eef7dafa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "處理這種情況的正確方法是為 React Native 添加一個自定義配置，指示應用程式正確安裝傳遞依賴。為此："
+      }
+    },
+    {
+      "segment_id": "e7bc8c38",
+      "source_content": "1. If you don't have it already, create a new file called `react-native.config.js`.\n2. Exclude explicitly the transitive dependency from the `dependency` when the flag is turned on.",
+      "source_content_hash": "87eb63a91d79c87eb8b226d3d719ec476cb7878fe5413e23c66143c08e9a3a9d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 如果尚未擁有，請創建一個名為 `react-native.config.js` 的新文件。\n2. 當標誌開啟時，明確從 `dependency` 中排除傳遞依賴。"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "For example, the `react-native-flipper` library is an additional library that depends on Flipper. If your app uses that, you need to exclude it from the dependencies. Your `react-native.config.js` would look like this:",
+      "source_content_hash": "25affe7980f07389d20fd32744018793aed3bacac9136e2aded3757c8bcf2c7a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，`react-native-flipper` 函式庫是一個依賴於 Flipper 的附加函式庫。如果您的應用程式使用了它，您需要將其從依賴項中排除。您的 `react-native.config.js` 文件會如下所示："
+      }
+    },
+    {
+      "segment_id": "6648a219",
+      "source_content": "```js title=\"react-native.config.js\"\nmodule.exports = {\n  // other fields\n  dependency: {\n    ...(process.env.NO_FLIPPER\n      ? {'react-native-flipper': {platforms: {ios: null}}}\n      : {}),\n  },\n};\n```",
+      "source_content_hash": "ec758978be920b93aaace7ab0483728de033ce08d723a5a7405ac43a674b2855",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6648a219"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/speeding-ci-builds.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.516614+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "87547ec5b760bb18d47cc50eec97bdf974099a9753a776626dae678843f9e536"
+  }
+}

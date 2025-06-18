@@ -1,0 +1,624 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2023-06-21-package-exports-support.md",
+  "source_file_content_hash": "14e8305802680855c47022868f06c6910cd8de504cc7ca5c2c89fc64fbd8b8bd",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'Package Exports Support in React Native'\nauthors: [huntie]\ntags: [announcement, metro]\ndate: 2023-06-21\n---",
+      "source_content_hash": "b6755319bec7bcfa57686de29c51fe99336673c8092d86a364a8339e175417bb",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "# Package Exports Support in React Native",
+      "source_content_hash": "33b9487254db5780fa5b326326e1f69a06300c3eda2a41bbb007ac70c50840e0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# React Native 中的套件匯出支援"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "With the release of [React Native 0.72](/blog/2023/06/21/0.72-metro-package-exports-symlinks), Metro — our JavaScript build tool — now includes beta support for the `package.json` [`\"exports\"`](https://nodejs.org/docs/latest-v18.x/api/packages.html#exports) field. When [enabled](/blog/2023/06/21/package-exports-support#enabling-package-exports-beta), it adds the following functionality:",
+      "source_content_hash": "27f77bc228b854a8ebb4066816274632ecd608e70da039b0ed7f9ae76fd4269a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著 [React Native 0.72](/blog/2023/06/21/0.72-metro-package-exports-symlinks) 的發布，我們的 JavaScript 建置工具 Metro 現在包含對 `package.json` 中 [`\"exports\"`](https://nodejs.org/docs/latest-v18.x/api/packages.html#exports) 欄位的測試版支援。當[啟用](/blog/2023/06/21/package-exports-support#enabling-package-exports-beta)後，它新增了以下功能："
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- [React Native projects will work with more npm packages out-of-the-box](/blog/2023/06/21/package-exports-support#for-app-developers)\n- [New capabilities for packages to define their API and target React Native](/blog/2023/06/21/package-exports-support#for-package-maintainers-preview)\n- [Some breaking changes to package resolution (in edge cases)](/blog/2023/06/21/package-exports-support#breaking-changes)",
+      "source_content_hash": "78950115d4ae4df3ad8e255aa52a8b560632b9b0a45744c544493950643a9d76",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [React Native 專案將能直接使用更多 npm 套件](/blog/2023/06/21/package-exports-support#for-app-developers)\n- [套件能定義其 API 並針對 React Native 的新功能](/blog/2023/06/21/package-exports-support#for-package-maintainers-preview)\n- [套件解析的一些破壞性變更（在邊緣情況下）](/blog/2023/06/21/package-exports-support#breaking-changes)"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "In this post we'll cover how Package Exports works, and what these changes mean for you as a React Native app developer or package maintainer.",
+      "source_content_hash": "49a9fbfc61532d189e5f0913321e3ac42b8a45b90cea52b837e9bd3ee864692d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在這篇文章中，我們將介紹套件匯出的運作方式，以及這些變更對身為 React Native 應用程式開發者或套件維護者的您意味著什麼。"
+      }
+    },
+    {
+      "segment_id": "45c63027",
+      "source_content": "<!-- truncate -->",
+      "source_content_hash": "2f8566552e3b92233817e9029faa608a0a7bde771612eb57367d8dad692fdcb4",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45c63027"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "## What is Package Exports?",
+      "source_content_hash": "3453b6d0dc8dceb1761def7328ef028b188b634637bbc2644ed895e73ff0f2ce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 什麼是套件匯出？"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "Introduced in Node.js 12.7.0, Package Exports is the modern approach for npm packages to specify **entry points** — the mapping of package subpaths which can be externally imported and which file(s) they should resolve to.",
+      "source_content_hash": "2fb69cf4fb5b4c75109634b8a742abe1850abfa34c4f640e500f531a35ef56da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "套件匯出是 Node.js 12.7.0 引入的現代方法，讓 npm 套件能指定**進入點**——套件子路徑的映射，這些子路徑可以被外部導入並解析到哪些檔案。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Supporting `\"exports\"` improves how React Native projects will work with the wider JavaScript ecosystem ([used in ~16.6k packages today](https://github.com/search?q=path%3A%2A%2A%2Fpackage.json+%22%5C%22access%5C%22%3A+%5C%22public%5C%22%22+%22%5C%22exports%5C%22%22+NOT+path%3A%2A%2A%2Fnode_modules+NOT+is%3Afork+NOT+is%3Aarchived&type=code)), and gives package authors a standardised feature set for multiplatform packages to target React Native.",
+      "source_content_hash": "a8736322048b689892f3552d3f87949f89c571e97dda04db5f1274f1a1b52ad6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支援 `\"exports\"` 改善了 React Native 專案與更廣泛的 JavaScript 生態系統的互動（[目前約有 16.6k 個套件使用](https://github.com/search?q=path%3A%2A%2A%2Fpackage.json+%22%5C%22access%5C%22%3A+%5C%22public%5C%22%22+%22%5C%22exports%5C%22%22+NOT+path%3A%2A%2A%2Fnode_modules+NOT+is%3Afork+NOT+is%3Aarchived&type=code)），並為套件作者提供了一套標準化功能集，讓跨平台套件能針對 React Native。"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "[`\"exports\"`](https://nodejs.org/docs/latest-v19.x/api/packages.html#exports) can be used alongside, or instead of, [`\"main\"`](https://nodejs.org/docs/latest-v19.x/api/packages.html#main) in a `package.json` file.",
+      "source_content_hash": "0e7b431c522b8fdca5218e4b5ff7b6caf94b286783f295d0a813e4927a9aa620",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[`\"exports\"`](https://nodejs.org/docs/latest-v19.x/api/packages.html#exports) 可以與 [`\"main\"`](https://nodejs.org/docs/latest-v19.x/api/packages.html#main) 一起使用，或完全取代它。"
+      }
+    },
+    {
+      "segment_id": "15a1fd96",
+      "source_content": "```json\n{\n  \"name\": \"@storybook/addon-actions\",\n  \"main\": \"./dist/index.js\",\n  ...\n  \"exports\": {\n    \".\": {\n      \"node\": \"./dist/index.js\",\n      \"import\": \"./dist/index.mjs\",\n      \"default\": \"./dist/index.js\"\n    },\n    \"./preview\": {\n      \"import\": \"./dist/preview.mjs\",\n      \"default\": \"./dist/preview.js\"\n    },\n    ...\n    \"./package.json\": \"./package.json\"\n  }\n}\n```",
+      "source_content_hash": "8e07410ae0c735ceff9cc3d95241206ce905557ecd1e36f26aa0f784dc3d609f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_15a1fd96"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "Here's some app code consuming the above package by importing different subpaths of `@storybook/addon-actions`.",
+      "source_content_hash": "1c8bbd5fb2341e12fff3c62aa9dddcde500c5554bcbc46a8602f01e1bf5c1c5f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是一些應用程式代碼，通過導入 `@storybook/addon-actions` 的不同子路徑來使用上述套件。"
+      }
+    },
+    {
+      "segment_id": "4795a13d",
+      "source_content": "```js\nimport {action} from '@storybook/addon-actions';\n// -> '@storybook/addon-actions/dist/index.js'\n\nimport {action} from '@storybook/addon-actions/preview';\n// -> '@storybook/addon-actions/dist/preview.js'\n\nimport helpers from '@storybook/addon-actions/src/preset/addArgsHelpers';\n// Inaccessible - not listed in \"exports\"!\n```",
+      "source_content_hash": "67bc58cf68791e52166f7a0c56e720566f31bbd655a605dd3e368445ec6f3a02",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4795a13d"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "The headlining features of Package Exports are:",
+      "source_content_hash": "ea4c3f0d05f1dc7059ef1de2f3c5eb800b180835008369713a64086dc2c2008d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "套件匯出的主要功能包括："
+      }
+    },
+    {
+      "segment_id": "158e1f5d",
+      "source_content": "- **Package encapsulation**: Only subpaths defined in `\"exports\"` can be imported from outside the package — giving packages control over their public API.\n- **Subpath aliases**: Packages can define custom subpaths which map to a different file location (including via [subpath patterns](https://nodejs.org/docs/latest-v19.x/api/packages.html#subpath-patterns)) — allowing relocation of files while preserving the public API.\n- **Conditional exports**: A subpath may resolve to a different underlying file depending on environment. For example, to target `\"node\"`, `\"browser\"`, or `\"react-native\"` runtimes — replacing the [`\"browser\"` field spec](https://github.com/defunctzombie/package-browser-field-spec).",
+      "source_content_hash": "2068c08b55896166f2a5f7cc68ae960c09db422592e9079630b7c7cfe29b4556",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **套件封裝**：只有 `\"exports\"` 中定義的子路徑才能從套件外部導入——讓套件能控制其公共 API。\n- **子路徑別名**：套件可以定義自訂子路徑，這些子路徑映射到不同的檔案位置（包括通過[子路徑模式](https://nodejs.org/docs/latest-v19.x/api/packages.html#subpath-patterns)）——允許在保留公共 API 的同時重新定位檔案。\n- **條件式匯出**：一個子路徑可能根據環境解析到不同的底層檔案。例如，針對 `\"node\"`、`\"browser\"` 或 `\"react-native\"` 運行時——取代 [`\"browser\"` 欄位規範](https://github.com/defunctzombie/package-browser-field-spec)。"
+      }
+    },
+    {
+      "segment_id": "fc8cba88",
+      "source_content": ":::note\nThe full capabilities for `\"exports\"` are detailed in the [Node.js Package Entry Points spec](https://nodejs.org/docs/latest-v19.x/api/packages.html#package-entry-points).\n\nSince these features overlap with existing React Native concepts (such as [platform-specific extensions](/docs/platform-specific-code)), and since `\"exports\"` had been live in the npm ecosystem for some time, we reached out to the React Native community to make sure our implementation would meet developers' needs ([PR](https://github.com/react-native-community/discussions-and-proposals/pull/534), [final RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0534-metro-package-exports-support.md)).\n:::",
+      "source_content_hash": "6bf7e94d880503e1ec1ad1d4e044548ee8e3afcc1ea30dcc29e6a9229728a23a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n`\"exports\"` 的完整功能詳見 [Node.js 套件進入點規範](https://nodejs.org/docs/latest-v19.x/api/packages.html#package-entry-points)。\n\n由於這些功能與現有的 React Native 概念（如[平台特定擴展](/docs/platform-specific-code)）重疊，且 `\"exports\"` 已在 npm 生態系統中存在一段時間，我們聯繫了 React Native 社群，以確保我們的實作能滿足開發者的需求（[PR](https://github.com/react-native-community/discussions-and-proposals/pull/534)、[最終 RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0534-metro-package-exports-support.md)）。\n:::"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "## For app developers",
+      "source_content_hash": "4e4de1541da5a4a232b94662da7bb1ac113984a76a7006b2ffe236cd80e12e16",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "Package Exports can be enabled today, in beta.",
+      "source_content_hash": "1b8a63a533ef290143918db7658c64887c92e8dff25a89d03ac37132fa6c380a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6384b3d4",
+      "source_content": "- Imports against packages that depend on Package Exports features (such as [**Firebase**](https://www.npmjs.com/package/firebase) and [**Storybook**](https://www.npmjs.com/search?q=%40storybook)) should now work as designed.\n- React Native for Web projects using Metro will now be able to use the `\"browser\"` conditional export, removing the need for workarounds.",
+      "source_content_hash": "8ddd8e4b97db9483334022506cd911443cd3a1f364b1bc4b001f3fdcec4c24a4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "Enabling Package Exports brings a few [edge-case breaking changes](#breaking-changes) that may affect specific projects, and which you can [test today](#validating-changes-in-your-project).",
+      "source_content_hash": "543168c04a80b2fbd4de1b43b0924804300bcc785d6ff3983e19bdd2cad4f4c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "**In a future React Native release, Package Exports will be enabled by default**. In a chicken-and-egg situation, React Native apps were previously a holdout for some packages to migrate to `\"exports\"` — or used our `\"react-native\"` root field escape hatch. Supporting these features in Metro will allow the ecosystem to move forward.",
+      "source_content_hash": "dcb4e851453ff739a3beff065a2943ba8bb7593f96979ff39ed49b009075774d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0a103a02",
+      "source_content": "### Enabling Package Exports (beta)",
+      "source_content_hash": "c41fe5f62beaff772130f578a6e22b5169cbc5d46cf414f83462c62d5d772746",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "Package Exports can be enabled in your app's [**metro.config.js**](https://github.com/facebook/react-native/blob/0.72-stable/packages/react-native/template/metro.config.js) file via the [`resolver.unstable_enablePackageExports`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) option.",
+      "source_content_hash": "f4b5d34c9888113ef0b0e499d2b1b6c4d4bb6d2b8c538899b7ef871c82d973e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6563256",
+      "source_content": "```js\nconst config = {\n  // ...\n  resolver: {\n    unstable_enablePackageExports: true,\n  },\n};\n```",
+      "source_content_hash": "e2bfcced1c2a20aa9e3d7370149a5e00a83e675de3902005808c29867f97cb8c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "Metro exposes two further resolver options which configure how conditional exports behave:",
+      "source_content_hash": "f3b681981af597c4d34c7ac91ff18a5e776121b2b4778b94d66f5199119faf1f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "85aeef6c",
+      "source_content": "- [`unstable_conditionNames`](https://metrobundler.dev/docs/configuration/#unstable_conditionnames-experimental) — The set of [condition names](https://nodejs.org/docs/latest-v19.x/api/packages.html#community-conditions-definitions) to assert when resolving conditional exports. By default, we match `['require', 'import', 'react-native']`.\n- [`unstable_conditionsByPlatform`](https://metrobundler.dev/docs/configuration/#unstable_conditionsbyplatform-experimental) — The additional condition names to assert when resolving for a given platform target. By default, this matches `'browser'` when the platform is `'web'`.",
+      "source_content_hash": "45337b89585ba5efc7af47baf35c923a22e77b2cef3c2e109b15abb428a356ce",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5ae4e2a6",
+      "source_content": ":::tip\n**Remember to use the React Native [Jest preset](https://github.com/facebook/react-native/blob/main/template/jest.config.js#L2)!** Jest includes support for Package Exports by default. In tests, you can override which `customExportConditions` are resolved using the [`testEnvironmentOptions`](https://jestjs.io/docs/configuration#testenvironmentoptions-object) option.\n\n**If you are using TypeScript**, resolution behaviour can be matched by setting [`moduleResolution: 'bundler'`](https://www.typescriptlang.org/tsconfig#moduleResolution) and [`resolvePackageJsonImports: false`](https://www.typescriptlang.org/tsconfig#resolvePackageJsonExports) within your project's `tsconfig.json`.\n:::",
+      "source_content_hash": "40f652c908c7e84b62657aaf04be11c093eb3792ce3b3372735581cb65ec6a29",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "#### Validating changes in your project",
+      "source_content_hash": "f9fabf84072f27b3e9c32b5fa4361084354b3f35db99765078510b19df1a11f6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "For existing projects, we recommend that early adopters follow these steps to see if resolution changes occur after enabling `unstable_enablePackageExports`. This is a one-time process. It's likely that there will be no changes at all, but we'd like developers to opt in with certainty.",
+      "source_content_hash": "0c63b7b45bc5dd1e7fdab7a93b7ddc7053a9e36925f436c7a2659b4c91bb36c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "65095059",
+      "source_content": "<details>\n<summary>💡 Validating changes in your project</summary>\n\n:::note\nIf you are not using Yarn, substitute `yarn` for `npx` (or the relevant tool used in your project).\n:::\n\n1. Get all resolved dependencies (before changes):\n\n   ```sh\n   # Replace index.js with your entry file if needed, such as App.js\n   yarn metro get-dependencies index.js --platform android --output before.txt\n   ```\n\n   - **Expo CLI**: Run `npx expo customize metro.config.js` if your project doesn't have a `metro.config.js` file yet.\n   - For full coverage, substitute `--platform android` for the other platforms in use by your app (e.g. `ios`, `web`).\n\n2. Enable `resolver.unstable_enablePackageExports` in `metro.config.js`.\n3. Get all resolved dependencies (after changes):\n\n   ```sh\n   yarn metro get-dependencies index.js --platform android --output after.txt\n   ```\n\n4. Compare!\n\n   ```sh\n   diff before.txt after.txt\n   ```\n\n</details>",
+      "source_content_hash": "fe532d51ad6f9c3d5962f9eb1558ee0a9902464ed7b31be8e4128df82ce1588d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "af843cee",
+      "source_content": "### Breaking changes",
+      "source_content_hash": "22d2643a9cc72467ce676b2837b3f3f329a458265c1068ef6750df13ae72cb60",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "We decided on an implementation of Package Exports in Metro that is spec-compliant (necessitating some breaking changes), but backwards compatible otherwise (helping apps with existing imports to migrate gradually).",
+      "source_content_hash": "0698aaef5a725c8a00ef452bcf12c7255820f9868afb361af1018dcfca56ffaf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "The key breaking change is that when `\"exports\"` is provided by a package, it will be consulted first (before any other `package.json` fields) — and a matched subpath target will be used directly.",
+      "source_content_hash": "ec49b64e3a123c4d7101a358c82751ad936e679f7fca5d28e54eb47a2e4115bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dd45f3ea",
+      "source_content": "- Metro will not expand [`sourceExts`](https://metrobundler.dev/docs/configuration/#sourceexts) against the import specifier.\n- Metro will not resolve [platform-specific extensions](/docs/platform-specific-code) against the target file.",
+      "source_content_hash": "a36885998d0ff267c480a4fa568e044da8d7d9d88d9806bd4efa5d0ba4673ac6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "For more details, please see all [**breaking changes**](https://metrobundler.dev/docs/package-exports#summary-of-breaking-changes) in the Metro docs.",
+      "source_content_hash": "d5d6b1886f0b35a8ba2031bf1e3debc909e6c0630fcd711fd7728237d94de588",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2f2d5f01",
+      "source_content": "### Package encapsulation is lenient",
+      "source_content_hash": "72a8c7d0a3ca0d9d8bddc03d3ee61bf63e160666e6a487439d5e41f5888a23bf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 套件封裝採取寬鬆策略"
+      }
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "When Metro encounters a subpath that isn't listed in `\"exports\"`, **it will fall back to legacy resolution**. This is a compatibility feature intended to reduce user friction for previously allowable imports in existing React Native projects.",
+      "source_content_hash": "52013e9da9e1d4f28e5811a176e2b7d75aa2fd0048918a27e696390a17eab51a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 Metro 遇到未列在 `\"exports\"` 中的子路徑時，**會退回傳統解析方式**。此相容性設計旨在降低既有 React Native 專案中已允許的導入操作所產生的摩擦。"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "Instead of throwing an error, Metro will log a warning.",
+      "source_content_hash": "387b9d90c754ad9545fb0592a611eb228af4f3f39262630929836dfb806b2e0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Metro 不會拋出錯誤，而是記錄警告訊息。"
+      }
+    },
+    {
+      "segment_id": "25a51782",
+      "source_content": "```sh\nwarn: You have imported the module \"foo/private/fn.js\" which is not listed in\nthe \"exports\" of \"foo\". Consider updating your call site or asking the package\nmaintainer(s) to expose this API.\n```",
+      "source_content_hash": "c15cdc82b29d1d77bfbd5341a8fd7a7ee479687cda0ee5e6a792c838a06b5c38",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_25a51782"
+      }
+    },
+    {
+      "segment_id": "50ecdbd8",
+      "source_content": ":::note\nWe plan to implement a strict mode for package encapsulation in future, to align with Node's default behaviour. Therefore, **we recommend that all developers address these warnings** if raised by users.\n:::",
+      "source_content_hash": "9e4f8bfd3b4687f63f5cf95a21ab5cde6f200b11d35f620769d842cd0ead043e",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n我們計劃在未來實作嚴格的套件封裝模式，以符合 Node 的預設行為。因此**建議所有開發者處理這些警告**（若被使用者回報）。\n:::"
+      }
+    },
+    {
+      "segment_id": "89b740fe",
+      "source_content": "## For package maintainers (preview)",
+      "source_content_hash": "ced6e612b383bf7c9043723452019f8d432d51fd3db9894d9480904257a91fdb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 給套件維護者的預覽說明"
+      }
+    },
+    {
+      "segment_id": "67f9f657",
+      "source_content": ":::info\nPer our [rollout plan](#the-future-stable-exports-enabled-by-default), Package Exports will be enabled for most projects in the next React Native release (0.73) later this year.\n\n**We have no plans to remove support for the `\"main\"` field and other current package resolution features any time soon.**\n:::",
+      "source_content_hash": "8c3b6f9d5d0018fd781c57e7b7698e25e6aac19fe7171d0584f5995e03da4b82",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n根據我們的[推出計劃](#the-future-stable-exports-enabled-by-default)，套件匯出功能將在下一版 React Native (0.73) 為多數專案預設啟用。\n\n**我們目前沒有計劃在短期內移除對 `\"main\"` 欄位及其他現有套件解析功能的支援。**\n:::"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "Package Exports provides the ability to restrict access to your package's internals, and more predictable capabilities for libraries to target React Native and React Native for Web.",
+      "source_content_hash": "04f914824bd86329450d66acc58824519bc70eaa7ce4ba420604d219b30402d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "套件匯出功能讓您能限制套件內部存取，並為函式庫提供更可預測的能力來鎖定 React Native 與 React Native for Web。"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "### If you are using `\"exports\"` today",
+      "source_content_hash": "87fc7cb9c9a197d936821bcd17763615f0d0b8672b28619bc4feee70c29f8df8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 若您目前已使用 `\"exports\"`"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "If your package uses `\"exports\"` alongside the current `\"react-native\"` root field, please bear in mind the [breaking changes](#breaking-changes) for users above. For users enabling this feature in Metro, `\"exports\"` will now be considered first during module resolution.",
+      "source_content_hash": "b7ba021ee2e3676733d9782250b0f06974df9d688030bffebd55141c012713d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您的套件同時使用 `\"exports\"` 與現有的 `\"react-native\"` 根欄位，請注意上述使用者的[重大變更](#breaking-changes)。對在 Metro 啟用此功能的使用者而言，模組解析時會優先考量 `\"exports\"`。"
+      }
+    },
+    {
+      "segment_id": "c8a6ab3e",
+      "source_content": "In practice, we anticipate the main change for users will be the enforcement (via warnings) of any inaccessible subpaths in their apps, from respecting `\"exports\"` package encapsulation.",
+      "source_content_hash": "8d4e3f4ee7adeffefaeac8898d05e10b20cda2d4d2ed8c45f69474827fb1c592",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實際上，我們預期使用者的主要變動將來自套件封裝的 `\"exports\"` 規範——透過警告機制來強制執行應用程式中無法存取的子路徑。"
+      }
+    },
+    {
+      "segment_id": "e63d69ef",
+      "source_content": "### Migrating to `\"exports\"`",
+      "source_content_hash": "0bfa6f429617d056e48021fc3fe9099f341eb19baec3afede265e5723e690ce8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 遷移至 `\"exports\"`"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "**Adding an `\"exports\"` field to your package is entirely optional**. Existing package resolution features will behave identically for packages which don't use `\"exports\"` — and we have no plans to remove this behaviour.",
+      "source_content_hash": "ea4a7dece167da1cbeda0c9a82b78fbe4c5dc5e02def0614c256f915d1dd87f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**為套件新增 `\"exports\"` 欄位完全屬於選配**。現有套件解析功能對未使用 `\"exports\"` 的套件會維持相同行為——我們沒有計劃移除此行為。"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "We believe that the new features of `\"exports\"` provide a compelling feature set for React Native package maintainers.",
+      "source_content_hash": "1da237a546b457a2afd88c343f0f95f12e63369b91a65fc9308abadbdc0b6fc7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們認為 `\"exports\"` 的新功能為 React Native 套件維護者提供了極具吸引力的功能組合。"
+      }
+    },
+    {
+      "segment_id": "458ab9ae",
+      "source_content": "- **Tighten your package API**: This is a great time to review the module API of your package, which can now be formally defined via exported subpath aliases. This prevents users from accessing internal APIs, reducing surface area for bugs.\n- **Conditional exports**: If your package targets React Native for Web (i.e. `\"react-native\"` and `\"browser\"`), we now give packages control of the resolution order of these conditions (see next heading).",
+      "source_content_hash": "81fae19f8755567901a8dfa7119152a546c3089620679c7305eabf2387d68d7e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **強化套件 API 管控**：現在是審視套件模組 API 的好時機，可透過匯出的子路徑別名正式定義。這能防止使用者存取內部 API，減少錯誤發生面。\n- **條件式匯出**：若您的套件目標是 React Native for Web（即 `\"react-native\"` 和 `\"browser\"`），現在套件能控制這些條件的解析順序（參見下個標題）。"
+      }
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "If you decide to introduce `\"exports\"`, **we recommend making this as a breaking change**. We've prepared a [**migration guide**](https://metrobundler.dev/docs/package-exports#migration-guide-for-package-maintainers) in the Metro docs which includes how to replace features such as platform-specific extensions.",
+      "source_content_hash": "2ac5aff57bf3c36bf99139d0a7c559bf6dfb34406094406fba3a6319331d00dd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若決定導入 `\"exports\"`，**建議將其視為重大變更**。我們在 Metro 文件中準備了[**遷移指南**](https://metrobundler.dev/docs/package-exports#migration-guide-for-package-maintainers)，內容包含如何取代平台特定擴充等功能。"
+      }
+    },
+    {
+      "segment_id": "07d32b30",
+      "source_content": ":::note\n**Please do not rely on the lenient behaviours of Metro's implementation.** While Metro is backwards-compatible, packages should follow how `\"exports\"` is documented in the spec and strictly implemented by other tools.\n:::",
+      "source_content_hash": "a5eab0c0cff491b1c618a85bee7d1f19dce31238efcd24e3435cd95e36e38e96",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n**請勿依賴 Metro 實作的寬鬆行為**。雖然 Metro 保持向後相容，但套件應遵循規格文件記載的 `\"exports\"` 標準及其他工具的嚴格實作方式。\n:::"
+      }
+    },
+    {
+      "segment_id": "6ac93c98",
+      "source_content": "### The new `\"react-native\"` condition",
+      "source_content_hash": "3f27716253dcf2d206ed393332433647bc02e13967cf962e42c33e3b75a4eb3c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新增的 `\"react-native\"` 條件"
+      }
+    },
+    {
+      "segment_id": "b4204c03",
+      "source_content": "We've introduced `\"react-native\"` as a community condition (for use with conditional exports). This represents React Native, the framework, sitting alongside other recognised runtimes such as `\"node\"` and `\"deno\"` ([RFC](https://github.com/nodejs/node/pull/45367)).",
+      "source_content_hash": "1cb50f3976278a0db5e66d6a2fd4ae5c9d1d061b1b41a812bc820a8be6717f67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已將 `\"react-native\"` 納入社群條件（用於條件式匯出）。這代表 React Native 框架與其他已知運行環境如 `\"node\"` 和 `\"deno\"` 並列（參見 [RFC](https://github.com/nodejs/node/pull/45367)）。"
+      }
+    },
+    {
+      "segment_id": "93c19dc7",
+      "source_content": "> [Community Conditions Definitions — **`\"react-native\"`**](https://nodejs.org/docs/latest-v19.x/api/packages.html#community-conditions-definitions)\n>\n> _Will be matched by the React Native framework (all platforms). To target React Native for Web, \"browser\" should be specified before this condition._",
+      "source_content_hash": "c573f1e3eea772deb8cc41843c3868bb8c0b13541c1a8582379d6e7970d9d7e5",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> [社群條件定義——**`\"react-native\"`**](https://nodejs.org/docs/latest-v19.x/api/packages.html#community-conditions-definitions)\n>\n> _將由 React Native 框架匹配（全平台適用）。若目標為 React Native for Web，應在此條件前指定 \"browser\"。_"
+      }
+    },
+    {
+      "segment_id": "eeeea5ce",
+      "source_content": "This replaces the previous `\"react-native\"` root field. The priority order for how this was previously resolved was determined by projects, [which created ambiguity when using React Native for Web](https://github.com/expo/router/issues/37#issuecomment-1275925758). Under `\"exports\"`, _packages concretely define the resolution order for conditional entry points_ — removing this ambiguity.",
+      "source_content_hash": "c80a1a0fc669e4daf4a22f0ce637508ecf94406abcf7ef7a7174f216d631ab05",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這取代了先前的 `\"react-native\"` 根欄位。過去解析優先順序由專案決定的方式，[在使用 React Native for Web 時會產生歧義](https://github.com/expo/router/issues/37#issuecomment-1275925758)。透過 `\"exports\"`，_套件能明確定義條件進入點的解析順序_——消除此歧義。"
+      }
+    },
+    {
+      "segment_id": "ade38aab",
+      "source_content": "```json\n  \"exports\": {\n    \"browser\": \"./dist/index-browser.js\",\n    \"react-native\": \"./dist/index-react-native.js\",\n    \"default\": \"./dist/index.js\"\n  }\n```",
+      "source_content_hash": "1a68e1b355c6b625f8b25f2da99378354cadcdcc4fe7cd746b618b80b80ebeb6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ade38aab"
+      }
+    },
+    {
+      "segment_id": "6d7e2970",
+      "source_content": ":::note\nWe chose not to introduce `\"android\"` and `\"ios\"` conditions, due to the prevalence of other existing platform selection methods, and the complexity of how this behaviour might work across frameworks. Please use the [`Platform.select()`](/docs/platform#select) API instead.\n:::",
+      "source_content_hash": "e4124e7bf8199a0b5269c775f21a9453a96008c771628482d87773b87324d0fb",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n我們選擇不引入 `\"android\"` 和 `\"ios\"` 條件，原因是現有平台選擇方法已廣泛使用，且跨框架實現此行為的複雜性過高。請改用 [`Platform.select()`](/docs/platform#select) API。\n:::"
+      }
+    },
+    {
+      "segment_id": "950e5c6c",
+      "source_content": "## The future: Stable `\"exports\"`, enabled by default",
+      "source_content_hash": "4fe7bed8b61ba9cc3f7e756374d97325e0ce51302c3aa1ea1113521683280cd5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 未來規劃：預設啟用的穩定版 `\"exports\"`"
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "In the next React Native release, we are aiming to remove the `unstable_` prefix for this feature (having addressed planned performance work and any bugs) and will enable Package Exports resolution by default.",
+      "source_content_hash": "43544f829840354f9af9518baf431d4c8143f9369b542ddf91ca5304eaeef808",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在下一個 React Native 版本中，我們計劃移除此功能的 `unstable_` 前綴（在完成預定的效能優化與錯誤修復後），並將預設啟用 Package Exports 解析功能。"
+      }
+    },
+    {
+      "segment_id": "01902900",
+      "source_content": "With `\"exports\"` enabled for everyone, we can begin taking the React Native community forward — for example, React Native's core packages could be updated to better separate public and internal modules.",
+      "source_content_hash": "8cbb24e0a6bbd55133068699cd6a6690e4296c03dd8f4e94fdff9946481f08ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `\"exports\"` 全面啟用後，我們便能推動 React Native 生態系向前發展——例如更新核心套件以更明確區分公開模組與內部模組。"
+      }
+    },
+    {
+      "segment_id": "dbeb30c1",
+      "source_content": "![Rollout plan for Package Exports support](/blog/assets/package-exports-rollout.png)",
+      "source_content_hash": "c938d908b66e4821c53ae26f1942dec5d25f8a14ac8e0cd0376f52b9cf3e353f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Package Exports 支援的推出時程圖](/blog/assets/package-exports-rollout.png)"
+      }
+    },
+    {
+      "segment_id": "c0f80a50",
+      "source_content": "## Thanks",
+      "source_content_hash": "1e57366f4f2b8342ce1186455878164e2c099d41b453de456c1a921520e0df59",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "d73903fc",
+      "source_content": "Thanks to members of the React Native community that gave feedback on the RFC: [@SimenB](https://github.com/SimenB), [@tido64](https://github.com/tido64), [@byCedric](https://github.com/byCedric), [@thymikee](https://github.com/thymikee).",
+      "source_content_hash": "ec7128b8ec5b117f82f318741a021c1995fc43472e3a2689785f3f8f78b3436f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝 React Native 社群成員對 RFC 提供的反饋：[@SimenB](https://github.com/SimenB)、[@tido64](https://github.com/tido64)、[@byCedric](https://github.com/byCedric)、[@thymikee](https://github.com/thymikee)。"
+      }
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "Huge thanks to [@motiz88](https://github.com/motiz88) and [@robhogan](https://github.com/robhogan) at Meta for supporting the development of this feature.",
+      "source_content_hash": "6ce03dbea81232fd7e7f530e905bab017a193b83885edf1658b9acadd883cfe7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "特別感謝 Meta 的 [@motiz88](https://github.com/motiz88) 和 [@robhogan](https://github.com/robhogan) 對此功能開發的支持。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2023-06-21-package-exports-support.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.235850+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "14e8305802680855c47022868f06c6910cd8de504cc7ca5c2c89fc64fbd8b8bd"
+  }
+}

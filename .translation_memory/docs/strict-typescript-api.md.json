@@ -1,0 +1,480 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/strict-typescript-api.md",
+  "source_file_content_hash": "78de27de71290bb6712f0fff2d0006a5a7d245d31d1c2db3cc8cbd6c877d3ce4",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: strict-typescript-api\ntitle: Strict TypeScript API (opt in)\n---",
+      "source_content_hash": "a67847044a2b573e4fcef6cae85e1f419c2e09bd62840057251caae2e6859618",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "The Strict TypeScript API is a preview of our future, stable JavaScript API for React Native.",
+      "source_content_hash": "835f9593fe862ec751ce0496cf2f81ec9c3c90a0b42a037d4fa9dbe100f0392e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "嚴格版 TypeScript API 是我們為 React Native 未來穩定版 JavaScript API 提供的預覽功能。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Specifically, this is a new set of TypeScript types for the `react-native` npm package, available from 0.80 onwards. These provide stronger and more futureproof type accuracy, and will allow us to confidently evolve React Native's API into a stable shape. Opting in to the Strict TypeScript API brings some structural type differences, and is therefore a one-time breaking change.",
+      "source_content_hash": "b2794ef3fd11cdc8b6be8866df4a7ff7b7221fa78d9ab89f7b8fe4dbdc07a50e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "具體而言，這是針對 `react-native` npm 套件的一套全新 TypeScript 型別定義，自 0.80 版本起提供。這些型別能帶來更強健且更具未來性的型別準確度，讓我們能更有信心地將 React Native API 演進至穩定形態。採用嚴格版 TypeScript API 會帶來一些結構性型別差異，因此屬於一次性重大變更。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The new types are:",
+      "source_content_hash": "80e2e84ca0468e1cc71bd42ca53eb8bfb5b80730cfc114819e70b49a83945afd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "新型別具備以下特徵："
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "1. **Generated directly from our source code** — improving coverage and correctness, so you can expect stronger compatibility guarantees.\n2. **Restricted to `react-native`'s index file** — more tightly defining our public API, and meaning we won't break the API when making internal file changes.",
+      "source_content_hash": "158447ec858d4bc69e3b58647482d06eed564a53c5faa03bcc1635ea848c01e4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. **直接從原始碼生成** — 提升覆蓋率與正確性，您可預期更強的相容性保證。\n2. **限制於 `react-native` 索引檔案** — 更嚴格定義公共 API，意味著進行內部檔案變更時不會破壞 API。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "When the community is ready, the Strict TypeScript API will become our default API in future — synchronized with deep imports removal.",
+      "source_content_hash": "b76cc8f5fbcd33578ad5a4f6b572016ecdcedc33b7817e4e94dfedfbd4af9dab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當社群準備就緒時，嚴格版 TypeScript API 將成為我們的預設 API — 並與深層導入移除工作同步實施。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "## Opting in",
+      "source_content_hash": "70a0b18bdd278df79c7b19c4f86de3926d77c4579ddbf11b64050520526ab146",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 啟用方式"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "We're shipping these new types alongside our existing types, meaning you can choose to migrate when ready. We encourage early adopters and newly created apps to opt in via your `tsconfig.json` file.",
+      "source_content_hash": "273b7db0bea7b09c64af71326519ed7d7503d1d34a4292758bb3abd72f1a71aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們將這些新型別與現有型別同時發布，您可自行選擇遷移時機。我們鼓勵早期採用者與新建立的應用程式透過 `tsconfig.json` 檔案啟用此功能。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Opting in is a **breaking change**, since some of our new types have updated names and shapes, although many apps won't be affected. You can learn about each breaking change in the next section.",
+      "source_content_hash": "03b984fa42feb1dfa0923b503236ba037752efd92abe95580aa190bf6bc3bf1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "啟用嚴格版屬於**重大變更**，因為部分新型別已更新名稱與結構，不過許多應用程式可能不受影響。您可在下一節了解各項重大變更細節。"
+      }
+    },
+    {
+      "segment_id": "41a8ae85",
+      "source_content": "```json title=\"tsconfig.json\"\n{\n  \"extends\": \"@react-native/typescript-config\",\n  \"compilerOptions\": {\n    ...\n    \"customConditions\": [\"react-native-strict-api\"]\n  }\n}\n```",
+      "source_content_hash": "495066784917d0d329ea94dd2f61d9ee4150992e919ea63148070d2ced143c61",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41a8ae85"
+      }
+    },
+    {
+      "segment_id": "8a66e580",
+      "source_content": ":::note[Under the hood]\n\nThis will instruct TypeScript to resolve `react-native` types from our new [`types_generated/`](https://www.npmjs.com/package/react-native?activeTab=code) dir, instead of the previous [`types/`](https://www.npmjs.com/package/react-native?activeTab=code) dir (manually maintained). No restart of TypeScript or your editor is required.\n\n:::",
+      "source_content_hash": "d50686e5a7a1954ddb5496aa4782e386e55f3722836982fefe238a0699276ba6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[底層機制]\n\n這將指示 TypeScript 從我們新建的 [`types_generated/`](https://www.npmjs.com/package/react-native?activeTab=code) 目錄解析 `react-native` 型別，而非原先手動維護的 [`types/`](https://www.npmjs.com/package/react-native?activeTab=code) 目錄。無需重新啟動 TypeScript 或您的編輯器。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "The Strict TypeScript API follows our [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894) to remove deep imports from React Native. Therefore, some APIs are no longer exported at root. This is intentional, in order to reduce the overall surface area of React Native's API.",
+      "source_content_hash": "26a2917d7d60e0421a696f9c3467c729be9b9058b7fe423f9dcfc0686ba2f750",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "嚴格版 TypeScript API 遵循我們移除 React Native 深層導入的 [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894) 規範。因此部分 API 不再從根目錄導出，這是刻意為之，旨在減少 React Native API 的整體表面積。"
+      }
+    },
+    {
+      "segment_id": "688f7369",
+      "source_content": ":::tip[API feedback]\n\n**Sending feedback**: We will be working with the community to finalize which APIs we export over (at least) the next two React Native releases. Please share your feedback in our [feedback thread](https://github.com/react-native-community/discussions-and-proposals/discussions/893).\n\nSee also our [announcement blog post](/blog/2025/06/12/moving-towards-a-stable-javascript-api) for more info on our motivation and timelines.\n\n:::",
+      "source_content_hash": "d5dd50970f5e8b0cc15b81b7c9c46ea06a8818109201656a3d892ccd1904c34a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip[API 意見回饋]\n\n**提交意見**：我們將與社群合作，在（至少）未來兩個 React Native 版本中共同決定最終導出的 API 清單。請在我們的[意見討論串](https://github.com/react-native-community/discussions-and-proposals/discussions/893)分享您的想法。\n\n另請參閱我們的[公告部落格文章](/blog/2025/06/12/moving-towards-a-stable-javascript-api)了解我們的動機與時程規劃。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "6f930b2f",
+      "source_content": "## Migration guide",
+      "source_content_hash": "9af00acc22f306f45d5be45f4effca0cdb893c42c064009b7bd87e3161c342f7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 遷移指南"
+      }
+    },
+    {
+      "segment_id": "11c76fcc",
+      "source_content": "### Codegen types should now be imported from the `react-native` package",
+      "source_content_hash": "d5794a88b9f5730253809f9639906c26f002cff9ff1a0e4120b96672aaecf211",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Codegen 型別現在應從 `react-native` 套件導入"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "Types used for codegen, like `Int32`, `Double`, `WithDefault` etc. are now available under a single `CodegenTypes` namespace. Similarly, `codegenNativeComponent` and `codegenNativeCommands` are now available to import from the react-native package instead of using the deep import.",
+      "source_content_hash": "c4e29325fc87c002223814956d363a16e8120f6837f4df73c523c84f05045307",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於 codegen 的型別（如 `Int32`、`Double`、`WithDefault` 等）現在統一歸類於 `CodegenTypes` 命名空間下。同樣地，`codegenNativeComponent` 與 `codegenNativeCommands` 現在也改為從 react-native 套件導入，而非使用深層導入路徑。"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "Namespaced `CodegenTypes` as well as `codegenNativeCommands` and `codegenNativeComponent` are also available from `react-native` package when the Strict API is not enabled to make the adoption easier for third-party libraries.",
+      "source_content_hash": "e0562369fc30eff2325caa881de5f9b6e04c070d8f190e937bbddfc801c6ba7a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "命名空間化的 `CodegenTypes` 以及 `codegenNativeCommands` 和 `codegenNativeComponent` 在未啟用嚴格版 API 時仍可從 `react-native` 套件取得，以便第三方函式庫更容易進行適配。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "**Before**",
+      "source_content_hash": "7d400a6ca087cd9a9d632d620db28b8034e7cf5c8df933c0fa1ef26831a249e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**變更前**"
+      }
+    },
+    {
+      "segment_id": "6d254e09",
+      "source_content": "```ts title=\"\"\nimport codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';\nimport type {\n  Int32,\n  WithDefault,\n} from 'react-native/Libraries/Types/CodegenTypes';\n\ninterface NativeProps extends ViewProps {\n  enabled?: WithDefault<boolean, true>;\n  size?: Int32;\n}\n\nexport default codegenNativeComponent<NativeProps>(\n  'RNCustomComponent',\n);\n```",
+      "source_content_hash": "4686f5f489d347fd3699456ef749d988c0ffe7ce29ef8eb9dca69eb6945e9ec9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6d254e09"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "**After**",
+      "source_content_hash": "12282d947f67f1ca4d2e90c5a876bcae871b51dc2cb2ea819d9871ff50a5f0ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**變更後**"
+      }
+    },
+    {
+      "segment_id": "8a9e710a",
+      "source_content": "```ts title=\"\"\nimport {CodegenTypes, codegenNativeComponent} from 'react-native';\n\ninterface NativeProps extends ViewProps {\n  enabled?: CodegenTypes.WithDefault<boolean, true>;\n  size?: CodegenTypes.Int32;\n}\n\nexport default codegenNativeComponent<NativeProps>(\n  'RNCustomComponent',\n);\n```",
+      "source_content_hash": "cc65eb3c35ba0f9e2d3072c44dc617d29531ca8ca3fde27146a9ed66d4a1c309",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a9e710a"
+      }
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "### Removal of `*Static` types",
+      "source_content_hash": "48b9812f8c44c215e3f0e71f7592c8017f2c1c615c99ab0f7ba5ca5b2892098d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除 `*Static` 型別"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "**Before**",
+      "source_content_hash": "7d400a6ca087cd9a9d632d620db28b8034e7cf5c8df933c0fa1ef26831a249e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**變更前**"
+      }
+    },
+    {
+      "segment_id": "59f28e14",
+      "source_content": "```tsx title=\"\"\nimport {Linking, LinkingStatic} from 'react-native';\n\nfunction foo(linking: LinkingStatic) {}\nfoo(Linking);\n```",
+      "source_content_hash": "1ddf916e37da147e8b4433001919e088fb4aa18ae62153c37a35574031358bb3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_59f28e14"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "**After**",
+      "source_content_hash": "12282d947f67f1ca4d2e90c5a876bcae871b51dc2cb2ea819d9871ff50a5f0ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**變更後**"
+      }
+    },
+    {
+      "segment_id": "1cf51900",
+      "source_content": "```tsx title=\"\"\nimport {Linking} from 'react-native';\n\nfunction foo(linking: Linking) {}\nfoo(Linking);\n```",
+      "source_content_hash": "3515ad3ac348fa03bff55417482adb35bee607289a82482960d94763524be0ab",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1cf51900"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "The following APIs were previously named as `*Static` plus a variable declaration of said type. In most cases there was an alias so that value and the type were exported under the same identifier, but some were missing.",
+      "source_content_hash": "8e50d75b0233f19708ad9745eae1354887d6dfd1a40c433406f989b947adb201",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下 API 先前採用 `*Static` 命名方式並搭配該型別的變數宣告。多數情況下會存在別名，使值與型別能透過相同識別符號導出，但部分 API 缺少此機制。"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "(For example there was an `AlertStatic` type, `Alert` variable of type `AlertStatic` and type `Alert` which was an alias for `AlertStatic`. But in the case of `PixelRatio` there was a `PixelRatioStatic` type and a `PixelRatio` variable of that type without additional type aliases.)",
+      "source_content_hash": "e79a13b5176bdbd314188b52c23a364dd1f8f38846d518bbf616cf4b46954ad7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "（例如過去存在 `AlertStatic` 類型、`Alert` 變數（類型為 `AlertStatic`）以及作為 `AlertStatic` 別名的 `Alert` 類型。但在 `PixelRatio` 案例中，有 `PixelRatioStatic` 類型和該類型的 `PixelRatio` 變數，卻沒有額外的類型別名。）"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "**Affected APIs**",
+      "source_content_hash": "7708a930c429390b1cbe6d9d72ed7facaf2b1242973502b07d1facde866af0d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**受影響的 API**"
+      }
+    },
+    {
+      "segment_id": "2890f5b2",
+      "source_content": "- `AlertStatic`\n- `ActionSheetIOSStatic`\n- `ToastAndroidStatic`\n- `InteractionManagerStatic` (In this case there was no relevant `InteractionManager` type alias)\n- `UIManagerStatic`\n- `PlatformStatic`\n- `SectionListStatic`\n- `PixelRatioStatic` (In this case there was no relevant `PixelRatio` type alias)\n- `AppStateStatic`\n- `AccessibilityInfoStatic`\n- `ImageResizeModeStatic`\n- `BackHandlerStatic`\n- `DevMenuStatic` (In this case there was no relevant `DevMenu` type alias)\n- `ClipboardStatic`\n- `PermissionsAndroidStatic`\n- `ShareStatic`\n- `DeviceEventEmitterStatic`\n- `LayoutAnimationStatic`\n- `KeyboardStatic` (In this case there was no relevant `Keyboard` type alias)\n- `DevSettingsStatic` (In this case there was no relevant `DevSettings` type alias)\n- `I18nManagerStatic`\n- `EasingStatic`\n- `PanResponderStatic`\n- `NativeModulesStatic` (In this case there was no relevant `NativeModules` type alias)\n- `LogBoxStatic`\n- `PushNotificationIOSStatic`\n- `SettingsStatic`\n- `VibrationStatic`",
+      "source_content_hash": "548fc787c2f98b427ef8bafdb2c1a98115f8c4e90d9fca0bb25161d0f670f98f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `AlertStatic`\n- `ActionSheetIOSStatic`\n- `ToastAndroidStatic`\n- `InteractionManagerStatic`（此案例中無對應的 `InteractionManager` 類型別名）\n- `UIManagerStatic`\n- `PlatformStatic`\n- `SectionListStatic`\n- `PixelRatioStatic`（此案例中無對應的 `PixelRatio` 類型別名）\n- `AppStateStatic`\n- `AccessibilityInfoStatic`\n- `ImageResizeModeStatic`\n- `BackHandlerStatic`\n- `DevMenuStatic`（此案例中無對應的 `DevMenu` 類型別名）\n- `ClipboardStatic`\n- `PermissionsAndroidStatic`\n- `ShareStatic`\n- `DeviceEventEmitterStatic`\n- `LayoutAnimationStatic`\n- `KeyboardStatic`（此案例中無對應的 `Keyboard` 類型別名）\n- `DevSettingsStatic`（此案例中無對應的 `DevSettings` 類型別名）\n- `I18nManagerStatic`\n- `EasingStatic`\n- `PanResponderStatic`\n- `NativeModulesStatic`（此案例中無對應的 `NativeModules` 類型別名）\n- `LogBoxStatic`\n- `PushNotificationIOSStatic`\n- `SettingsStatic`\n- `VibrationStatic`"
+      }
+    },
+    {
+      "segment_id": "73776161",
+      "source_content": "### Some core components are now function components instead of class components",
+      "source_content_hash": "6d422a77a82bfe548f359b46057fd03248f3ee575640de990aae60d6e3657b75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 部分核心元件現改為函式元件而非類別元件"
+      }
+    },
+    {
+      "segment_id": "6b304caa",
+      "source_content": "- `View`\n- `Image`\n- `TextInput`\n- `Modal`\n- `Text`\n- `TouchableWithoutFeedback`\n- `Switch`\n- `ActivityIndicator`\n- `ProgressBarAndroid`\n- `InputAccessoryView`\n- `Button`\n- `SafeAreaView`",
+      "source_content_hash": "794996b29a806977b938ff7ae981c79c73afb92f4269e23adde07bdc40129ae5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `View`\n- `Image`\n- `TextInput`\n- `Modal`\n- `Text`\n- `TouchableWithoutFeedback`\n- `Switch`\n- `ActivityIndicator`\n- `ProgressBarAndroid`\n- `InputAccessoryView`\n- `Button`\n- `SafeAreaView`"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "Due to this change, accessing ref types of these views requires using `React.ComponentRef<typeof View>` pattern which works as expected for both class and function components, e.g.:",
+      "source_content_hash": "78465757b8ee9bf4da0a231f5206c5f1f2162b38237702be61c45304f4e7238b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此變更，存取這些視圖的 ref 類型需改用 `React.ComponentRef<typeof View>` 模式，此模式對類別元件與函式元件皆適用，例如："
+      }
+    },
+    {
+      "segment_id": "0029045f",
+      "source_content": "```ts title=\"\"\nconst ref = useRef<React.ComponentRef<typeof View>>(null);\n```",
+      "source_content_hash": "53e67183c419565aa791ac1e4a4d30089ca9ce67a12256294c267bed7173c8ae",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "## Other breaking changes",
+      "source_content_hash": "c3ee12b1f7f688c7b7359a35d4aba682d2cd93c289905cbcea202bf876e597f7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他重大變更"
+      }
+    },
+    {
+      "segment_id": "657bde08",
+      "source_content": "### Changes to Animated types",
+      "source_content_hash": "a1519acc854e87fa651c1b3deebc49b75a19ad882e8fa4c9a843b44c5f0822ee",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Animated 類型調整"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "Animated nodes were previously generic types based on their interpolation output. Now, they are non-generic types with a generic `interpolate` method.",
+      "source_content_hash": "a6923aa7e94c100f2b62f5d9cb3790c752a1fdf810b2f2918c19765458e52d0a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Animated 節點原先基於插值輸出作為泛型類型，現改為非泛型類型並搭配泛型 `interpolate` 方法。"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "`Animated.LegacyRef` is no longer available.",
+      "source_content_hash": "d5d55fd4ca226d1a7f7856afa109457fbcf9df1dc76eba2c7be56701ef6d6ce7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated.LegacyRef` 已移除。"
+      }
+    },
+    {
+      "segment_id": "a49ac2ed",
+      "source_content": "### Unified types for optional props",
+      "source_content_hash": "fcbc117d3316d095f6b742af656fe18ccb2192d21372f8ba292804f8065527e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 統一可選屬性的類型"
+      }
+    },
+    {
+      "segment_id": "808b0414",
+      "source_content": "In the new types, every optional prop will be typed as `type | undefined`.",
+      "source_content_hash": "ad512b84428c6cbb37356e472c9d47e7e70d2648a27d3a49e6d8a4990bd94c0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "新類型系統中，所有可選屬性將統一標記為 `type | undefined`。"
+      }
+    },
+    {
+      "segment_id": "a75f8411",
+      "source_content": "### Removal of some deprecated types",
+      "source_content_hash": "dc4a252781029529d46966403e5ac66200a8653529c4a4ccd884a7e1e0152b1b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除部分棄用類型"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "All types listed in [`DeprecatedPropertiesAlias.d.ts`](https://github.com/facebook/react-native/blob/0.80-stable/packages/react-native/types/public/DeprecatedPropertiesAlias.d.ts) are inaccessible under the Strict API.",
+      "source_content_hash": "b51c717114968915d68d0a9e34a81c2ccc2d3c1090adacefd9079e1cecea12ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "嚴格 API 下無法存取 [`DeprecatedPropertiesAlias.d.ts`](https://github.com/facebook/react-native/blob/0.80-stable/packages/react-native/types/public/DeprecatedPropertiesAlias.d.ts) 列出的所有類型。"
+      }
+    },
+    {
+      "segment_id": "8d279c43",
+      "source_content": "### Removal of leftover component props",
+      "source_content_hash": "78cb56711b7d56687fec95d82fcb33e4ec0a299ade8b4d5e34c67a47bbbc3c97",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除殘留元件屬性"
+      }
+    },
+    {
+      "segment_id": "e5821418",
+      "source_content": "Some properties that were defined in type definitions but were not used by the component or were lacking a definition were removed (for example: `lineBreakMode` on `Text`, `scrollWithoutAnimationTo` on `ScrollView`, transform styles defined outside of transform array).",
+      "source_content_hash": "df5a299d39278e23b660d1270190ce2aa4c8b1755d58869353720b33d9b33ea1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "刪除了類型定義中存在但元件未使用或缺乏定義的屬性（例如：`Text` 的 `lineBreakMode`、`ScrollView` 的 `scrollWithoutAnimationTo`、transform 陣列外定義的 transform 樣式）。"
+      }
+    },
+    {
+      "segment_id": "c4ac6a6f",
+      "source_content": "### Previously accessible private type helpers may now be removed",
+      "source_content_hash": "5b25132483f26ebd3057d38e4fc9aa205db09f5dc9d20aeeb1f2192c91f2af25",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 原先可存取的私有類型輔助工具可能已被移除"
+      }
+    },
+    {
+      "segment_id": "b49a7009",
+      "source_content": "Due to the configuration of the previous type definitions, every defined type was accessible from the `react-native` package. This included types that were not explicitly exported and helper types that were only supposed to be used internally.",
+      "source_content_hash": "d66af76e171771464169af9d074fa7acda3877da6b6194c67e254860866333b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於舊版類型定義的配置，所有定義類型皆可從 `react-native` 套件存取，這包含未明確導出的類型與僅限內部使用的輔助類型。"
+      }
+    },
+    {
+      "segment_id": "9ebd9d9b",
+      "source_content": "Notable examples of this are types related to StyleSheet (like `RecursiveArray`, `RegisteredStyle` and `Falsy`) and Animated (like `WithAnimatedArray` and `WithAnimatedObject`).",
+      "source_content_hash": "8fef52ab6cd5bd101af5d30a7562733f23595acd88dcc616ce1d9c861f37ce4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯著案例包含與 StyleSheet 相關的類型（如 `RecursiveArray`、`RegisteredStyle` 和 `Falsy`）以及 Animated 相關類型（如 `WithAnimatedArray` 和 `WithAnimatedObject`）。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/strict-typescript-api.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.205145+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "78de27de71290bb6712f0fff2d0006a5a7d245d31d1c2db3cc8cbd6c877d3ce4"
+  }
+}

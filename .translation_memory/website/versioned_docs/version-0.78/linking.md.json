@@ -1,0 +1,742 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.78/linking.md",
+  "source_file_content_hash": "4ca405316735f6411d25709004897ef929e9bb3e1ea5d8bd88c95cb6eb1a914f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: linking\ntitle: Linking\n---",
+      "source_content_hash": "d4107b366051c2dddbab90f86c241869be35f3570283fa4e4715457c7b420673",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`Linking` gives you a general interface to interact with both incoming and outgoing app links.",
+      "source_content_hash": "ddc4f86ead5f7729c87d9b1d6d2512a8a4b2895a52c1408bcff45243012d2a40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Linking` 提供了一個通用介面，用於處理傳入和傳出的應用程式連結。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Every Link (URL) has a URL Scheme, some websites are prefixed with `https://` or `http://` and the `http` is the URL Scheme. Let's call it scheme for short.",
+      "source_content_hash": "f4f6427e0c9c4158c0ca91cf9eba1c4de917a6237d081237c824cc8924d42057",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個連結（URL）都有一個 URL 方案，某些網站以 `https://` 或 `http://` 為前綴，其中的 `http` 就是 URL 方案。我們簡稱其為 scheme。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "In addition to `https`, you're likely also familiar with the `mailto` scheme. When you open a link with the mailto scheme, your operating system will open an installed mail application. Similarly, there are schemes for making phone calls and sending SMS. Read more about [built-in URL](#built-in-url-schemes) schemes below.",
+      "source_content_hash": "01970767a486a9d8691d7a531f74df0b62dac03a274b6b4b3dc41ab3b49a2bc7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了 `https`，你可能還熟悉 `mailto` 方案。當你打開一個帶有 mailto 方案的連結時，你的操作系統會打開已安裝的郵件應用程式。同樣地，也有用於撥打電話和發送 SMS 的方案。更多關於[內建 URL](#built-in-url-schemes) 方案的資訊請參閱下文。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "Like using the mailto scheme, it's possible to link to other applications by using custom url schemes. For example, when you get a **Magic Link** email from Slack, the **Launch Slack** button is an anchor tag with an href that looks something like: `slack://secret/magic-login/other-secret`. Like with Slack, you can tell the operating system that you want to handle a custom scheme. When the Slack app opens, it receives the URL that was used to open it. This is often referred to as deep linking. Read more about how to [get the deep link](#get-the-deep-link) into your app.",
+      "source_content_hash": "c60bbc3669834472285f4d1d56cd1fa7a0308fdb6fd300c2fa80a6285cf04672",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "就像使用 mailto 方案一樣，可以通過自定義 URL 方案連結到其他應用程式。例如，當你從 Slack 收到一封 **Magic Link** 郵件時，**Launch Slack** 按鈕是一個錨標籤，其 href 看起來像這樣：`slack://secret/magic-login/other-secret`。與 Slack 類似，你可以告訴操作系統你想要處理一個自定義方案。當 Slack 應用程式打開時，它會接收到用於打開它的 URL。這通常被稱為深度連結。更多關於如何[獲取深度連結](#get-the-deep-link)到你的應用程式的資訊請參閱下文。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "A custom URL scheme isn't the only way to open your application on mobile. For example, if you want to email someone a link to be opened on mobile, using a custom URL scheme isn't ideal because the user might open the email on a desktop, where the link wouldn't work. Instead, you should use standard `https` links, such as `https://www.myapp.io/records/1234546`. On mobile, these links can be configured to open your app. On Android, this feature is called **Deep Links**, while on iOS, it is known as **Universal Links**.",
+      "source_content_hash": "15dcae6971e4d580efdd304457b9dcdb133e62a3bd996b6a3dfbbb74d15693f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自定義 URL 方案並不是在移動設備上打開應用程式的唯一方式。例如，如果你想通過電子郵件發送一個連結以便在移動設備上打開，使用自定義 URL 方案並不理想，因為用戶可能在桌面上打開郵件，而連結在那裡無法工作。相反，你應該使用標準的 `https` 連結，例如 `https://www.myapp.io/records/1234546`。在移動設備上，這些連結可以配置為打開你的應用程式。在 Android 上，此功能稱為 **Deep Links**，而在 iOS 上則稱為 **Universal Links**。"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### Built-in URL Schemes",
+      "source_content_hash": "ebc4264fb3b5763982b68f8b467e0767a4554fab509db91b21bfd3d224c9668a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 內建 URL 方案"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "As mentioned in the introduction, there are some URL schemes for core functionality that exist on every platform. The following is a non-exhaustive list, but covers the most commonly used schemes.",
+      "source_content_hash": "eba87b29ec79c195319d53179015ca299d3df7c5f5ce3679be6f1f3d1313f1bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如引言所述，有一些用於核心功能的 URL 方案存在於每個平台上。以下是一個非詳盡的列表，但涵蓋了最常用的方案。"
+      }
+    },
+    {
+      "segment_id": "e1ffabf9",
+      "source_content": "| Scheme           | Description                                | iOS | Android |\n| ---------------- | ------------------------------------------ | --- | ------- |\n| `mailto`         | Open mail app, eg: mailto: support@expo.io | ✅  | ✅      |\n| `tel`            | Open phone app, eg: tel:+123456789         | ✅  | ✅      |\n| `sms`            | Open SMS app, eg: sms:+123456789           | ✅  | ✅      |\n| `https` / `http` | Open web browser app, eg: https://expo.io  | ✅  | ✅      |",
+      "source_content_hash": "0dc0efcefd4863a7257b33dea891c0f25e02753c3c3a871d8b1946940a0e56f9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e1ffabf9"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "### Enabling Deep Links",
+      "source_content_hash": "9785527bea987dfa04eba04d915603a6bff1392ec853d383e2017a9fcd9011a3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 啟用深度連結"
+      }
+    },
+    {
+      "segment_id": "ea37d64a",
+      "source_content": "<div className=\"banner-native-code-required\">\n  <h3>Projects with Native Code Only</h3>\n  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href=\"https://docs.expo.dev/guides/linking/\">Linking</a> in the Expo documentation for the appropriate alternative.</p>\n</div>",
+      "source_content_hash": "aec4f4887a5e3886a392a875ee4df2a2cfa85a96586823d11323816f9715088e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ea37d64a"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "If you want to enable deep links in your app, please read the below guide:",
+      "source_content_hash": "9f6c5fc7b0eb0992c4f81312cf915ae11da69cf6e46d12755b55b4fe5afd91d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你想在應用程式中啟用深度連結，請閱讀以下指南："
+      }
+    },
+    {
+      "segment_id": "720d606f",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultPlatform} values={constants.platforms}>\n<TabItem value=\"android\">\n\n> For instructions on how to add support for deep linking on Android, refer to [Enabling Deep Links for App Content - Add Intent Filters for Your Deep Links](https://developer.android.com/training/app-indexing/deep-linking.html#adding-filters).\n\nIf you wish to receive the intent in an existing instance of MainActivity, you may set the `launchMode` of MainActivity to `singleTask` in `AndroidManifest.xml`. See [`<activity>`](https://developer.android.com/guide/topics/manifest/activity-element.html) documentation for more information.\n\n```xml\n<activity\n  android:name=\".MainActivity\"\n  android:launchMode=\"singleTask\">\n```\n\n</TabItem>\n<TabItem value=\"ios\">\n\n> **NOTE:** On iOS, you'll need to add the `LinkingIOS` folder into your header search paths as described in step 3 [here](linking-libraries-ios#step-3). If you also want to listen to incoming app links during your app's execution, you'll need to add the following lines to your `*AppDelegate.m`:\n\n```objectivec\n// iOS 9.x or newer\n#import <React/RCTLinkingManager.h>\n\n- (BOOL)application:(UIApplication *)application\n   openURL:(NSURL *)url\n   options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options\n{\n  return [RCTLinkingManager application:application openURL:url options:options];\n}\n```\n\nIf you're targeting iOS 8.x or older, you can use the following code instead:\n\n```objectivec\n// iOS 8.x or older\n#import <React/RCTLinkingManager.h>\n\n- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url\n  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation\n{\n  return [RCTLinkingManager application:application openURL:url\n                      sourceApplication:sourceApplication annotation:annotation];\n}\n```\n\nIf your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:\n\n```objectivec\n- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity\n restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler\n{\n return [RCTLinkingManager application:application\n                  continueUserActivity:userActivity\n                    restorationHandler:restorationHandler];\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "749f65a7d7f72447a0069ea010c643e1e7db5dfc36bdf4a51be1bc4b931b59b2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_720d606f"
+      }
+    },
+    {
+      "segment_id": "b10963d7",
+      "source_content": "### Handling Deep Links",
+      "source_content_hash": "1a678605098f6c125181f717a19ac16c031f64557758a20dc63e84cbfd7d60f7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 處理深度連結"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "There are two ways to handle URLs that open your app.",
+      "source_content_hash": "be8c36d03ec001a5c56ffb258c8608f9b3d576c8c82c6d20fab716727b57c686",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有兩種方式可以處理打開你應用程式的 URL。"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "#### 1. If the app is already open, the app is foregrounded and a Linking 'url' event is fired",
+      "source_content_hash": "3cea7f900c8ab2f3e36c26e2b8f5ba19acac344bf98e3eefafc7ca52c8affdf3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 1. 如果應用程式已經打開，應用程式會被置於前台並觸發一個 Linking 'url' 事件"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "You can handle these events with `Linking.addEventListener('url', callback)` - it calls `callback({url})` with the linked URL",
+      "source_content_hash": "55f898702360411197fde107f87fe874baa46383bfc74dbdfbeab5c339cfa72e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以使用 `Linking.addEventListener('url', callback)` 來處理這些事件——它會調用 `callback({url})` 並傳入連結的 URL"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "#### 2. If the app is not already open, it is opened and the url is passed in as the initialURL",
+      "source_content_hash": "1291365be0a64431fa45426168e0bbb7cb7f6c58e9b8ad0e195fef69b2b54ef7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 2. 如果應用程式尚未打開，它會被打開並且 URL 會作為 initialURL 傳入"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "You can handle these events with `Linking.getInitialURL()` - it returns a Promise that resolves to the URL, if there is one.",
+      "source_content_hash": "610da2414601cdc23591860246090aaf3ba00fc9abda9d643c1100660a32155c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以使用 `Linking.getInitialURL()` 來處理這些事件——它返回一個 Promise，該 Promise 會解析為 URL（如果有的話）。"
+      }
+    },
+    {
+      "segment_id": "04837130",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "8574d51c",
+      "source_content": "### Open Links and Deep Links (Universal Links)",
+      "source_content_hash": "e8b5181bd5d09fd96ba01f274a047f3ba65743df1a76a652eca34206cdbad13a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 打開連結和深度連結（Universal Links）"
+      }
+    },
+    {
+      "segment_id": "f018dbb4",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js\nimport React, {useCallback} from 'react';\nimport {Alert, Button, Linking, StyleSheet, View} from 'react-native';\n\nconst supportedURL = 'https://google.com';\n\nconst unsupportedURL = 'slack://open?team=123456';\n\nconst OpenURLButton = ({url, children}) => {\n  const handlePress = useCallback(async () => {\n    // Checking if the link is supported for links with custom URL scheme.\n    const supported = await Linking.canOpenURL(url);\n\n    if (supported) {\n      // Opening the link with some app, if the URL scheme is \"http\" the web link should be opened\n      // by some browser in the mobile\n      await Linking.openURL(url);\n    } else {\n      Alert.alert(`Don't know how to open this URL: ${url}`);\n    }\n  }, [url]);\n\n  return <Button title={children} onPress={handlePress} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>\n      <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx\nimport React, {useCallback} from 'react';\nimport {Alert, Button, Linking, StyleSheet, View} from 'react-native';\n\nconst supportedURL = 'https://google.com';\n\nconst unsupportedURL = 'slack://open?team=123456';\n\ntype OpenURLButtonProps = {\n  url: string;\n  children: string;\n};\n\nconst OpenURLButton = ({url, children}: OpenURLButtonProps) => {\n  const handlePress = useCallback(async () => {\n    // Checking if the link is supported for links with custom URL scheme.\n    const supported = await Linking.canOpenURL(url);\n\n    if (supported) {\n      // Opening the link with some app, if the URL scheme is \"http\" the web link should be opened\n      // by some browser in the mobile\n      await Linking.openURL(url);\n    } else {\n      Alert.alert(`Don't know how to open this URL: ${url}`);\n    }\n  }, [url]);\n\n  return <Button title={children} onPress={handlePress} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>\n      <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "5d2ecd70f3ab4e942a6478f94cf8be09a66ec1c104d315a1a980a086f4b20b38",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f018dbb4"
+      }
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "### Open Custom Settings",
+      "source_content_hash": "f2dc945b78ecaf65651586c5385d6530c5e606246f3b4ee4ce1287dc0c4dd4ef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 打開自定義設置"
+      }
+    },
+    {
+      "segment_id": "e8993097",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js\nimport React, {useCallback} from 'react';\nimport {Button, Linking, StyleSheet, View} from 'react-native';\n\nconst OpenSettingsButton = ({children}) => {\n  const handlePress = useCallback(async () => {\n    // Open the custom settings if the app has one\n    await Linking.openSettings();\n  }, []);\n\n  return <Button title={children} onPress={handlePress} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <OpenSettingsButton>Open Settings</OpenSettingsButton>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx\nimport React, {useCallback} from 'react';\nimport {Button, Linking, StyleSheet, View} from 'react-native';\n\ntype OpenSettingsButtonProps = {\n  children: string;\n};\n\nconst OpenSettingsButton = ({children}: OpenSettingsButtonProps) => {\n  const handlePress = useCallback(async () => {\n    // Open the custom settings if the app has one\n    await Linking.openSettings();\n  }, []);\n\n  return <Button title={children} onPress={handlePress} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <OpenSettingsButton>Open Settings</OpenSettingsButton>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "450beda091f0286e40dc23465e86333de06ebc702dd41964ef059546ddf00b47",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e8993097"
+      }
+    },
+    {
+      "segment_id": "e93ab8a6",
+      "source_content": "### Get the Deep Link",
+      "source_content_hash": "aaf68cd078846d824f996400708c254bb7cbbc4a44aad68db0995fdeaea70f48",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 獲取深度連結"
+      }
+    },
+    {
+      "segment_id": "725f0146",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js\nimport React, {useState, useEffect} from 'react';\nimport {Linking, StyleSheet, Text, View} from 'react-native';\n\nconst useInitialURL = () => {\n  const [url, setUrl] = useState(null);\n  const [processing, setProcessing] = useState(true);\n\n  useEffect(() => {\n    const getUrlAsync = async () => {\n      // Get the deep link used to open the app\n      const initialUrl = await Linking.getInitialURL();\n\n      // The setTimeout is just for testing purpose\n      setTimeout(() => {\n        setUrl(initialUrl);\n        setProcessing(false);\n      }, 1000);\n    };\n\n    getUrlAsync();\n  }, []);\n\n  return {url, processing};\n};\n\nconst App = () => {\n  const {url: initialUrl, processing} = useInitialURL();\n\n  return (\n    <View style={styles.container}>\n      <Text>\n        {processing\n          ? 'Processing the initial url from a deep link'\n          : `The deep link is: ${initialUrl || 'None'}`}\n      </Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx\nimport React, {useState, useEffect} from 'react';\nimport {Linking, StyleSheet, Text, View} from 'react-native';\n\nconst useInitialURL = () => {\n  const [url, setUrl] = useState<string | null>(null);\n  const [processing, setProcessing] = useState(true);\n\n  useEffect(() => {\n    const getUrlAsync = async () => {\n      // Get the deep link used to open the app\n      const initialUrl = await Linking.getInitialURL();\n\n      // The setTimeout is just for testing purpose\n      setTimeout(() => {\n        setUrl(initialUrl);\n        setProcessing(false);\n      }, 1000);\n    };\n\n    getUrlAsync();\n  }, []);\n\n  return {url, processing};\n};\n\nconst App = () => {\n  const {url: initialUrl, processing} = useInitialURL();\n\n  return (\n    <View style={styles.container}>\n      <Text>\n        {processing\n          ? 'Processing the initial url from a deep link'\n          : `The deep link is: ${initialUrl || 'None'}`}\n      </Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "c2b8a286a64b47d02318b30c91fe849b3e9e99b7e60b9f2f18b3f9344202d259",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_725f0146"
+      }
+    },
+    {
+      "segment_id": "96cd7bb6",
+      "source_content": "### Send Intents (Android)",
+      "source_content_hash": "46a41af19c9b6f68d4f781190b61bcdcdea2fa33fba1de930a31d16a1bfa3f4f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 發送 Intents（Android）"
+      }
+    },
+    {
+      "segment_id": "a6fc596a",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Linking%20Example&supportedPlatforms=android&ext=js\nimport React, {useCallback} from 'react';\nimport {Alert, Button, Linking, StyleSheet, View} from 'react-native';\n\nconst SendIntentButton = ({action, extras, children}) => {\n  const handlePress = useCallback(async () => {\n    try {\n      await Linking.sendIntent(action, extras);\n    } catch (e) {\n      Alert.alert(e.message);\n    }\n  }, [action, extras]);\n\n  return <Button title={children} onPress={handlePress} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <SendIntentButton action=\"android.intent.action.POWER_USAGE_SUMMARY\">\n        Power Usage Summary\n      </SendIntentButton>\n      <SendIntentButton\n        action=\"android.settings.APP_NOTIFICATION_SETTINGS\"\n        extras={[\n          {\n            key: 'android.provider.extra.APP_PACKAGE',\n            value: 'com.facebook.katana',\n          },\n        ]}>\n        App Notification Settings\n      </SendIntentButton>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Linking%20Example&ext=tsx\nimport React, {useCallback} from 'react';\nimport {Alert, Button, Linking, StyleSheet, View} from 'react-native';\n\ntype SendIntentButtonProps = {\n  action: string;\n  children: string;\n  extras?: Array<{\n    key: string;\n    value: string | number | boolean;\n  }>;\n};\n\nconst SendIntentButton = ({\n  action,\n  extras,\n  children,\n}: SendIntentButtonProps) => {\n  const handlePress = useCallback(async () => {\n    try {\n      await Linking.sendIntent(action, extras);\n    } catch (e: any) {\n      Alert.alert(e.message);\n    }\n  }, [action, extras]);\n\n  return <Button title={children} onPress={handlePress} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <SendIntentButton action=\"android.intent.action.POWER_USAGE_SUMMARY\">\n        Power Usage Summary\n      </SendIntentButton>\n      <SendIntentButton\n        action=\"android.settings.APP_NOTIFICATION_SETTINGS\"\n        extras={[\n          {\n            key: 'android.provider.extra.APP_PACKAGE',\n            value: 'com.facebook.katana',\n          },\n        ]}>\n        App Notification Settings\n      </SendIntentButton>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "65544f7bbdcb709b587280092252d7ab1ddc8025a8ffa027bf07333b68ea8912",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a6fc596a"
+      }
+    },
+    {
+      "segment_id": "b7644a77",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "61b8f47a",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "e9a726de",
+      "source_content": "### `addEventListener()`",
+      "source_content_hash": "c14ee61a90cacc6adff71fa9f1ff675bde58b04df64bfe24a80a9a4a21f7ced0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addEventListener()`"
+      }
+    },
+    {
+      "segment_id": "6ed66131",
+      "source_content": "```tsx\nstatic addEventListener(\n  type: 'url',\n  handler: (event: {url: string}) => void,\n): EmitterSubscription;\n```",
+      "source_content_hash": "d3c4cdff016da53c46f259a97d86e5db879056d62f672744b2b2caa66812e7fb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6ed66131"
+      }
+    },
+    {
+      "segment_id": "624f0d89",
+      "source_content": "Add a handler to Linking changes by listening to the `url` event type and providing the handler.",
+      "source_content_hash": "e99ae8459fd80a025605331f97568ba6d2a94e8b44ad130b840d93bdda0282b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通過監聽 `url` 事件類型並提供處理程序，為 Linking 變化添加一個處理程序。"
+      }
+    },
+    {
+      "segment_id": "c779bd5f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "89d9a6db",
+      "source_content": "### `canOpenURL()`",
+      "source_content_hash": "54c34e69bb4de2b4afce6206fe624f6fcb2ef988538e55498cef28ae91b9536a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `canOpenURL()`"
+      }
+    },
+    {
+      "segment_id": "94fbdbda",
+      "source_content": "```tsx\nstatic canOpenURL(url: string): Promise<boolean>;\n```",
+      "source_content_hash": "5f4f4d355ade6d6d2f7fa56a71ff556e9a9375fb0c433c7dec8e4f418c71d091",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_94fbdbda"
+      }
+    },
+    {
+      "segment_id": "2e4be0ab",
+      "source_content": "Determine whether or not an installed app can handle a given URL.",
+      "source_content_hash": "66035fb741d7583a0c380804eb9d0c704fd794403574512fb9947a7a47e6fc49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "判斷已安裝的應用程式是否能處理指定的 URL。"
+      }
+    },
+    {
+      "segment_id": "d66f9bc8",
+      "source_content": "The method returns a `Promise` object. When it is determined whether or not the given URL can be handled, the promise is resolved and the first parameter is whether or not it can be opened.",
+      "source_content_hash": "c65d5634a2fed7ddf866a0d28931b3886d314baed0f7b8dcc7d62acc9110993c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法會返回一個 `Promise` 物件。當系統判斷該 URL 是否能被處理時，Promise 會被解析，其第一個參數表示該 URL 是否能被打開。"
+      }
+    },
+    {
+      "segment_id": "3e09f17b",
+      "source_content": "The `Promise` will reject on Android if it was impossible to check if the URL can be opened or when targeting Android 11 (SDK 30) if you didn't specify the relevant intent queries in `AndroidManifest.xml`. Similarly on iOS, the promise will reject if you didn't add the specific scheme in the `LSApplicationQueriesSchemes` key inside `Info.plist` (see bellow).",
+      "source_content_hash": "bffb4cbc26d09d0bfbf228bec9323b690e270a558f5b0121455de66715ed5943",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，若無法檢查 URL 是否能被打開，或當目標為 Android 11 (SDK 30) 時未在 `AndroidManifest.xml` 中指定相關的 intent 查詢，Promise 會被拒絕。同樣地，在 iOS 上，若未在 `Info.plist` 的 `LSApplicationQueriesSchemes` 鍵中添加特定 scheme（見下文），Promise 也會被拒絕。"
+      }
+    },
+    {
+      "segment_id": "0e5d7420",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "736333fe",
+      "source_content": "| Name                                                     | Type   | Description      |\n| -------------------------------------------------------- | ------ | ---------------- |\n| url <div className=\"label basic required\">Required</div> | string | The URL to open. |",
+      "source_content_hash": "efafb54b7a1e14fad43db76cea68670d5274d903312c8a1c09c966c9a281e085",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_736333fe"
+      }
+    },
+    {
+      "segment_id": "a5a385ac",
+      "source_content": "> For web URLs, the protocol (`\"http://\"`, `\"https://\"`) must be set accordingly!",
+      "source_content_hash": "a636b0428c8b6ef472b9989141ed382d92f72e6cf980f50ff55e363095a040b9",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 對於網頁 URL，必須正確設定通訊協定（`\"http://\"`、`\"https://\"`）！"
+      }
+    },
+    {
+      "segment_id": "b08dacd7",
+      "source_content": "> This method has limitations on iOS 9+. From [the official Apple documentation](https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl):\n>\n> - If your app is linked against an earlier version of iOS but is running in iOS 9.0 or later, you can call this method up to 50 times. After reaching that limit, subsequent calls always resolve to `false`. If the user reinstalls or upgrades the app, iOS resets the limit.\n>\n> As of iOS 9, your app also needs to provide the `LSApplicationQueriesSchemes` key inside `Info.plist` or `canOpenURL()` will always resolve to `false`.",
+      "source_content_hash": "cf6f265aab567e2251ca205929b6427c168ca26e900f91ac499c2b1aec2d46ed",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 此方法在 iOS 9+ 上有其限制。根據 [Apple 官方文件](https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl)：\n>\n> - 若你的應用程式是針對較早版本的 iOS 所連結，但在 iOS 9.0 或更高版本上運行，則此方法最多可呼叫 50 次。達到此限制後，後續呼叫將始終解析為 `false`。若用戶重新安裝或升級應用程式，iOS 會重置此限制。\n>\n> 自 iOS 9 起，你的應用程式還需在 `Info.plist` 中提供 `LSApplicationQueriesSchemes` 鍵，否則 `canOpenURL()` 將始終解析為 `false`。"
+      }
+    },
+    {
+      "segment_id": "50f0d322",
+      "source_content": "> When targeting Android 11 (SDK 30) you must specify the intents for the schemes you want to handle in `AndroidManifest.xml`. A list of common intents can be found [here](https://developer.android.com/guide/components/intents-common).\n>\n> For example to handle `https` schemes the following needs to be added to your manifest:\n>\n> ```\n> <manifest ...>\n>     <queries>\n>         <intent>\n>             <action android:name=\"android.intent.action.VIEW\" />\n>             <data android:scheme=\"https\"/>\n>         </intent>\n>     </queries>\n> </manifest>\n> ```",
+      "source_content_hash": "e66601426d057435cdf3a435f14d5cf386cfd8a27eb1da15a181dcc2d44a1094",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 當目標為 Android 11 (SDK 30) 時，你必須在 `AndroidManifest.xml` 中指定要處理的 scheme 的 intents。常見的 intents 列表可參考 [這裡](https://developer.android.com/guide/components/intents-common)。\n>\n> 例如，要處理 `https` scheme，需在 manifest 中添加以下內容：\n>\n> ```\n> <manifest ...>\n>     <queries>\n>         <intent>\n>             <action android:name=\"android.intent.action.VIEW\" />\n>             <data android:scheme=\"https\"/>\n>         </intent>\n>     </queries>\n> </manifest>\n> ```"
+      }
+    },
+    {
+      "segment_id": "e14bc8f3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c6c37027",
+      "source_content": "### `getInitialURL()`",
+      "source_content_hash": "0008f71d0e7f2cd92a2b52589bafba46ffbf3b45fe0ad9f512d9948b836d3bf0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getInitialURL()`"
+      }
+    },
+    {
+      "segment_id": "0b0bae3c",
+      "source_content": "```tsx\nstatic getInitialURL(): Promise<string | null>;\n```",
+      "source_content_hash": "288be81f16238cb00afe29c0b287d9e7a9f11404c37b67bd7365b564584aeac9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0b0bae3c"
+      }
+    },
+    {
+      "segment_id": "1a0060fb",
+      "source_content": "If the app launch was triggered by an app link, it will give the link url, otherwise it will give `null`.",
+      "source_content_hash": "3001037939fb9dde105feb180900d55905d7d8bbd0f0d3192c58e3a812008d0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若應用程式的啟動是由應用程式連結觸發，則會返回該連結的 URL，否則返回 `null`。"
+      }
+    },
+    {
+      "segment_id": "021b3b2b",
+      "source_content": "> To support deep linking on Android, refer https://developer.android.com/training/app-indexing/deep-linking.html#handling-intents",
+      "source_content_hash": "c8e6108746093aa325c6ea5d3bec44390a4faefe36fcac49a10aec69c4998ec5",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 要在 Android 上支援深度連結，請參考 https://developer.android.com/training/app-indexing/deep-linking.html#handling-intents"
+      }
+    },
+    {
+      "segment_id": "0e02b265",
+      "source_content": "> getInitialURL may return `null` when Remote JS Debugging is active. Disable the debugger to ensure it gets passed.",
+      "source_content_hash": "ddd67e8abd0b16f043055d746b502503c64e4414408842b7beb3cc8bb094fc4d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 當遠端 JS 除錯功能啟用時，`getInitialURL` 可能會返回 `null`。請停用除錯器以確保能正確傳遞。"
+      }
+    },
+    {
+      "segment_id": "0fe5f5df",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9a24614d",
+      "source_content": "### `openSettings()`",
+      "source_content_hash": "aad10d77b4f6c2143bfe6e79e1392535ab622ecd57ac2e5660c60c0437c7a4e0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `openSettings()`"
+      }
+    },
+    {
+      "segment_id": "70609ff7",
+      "source_content": "```tsx\nstatic openSettings(): Promise<void>;\n```",
+      "source_content_hash": "5066185ed2901c5d91db3f946335eb245fdf9ef033264919c2989d7a41da95a1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_70609ff7"
+      }
+    },
+    {
+      "segment_id": "9136f816",
+      "source_content": "Open the Settings app and displays the app’s custom settings, if it has any.",
+      "source_content_hash": "c2531962bfbe76892932b648bff191b8fa39010ea00c8c78efc3220bc1a8071e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開啟設定應用程式並顯示該應用程式的自訂設定（若有）。"
+      }
+    },
+    {
+      "segment_id": "b1161146",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e4e26f5f",
+      "source_content": "### `openURL()`",
+      "source_content_hash": "e5a3b726370f0ebca3e6b88acdce3e389ceafd982c3c1f68a6d4125cbb99cc9f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `openURL()`"
+      }
+    },
+    {
+      "segment_id": "7174bc1f",
+      "source_content": "```tsx\nstatic openURL(url: string): Promise<any>;\n```",
+      "source_content_hash": "406c93ed1a685d8b9f6d7140e620911c8892d832ca21e5aeac3d7976ac792daa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7174bc1f"
+      }
+    },
+    {
+      "segment_id": "c9eef4b6",
+      "source_content": "Try to open the given `url` with any of the installed apps.",
+      "source_content_hash": "d2edce4f862357d23e469e678a6ef064073b0b833c649254de79627ad1cbbf7a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "嘗試使用任何已安裝的應用程式開啟指定的 `url`。"
+      }
+    },
+    {
+      "segment_id": "0b019848",
+      "source_content": "You can use other URLs, like a location (e.g. \"geo:37.484847,-122.148386\" on Android or \"https://maps.apple.com/?ll=37.484847,-122.148386\" on iOS), a contact, or any other URL that can be opened with the installed apps.",
+      "source_content_hash": "7553f15d06cae4d4eb61ed89dd59f70c94ab2347d5d3307f9395ee7fe9accdb1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你也可以使用其他 URL，例如位置（在 Android 上使用 \"geo:37.484847,-122.148386\"，在 iOS 上使用 \"https://maps.apple.com/?ll=37.484847,-122.148386\"）、聯絡人，或任何其他可透過已安裝應用程式開啟的 URL。"
+      }
+    },
+    {
+      "segment_id": "673173a8",
+      "source_content": "The method returns a `Promise` object. If the user confirms the open dialog or the url automatically opens, the promise is resolved. If the user cancels the open dialog or there are no registered applications for the url, the promise is rejected.",
+      "source_content_hash": "046e56cc7a9091e08cc561da8ec7662bc607c3d8f839db943477af6c490ca9bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法會返回一個 `Promise` 物件。若用戶確認開啟對話框或 URL 自動開啟，Promise 會被解析。若用戶取消開啟對話框或沒有已註冊的應用程式可處理該 URL，Promise 會被拒絕。"
+      }
+    },
+    {
+      "segment_id": "c637866f",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "1c9dbd77",
+      "source_content": "| Name                                                     | Type   | Description      |\n| -------------------------------------------------------- | ------ | ---------------- |\n| url <div className=\"label basic required\">Required</div> | string | The URL to open. |",
+      "source_content_hash": "efafb54b7a1e14fad43db76cea68670d5274d903312c8a1c09c966c9a281e085",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1c9dbd77"
+      }
+    },
+    {
+      "segment_id": "6f4f9e83",
+      "source_content": "> This method will fail if the system doesn't know how to open the specified URL. If you're passing in a non-http(s) URL, it's best to check `canOpenURL()` first.",
+      "source_content_hash": "ab0eb498df95fbb45acf833cd8a42bbb4380d7f11f221377d7d732282ff8e144",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 若系統不知道如何開啟指定的 URL，此方法將會失敗。若你傳入的是非 http(s) 的 URL，最好先檢查 `canOpenURL()`。"
+      }
+    },
+    {
+      "segment_id": "19739716",
+      "source_content": "> For web URLs, the protocol (`\"http://\"`, `\"https://\"`) must be set accordingly!",
+      "source_content_hash": "a636b0428c8b6ef472b9989141ed382d92f72e6cf980f50ff55e363095a040b9",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 對於網頁 URL，必須正確設定通訊協定（`\"http://\"`、`\"https://\"`）！"
+      }
+    },
+    {
+      "segment_id": "8f0f7a79",
+      "source_content": "> This method may behave differently in a simulator e.g. `\"tel:\"` links are not able to be handled in the iOS simulator as there's no access to the dialer app.",
+      "source_content_hash": "8110ffa1881af3bb0f9ac03c5c08a7320378df44a8f76a7248fdad7660de110d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 此方法在模擬器中的行為可能不同，例如 iOS 模擬器無法處理 `\"tel:\"` 連結，因為無法存取撥號應用程式。"
+      }
+    },
+    {
+      "segment_id": "629feaef",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "77dc047b",
+      "source_content": "### `sendIntent()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "e6989eec644a5d4ab155d829765a960c43d2de4e3bbe26b8aee828e96648760f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `sendIntent()` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "c24115da",
+      "source_content": "```tsx\nstatic sendIntent(\n  action: string,\n  extras?: Array<{key: string; value: string | number | boolean}>,\n): Promise<void>;\n```",
+      "source_content_hash": "14de6e4a81a9f3fe803c6bdf74947d03a2dc88f72b78ea19f5804d53c697616f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c24115da"
+      }
+    },
+    {
+      "segment_id": "d441c3ac",
+      "source_content": "Launch an Android intent with extras.",
+      "source_content_hash": "6a497fd8d782dcf9f147beaa773cdef46c240d3a80ad12c8371a22aa4edd77b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "啟動帶有附加資料的 Android intent。"
+      }
+    },
+    {
+      "segment_id": "538f8d2f",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "8e77a952",
+      "source_content": "| Name                                                        | Type                                                       |\n| ----------------------------------------------------------- | ---------------------------------------------------------- |\n| action <div className=\"label basic required\">Required</div> | string                                                     |\n| extras                                                      | `Array<{key: string, value: string ｜ number ｜ boolean}>` |",
+      "source_content_hash": "72e0cc615a8e1a5fbf4f05317156f7b2f671f9d1c1ada161336048d360de5592",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8e77a952"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.78/linking.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.788867+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "4ca405316735f6411d25709004897ef929e9bb3e1ea5d8bd88c95cb6eb1a914f"
+  }
+}

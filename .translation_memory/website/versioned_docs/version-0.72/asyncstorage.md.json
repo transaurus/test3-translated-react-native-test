@@ -1,0 +1,932 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/asyncstorage.md",
+  "source_file_content_hash": "b750e0d6a52c1199330a2c603af72b2c3bb037fa060e8c8ec841a327984ce8ab",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: asyncstorage\ntitle: '🚧 AsyncStorage'\n---",
+      "source_content_hash": "d87b603cbbc58e259de7db5e9d8064f3a8d16b571bd742a3d813648e28144628",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "f1ef2f7d",
+      "source_content": "> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=storage) instead.",
+      "source_content_hash": "1dcc5c6e0f47ff2a8534e3225ec27b6e0d5ba5db2864dd302cdfb40c107b047a",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **已移除。** 請改用 [社群套件](https://reactnative.directory/?search=storage) 替代方案。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`AsyncStorage` is an unencrypted, asynchronous, persistent, key-value storage system that is global to the app. It should be used instead of LocalStorage.",
+      "source_content_hash": "0709c162cb5e05e3b1b58761212eb4ee9a4a7fe5b0a6e6979278ff8b84a244d6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`AsyncStorage` 是一個未加密、非同步、持久化且全域於應用的鍵值儲存系統，應取代 LocalStorage 使用。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "It is recommended that you use an abstraction on top of `AsyncStorage` instead of `AsyncStorage` directly for anything more than light usage since it operates globally.",
+      "source_content_hash": "3278f296632b5387f3e6d49530d71dfd96941c4ed31023a3d3a5a4b87751aff8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議在輕量使用之外，應基於 `AsyncStorage` 再封裝抽象層，而非直接操作全域性的 `AsyncStorage`。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "On iOS, `AsyncStorage` is backed by native code that stores small values in a serialized dictionary and larger values in separate files. On Android, `AsyncStorage` will use either [RocksDB](http://rocksdb.org/) or SQLite based on what is available.",
+      "source_content_hash": "039bffa845cd0bbe0a2077180d30c6b8c8e014f06f81b3018b7130afcbdd39c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 上，`AsyncStorage` 底層由原生程式碼實現，小數值會儲存在序列化字典中，大數值則存於獨立檔案。Android 端則會根據可用性選擇使用 [RocksDB](http://rocksdb.org/) 或 SQLite。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The `AsyncStorage` JavaScript code is a facade that provides a clear JavaScript API, real `Error` objects, and non-multi functions. Each method in the API returns a `Promise` object.",
+      "source_content_hash": "d3fa5dbefe1c94f8e7455c244e5ac9ef4062642a8de93576988bf5f4d0934b47",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`AsyncStorage` 的 JavaScript 層為門面模式，提供清晰的 API、真實的 `Error` 物件及非批次操作方法，每個 API 方法皆回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Importing the `AsyncStorage` library:",
+      "source_content_hash": "432ca30127d8ead59cbe09aeaf3f6063fed55f4f93ae06b6182e389d19a96fbe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "導入 `AsyncStorage` 函式庫："
+      }
+    },
+    {
+      "segment_id": "6e5ba8fb",
+      "source_content": "```jsx\nimport {AsyncStorage} from 'react-native';\n```",
+      "source_content_hash": "eb58e76cf725b12670d2a807c0acb5be25bca623d38019a3bd85ce9ac0aceadb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6e5ba8fb"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "Persisting data:",
+      "source_content_hash": "dd8225da7a923bb3a467861b8a7f464c5d26578552a8d5e135c0d619a1f2c73c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "持久化資料："
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```jsx\n_storeData = async () => {\n  try {\n    await AsyncStorage.setItem(\n      '@MySuperStore:key',\n      'I like to save it.',\n    );\n  } catch (error) {\n    // Error saving data\n  }\n};\n```",
+      "source_content_hash": "9d65d47971687d6face11a3d85fd7434c5de9fc58e430641274d2cc3c454c974",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "Fetching data:",
+      "source_content_hash": "e8fc9549eb0ad393ffa7a50bc6a067747ca61a585d14bf32f6d59469aaa30022",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讀取資料："
+      }
+    },
+    {
+      "segment_id": "de8f60af",
+      "source_content": "```jsx\n_retrieveData = async () => {\n  try {\n    const value = await AsyncStorage.getItem('TASKS');\n    if (value !== null) {\n      // We have data!!\n      console.log(value);\n    }\n  } catch (error) {\n    // Error retrieving data\n  }\n};\n```",
+      "source_content_hash": "de9029d1d59e0ea98d64503979e8ce758c750d4680d0d6e14298bf125754cb47",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de8f60af"
+      }
+    },
+    {
+      "segment_id": "5f01394b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "af52d59d",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文件"
+      }
+    },
+    {
+      "segment_id": "e50bebbf",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "### `getItem()`",
+      "source_content_hash": "51f16fe8da7636bff8466cbdf3e856a6461768971966d99fd5a0e4000cf72f7c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getItem()`"
+      }
+    },
+    {
+      "segment_id": "c05ad55e",
+      "source_content": "```jsx\nstatic getItem(key: string, [callback]: ?(error: ?Error, result: ?string) => void)\n```",
+      "source_content_hash": "4575a4ab8a9aa05a89968d03a2d1417d30cb1b1ffc2d22ecdc2b384363ec2f90",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c05ad55e"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "Fetches an item for a `key` and invokes a callback upon completion. Returns a `Promise` object.",
+      "source_content_hash": "106133dedf0b199b670b946658e56dee63309e18527ab7290340999308154478",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "根據 `key` 取得項目並在完成時觸發回調。回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "5eeb0e94",
+      "source_content": "| Name     | Type                                        | Required | Description                                                       |\n| -------- | ------------------------------------------- | -------- | ----------------------------------------------------------------- |\n| key      | string                                      | Yes      | Key of the item to fetch.                                         |\n| callback | `?(error: ?Error, result: ?string) => void` | No       | Function that will be called with a result if found or any error. |",
+      "source_content_hash": "a89d4c35a90dd2efe8f8ef6c3cf66d1275c49063d1b80bf5b408795cd15f43d8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5eeb0e94"
+      }
+    },
+    {
+      "segment_id": "7afb38f4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "### `setItem()`",
+      "source_content_hash": "cc9d1120c8d9e5b2f2ee6d116e124c8b63bb63b3bcd65cc7cf45e0452df6a8d6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setItem()`"
+      }
+    },
+    {
+      "segment_id": "8a9e710a",
+      "source_content": "```jsx\nstatic setItem(key: string, value: string, [callback]: ?(error: ?Error) => void)\n```",
+      "source_content_hash": "5fbf09890fe2de81a111277c70cfac8a748489e01b91ded4b74a5defc32561cb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a9e710a"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "Sets the value for a `key` and invokes a callback upon completion. Returns a `Promise` object.",
+      "source_content_hash": "f7ac5834e1dc8b93137800a8a1c4ff00671d33dcb93c50a628d19cf869871011",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為 `key` 設定數值並在完成時觸發回調。回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "0d9b3b59",
+      "source_content": "| Name     | Type                       | Required | Description                                  |\n| -------- | -------------------------- | -------- | -------------------------------------------- |\n| key      | string                     | Yes      | Key of the item to set.                      |\n| value    | string                     | Yes      | Value to set for the `key`.                  |\n| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |",
+      "source_content_hash": "6600b736e64e0903c60de84851e17233d4e3e680c60053c632588d6946e84d3a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0d9b3b59"
+      }
+    },
+    {
+      "segment_id": "9006437d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### `removeItem()`",
+      "source_content_hash": "7b6f4becf40894f6318e14beb46f287e93ed890927ec584afe11c0ba07c3a9f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeItem()`"
+      }
+    },
+    {
+      "segment_id": "19913a56",
+      "source_content": "```jsx\nstatic removeItem(key: string, [callback]: ?(error: ?Error) => void)\n```",
+      "source_content_hash": "359f75d8cf2abc754048b52019c32d39613d089cf5d7421bce0d57f10ac0deec",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_19913a56"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "Removes an item for a `key` and invokes a callback upon completion. Returns a `Promise` object.",
+      "source_content_hash": "df523b9812aa89b7e6094d9aed859e91852d84e2ca7a501ad783d553ea8b9fd4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "移除指定 `key` 的項目並在完成時觸發回調。回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "f4f901d3",
+      "source_content": "| Name     | Type                       | Required | Description                                  |\n| -------- | -------------------------- | -------- | -------------------------------------------- |\n| key      | string                     | Yes      | Key of the item to remove.                   |\n| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |",
+      "source_content_hash": "1faba488a53a74ac8633ccda60abe7e983729c2b02c1a95aad107e48111ccb04",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f4f901d3"
+      }
+    },
+    {
+      "segment_id": "04837130",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "### `mergeItem()`",
+      "source_content_hash": "18236dc84fd82d453d6019767fa924679dbe582016c6cd005f8adf9a7def924a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `mergeItem()`"
+      }
+    },
+    {
+      "segment_id": "f39e109c",
+      "source_content": "```jsx\nstatic mergeItem(key: string, value: string, [callback]: ?(error: ?Error) => void)\n```",
+      "source_content_hash": "459d1ef6a2ca505694008592564debe840a12591dd058f30a7c5822d917cc41b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f39e109c"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "Merges an existing `key` value with an input value, assuming both values are stringified JSON. Returns a `Promise` object.",
+      "source_content_hash": "06abf3c86f25d0d21f8e51966c7571224fbea8448e4027bbe09bec7965167841",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "合併現有 `key` 值與輸入值（假設兩者皆為 JSON 字串）。回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "**NOTE:** This is not supported by all native implementations.",
+      "source_content_hash": "a79af9533a67edd913e8c8ce9c7ab358bc869821615fa32857b51e1e17840a8d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**注意：** 並非所有原生實作都支援此功能。"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "4fdeb798",
+      "source_content": "| Name     | Type                       | Required | Description                                  |\n| -------- | -------------------------- | -------- | -------------------------------------------- |\n| key      | string                     | Yes      | Key of the item to modify.                   |\n| value    | string                     | Yes      | New value to merge for the `key`.            |\n| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |",
+      "source_content_hash": "5ce04d477bf8c6d14e350e69d15a3df1d83172883a9762f3de73df89f60b0cb5",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fdeb798"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "Example:",
+      "source_content_hash": "872887e563e75957ffc20b021332504f2ddd0a8f3964cb93070863bfaf13cdad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例："
+      }
+    },
+    {
+      "segment_id": "5be4f25e",
+      "source_content": "```jsx\nlet UID123_object = {\n  name: 'Chris',\n  age: 30,\n  traits: {hair: 'brown', eyes: 'brown'},\n};\n// You only need to define what will be added or updated\nlet UID123_delta = {\n  age: 31,\n  traits: {eyes: 'blue', shoe_size: 10},\n};\n\nAsyncStorage.setItem(\n  'UID123',\n  JSON.stringify(UID123_object),\n  () => {\n    AsyncStorage.mergeItem(\n      'UID123',\n      JSON.stringify(UID123_delta),\n      () => {\n        AsyncStorage.getItem('UID123', (err, result) => {\n          console.log(result);\n        });\n      },\n    );\n  },\n);\n\n// Console log result:\n// => {'name':'Chris','age':31,'traits':\n//    {'shoe_size':10,'hair':'brown','eyes':'blue'}}\n```",
+      "source_content_hash": "ef0dbb1bec05d6d005b177464e5fc162e4c13411d0afd0199e7079ae25a24aaf",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5be4f25e"
+      }
+    },
+    {
+      "segment_id": "a0d6d6c7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a5905b07",
+      "source_content": "### `clear()`",
+      "source_content_hash": "c47045d79f8125a3700cb890f7984e9bae26cd66b3080d63c0a3554cab306868",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `clear()`"
+      }
+    },
+    {
+      "segment_id": "b5ea89c4",
+      "source_content": "```jsx\nstatic clear([callback]: ?(error: ?Error) => void)\n```",
+      "source_content_hash": "59a72f303ca52b3111849c58a49801f2fc9800ea7ec46070bcd57db8622bd6d3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b5ea89c4"
+      }
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "Erases _all_ `AsyncStorage` for all clients, libraries, etc. You probably don't want to call this; use `removeItem` or `multiRemove` to clear only your app's keys. Returns a `Promise` object.",
+      "source_content_hash": "c822a48804d127efe58abafecfbc4f9b03d63099a27a88249f065e8143d1bc41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "清除 _所有_ `AsyncStorage` 資料（含所有客戶端、函式庫等）。通常不應直接呼叫此方法，請改用 `removeItem` 或 `multiRemove` 僅清除應用自身的鍵值。回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "48564f44",
+      "source_content": "| Name     | Type                       | Required | Description                                  |\n| -------- | -------------------------- | -------- | -------------------------------------------- |\n| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |",
+      "source_content_hash": "bf88996c119ce51af748eacc34761c099a95ed3d4c81c56f54c69332e4389e8e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48564f44"
+      }
+    },
+    {
+      "segment_id": "33b68b3f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "### `getAllKeys()`",
+      "source_content_hash": "d1f260d8b73f8438824a33dc9c009be8c75ec3d0de523f75ab5ef5dee886661c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getAllKeys()`"
+      }
+    },
+    {
+      "segment_id": "8185786b",
+      "source_content": "```jsx\nstatic getAllKeys([callback]: ?(error: ?Error, keys: ?Array<string>) => void)\n```",
+      "source_content_hash": "9c53afcabad5dcdef6a8177b4dfaf311303054c03360deafa529ffc48f67a2a5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8185786b"
+      }
+    },
+    {
+      "segment_id": "5cf1bce4",
+      "source_content": "Gets _all_ keys known to your app; for all callers, libraries, etc. Returns a `Promise` object.",
+      "source_content_hash": "14988357b342b4f49573e7edc4570309c37c64fbb1419bca8eec040a659c38fb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取得應用已知的 _所有_ 鍵值（含所有呼叫者、函式庫等）。回傳 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "fbe698de",
+      "source_content": "| Name     | Type                                             | Required | Description                                                     |\n| -------- | ------------------------------------------------ | -------- | --------------------------------------------------------------- |\n| callback | `?(error: ?Error, keys: ?Array<string>) => void` | No       | Function that will be called with all keys found and any error. |",
+      "source_content_hash": "4793746c410bc5f8bffc815b715b30231618679cb82326eccf8016be91e6e109",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fbe698de"
+      }
+    },
+    {
+      "segment_id": "e5e7e900",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3bff4086",
+      "source_content": "### `flushGetRequests()`",
+      "source_content_hash": "c09ffd8746ef5204562d267829f57e5c346501a51a0fecae84da16cab21a573c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `flushGetRequests()`"
+      }
+    },
+    {
+      "segment_id": "ec2ce541",
+      "source_content": "```jsx\nstatic flushGetRequests(): [object Object]\n```",
+      "source_content_hash": "b7fe07f57ba80156f6a90492140af277b4ca8da6829d5ce1cd52667d2dbb26a8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ec2ce541"
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "Flushes any pending requests using a single batch call to get the data.",
+      "source_content_hash": "ecf4c8399b701e032f3c18b2d3a5cce639119e4f726171a6d1330c40f80bc63f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過單一批次呼叫刷新所有待處理請求以獲取資料。"
+      }
+    },
+    {
+      "segment_id": "25543f66",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "778e087a",
+      "source_content": "### `multiGet()`",
+      "source_content_hash": "5c150110afd0723f0b6beeea464e1f92b5e071eed33527cf9cb39ab756205b80",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `multiGet()`"
+      }
+    },
+    {
+      "segment_id": "7079d2d5",
+      "source_content": "```jsx\nstatic multiGet(keys: Array<string>, [callback]: ?(errors: ?Array<Error>, result: ?Array<Array<string>>) => void)\n```",
+      "source_content_hash": "314d57c3e00f07e557d3c9d906b135e3a6b838620ca58b256aeabf0dae046a90",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7079d2d5"
+      }
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "This allows you to batch the fetching of items given an array of `key` inputs. Your callback will be invoked with an array of corresponding key-value pairs found:",
+      "source_content_hash": "7893a4c92c3d0aa3fc9d60529addac48607ad0905e63e0eb3d0eb26efd2adfee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法允許您批次獲取給定鍵值陣列的項目。回調函數將被調用並傳入對應的鍵值對陣列："
+      }
+    },
+    {
+      "segment_id": "af7c5c4e",
+      "source_content": "```\nmultiGet(['k1', 'k2'], cb) -> cb([['k1', 'val1'], ['k2', 'val2']])\n```",
+      "source_content_hash": "c620f5b937c276427626ef485cf8896c39e5997c6b9baa58a80eddc474176824",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af7c5c4e"
+      }
+    },
+    {
+      "segment_id": "d8c366cc",
+      "source_content": "The method returns a `Promise` object.",
+      "source_content_hash": "dce7cc9183b38dfb44405f98d660b7e6fc843bac6207fbeaea7e13191a5acac8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該方法返回一個 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "f41bd436",
+      "source_content": "| Name     | Type                                                              | Required | Description                                                                                                         |\n| -------- | ----------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------- |\n| keys     | `Array<string>`                                                   | Yes      | Array of key for the items to get.                                                                                  |\n| callback | `?(errors: ?Array<Error>, result: ?Array<Array<string>>) => void` | No       | Function that will be called with a key-value array of the results, plus an array of any key-specific errors found. |",
+      "source_content_hash": "8ebc4fcbdfc20b08d780f2d83459277e3600ff1e146472a4e797d89f9f860fea",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f41bd436"
+      }
+    },
+    {
+      "segment_id": "01902900",
+      "source_content": "Example:",
+      "source_content_hash": "872887e563e75957ffc20b021332504f2ddd0a8f3964cb93070863bfaf13cdad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例："
+      }
+    },
+    {
+      "segment_id": "4d54a1e8",
+      "source_content": "```jsx\nAsyncStorage.getAllKeys((err, keys) => {\n  AsyncStorage.multiGet(keys, (err, stores) => {\n    stores.map((result, i, store) => {\n      // get at each store's key/value so you can work with it\n      let key = store[i][0];\n      let value = store[i][1];\n    });\n  });\n});\n```",
+      "source_content_hash": "1d670738b835c32a79401550c1cdac30050fe578bde866a1e69cd2f3c79e405d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d54a1e8"
+      }
+    },
+    {
+      "segment_id": "f0644895",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4147aea6",
+      "source_content": "### `multiSet()`",
+      "source_content_hash": "f92009408ce9a41d68f4e161c6efd471dc9fb7bfeaf444d51fe79848dc596e5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `multiSet()`"
+      }
+    },
+    {
+      "segment_id": "cdbe4894",
+      "source_content": "```jsx\nstatic multiSet(keyValuePairs: Array<Array<string>>, [callback]: ?(errors: ?Array<Error>) => void)\n```",
+      "source_content_hash": "525307b8237289f8bc32ec4a2b535e608bc04bc266c8dedfdff35592be7a6cc7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cdbe4894"
+      }
+    },
+    {
+      "segment_id": "ceb4fd26",
+      "source_content": "Use this as a batch operation for storing multiple key-value pairs. When the operation completes you'll get a single callback with any errors:",
+      "source_content_hash": "504aeb5c1c91220b44b6e9108988368f02adc5fa1a1326fdffd3c1da74381d54",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用此方法批次儲存多組鍵值對。操作完成時將透過單一回調返回任何錯誤："
+      }
+    },
+    {
+      "segment_id": "0cb8c4d3",
+      "source_content": "```\nmultiSet([['k1', 'val1'], ['k2', 'val2']], cb);\n```",
+      "source_content_hash": "f43c0ea4addadbcd6423faad51097a2708bd8dccb1d179ed26c4519f70cf8e98",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0cb8c4d3"
+      }
+    },
+    {
+      "segment_id": "41e7f712",
+      "source_content": "The method returns a `Promise` object.",
+      "source_content_hash": "dce7cc9183b38dfb44405f98d660b7e6fc843bac6207fbeaea7e13191a5acac8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該方法返回一個 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "15d5abf0",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "8f6a7793",
+      "source_content": "| Name          | Type                               | Required | Description                                                                  |\n| ------------- | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |\n| keyValuePairs | `Array<Array<string>>`             | Yes      | Array of key-value array for the items to set.                               |\n| callback      | `?(errors: ?Array<Error>) => void` | No       | Function that will be called with an array of any key-specific errors found. |",
+      "source_content_hash": "423fae6c312814199f81ea3289f0349a188f40877caf8bb1287020b194bdf41e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f6a7793"
+      }
+    },
+    {
+      "segment_id": "ac476bec",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b1889ce8",
+      "source_content": "### `multiRemove()`",
+      "source_content_hash": "84c4f6c449bad83c286807f3a0dfea2abdbaee8e15aedd39e86628d050da7927",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `multiRemove()`"
+      }
+    },
+    {
+      "segment_id": "a3c4300b",
+      "source_content": "```jsx\nstatic multiRemove(keys: Array<string>, [callback]: ?(errors: ?Array<Error>) => void)\n```",
+      "source_content_hash": "f223b1578d39d02f8f08cd455df4c1d7888566a1e35e30ee27a5a2d9f705e595",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a3c4300b"
+      }
+    },
+    {
+      "segment_id": "216a8ee1",
+      "source_content": "Call this to batch the deletion of all keys in the `keys` array. Returns a `Promise` object.",
+      "source_content_hash": "f64b3638282d259014eaeb4b0ca109f9b9f61e64409322d0f63b977e008e015a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "呼叫此方法以批次刪除 `keys` 陣列中的所有鍵。返回一個 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "53f1f452",
+      "source_content": "| Name     | Type                               | Required | Description                                                             |\n| -------- | ---------------------------------- | -------- | ----------------------------------------------------------------------- |\n| keys     | `Array<string>`                    | Yes      | Array of key for the items to delete.                                   |\n| callback | `?(errors: ?Array<Error>) => void` | No       | Function that will be called an array of any key-specific errors found. |",
+      "source_content_hash": "0013ef2d0922e15bc5d9b800af82d014c2d452ae25cab601a0de229f60f1db7c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_53f1f452"
+      }
+    },
+    {
+      "segment_id": "e962484d",
+      "source_content": "Example:",
+      "source_content_hash": "872887e563e75957ffc20b021332504f2ddd0a8f3964cb93070863bfaf13cdad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例："
+      }
+    },
+    {
+      "segment_id": "9dd29bcd",
+      "source_content": "```jsx\nlet keys = ['k1', 'k2'];\nAsyncStorage.multiRemove(keys, err => {\n  // keys k1 & k2 removed, if they existed\n  // do most stuff after removal (if you want)\n});\n```",
+      "source_content_hash": "f3bbe94ee97319091cd1a392963428c413b7b9740c33767e7683dda27a60a8dc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9dd29bcd"
+      }
+    },
+    {
+      "segment_id": "a49874ee",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f8d1807a",
+      "source_content": "### `multiMerge()`",
+      "source_content_hash": "b4a18982ad4c14ac2c0a0a19b3de8a71e8427dab502d737996fa4ffa230e2eaf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `multiMerge()`"
+      }
+    },
+    {
+      "segment_id": "98fbc9ce",
+      "source_content": "```jsx\nstatic multiMerge(keyValuePairs: Array<Array<string>>, [callback]: ?(errors: ?Array<Error>) => void)\n```",
+      "source_content_hash": "aa975d7d265bbb99271fc1a82fcacf4ba6ed9005b70cf6240d513fb248be8002",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_98fbc9ce"
+      }
+    },
+    {
+      "segment_id": "a5a28988",
+      "source_content": "Batch operation to merge in existing and new values for a given set of keys. This assumes that the values are stringified JSON. Returns a `Promise` object.",
+      "source_content_hash": "2318bd9f509fccddace334ef6a82b6dc903349c8db38ae5f30eb31bcfbda3330",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "批次合併指定鍵集的現有值與新值（假設值為字串化JSON）。返回一個 `Promise` 物件。"
+      }
+    },
+    {
+      "segment_id": "6c4ea90c",
+      "source_content": "**NOTE**: This is not supported by all native implementations.",
+      "source_content_hash": "4631f6092ef5a21bda6d77a77d8aa52aa3fb14ab1197648136880e52386a0892",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**注意**：並非所有原生實作都支援此功能。"
+      }
+    },
+    {
+      "segment_id": "a01e2096",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "1091b467",
+      "source_content": "| Name          | Type                               | Required | Description                                                                  |\n| ------------- | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |\n| keyValuePairs | `Array<Array<string>>`             | Yes      | Array of key-value array for the items to merge.                             |\n| callback      | `?(errors: ?Array<Error>) => void` | No       | Function that will be called with an array of any key-specific errors found. |",
+      "source_content_hash": "3e313e5fc250d38551c9e881901b0d7e7f64c3eb20acfd010dd8228da7865707",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1091b467"
+      }
+    },
+    {
+      "segment_id": "1f92e934",
+      "source_content": "Example:",
+      "source_content_hash": "872887e563e75957ffc20b021332504f2ddd0a8f3964cb93070863bfaf13cdad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例："
+      }
+    },
+    {
+      "segment_id": "bdb6a28d",
+      "source_content": "```jsx\n// first user, initial values\nlet UID234_object = {\n  name: 'Chris',\n  age: 30,\n  traits: {hair: 'brown', eyes: 'brown'},\n};\n\n// first user, delta values\nlet UID234_delta = {\n  age: 31,\n  traits: {eyes: 'blue', shoe_size: 10},\n};\n\n// second user, initial values\nlet UID345_object = {\n  name: 'Marge',\n  age: 25,\n  traits: {hair: 'blonde', eyes: 'blue'},\n};\n\n// second user, delta values\nlet UID345_delta = {\n  age: 26,\n  traits: {eyes: 'green', shoe_size: 6},\n};\n\nlet multi_set_pairs = [\n  ['UID234', JSON.stringify(UID234_object)],\n  ['UID345', JSON.stringify(UID345_object)],\n];\nlet multi_merge_pairs = [\n  ['UID234', JSON.stringify(UID234_delta)],\n  ['UID345', JSON.stringify(UID345_delta)],\n];\n\nAsyncStorage.multiSet(multi_set_pairs, err => {\n  AsyncStorage.multiMerge(multi_merge_pairs, err => {\n    AsyncStorage.multiGet(['UID234', 'UID345'], (err, stores) => {\n      stores.map((result, i, store) => {\n        let key = store[i][0];\n        let val = store[i][1];\n        console.log(key, val);\n      });\n    });\n  });\n});\n\n// Console log results:\n// => UID234 {\"name\":\"Chris\",\"age\":31,\"traits\":{\"shoe_size\":10,\"hair\":\"brown\",\"eyes\":\"blue\"}}\n// => UID345 {\"name\":\"Marge\",\"age\":26,\"traits\":{\"shoe_size\":6,\"hair\":\"blonde\",\"eyes\":\"green\"}}\n```",
+      "source_content_hash": "75d804c1cebb59367f524aa6c4a369d70ca402909ceb9bce7ca4fe70a124a494",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bdb6a28d"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/asyncstorage.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.407755+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "b750e0d6a52c1199330a2c603af72b2c3bb037fa060e8c8ec841a327984ce8ab"
+  }
+}

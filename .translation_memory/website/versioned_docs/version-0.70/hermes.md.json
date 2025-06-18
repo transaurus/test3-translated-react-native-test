@@ -1,0 +1,540 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/hermes.md",
+  "source_file_content_hash": "2fc5730e38ca9e4d54089f72df66d321e93596c846349ba52f127dd94d6ffc03",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: hermes\ntitle: Using Hermes\n---",
+      "source_content_hash": "7c75742db0a6bb1f2fa1e4c18f18cdeccd600fd6c29aec4df04f2c8c87ccbaa9",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9ed38fc",
+      "source_content": "<a href=\"https://hermesengine.dev\">\n  <img width={300} height={300} className=\"hermes-logo\" src=\"/docs/assets/HermesLogo.svg\" style={{height: \"auto\"}}/>\n</a>",
+      "source_content_hash": "7ae61bc02724f2fdc9cdcf6a5a0773d2b0e69afdb54072b2004604386b188ce7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "[Hermes](https://hermesengine.dev) is an open-source JavaScript engine optimized for React Native. For many apps, using Hermes will result in improved start-up time, decreased memory usage, and smaller app size when compared to JavaScriptCore.\nHermes is used by default by React Native and no additional configuration is required to enable it.",
+      "source_content_hash": "f11121fb942534094b6a87d3f58dfd9a0e32092adb105f3e38b88120eec75098",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Bundled Hermes",
+      "source_content_hash": "d11372e733303bcbd7dca8d9b6064c19b56266aec74294d4e2807010da4e1d6c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "React Native comes with a **bundled version** of Hermes.\nWe will be building a version of Hermes for you whenever we release a new version of React Native. This will make sure you're consuming a version of Hermes which is fully compatible with the version of React Native you're using.",
+      "source_content_hash": "a52a5eee8ab7de10b80722df20aecdc113ee99760785c2004caad07dbdfeb971",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Historically, we had problems with matching versions of Hermes with versions of React Native. This fully eliminates this problem, and offers users a JS engine that is compatible with the specific React Native version.",
+      "source_content_hash": "91d09a1717f386f66e0a870077cd84f8cc9d8ff52e2da5fa1f0922e14dae691f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "This change is fully transparent to users of React Native. You can still disable Hermes using the command described in this page.\nYou can [read more about the technical implementation on this page](/architecture/bundled-hermes).",
+      "source_content_hash": "47c2677e0f67c00289e7f005a9f1e0397c7954f16ebca4e76e7af0da43a817ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## Confirming Hermes is in use",
+      "source_content_hash": "6f7835bba11326ae6f47802b06ec5b3d7717bf004d473d9d9a640b2910f31eef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "If you've recently created a new app from scratch, you should see if Hermes is enabled in the welcome view:",
+      "source_content_hash": "f27b92a6616a0c5c2d3872b63e302ca35d9b6f8e29a93f3764856e714c1d9718",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "![Where to find JS engine status in AwesomeProject](/docs/assets/HermesApp.jpg)",
+      "source_content_hash": "43346d9971b491652aa7b210672e2aebf58ebc65bd457285c0e0e8f42eadf369",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "A `HermesInternal` global variable will be available in JavaScript that can be used to verify that Hermes is in use:",
+      "source_content_hash": "b0d412598a492a7b5fa658b6d398900a3cfb540edfcbdceadef175c5c3cfae8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```jsx\nconst isHermes = () => !!global.HermesInternal;\n```",
+      "source_content_hash": "2fce161aa284ecf57427cbfc72998df6abbe1d155d0db84d3648af4c7d27b349",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "26b47687",
+      "source_content": ":::caution\nIf you are using a non-standard way of loading the JS bundle, it is possible that the `HermesInternal` variable is available but you aren't using the highly optimised pre-compiled bytecode.\nConfirm that you are using the `.hbc` file and also benchmark the before/after as detailed below.\n:::",
+      "source_content_hash": "b3025ef7340abf31e10da2be49179ae7d2d5bd5073f2159ca8790c430538662c",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "To see the benefits of Hermes, try making a release build/deployment of your app to compare. For example:",
+      "source_content_hash": "3d4e5c4bbd406f8572d853731882640b02b442e45a93dd6859e1afb7015bf79f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "026f2f3e",
+      "source_content": "```shell\n$ npx react-native run-android --variant release\n```",
+      "source_content_hash": "fa95d237672a94ac936951d6a5c21abe61251715447e88d5dd12198a68d6e9bb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "or for iOS:",
+      "source_content_hash": "c39fb95bb28cd5be3c72bc9d181ec70ab490dbabf736d355baa0d1a9f52e30bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "48ec8149",
+      "source_content": "```shell\n$ npx react-native run-ios --configuration Release\n```",
+      "source_content_hash": "09b33d0ac760aaab0190901952559bf5728ea58e17c330c9b7e50f086602209c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "This will compile JavaScript to bytecode during build time which will improve your app's startup speed on device.",
+      "source_content_hash": "09e0ea5483b7c340750f32d1cb4c3bc70bd6f4110e6dd769309426775eaca0fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "## Debugging JS on Hermes using Google Chrome's DevTools",
+      "source_content_hash": "568e52dbce0f82468d495ae0cf105b1cf33e25f76cf0e05d3213953876eac4aa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "Hermes supports the Chrome debugger by implementing the Chrome inspector protocol. This means Chrome's tools can be used to directly debug JavaScript running on Hermes, on an emulator or on a real, physical, device.",
+      "source_content_hash": "4b48b9dc9dbaefedbb82987f3229e949d8978ab011d2b159188d3dbaad0c4055",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7cde057a",
+      "source_content": ":::info\nNote that this is very different with the \"Remote JS Debugging\" from the In-App Developer Menu documented in the [Debugging](debugging#debugging-using-a-custom-javascript-debugger) section, which actually runs the JS code on Chrome's V8 on your development machine (laptop or desktop).\n:::",
+      "source_content_hash": "53f3158aa7576d46f70727f671228313e5466e90ab90d9b160917b234b21c841",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "Chrome connects to Hermes running on device via Metro, so you'll need to know where Metro is listening. Typically this will be on `localhost:8081`, but this is [configurable](https://metrobundler.dev/docs/configuration). When running `yarn start` the address is written to stdout on startup.",
+      "source_content_hash": "1327770a001bd2477b46eb70358e81b73988f9a40b85a3eaef4179b444cf78a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "Once you know where the Metro server is listening, you can connect with Chrome using the following steps:",
+      "source_content_hash": "ad46e284db94b239283c0d8c6c47dfa45790140707b24c4aca1d1d712681f210",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2eb5ba30",
+      "source_content": "1. Navigate to `chrome://inspect` in a Chrome browser instance.\n\n2. Use the `Configure...` button to add the Metro server address (typically `localhost:8081` as described above).",
+      "source_content_hash": "caecf24f7899c420a470780b17f6850528b66417241713a55dc98876cb295f92",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "![Configure button in Chrome DevTools devices page](/docs/assets/HermesDebugChromeConfig.png)",
+      "source_content_hash": "054080b30dbef65c4cf8700ac25979b4b5af3ce4dec825054ad71e07c9b28930",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "![Dialog for adding Chrome DevTools network targets](/docs/assets/HermesDebugChromeMetroAddress.png)",
+      "source_content_hash": "a7ae3bde7395d7ffaf5b6fa752e57a3af3c42910c1ef601d1407f4f4dc05d7a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c7436e69",
+      "source_content": "3. You should now see a \"Hermes React Native\" target with an \"inspect\" link which can be used to bring up debugger. If you don't see the \"inspect\" link, make sure the Metro server is running. ![Target inspect link](/docs/assets/HermesDebugChromeInspect.png)\n\n4. You can now use the Chrome debug tools. For example, to breakpoint the next time some JavaScript is run, click on the pause button and trigger an action in your app which would cause JavaScript to execute. ![Pause button in debug tools](/docs/assets/HermesDebugChromePause.png)",
+      "source_content_hash": "b2366f2fa97bb21ec5a2d77e397b6d4fff119323cfe1409976703ecec5519323",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "3. 現在您應該會看到一個標示為「Hermes React Native」的目標項目，並帶有「inspect」連結，點擊即可開啟偵錯工具。若未顯示「inspect」連結，請確認 Metro 伺服器是否正常運作。![目標檢查連結](/docs/assets/HermesDebugChromeInspect.png)\n\n4. 您現在可以使用 Chrome 的偵錯工具。例如，若要在下次執行 JavaScript 時中斷點，點擊暫停按鈕並觸發應用程式中會執行 JavaScript 的動作。![偵錯工具中的暫停按鈕](/docs/assets/HermesDebugChromePause.png)"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "## Enabling Hermes on Older Versions of React Native",
+      "source_content_hash": "ac3d6f8c507bf1dc7230fa0523b1ed32c3b94edeb6f968de882f6a948248925f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 在舊版 React Native 中啟用 Hermes"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "Hermes is the default engine as of React Native 0.70. This section explains how to enable Hermes on older versions of React Native.\nFirst, ensure you're using at least version 0.60.4 of React Native to enable Hermes on Android or 0.64 of React Native to enable Hermes on iOS.",
+      "source_content_hash": "9b39d9b59bfab681a6df857faefeb3a6ac87ac0326cce9d710f025b3fac0a74f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自 React Native 0.70 起，Hermes 已成為預設引擎。本節說明如何在舊版 React Native 中啟用 Hermes。\n首先，請確保您使用的 React Native 版本至少為 0.60.4（Android）或 0.64（iOS）以啟用 Hermes。"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "If you have an existing app based on an earlier version of React Native, you will have to upgrade it first. See [Upgrading to new React Native Versions](/docs/upgrading) for how to do this. After upgrading the app, make sure everything works before trying to switch to Hermes.",
+      "source_content_hash": "982db50cb08a95e67e31cd985b3dff1c357c5498755c933521d8f1ba54b8e2ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您現有的應用程式基於較舊的 React Native 版本，需先進行升級。詳見[升級至新版 React Native](/docs/upgrading)。升級後，請確認所有功能正常運作，再切換至 Hermes。"
+      }
+    },
+    {
+      "segment_id": "edb00ead",
+      "source_content": ":::caution[Note for React Native compatibility]\nEach Hermes release is aimed at a specific RN version. The rule of thumb is to always follow [Hermes releases](https://github.com/facebook/hermes/releases) strictly.\nVersion mismatch can result in instant crash of your apps in the worst case scenario.\n:::",
+      "source_content_hash": "2b05829398a2e52c1b984317d99415793ccd6aef26f7ffacf2474c9f684a18b6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution[React Native 相容性注意事項]\n每個 Hermes 版本皆針對特定 RN 版本設計。基本原則是嚴格遵循 [Hermes 發佈版本](https://github.com/facebook/hermes/releases)。\n版本不相容可能導致應用程式直接崩潰。\n:::"
+      }
+    },
+    {
+      "segment_id": "93d92b0f",
+      "source_content": ":::info[Note for Windows users]\nHermes requires [Microsoft Visual C++ 2015 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=48145).\n:::",
+      "source_content_hash": "90f316b54fd9f0434c47876e7535ff799db98c8a688ac41d13ac7c764b2c5d0c",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info[Windows 使用者注意]\nHermes 需安裝 [Microsoft Visual C++ 2015 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=48145)。\n:::"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### Android",
+      "source_content_hash": "18508687aedd8506ac08685625c58c973d94225f52d4abdd8fc62e581c6da653",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "Edit your `android/app/build.gradle` file and make the change illustrated below:",
+      "source_content_hash": "b16ab9cc5749189fa3057d0fc995b06b9fbb32f46e48cb0bb6d9b5b5e2f295d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "編輯 `android/app/build.gradle` 檔案並進行以下變更："
+      }
+    },
+    {
+      "segment_id": "7fa46732",
+      "source_content": "```diff\n  project.ext.react = [\n      entryFile: \"index.js\",\n-     enableHermes: false  // clean and rebuild if changing\n+     enableHermes: true  // clean and rebuild if changing\n  ]\n\n// ...\n\nif (enableHermes) {\n-    def hermesPath = \"../../node_modules/hermes-engine/android/\";\n-    debugImplementation files(hermesPath + \"hermes-debug.aar\")\n-    releaseImplementation files(hermesPath + \"hermes-release.aar\")\n+    //noinspection GradleDynamicVersion\n+    implementation(\"com.facebook.react:hermes-engine:+\") { // From node_modules\n+        exclude group:'com.facebook.fbjni'\n+    }\n} else {\n```",
+      "source_content_hash": "f7865dee49ace5743ceff64b911919ad6856a9266e4b856b9fe791c46dc7151b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7fa46732"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "Also, if you're using ProGuard, you will need to add these rules in `proguard-rules.pro` :",
+      "source_content_hash": "c478b4067ee02e3e915d151039c51ecf2fe6b28187d85d2e67d46b28bdce62b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 ProGuard，需在 `proguard-rules.pro` 中加入以下規則："
+      }
+    },
+    {
+      "segment_id": "353ca453",
+      "source_content": "```\n-keep class com.facebook.hermes.unicode.** { *; }\n-keep class com.facebook.jni.** { *; }\n```",
+      "source_content_hash": "eea2d46450332fce985c3e967a454935604b85ceb30fea6c289e21a89e5c4275",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_353ca453"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "Next, if you've already built your app at least once, clean the build:",
+      "source_content_hash": "8594a81d6e7722cefb66c39a34d2062b4958476b0288d99d3233a8758b004b1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著，若您已至少建構過應用程式一次，請先清理建構："
+      }
+    },
+    {
+      "segment_id": "4e583d18",
+      "source_content": "```shell\n$ cd android && ./gradlew clean\n```",
+      "source_content_hash": "c1dbfc677ad8c9dcf50fd910414d49b9ae16a7ad70fc03244f6a8bad78748385",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e583d18"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "That's it! You should now be able to develop and deploy your app as usual:",
+      "source_content_hash": "a5456de2c58a95d23808096910172aa0f9fcd49eb4490b0b66645729aa4e5c66",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成！現在您應能如常開發與部署應用程式："
+      }
+    },
+    {
+      "segment_id": "18fb666f",
+      "source_content": "```shell\n$ npx react-native run-android\n```",
+      "source_content_hash": "06dfce6be347c789c76a9d7f1b333b32b916e73002a7aac45a19150b824cd85c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_18fb666f"
+      }
+    },
+    {
+      "segment_id": "a1600d1d",
+      "source_content": ":::note[Note about Android App Bundles]\nAndroid app bundles are supported from React Native 0.62 and up.\n:::",
+      "source_content_hash": "dfd6d19c35f0c019229bbd515602c804d22c100015673d89c6d9a025ed1ac4e5",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[Android App Bundle 注意事項]\nAndroid App Bundle 自 React Native 0.62 起支援。\n:::"
+      }
+    },
+    {
+      "segment_id": "fff17ff8",
+      "source_content": "### iOS",
+      "source_content_hash": "b646a613d3c8a9a4ca1214eed895ef4f31b195bbc5c8456c23cc55e60cc49c95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "Since React Native 0.64, Hermes also runs on iOS. To enable Hermes for iOS, edit your `ios/Podfile` file and make the change illustrated below:",
+      "source_content_hash": "2e5f984b2e83668cafa219bd889ae90208fa8558f48116f2dda45b10f2aa0360",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自 React Native 0.64 起，Hermes 亦支援 iOS。要啟用 iOS 版 Hermes，請編輯 `ios/Podfile` 檔案並進行以下變更："
+      }
+    },
+    {
+      "segment_id": "a6c3f55f",
+      "source_content": "```diff\n   use_react_native!(\n     :path => config[:reactNativePath],\n     # to enable hermes on iOS, change `false` to `true` and then install pods\n     # By default, Hermes is disabled on Old Architecture, and enabled on New Architecture.\n     # You can enable/disable it manually by replacing `flags[:hermes_enabled]` with `true` or `false`.\n-    :hermes_enabled => flags[:hermes_enabled],\n+    :hermes_enabled => true\n   )\n```",
+      "source_content_hash": "7c4acbd0718c9e897e86adb4ca99cdbc8a6bfa5cdeb762debef753ac90e251ab",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a6c3f55f"
+      }
+    },
+    {
+      "segment_id": "619c3209",
+      "source_content": "By default, you will be using Hermes if you're on the New Architecture. By specifying a value such\nas `true` or `false` you can enable/disable Hermes as you wish.",
+      "source_content_hash": "0bfceab2a55a5de53ef06633f5d1b3216321ff187cd3e637d841f2cb5afc51b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，若您使用新架構（New Architecture）將自動啟用 Hermes。您可透過設定如 `true` 或 `false` 來手動啟用/停用。"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "Once you've configured it, you can install the Hermes pods with:",
+      "source_content_hash": "247161d59489ade963fafac6b08be81048091ed3a1761b7a52d64c6038d29389",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定完成後，執行以下指令安裝 Hermes pods："
+      }
+    },
+    {
+      "segment_id": "b68d496b",
+      "source_content": "```shell\n$ cd ios && pod install\n```",
+      "source_content_hash": "844532e2cab53770de5cdcda9aa20e8e7fdcaeaec1ac95b3bb49a4d2526032a6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b68d496b"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "That's it! You should now be able to develop and deploy your app as usual:",
+      "source_content_hash": "a5456de2c58a95d23808096910172aa0f9fcd49eb4490b0b66645729aa4e5c66",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成！現在您應能如常開發與部署應用程式："
+      }
+    },
+    {
+      "segment_id": "414aa732",
+      "source_content": "```shell\n$ npx react-native run-ios\n```",
+      "source_content_hash": "dfcce8455afecc8d0df5e6b2d604c8c62a0eacfb20ca3f9a62a6b107c2696cd4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_414aa732"
+      }
+    },
+    {
+      "segment_id": "16ae54ea",
+      "source_content": "## Switching back to JavaScriptCore",
+      "source_content_hash": "1125f31d5d8851117112cf498ebc2a43938d041a284fba74cb6bc388c18651a9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 切換回 JavaScriptCore"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "React Native also supports using JavaScriptCore as the [JavaScript engine](javascript-environment). Follow these instructions to opt-out of Hermes.",
+      "source_content_hash": "310a456da565ec7b00b92cabfe67aa467bccb7586375bcb82a93f56b700a5930",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 亦支援使用 JavaScriptCore 作為 [JavaScript 引擎](javascript-environment)。請依以下指示停用 Hermes。"
+      }
+    },
+    {
+      "segment_id": "a49ac2ed",
+      "source_content": "### Android",
+      "source_content_hash": "18508687aedd8506ac08685625c58c973d94225f52d4abdd8fc62e581c6da653",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android"
+      }
+    },
+    {
+      "segment_id": "808b0414",
+      "source_content": "Edit your `android/app/build.gradle` file and make the change illustrated below:",
+      "source_content_hash": "b16ab9cc5749189fa3057d0fc995b06b9fbb32f46e48cb0bb6d9b5b5e2f295d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "編輯 `android/app/build.gradle` 檔案並進行以下變更："
+      }
+    },
+    {
+      "segment_id": "028bef0a",
+      "source_content": "```diff\n  project.ext.react = [\n-     enableHermes: true,  // clean and rebuild if changing\n+     enableHermes: false,  // clean and rebuild if changing\n  ]\n```",
+      "source_content_hash": "b5252b7b4aa6413118161bfa8b9bc0e5bf122646dba4b6bf1443393d0323d52f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_028bef0a"
+      }
+    },
+    {
+      "segment_id": "188a0310",
+      "source_content": "### iOS",
+      "source_content_hash": "b646a613d3c8a9a4ca1214eed895ef4f31b195bbc5c8456c23cc55e60cc49c95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS"
+      }
+    },
+    {
+      "segment_id": "5cf1bce4",
+      "source_content": "Edit your `ios/Podfile` file and make the change illustrated below:",
+      "source_content_hash": "7b33c56d927b23547e0a230e84dd27fd05c67c040e53150d4a6bef91d0bd74e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "編輯 `ios/Podfile` 檔案並進行以下變更："
+      }
+    },
+    {
+      "segment_id": "d7c0a6db",
+      "source_content": "```diff\n   use_react_native!(\n     :path => config[:reactNativePath],\n     # Hermes is now enabled by default. Disable by setting this flag to false.\n     # Upcoming versions of React Native may rely on get_default_flags(), but\n     # we make it explicit here to aid in the React Native upgrade process.\n-    :hermes_enabled => flags[:hermes_enabled],\n+    :hermes_enabled => false,\n   )\n```",
+      "source_content_hash": "95a3a9835c422237f8f8bcadf3e909f88e6b2d821bb7fa1b32884bef3723b0bb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7c0a6db"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/hermes.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.306913+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "2fc5730e38ca9e4d54089f72df66d321e93596c846349ba52f127dd94d6ffc03"
+  }
+}

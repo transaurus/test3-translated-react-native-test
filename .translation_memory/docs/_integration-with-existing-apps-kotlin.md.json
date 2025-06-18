@@ -1,0 +1,708 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/_integration-with-existing-apps-kotlin.md",
+  "source_file_content_hash": "a7c371efa89f248e12f13589ccc03dd8a2bac13df38a44870518cfd91ea44a82",
+  "segments": [
+    {
+      "segment_id": "a9b642df",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9b642df"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "## Key Concepts",
+      "source_content_hash": "dfa7c52d142437bb74c4b7713c923cc1f67dda7d1ce85a63282198e6bf1e47b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 核心概念"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "The keys to integrating React Native components into your Android application are to:",
+      "source_content_hash": "60e9ed87b53c396e29051e5f7504974f2bacbd3cdf951800759df21057555870",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 React Native 元件整合至 Android 應用的關鍵在於："
+      }
+    },
+    {
+      "segment_id": "57e757df",
+      "source_content": "1. Set up the correct directory structure.\n2. Install the necessary NPM dependencies.\n3. Adding React Native to your Gradle configuration.\n4. Writing the TypeScript code for your first React Native screen.\n5. Integrate React Native with your Android code using a ReactActivity.\n6. Testing your integration by running the bundler and seeing your app in action.",
+      "source_content_hash": "df9e90ff87e7bc9ebdd852a9d4605cfce9d0304ef7733e664151780e77bc763e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 建立正確的目錄結構\n2. 安裝必要的 NPM 相依套件\n3. 在 Gradle 配置中加入 React Native\n4. 為首個 React Native 畫面編寫 TypeScript 程式碼\n5. 使用 ReactActivity 將 React Native 整合至 Android 程式碼\n6. 執行打包工具並查看應用運行情況來測試整合結果"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Using the Community Template",
+      "source_content_hash": "ab8eaa18ccb6715ba9ff00b85866645e08b28266df4d92f4814b2b6c3bea07ba",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用社群範本"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "While you follow this guide, we suggest you to use the [React Native Community Template](https://github.com/react-native-community/template/) as reference. The template contains a **minimal Android app** and will help you understanding how to integrate React Native into an existing Android app.",
+      "source_content_hash": "15a75ce19facd9711c10314ba10fa0b176656e0775577dec60554d60e156d88a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "遵循本指南時，建議您參考 [React Native 社群範本](https://github.com/react-native-community/template/)。該範本包含一個**精簡的 Android 應用**，可幫助您理解如何將 React Native 整合至現有 Android 應用。"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "## Prerequisites",
+      "source_content_hash": "bbd3d4949a6f237efd8d4ff5c7c5f30d968e7a989ad12f3d7dcef69c98053912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 必要條件"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "Follow the guide on [setting up your development environment](set-up-your-environment) and using [React Native without a framework](getting-started-without-a-framework) to configure your development environment for building React Native apps for Android.\nThis guide also assumes you're familiar with the basics of Android development such as creating Activities and editing the `AndroidManifest.xml` file.",
+      "source_content_hash": "bf0c090c5cd8cbbe416c2c71a1b62f4a445ef95d1e5b34fb55874cefdd690012",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請先依照[設定開發環境](set-up-your-environment)指南與[不使用框架的 React Native](getting-started-without-a-framework)指南，配置您的 Android 版 React Native 應用開發環境。\n本指南同時假設您已熟悉 Android 開發基礎知識，例如建立 Activity 與編輯 `AndroidManifest.xml` 檔案。"
+      }
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## 1. Set up directory structure",
+      "source_content_hash": "128ae53f7f10f353ddd91d6ea6aeaa90f9bf105f6b3deb12bfd51cf83318eb36",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 1. 設定目錄結構"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "To ensure a smooth experience, create a new folder for your integrated React Native project, then **move your existing Android project** to the `/android` subfolder.",
+      "source_content_hash": "01971a1491c9306bf45899dc752e0abb8d17155522d403b2c8021f34d6138098",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為確保流程順暢，請為整合式 React Native 專案建立新資料夾，然後**將現有 Android 專案移動**至 `/android` 子資料夾。"
+      }
+    },
+    {
+      "segment_id": "fa430ad4",
+      "source_content": "## 2. Install NPM dependencies",
+      "source_content_hash": "4f391db6000e3924acbd95b80b111923206938a3a43a75b6deb1e7e2f6735e7b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 2. 安裝 NPM 相依套件"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "Go to the root directory and run the following command:",
+      "source_content_hash": "1cf1452ac5c3121b9a29a1ff8d3d7e84b86e6d072e3f01b262dc5bb8282e2265",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進入根目錄並執行以下指令："
+      }
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```shell\ncurl -O https://raw.githubusercontent.com/react-native-community/template/refs/heads/0.75-stable/template/package.json\n```",
+      "source_content_hash": "730d03639093d0b22ff190193885cf0594b2c2426aff4738eba0a5a6f86fcb07",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cb57d798"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "This will copy the `package.json` [file from the Community template](https://github.com/react-native-community/template/blob/0.75-stable/template/package.json) to your project.",
+      "source_content_hash": "1f49dc4c14b4c989e7e5b2c01936292bf2d3f64a79a30de072708b0f4f97a006",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此指令會將[社群範本中的 `package.json` 檔案](https://github.com/react-native-community/template/blob/0.75-stable/template/package.json)複製到您的專案。"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "Next, install the NPM packages by running:",
+      "source_content_hash": "bd506fe0a61ad42684a771d9c9848a3b3eebbe5e21312430376e99a8e0c3b006",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著執行以下指令安裝 NPM 套件："
+      }
+    },
+    {
+      "segment_id": "100eac36",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm install\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn install\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "59e841b63b6bfb68ac05adc61cb933d7e73e79d6be61c783375f2961c5d78bb7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_100eac36"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "Installation process has created a new `node_modules` folder. This folder stores all the JavaScript dependencies required to build your project.",
+      "source_content_hash": "faa7f50a015bcca5cb81396bc8015669c49c160fc0c0f690fdd72344d0d3692c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "安裝程序會建立新的 `node_modules` 資料夾，此資料夾儲存建置專案所需的所有 JavaScript 相依套件。"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "Add `node_modules/` to your `.gitignore` file (here the [Community default one](https://github.com/react-native-community/template/blob/0.75-stable/template/_gitignore)).",
+      "source_content_hash": "0ded8f90fe85b8c09110e74fec3221c68088004bb197d6f7c00490d5c72b5133",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請將 `node_modules/` 加入您的 `.gitignore` 檔案（可參考[社群預設範本](https://github.com/react-native-community/template/blob/0.75-stable/template/_gitignore)）。"
+      }
+    },
+    {
+      "segment_id": "ab5fc5b5",
+      "source_content": "## 3. Adding React Native to your app",
+      "source_content_hash": "ad7eaaf9dc91709c54236eb7c04a712da6cd15b3714523b087b7514bf539153f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 3. 將 React Native 加入應用"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "### Configuring Gradle",
+      "source_content_hash": "c367d1b989fb077825bc3d3b3ecc455efb75dc46b3e285de798926156aa14074",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 配置 Gradle"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "React Native uses the React Native Gradle Plugin to configure your dependencies and project setup.",
+      "source_content_hash": "76964bc65bef587224f807be52dc4bd84bda0ca55039501c9e1aa6d92bd27e4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 使用 React Native Gradle 插件來配置相依套件與專案設定。"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "First, let's edit your `settings.gradle` file by adding those lines (as suggested from the [Community template](https://github.com/react-native-community/template/blob/0.77-stable/template/android/settings.gradle)):",
+      "source_content_hash": "7e67a736b47d0efe8c4c820c9ab9b8fe326ea45b25e0b42b78cbacee93cc9fc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先編輯 `settings.gradle` 檔案，加入以下內容（參照[社群範本建議](https://github.com/react-native-community/template/blob/0.77-stable/template/android/settings.gradle)）："
+      }
+    },
+    {
+      "segment_id": "67b24fc5",
+      "source_content": "```groovy\n// Configures the React Native Gradle Settings plugin used for autolinking\npluginManagement { includeBuild(\"../node_modules/@react-native/gradle-plugin\") }\nplugins { id(\"com.facebook.react.settings\") }\nextensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }\n// If using .gradle.kts files:\n// extensions.configure<com.facebook.react.ReactSettingsExtension> { autolinkLibrariesFromCommand() }\nincludeBuild(\"../node_modules/@react-native/gradle-plugin\")\n\n// Include your existing Gradle modules here.\n// include(\":app\")\n```",
+      "source_content_hash": "7596e817e55e6647428397fdfceff27239c9b7da95624b3988622631fc0fc0e5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_67b24fc5"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "Then you need to open your top level `build.gradle` and include this line (as suggested from the [Community template](https://github.com/react-native-community/template/blob/0.77-stable/template/android/build.gradle)):",
+      "source_content_hash": "8f1804e1bedfd19a7d50738e772b12bf64371c2f7d6a7c1042c8dfded0b56cb6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著開啟頂層的 `build.gradle` 並加入此行（參照[社群範本建議](https://github.com/react-native-community/template/blob/0.77-stable/template/android/build.gradle)）："
+      }
+    },
+    {
+      "segment_id": "092b29bb",
+      "source_content": "```diff\nbuildscript {\n    repositories {\n        google()\n        mavenCentral()\n    }\n    dependencies {\n        classpath(\"com.android.tools.build:gradle:7.3.1\")\n+       classpath(\"com.facebook.react:react-native-gradle-plugin\")\n    }\n}\n```",
+      "source_content_hash": "26e453b8fa9238464baab123c7f4fea7e15a02ba84357e99f94b972638d13e24",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_092b29bb"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "This makes sure the React Native Gradle Plugin (RNGP) is available inside your project.\nFinally, add those lines inside your Applications's `build.gradle` file (it's a different `build.gradle` file usually inside your `app` folder - you can use the [Community template file as reference](https://github.com/react-native-community/template/blob/0.77-stable/template/android/app/build.gradle)):",
+      "source_content_hash": "f1a7d04f4d3db0a13f0cd6ab190c0d1d49858e6149e616bf5289f1855641b100",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此配置確保 React Native Gradle 插件（RNGP）可在專案中使用。\n最後在應用程式的 `build.gradle` 檔案中加入以下內容（此為不同的 `build.gradle` 檔案，通常位於 `app` 資料夾內 - 可參考[社群範本檔案](https://github.com/react-native-community/template/blob/0.77-stable/template/android/app/build.gradle)）："
+      }
+    },
+    {
+      "segment_id": "890e01bc",
+      "source_content": "```diff\napply plugin: \"com.android.application\"\n+apply plugin: \"com.facebook.react\"\n\nrepositories {\n    mavenCentral()\n}\n\ndependencies {\n    // Other dependencies here\n+   // Note: we intentionally don't specify the version number here as RNGP will take care of it.\n+   // If you don't use the RNGP, you'll have to specify version manually.\n+   implementation(\"com.facebook.react:react-android\")\n+   implementation(\"com.facebook.react:hermes-android\")\n}\n\n+react {\n+   // Needed to enable Autolinking - https://github.com/react-native-community/cli/blob/master/docs/autolinking.md\n+   autolinkLibrariesWithApp()\n+}\n```",
+      "source_content_hash": "0cf2b8a900583be8df413e0d21ade653df2573a9d84c7eb8df44f5aecf6afeba",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_890e01bc"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "Finally, open your application `gradle.properties` files and add the following line (here the [Community template file as reference](https://github.com/react-native-community/template/blob/0.77-stable/template/android/gradle.properties)):",
+      "source_content_hash": "6638e913830553282ca44667b18919d6904c685352c9d9cd916ae64faae2577c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後開啟應用程式的 `gradle.properties` 檔案並加入以下內容（參照[社群範本檔案](https://github.com/react-native-community/template/blob/0.77-stable/template/android/gradle.properties)）："
+      }
+    },
+    {
+      "segment_id": "7102653e",
+      "source_content": "```diff\n+reactNativeArchitectures=armeabi-v7a,arm64-v8a,x86,x86_64\n+newArchEnabled=true\n+hermesEnabled=true\n```",
+      "source_content_hash": "50dff40ac853d8999132b5656b6d71134cc55106f2faadb977198c31c3d28705",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7102653e"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "### Configuring your manifest",
+      "source_content_hash": "819f13a415da383342d57d7c2e1779ea2fafbaabb868e883884c14d6cfef4126",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 配置清單檔案"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "First, make sure you have the Internet permission in your `AndroidManifest.xml`:",
+      "source_content_hash": "628c206ab5b924b5d0695c97dd14a0fb375163bb15e7b846696a2f66edc10efe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先確認 `AndroidManifest.xml` 中已啟用網路權限："
+      }
+    },
+    {
+      "segment_id": "18fb666f",
+      "source_content": "```diff\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\">\n\n+   <uses-permission android:name=\"android.permission.INTERNET\" />\n\n    <application\n      android:name=\".MainApplication\">\n    </application>\n</manifest>\n```",
+      "source_content_hash": "45c64c11e9a9531c53b918ac1e26d73a42e231e9af27bb1bdcb059ff79ff8b54",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_18fb666f"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "Then you need to enable [cleartext traffic](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted) in your **debug** `AndroidManifest.xml`:",
+      "source_content_hash": "1b7ecf349f4d734c63c14657bae44ebbe96350470353322c7462b74cc400cb2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4fe849d4",
+      "source_content": "```diff\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\">\n\n    <application\n+       android:usesCleartextTraffic=\"true\"\n+       tools:targetApi=\"28\"\n    />\n</manifest>\n```",
+      "source_content_hash": "88cf8392600de5dbe2c9f86efa70a5dfb06f424edf0cb08196b23369d8c4391c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "As usual, here the AndroidManifest.xml file from the Community template to use as a reference: [main](https://github.com/react-native-community/template/blob/0.77-stable/template/android/app/src/main/AndroidManifest.xml) and [debug](https://github.com/react-native-community/template/blob/0.77-stable/template/android/app/src/debug/AndroidManifest.xml)",
+      "source_content_hash": "64196d77571d0ea20d4aa4a324f91d724f3701973ced5fc5130f660e60f924c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "This is needed as your application will communicate with your local bundler, [Metro][https://metrobundler.dev/], via HTTP.",
+      "source_content_hash": "c9c559985236d0022b0d1ca86732c830f1b15d151796a8fbda64b4ac388636eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "Make sure you add this only to your **debug** manifest.",
+      "source_content_hash": "9aeef15712d2b69e6e7a24839ce5e71281ebd87cd527492ece3d5afa18f5c0f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d4eab4a6",
+      "source_content": "## 4. Writing the TypeScript Code",
+      "source_content_hash": "6b8e9e4612e5d4b42223e06deb9cdc950c66524ca4e5562416318633de5cff6d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0ddaa835",
+      "source_content": "Now we will actually modify the native Android application to integrate React Native.",
+      "source_content_hash": "ca4e7dfb9a5d4afde9c808f3648b7966e7af17ffa3b69ad7776b0dbceaf08455",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "The first bit of code we will write is the actual React Native code for the new screen that will be integrated into our application.",
+      "source_content_hash": "2726f221c9676b02e0bee7533c06f4941661b7ab5fb03484bdbef2ff9541ede7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "58f98d22",
+      "source_content": "### Create a `index.js` file",
+      "source_content_hash": "62765e740ffd778da69c5d9c3482a1a7bbce145c1d5310abaf8a47c096dc557f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "First, create an empty `index.js` file in the root of your React Native project.",
+      "source_content_hash": "222b302ac1b091af71896a3a39045a87eef629b8f8bcc827cc344dfed4e22814",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "`index.js` is the starting point for React Native applications, and it is always required. It can be a small file that `import`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it.",
+      "source_content_hash": "58b1dddbb303c79fa09c97a576f201435ea18b78fd1e0cb6857945240e10d2a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "85ea22dd",
+      "source_content": "Our index.js should look as follows (here the [Community template file as reference](https://github.com/react-native-community/template/blob/0.77-stable/template/index.js)):",
+      "source_content_hash": "5097da10ec071acb6be8750a8282ff80fed06e241fa930fb5d10482c7daac849",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9bc650e1",
+      "source_content": "```js\nimport {AppRegistry} from 'react-native';\nimport App from './App';\n\nAppRegistry.registerComponent('HelloWorld', () => App);\n```",
+      "source_content_hash": "362bd98183497c35b7e488dbbde4eb0293f227f4393ac57151a9be90674ea868",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "61282bab",
+      "source_content": "### Create a `App.tsx` file",
+      "source_content_hash": "134fa947d580dad127d2271e70a59ec080f4a2f2314f6600e655f3e6fa7a9aff",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "Let's create an `App.tsx` file. This is a [TypeScript](https://www.typescriptlang.org/) file that can have [JSX](<https://en.wikipedia.org/wiki/JSX_(JavaScript)>) expressions. It contains the root React Native component that we will integrate into our Android application ([link](https://github.com/react-native-community/template/blob/0.77-stable/template/App.tsx)):",
+      "source_content_hash": "bcffed8197279c063755b1c80dfa6bb98b88b1446b9f8e05590b9252d5827a92",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bea1601a",
+      "source_content": "```tsx\nimport React from 'react';\nimport {\n  SafeAreaView,\n  ScrollView,\n  StatusBar,\n  StyleSheet,\n  Text,\n  useColorScheme,\n  View,\n} from 'react-native';\n\nimport {\n  Colors,\n  DebugInstructions,\n  Header,\n  ReloadInstructions,\n} from 'react-native/Libraries/NewAppScreen';\n\nfunction App(): React.JSX.Element {\n  const isDarkMode = useColorScheme() === 'dark';\n\n  const backgroundStyle = {\n    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,\n  };\n\n  return (\n    <SafeAreaView style={backgroundStyle}>\n      <StatusBar\n        barStyle={isDarkMode ? 'light-content' : 'dark-content'}\n        backgroundColor={backgroundStyle.backgroundColor}\n      />\n      <ScrollView\n        contentInsetAdjustmentBehavior=\"automatic\"\n        style={backgroundStyle}>\n        <Header />\n        <View\n          style={{\n            backgroundColor: isDarkMode\n              ? Colors.black\n              : Colors.white,\n            padding: 24,\n          }}>\n          <Text style={styles.title}>Step One</Text>\n          <Text>\n            Edit <Text style={styles.bold}>App.tsx</Text> to\n            change this screen and see your edits.\n          </Text>\n          <Text style={styles.title}>See your changes</Text>\n          <ReloadInstructions />\n          <Text style={styles.title}>Debug</Text>\n          <DebugInstructions />\n        </View>\n      </ScrollView>\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  title: {\n    fontSize: 24,\n    fontWeight: '600',\n  },\n  bold: {\n    fontWeight: '700',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "f4259ac64146a5a817edaa67b2a5bb24733f34034a97ffeaf2a043696f0f1862",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6e7e6a7",
+      "source_content": "Here the [Community template file as reference](https://github.com/react-native-community/template/blob/0.77-stable/template/App.tsx)",
+      "source_content_hash": "d596e14b6170c5ba3f3aad22e5c9ece6f240a52cfd357ad8e7ce2355e5d19ce0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99e592b0",
+      "source_content": "## 5. Integrating with your Android code",
+      "source_content_hash": "3ffb6f53ea473c37377d831180111321296ab2eff36310b8d616dbb0970e867f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "93f7c834",
+      "source_content": "We now need to add some native code in order to start the React Native runtime and tell it to render our React components.",
+      "source_content_hash": "5865d3f502a2c4517db6258136ebbe5faccbc76c3a9bcba46e609351a96df8f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe3afe38",
+      "source_content": "### Updating your Application class",
+      "source_content_hash": "6511bbe81f123a3968e58f9579d1992059f6a12e0732d5d0cbeaf1ae6f264bec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f50056c0",
+      "source_content": "First, we need to update your `Application` class to properly initialize React Native as follows:",
+      "source_content_hash": "0de3ac92e7f509a30beab289bf42426326d104470b218237421e0269c576b653",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c5d2aa20",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n\n<TabItem value=\"java\">\n\n```diff\npackage <your-package-here>;\n\nimport android.app.Application;\n+import com.facebook.react.PackageList;\n+import com.facebook.react.ReactApplication;\n+import com.facebook.react.ReactHost;\n+import com.facebook.react.ReactNativeHost;\n+import com.facebook.react.ReactPackage;\n+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;\n+import com.facebook.react.defaults.DefaultReactHost;\n+import com.facebook.react.defaults.DefaultReactNativeHost;\n+import com.facebook.soloader.SoLoader;\n+import com.facebook.react.soloader.OpenSourceMergedSoMapping\n+import java.util.List;\n\n-class MainApplication extends Application {\n+class MainApplication extends Application implements ReactApplication {\n+ @Override\n+ public ReactNativeHost getReactNativeHost() {\n+   return new DefaultReactNativeHost(this) {\n+     @Override\n+     protected List<ReactPackage> getPackages() { return new PackageList(this).getPackages(); }\n+     @Override\n+     protected String getJSMainModuleName() { return \"index\"; }\n+     @Override\n+     public boolean getUseDeveloperSupport() { return BuildConfig.DEBUG; }\n+     @Override\n+     protected boolean isNewArchEnabled() { return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED; }\n+     @Override\n+     protected Boolean isHermesEnabled() { return BuildConfig.IS_HERMES_ENABLED; }\n+   };\n+ }\n\n+ @Override\n+ public ReactHost getReactHost() {\n+   return DefaultReactHost.getDefaultReactHost(getApplicationContext(), getReactNativeHost());\n+ }\n\n  @Override\n  public void onCreate() {\n    super.onCreate();\n+   SoLoader.init(this, OpenSourceMergedSoMapping);\n+   if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {\n+     DefaultNewArchitectureEntryPoint.load();\n+   }\n  }\n}\n```\n\n</TabItem>\n\n<TabItem value=\"kotlin\">\n\n```diff\n// package <your-package-here>\n\nimport android.app.Application\n+import com.facebook.react.PackageList\n+import com.facebook.react.ReactApplication\n+import com.facebook.react.ReactHost\n+import com.facebook.react.ReactNativeHost\n+import com.facebook.react.ReactPackage\n+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load\n+import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost\n+import com.facebook.react.defaults.DefaultReactNativeHost\n+import com.facebook.soloader.SoLoader\n+import com.facebook.react.soloader.OpenSourceMergedSoMapping\n\n-class MainApplication : Application() {\n+class MainApplication : Application(), ReactApplication {\n\n+ override val reactNativeHost: ReactNativeHost =\n+      object : DefaultReactNativeHost(this) {\n+        override fun getPackages(): List<ReactPackage> = PackageList(this).packages\n+        override fun getJSMainModuleName(): String = \"index\"\n+        override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG\n+        override val isNewArchEnabled: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED\n+        override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED\n+      }\n\n+ override val reactHost: ReactHost\n+   get() = getDefaultReactHost(applicationContext, reactNativeHost)\n\n  override fun onCreate() {\n    super.onCreate()\n+   SoLoader.init(this, OpenSourceMergedSoMapping)\n+   if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {\n+     load()\n+   }\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "2f50cfd660b25cbb83c93c2f18b606683b58c9436739db248b55e56c58c5d75d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "b41b4d77",
+      "source_content": "As usual, here the [MainApplication.kt Community template file as reference](https://github.com/react-native-community/template/blob/0.77-stable/template/android/app/src/main/java/com/helloworld/MainApplication.kt)",
+      "source_content_hash": "f40e0e22687802f29082d38762526526a63aad7b23fdc8f3fb1f1b71eba3bef4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "06d2929c",
+      "source_content": "#### Creating a `ReactActivity`",
+      "source_content_hash": "7bc439e450532599b3b48a18eedc0f91fcaa73ce695d74780b9f7f0797c163be",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "323eea94",
+      "source_content": "Finally, we need to create a new `Activity` that will extend `ReactActivity` and host the React Native code. This activity will be responsible for starting the React Native runtime and rendering the React component.",
+      "source_content_hash": "c27a2b8d0068780f4b4bd48e444687a3b9373311f6461b3134b5236ff4e3aa48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c0a9f019",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n\n<TabItem value=\"java\">\n\n```java\n// package <your-package-here>;\n\nimport com.facebook.react.ReactActivity;\nimport com.facebook.react.ReactActivityDelegate;\nimport com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;\nimport com.facebook.react.defaults.DefaultReactActivityDelegate;\n\npublic class MyReactActivity extends ReactActivity {\n\n    @Override\n    protected String getMainComponentName() {\n        return \"HelloWorld\";\n    }\n\n    @Override\n    protected ReactActivityDelegate createReactActivityDelegate() {\n        return new DefaultReactActivityDelegate(this, getMainComponentName(), DefaultNewArchitectureEntryPoint.getFabricEnabled());\n    }\n}\n```\n\n</TabItem>\n\n<TabItem value=\"kotlin\">\n\n```kotlin\n// package <your-package-here>\n\nimport com.facebook.react.ReactActivity\nimport com.facebook.react.ReactActivityDelegate\nimport com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled\nimport com.facebook.react.defaults.DefaultReactActivityDelegate\n\nclass MyReactActivity : ReactActivity() {\n\n    override fun getMainComponentName(): String = \"HelloWorld\"\n\n    override fun createReactActivityDelegate(): ReactActivityDelegate =\n        DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "e874a3e0d1f5846c52169d6649ca94994b9f271f079a6bd96d72fc5a8ebb3f69",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a2532daf",
+      "source_content": "As usual, here the [MainActivity.kt Community template file as reference](https://github.com/react-native-community/template/blob/0.77-stable/template/android/app/src/main/java/com/helloworld/MainApplication.kt)",
+      "source_content_hash": "7c6a79bd687299c885d88c8195412ff144d837ce749fd0f68adba338daa969d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e0b49a3",
+      "source_content": "Whenever you create a new Activity, you need to add it to your `AndroidManifest.xml` file. You also need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar` (or to any non-ActionBar theme) as otherwise your application will render an ActionBar on top of your React Native screen:",
+      "source_content_hash": "cf44830253ee31a5218c6640922034ddb96de8503fd431e2dc42095a04ed2b91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c34e4bdd",
+      "source_content": "```diff\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\">\n\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n\n    <application\n      android:name=\".MainApplication\">\n\n+     <activity\n+       android:name=\".MyReactActivity\"\n+       android:label=\"@string/app_name\"\n+       android:theme=\"@style/Theme.AppCompat.Light.NoActionBar\">\n+     </activity>\n    </application>\n</manifest>\n```",
+      "source_content_hash": "32955d44b176947279a0d0a078238bbb60c847ad90f708bdfe61a012d5e45bfd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "0400d81e",
+      "source_content": "Now your activity is ready to run some JavaScript code.",
+      "source_content_hash": "7d034b10f109a14e2697aeecf4bc7a3e45fc671c8af8a95e17fb94bcf3f417e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "573762e8",
+      "source_content": "## 6. Test your integration",
+      "source_content_hash": "b699e7bc1e3982762fb545dfdd32ca07e95b182f045dba8bd0e31d37094223f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec3c0760",
+      "source_content": "You have completed all the basic steps to integrate React Native with your application. Now we will start the [Metro bundler](https://metrobundler.dev/) to build your TypeScript application code into a bundle. Metro's HTTP server shares the bundle from `localhost` on your developer environment to a simulator or device. This allows for [hot reloading](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading).",
+      "source_content_hash": "a033b3f195ddbd04b9d5eed1a9f160b5c03d55131bd7cc58c2306fcaab105b39",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "69d6e4be",
+      "source_content": "First, you need to create a `metro.config.js` file in the root of your project as follows:",
+      "source_content_hash": "fadfbfb3ab328b95f722f924af7116220f0544c8c68699c8f80f31cfe1b8a503",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "37825d25",
+      "source_content": "```js\nconst {getDefaultConfig} = require('@react-native/metro-config');\nmodule.exports = getDefaultConfig(__dirname);\n```",
+      "source_content_hash": "36d7242fe55a7b33f2af1093753de5b57f2131baa6157f4a2bd89b367ea715ef",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "24d24e6d",
+      "source_content": "You can checkout the [metro.config.js file](https://github.com/react-native-community/template/blob/0.77-stable/template/metro.config.js) from the Community template file as reference.",
+      "source_content_hash": "0c5250d64d8072acdad5a095bcf85484f6864a8ab284714a34a089bf6d7fe23d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0dcd0a42",
+      "source_content": "Once you have the config file in place, you can run the bundler. Run the following command in the root directory of your project:",
+      "source_content_hash": "710903a85bed90dbab1675cdc8f69a9fd5381dbbf42f531362948e548498984d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b212fe",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm start\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn start\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "c237368f53d424fc0258cdfede32c6cec163bfb5057a3e532e5e4fd9921f4fdf",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f49fce49",
+      "source_content": "Now build and run your Android app as normal.",
+      "source_content_hash": "2274a2b1266bf358570841ba50790f10ed52a4e3e87aff814419c328fb735464",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6cf42755",
+      "source_content": "Once you reach your React-powered Activity inside the app, it should load the JavaScript code from the development server and display:",
+      "source_content_hash": "ffbd58e312e30612af5d9cb2b06ca9673074a90f45f6ffcc3834fca302b17192",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e3db507d",
+      "source_content": "<center><img src=\"/docs/assets/EmbeddedAppAndroidVideo.gif\" width=\"300\" /></center>",
+      "source_content_hash": "892542da36ccd6561abec11e7ad8a82a51696d04a44d547a9f6747d5e82d8c14",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "88541947",
+      "source_content": "### Creating a release build in Android Studio",
+      "source_content_hash": "00b59b0a51a1190cf107409af485fa49ed63d544ca45312109df560a21653bbd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a1988152",
+      "source_content": "You can use Android Studio to create your release builds too! It’s as quick as creating release builds of your previously-existing native Android app.",
+      "source_content_hash": "1eba54d8273d4302461b69cf51f7783c48f3e98ff118aa05ad2c477e369c7d86",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d85a747f",
+      "source_content": "The React Native Gradle Plugin will take care of bundling the JS code inside your APK/App Bundle.",
+      "source_content_hash": "aee535433704e69365117e1ede1335044d3a44452c72cdf1434c16c18e8df9a2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bd254bae",
+      "source_content": "If you're not using Android Studio, you can create a release build with:",
+      "source_content_hash": "344f59f0088e7fd71533663c72da4b65c9a42e449495569141dd3b9bc0ee29a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d82c29f8",
+      "source_content": "```\ncd android\n# For a Release APK\n./gradlew :app:assembleRelease\n# For a Release AAB\n./gradlew :app:bundleRelease\n```",
+      "source_content_hash": "2cffef9ace21dfd0887f0e3a4232cfbdc6d474ff50e927ac93701a8db7d02a78",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3ad6f5b1",
+      "source_content": "### Now what?",
+      "source_content_hash": "3f41131596e2a049d4d00c4f4c304ff87d8d3cc0474a4c61c485847d9bafeca5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7f0cded5",
+      "source_content": "At this point you can continue developing your app as usual. Refer to our [debugging](debugging) and [deployment](running-on-device) docs to learn more about working with React Native.",
+      "source_content_hash": "2a765e765a3af5281841e72ffe76592a8162446ba5f35a892d9224be47053a1e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/_integration-with-existing-apps-kotlin.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.232107+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a7c371efa89f248e12f13589ccc03dd8a2bac13df38a44870518cfd91ea44a82"
+  }
+}

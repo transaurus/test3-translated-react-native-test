@@ -1,0 +1,392 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/fabric-native-components-ios.md",
+  "source_file_content_hash": "6c20a0da87d35582d8f4fe675c54b62af2358e4ea342537354ee786849e91ea7",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: fabric-native-components-ios\ntitle: 'Fabric Native Components: iOS'\n---",
+      "source_content_hash": "e0e2f941c758a8b4a4baedd5427f40dff3369e126877816198cfa02598ce1f23",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Now it's time to write some iOS platform code to be able to render the web view. The steps you need to follow are:",
+      "source_content_hash": "67e4ee0670d25787697dc1332531c2a15207a346072bbd38ea3d20d553bf7a2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候編寫一些 iOS 平台代碼來渲染網頁視圖。您需要遵循的步驟如下："
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- Run Codegen.\n- Write the code for the `RCTWebView`\n- Register the `RCTWebView` in the application",
+      "source_content_hash": "1fcc478d0500ce1dd249625d12089fc4a91fa8589b112abb8432ba740ec51b44",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 執行 Codegen\n- 編寫 `RCTWebView` 的代碼\n- 在應用程式中註冊 `RCTWebView`"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "### 1. Run Codegen",
+      "source_content_hash": "7341f70042d7cd97097937e629737439f03288f0acf58d46209871bc8b9513e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 執行 Codegen"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "You can [manually run](the-new-architecture/codegen-cli) the Codegen, however it's simpler to use the application you're going to demo the component in to do this for you.",
+      "source_content_hash": "05614c5ccd5ba73294723ff52b52e0e3727e2f1d662723094dbf8f2502235e9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以[手動執行](the-new-architecture/codegen-cli) Codegen，但更簡單的方法是使用您將用來演示該組件的應用程式來完成此操作。"
+      }
+    },
+    {
+      "segment_id": "6e5ba8fb",
+      "source_content": "```bash\ncd ios\nbundle install\nbundle exec pod install\n```",
+      "source_content_hash": "b084bf784c587d1511929d5b95f44445cf6c0eb960bab52bc31a315eb61644b5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6e5ba8fb"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Importantly you will see logging output from Codegen, which we're going to use in Xcode to build our WebView native component.",
+      "source_content_hash": "c72051465a327212fe29bf3bcda8d365b71140e876fa89f825c13bb3adafbfab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "重要的是，您將看到 Codegen 的日誌輸出，我們將在 Xcode 中使用這些日誌來構建我們的 WebView 原生組件。"
+      }
+    },
+    {
+      "segment_id": "a2f1eaea",
+      "source_content": ":::warning\nYou should be careful about committing generated code to your repository. Generated code is specific to each version of React Native. Use npm [peerDependencies](https://nodejs.org/en/blog/npm/peer-dependencies) to restrict compatibility with version of React Native.\n:::",
+      "source_content_hash": "85cc9e4448c88e2883371a6d600ee1fba5ac57c51583195643a5a15160620da8",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n您應該謹慎將生成的代碼提交到您的存儲庫。生成的代碼針對每個 React Native 版本都是特定的。使用 npm 的 [peerDependencies](https://nodejs.org/en/blog/npm/peer-dependencies) 來限制與 React Native 版本的兼容性。\n:::"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### 3. Write the `RCTWebView`",
+      "source_content_hash": "8f2d3e47ca0bc2ed135639b4e1d8542643c2d1eaa57b5e035d509c63b721e89a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 編寫 `RCTWebView`"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "We need to prepare your iOS project using Xcode by completing these **5 steps**:",
+      "source_content_hash": "f84408e3eb30c21099b97d8e30f56f86605780e655120f5a082a4ffb9c2bb7aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們需要通過完成以下 **5 個步驟** 來準備您的 iOS 項目（使用 Xcode）："
+      }
+    },
+    {
+      "segment_id": "f2c8a42b",
+      "source_content": "1. Open the CocoPods generated Xcode Workspace:",
+      "source_content_hash": "539afc64950395f3d103992b679b04d61f565955f16d5ab9dfff25836c2b3dac",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 打開由 CocoPods 生成的 Xcode Workspace："
+      }
+    },
+    {
+      "segment_id": "076d64d1",
+      "source_content": "```bash\ncd ios\nopen Demo.xcworkspace\n```",
+      "source_content_hash": "309d368718c32699724e7ec13ade36c49a5063d3dc3a769bc5f52248c812e5ff",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_076d64d1"
+      }
+    },
+    {
+      "segment_id": "d1ce550c",
+      "source_content": "<img class=\"half-size\" alt=\"Open Xcode Workspace\" src=\"/docs/assets/fabric-native-components/1.webp\" />",
+      "source_content_hash": "9bde8a7a19a22d39a4b1bc391eda2657822c12539ddeb16aaffe3f78d5fd1951",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d1ce550c"
+      }
+    },
+    {
+      "segment_id": "bdfae007",
+      "source_content": "2. Right click on app and select <code>New Group</code>, call the new group `WebView`.",
+      "source_content_hash": "4f86497f970d217a2c7f066a1f09223e55c98fb144aa17da7c315bf39c634341",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 右鍵點擊應用程式並選擇 <code>New Group</code>，將新組命名為 `WebView`。"
+      }
+    },
+    {
+      "segment_id": "68123cc1",
+      "source_content": "<img class=\"half-size\" alt=\"Right click on app and select New Group\" src=\"/docs/assets/fabric-native-components/2.webp\" />",
+      "source_content_hash": "79f6aa3a931fcae395586abb52880b59de0b76e567ba24a2e6857a4216763803",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_68123cc1"
+      }
+    },
+    {
+      "segment_id": "b93ddfac",
+      "source_content": "3. In the `WebView` group, create <code>New</code>→<code>File from Template</code>.",
+      "source_content_hash": "1a6eebe497f8223c62f374e9c3021a3a3f0b297fd268dffef5684ecd176171f8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "3. 在 `WebView` 組中，創建 <code>New</code>→<code>File from Template</code>。"
+      }
+    },
+    {
+      "segment_id": "6127963f",
+      "source_content": "<img class=\"half-size\" alt=\"Create a new file using the Cocoa Touch Classs template\" src=\"/docs/assets/fabric-native-components/3.webp\" />",
+      "source_content_hash": "96d0b9da0ee950f3beef5c712166ea16907f41d00948de912dac95ac14bdbd1e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6127963f"
+      }
+    },
+    {
+      "segment_id": "ddd2c7ae",
+      "source_content": "4. Use the <code>Objective-C File</code> template, and name it <code>RCTWebView</code>.",
+      "source_content_hash": "3d809edcf5432f985727163086a865913f282ec74a9d13b8fa05df309b497d4e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "4. 使用 <code>Objective-C File</code> 模板，並將其命名為 <code>RCTWebView</code>。"
+      }
+    },
+    {
+      "segment_id": "8296bd42",
+      "source_content": "<img class=\"half-size\" alt=\"Create an Objective-C RCTWebView class\" src=\"/docs/assets/fabric-native-components/4.webp\" />",
+      "source_content_hash": "0f1fc5fd5900aa5651e54291f6f77a604d38f749a071c39331ce811cde6e08d6",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8296bd42"
+      }
+    },
+    {
+      "segment_id": "c94a9c0e",
+      "source_content": "5. Repeat step 4 and create a header file named `RCTWebView.h`.\n\n6. Rename <code>RCTWebView.m</code> → <code>RCTWebView.mm</code> making it an Objective-C++ file.",
+      "source_content_hash": "b6e4eaa5858b45a39171c23564cf1931812f5e34e38f3c213aae504a24f3f2ab",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "5. 重複步驟 4，創建一個名為 `RCTWebView.h` 的頭文件。\n\n6. 將 <code>RCTWebView.m</code> 重命名為 <code>RCTWebView.mm</code>，使其成為 Objective-C++ 文件。"
+      }
+    },
+    {
+      "segment_id": "6d254e09",
+      "source_content": "```text title=\"Demo/ios\"\nPodfile\n...\nDemo\n├── AppDelegate.swift\n...\n// highlight-start\n├── RCTWebView.h\n└── RCTWebView.mm\n// highlight-end\n```",
+      "source_content_hash": "60bb21176ab03a9e7520fcce9025059abfca3842cf3f2cff82888d41dd539007",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6d254e09"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "After creating the header file and the implementation file, you can start implementing them.",
+      "source_content_hash": "36395afe0ff4a39cac3d9b23ecfcefd730f838b673f50e256cb6b29fad0257c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建頭文件和實現文件後，您可以開始實現它們。"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "This is the code for the `RCTWebView.h` file, which declares the component interface.",
+      "source_content_hash": "1905e7a5c5ffbc21ee884b448318192eaaa9e21938ccbcb2f2387bcfa04ec5db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是 `RCTWebView.h` 文件的代碼，它聲明了組件的接口。"
+      }
+    },
+    {
+      "segment_id": "9f3b4022",
+      "source_content": "```objc title=\"Demo/RCTWebView/RCTWebView.h\"\n#import <React/RCTViewComponentView.h>\n#import <UIKit/UIKit.h>\n\nNS_ASSUME_NONNULL_BEGIN\n\n@interface RCTWebView : RCTViewComponentView\n\n// You would declare native methods you'd want to access from the view here\n\n@end\n\nNS_ASSUME_NONNULL_END\n```",
+      "source_content_hash": "81600f2cb8db51443c2b78970d8e8e0c8d1f0c6fa3d9c5580bb51bb06aff5467",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9f3b4022"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "This class defines an `RCTWebView` which extends the `RCTViewComponentView` class. This is the base class for all the native components and it is provided by React Native.",
+      "source_content_hash": "da2d239074f10a4f1231b4009537382ee7d5b9005674109abeb2d60a5166e841",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該類定義了一個 `RCTWebView`，它繼承自 `RCTViewComponentView` 類。這是所有原生組件的基類，由 React Native 提供。"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "The code for the implementation file (`RCTWebView.mm`) is the following:",
+      "source_content_hash": "bf79f0b1a9d476c6541a544bf18ad57a95186edc31073c006823ff26033ba5ca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實現文件（`RCTWebView.mm`）的代碼如下："
+      }
+    },
+    {
+      "segment_id": "daa16011",
+      "source_content": "```objc title=\"Demo/RCTWebView/RCTWebView.mm\"\n#import \"RCTWebView.h\"\n\n#import <react/renderer/components/AppSpec/ComponentDescriptors.h>\n#import <react/renderer/components/AppSpec/EventEmitters.h>\n#import <react/renderer/components/AppSpec/Props.h>\n#import <react/renderer/components/AppSpec/RCTComponentViewHelpers.h>\n// highlight-next-line\n#import <WebKit/WebKit.h>\n\nusing namespace facebook::react;\n\n@interface RCTWebView () <RCTCustomWebViewViewProtocol, WKNavigationDelegate>\n@end\n\n@implementation RCTWebView {\n  NSURL * _sourceURL;\n  WKWebView * _webView;\n}\n\n-(instancetype)init\n{\n  if(self = [super init]) {\n    // highlight-start\n    _webView = [WKWebView new];\n    _webView.navigationDelegate = self;\n    [self addSubview:_webView];\n    // highlight-end\n  }\n  return self;\n}\n\n- (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps\n{\n  const auto &oldViewProps = *std::static_pointer_cast<CustomWebViewProps const>(_props);\n  const auto &newViewProps = *std::static_pointer_cast<CustomWebViewProps const>(props);\n\n  // Handle your props here\n  if (oldViewProps.sourceURL != newViewProps.sourceURL) {\n    NSString *urlString = [NSString stringWithCString:newViewProps.sourceURL.c_str() encoding:NSUTF8StringEncoding];\n    _sourceURL = [NSURL URLWithString:urlString];\n    // highlight-start\n    if ([self urlIsValid:newViewProps.sourceURL]) {\n      [_webView loadRequest:[NSURLRequest requestWithURL:_sourceURL]];\n    }\n    // highlight-end\n  }\n\n  [super updateProps:props oldProps:oldProps];\n}\n\n-(void)layoutSubviews\n{\n  [super layoutSubviews];\n  _webView.frame = self.bounds;\n\n}\n\n#pragma mark - WKNavigationDelegate\n\n// highlight-start\n-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation\n{\n  CustomWebViewEventEmitter::OnScriptLoaded result = CustomWebViewEventEmitter::OnScriptLoaded{CustomWebViewEventEmitter::OnScriptLoadedResult::Success};\n  self.eventEmitter.onScriptLoaded(result);\n}\n\n- (BOOL)urlIsValid:(std::string)propString\n{\n  if (propString.length() > 0 && !_sourceURL) {\n    CustomWebViewEventEmitter::OnScriptLoaded result = CustomWebViewEventEmitter::OnScriptLoaded{CustomWebViewEventEmitter::OnScriptLoadedResult::Error};\n\n    self.eventEmitter.onScriptLoaded(result);\n    return NO;\n  }\n  return YES;\n}\n\n// Event emitter convenience method\n- (const CustomWebViewEventEmitter &)eventEmitter\n{\n  return static_cast<const CustomWebViewEventEmitter &>(*_eventEmitter);\n}\n// highlight-end\n\n+ (ComponentDescriptorProvider)componentDescriptorProvider\n{\n  return concreteComponentDescriptorProvider<CustomWebViewComponentDescriptor>();\n}\n\n@end\n```",
+      "source_content_hash": "dd641c9444f30ea791ecef7e42ef0025c1a4c6d7b3047a015d2831b891eb1cf9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_daa16011"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "This code is written in Objective-C++ and contains various details:",
+      "source_content_hash": "946f134ed58e2eb3cafea1aeb76a275518e0f221f14abd2f4a64c18787dd8653",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這段代碼是用 Objective-C++ 編寫的，包含以下細節："
+      }
+    },
+    {
+      "segment_id": "fc7b5b3c",
+      "source_content": "- the `@interface` implements two protocols:\n  - `RCTCustomWebViewViewProtocol`, generated by Codegen;\n  - `WKNavigationDelegate`, provided by the WebKit framework to handle the web view navigation events;\n- the `init` method that instantiates the `WKWebView`, adds it to the subviews and that sets the `navigationDelegate`;\n- the `updateProps` method that is called by React Native when the component's props change;\n- the `layoutSubviews` method that describes how the custom view needs to be laid out;\n- the `webView:didFinishNavigation:` method that lets you handle what to do when the `WKWebView` finishes loading the page;\n- the `urlIsValid:(std::string)propString` method that checks whether the URL received as prop is valid;\n- the `eventEmitter` method which is a utility to retrieve a strongly typed `eventEmitter` instance\n- the `componentDescriptorProvider` which returns the `ComponentDescriptor` generated by Codegen;",
+      "source_content_hash": "d26bd3682ee007cc6b1ce5141a64a70d4dd5d385fe91a07764b66463184cd81c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `@interface` 實現了兩個協議：\n  - `RCTCustomWebViewViewProtocol`，由 Codegen 生成；\n  - `WKNavigationDelegate`，由 WebKit 框架提供，用於處理網頁視圖的導航事件；\n- `init` 方法，用於實例化 `WKWebView`，將其添加到子視圖中並設置 `navigationDelegate`；\n- `updateProps` 方法，當組件的 props 發生變化時由 React Native 調用；\n- `layoutSubviews` 方法，描述如何佈局自定義視圖；\n- `webView:didFinishNavigation:` 方法，讓您處理 `WKWebView` 完成頁面加載後的操作；\n- `urlIsValid:(std::string)propString` 方法，檢查作為 prop 接收的 URL 是否有效；\n- `eventEmitter` 方法，這是一個實用工具，用於檢索強類型的 `eventEmitter` 實例；\n- `componentDescriptorProvider`，返回由 Codegen 生成的 `ComponentDescriptor`；"
+      }
+    },
+    {
+      "segment_id": "8159e12a",
+      "source_content": "#### Add WebKit framework",
+      "source_content_hash": "18ad7a2b3afac6e77f1dec778caffe2aa01b92374be52ab4b63c93a4ac80c873",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 添加 WebKit 框架"
+      }
+    },
+    {
+      "segment_id": "ba7527ce",
+      "source_content": ":::note\nThis step is only required because we are creating a Web view. Web components on iOS needs to be linked against the WebKit framework provided by Apple. If your component doesn't need to access web-specific features, you can skip this step.\n:::",
+      "source_content_hash": "1d3b9d6b75130824c3c4c30684c59410d3ac446e9e1d65262b3514a757a6ef52",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n此步驟僅在建立 Web 視圖時需要。iOS 上的 Web 元件需要連結至 Apple 提供的 WebKit 框架。若您的元件不需要存取網頁特定功能，可跳過此步驟。\n:::"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "A web view requires access to some features that Apple provides through one of the frameworks shipped with Xcode and the devices: WebKit.\nYou can see it in the native code by the `#import <WebKit/WebKit.h>` line added in the `RCTWebView.mm`.",
+      "source_content_hash": "ea15d393f18aeb25110a585e31be5deb19c703145cac52f6345d07347e8cd1b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Web 視圖需要存取 Apple 透過 Xcode 和裝置內建的框架之一提供的功能：WebKit。\n您可以在原生程式碼中看到 `RCTWebView.mm` 檔案新增的 `#import <WebKit/WebKit.h>` 這行程式碼。"
+      }
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "To link the WebKit framework in your app, follow these steps:",
+      "source_content_hash": "61dbc111c2b45f97a0b8ec8e7eca68d4be6b5ac32f210a6122c07ab454b98082",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在您的應用程式中連結 WebKit 框架，請遵循以下步驟："
+      }
+    },
+    {
+      "segment_id": "9ba29f2e",
+      "source_content": "1. In Xcode, Click on your project\n2. Select the app target\n3. Select the General tab\n4. Scroll down until you find the _\"Frameworks, Libraries, and Embedded Contents\"_ section, and press the `+` button",
+      "source_content_hash": "3fe1bf4489afbac05fab104d39eece755c541d9cf5d96fa6210e7ab31d31b7d1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在 Xcode 中，點選您的專案\n2. 選擇應用程式目標\n3. 選擇 General 標籤頁\n4. 向下滾動直到找到「Frameworks, Libraries, and Embedded Contents」區段，並點擊 `+` 按鈕"
+      }
+    },
+    {
+      "segment_id": "151776a7",
+      "source_content": "<img class=\"half-size\" alt=\"Add webkit framework to your app 1\" src=\"/docs/assets/AddWebKitFramework1.png\" />",
+      "source_content_hash": "8378f70c3474f01f7e682ce915f381b0c0b84f336ba1e032283a5c0936a244d7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_151776a7"
+      }
+    },
+    {
+      "segment_id": "98bedd07",
+      "source_content": "5. In the search bar, filter for WebKit\n6. Select the WebKit framework\n7. Click on Add.",
+      "source_content_hash": "afb30d4c5060bf345e0ba146a751950ec63d36cd1500b009e744ad56b538187b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "5. 在搜尋欄中，篩選 WebKit\n6. 選擇 WebKit 框架\n7. 點擊 Add。"
+      }
+    },
+    {
+      "segment_id": "c3c12e09",
+      "source_content": "<img class=\"half-size\" alt=\"Add webkit framework to your app 2\" src=\"/docs/assets/AddWebKitFramework2.png\" />",
+      "source_content_hash": "00480f435cef48cf311c7dc0b2671c56ecc55ded4ce48ea6c9b89e7a84a4db94",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c3c12e09"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/fabric-native-components-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.945537+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6c20a0da87d35582d8f4fe675c54b62af2358e4ea342537354ee786849e91ea7"
+  }
+}

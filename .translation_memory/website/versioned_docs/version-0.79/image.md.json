@@ -1,0 +1,2082 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/image.md",
+  "source_file_content_hash": "ca8e23f0ad8539ef3e7be4ca85c6dd183457cf1f4621c8622da76ce059d6a208",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: image\ntitle: Image\n---",
+      "source_content_hash": "14f3cc82027a6dbb29e7ab1868973c66ec63299b3069478ebe237b44415666c5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.",
+      "source_content_hash": "545eec4d6e882ef042ffce63fd0305b15ade0b61ff4d2adf0cce51136984cc37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個用於顯示不同類型圖片的 React 元件，包括網路圖片、靜態資源、臨時本地圖片以及來自本地磁碟的圖片（例如相機膠卷）。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "This example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the `'data:'` uri scheme.",
+      "source_content_hash": "cacf32e9558e288d6bfa1ccbc172ccbb2df618227000831259722be3b51adf41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此範例展示如何從本地儲存空間、網路甚至透過「data:」URI 方案提供的數據中獲取並顯示圖片。"
+      }
+    },
+    {
+      "segment_id": "2f796981",
+      "source_content": "> Note that for network and data images, you will need to manually specify the dimensions of your image!",
+      "source_content_hash": "e987ad771f85f06ce74255cca8eb33d5834ffa6d30c159482f5cb619725be4a7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意，對於網路和數據圖片，您需要手動指定圖片的尺寸！"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Examples",
+      "source_content_hash": "0d19ab46319785768005536313f02bd3b9b779aaed82eeac5bf7a7f796ad3ef1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "5564d81d",
+      "source_content": "```SnackPlayer name=Image%20Example\nimport React from 'react';\nimport {Image, StyleSheet} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  tinyLogo: {\n    width: 50,\n    height: 50,\n  },\n  logo: {\n    width: 66,\n    height: 58,\n  },\n});\n\nconst DisplayAnImage = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <Image\n        style={styles.tinyLogo}\n        source={require('@expo/snack-static/react-native-logo.png')}\n      />\n      <Image\n        style={styles.tinyLogo}\n        source={{\n          uri: 'https://reactnative.dev/img/tiny_logo.png',\n        }}\n      />\n      <Image\n        style={styles.logo}\n        source={{\n          uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',\n        }}\n      />\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nexport default DisplayAnImage;\n```",
+      "source_content_hash": "923bad3fdd92e8eb71ebf9e0f306f03d8bc13b39f53ac66cdb33d6d9a959c664",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5564d81d"
+      }
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "You can also add `style` to an image:",
+      "source_content_hash": "0e8093d35daae3722d5eb8db3750725d5ced00c4dba8e0bfe201dd8da1be58f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您也可以為圖片添加 `style`："
+      }
+    },
+    {
+      "segment_id": "c05ad55e",
+      "source_content": "```SnackPlayer name=Styled%20Image%20Example\nimport React from 'react';\nimport {Image, StyleSheet} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  stretch: {\n    width: 50,\n    height: 200,\n    resizeMode: 'stretch',\n  },\n});\n\nconst DisplayAnImageWithStyle = () => (\n  <SafeAreaProvider>\n    <SafeAreaView style={styles.container}>\n      <Image\n        style={styles.stretch}\n        source={require('@expo/snack-static/react-native-logo.png')}\n      />\n    </SafeAreaView>\n  </SafeAreaProvider>\n);\n\nexport default DisplayAnImageWithStyle;\n```",
+      "source_content_hash": "8e270b5c557359dbe9e2667d79e53d38f54f6ca35613ce56dbd3dcd523c28318",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c05ad55e"
+      }
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "## GIF and WebP support on Android",
+      "source_content_hash": "afe372f063bcf0379c6b36f13eecb13d916b91efd3c8e6ed29ac8ddc2a9e87e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Android 上的 GIF 和 WebP 支援"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "When building your own native code, GIF and WebP are not supported by default on Android.",
+      "source_content_hash": "15d271ef401b1fd6cb5c59e84a3db740243cc15186132c5f5131004e6c4ac48c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在自行構建原生代碼時，Android 預設不支援 GIF 和 WebP 格式。"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.",
+      "source_content_hash": "09e41f71057b782d81232ec2e0e4603d8b1802458fcab99cd7b1663d7d435fbf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您需要根據應用需求，在 `android/app/build.gradle` 中添加一些可選模組。"
+      }
+    },
+    {
+      "segment_id": "ec99e704",
+      "source_content": "```groovy\ndependencies {\n  // If your app supports Android versions before Ice Cream Sandwich (API level 14)\n  implementation 'com.facebook.fresco:animated-base-support:1.3.0'\n\n  // For animated GIF support\n  implementation 'com.facebook.fresco:animated-gif:3.2.0'\n\n  // For WebP support, including animated WebP\n  implementation 'com.facebook.fresco:animated-webp:3.2.0'\n  implementation 'com.facebook.fresco:webpsupport:3.2.0'\n\n  // For WebP support, without animations\n  implementation 'com.facebook.fresco:webpsupport:3.2.0'\n}\n```",
+      "source_content_hash": "8a8aa54839c8150b2ba92ed7c7b88367138b6cfe2d03f616ab34f607223be039",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ec99e704"
+      }
+    },
+    {
+      "segment_id": "0a99e21d",
+      "source_content": "> Note: the version listed above may not be updated in time. Please check [`packages/react-native/gradle/libs.versions.toml`](https://github.com/facebook/react-native/blob/main/packages/react-native/gradle/libs.versions.toml) in the main repo to see which fresco version is being used in a specific tagged version.",
+      "source_content_hash": "82371ffc0cac66e0180bdb37582a72d7d2238c29d0ca1f9e06070e5d3d999f4f",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：上述列出的版本可能未及時更新。請查閱主代碼庫中的 [`packages/react-native/gradle/libs.versions.toml`](https://github.com/facebook/react-native/blob/main/packages/react-native/gradle/libs.versions.toml) 以確認特定標籤版本使用的 fresco 版本。"
+      }
+    },
+    {
+      "segment_id": "55c9cb00",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文檔"
+      }
+    },
+    {
+      "segment_id": "638efb88",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "cbd60296",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [View 屬性](view.md#props)"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "Inherits [View Props](view#props).",
+      "source_content_hash": "728a59ec5a33ce4be2ffcbe3e86d44eb0b94d3f535bae6f8a1e98376c99bd5ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [View 屬性](view#props)。"
+      }
+    },
+    {
+      "segment_id": "3d477c19",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "### `accessible`",
+      "source_content_hash": "7e2f45d1c536354ff4e8f949668ed0b63fc433f315af4147b029c19a8259c830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessible`"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "When true, indicates the image is an accessibility element.",
+      "source_content_hash": "c50df184de93ff3f15ab9d232afa04cef2535f11480865a3853e0d6cdefeca37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 true 時，表示該圖片是一個無障礙元素。"
+      }
+    },
+    {
+      "segment_id": "63ab29f9",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_63ab29f9"
+      }
+    },
+    {
+      "segment_id": "f1a2be1a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13292277",
+      "source_content": "### `accessibilityLabel`",
+      "source_content_hash": "4f55de35ce0c561187344a423b6279d22ada7d874f880caef84af52c16646758",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `accessibilityLabel`"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "The text that's read by the screen reader when the user interacts with the image.",
+      "source_content_hash": "21edaa4af062134766017e9c8a84526437e4c51a1e47ddc1377676d3a0a7582b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當用戶與圖片互動時，螢幕閱讀器將朗讀此文字。"
+      }
+    },
+    {
+      "segment_id": "e016853e",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e016853e"
+      }
+    },
+    {
+      "segment_id": "8bc5aad7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "### `alt`",
+      "source_content_hash": "278e33b92d449e691ffc0fbcdcd4a76f79edd627692cb0287ca348729d9253e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `alt`"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "A string that defines an alternative text description of the image, which will be read by the screen reader when the user interacts with it. Using this will automatically mark this element as accessible.",
+      "source_content_hash": "77fa73fed2a8d4d3dc3b4edb345c71869828e894be5ec34bfd8ad01a0dd14113",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "定義圖片替代文字描述的字符串，當用戶與圖片互動時將由螢幕閱讀器朗讀。使用此屬性會自動將該元素標記為可訪問。"
+      }
+    },
+    {
+      "segment_id": "acafaaec",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_acafaaec"
+      }
+    },
+    {
+      "segment_id": "70a662e2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "97afbaf0",
+      "source_content": "### `blurRadius`",
+      "source_content_hash": "2b7ca5233868551569352d34b9b4e9e5df11c75e3e4501c2ce3418e42e1c040f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `blurRadius`"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "blurRadius: the blur radius of the blur filter added to the image.",
+      "source_content_hash": "b992bce351385f612a03662840b84eaedf6dae6c80ba3bb4e4e281ef1c6af7cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "blurRadius：添加到圖片的模糊濾鏡的模糊半徑。"
+      }
+    },
+    {
+      "segment_id": "1f4353f2",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1f4353f2"
+      }
+    },
+    {
+      "segment_id": "1c652117",
+      "source_content": "> Tip: On IOS, you will need to increase `blurRadius` by more than `5`.",
+      "source_content_hash": "87c42420f96c8f0d204b8e2e47bcb224237bee749d3e4e27a018e776e1955cc7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 提示：在 iOS 上，您需要將 `blurRadius` 設置為大於 `5` 的值。"
+      }
+    },
+    {
+      "segment_id": "cb3e8b91",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "58f98d22",
+      "source_content": "### `capInsets` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "21d023a68a8fc25e45ff3725964a9a909a59217cc413ca6c0d8bbd50ea9b2ee3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `capInsets` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "When the image is resized, the corners of the size specified by `capInsets` will stay a fixed size, but the center content and borders of the image will be stretched. This is useful for creating resizable rounded buttons, shadows, and other resizable assets. More info in the [official Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets).",
+      "source_content_hash": "5794799d58bb286e3c3265a875c085b90aeae8e739db69eb322cce4dbb94f73a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當圖片調整大小時，由 `capInsets` 指定的尺寸的角落將保持固定大小，但圖片的中心內容和邊框將被拉伸。這對於創建可調整大小的圓角按鈕、陰影和其他可調整大小的資源非常有用。更多資訊請參閱 [Apple 官方文檔](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets)。"
+      }
+    },
+    {
+      "segment_id": "28fc1cfd",
+      "source_content": "| Type         |\n| ------------ |\n| [Rect](rect) |",
+      "source_content_hash": "beeb10fe08e4805d4b3691149c48772d9a56a072363ad00afef11e2a4413f03a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_28fc1cfd"
+      }
+    },
+    {
+      "segment_id": "158ce243",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "445c72bd",
+      "source_content": "### `crossOrigin`",
+      "source_content_hash": "af235c91618bfe598f12c6342875889bbf892b537a318f8ef4436d9a26dd52bf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `crossOrigin`"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "A string of a keyword specifying the CORS mode to use when fetching the image resource. It works similar to crossorigin attribute in HTML.",
+      "source_content_hash": "763c2ab2eb9b1f95ac8354d221b1c42741431ae30bd8c5831add4288015c508a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定獲取圖片資源時使用的 CORS 模式的關鍵字字符串。其功能類似於 HTML 中的 crossorigin 屬性。"
+      }
+    },
+    {
+      "segment_id": "d0f2205c",
+      "source_content": "- `anonymous`: No exchange of user credentials in the image request.\n- `use-credentials`: Sets `Access-Control-Allow-Credentials` header value to `true` in the image request.",
+      "source_content_hash": "db49e3df4dfbef10788cf878cd7a810ff7467e5a608f30e64cb13aa3a84ace7b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `anonymous`：圖片請求中不交換用戶憑證。\n- `use-credentials`：在圖片請求中將 `Access-Control-Allow-Credentials` 標頭值設為 `true`。"
+      }
+    },
+    {
+      "segment_id": "864536ba",
+      "source_content": "| Type                                     | Default       |\n| ---------------------------------------- | ------------- |\n| enum(`'anonymous'`, `'use-credentials'`) | `'anonymous'` |",
+      "source_content_hash": "9f1c034d562d682ae40e7d5ba6fa378bed8a6de24798dc167100f68f7c906295",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_864536ba"
+      }
+    },
+    {
+      "segment_id": "f76688f3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6d457467",
+      "source_content": "### `defaultSource`",
+      "source_content_hash": "b679c69acfcd6aa6063dbc57bcabed64ba46e8ad1640797b132bd2f760060f14",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `defaultSource`"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "A static image to display while loading the image source.",
+      "source_content_hash": "a5b833552585a8f67c730218f17506468947061d3b6e4e7202baabf347be8144",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "載入圖片來源時顯示的靜態圖片。"
+      }
+    },
+    {
+      "segment_id": "ae4c3f3f",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| [ImageSource](image#imagesource) |",
+      "source_content_hash": "17c6021b7f1c1636a02898d4ba71bfbd9f835b99f5f2941b29554fa903bf1a7c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ae4c3f3f"
+      }
+    },
+    {
+      "segment_id": "930e340a",
+      "source_content": "> **Note:** On Android, the default source prop is ignored on debug builds.",
+      "source_content_hash": "90755c62a2cb087e32c59986066df9ecd34edb9d4e199ef005362b53263e3627",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **注意：** 在 Android 上，debug 版本會忽略預設的 source 屬性。"
+      }
+    },
+    {
+      "segment_id": "acb19165",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a9de5d69",
+      "source_content": "### `fadeDuration` <div class=\"label android\">Android</div>",
+      "source_content_hash": "78340f77dbc6e7f2295d4cca6680fc0ebc2bdc446f76a44d6110abb46167a91c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `fadeDuration` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "e6ac016e",
+      "source_content": "Fade animation duration in milliseconds.",
+      "source_content_hash": "5de69cb690ba9e5fb01004ff21946d33e15322817f6e69da4350a5fbd232a206",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "淡入淡出動畫的持續時間（毫秒）。"
+      }
+    },
+    {
+      "segment_id": "1de6abbc",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `300`   |",
+      "source_content_hash": "ddd358620bef0dbc6ac9e96b894ffdf8ee6ecbfec5762d17da682137620e98e4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1de6abbc"
+      }
+    },
+    {
+      "segment_id": "a025b260",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ba4aa94e",
+      "source_content": "### `height`",
+      "source_content_hash": "e4fb016c96faca759fece3409dfac1f2604a28231868dee85e3089e499d9d537",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `height`"
+      }
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "Height of the image component.",
+      "source_content_hash": "f06c4f15dbd120370128aadf66f455ebf533da219fbaa28aa7fa09aa839c00df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "圖片元件的高度。"
+      }
+    },
+    {
+      "segment_id": "12cbb2c8",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12cbb2c8"
+      }
+    },
+    {
+      "segment_id": "fe7bdddf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "950e5c6c",
+      "source_content": "### `loadingIndicatorSource`",
+      "source_content_hash": "c9652afeec1125f4f05ff4d25b75676fe9dac7698dd5f51bcfaa5061ad567e29",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `loadingIndicatorSource`"
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "Similarly to `source`, this property represents the resource used to render the loading indicator for the image. The loading indicator is displayed until image is ready to be displayed, typically after the image is downloaded.",
+      "source_content_hash": "5676feec5d16f4209caecea66f85ef370788066ad2994c9e541420a81168443d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "類似於 `source`，此屬性代表用於渲染圖片載入指示器的資源。載入指示器會顯示直到圖片準備好顯示，通常是在圖片下載完成後。"
+      }
+    },
+    {
+      "segment_id": "46f9cb25",
+      "source_content": "| Type                                                  |\n| ----------------------------------------------------- |\n| [ImageSource](image#imagesource) (`uri` only), number |",
+      "source_content_hash": "18fdaba6599296f61e705aac8788716f4fa2597ca49a11faf0d342bdda9c5dc1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_46f9cb25"
+      }
+    },
+    {
+      "segment_id": "40f71b18",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5e300688",
+      "source_content": "### `onError`",
+      "source_content_hash": "d026a423d593a4494f7f735253f5a2cbfc8c246d6649216994ed1bf8ed157afa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onError`"
+      }
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "Invoked on load error.",
+      "source_content_hash": "d7df7a71bfb82b5a5013b77f690c50f571d96761364009957f9c7a8a8f4ec24a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在載入錯誤時觸發。"
+      }
+    },
+    {
+      "segment_id": "972686b4",
+      "source_content": "| Type                                |\n| ----------------------------------- |\n| (`{nativeEvent: {error} }`) => void |",
+      "source_content_hash": "f265ae5443096f0d614cacbaa2793520d84c25db18d4db855dd02eab90cdb626",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_972686b4"
+      }
+    },
+    {
+      "segment_id": "f0644895",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4147aea6",
+      "source_content": "### `onLayout`",
+      "source_content_hash": "4003ab8e4c09c2b682ab13f81e81b2827452db77e43f86621b1c3c7107f873ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLayout`"
+      }
+    },
+    {
+      "segment_id": "43287462",
+      "source_content": "Invoked on mount and on layout changes.",
+      "source_content_hash": "290f35b58ac09874c73cf9c19bd00bc7285f2b644910877c66249e1c5fe2aa8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在掛載時和佈局變化時觸發。"
+      }
+    },
+    {
+      "segment_id": "cee68c12",
+      "source_content": "| Type                                                    |\n| ------------------------------------------------------- |\n| `md ({nativeEvent: [LayoutEvent](layoutevent)} => void` |",
+      "source_content_hash": "7cd488b1e21f4000a342f831c01fa7a2e4125429454bec6443c84c7a017d54e1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cee68c12"
+      }
+    },
+    {
+      "segment_id": "decc5f7c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "6beaa586",
+      "source_content": "### `onLoad`",
+      "source_content_hash": "311772bceb35d6312e2ec0a7bcf762fc80305cda2c30f5f268111955824a8b7c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLoad`"
+      }
+    },
+    {
+      "segment_id": "41e7f712",
+      "source_content": "Invoked when load completes successfully.",
+      "source_content_hash": "1afc9a853ee023edecd7aa2ff35b0733f4f3304e46e7cddecd06f9f256a2fcd1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在載入成功完成時觸發。"
+      }
+    },
+    {
+      "segment_id": "15d5abf0",
+      "source_content": "**Example:** `onLoad={({nativeEvent: {source: {width, height}}}) => setImageRealSize({width, height})}`",
+      "source_content_hash": "27b935eb7badb8437a05f5d1cb41e1ed50a55f10a2a9af72f792cc67a8bb8217",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：** `onLoad={({nativeEvent: {source: {width, height}}}) => setImageRealSize({width, height})}`"
+      }
+    },
+    {
+      "segment_id": "8f6a7793",
+      "source_content": "| Type                                                                |\n| ------------------------------------------------------------------- |\n| `md ({nativeEvent: [ImageLoadEvent](image#imageloadevent)} => void` |",
+      "source_content_hash": "0ebf18bf7b5fe86a9b955ec83e5e3e7f4ac63779159780b23f586a031b823a86",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8f6a7793"
+      }
+    },
+    {
+      "segment_id": "55e0e60b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "66a437ee",
+      "source_content": "### `onLoadEnd`",
+      "source_content_hash": "315c566bd941b6b403722fc256d8959a1a1d4eff919c96c352d81958addd8627",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLoadEnd`"
+      }
+    },
+    {
+      "segment_id": "bb5297fc",
+      "source_content": "Invoked when load either succeeds or fails.",
+      "source_content_hash": "dadd109f43b6f3a7afacca4c6600beaeb00ff4e6d5c5cd13f3f4a105512afdde",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在載入成功或失敗時觸發。"
+      }
+    },
+    {
+      "segment_id": "93d30302",
+      "source_content": "| Type       |\n| ---------- |\n| () => void |",
+      "source_content_hash": "be2856fa963da4b6dd0caf659a430afc19f2a9b9aa1390a603043fccb937ca8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93d30302"
+      }
+    },
+    {
+      "segment_id": "34c51f55",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "846134ef",
+      "source_content": "### `onLoadStart`",
+      "source_content_hash": "fcdd30d949c28593c614e10a9514a0be26a91582ae9ba8a5fe5b5649f32b4105",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onLoadStart`"
+      }
+    },
+    {
+      "segment_id": "53e725dc",
+      "source_content": "Invoked on load start.",
+      "source_content_hash": "c714f6e4dbdfc55895547d57d1e1ea046db647332d643851288ce317513e7d3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在載入開始時觸發。"
+      }
+    },
+    {
+      "segment_id": "5014d30c",
+      "source_content": "**Example:** `onLoadStart={() => this.setState({loading: true})}`",
+      "source_content_hash": "f6388c3152995890b554752b3da9b2c1965542c5d222edfc6112571e3189dd5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：** `onLoadStart={() => this.setState({loading: true})}`"
+      }
+    },
+    {
+      "segment_id": "95799de0",
+      "source_content": "| Type       |\n| ---------- |\n| () => void |",
+      "source_content_hash": "be2856fa963da4b6dd0caf659a430afc19f2a9b9aa1390a603043fccb937ca8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95799de0"
+      }
+    },
+    {
+      "segment_id": "c650ddf9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c2db81f5",
+      "source_content": "### `onPartialLoad` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "8a4aaec6487f8306848f2ed755c6415a499b431b89e38d7b53a136c28080879c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onPartialLoad` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "7eb5b32d",
+      "source_content": "Invoked when a partial load of the image is complete. The definition of what constitutes a \"partial load\" is loader specific though this is meant for progressive JPEG loads.",
+      "source_content_hash": "3bea75c9c77153735c174c24b896a814c90903d62e8a60e8d8de650d2431fb61",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在圖片部分載入完成時觸發。「部分載入」的定義取決於載入器，但這通常用於漸進式 JPEG 載入。"
+      }
+    },
+    {
+      "segment_id": "34ce3554",
+      "source_content": "| Type       |\n| ---------- |\n| () => void |",
+      "source_content_hash": "be2856fa963da4b6dd0caf659a430afc19f2a9b9aa1390a603043fccb937ca8c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_34ce3554"
+      }
+    },
+    {
+      "segment_id": "768b4174",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "295e85da",
+      "source_content": "### `onProgress`",
+      "source_content_hash": "35d63bfefa9b9f0ae9b95b1cd6c6cf8e275d59c19de3cd67bf2ff3068ace2b84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onProgress`"
+      }
+    },
+    {
+      "segment_id": "a5a28988",
+      "source_content": "Invoked on download progress.",
+      "source_content_hash": "21905e53dbac38ed16cd1c04acd894e15c1bf926eb8d1d66f7aa80c8ed61a51a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在下載進度更新時觸發。"
+      }
+    },
+    {
+      "segment_id": "829c4d3e",
+      "source_content": "| Type                                        |\n| ------------------------------------------- |\n| (`{nativeEvent: {loaded, total} }`) => void |",
+      "source_content_hash": "01e43fd4671b57333f907dc78086f62097e36bd33d476b86e2600c7118633216",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_829c4d3e"
+      }
+    },
+    {
+      "segment_id": "423d7e73",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a4628837",
+      "source_content": "### `progressiveRenderingEnabled` <div class=\"label android\">Android</div>",
+      "source_content_hash": "90a54e6e7a422ebee418dd1922fc6948d985e5dc0db4d0360b756fd9216200a6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `progressiveRenderingEnabled` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "b2ffb658",
+      "source_content": "When `true`, enables progressive jpeg streaming - https://frescolib.org/docs/progressive-jpegs.",
+      "source_content_hash": "ae267cffdd67560a0df325bddd82d16b37dd33b176de12b127b9f911474ad25a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為 `true` 時，啟用漸進式 JPEG 串流 - https://frescolib.org/docs/progressive-jpegs。"
+      }
+    },
+    {
+      "segment_id": "a559a766",
+      "source_content": "| Type | Default |\n| ---- | ------- |\n| bool | `false` |",
+      "source_content_hash": "44a066b483a4af093dec2ddb86c1ba7145d1596b15c5e59e54c51e671e066da8",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a559a766"
+      }
+    },
+    {
+      "segment_id": "aea7c09f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "638164aa",
+      "source_content": "### `referrerPolicy`",
+      "source_content_hash": "3d0699ae880280e580803aa726d6985fc46038dea787420069d20b22bafce355",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `referrerPolicy`"
+      }
+    },
+    {
+      "segment_id": "9929329e",
+      "source_content": "A string indicating which referrer to use when fetching the resource. Sets the value for `Referrer-Policy` header in the image request. Works similar to `referrerpolicy` attribute in HTML.",
+      "source_content_hash": "d456de7d80398f2b022326c6b6a4f5bacac6b493e242d3c26f2fa76b4cb75dcf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一個字串，指示在獲取資源時使用哪個 referrer。設定圖片請求中 `Referrer-Policy` 標頭的值。功能類似於 HTML 中的 `referrerpolicy` 屬性。"
+      }
+    },
+    {
+      "segment_id": "675b1482",
+      "source_content": "| Type                                                                                                                                                                                     | Default                             |\n| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |\n| enum(`'no-referrer'`, `'no-referrer-when-downgrade'`, `'origin'`, `'origin-when-cross-origin'`, `'same-origin'`, `'strict-origin'`, `'strict-origin-when-cross-origin'`, `'unsafe-url'`) | `'strict-origin-when-cross-origin'` |",
+      "source_content_hash": "909bc93dff7d4a6b1cdfebacd6c9204fdad17017df444c4bbfcde64315953ddf",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_675b1482"
+      }
+    },
+    {
+      "segment_id": "1e1e3aef",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8dfbc79d",
+      "source_content": "### `resizeMethod` <div class=\"label android\">Android</div>",
+      "source_content_hash": "64a66eeb9fb3cc091344e37a98252f29ba3b5fe81b62c36dde21aa8dbd7b3c0f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `resizeMethod` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "0302cdc1",
+      "source_content": "The mechanism that should be used to resize the image when the image's dimensions differ from the image view's dimensions. Defaults to `auto`.",
+      "source_content_hash": "16f50533208fc4d5cd0d91de1afa7e0d2ff773bb3e1438403bf9506a03741b04",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當圖片的尺寸與圖片視圖的尺寸不同時，用於調整圖片大小的機制。預設為 `auto`。"
+      }
+    },
+    {
+      "segment_id": "e55e1c2c",
+      "source_content": "- `auto`: Use heuristics to pick between `resize` and `scale`.\n\n- `resize`: A software operation which changes the encoded image in memory before it gets decoded. This should be used instead of `scale` when the image is much larger than the view.\n\n- `scale`: The image gets drawn downscaled or upscaled. Compared to `resize`, `scale` is faster (usually hardware accelerated) and produces higher quality images. This should be used if the image is smaller than the view. It should also be used if the image is slightly bigger than the view.\n\n- `none`: No sampling is performed and the image is displayed in its full resolution. This should only be used in rare circumstances because it is considered unsafe as Android will throw a runtime exception when trying to render images that consume too much memory.",
+      "source_content_hash": "b2e4f1ad48c60d7f0676ad6f486fc6aa412c4524a1e3888a6b265874864db226",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `auto`：使用啟發式方法在 `resize` 和 `scale` 之間選擇。\n\n- `resize`：一種軟體操作，在圖像解碼前改變記憶體中的編碼圖像。當圖像遠大於視圖時，應使用此方法而非 `scale`。\n\n- `scale`：圖像會被縮小或放大繪製。與 `resize` 相比，`scale` 更快（通常由硬體加速）且產生更高品質的圖像。如果圖像小於視圖，應使用此方法。如果圖像略大於視圖，也應使用此方法。\n\n- `none`：不進行採樣，圖像以其完整解析度顯示。這僅應在極少數情況下使用，因為它被視為不安全，當 Android 嘗試渲染消耗過多記憶體的圖像時會拋出運行時異常。"
+      }
+    },
+    {
+      "segment_id": "e4ab192a",
+      "source_content": "More details about `resize` and `scale` can be found at https://frescolib.org/docs/resizing.",
+      "source_content_hash": "13405475321310019331197b5f9c9f35cb4abf658be044e84223bf9fde46fa91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有關 `resize` 和 `scale` 的更多詳細資訊，請參閱 https://frescolib.org/docs/resizing。"
+      }
+    },
+    {
+      "segment_id": "44ac7916",
+      "source_content": "| Type                                            | Default  |\n| ----------------------------------------------- | -------- |\n| enum(`'auto'`, `'resize'`, `'scale'`, `'none'`) | `'auto'` |",
+      "source_content_hash": "d05e83cd9ea1ed08546b7d5df11454c789c962d47150a32e3c2cee409ba38c36",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_44ac7916"
+      }
+    },
+    {
+      "segment_id": "a915c64f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1e5c4bc8",
+      "source_content": "### `resizeMode`",
+      "source_content_hash": "572a9ddddaa7cf46e74b642534b3139e12c5e694ccdf79183611e92c2f57db77",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `resizeMode`"
+      }
+    },
+    {
+      "segment_id": "d8492b16",
+      "source_content": "Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.",
+      "source_content_hash": "b4c2283f4bd5cf91c092a120cec32b877b85cb5b4bf59b53766d531c758b3c89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定當框架與原始圖像尺寸不匹配時如何調整圖像大小。預設為 `cover`。"
+      }
+    },
+    {
+      "segment_id": "f6aafc57",
+      "source_content": "- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that\n\n  - both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding)\n  - at least one dimension of the scaled image will be equal to the corresponding dimension of the view (minus padding)\n\n- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).\n\n- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.\n\n- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.\n\n- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.",
+      "source_content_hash": "b1fd924c78c717566bae5291ec65411689c32df9a3f260782347e276a1282b35",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `cover`：均勻縮放圖像（保持圖像的長寬比），使得：\n\n  - 圖像的兩個尺寸（寬度和高度）都等於或大於視圖的相應尺寸（減去內邊距）\n  - 縮放後的圖像至少有一個尺寸等於視圖的相應尺寸（減去內邊距）\n\n- `contain`：均勻縮放圖像（保持圖像的長寬比），使得圖像的兩個尺寸（寬度和高度）都等於或小於視圖的相應尺寸（減去內邊距）。\n\n- `stretch`：獨立縮放寬度和高度，這可能會改變圖像的長寬比。\n\n- `repeat`：重複圖像以覆蓋視圖的框架。圖像將保持其大小和長寬比，除非它大於視圖，在這種情況下，它將被均勻縮小以適應視圖。\n\n- `center`：在視圖的兩個維度上居中圖像。如果圖像大於視圖，則均勻縮小以適應視圖。"
+      }
+    },
+    {
+      "segment_id": "2e6a9bf3",
+      "source_content": "| Type                                                              | Default   |\n| ----------------------------------------------------------------- | --------- |\n| enum(`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |",
+      "source_content_hash": "1d19caf563e1a2fd421f639a412d0f48350d39f968e0689bfb76271162ea8ec1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2e6a9bf3"
+      }
+    },
+    {
+      "segment_id": "f41cb686",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3f6b512a",
+      "source_content": "### `resizeMultiplier` <div class=\"label android\">Android</div>",
+      "source_content_hash": "9c134ad962135b87c2493ddb2c172a3adf17537ec43a3d73b60a66a4e5038382",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `resizeMultiplier` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "e91bdcd9",
+      "source_content": "When the `resizeMethod` is set to `resize`, the destination dimensions are multiplied by this value. The `scale` method is used to perform the remainder of the resize. A default of `1.0` means the bitmap size is designed to fit the destination dimensions. A multiplier greater than `1.0` will set the resize options larger than that of the destination dimensions, and the resulting bitmap will be scaled down from the hardware size. Defaults to `1.0`.",
+      "source_content_hash": "ea3c8e73d88a919b5132984bb5c158c0d740f09a1797592e670b14c179cd2482",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 `resizeMethod` 設為 `resize` 時，目標尺寸會乘以此值。`scale` 方法用於執行剩餘的調整大小。預設值 `1.0` 表示位圖大小設計為適應目標尺寸。大於 `1.0` 的乘數會將調整選項設為大於目標尺寸，生成的位圖將從硬體大小縮小。預設為 `1.0`。"
+      }
+    },
+    {
+      "segment_id": "4bfb1f31",
+      "source_content": "This prop is most useful in cases where the destination dimensions are quite small and the source image is significantly larger. The `resize` resize method performs downsampling and significant image quality is lost between the source and destination image sizes, often resulting in a blurry image. By using a multiplier, the decoded image is slightly larger than the target size but smaller than the source image (if the source image is large enough). This allows aliasing artifacts to produce faux quality through scaling operations on the multiplied image.",
+      "source_content_hash": "eec5483cfddff9c6333363197430dc0af2f655841538e7b1de53395d3c9f710a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此屬性在目標尺寸非常小且源圖像顯著較大的情況下最為有用。`resize` 調整方法執行下採樣，源圖像和目標圖像尺寸之間會損失顯著的圖像品質，通常導致圖像模糊。通過使用乘數，解碼後的圖像略大於目標大小但小於源圖像（如果源圖像足夠大）。這允許通過縮放操作在乘數圖像上產生偽品質的鋸齒偽影。"
+      }
+    },
+    {
+      "segment_id": "dbea1fe8",
+      "source_content": "If you have a source image with dimensions 200x200 and destination dimensions of 24x24, a resizeMultiplier of `2.0` will tell Fresco to downsample the image to 48x48. Fresco picks the closest power of 2 (so, 50x50) and decodes the image into a bitmap of that size. Without the multiplier, the closest power of 2 would be 25x25. The resultant image is scaled down by the system.",
+      "source_content_hash": "403d5ceb0b468998be444ff9a5c9a667ebf83f72c3af38ee5a830c64f869e945",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您有一個尺寸為 200x200 的源圖像和 24x24 的目標尺寸，`resizeMultiplier` 為 `2.0` 將告訴 Fresco 將圖像下採樣至 48x48。Fresco 選擇最接近的 2 的冪次（即 50x50）並將圖像解碼為該大小的位圖。沒有乘數時，最接近的 2 的冪次將是 25x25。生成的圖像由系統縮小。"
+      }
+    },
+    {
+      "segment_id": "9e2a39e2",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| number | `1.0`   |",
+      "source_content_hash": "b2eadeebf015294b474e4f960b2804cd3e8c4b659d639bb23b5475397baaca47",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9e2a39e2"
+      }
+    },
+    {
+      "segment_id": "1da485f4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b98aff93",
+      "source_content": "### `source`",
+      "source_content_hash": "51edcd6e84be2af26bfbdbec4f911a8bc1ba8b51f2d26768918e09748f0eef15",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `source`"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "The image source (either a remote URL or a local file resource).",
+      "source_content_hash": "37904ea92d601e5d8ae7922d4ec2cab8254c2c354f8f9e8ccfa09874b6f33a9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "圖像來源（可以是遠程 URL 或本地文件資源）。"
+      }
+    },
+    {
+      "segment_id": "860eb645",
+      "source_content": "This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache. (For more information see [Cache Control for Images](images#cache-control)).",
+      "source_content_hash": "3f99077da3a3e6c950c955916e74e3cac0794136f43a3cc3d0abfca153343362",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此屬性也可以包含多個遠端 URL，並指定其寬度和高度，可能還包括縮放比例或其他 URI 參數。原生端會根據圖像容器的測量尺寸選擇最佳的 `uri` 來顯示。可以添加 `cache` 屬性來控制網路請求如何與本地緩存交互。（更多信息請參見[圖像的緩存控制](images#cache-control)）。"
+      }
+    },
+    {
+      "segment_id": "fee14fdc",
+      "source_content": "The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp`, `psd` (iOS only). In addition, iOS supports several RAW image formats. Refer to Apple's documentation for the current list of supported camera models (for iOS 12, see https://support.apple.com/en-ca/HT208967).",
+      "source_content_hash": "9ca7fae2fec2ac87c6fe21757c65aa1bca0aaf7c893c9bf71b06112877b1dd56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前支援的格式有 `png`、`jpg`、`jpeg`、`bmp`、`gif`、`webp`、`psd`（僅限 iOS）。此外，iOS 還支援多種 RAW 圖像格式。請參考 Apple 的文檔以獲取當前支援的相機型號列表（對於 iOS 12，請參見 https://support.apple.com/en-ca/HT208967）。"
+      }
+    },
+    {
+      "segment_id": "77f0732d",
+      "source_content": "Please note that the `webp` format is supported on iOS **only** when bundled with the JavaScript code.",
+      "source_content_hash": "a188337681fd3e7800fa8caf70fa7bb8986d90078bc216206d4457857f486712",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，`webp` 格式在 iOS 上**僅**在與 JavaScript 代碼捆綁時才受支援。"
+      }
+    },
+    {
+      "segment_id": "16028bdb",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| [ImageSource](image#imagesource) |",
+      "source_content_hash": "17c6021b7f1c1636a02898d4ba71bfbd9f835b99f5f2941b29554fa903bf1a7c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_16028bdb"
+      }
+    },
+    {
+      "segment_id": "f3923244",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "20ca1bf3",
+      "source_content": "### `src`",
+      "source_content_hash": "488266de3a753191944bbc559cacc25539aec996b96b37d18015bdded53e7117",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `src`"
+      }
+    },
+    {
+      "segment_id": "7ba83bb3",
+      "source_content": "A string representing the remote URL of the image. This prop has precedence over `source` prop.",
+      "source_content_hash": "cd9734e03ac7b2bf341797dafe103dd54c441773184a70b5a596485a00f0fcd2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示圖像遠端 URL 的字串。此屬性優先於 `source` 屬性。"
+      }
+    },
+    {
+      "segment_id": "f6c8bbba",
+      "source_content": "**Example:** `src={'https://reactnative.dev/img/tiny_logo.png'}`",
+      "source_content_hash": "1c2919b00a86ce0f95f2ad07dc56b0ee9be05f38c68226eb0069d060e05f3e4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：** `src={'https://reactnative.dev/img/tiny_logo.png'}`"
+      }
+    },
+    {
+      "segment_id": "9558beaf",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9558beaf"
+      }
+    },
+    {
+      "segment_id": "731aa022",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13d0d6bd",
+      "source_content": "### `srcSet`",
+      "source_content_hash": "3b679416df5170cab6bbb08d2a86b2e2fd82d97e2472a487eb399b97b8f3c6a4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `srcSet`"
+      }
+    },
+    {
+      "segment_id": "51721da5",
+      "source_content": "A string representing comma separated list of possible candidate image source. Each image source contains a URL of an image and a pixel density descriptor. If no descriptor is specified, it defaults to descriptor of `1x`.",
+      "source_content_hash": "ea35fdb07cf6a751dbf878618cef599f38f01e2de90554576167a4ac31c5f3b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示逗號分隔的可能候選圖像源的字串。每個圖像源包含圖像的 URL 和像素密度描述符。如果未指定描述符，則默認為 `1x` 描述符。"
+      }
+    },
+    {
+      "segment_id": "7a210168",
+      "source_content": "If `srcSet` does not contain a `1x` descriptor, the value in `src` is used as image source with `1x` descriptor (if provided).",
+      "source_content_hash": "b2ab37bf134dd0a3323f3e06ca213184fe208ac7c87b66def7959cb7147499b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果 `srcSet` 不包含 `1x` 描述符，則使用 `src` 中的值作為 `1x` 描述符的圖像源（如果提供）。"
+      }
+    },
+    {
+      "segment_id": "3bb26da2",
+      "source_content": "This prop has precedence over both the `src` and `source` props.",
+      "source_content_hash": "4768825dd56ca1ab13265d8772e7745b28a66329959c58534753e8b22cea307b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此屬性優先於 `src` 和 `source` 屬性。"
+      }
+    },
+    {
+      "segment_id": "250c20ca",
+      "source_content": "**Example:** `srcSet={'https://reactnative.dev/img/tiny_logo.png 1x, https://reactnative.dev/img/header_logo.svg 2x'}`",
+      "source_content_hash": "5ffb63d6ae1f6e59931d464ceca49185bbceeb863a68a3198d4f848f5664eef4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：** `srcSet={'https://reactnative.dev/img/tiny_logo.png 1x, https://reactnative.dev/img/header_logo.svg 2x'}`"
+      }
+    },
+    {
+      "segment_id": "f981ed88",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f981ed88"
+      }
+    },
+    {
+      "segment_id": "51f592b3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cd2c3844",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `style`"
+      }
+    },
+    {
+      "segment_id": "f7e7d4c8",
+      "source_content": "| Type                                                                                                                                                 |\n| ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| [Image Style Props](image-style-props#props), [Layout Props](layout-props#props), [Shadow Props](shadow-props#props), [Transforms](transforms#props) |",
+      "source_content_hash": "e48dbc36cb4e88c9df45970f03f8a9e163c3f3c6befd3b4e173fda27b6d86b49",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f7e7d4c8"
+      }
+    },
+    {
+      "segment_id": "b2c83116",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b6ec34ca",
+      "source_content": "### `testID`",
+      "source_content_hash": "83bb1ecc3bce9cf38987403cbf0eee8440f9d30cfdf54fe124a9fc8228f9b47c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `testID`"
+      }
+    },
+    {
+      "segment_id": "0beac34c",
+      "source_content": "A unique identifier for this element to be used in UI Automation testing scripts.",
+      "source_content_hash": "c2841f5a0533fd323b24e478755bd3ddd3c1107b46dda65ea13602b801c7b29f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於 UI 自動化測試腳本中標識此元素的唯一標識符。"
+      }
+    },
+    {
+      "segment_id": "3fb1bca9",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3fb1bca9"
+      }
+    },
+    {
+      "segment_id": "0b0f3095",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "db274ff9",
+      "source_content": "### `tintColor`",
+      "source_content_hash": "7014a43de5b69221e94c3f2011179d028d0492a926f4c0defddc02f3d0ed8a02",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `tintColor`"
+      }
+    },
+    {
+      "segment_id": "bfa178cb",
+      "source_content": "Changes the color of all non-transparent pixels to the `tintColor`.",
+      "source_content_hash": "2f2ecbe3d58289751705f75656ce6388af60f9d6b600f7444d310484162b8c3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將所有非透明像素的顏色更改為 `tintColor`。"
+      }
+    },
+    {
+      "segment_id": "ad96d0e6",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ad96d0e6"
+      }
+    },
+    {
+      "segment_id": "143cc160",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "afdec47c",
+      "source_content": "### `width`",
+      "source_content_hash": "466da2ad29daff30b425dbfda1b4bbf5a290672ed5b2415e7bbfb14d844dbe75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `width`"
+      }
+    },
+    {
+      "segment_id": "04bb83ba",
+      "source_content": "Width of the image component.",
+      "source_content_hash": "b9866e061f930fcb5ca0e44d17ad963f7626c2c22031d964b833dbc11131e31b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "圖像組件的寬度。"
+      }
+    },
+    {
+      "segment_id": "992779f7",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_992779f7"
+      }
+    },
+    {
+      "segment_id": "c655c05b",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "86bedbf7",
+      "source_content": "### `abortPrefetch()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "059907f2caa036d23e9fd78a9b3774f9981b9c43d5e03252e5bbbd0b8c9b2cbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `abortPrefetch()` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "c97b2475",
+      "source_content": "```tsx\nstatic abortPrefetch(requestId: number);\n```",
+      "source_content_hash": "8abc2d029cda70a15d6b21dc731a499880ac9111eddaaf3123a97ac2ab28dea4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c97b2475"
+      }
+    },
+    {
+      "segment_id": "0b7b2b74",
+      "source_content": "Abort prefetch request.",
+      "source_content_hash": "903bba572bb886f02007733f0bb93a3b254f5d8ec7cd8cc4bee532f956502acb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "中止預取請求。"
+      }
+    },
+    {
+      "segment_id": "b136c0e9",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "b35e5dde",
+      "source_content": "| Name                                                       | Type   | Description                             |\n| ---------------------------------------------------------- | ------ | --------------------------------------- |\n| requestId <div class=\"label basic required\">Required</div> | number | Request id as returned by `prefetch()`. |",
+      "source_content_hash": "338a832b84d3c798bc5c582884b0984dcda64ea66ea9f68accc0f7a091038646",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b35e5dde"
+      }
+    },
+    {
+      "segment_id": "10b7b5b9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "fb037688",
+      "source_content": "### `getSize()`",
+      "source_content_hash": "4c6fcac54960fcf04de7edc6d7244948b0ea54b6f475a851e67647507196dd8c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getSize()`"
+      }
+    },
+    {
+      "segment_id": "684c7294",
+      "source_content": "```tsx\nstatic getSize(uri: string): Promise<{width: number, height: number}>;\n```",
+      "source_content_hash": "efbe26b2f376de4b8896520cfb4e7d4dad18afd2f1543609fd31d2dd5feb9ef7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_684c7294"
+      }
+    },
+    {
+      "segment_id": "a1988152",
+      "source_content": "Retrieve the width and height (in pixels) of an image prior to displaying it. This method can fail if the image cannot be found, or fails to download.",
+      "source_content_hash": "ba09bd166e2bdecfb0ac5f672be7196e515d0bd71d16fa7a7d1c5cfb7ba46b66",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在顯示圖像之前獲取其寬度和高度（以像素為單位）。如果無法找到圖像或下載失敗，此方法可能會失敗。"
+      }
+    },
+    {
+      "segment_id": "d85a747f",
+      "source_content": "In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.",
+      "source_content_hash": "f277a78a29752ea8b46911527664f64113ee98aed839cba16f1210c48e4301a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了獲取圖像尺寸，可能需要先加載或下載圖像，然後將其緩存。這意味著原則上可以使用此方法預加載圖像，但此方法並非為此目的而優化，未來可能會以不完全加載/下載圖像數據的方式實現。將提供一個單獨的 API 作為預加載圖像的正確支援方式。"
+      }
+    },
+    {
+      "segment_id": "bd254bae",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "1b8df448",
+      "source_content": "| <div className=\"wideColumn\">Name</div>               | Type   | Description                |\n| ---------------------------------------------------- | ------ | -------------------------- |\n| uri <div class=\"label basic required\">Required</div> | string | The location of the image. |",
+      "source_content_hash": "7ca3d6339127ef2416993feb630b065c6e8e753d3a9583c5500b40c57ed98176",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1b8df448"
+      }
+    },
+    {
+      "segment_id": "b900cc83",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "aeee39a9",
+      "source_content": "### `getSizeWithHeaders()`",
+      "source_content_hash": "093e73783ef83b8eddb74dd8025e1798a3df801236f2caefd40957d220051327",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getSizeWithHeaders()`"
+      }
+    },
+    {
+      "segment_id": "f3e9a624",
+      "source_content": "```tsx\nstatic getSizeWithHeaders(\n  uri: string,\n  headers: {[index: string]: string}\n): Promise<{width: number, height: number}>;\n```",
+      "source_content_hash": "79fb9ae81b0e26e56efe9742a91cfd7fec5f3a34da5858ed290bbf8c96a6a29c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f3e9a624"
+      }
+    },
+    {
+      "segment_id": "d82906fc",
+      "source_content": "Retrieve the width and height (in pixels) of an image prior to displaying it with the ability to provide the headers for the request. This method can fail if the image cannot be found, or fails to download. It also does not work for static image resources.",
+      "source_content_hash": "d35dc55c8d2341f187e209ea4034886cd815ee65b1366a66cb5cccfeb4c271c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在顯示圖片之前，透過提供請求標頭來取得圖片的寬度和高度（以像素為單位）。如果圖片無法找到或下載失敗，此方法可能會失敗。此方法也不適用於靜態圖片資源。"
+      }
+    },
+    {
+      "segment_id": "e67afabd",
+      "source_content": "In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.",
+      "source_content_hash": "f277a78a29752ea8b46911527664f64113ee98aed839cba16f1210c48e4301a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了取得圖片的尺寸，可能需要先載入或下載圖片，之後會將其緩存。這意味著原則上你可以使用此方法來預載圖片，但此方法並非為此目的而優化，且未來可能會以不完全載入/下載圖片資料的方式實現。預載圖片的正式支援方法將作為獨立的API提供。"
+      }
+    },
+    {
+      "segment_id": "cee5aad9",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "a25897a0",
+      "source_content": "| <div className=\"wideColumn\">Name</div>                   | Type   | Description                  |\n| -------------------------------------------------------- | ------ | ---------------------------- |\n| uri <div class=\"label basic required\">Required</div>     | string | The location of the image.   |\n| headers <div class=\"label basic required\">Required</div> | object | The headers for the request. |",
+      "source_content_hash": "472fdbb03d300a447b2dc1306f252b6cfab2fe1ba5506a97d9295355341e2e5e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a25897a0"
+      }
+    },
+    {
+      "segment_id": "006d06ed",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3a8e718b",
+      "source_content": "### `prefetch()`",
+      "source_content_hash": "19da34ef1ea06127acecc90b0d59531bc2e35a9f7c5ef876e0c4542de623e6e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `prefetch()`"
+      }
+    },
+    {
+      "segment_id": "71311de1",
+      "source_content": "```tsx\nawait Image.prefetch(url);\n```",
+      "source_content_hash": "b8d3f99e71f7af45967cf6be40bef6b42d804368a5451071c6b972473646c5a4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71311de1"
+      }
+    },
+    {
+      "segment_id": "bb16b416",
+      "source_content": "Prefetches a remote image for later use by downloading it to the disk cache. Returns a promise which resolves to a boolean.",
+      "source_content_hash": "502dcfc488d2035dbd7dcde7ecce52f22b82cb192b68d6357f385c7238d6664b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預取遠端圖片以供後續使用，方法是將其下載到磁碟快取中。返回一個解析為布林值的Promise。"
+      }
+    },
+    {
+      "segment_id": "67484b26",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "45f81733",
+      "source_content": "| Name                                                 | Type                                              | Description                                            |\n| ---------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------ |\n| url <div class=\"label basic required\">Required</div> | string                                            | The remote location of the image.                      |\n| callback                                             | function <div class=\"label android\">Android</div> | The function that will be called with the `requestId`. |",
+      "source_content_hash": "a35ac87b0d42e3def3da21928450672dd1e19548b70fb77179f9b3a84cadba78",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45f81733"
+      }
+    },
+    {
+      "segment_id": "a2457fd3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c9f84e5e",
+      "source_content": "### `queryCache()`",
+      "source_content_hash": "4273df5b0631c459a77afba41be972d68bf2ab29ff992a712d5e4a2247f3bdb5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `queryCache()`"
+      }
+    },
+    {
+      "segment_id": "61b0ee0d",
+      "source_content": "```tsx\nstatic queryCache(\n  urls: string[],\n): Promise<Record<string, 'memory' | 'disk' | 'disk/memory'>>;\n```",
+      "source_content_hash": "a0593e1bd36f21c5a80d2511421ebfe1bba926eb28df907d0c388210e007cd3e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_61b0ee0d"
+      }
+    },
+    {
+      "segment_id": "99cb8892",
+      "source_content": "Perform cache interrogation. Returns a promise which resolves to a mapping from URL to cache status, such as \"disk\", \"memory\" or \"disk/memory\". If a requested URL is not in the mapping, it means it's not in the cache.",
+      "source_content_hash": "b144b20553aeda704493e157b39140ef6071f3cce049b27cac0d9a7535897fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行快取查詢。返回一個Promise，解析為從URL到快取狀態的映射，例如「disk」、「memory」或「disk/memory」。如果請求的URL不在映射中，表示它不在快取中。"
+      }
+    },
+    {
+      "segment_id": "e6bf9a6c",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "d6b7b8e8",
+      "source_content": "| Name                                                  | Type  | Description                                |\n| ----------------------------------------------------- | ----- | ------------------------------------------ |\n| urls <div class=\"label basic required\">Required</div> | array | List of image URLs to check the cache for. |",
+      "source_content_hash": "0c1bf9c2a7d4d6aaf61da3400119f43526e39b7fb9454e588d08c9d13c2e8774",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d6b7b8e8"
+      }
+    },
+    {
+      "segment_id": "9df94287",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "56163162",
+      "source_content": "### `resolveAssetSource()`",
+      "source_content_hash": "cfe8272b5f2c71bca9738270f507e3ebbc24c59116f4c584088fad3d63724748",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `resolveAssetSource()`"
+      }
+    },
+    {
+      "segment_id": "0704b15c",
+      "source_content": "```tsx\nstatic resolveAssetSource(source: ImageSourcePropType): {\n  height: number;\n  width: number;\n  scale: number;\n  uri: string;\n};\n```",
+      "source_content_hash": "2700f57bc667a4bf3c2f68e5f9fc591615ccd19caeb88da25873bda265bf6f9b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0704b15c"
+      }
+    },
+    {
+      "segment_id": "5591470c",
+      "source_content": "Resolves an asset reference into an object which has the properties `uri`, `scale`, `width`, and `height`.",
+      "source_content_hash": "bbd4c7326d3a258e5b0fa4ff132f803c1de914b9cd893eabe5cb9c2293fa2664",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將資源引用解析為一個物件，該物件具有`uri`、`scale`、`width`和`height`屬性。"
+      }
+    },
+    {
+      "segment_id": "4e776de2",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "05719abd",
+      "source_content": "| <div className=\"wideColumn\">Name</div>                  | Type                                     | Description                                                                  |\n| ------------------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |\n| source <div class=\"label basic required\">Required</div> | [ImageSource](image#imagesource), number | A number (opaque type returned by `require('./foo.png')`) or an ImageSource. |",
+      "source_content_hash": "ce3d56d02dec6f00e8fa195d2b6e6f0f38666057df260098b455999388b58d9f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_05719abd"
+      }
+    },
+    {
+      "segment_id": "169dc225",
+      "source_content": "## Type Definitions",
+      "source_content_hash": "a5e3a9fcc5db64516e630bf0b4dfcdf9787a0073f3e2af1855734698fa6575c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 類型定義"
+      }
+    },
+    {
+      "segment_id": "5e6eca4f",
+      "source_content": "### ImageCacheEnum <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "02391d43636de71bd5f5254cd6440332559466d2654233edb643d5493d1d484e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### ImageCacheEnum <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "aa8e8b02",
+      "source_content": "Enum which can be used to set the cache handling or strategy for the potentially cached responses.",
+      "source_content_hash": "0d72993163a8141e32a4db3a079bfeffa72782cc83592291147714444357a1b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於設定快取處理或策略的枚舉，適用於可能被快取的回應。"
+      }
+    },
+    {
+      "segment_id": "75e42548",
+      "source_content": "| Type                                                               | Default     |\n| ------------------------------------------------------------------ | ----------- |\n| enum(`'default'`, `'reload'`, `'force-cache'`, `'only-if-cached'`) | `'default'` |",
+      "source_content_hash": "abd21c72ff83e44e967669b478bcefb103dd4771036ad1005cc6b2948632028a",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_75e42548"
+      }
+    },
+    {
+      "segment_id": "72b4cdfd",
+      "source_content": "- `default`: Use the native platforms default strategy.\n- `reload`: The data for the URL will be loaded from the originating source. No existing cache data should be used to satisfy a URL load request.\n- `force-cache`: The existing cached data will be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is loaded from the originating source.\n- `only-if-cached`: The existing cache data will be used to satisfy a request, regardless of its age or expiration date. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed.",
+      "source_content_hash": "654dca59699f1cc97c84cc0d49c7a81beb3e636f67ae9170fa0dfdaa049cad18",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `default`: 使用原生平台的預設策略。\n- `reload`: 從原始來源載入URL的資料。不應使用現有的快取資料來滿足URL載入請求。\n- `force-cache`: 無論其年齡或過期日期如何，將使用現有的快取資料來滿足請求。如果快取中沒有對應請求的資料，則從原始來源載入資料。\n- `only-if-cached`: 無論其年齡或過期日期如何，將使用現有的快取資料來滿足請求。如果快取中沒有對應URL載入請求的資料，則不會嘗試從原始來源載入資料，且載入被視為失敗。"
+      }
+    },
+    {
+      "segment_id": "a3806a96",
+      "source_content": "### ImageLoadEvent",
+      "source_content_hash": "3f66057c987973d3ddb8994468cd7b8bc44ad3dfd1444e27f66d83126eae68ab",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### ImageLoadEvent"
+      }
+    },
+    {
+      "segment_id": "1a0060fb",
+      "source_content": "Object returned in the `onLoad` callback.",
+      "source_content_hash": "bb814bd1b42ec3860e89178d07826c1b31edc589dd541f6efd07757fda4003b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在`onLoad`回調中返回的物件。"
+      }
+    },
+    {
+      "segment_id": "864e8b65",
+      "source_content": "| Type   |\n| ------ |\n| object |",
+      "source_content_hash": "86756560a7c28f4f513ff219d36e1e012599275905f1203f6c3d00184f11798d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_864e8b65"
+      }
+    },
+    {
+      "segment_id": "a10f4259",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "03197c62",
+      "source_content": "| Name   | Type   | Description                         |\n| ------ | ------ | ----------------------------------- |\n| source | object | The [source object](#source-object) |",
+      "source_content_hash": "9161b91bf89308e05e962036ca044d26b24c9349b33423406c3ef3435c08102d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03197c62"
+      }
+    },
+    {
+      "segment_id": "7299e49d",
+      "source_content": "#### Source Object",
+      "source_content_hash": "5d52551d117c87d3f56b23bec1713962681b690f61022be2f3fa4ca8871467a8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 來源物件"
+      }
+    },
+    {
+      "segment_id": "9136f816",
+      "source_content": "**Properties:**",
+      "source_content_hash": "3ad3ddafedabe9e6a7ef866359f5fffbc56c168e7310211b97ba71cff26d7616",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性：**"
+      }
+    },
+    {
+      "segment_id": "599505ef",
+      "source_content": "| Name   | Type   | Description                                                  |\n| ------ | ------ | ------------------------------------------------------------ |\n| width  | number | The width of loaded image.                                   |\n| height | number | The height of loaded image.                                  |\n| uri    | string | A string representing the resource identifier for the image. |",
+      "source_content_hash": "9b61b9785afc9c18a0717f23c42456056ceff8606d881a750f4755b088f63739",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_599505ef"
+      }
+    },
+    {
+      "segment_id": "5f403015",
+      "source_content": "### ImageSource",
+      "source_content_hash": "d9be35c9f5088ef2dbfd8b1888e4be33b28c7dca26731382112fc2746059e027",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### ImageSource"
+      }
+    },
+    {
+      "segment_id": "865b2b6b",
+      "source_content": "| Type                             |\n| -------------------------------- |\n| object, array of objects, number |",
+      "source_content_hash": "9d06d3e4c7174a80631d596a15f31b0f977487b598dfed37fb8d2a4469690d2e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_865b2b6b"
+      }
+    },
+    {
+      "segment_id": "673173a8",
+      "source_content": "**Properties (if passing as object or array of objects):**",
+      "source_content_hash": "b44670f8b3efca312a28f690e11126236771772bc5dc225d31de9c448cedc3b4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**屬性（如果傳遞物件或物件陣列）：**"
+      }
+    },
+    {
+      "segment_id": "736fb2d9",
+      "source_content": "| <div className=\"wideColumn\">Name</div> | Type                                       | Description                                                                                                                                                                          |\n| -------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| uri                                    | string                                     | A string representing the resource identifier for the image, which could be an http address, a local file path, or the name of a static image resource.                              |\n| width                                  | number                                     | Can be specified if known at build time, in which case the value will be used to set the default `<Image/>` component dimension.                                                     |\n| height                                 | number                                     | Can be specified if known at build time, in which case the value will be used to set the default `<Image/>` component dimension.                                                     |\n| scale                                  | number                                     | Used to indicate the scale factor of the image. Defaults to `1.0` if unspecified, meaning that one image pixel equates to one display point / DIP.                                   |\n| bundle<div class=\"label ios\">iOS</div> | string                                     | The iOS asset bundle which the image is included in. This will default to `[NSBundle mainBundle]` if not set.                                                                        |\n| method                                 | string                                     | The HTTP Method to use. Defaults to `'GET'` if not specified.                                                                                                                        |\n| headers                                | object                                     | An object representing the HTTP headers to send along with the request for a remote image.                                                                                           |\n| body                                   | string                                     | The HTTP body to send with the request. This must be a valid UTF-8 string, and will be sent exactly as specified, with no additional encoding (e.g. URL-escaping or base64) applied. |\n| cache<div class=\"label ios\">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | Determines how the requests handles potentially cached responses.                                                                                                                    |",
+      "source_content_hash": "155074ca4a7d66f07b55d7e142d96f50db73f38d8a46950dbe4879234169d8ca",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_736fb2d9"
+      }
+    },
+    {
+      "segment_id": "639b6949",
+      "source_content": "**If passing a number:**",
+      "source_content_hash": "b332471581b4d86641b45854d170c8c1690c5ec5ea3b057bba6b93fa4afcc391",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**如果傳遞數字：**"
+      }
+    },
+    {
+      "segment_id": "01334d9d",
+      "source_content": "- `number` - opaque type returned by something like `require('./image.jpg')`.",
+      "source_content_hash": "8913c032e83d491a500f55a7dc5c70a85ee64fc23b64b61fd21b0062e7110eb7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `number` - 由類似`require('./image.jpg')`返回的不透明類型。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/image.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.993649+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ca8e23f0ad8539ef3e7be4ca85c6dd183457cf1f4621c8622da76ce059d6a208"
+  }
+}

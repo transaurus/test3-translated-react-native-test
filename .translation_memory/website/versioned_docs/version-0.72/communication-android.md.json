@@ -1,0 +1,332 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/communication-android.md",
+  "source_file_content_hash": "3c55dd643bd458cde18ff0c405f029a63a29b180ededd7ee58e57e1f8f07ff33",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: communication-android\ntitle: Communication between native and React Native\n---",
+      "source_content_hash": "e508fb5e30eae4c0f8dc45563a1dacd9f7e384f10ec9317a82877f35850a9686",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "In [Integrating with Existing Apps guide](integration-with-existing-apps) and [Native UI Components guide](native-components-android) we learn how to embed React Native in a native component and vice versa. When we mix native and React Native components, we'll eventually find a need to communicate between these two worlds. Some ways to achieve that have been already mentioned in other guides. This article summarizes available techniques.",
+      "source_content_hash": "235c8d2979637e3ceba708a458ea68505ba8133d33d95b6478f64484d2e0a259",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在[整合既有應用程式指南](integration-with-existing-apps)和[原生UI元件指南](native-components-android)中，我們學習了如何將React Native嵌入原生元件，反之亦然。當混合使用原生與React Native元件時，最終會需要在這兩個世界之間建立溝通管道。其他指南已提及部分實現方式，本文將統整現有技術方案。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Introduction",
+      "source_content_hash": "d753efbab681fa4da82470d9a83b1c202de58f92fd498e77a269c1163bc4714b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 簡介"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "React Native is inspired by React, so the basic idea of the information flow is similar. The flow in React is one-directional. We maintain a hierarchy of components, in which each component depends only on its parent and its own internal state. We do this with properties: data is passed from a parent to its children in a top-down manner. If an ancestor component relies on the state of its descendant, one should pass down a callback to be used by the descendant to update the ancestor.",
+      "source_content_hash": "ed8300d70df5a1fd10a4a889a649a0cd58887806063f94c0cc24a8eaa8841497",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native的設計靈感源自React，因此資訊流的基本概念相似。React採用單向數據流，我們維護元件的階層結構，每個元件僅依賴其父元件與自身內部狀態。這透過屬性(properties)實現：資料以自上而下的方式從父元件傳遞給子元件。若祖先元件需根據後代元件的狀態進行調整，則應向下傳遞回調函數(callback)供後代元件更新祖先狀態。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "The same concept applies to React Native. As long as we are building our application purely within the framework, we can drive our app with properties and callbacks. But, when we mix React Native and native components, we need some specific, cross-language mechanisms that would allow us to pass information between them.",
+      "source_content_hash": "d170d52b61872abb245d41624d19628dc8b13d4337181d0594eaed162592a2f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此概念同樣適用於React Native。只要完全在框架內建構應用程式，我們就能透過屬性和回調驅動應用。但當混合使用React Native與原生元件時，需要特定的跨語言機制來實現彼此間的資訊傳遞。"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性傳遞"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Properties are the most straightforward way of cross-component communication. So we need a way to pass properties both from native to React Native, and from React Native to native.",
+      "source_content_hash": "84ace4e590b710986f2340cdb7b199d294433fc038376d8482f940813aa5078e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "屬性是最直接的跨元件通訊方式。因此我們需要實現雙向屬性傳遞：從原生到React Native，以及從React Native到原生。"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "### Passing properties from native to React Native",
+      "source_content_hash": "2aca5459a124d0c06f5148a4866117d80769dcc86c258bf26c43053c8da1f743",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 從原生端傳遞屬性至React Native"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "You can pass properties down to the React Native app by providing a custom implementation of `ReactActivityDelegate` in your main activity. This implementation should override `getLaunchOptions` to return a `Bundle` with the desired properties.",
+      "source_content_hash": "625a547e58b3d14d86bab50f618a235ab338bf16b1ad0185672d750d026376ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可透過在主活動(main activity)中實作自訂的`ReactActivityDelegate`來傳遞屬性至React Native應用。此實作需覆寫`getLaunchOptions`方法，返回包含所需屬性的`Bundle`物件。"
+      }
+    },
+    {
+      "segment_id": "42e34e45",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n\n<TabItem value=\"java\">\n\n```java\npublic class MainActivity extends ReactActivity {\n  @Override\n  protected ReactActivityDelegate createReactActivityDelegate() {\n    return new ReactActivityDelegate(this, getMainComponentName()) {\n      @Override\n      protected Bundle getLaunchOptions() {\n        Bundle initialProperties = new Bundle();\n        ArrayList<String> imageList = new ArrayList<String>(Arrays.asList(\n                \"http://foo.com/bar1.png\",\n                \"http://foo.com/bar2.png\"\n        ));\n        initialProperties.putStringArrayList(\"images\", imageList);\n        return initialProperties;\n      }\n    };\n  }\n}\n```\n\n</TabItem>\n\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass MainActivity : ReactActivity() {\n    override fun createReactActivityDelegate(): ReactActivityDelegate {\n        return object : ReactActivityDelegate(this, mainComponentName) {\n            override fun getLaunchOptions(): Bundle {\n                val imageList = arrayListOf(\"http://foo.com/bar1.png\", \"http://foo.com/bar2.png\")\n                val initialProperties = Bundle().apply { putStringArrayList(\"images\", imageList) }\n                return initialProperties\n            }\n        }\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "04e4c413138be9979bfffec5c3f81d2b590ead66a4649d5e92e07f0f2189b934",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_42e34e45"
+      }
+    },
+    {
+      "segment_id": "29ad5b0e",
+      "source_content": "```tsx\nimport React from 'react';\nimport {View, Image} from 'react-native';\n\nexport default class ImageBrowserApp extends React.Component {\n  renderImage(imgURI) {\n    return <Image source={{uri: imgURI}} />;\n  }\n  render() {\n    return <View>{this.props.images.map(this.renderImage)}</View>;\n  }\n}\n```",
+      "source_content_hash": "75b9f3cb21d1bddc8ddb07bd4a27d0ee61fbe95474e3a5e9a592221f051899e1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29ad5b0e"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "`ReactRootView` provides a read-write property `appProperties`. After `appProperties` is set, the React Native app is re-rendered with new properties. The update is only performed when the new updated properties differ from the previous ones.",
+      "source_content_hash": "504635935bf841c9179c8c3127e19a8a581b0a178fbd679e426e5580f77071f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`ReactRootView`提供可讀寫屬性`appProperties`。設定此屬性後，React Native應用會以新屬性重新渲染。僅當新屬性與先前值不同時才會觸發更新。"
+      }
+    },
+    {
+      "segment_id": "057a9dd8",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n\n<TabItem value=\"java\">\n\n```java\nBundle updatedProps = mReactRootView.getAppProperties();\nArrayList<String> imageList = new ArrayList<String>(Arrays.asList(\n        \"http://foo.com/bar3.png\",\n        \"http://foo.com/bar4.png\"\n));\nupdatedProps.putStringArrayList(\"images\", imageList);\n\nmReactRootView.setAppProperties(updatedProps);\n```\n\n</TabItem>\n\n<TabItem value=\"kotlin\">\n\n```kotlin\nvar updatedProps: Bundle = reactRootView.getAppProperties()\nvar imageList = arrayListOf(\"http://foo.com/bar3.png\", \"http://foo.com/bar4.png\")\n```\n\n</TabItem>\n\n</Tabs>",
+      "source_content_hash": "e5a3ebaeb3e8041514406e2e1e265fc48114d863abefc810d37f34cf815d031b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_057a9dd8"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "It is fine to update properties anytime. However, updates have to be performed on the main thread. You use the getter on any thread.",
+      "source_content_hash": "a61e1c9f75aacd89a933ea1c95f5029f04f2c4883de6cc85233d87ecd618e489",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨時更新屬性皆可，但更新操作必須在主執行緒進行。讀取操作則可在任何執行緒執行。"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "There is no way to update only a few properties at a time. We suggest that you build it into your own wrapper instead.",
+      "source_content_hash": "e24b1b892b0a2501592829f8c83ad32d6fc35c56cb9d3eaae45828356cfc53fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前無法僅更新部分屬性，建議自行建立封裝層處理此需求。"
+      }
+    },
+    {
+      "segment_id": "600e3b34",
+      "source_content": "> **_Note:_** Currently, JS function `componentWillUpdateProps` of the top level RN component will not be called after a prop update. However, you can access the new props in `componentDidMount` function.",
+      "source_content_hash": "b98061083ac0db747dab3b879cb2a652efeba771b7e7a89cfde1272160b86937",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **_注意：_** 目前頂層RN元件的JS函數`componentWillUpdateProps`在屬性更新後不會被呼叫。但您仍可透過`componentDidMount`函數存取新屬性。"
+      }
+    },
+    {
+      "segment_id": "37fca32e",
+      "source_content": "### Passing properties from React Native to native",
+      "source_content_hash": "f7eccf47a5993074d60b79a013767e95d971acd06e71563b3f6ec7ff8363dcbe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 從React Native傳遞屬性至原生端"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "The problem exposing properties of native components is covered in detail in [this article](native-components-android#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation). In short, properties that are to be reflected in JavaScript needs to be exposed as setter method annotated with `@ReactProp`, then use them in React Native as if the component was an ordinary React Native component.",
+      "source_content_hash": "4fa7aa1540c183bc8fa3dc3340a690f5aa03013ed0eec52017f92f1aeb2b4f53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[此文章](native-components-android#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation)詳細說明原生元件屬性的暴露方式。簡言之，需透過`@ReactProp`註解標記setter方法來暴露屬性至JavaScript端，之後即可像操作普通React Native元件般使用這些屬性。"
+      }
+    },
+    {
+      "segment_id": "b9b8694c",
+      "source_content": "### Limits of properties",
+      "source_content_hash": "40d326ca4d8ca30e46d82048f457edf59888a434018ccb3801915f7aad57d6bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 屬性機制的限制"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "The main drawback of cross-language properties is that they do not support callbacks, which would allow us to handle bottom-up data bindings. Imagine you have a small RN view that you want to be removed from the native parent view as a result of a JS action. There is no way to do that with props, as the information would need to go bottom-up.",
+      "source_content_hash": "f2a6eb9b1ca4375c6e72a1a8a3967fd41c983e01933064f74694dbce71c04072",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "跨語言屬性的主要缺憾在於不支援回調機制，這使得我們無法實現自下而上的數據綁定。例如當您需要透過JS操作移除原生父視圖中的小型RN視圖時，純屬性機制無法達成此需求，因為資訊需逆向傳遞。"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "Although we have a flavor of cross-language callbacks ([described here](native-modules-android#callbacks)), these callbacks are not always the thing we need. The main problem is that they are not intended to be passed as properties. Rather, this mechanism allows us to trigger a native action from JS, and handle the result of that action in JS.",
+      "source_content_hash": "c5a5abc1fb442833081163d6e2a37248977ec28ee6e14b216c5f4ae38aa29a40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然存在跨語言回調的變體方案（[參見此處說明](native-modules-android#callbacks)），但這些回調未必符合所有需求。主要問題在於它們並非設計用來作為屬性傳遞，而是提供從JS觸發原生操作後，在JS端處理結果的機制。"
+      }
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "## Other ways of cross-language interaction (events and native modules)",
+      "source_content_hash": "6d653e8ae16608fbc120ed10a2b418257dad6fcb73eb3eb56d6336c6f21e9678",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他跨語言互動方式（事件與原生模組）"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "As stated in the previous chapter, using properties comes with some limitations. Sometimes properties are not enough to drive the logic of our app and we need a solution that gives more flexibility. This chapter covers other communication techniques available in React Native. They can be used for internal communication (between JS and native layers in RN) as well as for external communication (between RN and the 'pure native' part of your app).",
+      "source_content_hash": "2b652ba496b1c5cd8e544a71474499bec8159cdcae65c396383bdd2064697caf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如前一章所述，使用屬性存在一些限制。有時屬性不足以驅動應用程序的邏輯，我們需要一個提供更大靈活性的解決方案。本章涵蓋了 React Native 中可用的其他通信技術。它們既可用於內部通信（RN 中 JS 和原生層之間的通信），也可用於外部通信（RN 與應用程序「純原生」部分之間的通信）。"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "React Native enables you to perform cross-language function calls. You can execute custom native code from JS and vice versa. Unfortunately, depending on the side we are working on, we achieve the same goal in different ways. For native - we use events mechanism to schedule an execution of a handler function in JS, while for React Native we directly call methods exported by native modules.",
+      "source_content_hash": "cedd7a88eebf35d616c66718ef4c8956dd4661ea623986f455367ef6e313e2ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 允許您執行跨語言函數調用。您可以從 JS 執行自定義原生代碼，反之亦然。遺憾的是，根據我們所處的端點，我們以不同的方式實現相同的目標。對於原生端，我們使用事件機制來安排在 JS 中執行處理函數，而對於 React Native 端，我們直接調用原生模塊導出的方法。"
+      }
+    },
+    {
+      "segment_id": "d53c8ed4",
+      "source_content": "### Calling React Native functions from native (events)",
+      "source_content_hash": "19a747a85a6b3c9760fc6d707a0857149d8e409cfe5c846789338a5c7cf8506e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 從原生端調用 React Native 函數（事件）"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "Events are described in detail in [this article](native-components-android#events). Note that using events gives us no guarantees about execution time, as the event is handled on a separate thread.",
+      "source_content_hash": "ceb09d8295316370c307da358479d7e263268bb8c66fec5fb847604b3eba132b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "事件在[這篇文章](native-components-android#events)中有詳細描述。請注意，使用事件無法保證執行時間，因為事件是在單獨的線程上處理的。"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Events are powerful, because they allow us to change React Native components without needing a reference to them. However, there are some pitfalls that you can fall into while using them:",
+      "source_content_hash": "5f26335f5dbae7b331a65215bd1aae305c9c0bc9c542102d9c08df4994c31276",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "事件非常強大，因為它們允許我們無需引用 React Native 組件即可對其進行修改。然而，在使用事件時可能會遇到一些陷阱："
+      }
+    },
+    {
+      "segment_id": "8c9c56b6",
+      "source_content": "- As events can be sent from anywhere, they can introduce spaghetti-style dependencies into your project.\n- Events share namespace, which means that you may encounter some name collisions. Collisions will not be detected statically, which makes them hard to debug.\n- If you use several instances of the same React Native component and you want to distinguish them from the perspective of your event, you'll likely need to introduce identifiers and pass them along with events (you can use the native view's `reactTag` as an identifier).",
+      "source_content_hash": "ff2df102229a28d232b8413c90fadc65ae55267bb84d2f1f1e56410c0462940a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 由於事件可以從任何地方發送，它們可能會在項目中引入意大利麵條式的依賴關係。\n- 事件共享命名空間，這意味著您可能會遇到名稱衝突。衝突不會被靜態檢測，因此難以調試。\n- 如果您使用多個相同 React Native 組件的實例，並且希望從事件的角度區分它們，您可能需要引入標識符並與事件一起傳遞（可以使用原生視圖的 `reactTag` 作為標識符）。"
+      }
+    },
+    {
+      "segment_id": "af843cee",
+      "source_content": "### Calling native functions from React Native (native modules)",
+      "source_content_hash": "d7f1d5537da1ec954352358be2354e3b39ae1ef6d251f2c24cafe0a81263e5fe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 從 React Native 調用原生函數（原生模塊）"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "Native modules are Java/Kotlin classes that are available in JS. Typically one instance of each module is created per JS bridge. They can export arbitrary functions and constants to React Native. They have been covered in detail in [this article](native-modules-android).",
+      "source_content_hash": "05f3211ff4961576f1bf1871261a8f994313bb5521db3f045fbe963d5cea0c56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模塊是可在 JS 中使用的 Java/Kotlin 類。通常每個 JS 橋會創建每個模塊的一個實例。它們可以向 React Native 導出任意函數和常量。[這篇文章](native-modules-android)對此有詳細介紹。"
+      }
+    },
+    {
+      "segment_id": "846cde35",
+      "source_content": "> **_Warning_**: All native modules share the same namespace. Watch out for name collisions when creating new ones.",
+      "source_content_hash": "865ae63de511732a274d5e17fb6faeee275305e2a6bdbabd32e7cf3e59379852",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **_警告_**：所有原生模塊共享相同的命名空間。在創建新模塊時請注意名稱衝突。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/communication-android.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.397168+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "3c55dd643bd458cde18ff0c405f029a63a29b180ededd7ee58e57e1f8f07ff33"
+  }
+}

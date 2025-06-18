@@ -1,0 +1,532 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/build-speed.md",
+  "source_file_content_hash": "4a0a1b6190a1760aad75043dad40722a673b03e70d6d44678d14d4c1b00f761f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: build-speed\ntitle: Speeding up your Build phase\n---",
+      "source_content_hash": "dc5c6f51270d4ac3762b7aea50405316394ac220442b05f5eeee2052c6ce0f07",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Building your React Native app could be **expensive** and take several minutes of developers time.\nThis can be problematic as your project grows and generally in bigger organizations with multiple React Native developers.",
+      "source_content_hash": "085542a71122c099fabd23e5f42b7efeb68526cdad512b2b9faf3de0c7d308b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建構你的 React Native 應用程式可能**相當耗時**，會佔用開發者數分鐘的時間。\n隨著專案規模增長，特別是在擁有多位 React Native 開發者的大型組織中，這個問題會更加明顯。"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "To mitigate this performance hit, this page shares some suggestions on how to **improve your build time**.",
+      "source_content_hash": "d409df97c191d1f24c3310eb511daa4549e6ece16e8ed30e35379cf55134b524",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為緩解此效能瓶頸，本頁面將分享一些**提升建構速度**的實用建議。"
+      }
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "## Build only one ABI during development (Android-only)",
+      "source_content_hash": "f2cf18cbdc1be154b7c7a7b8b1226de0f35aaf7dc11cff16e4d44ae36093b24b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 開發期間僅建構單一 ABI（僅限 Android）"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "When building your android app locally, by default you build all the 4 [Application Binary Interfaces (ABIs)](https://developer.android.com/ndk/guides/abis) : `armeabi-v7a`, `arm64-v8a`, `x86` & `x86_64`.",
+      "source_content_hash": "e38047a6f89d8202aae9c5fba101a6053938432e10f9e7a1d504091813a8b58c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當你在本地建構 Android 應用程式時，預設會同時建構所有 4 種[應用程式二進位介面 (ABI)](https://developer.android.com/ndk/guides/abis)：`armeabi-v7a`、`arm64-v8a`、`x86` 和 `x86_64`。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "However, you probably don't need to build all of them if you're building locally and testing your emulator or on a physical device.",
+      "source_content_hash": "8824f226392a2c387fb5a8c194efc170b5d07960a38ae2b7e15313759509d985",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但若你僅需在本地模擬器或實體裝置上測試，其實無需建構全部 ABI 版本。"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "This should reduce your **native build time** by a ~75% factor.",
+      "source_content_hash": "a87e4c19ccca0116c86cf1cf27005aa035d641d7bb46045e6ac62b751a513537",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此做法可將**原生建構時間**縮短約 75%。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "If you're using the React Native CLI, you can add the `--active-arch-only` flag to the `run-android` command. This flag will make sure the correct ABI is picked up from either the running emulator or the plugged in phone. To confirm that this approach is working fine, you'll see a message like `info Detected architectures arm64-v8a` on console.",
+      "source_content_hash": "c9ef589218a98e990170439d107e66095d7ad92127b60afa84fadced16566e44",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若使用 React Native CLI，可在 `run-android` 指令中加入 `--active-arch-only` 旗標。此旗標會自動偵測運行中模擬器或連接裝置的 ABI 架構。成功時，控制台將顯示如 `info Detected architectures arm64-v8a` 的確認訊息。"
+      }
+    },
+    {
+      "segment_id": "cbbebf8e",
+      "source_content": "```\n$ yarn react-native run-android --active-arch-only\n\n[ ... ]\ninfo Running jetifier to migrate libraries to AndroidX. You can disable it using \"--no-jetifier\" flag.\nJetifier found 1037 file(s) to forward-jetify. Using 32 workers...\ninfo JS server already running.\ninfo Detected architectures arm64-v8a\ninfo Installing the app...\n```",
+      "source_content_hash": "89aa9e583027faa6f091b3d2426edf5777f4911f9459423b3a4421ceea35f358",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cbbebf8e"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "This mechanism relies on the `reactNativeArchitectures` Gradle property.",
+      "source_content_hash": "1bfe1f21a9eed015bf9ac0f81de1c2c7e56d329d2bc733b7a631d30038eff331",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此機制依賴於 Gradle 屬性 `reactNativeArchitectures`。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "Therefore, if you're building directly with Gradle from the command line and without the CLI, you can specify the ABI you want to build as follows:",
+      "source_content_hash": "850fadae7cd69709a08ea0a6f4e73170ed8cd362e12b2fc562358149a7cd836a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此若直接透過 Gradle 指令行建構（不使用 CLI），可透過以下方式指定目標 ABI："
+      }
+    },
+    {
+      "segment_id": "076d64d1",
+      "source_content": "```\n$ ./gradlew :app:assembleDebug -PreactNativeArchitectures=x86,x86_64\n```",
+      "source_content_hash": "1bee901d66b4d89a7115531786b4e7303bfd15db75312a87cfe8a4e826be3531",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_076d64d1"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "This can be useful if you wish to build your Android App on a CI and use a matrix to parallelize the build of the different architectures.",
+      "source_content_hash": "8c457877fcdab66293e1581c30eea9ce7693e5ec9cab56e4d94539cacdfc9510",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法特別適用於在 CI 環境中，透過矩陣平行建構不同架構的 Android 應用程式。"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "If you wish, you can also override this value locally, using the `gradle.properties` file you have in the [top-level folder](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33) of your project:",
+      "source_content_hash": "2be180c7667d50dacab59fd3306b03b129f503a3313aac5c9958b174b0343184",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "亦可透過修改專案[頂層目錄](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33)中的 `gradle.properties` 檔案來覆寫此值："
+      }
+    },
+    {
+      "segment_id": "45022e4f",
+      "source_content": "```\n# Use this property to specify which architecture you want to build.\n# You can also override it from the CLI using\n# ./gradlew <task> -PreactNativeArchitectures=x86_64\nreactNativeArchitectures=armeabi-v7a,arm64-v8a,x86,x86_64\n```",
+      "source_content_hash": "ba3105c374a641a2580a2d7474fc6d127de0aef9504498ec6c53b3de6f8fb6f3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45022e4f"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Once you build a **release version** of your app, don't forget to remove those flags as you want to build an apk/app bundle that works for all the ABIs and not only for the one you're using in your daily development workflow.",
+      "source_content_hash": "d427ca1dcb10d49496f38f5272b542432dddf8ef910c5ec4330a72472cf3cfed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，建構**正式版應用程式**時務必移除這些旗標，以確保產出的 apk/app bundle 支援所有 ABI 架構，而非僅限日常開發使用的單一架構。"
+      }
+    },
+    {
+      "segment_id": "c6cc90a0",
+      "source_content": "## Use a compiler cache",
+      "source_content_hash": "9516c344edb6b800c2dd55e2974eb63ea157aa5f6b1ee9ed182fe8df17a1c6f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用編譯器快取"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "If you're running frequent native builds (either C++ or Objective-C), you might benefit from using a **compiler cache**.",
+      "source_content_hash": "c4aa7443008470a9075a7086fd626b8484d771e48556465118d21f0aff7b4a2b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若需頻繁執行原生建構（C++ 或 Objective-C），採用**編譯器快取**可顯著提升效率。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "Specifically you can use two type of caches: local compiler caches and distributed compiler caches.",
+      "source_content_hash": "da9089319cd250309d2e36391cd838d7a91f4fa9fce54ac244d6d330c52ec46f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "具體可分為兩類快取：本地編譯器快取與分散式編譯器快取。"
+      }
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "### Local caches",
+      "source_content_hash": "75a67473c36537ccc703ecce66c36e04849cf8fb09555a0553082f4fc73ac829",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 本地快取"
+      }
+    },
+    {
+      "segment_id": "416beea7",
+      "source_content": ":::info\nThe following instructions will work for **both Android & iOS**.\nIf you're building only Android apps, you should be good to go.\nIf you're building also iOS apps, please follow the instructions in the [XCode Specific Setup](#xcode-specific-setup) section below.\n:::",
+      "source_content_hash": "f85a329ed6d3a5955ec894bab65db6f97430aefa187d880690a4bb7009da608d",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n以下說明適用於**Android 與 iOS** 建構。\n若僅建構 Android 應用程式，直接依步驟操作即可。\n若需建構 iOS 應用程式，請額外參照下方 [XCode 專屬設定](#xcode-specific-setup)章節。\n:::"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "We suggest to use [**ccache**](https://ccache.dev/) to cache the compilation of your native builds.\nCcache works by wrapping the C++ compilers, storing the compilation results, and skipping the compilation\nif an intermediate compilation result was originally stored.",
+      "source_content_hash": "97494a16a6ce8f42f9c0dd1ada04879ddd9b2e4913fb66a22ff7ab8c60ef4a9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議使用 [**ccache**](https://ccache.dev/) 來快取原生建構的編譯結果。\nCcache 透過封裝 C++ 編譯器運作，儲存編譯結果並在後續建構時直接調用快取，跳過重複編譯階段。"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "To install it, you can follow the [official installation instructions](https://github.com/ccache/ccache/blob/master/doc/INSTALL.md).",
+      "source_content_hash": "c32c4a8bbfc459bbc9d5218f59d6abb736a4cd3a610887873c37af6e56a16f22",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "安裝方式請參照[官方安裝指南](https://github.com/ccache/ccache/blob/master/doc/INSTALL.md)。"
+      }
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "On macOS, we can install ccache with `brew install ccache`.\nOnce installed you can configure it as follows to cache NDK compile results:",
+      "source_content_hash": "fb95a6914b73563990e67a503fb6a2feaac38e65db57a999bc62cacbf789853a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 macOS 上可透過 `brew install ccache` 安裝。安裝完成後，可依以下方式設定以快取 NDK 編譯結果："
+      }
+    },
+    {
+      "segment_id": "468b36ba",
+      "source_content": "```\nln -s $(which ccache) /usr/local/bin/gcc\nln -s $(which ccache) /usr/local/bin/g++\nln -s $(which ccache) /usr/local/bin/cc\nln -s $(which ccache) /usr/local/bin/c++\nln -s $(which ccache) /usr/local/bin/clang\nln -s $(which ccache) /usr/local/bin/clang++\n```",
+      "source_content_hash": "7975e16297845801b6d92af74f80226cd2082d1b16617cea557786e8e52f53b0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_468b36ba"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "This will create symbolic links to `ccache` inside the `/usr/local/bin/` which are called `gcc`, `g++`, and so on.",
+      "source_content_hash": "82458efc574340f5af439e6f4781b7d88189bed0212a70c2515cc09183bb3bce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此操作會在 `/usr/local/bin/` 目錄下建立名為 `gcc`、`g++` 等指向 ccache 的符號連結。"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "This works as long as `/usr/local/bin/` comes first than `/usr/bin/` inside your `$PATH` variable, which is the default.",
+      "source_content_hash": "bdc78ebb23348793a1ffd6dae49eda5c1662638e15f5a6e990535752e0cb78da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "只要 `/usr/local/bin/` 路徑優先於 `/usr/bin/` 出現在 `$PATH` 變數中即可正常運作（此為預設設定）。"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "You can verify that it works using the `which` command:",
+      "source_content_hash": "1978f3e434693428d8ee0640213fe3b25487b87097fc1dc937b156d5dab6a1af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以使用 `which` 指令來驗證是否生效："
+      }
+    },
+    {
+      "segment_id": "5dd0e3a7",
+      "source_content": "```\n$ which gcc\n/usr/local/bin/gcc\n```",
+      "source_content_hash": "7c4eed2567f5e35c84278372b03b96c7c3543c549e8007d788ce5ca593579b31",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5dd0e3a7"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "If the results is `/usr/local/bin/gcc`, then you're effectively calling `ccache` which will wrap the `gcc` calls.",
+      "source_content_hash": "9d4c0b682bf80a8a3c53a6bf502f28d509d1218a154a3d0cf58724a5f20dafd8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若結果顯示為 `/usr/local/bin/gcc`，則代表你實際呼叫的是 `ccache`，它會包裹 `gcc` 的呼叫。"
+      }
+    },
+    {
+      "segment_id": "ca7170d9",
+      "source_content": ":::caution\nPlease note that this setup of `ccache` will affect all the compilations that you're running on your machine, not only those related to React Native. Use it at your own risk. If you're failing to install/compile other software, this might be the reason. If that is the case, you can remove the symlink you created with:\n\n```\nunlink /usr/local/bin/gcc\nunlink /usr/local/bin/g++\nunlink /usr/local/bin/cc\nunlink /usr/local/bin/c++\nunlink /usr/local/bin/clang\nunlink /usr/local/bin/clang++\n```\n\nto revert your machine to the original status and use the default compilers.\n:::",
+      "source_content_hash": "e562a21d1d8f17a4e5df7b17c6b791d0e71af2980475e07d192a66db84fba682",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution\n請注意，此 `ccache` 設定會影響你機器上所有的編譯行為，不僅限於 React Native 相關的編譯。使用時請自行承擔風險。若你遇到其他軟體安裝或編譯失敗的情況，這可能是原因之一。若發生此狀況，你可以透過以下指令移除已建立的符號連結：\n\n```\nunlink /usr/local/bin/gcc\nunlink /usr/local/bin/g++\nunlink /usr/local/bin/cc\nunlink /usr/local/bin/c++\nunlink /usr/local/bin/clang\nunlink /usr/local/bin/clang++\n```\n\n以恢復機器至原始狀態並使用預設的編譯器。\n:::"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "You can then do two clean builds (e.g. on Android you can first run `yarn react-native run-android`, delete the `android/app/build` folder and run the first command once more). You will notice that the second build was way faster than the first one (it should take seconds rather than minutes).\nWhile building, you can verify that `ccache` works correctly and check the cache hits/miss rate `ccache -s`",
+      "source_content_hash": "e5e04d8991fd2fc71b42b79e5fcbd7062af81aea5c8bf10cd311b9e4fc307afe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著你可以執行兩次完整建置（例如在 Android 上，可以先執行 `yarn react-native run-android`，刪除 `android/app/build` 資料夾後再次執行相同指令）。你會注意到第二次建置速度大幅提升（應只需數秒而非數分鐘）。\n在建置過程中，你可以透過 `ccache -s` 驗證 `ccache` 是否正常運作，並檢查快取命中/未命中率。"
+      }
+    },
+    {
+      "segment_id": "f155ef1e",
+      "source_content": "```\n$ ccache -s\nSummary:\n  Hits:             196 /  3068 (6.39 %)\n    Direct:           0 /  3068 (0.00 %)\n    Preprocessed:   196 /  3068 (6.39 %)\n  Misses:          2872\n    Direct:        3068\n    Preprocessed:  2872\n  Uncacheable:        1\nPrimary storage:\n  Hits:             196 /  6136 (3.19 %)\n  Misses:          5940\n  Cache size (GB): 0.60 / 20.00 (3.00 %)\n```",
+      "source_content_hash": "7948a85d967b4a28eb0d2997e11f5d796952d7ee162625725b30292219eb18ae",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f155ef1e"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "Note that `ccache` aggregates the stats over all builds. You can use `ccache --zero-stats` to reset them before a build to verify the cache-hit ratio.",
+      "source_content_hash": "52174c345c8ceaeb40c5538bd32198584754d6a916169be93e69f479e08a7077",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需注意 `ccache` 會累積所有建置的統計數據。你可以使用 `ccache --zero-stats` 在建置前重置數據，以驗證快取命中率。"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "Should you need to wipe your cache, you can do so with `ccache --clear`",
+      "source_content_hash": "8fe3c6b9b611feebe3532d6f309a910af7b0236354ef547cd9145461475cd5e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若需清除快取，可執行 `ccache --clear`"
+      }
+    },
+    {
+      "segment_id": "c83259bb",
+      "source_content": "#### XCode Specific Setup",
+      "source_content_hash": "770cb6ebf07cf1a6ebbaabf05585f7302017423e815a23826edcfbefe659d276",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### XCode 專屬設定"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "To make sure `ccache` works correctly with iOS and XCode, you need to follow a couple of extra steps:",
+      "source_content_hash": "e90c0ba59a6d7ffaf23b2afebba4bbef61a8d5912ae73e8624e3553084bbe9b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要確保 `ccache` 在 iOS 和 XCode 環境正常運作，需額外執行以下步驟："
+      }
+    },
+    {
+      "segment_id": "292df6cb",
+      "source_content": "1. You must alter the way Xcode and `xcodebuild` call for the compiler command. By default they use _fully specified paths_ to the compiler binaries, so the symbolic links installed in `/usr/local/bin` will not be used. You may configure Xcode to use _relative_ names for the compilers using either of these two options:",
+      "source_content_hash": "950ac337df68dbb5d7098498de2bfb0c1e7cc0f58373c62c8f9ec86f877d9106",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 必須調整 Xcode 和 `xcodebuild` 呼叫編譯器指令的方式。預設情況下它們會使用編譯器二進位檔的「完整路徑」，因此安裝在 `/usr/local/bin` 的符號連結將不會被使用。你可以透過以下任一方式設定 Xcode 使用「相對名稱」呼叫編譯器："
+      }
+    },
+    {
+      "segment_id": "eb70e807",
+      "source_content": "- environment variables prefixed on the command line if you use a direct command line: `CLANG=clang CLANGPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ xcodebuild <rest of xcodebuild command line>`\n- A `post_install` section in your `ios/Podfile` that alters the compiler in your Xcode workspace during the `pod install` step:",
+      "source_content_hash": "449dee9cc1be3078ab8988f24f617f838a1ddb0abc44a0ac10e0ce89766e0d92",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 若直接使用命令列，可在指令前綴環境變數：`CLANG=clang CLANGPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ xcodebuild <xcodebuild 指令列其餘參數>`\n- 在 `ios/Podfile` 中加入 `post_install` 區段，於 `pod install` 階段修改 Xcode workspace 中的編譯器設定："
+      }
+    },
+    {
+      "segment_id": "a6c3f55f",
+      "source_content": "```ruby\n  post_install do |installer|\n    react_native_post_install(installer)\n\n    # ...possibly other post_install items here\n\n    installer.pods_project.targets.each do |target|\n      target.build_configurations.each do |config|\n        # Using the un-qualified names means you can swap in different implementations, for example ccache\n        config.build_settings[\"CC\"] = \"clang\"\n        config.build_settings[\"LD\"] = \"clang\"\n        config.build_settings[\"CXX\"] = \"clang++\"\n        config.build_settings[\"LDPLUSPLUS\"] = \"clang++\"\n      end\n    end\n\n    __apply_Xcode_12_5_M1_post_install_workaround(installer)\n  end\n```",
+      "source_content_hash": "f3369622cfbd51769ae41b793c02a5caeb37f43b4e6e49712f7e45ecbc11a749",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a6c3f55f"
+      }
+    },
+    {
+      "segment_id": "25215977",
+      "source_content": "2. You need a ccache configuration that allows for a certain level of sloppiness and cache behavior such that ccache registers cache hits during Xcode compiles. The ccache configuration variables that are different from standard are as follows if configured by environment variable:",
+      "source_content_hash": "d7838eab365ffc125809de266e344880fe618b1430a2bb1eff80e6c8809b7174",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 需要設定 ccache 配置，允許一定程度的寬鬆和快取行為，使 ccache 能在 Xcode 編譯期間註冊快取命中。若透過環境變數設定，以下為與標準配置不同的 ccache 配置參數："
+      }
+    },
+    {
+      "segment_id": "414aa732",
+      "source_content": "```bash\nexport CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros\nexport CCACHE_FILECLONE=true\nexport CCACHE_DEPEND=true\nexport CCACHE_INODECACHE=true\n```",
+      "source_content_hash": "0a6e69fd8fad405d56a8171298799aaeebf7e1e87ec3d10ed22f96e9a66c4c02",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_414aa732"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "The same may be configured in a `ccache.conf` file or any other mechanism ccache provides. More on this can be found in the [official ccache manual](https://ccache.dev/manual/4.3.html).",
+      "source_content_hash": "804ab24efe7d4e8415e72150bd537626939645bf4b13b307e692252af4391859",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "相同配置也可透過 `ccache.conf` 檔案或 ccache 提供的其他機制完成。更多細節請參閱 [官方 ccache 手冊](https://ccache.dev/manual/4.3.html)。"
+      }
+    },
+    {
+      "segment_id": "a6b29dc7",
+      "source_content": "#### Using this approach on a CI",
+      "source_content_hash": "686feb6fee874400ab696579f5f96b0b7ff569db86403ca2febc54191d139ee0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 在 CI 上使用此方法"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "Ccache uses the `/Users/$USER/Library/Caches/ccache` folder on macOS to store the cache.\nTherefore you could save & restore the corresponding folder also on CI to speedup your builds.",
+      "source_content_hash": "0a4c976cba47d92b0d4b43d16294c9c044eaccaf4b6f5af9a1ac4d6b9d0c5004",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Ccache 在 macOS 上會使用 `/Users/$USER/Library/Caches/ccache` 資料夾儲存快取。\n因此你也可以在 CI 上保存與恢復該資料夾以加速建置。"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "However, there are a couple of things to be aware:",
+      "source_content_hash": "ef1fff3f61847caf7b59bf5b280cb08f53fcf7fbb52edb52ebb1d0776c789896",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但需注意以下事項："
+      }
+    },
+    {
+      "segment_id": "67a49da9",
+      "source_content": "1. On CI, we recommend to do a full clean build, to avoid poisoned cache problems. If you follow the approach mentioned in the previous paragraph, you should be able to parallelize the native build on 4 different ABIs and you will most likely not need `ccache` on CI.\n\n2. `ccache` relies on timestamps to compute a cache hit. This doesn't work well on CI as files are re-downloaded at every CI run. To overcome this, you'll need to use the `compiler_check content` option which relies instead on [hashing the content of the file](https://ccache.dev/manual/4.3.html).",
+      "source_content_hash": "2a921ebaff43e1de6849872861ddf8429cc67eaff3876774221c467d4f1e15a8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在 CI 上建議執行完整清除建置，以避免快取污染問題。若遵循前文提到的平行化建置方法，你應能將原生建置分散至 4 種不同 ABI 上執行，此時在 CI 上很可能不需要使用 `ccache`。\n\n2. `ccache` 依賴時間戳記計算快取命中，這在 CI 環境效果不佳，因為每次執行時檔案都會重新下載。為解決此問題，需使用 `compiler_check content` 選項，改為[對檔案內容進行雜湊計算](https://ccache.dev/manual/4.3.html)。"
+      }
+    },
+    {
+      "segment_id": "c4ac6a6f",
+      "source_content": "### Distributed caches",
+      "source_content_hash": "a71572ffef70e67e357ce1d84dcf5df5c64b0e48049bdd114425e33200542be1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 分散式快取"
+      }
+    },
+    {
+      "segment_id": "b49a7009",
+      "source_content": "Similar to local caches, you might want to consider using a distributed cache for your native builds.\nThis could be specifically useful in bigger organizations that are doing frequent native builds.",
+      "source_content_hash": "40a46711cd22c96d154ebd9ab7b7384634499d1e46841e76bcfbb2f77f897667",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與本地緩存類似，您可能會考慮為原生建置使用分散式緩存。\n這對於頻繁進行原生建置的大型組織尤其有用。"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "We recommend to use [sccache](https://github.com/mozilla/sccache) to achieve this.\nWe defer to the sccache [distributed compilation quickstart](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md) for instructions on how to setup and use this tool.",
+      "source_content_hash": "934ebdf0af8557af6b234b126abd9fbe09df30b7101acb99c6d759f93357f0fb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們推薦使用 [sccache](https://github.com/mozilla/sccache) 來實現此目的。\n關於如何設置和使用此工具，我們參考 sccache 的[分散式編譯快速入門指南](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md)。"
+      }
+    },
+    {
+      "segment_id": "c6d75762",
+      "source_content": "## Troubleshooting",
+      "source_content_hash": "659a188b36f9c3262a28539e24c345df4edc9657f59b116b0a1d9887cf2e28e0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 疑難排解"
+      }
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "Please find instructions on how to solve some of the most common build performance issue in this section.",
+      "source_content_hash": "6d5aad73206e6a749aa616a5e3eadbb0b2db0fe0362ff8d1bbd3d40e57caf2b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本節提供解決一些最常見建置效能問題的指引。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/build-speed.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.303673+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "4a0a1b6190a1760aad75043dad40722a673b03e70d6d44678d14d4c1b00f761f"
+  }
+}

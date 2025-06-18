@@ -1,0 +1,362 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/turbo-native-modules-ios.md",
+  "source_file_content_hash": "888be80202749430dc07cf30a751ed6e30d6bf833906d726f1f9fc01914acb06",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: turbo-native-modules-ios\ntitle: 'Turbo Native Modules: iOS'\n---",
+      "source_content_hash": "a47d7986e0c2ec924718c4dab80823d11e6455a885accb00feff368967876c7e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Now it's time to write some iOS platform code to make sure `localStorage` survives after the application is closed.",
+      "source_content_hash": "7b8e2c26ccaf33e2eb7d6cd043e39380c403ce7243d2b37e4aa9e2121c2f1478",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候編寫一些 iOS 平台代碼，以確保 `localStorage` 在應用程式關閉後仍然保留。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Prepare your Xcode Project",
+      "source_content_hash": "ab29f8d36fc0905654586db8abfc49e62fc3258328de82dc644b4191cafc2f20",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 準備你的 Xcode 專案"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "We need to prepare your iOS project using Xcode. After completing these **6 steps** you'll have `RCTNativeLocalStorage` that implements the generated `NativeLocalStorageSpec` interface.",
+      "source_content_hash": "ff1fd1965376ccbea8c598628798f70dc5c1b77de10faa2b105cf829223d42df",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們需要使用 Xcode 準備你的 iOS 專案。完成以下 **6 個步驟** 後，你將擁有實現生成 `NativeLocalStorageSpec` 接口的 `RCTNativeLocalStorage`。"
+      }
+    },
+    {
+      "segment_id": "9e760345",
+      "source_content": "1. Open the CocoPods generated Xcode Workspace:",
+      "source_content_hash": "539afc64950395f3d103992b679b04d61f565955f16d5ab9dfff25836c2b3dac",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 打開由 CocoPods 生成的 Xcode Workspace："
+      }
+    },
+    {
+      "segment_id": "41ad46a6",
+      "source_content": "```bash\ncd ios\nopen TurboModuleExample.xcworkspace\n```",
+      "source_content_hash": "1975e57ff1d31c3cf17bb3916a8a4635a6b4015715d8aa958a05a5d2aa651700",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41ad46a6"
+      }
+    },
+    {
+      "segment_id": "1485a88b",
+      "source_content": "<img class=\"half-size\" alt=\"Open Xcode Workspace\" src=\"/docs/assets/turbo-native-modules/xcode/1.webp\" />",
+      "source_content_hash": "323247bd59708fa10db81d17d9e5ba605c943f0a3024eadef8a3f499eb0276bb",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1485a88b"
+      }
+    },
+    {
+      "segment_id": "1b8c1887",
+      "source_content": "2. Right click on app and select <code>New Group</code>, call the new group `NativeLocalStorage`.",
+      "source_content_hash": "65ef2d201826f6e0ba39ce24a3b0e6d03eef561bc5c6900f62787d7f78129205",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 右鍵點擊應用程式並選擇 <code>New Group</code>，將新群組命名為 `NativeLocalStorage`。"
+      }
+    },
+    {
+      "segment_id": "0dc46dba",
+      "source_content": "<img class=\"half-size\" alt=\"Right click on app and select New Group\" src=\"/docs/assets/turbo-native-modules/xcode/2.webp\" />",
+      "source_content_hash": "9b8f3c3e41c0e7cc53e3ea7054300a48d1914d276be3828a74163620d7739623",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0dc46dba"
+      }
+    },
+    {
+      "segment_id": "b3f5c97c",
+      "source_content": "3. In the `NativeLocalStorage` group, create <code>New</code>→<code>File from Template</code>.",
+      "source_content_hash": "7545c330b2c88a1c770ebdb67dc0900f17fe4d23c47f672695bc58a82f381c0b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "3. 在 `NativeLocalStorage` 群組中，創建 <code>New</code>→<code>File from Template</code>。"
+      }
+    },
+    {
+      "segment_id": "9329e3e0",
+      "source_content": "<img class=\"half-size\" alt=\"Create a new file using the Cocoa Touch Class template\" src=\"/docs/assets/turbo-native-modules/xcode/3.webp\" />",
+      "source_content_hash": "49c7f6703ef6d893fb7a806119c2e1f06770c3ba3e87128e1a9017fa4f224e91",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9329e3e0"
+      }
+    },
+    {
+      "segment_id": "c6dea11f",
+      "source_content": "4. Use the <code>Cocoa Touch Class</code>.",
+      "source_content_hash": "10d75a84a99c4e0ac20d0e2204f85406ac968565a4d7179d1970defd33e2ed21",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "4. 使用 <code>Cocoa Touch Class</code>。"
+      }
+    },
+    {
+      "segment_id": "2a70bec8",
+      "source_content": "<img class=\"half-size\" alt=\"Use the Cocoa Touch Class template\" src=\"/docs/assets/turbo-native-modules/xcode/4.webp\"  />",
+      "source_content_hash": "52ad175fb1ac115a896c556f9537ce84476e5f104ad967719d003146fd254f4b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2a70bec8"
+      }
+    },
+    {
+      "segment_id": "fc8eadc3",
+      "source_content": "5. Name the Cocoa Touch Class <code>RCTNativeLocalStorage</code> with the <code>Objective-C</code> language.",
+      "source_content_hash": "2c43799b0fac037ed8793042fdede3988efcfd59d5b0993695fe1d9107bbaa8f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "5. 將 Cocoa Touch Class 命名為 <code>RCTNativeLocalStorage</code>，並選擇 <code>Objective-C</code> 語言。"
+      }
+    },
+    {
+      "segment_id": "7b66d6d6",
+      "source_content": "<img class=\"half-size\" alt=\"Create an Objective-C RCTNativeLocalStorage class\" src=\"/docs/assets/turbo-native-modules/xcode/5.webp\" />",
+      "source_content_hash": "d4b2061f03cc5437b533b43cba0dd35779f628a8f38ce51681630649a1e36029",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7b66d6d6"
+      }
+    },
+    {
+      "segment_id": "33808f76",
+      "source_content": "6. Rename <code>RCTNativeLocalStorage.m</code> → <code>RCTNativeLocalStorage.mm</code> making it an Objective-C++ file.",
+      "source_content_hash": "b8184c53e71778123a9f89b6525340d5681b37112be565fe87d2cac8503d44c2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "6. 將 <code>RCTNativeLocalStorage.m</code> 重新命名為 <code>RCTNativeLocalStorage.mm</code>，使其成為 Objective-C++ 文件。"
+      }
+    },
+    {
+      "segment_id": "d1ce550c",
+      "source_content": "<img class=\"half-size\" alt=\"Convert to and Objective-C++ file\" src=\"/docs/assets/turbo-native-modules/xcode/6.webp\" />",
+      "source_content_hash": "7644913678c99f3c5b440f4c6ad987c016133a842b22ce3314e8c2dfe9fcdbc8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d1ce550c"
+      }
+    },
+    {
+      "segment_id": "06c0f776",
+      "source_content": "## Implement localStorage with NSUserDefaults",
+      "source_content_hash": "a7ede50da88b19fc3bf4fba636b15ebc3ea16ea038531d1ce5c91420b55273af",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 NSUserDefaults 實現 localStorage"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "Start by updating `RCTNativeLocalStorage.h`:",
+      "source_content_hash": "6b897a1ce1bede49794b2de729420292fb5f30c69f508cc81a54aadb9b16c12d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先更新 `RCTNativeLocalStorage.h`："
+      }
+    },
+    {
+      "segment_id": "b75ddc12",
+      "source_content": "```objc title=\"NativeLocalStorage/RCTNativeLocalStorage.h\"\n//  RCTNativeLocalStorage.h\n//  TurboModuleExample\n\n#import <Foundation/Foundation.h>\n// highlight-add-next-line\n#import <NativeLocalStorageSpec/NativeLocalStorageSpec.h>\n\nNS_ASSUME_NONNULL_BEGIN\n\n// highlight-remove-next-line\n@interface RCTNativeLocalStorage : NSObject\n// highlight-add-next-line\n@interface RCTNativeLocalStorage : NSObject <NativeLocalStorageSpec>\n\n@end\n```",
+      "source_content_hash": "6541b11128f4a32f0ecd1e40514df751583da0c1fa3b24f9b41b990c4cd06e93",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b75ddc12"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "Then update our implementation to use `NSUserDefaults` with a custom [suite name](https://developer.apple.com/documentation/foundation/nsuserdefaults/1409957-initwithsuitename).",
+      "source_content_hash": "6649a99bbe5856da47c73e38ff2f8aef580565ff1208c432e89cdefc0b6ca5dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後更新我們的實現，使用帶有自定義 [suite name](https://developer.apple.com/documentation/foundation/nsuserdefaults/1409957-initwithsuitename) 的 `NSUserDefaults`。"
+      }
+    },
+    {
+      "segment_id": "1d510af2",
+      "source_content": "```objc title=\"NativeLocalStorage/RCTNativeLocalStorage.mm\"\n//  RCTNativeLocalStorage.m\n//  TurboModuleExample\n\n#import \"RCTNativeLocalStorage.h\"\n\nstatic NSString *const RCTNativeLocalStorageKey = @\"local-storage\";\n\n@interface RCTNativeLocalStorage()\n@property (strong, nonatomic) NSUserDefaults *localStorage;\n@end\n\n@implementation RCTNativeLocalStorage\n\n- (id) init {\n  if (self = [super init]) {\n    _localStorage = [[NSUserDefaults alloc] initWithSuiteName:RCTNativeLocalStorageKey];\n  }\n  return self;\n}\n\n- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {\n  return std::make_shared<facebook::react::NativeLocalStorageSpecJSI>(params);\n}\n\n- (NSString * _Nullable)getItem:(NSString *)key {\n  return [self.localStorage stringForKey:key];\n}\n\n- (void)setItem:(NSString *)value\n          key:(NSString *)key {\n  [self.localStorage setObject:value forKey:key];\n}\n\n- (void)removeItem:(NSString *)key {\n  [self.localStorage removeObjectForKey:key];\n}\n\n- (void)clear {\n  NSDictionary *keys = [self.localStorage dictionaryRepresentation];\n  for (NSString *key in keys) {\n    [self removeItem:key];\n  }\n}\n\n+ (NSString *)moduleName\n{\n  return @\"NativeLocalStorage\";\n}\n\n@end\n```",
+      "source_content_hash": "00e1b361d2b170639f2042b494d0738fea8aac01d573e952db01f7e1052be57f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1d510af2"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "Important things to note:",
+      "source_content_hash": "95edb9d1b272795d985b27e2c6993e0f4e3c6837887de3c19d89e3c61071594f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需要注意的重要事項："
+      }
+    },
+    {
+      "segment_id": "10e4f9ca",
+      "source_content": "- You can use Xcode to jump to the Codegen `@protocol NativeLocalStorageSpec`. You can also use Xcode to generate stubs for you.",
+      "source_content_hash": "e1a8a246c56398ff66f5999563df9f99dde2289f975c67bda8ada148b38655e9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 你可以使用 Xcode 跳轉到 Codegen 的 `@protocol NativeLocalStorageSpec`。你也可以使用 Xcode 為你生成存根。"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "## Register the Native Module in your app",
+      "source_content_hash": "a4be6f0bcbd9ccc1c071fa1ce86a113e0213edcf33fa9a63b03b0049009d6b44",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 在應用程式中註冊原生模組"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "The last step consist in updating the `package.json` to tell React Native about the link between the JS specs of the Native Module and the concrete implementation of those specs in native code.",
+      "source_content_hash": "bf2e6bd77ed3f1d4d1eabbd79a4851434edf348d44f37e678652513ca9c28205",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是更新 `package.json`，告訴 React Native 關於原生模組的 JS 規格與原生代碼中這些規格的具體實現之間的連結。"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "Modify the `package.json` as it follows:",
+      "source_content_hash": "ea6a5d11d93ca88262a9d6d7fd0510763e55745fd18f7113c226be378cacb1d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "修改 `package.json` 如下："
+      }
+    },
+    {
+      "segment_id": "a3a1b8eb",
+      "source_content": "```json title=\"package.json\"\n     \"start\": \"react-native start\",\n     \"test\": \"jest\"\n   },\n   \"codegenConfig\": {\n     \"name\": \"AppSpecs\",\n     \"type\": \"modules\",\n     \"jsSrcsDir\": \"specs\",\n     \"android\": {\n       \"javaPackageName\": \"com.sampleapp.specs\"\n     }\n     // highlight-add-start\n     \"ios\":\n        \"modulesProvider\": {\n          \"NativeLocalStorage\": \"RCTNativeLocalStorage\"\n        }\n     // highlight-add-end\n   },\n\n   \"dependencies\": {\n```",
+      "source_content_hash": "a4debd70e681a57c5d8257c61629fa2a09ffd27821ff99dae3680bc5400e9874",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a3a1b8eb"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "At this point, you need to re-install the pods to make sure that codegen runs again to generate the new files:",
+      "source_content_hash": "cae622c94b4ab562c361e77064190d8dd3a96b56309f28d8e3d5f73090e2dc98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時，你需要重新安裝 pods，以確保 codegen 再次運行並生成新文件："
+      }
+    },
+    {
+      "segment_id": "5d30fd9b",
+      "source_content": "```bash\n# from the ios folder\nbundle exec pod install\nopen SampleApp.xcworkspace\n```",
+      "source_content_hash": "a582060ae68ad917697b77098db4b912e1dadcf14ab3ecb243190e3585d04fd3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5d30fd9b"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "If you now build your application from Xcode, you should be able to build successfully.",
+      "source_content_hash": "cee838e122ada1ec4b989eefd1ae0bda0035ca02432c47639911928ffc624c68",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你現在從 Xcode 構建應用程式，應該能夠成功構建。"
+      }
+    },
+    {
+      "segment_id": "ee213c98",
+      "source_content": "## Build and run your code on a Simulator",
+      "source_content_hash": "7425090cdb87c23bf3a0c1997344151f348efa7f517798628d118f24f1a39c90",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 在模擬器上構建並運行你的代碼"
+      }
+    },
+    {
+      "segment_id": "e59d0121",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n```bash\nnpm run ios\n```\n</TabItem>\n<TabItem value=\"yarn\">\n```bash\nyarn run ios\n```\n</TabItem>\n</Tabs>",
+      "source_content_hash": "9ffb3103fedc558a62cb96287f912d74febe31363b6352e83fa365776c7c9e96",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e59d0121"
+      }
+    },
+    {
+      "segment_id": "d2038b1b",
+      "source_content": "<video width=\"30%\" height=\"30%\" playsinline=\"true\" autoplay=\"true\" muted=\"true\" loop=\"true\">\n    <source src=\"/docs/assets/turbo-native-modules/turbo-native-modules-ios.webm\" type=\"video/webm\" />\n    <source src=\"/docs/assets/turbo-native-modules/turbo-native-modules-ios.mp4\" type=\"video/mp4\" />\n</video>",
+      "source_content_hash": "c9db0b4e84c591a1ef1ecd3b79aa57bf014354d347a1e43679ce97d691c58ecf",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d2038b1b"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/turbo-native-modules-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.039638+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "888be80202749430dc07cf30a751ed6e30d6bf833906d726f1f9fc01914acb06"
+  }
+}

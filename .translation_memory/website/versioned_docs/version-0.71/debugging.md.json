@@ -1,0 +1,862 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/debugging.md",
+  "source_file_content_hash": "ac16dc3535b01504d6541184b3cfac20f271a8f7d7a4a62458bc510b396f582d",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: debugging\ntitle: Debugging\n---",
+      "source_content_hash": "2d1cf15a339b7183a3c2c99ef871d6e7ceb2e6becbed6a1d034ef6acd64c4583",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Accessing the In-App Developer Menu",
+      "source_content_hash": "d22e147d85960cec0d7b9edd9f328e37f1fc3efc07f1f3e64ce54fec5e1e6de3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 存取應用內開發者選單"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "You can access the developer menu by shaking your device or by selecting \"Shake Gesture\" inside the Hardware menu in the iOS Simulator. You can also use the `⌘D` keyboard shortcut when your app is running in the iOS Simulator, or `⌘M` when running in an Android emulator on macOS and `Ctrl+M` on Windows and Linux. Alternatively for Android, you can run the command `adb shell input keyevent 82` to open the dev menu (82 being the Menu key code).",
+      "source_content_hash": "1cfd377c945c39cbf8b25260e89ff2f48fb096003242a97e311b1996c4f74de3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以透過搖動裝置或在 iOS 模擬器的硬體選單中選擇「搖動手勢」來存取開發者選單。當應用在 iOS 模擬器運行時，您也可以使用鍵盤快捷鍵 `⌘D`；在 macOS 的 Android 模擬器上使用 `⌘M`，或在 Windows 和 Linux 上使用 `Ctrl+M`。另外，對於 Android 裝置，您可以執行指令 `adb shell input keyevent 82` 來開啟開發者選單（82 是選單鍵的代碼）。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "![](/docs/assets/DeveloperMenu.png)",
+      "source_content_hash": "b208aedb9a23002ecf4fc6b42459c70c6bed32c638bae816235c393223912e93",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/docs/assets/DeveloperMenu.png)"
+      }
+    },
+    {
+      "segment_id": "25d77483",
+      "source_content": "> The Developer Menu is disabled in release (production) builds.",
+      "source_content_hash": "74d7f8f1aa5b955d371becfa40200532a18471a11b2ac34672df9c680b064bc4",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 開發者選單在正式（生產）版本中會被停用。"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "## Enabling Fast Refresh",
+      "source_content_hash": "0f6832e908682a65d8c2fe4f3d16a401920b9b60ac5937d5e68e5fd481c502a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 啟用快速重新整理"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Fast Refresh is a React Native feature that allows you to get near-instant feedback for changes in your React components. While debugging, it can help to have [Fast Refresh](fast-refresh.md) enabled. Fast Refresh is enabled by default, and you can toggle \"Enable Fast Refresh\" in the React Native developer menu. When enabled, most of your edits should be visible within a second or two.",
+      "source_content_hash": "e091812dd0c8492155df995068e63acc7eff9d34df157a3c3b705ede6da14e24",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "快速重新整理是 React Native 的一項功能，讓您能夠在修改 React 元件時獲得近乎即時的反饋。在除錯時，啟用[快速重新整理](fast-refresh.md)會有所幫助。快速重新整理預設為啟用狀態，您可以在 React Native 開發者選單中切換「啟用快速重新整理」。啟用後，大多數編輯內容應能在一兩秒內顯示出來。"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "## Enabling Keyboard Shortcuts",
+      "source_content_hash": "e2a4b9553ef53228cf94b91b4447e72cb8519b4b4bf9a21aec631137661669b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 啟用鍵盤快捷鍵"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "React Native supports a few keyboard shortcuts in the iOS Simulator. They are described below. To enable them on macOS, inside the Simulator app, open the I/O menu, select Keyboard, and make sure that \"Connect Hardware Keyboard\" is checked.",
+      "source_content_hash": "0a83d69072e95fe95d719241dbd7f09953d03e70e24e2e219f23e63c5fdd0061",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 在 iOS 模擬器中支援一些鍵盤快捷鍵，如下所述。要在 macOS 上啟用這些快捷鍵，請在模擬器應用程式中開啟 I/O 選單，選擇「鍵盤」，並確保「連接硬體鍵盤」選項已勾選。"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "## LogBox",
+      "source_content_hash": "7acc997fbbe39eb75d08a7456fd6efaaa51decdadc53e00c6948142842fd1acd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## LogBox"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "Errors and warnings in development builds are displayed in LogBox inside your app.",
+      "source_content_hash": "c9ca2947a2194c0a478c264b42824dd065c99edb3f2fe44c47ea53f1dc1a5b4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開發版本中的錯誤和警告會顯示在應用內的 LogBox 中。"
+      }
+    },
+    {
+      "segment_id": "18835972",
+      "source_content": "> LogBox is automatically disabled in release (production) builds.",
+      "source_content_hash": "aa3e797d94e31fdbf0b8fc8cea28f3ea40329cdda7d9a7f12c67de983284c24d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> LogBox 在正式（生產）版本中會自動停用。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### Console Errors and Warnings",
+      "source_content_hash": "3f0b8a170e840b1e0a1929a7be35b9f93f74eec497cabd323e3ed41669d7d8f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 控制台錯誤與警告"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "Console errors and warnings are displayed as on-screen notifications with a red or yellow badge, and the number of errors or warning in the console respectively. To view a console error or warnings, tap the notification to view the full screen information about the log and to paginate through all of the logs in the console.",
+      "source_content_hash": "cc81c424709d3221b4a81abd8581fc4e5f6c06cd5fc710bd3e76191feabf9341",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "控制台錯誤和警告會以帶有紅色或黃色標記的螢幕通知形式顯示，並分別標示控制台中的錯誤或警告數量。若要查看控制台錯誤或警告，請點擊通知以查看該日誌的完整螢幕資訊，並可翻頁瀏覽控制台中的所有日誌。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "These notifications can be hidden using `LogBox.ignoreAllLogs()`. This is useful when giving product demos, for example. Additionally, notifications can be hidden on a per-log basis via `LogBox.ignoreLogs()`. This is useful when there's a noisy warning that cannot be fixed, like those in a third-party dependency.",
+      "source_content_hash": "4c3c627bab96e7227d1184d4d2c392c08088cfff0d65378e4ff7c4102b71d2cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些通知可以透過 `LogBox.ignoreAllLogs()` 來隱藏，這在進行產品演示等場合非常有用。此外，也可以透過 `LogBox.ignoreLogs()` 針對特定日誌隱藏通知，這對於無法修復的第三方依賴項中的嘈雜警告特別有用。"
+      }
+    },
+    {
+      "segment_id": "9e89e13c",
+      "source_content": "> Ignore logs as a last resort and create a task to fix any logs that are ignored.",
+      "source_content_hash": "d780efe785b933b6a8752c767bdbae5791b9e53cadcd71c848db63a6dbe89d01",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 僅在最後手段時才忽略日誌，並應建立任務來修復任何被忽略的日誌。"
+      }
+    },
+    {
+      "segment_id": "4dd51304",
+      "source_content": "```tsx\nimport {LogBox} from 'react-native';\n\n// Ignore log notification by message:\nLogBox.ignoreLogs(['Warning: ...']);\n\n// Ignore all log notifications:\nLogBox.ignoreAllLogs();\n```",
+      "source_content_hash": "6092f938adb5b02acc3546af5cca7568e26af0bc74e8686631ce04359683f724",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4dd51304"
+      }
+    },
+    {
+      "segment_id": "c674e260",
+      "source_content": "### Unhandled Errors",
+      "source_content_hash": "62a83984c94d210099a4157ccae541a1d467ec4f7bb9996200e3ef099d8d29c2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 未處理的錯誤"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "Unhandled JavaScript errors such as `undefined is not a function` will automatically open a full screen LogBox error with the source of the error. These errors are dismissable and minimizable so that you can see the state of your app when these errors occur, but should always be addressed.",
+      "source_content_hash": "cdc63742f5245c19f6c1b2671b1239abddd4043640e8d7f18c72018e169e4715",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "未處理的 JavaScript 錯誤（例如 `undefined is not a function`）會自動開啟全螢幕的 LogBox 錯誤顯示，並標示錯誤來源。這些錯誤可以關閉或最小化，以便您能查看錯誤發生時的應用狀態，但這些錯誤應始終被處理。"
+      }
+    },
+    {
+      "segment_id": "cb5b269c",
+      "source_content": "### Syntax Errors",
+      "source_content_hash": "4c446605c271e174bea81061a0d20855dbd113f09f0e28f94f8989d4abee6d08",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 語法錯誤"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "When syntax error occurs the full screen LogBox error will automatically open with the stack trace and location of the syntax error. This error is not dismissable because it represents invalid JavaScript execution that must be fixed before continuing with your app. To dismiss these errors, fix the syntax error and either save to automatically dismiss (with Fast Refresh enabled) or cmd+r to reload (with Fast Refresh disabled).",
+      "source_content_hash": "dd491fa5e0f832a8c09b21e7f04abaf80bb7a58f7d02e9ff9332366c0641c268",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當發生語法錯誤時，全螢幕的 LogBox 錯誤會自動開啟，並顯示堆疊追蹤和語法錯誤的位置。此錯誤無法關閉，因為它代表無效的 JavaScript 執行，必須在繼續應用前修復。要關閉這些錯誤，請修正語法錯誤並儲存（若快速重新整理已啟用會自動關閉），或按 cmd+r 重新載入（若快速重新整理已停用）。"
+      }
+    },
+    {
+      "segment_id": "2c1b51df",
+      "source_content": "## Chrome Developer Tools",
+      "source_content_hash": "4641e138c2dfdd3d44225753dff4bfae4041b7d5cbc94dba912fb99e18109e39",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Chrome 開發者工具"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "To debug the JavaScript code in Chrome, select \"Debug JS Remotely\" from the Developer Menu. This will open a new tab at [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui).",
+      "source_content_hash": "10781d04228037f3ad8b5c81a162d15c500adf45380efcdfdb1ce08b88af17f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在 Chrome 中除錯 JavaScript 程式碼，請從開發者選單中選擇「遠端除錯 JS」。這將在 [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui) 開啟一個新分頁。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "Select `Tools → Developer Tools` from the Chrome Menu to open the [Developer Tools](https://developer.chrome.com/devtools). You may also access the DevTools using keyboard shortcuts (`⌘⌥I` on macOS, `Ctrl` `Shift` `I` on Windows). You may also want to enable [Pause On Caught Exceptions](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511) for a better debugging experience.",
+      "source_content_hash": "85a1972a013e489fea877fc071e4beb719a34d422789e9271eb5b2e61388d260",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 Chrome 選單中選擇「工具 → 開發者工具」以開啟[開發者工具](https://developer.chrome.com/devtools)。您也可以使用鍵盤快捷鍵（macOS 上為 `⌘⌥I`，Windows 上為 `Ctrl` `Shift` `I`）存取開發者工具。您可能還想啟用[在捕獲例外時暫停](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511)以獲得更好的除錯體驗。"
+      }
+    },
+    {
+      "segment_id": "73f3d740",
+      "source_content": "> Note: on Android, if the times between the debugger and device have drifted; things such as animation, event behavior, etc., might not work properly or the results may not be accurate. Please correct this by running ``adb shell \"date `date +%m%d%H%M%Y.%S%3N`\"`` on your debugger machine. Root access is required for the use in real device.",
+      "source_content_hash": "168d4a856a40541d931dceed33f3c3c5167d93a48620fc34edd9eb60e3dd898d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：在 Android 上，若偵錯工具與裝置間的時間出現偏差，可能會導致動畫效果、事件行為等功能異常或結果不準確。請在偵錯機器上執行指令 ``adb shell \"date `date +%m%d%H%M%Y.%S%3N`\"`` 進行校正（實體裝置需 root 權限）。"
+      }
+    },
+    {
+      "segment_id": "fbc3ff81",
+      "source_content": "> Note: the React Developer Tools Chrome extension does not work with React Native, but you can use its standalone version instead. Read [this section](debugging.md#react-developer-tools) to learn how.",
+      "source_content_hash": "cfac2c1e2fd42a1f4d7de40d30fc9f042189d1d2e1147aff84ec8741df2b26b5",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：React Developer Tools Chrome 擴充功能無法與 React Native 相容，但可使用其獨立版本。詳見[此章節](debugging.md#react-developer-tools)說明。"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### Debugging using a custom JavaScript debugger",
+      "source_content_hash": "84fdb128a64e6ab1e98b7d8c704699444b2eb319a3c4c80f3befdd8f4debf1c8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用自訂 JavaScript 偵錯工具"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "To use a custom JavaScript debugger in place of Chrome Developer Tools, set the `REACT_DEBUGGER` environment variable to a command that will start your custom debugger. You can then select \"Debug JS Remotely\" from the Developer Menu to start debugging.",
+      "source_content_hash": "d223b55dea139553bf09fe5d41faf32c02c2a350a93726b5dafe822c07a6262f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要改用自訂 JavaScript 偵錯工具替代 Chrome 開發者工具，需將 `REACT_DEBUGGER` 環境變數設為啟動該偵錯工具的命令。接著從開發者選單選擇「遠端偵錯 JS」即可開始偵錯。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "The debugger will receive a list of all project roots, separated by a space. For example, if you set `REACT_DEBUGGER=\"node /path/to/launchDebugger.js --port 2345 --type ReactNative\"`, then the command `node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app` will be used to start your debugger.",
+      "source_content_hash": "255be261a4978ed60aafd06bab6d256581264f18bf36833ea23574aefd1783ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "偵錯工具會接收到以空格分隔的專案根目錄列表。例如，若設定 `REACT_DEBUGGER=\"node /path/to/launchDebugger.js --port 2345 --type ReactNative\"`，則會使用指令 `node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app` 啟動偵錯工具。"
+      }
+    },
+    {
+      "segment_id": "bd4bfa7f",
+      "source_content": "> Custom debugger commands executed this way should be short-lived processes, and they shouldn't produce more than 200 kilobytes of output.",
+      "source_content_hash": "be83c7a97255a768df1e131be8331a6cafa70b9794ce97636d405c17c9aa9b36",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 此方式執行的自訂偵錯命令應為短生命週期程序，且輸出不得超過 200 KB。"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "## Safari Developer Tools",
+      "source_content_hash": "1149abb278afdc1f6de075d7e97f36b8fe20cb50d8aaf4aa8cc90a0b139bb4a6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Safari 開發者工具"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "You can use Safari to debug the iOS version of your app without having to enable \"Debug JS Remotely\".",
+      "source_content_hash": "99bca3b79c4f575e440cef82332a9e06fcea0aa3d8a0898acfead21da39da0c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無需啟用「遠端偵錯 JS」，即可使用 Safari 偵錯 iOS 版應用程式。"
+      }
+    },
+    {
+      "segment_id": "6384b3d4",
+      "source_content": "- On a physical device go to: `Settings → Safari → Advanced → Make sure \"Web Inspector\" is turned on` (This step is not needed on the Simulator)\n- On your Mac enable Develop menu in Safari: `Preferences → Advanced → Select \"Show Develop menu in menu bar\"`\n- Select your app's JSContext: `Develop → Simulator (or other device) → JSContext`\n- Safari's Web Inspector should open which has a Console and a Debugger",
+      "source_content_hash": "d60c4637212f2f32d7690d0cdda5ccd79ba4c6a51238439096671f2ec77739ac",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 實體裝置設定路徑：`設定 → Safari → 進階 → 確保「網頁檢查器」已啟用`（模擬器不需此步驟）\n- Mac 端啟用 Safari 開發選單：`偏好設定 → 進階 → 勾選「在選單列顯示開發選單」`\n- 選擇應用程式的 JSContext：`開發 → 模擬器（或其他裝置） → JSContext`\n- Safari 的網頁檢查器將開啟，內含控制台與偵錯工具"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "While sourcemaps may not be enabled by default, you can follow [this guide](http://blog.nparashuram.com/2019/10/debugging-react-native-ios-apps-with.html) or [video](https://www.youtube.com/watch?v=GrGqIIz51k4) to enable them and set break points at the right places in the source code.",
+      "source_content_hash": "80959a643d99a6aa1eada7bd43dc3b2b95c379d92ab4330c4c7111a8b5cdce19",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若原始碼對應未預設啟用，可參照[此指南](http://blog.nparashuram.com/2019/10/debugging-react-native-ios-apps-with.html)或[影片](https://www.youtube.com/watch?v=GrGqIIz51k4)啟用，並在原始碼正確位置設定中斷點。"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "However, every time the app is reloaded (using live reload, or by manually reloading), a new JSContext is created. Choosing \"Automatically Show Web Inspectors for JSContexts\" saves you from having to select the latest JSContext manually.",
+      "source_content_hash": "4a3d9817a34c0ae86af2242bae8d5a91d7176e558ed7e1a3a468af8d3c6ff848",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需注意，每次應用程式重新載入（透過即時重載或手動重載）時，都會建立新的 JSContext。勾選「自動顯示 JSContext 的網頁檢查器」可避免手動選擇最新 JSContext。"
+      }
+    },
+    {
+      "segment_id": "759d12dd",
+      "source_content": "## React Developer Tools",
+      "source_content_hash": "78acaca1dba187796dc5f46670a2a55320fb37137a8741261cdf03c7f3503fbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## React 開發者工具"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "You can use [the standalone version of React Developer Tools](https://github.com/facebook/react/tree/main/packages/react-devtools) to debug the React component hierarchy. To use it, install the `react-devtools` package globally:",
+      "source_content_hash": "c74357f238bfad7b6c61e6552b2a67285fc25d440c2efa77eab803956b6d1097",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可使用 [React Developer Tools 獨立版本](https://github.com/facebook/react/tree/main/packages/react-devtools)偵錯 React 元件層級結構。請先全域安裝 `react-devtools` 套件："
+      }
+    },
+    {
+      "segment_id": "722f1893",
+      "source_content": "> Note: Version 4 of `react-devtools` requires `react-native` version 0.62 or higher to work properly.",
+      "source_content_hash": "74f17c7f0814d58af6cbef2aebc6705c2dd1210ed6b629ccbc38e8e7dbc64623",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：`react-devtools` 第 4 版需搭配 `react-native` 0.62 以上版本才能正常運作。"
+      }
+    },
+    {
+      "segment_id": "2ef748d1",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm install -g react-devtools\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn global add react-devtools\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "a53b24fd3027373d1a1d6f2f948a2e3d866bb069de44645a4d6f651df81054b9",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2ef748d1"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "Now run `react-devtools` from the terminal to launch the standalone DevTools app:",
+      "source_content_hash": "cd7b41310631ab563d2ac4ebb282851e4d8d0c0596fba502798147f1d37eff28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在終端機執行 `react-devtools` 以啟動獨立版開發工具應用程式："
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```shell\nreact-devtools\n```",
+      "source_content_hash": "da9021adb7c4977efd5c69144eed4630889c2e083f6c1eac95cf035cd839f104",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "![React DevTools](/docs/assets/ReactDevTools.png)",
+      "source_content_hash": "d59dd9823e5e67603b45f35d82d54920fb256b72fb847ee097072941c6afe9a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React 開發者工具](/docs/assets/ReactDevTools.png)"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "It should connect to your simulator within a few seconds.",
+      "source_content_hash": "388e94a119d071b5b0d029d2a2a8ba65501ca14cabf1c10d320abcb458fcf076",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通常數秒內會自動連接至模擬器。"
+      }
+    },
+    {
+      "segment_id": "95807da3",
+      "source_content": ":::info\nIf connecting to the emulator proves troublesome (especially Android 12), try running `adb reverse tcp:8097 tcp:8097` in a new terminal.\n:::",
+      "source_content_hash": "0ef94b488289d6f616b44df8a04c077dda12aca5498090efb3f566aad82c48b8",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n若連接模擬器發生問題（特別是 Android 12），可嘗試在新終端機執行 `adb reverse tcp:8097 tcp:8097`。\n:::"
+      }
+    },
+    {
+      "segment_id": "232144f0",
+      "source_content": ":::info\nIf you prefer to avoid global installations, you can add `react-devtools` as a project dependency. Add the `react-devtools` package to your project using `npm install --save-dev react-devtools`, then add `\"react-devtools\": \"react-devtools\"` to the `scripts` section in your `package.json`, and then run `npm run react-devtools` from your project folder to open the DevTools.\n:::",
+      "source_content_hash": "b2058eaf2a67c1671aea7f745ffd08d64090b8d360f62642d2a2d2605ef9407c",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n若不想全域安裝，可將 `react-devtools` 加入專案依賴。透過 `npm install --save-dev react-devtools` 安裝套件，並在 `package.json` 的 `scripts` 區段加入 `\"react-devtools\": \"react-devtools\"`，最後在專案目錄執行 `npm run react-devtools` 即可開啟開發工具。\n:::"
+      }
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "### Integration with React Native Inspector",
+      "source_content_hash": "1864ee2395f70898f8359721b946a5e5573a5726fc8daefabf7f5880ebbb1507",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 與 React Native 檢查器整合"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "Open the in-app developer menu and choose \"Toggle Inspector\". It will bring up an overlay that lets you tap on any UI element and see information about it:",
+      "source_content_hash": "88e98bc5c3e4ba2943c8aac65bcf02d310e31abf8b54fe5f887d51f17cadac65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開啟應用內的開發者選單並選擇「切換檢查器」。這將顯示一個疊加層，讓您可以點擊任何 UI 元素並查看相關資訊："
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "![React Native Inspector](/docs/assets/Inspector.gif)",
+      "source_content_hash": "12d2ee5db8b668b164ded058c07a09566a71af386348812a353df66f60a6cf30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React Native 檢查器](/docs/assets/Inspector.gif)"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "However, when `react-devtools` is running, Inspector will enter a collapsed mode, and instead use the DevTools as primary UI. In this mode, clicking on something in the simulator will bring up the relevant components in the DevTools:",
+      "source_content_hash": "ae39fda1305e8b82742318b8a8fc4308988f2456634c07f8195a1a9a4c5f0668",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，當 `react-devtools` 正在運行時，檢查器會進入折疊模式，並改以 DevTools 作為主要 UI。在此模式下，點擊模擬器中的內容將在 DevTools 中顯示相關元件："
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "![React DevTools Inspector Integration](/docs/assets/ReactDevToolsInspector.gif)",
+      "source_content_hash": "3d423c0886459f4c62f28c486feb2367ca96b78f2dc3e4b66cd83d91c609d6b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React DevTools 檢查器整合](/docs/assets/ReactDevToolsInspector.gif)"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "You can choose \"Toggle Inspector\" in the same menu to exit this mode.",
+      "source_content_hash": "6ebc2343e7d8dda50b59134df6c390e28de7c730f5a36b5b06ff07d458e51906",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在同一選單中選擇「切換檢查器」來退出此模式。"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "### Inspecting Component Instances",
+      "source_content_hash": "e4158a94d0c7d049845686ce7f6573fb6a1f89e0531f3f3007acd44babaa1096",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 檢查元件實例"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "When debugging JavaScript in Chrome, you can inspect the props and state of the React components in the browser console.",
+      "source_content_hash": "c53410ae1f333f9a8600c6ca5f1adaccb10e1582a3ba3bb3c1d368bcf6aaa66f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Chrome 中調試 JavaScript 時，您可以在瀏覽器控制台中檢查 React 元件的 props 和 state。"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "First, follow the instructions for debugging in Chrome to open the Chrome console.",
+      "source_content_hash": "6594044bdfd015c24e26ded323cdf138c65a2486b9ab3e5885c5e67f4c66889e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先，按照在 Chrome 中調試的指示開啟 Chrome 控制台。"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "Make sure that the dropdown in the top left corner of the Chrome console says `debuggerWorker.js`. **This step is essential.**",
+      "source_content_hash": "b0776c3cfcbabd39042a8c958e0d5a85eb6d9f3a604fc5fe2ca3390ab7a42479",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "確保 Chrome 控制台左上角的下拉選單顯示 `debuggerWorker.js`。**此步驟至關重要。**"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "Then select a React component in React DevTools. There is a search box at the top that helps you find one by name. As soon as you select it, it will be available as `$r` in the Chrome console, letting you inspect its props, state, and instance properties.",
+      "source_content_hash": "a5a2dc21271ad73eaa8dad2a6554d203bdd5a5d3b0d31884e1235d6aeb838960",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後在 React DevTools 中選擇一個 React 元件。頂部有一個搜尋框可幫助您按名稱查找元件。一旦選中，它將在 Chrome 控制台中作為 `$r` 可用，讓您可以檢查其 props、state 和實例屬性。"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "![React DevTools Chrome Console Integration](/docs/assets/ReactDevToolsDollarR.gif)",
+      "source_content_hash": "05ffd234ee06c4008fc407a8193068fd4351b97d092b3631e7f1c6a85bc03d84",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React DevTools Chrome 控制台整合](/docs/assets/ReactDevToolsDollarR.gif)"
+      }
+    },
+    {
+      "segment_id": "6ab1b234",
+      "source_content": "## Performance Monitor",
+      "source_content_hash": "cf243bb2c6c0d9fd0fad28d295cabb7499b02d988f249ee2af1fcaaf81ebe113",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 效能監控器"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "You can enable a performance overlay to help you debug performance problems by selecting \"Perf Monitor\" in the Developer Menu.",
+      "source_content_hash": "967a64e996de032cb09f9ff17350c1d237aef7cee6369c2f60c6bb9013b95ce2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以透過在開發者選單中選擇「效能監控」來啟用效能疊加層，以幫助調試效能問題。"
+      }
+    },
+    {
+      "segment_id": "817eb4a8",
+      "source_content": "<hr style={{marginTop: 25, marginBottom: 25}} />",
+      "source_content_hash": "4a88d38d571b563e97a57688d2be92b2618a0ab2fb8028a89bb16ed2caf493ad",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_817eb4a8"
+      }
+    },
+    {
+      "segment_id": "97afbaf0",
+      "source_content": "## Debugging Application State",
+      "source_content_hash": "9a884baa158ecb85c09d9231b94b628c2c41cd965915241457ecfafb5c178c69",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 調試應用程式狀態"
+      }
+    },
+    {
+      "segment_id": "a8f09c71",
+      "source_content": "[Reactotron](https://github.com/infinitered/reactotron) is an open-source desktop app that allows you to inspect Redux or MobX-State-Tree application state as well as view custom logs, run custom commands such as resetting state, store and restore state snapshots, and other helpful debugging features for React Native apps.",
+      "source_content_hash": "6fc592272603e05a647612020aa1d2ddebde0c672ac36c2430c5f60b1ebab88d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Reactotron](https://github.com/infinitered/reactotron) 是一個開源桌面應用程式，可讓您檢查 Redux 或 MobX-State-Tree 的應用程式狀態，查看自訂日誌，執行自訂命令（如重置狀態），儲存和恢復狀態快照，以及其他對 React Native 應用程式有幫助的調試功能。"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "You can view installation instructions [in the README](https://github.com/infinitered/reactotron). If you're using Expo, here is an article detailing [how to install on Expo](https://shift.infinite.red/start-using-reactotron-in-your-expo-project-today-in-3-easy-steps-a03d11032a7a).",
+      "source_content_hash": "a33710d8addbee49c3eb874e2e3ad55320221e128e4a26ce1216a8f11ce0bca2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 [README](https://github.com/infinitered/reactotron) 中查看安裝說明。如果您使用 Expo，這裡有一篇文章詳細介紹 [如何在 Expo 中安裝](https://shift.infinite.red/start-using-reactotron-in-your-expo-project-today-in-3-easy-steps-a03d11032a7a)。"
+      }
+    },
+    {
+      "segment_id": "d4eab4a6",
+      "source_content": "# Native Debugging",
+      "source_content_hash": "8faaee4760103d64f8a76c26766c02ff5630ec13bb5e39ecc313d724c63aa522",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 原生調試"
+      }
+    },
+    {
+      "segment_id": "aa8003b6",
+      "source_content": "<div className=\"banner-native-code-required\">\n  <h3>Projects with Native Code Only</h3><p>\n    The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href=\"https://docs.expo.dev/workflow/prebuild/\" target=\"_blank\">prebuild</a> to use this API.</p>\n</div>",
+      "source_content_hash": "8d17106802403b3d10771c47028e7bb111f0ee1d5c239af3f13035de2434c14a",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_aa8003b6"
+      }
+    },
+    {
+      "segment_id": "16ae54ea",
+      "source_content": "## Accessing console logs",
+      "source_content_hash": "ea58c308f662eb93a03715daefb5e7b91b5ca0b45936325cdb631201885dd987",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 存取控制台日誌"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "You can display the console logs for an iOS or Android app by using the following commands in a terminal while the app is running:",
+      "source_content_hash": "f7fba3313255eef4b17f0c11fe3e19d5df19f387beaa520591cbc393a015702d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在應用程式運行時，於終端機中使用以下命令來顯示 iOS 或 Android 應用的控制台日誌："
+      }
+    },
+    {
+      "segment_id": "7eccd6ba",
+      "source_content": "```shell\nnpx react-native log-ios\nnpx react-native log-android\n```",
+      "source_content_hash": "3308ec5b17b22a9331ad6b5419e463f1ba9f1f7980488b34f1f5c65c7391de06",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7eccd6ba"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "You may also access these through `Debug → Open System Log...` in the iOS Simulator or by running `adb logcat \"*:S\" ReactNative:V ReactNativeJS:V` in a terminal while an Android app is running on a device or emulator.",
+      "source_content_hash": "d380e12c5f7718c9b09fa3e5bf1b9e81a2514c400fce1b7a032a44b4adfec74f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您也可以透過 iOS 模擬器中的 `Debug → Open System Log...` 或在 Android 裝置或模擬器上運行應用時，於終端機中執行 `adb logcat \"*:S\" ReactNative:V ReactNativeJS:V` 來存取這些日誌。"
+      }
+    },
+    {
+      "segment_id": "e37e40de",
+      "source_content": "> If you're using Create React Native App or Expo CLI, console logs already appear in the same terminal output as the bundler.",
+      "source_content_hash": "9aea101f21405eb71f5572e8834f9d128d4b964d94dcc2bdd28534b8d76574e7",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果您使用 Create React Native App 或 Expo CLI，控制台日誌已顯示在與打包器相同的終端輸出中。"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "## Debugging on a device with Chrome Developer Tools",
+      "source_content_hash": "0666fa187ab3393f2323cc2b2207faa3254ed4e37bc5110a924ea9d809585182",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 在裝置上使用 Chrome 開發者工具進行調試"
+      }
+    },
+    {
+      "segment_id": "86f43d60",
+      "source_content": "> If you're using Create React Native App or Expo CLI, this is configured for you already.",
+      "source_content_hash": "22819e16e44725e4eaeee1a6b9fb6f581243d0598785bb2b136e8f10de25a018",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果您使用 Create React Native App 或 Expo CLI，此功能已為您配置好。"
+      }
+    },
+    {
+      "segment_id": "5cf1bce4",
+      "source_content": "On iOS devices, open the file [`RCTWebSocketExecutor.mm`](https://github.com/facebook/react-native/blob/0.71-stable/React/CoreModules/RCTWebSocketExecutor.mm) and change \"localhost\" to the IP address of your computer, then select \"Debug JS Remotely\" from the Developer Menu.",
+      "source_content_hash": "dee680d43193bc3e6803df03fe6c200baf4759cf2b84df7c8d79685d0ea49898",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 裝置上，開啟檔案 [`RCTWebSocketExecutor.mm`](https://github.com/facebook/react-native/blob/0.71-stable/React/CoreModules/RCTWebSocketExecutor.mm) 並將 \"localhost\" 更改為您電腦的 IP 位址，然後在開發者選單中選擇「遠端調試 JS」。"
+      }
+    },
+    {
+      "segment_id": "0427bb2b",
+      "source_content": "On Android 5.0+ devices connected via USB, you can use the [`adb` command line tool](http://developer.android.com/tools/help/adb.html) to setup port forwarding from the device to your computer:",
+      "source_content_hash": "bb7bd69c07a78532a578f9d396a40fec401127139815599f1b67ec642d3dfd53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在透過 USB 連接的 Android 5.0+ 裝置上，您可以使用 [`adb` 命令列工具](http://developer.android.com/tools/help/adb.html) 來設定從裝置到您電腦的連接埠轉發："
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "`adb reverse tcp:8081 tcp:8081`",
+      "source_content_hash": "25a80a7cb83e1b094d146639f7a3d0e91d5ecb58fdbfcea7c4a230f4063146bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`adb reverse tcp:8081 tcp:8081`"
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "Alternatively, select \"Dev Settings\" from the Developer Menu, then update the \"Debug server host for device\" setting to match the IP address of your computer.",
+      "source_content_hash": "d0eaddb293f5a958917753bca71a52629ee7749ae7d2eb5e27a7c51b5ca09ad9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "或者，從開發者選單中選擇「Dev Settings」，然後將「Debug server host for device」設定更新為與您電腦的 IP 位址相符。"
+      }
+    },
+    {
+      "segment_id": "017c4d67",
+      "source_content": "> If you run into any issues, it may be possible that one of your Chrome extensions is interacting in unexpected ways with the debugger. Try disabling all of your extensions and re-enabling them one-by-one until you find the problematic extension.",
+      "source_content_hash": "b8e4f2d1c3006bfa0a56afedecdfbb333e22defcaae9126c0573d189c14ff64f",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果遇到任何問題，可能是某個 Chrome 擴充功能與偵錯工具產生意外的互動。嘗試停用所有擴充功能，並逐一重新啟用，直到找出有問題的擴充功能。"
+      }
+    },
+    {
+      "segment_id": "3bff4086",
+      "source_content": "## Debugging native code",
+      "source_content_hash": "a0fb0520648413937284bd941d229100683e7f80ae3ce2fe6a7a1094a12497db",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 除錯原生程式碼"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "When working with native code, such as when writing native modules, you can launch the app from Android Studio or Xcode and take advantage of the native debugging features (setting up breakpoints, etc.) as you would in case of building a standard native app.",
+      "source_content_hash": "bdee1ae152b3035d334dbdcc88320f29be64f4977dcbce3c9608c43b73d4f67c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當處理原生程式碼時，例如編寫原生模組，您可以從 Android Studio 或 Xcode 啟動應用程式，並利用原生除錯功能（設定中斷點等），就像在開發標準原生應用程式時一樣。"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "Another option is to run your application using the React Native CLI and attach the native debugger of the native IDE (Android Studio or Xcode) to the process.",
+      "source_content_hash": "7b4ab15c8406865768d377c60ca02cafdec5923e2f8728c04ea24c6b8a536ecd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個選項是使用 React Native CLI 執行您的應用程式，並將原生 IDE（Android Studio 或 Xcode）的原生偵錯工具附加到該程序。"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "### Android Studio",
+      "source_content_hash": "0ed1913ded2727602e394b89597039670b73dc0d620e3f3b69127e191739eaad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android Studio"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "On Android Studio you can do this by going on the \"Run\" option on the menu bar, clicking on \"Attach to Process...\" and selecting the running React Native app.",
+      "source_content_hash": "578dd7271fc4c11f809f5f86ebe4fbdc19aa8f246a0719972861cb5712378d11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android Studio 中，您可以透過點選選單列上的「Run」選項，點擊「Attach to Process...」，然後選擇正在執行的 React Native 應用程式來完成此操作。"
+      }
+    },
+    {
+      "segment_id": "778e087a",
+      "source_content": "### Xcode",
+      "source_content_hash": "6fd0a2b8ccc5c3e610309761f90ba5bd43ba3d5d74afefad69fb5816a7194ea9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Xcode"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "On Xcode click on \"Debug\" on the top menu bar, select the \"Attach to process\" option, and select the application in the list of \"Likely Targets\".",
+      "source_content_hash": "999e9930356535cb4a29b645d2a77e4016de8569c90224e0d4e2208089360c5d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Xcode 中，點擊頂部選單列上的「Debug」，選擇「Attach to process」選項，然後在「Likely Targets」清單中選擇應用程式。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/debugging.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.355271+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ac16dc3535b01504d6541184b3cfac20f271a8f7d7a4a62458bc510b396f582d"
+  }
+}

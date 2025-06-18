@@ -1,0 +1,504 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/flexbox.md",
+  "source_file_content_hash": "15f6e9ca360ddd9c7b4d0d9aaa7827b87b22ea8650cb653e2ee9d748a4944924",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: flexbox\ntitle: Layout with Flexbox\n---",
+      "source_content_hash": "3cffe3efeab0344fefaf5b081037b4207be4071a62a8c1ede88db37784db5627",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A component can specify the layout of its children using the Flexbox algorithm. Flexbox is designed to provide a consistent layout on different screen sizes.",
+      "source_content_hash": "eb40390b9e17b030ad1ac620cd85634ead08833de65ddc9e3a6003f839a9df3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "You will normally use a combination of `flexDirection`, `alignItems`, and `justifyContent` to achieve the right layout.",
+      "source_content_hash": "8ca54f79a3081aaebdd7a18317131c05e68d6f0b5e7c150b1433d7ad3985263d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6cae1da3",
+      "source_content": ":::caution\nFlexbox works the same way in React Native as it does in CSS on the web, with a few exceptions.\nThe defaults are different, with `flexDirection` defaulting to `column` instead of `row`, `alignContent` defaulting to `flex-start` instead of `stretch`, `flexShrink` defaulting to `0` instead of `1`, the `flex` parameter only supporting a single number.\n:::",
+      "source_content_hash": "5b1463dcb220613eda4d344a58530c869d6635ce991120a476139914fff8ee9f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## Flex",
+      "source_content_hash": "ff56bb1d7f2aeb5c0debbfe043b42d72d4f1bed819d46ff31707dd88b4b153b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "[`flex`](layout-props#flex) will define how your items are going to **“fill”** over the available space along your main axis. Space will be divided according to each element's flex property.",
+      "source_content_hash": "9f9c5a7a2943b72365b2837ad5bf7988b99dbb9d661e69a2de308a77d4e35198",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "In the following example, the red, yellow, and green views are all children in the container view that has `flex: 1` set. The red view uses `flex: 1` , the yellow view uses `flex: 2`, and the green view uses `flex: 3` . **1+2+3 = 6**, which means that the red view will get `1/6` of the space, the yellow `2/6` of the space, and the green `3/6` of the space.",
+      "source_content_hash": "189fe3bd0ee9c163f36138ca44cbaad3341fb70c40901af3830a6b49ae3d3b40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cbbebf8e",
+      "source_content": "```SnackPlayer name=Flex%20Example\nimport React from \"react\";\nimport { StyleSheet, Text, View } from \"react-native\";\n\nconst Flex = () => {\n  return (\n    <View style={[styles.container, {\n      // Try setting `flexDirection` to `\"row\"`.\n      flexDirection: \"column\"\n    }]}>\n      <View style={{ flex: 1, backgroundColor: \"red\" }} />\n      <View style={{ flex: 2, backgroundColor: \"darkorange\" }} />\n      <View style={{ flex: 3, backgroundColor: \"green\" }} />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    padding: 20,\n  },\n});\n\nexport default Flex;\n```",
+      "source_content_hash": "dc743f106c2e747b02cb4ea2c03b386308cbfa666259962b6980738dc544288c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c674e260",
+      "source_content": "## Flex Direction",
+      "source_content_hash": "2e29f1d62c5a23785004add253d2cfd17ee80941455667b00e012b73ea7cf100",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "[`flexDirection`](layout-props#flexdirection) controls the direction in which the children of a node are laid out. This is also referred to as the main axis. The cross axis is the axis perpendicular to the main axis, or the axis which the wrapping lines are laid out in.",
+      "source_content_hash": "31c691933763972d16e3ff37ccca279c780d9d086b2993528280656ed08aedc9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b4ef1e56",
+      "source_content": "- `column` (**default value**) Align children from top to bottom. If wrapping is enabled, then the next line will start to the right of the first item on the top of the container.\n\n- `row` Align children from left to right. If wrapping is enabled, then the next line will start under the first item on the left of the container.\n\n- `column-reverse` Align children from bottom to top. If wrapping is enabled, then the next line will start to the right of the first item on the bottom of the container.\n\n- `row-reverse` Align children from right to left. If wrapping is enabled, then the next line will start under the first item on the right of the container.",
+      "source_content_hash": "6fd64c26c5bbdb5c62a21ef790a14d3b3cc69c2e6b7cbcfde7a7428d8d4068e5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "You can learn more [here](https://www.yogalayout.dev/docs/styling/flex-direction).",
+      "source_content_hash": "f8b3f4301b395abb361e025ea21ef4c30a5bcf51d1523faeeb72395273945f49",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3adc0ceb",
+      "source_content": "```SnackPlayer name=Flex%20Direction\nimport React, { useState } from \"react\";\nimport { StyleSheet, Text, TouchableOpacity, View } from \"react-native\";\n\nconst FlexDirectionBasics = () => {\n  const [flexDirection, setflexDirection] = useState(\"column\");\n\n  return (\n    <PreviewLayout\n      label=\"flexDirection\"\n      values={[\"column\", \"row\", \"row-reverse\", \"column-reverse\"]}\n      selectedValue={flexDirection}\n      setSelectedValue={setflexDirection}\n    >\n      <View\n        style={[styles.box, { backgroundColor: \"powderblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"skyblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"steelblue\" }]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value && styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View style={[styles.container, { [label]: selectedValue }]}>\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n  },\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default FlexDirectionBasics;\n```",
+      "source_content_hash": "2545095598d87855f4c83a0dbac445e652382cf9cc4bd96023f52155151225c7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "89b740fe",
+      "source_content": "## Layout Direction",
+      "source_content_hash": "842a814b2f8980bc1d84cfac3ae44b2a9319fe548d682179ed426020946c3b79",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Layout [`direction`](layout-props#direction) specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also affects what edge `start` and `end` refer to. By default, React Native lays out with LTR layout direction. In this mode `start` refers to left and `end` refers to right.",
+      "source_content_hash": "4726927926e7f9e1d71f85b98b1d988b0f056db8a03051e59072923e0068b115",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d9211093",
+      "source_content": "- `LTR` (**default value**) Text and children are laid out from left to right. Margin and padding applied to the start of an element are applied on the left side.\n\n- `RTL` Text and children are laid out from right to left. Margin and padding applied to the start of an element are applied on the right side.",
+      "source_content_hash": "a64fe861fff55c46aebc247e0005ae69b731b4e91ebb5238de27cc4afbc3908d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "82a37a1b",
+      "source_content": "```SnackPlayer name=Flex%20Direction\nimport React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\n\nconst DirectionLayout = () => {\n  const [direction, setDirection] = useState(\"ltr\");\n\n  return (\n    <PreviewLayout\n      label=\"direction\"\n      selectedValue={direction}\n      values={[\"ltr\", \"rtl\"]}\n      setSelectedValue={setDirection}>\n      <View\n        style={[styles.box, { backgroundColor: \"powderblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"skyblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"steelblue\" }]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value && styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View style={[styles.container, { [label]: selectedValue }]}>\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n  },\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default DirectionLayout;\n```",
+      "source_content_hash": "5ff8872901e1f90dd6629d971f66188fe5299a90ba62f34e65fc77af5f3c9694",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c2db81f5",
+      "source_content": "## Justify Content",
+      "source_content_hash": "840f78008b3f94616629a64bb95ca9cf78d79800f224748f9fc2fb2215321938",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7eb5b32d",
+      "source_content": "[`justifyContent`](layout-props#justifycontent) describes how to align children within the main axis of their container. For example, you can use this property to center a child horizontally within a container with `flexDirection` set to `row` or vertically within a container with `flexDirection` set to `column`.",
+      "source_content_hash": "1ee3c058132b1f74ea44bdf7a78928a975e77dcee1bdb337e2334a5c5f184e45",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4c05eff6",
+      "source_content": "- `flex-start`(**default value**) Align children of a container to the start of the container's main axis.\n\n- `flex-end` Align children of a container to the end of the container's main axis.\n\n- `center` Align children of a container in the center of the container's main axis.\n\n- `space-between` Evenly space off children across the container's main axis, distributing the remaining space between the children.\n\n- `space-around` Evenly space off children across the container's main axis, distributing the remaining space around the children. Compared to `space-between`, using `space-around` will result in space being distributed to the beginning of the first child and end of the last child.\n\n- `space-evenly` Evenly distribute children within the alignment container along the main axis. The spacing between each pair of adjacent items, the main-start edge and the first item, and the main-end edge and the last item, are all exactly the same.",
+      "source_content_hash": "d66e4a85883a69a0d4ea3decb06800941d592fff60d5196270471176f8d6f12b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a01e2096",
+      "source_content": "You can learn more [here](https://www.yogalayout.dev/docs/styling/justify-content).",
+      "source_content_hash": "ffea2bc829be9a3d5c0b44d9a3cc30e745f09663ba0447c805b92c21fd0eec65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e029f808",
+      "source_content": "```SnackPlayer name=Justify%20Content\nimport React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\n\nconst JustifyContentBasics = () => {\n  const [justifyContent, setJustifyContent] = useState(\"flex-start\");\n\n  return (\n    <PreviewLayout\n      label=\"justifyContent\"\n      selectedValue={justifyContent}\n      values={[\n        \"flex-start\",\n        \"flex-end\",\n        \"center\",\n        \"space-between\",\n        \"space-around\",\n        \"space-evenly\",\n      ]}\n      setSelectedValue={setJustifyContent}\n    >\n      <View\n        style={[styles.box, { backgroundColor: \"powderblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"skyblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"steelblue\" }]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[styles.button, selectedValue === value && styles.selected]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value && styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View style={[styles.container, { [label]: selectedValue }]}>\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n  },\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default JustifyContentBasics;\n```",
+      "source_content_hash": "0256607158a648ff621aca45cb45f80caa9ae812229d134d4ef9fd9917f6dc6e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "81e59017",
+      "source_content": "## Align Items",
+      "source_content_hash": "4a257fc0b309880e9e3f4d32e5561e340d5d0f0698b72ad4af9b6c941190f9a0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ca714988",
+      "source_content": "[`alignItems`](layout-props#alignitems) describes how to align children along the cross axis of their container. It is very similar to `justifyContent` but instead of applying to the main axis, `alignItems` applies to the cross axis.",
+      "source_content_hash": "2b75409e3d026ddb305cd0dd98bdb2a3b69ef269b277fa4ea87a300bd6db24ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b7a56d1e",
+      "source_content": "- `stretch` (**default value**) Stretch children of a container to match the `height` of the container's cross axis.\n\n- `flex-start` Align children of a container to the start of the container's cross axis.\n\n- `flex-end` Align children of a container to the end of the container's cross axis.\n\n- `center` Align children of a container in the center of the container's cross axis.\n\n- `baseline` Align children of a container along a common baseline. Individual children can be set to be the reference baseline for their parents.",
+      "source_content_hash": "c0b59b55b33df64bca195a6ef000c076ec172c395839f1f91b573fe2004d87bf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bc5a2569",
+      "source_content": ":::info\nFor `stretch` to have an effect, children must not have a fixed dimension along the secondary axis. In the following example, setting `alignItems: stretch` does nothing until the `width: 50` is removed from the children.\n:::",
+      "source_content_hash": "e1b425c1e91099317e24dd288a7d908b13c719d10f54d2247d8de34a60fac858",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a5a5c34e",
+      "source_content": "You can learn more [here](https://www.yogalayout.dev/docs/styling/align-items-self).",
+      "source_content_hash": "a04e8895ef377f342175a6eae6224eef20f0ed452b136d32e86bfc4cb844cfb4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5ceeeefa",
+      "source_content": "```SnackPlayer name=Align%20Items\nimport React, { useState } from \"react\";\nimport {\n  View,\n  TouchableOpacity,\n  Text,\n  StyleSheet,\n} from \"react-native\";\n\nconst AlignItemsLayout = () => {\n  const [alignItems, setAlignItems] = useState(\"stretch\");\n\n  return (\n    <PreviewLayout\n      label=\"alignItems\"\n      selectedValue={alignItems}\n      values={[\n        \"stretch\",\n        \"flex-start\",\n        \"flex-end\",\n        \"center\",\n        \"baseline\",\n      ]}\n      setSelectedValue={setAlignItems}\n    >\n      <View\n        style={[styles.box, { backgroundColor: \"powderblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"skyblue\" }]}\n      />\n      <View\n        style={[\n          styles.box,\n          {\n            backgroundColor: \"steelblue\",\n            width: \"auto\",\n            minWidth: 50,\n          },\n        ]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value &&\n                styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View\n      style={[\n        styles.container,\n        { [label]: selectedValue },\n      ]}\n    >\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n    minHeight: 200,\n  },\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default AlignItemsLayout;\n```",
+      "source_content_hash": "c92aeddfd9e425d337452fa6b6fb97a2231e3cf0c1729a1d6b87d59e25d8074e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "db7cc96c",
+      "source_content": "## Align Self",
+      "source_content_hash": "ecdf1fe73b26ca53ae8c7b402251de8585b389387f753cacd134810827319db8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ab9fb328",
+      "source_content": "[`alignSelf`](layout-props#alignself) has the same options and effect as `alignItems` but instead of affecting the children within a container, you can apply this property to a single child to change its alignment within its parent. `alignSelf` overrides any option set by the parent with `alignItems`.",
+      "source_content_hash": "ba21022150698e23c7cc8ce61e760c45bfd29fcc0c9ea85fc964e3eb55d58b7b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e0c47761",
+      "source_content": "```SnackPlayer name=Align%20Self\nimport React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\n\nconst AlignSelfLayout = () => {\n  const [alignSelf, setAlignSelf] = useState(\"stretch\");\n\n  return (\n    <PreviewLayout\n      label=\"alignSelf\"\n      selectedValue={alignSelf}\n      values={[\"stretch\", \"flex-start\", \"flex-end\", \"center\", \"baseline\"]}\n      setSelectedValue={setAlignSelf}>\n        <View\n          style={[styles.box, {\n            alignSelf,\n            width: \"auto\",\n            minWidth: 50,\n            backgroundColor: \"powderblue\",\n          }]}\n        />\n      <View\n        style={[styles.box, { backgroundColor: \"skyblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"steelblue\" }]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value &&\n                styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View style={styles.container}>\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n    minHeight: 200,\n  },\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default AlignSelfLayout;\n```",
+      "source_content_hash": "ae2a97e17608b3b0082d66fef29816c64b16ad525cd55cc4f3cc785d2934fdfd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c1758d09",
+      "source_content": "## Align Content",
+      "source_content_hash": "9c03a57ec79e6466cf38530c8813f319f321f881ee383722ff113915c0bbdbf0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "18982b56",
+      "source_content": "[alignContent](layout-props#aligncontent) defines the distribution of lines along the cross-axis. This only has effect when items are wrapped to multiple lines using `flexWrap`.",
+      "source_content_hash": "9c3f0eeded83d4fff244c3334f1324a22e56d1c01cfb70efb367339059dbdad3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bbf872b0",
+      "source_content": "- `flex-start` (**default value**) Align wrapped lines to the start of the container's cross axis.\n\n- `flex-end` Align wrapped lines to the end of the container's cross axis.\n\n- `stretch` (_default value when using Yoga on the web_) Stretch wrapped lines to match the height of the container's cross axis.\n\n- `center` Align wrapped lines in the center of the container's cross axis.\n\n- `space-between` Evenly space wrapped lines across the container's cross axis, distributing the remaining space between the lines.\n\n- `space-around` Evenly space wrapped lines across the container's cross axis, distributing the remaining space around the lines. Compared to `space-between`, using `space-around` will result in space being distributed to the beginning of the first line and the end of the last line.",
+      "source_content_hash": "f0a5a547458014e698e07775c078660a7553a2504326294b770fdc437528282b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0e8d0733",
+      "source_content": "You can learn more [here](https://www.yogalayout.dev/docs/styling/align-content).",
+      "source_content_hash": "ef439615f2751ef8a572d88bb2aa794a7ab8f36e19a0463d5520209cef0b2944",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ddca8c8d",
+      "source_content": "```SnackPlayer name=Align%20Content\nimport React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\n\nconst AlignContentLayout = () => {\n  const [alignContent, setAlignContent] = useState(\"flex-start\");\n\n  return (\n    <PreviewLayout\n      label=\"alignContent\"\n      selectedValue={alignContent}\n      values={[\n        \"flex-start\",\n        \"flex-end\",\n        \"stretch\",\n        \"center\",\n        \"space-between\",\n        \"space-around\",\n      ]}\n      setSelectedValue={setAlignContent}>\n      <View\n        style={[styles.box, { backgroundColor: \"orangered\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"orange\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"mediumseagreen\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"deepskyblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"mediumturquoise\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"mediumslateblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"purple\" }]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value &&\n                styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View\n      style={[\n        styles.container,\n        { [label]: selectedValue },\n      ]}\n    >\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    flexWrap: \"wrap\",\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n    maxHeight: 400,\n  },\n  box: {\n    width: 50,\n    height: 80,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default AlignContentLayout;\n```",
+      "source_content_hash": "2729f69648aea29c060ba7b09335e56b1b5dcdd1d9b00c4281a8e59bbf8ff772",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "69b05245",
+      "source_content": "## Flex Wrap",
+      "source_content_hash": "ae598338f00b3983012e21fbf6ce0652cbfdae7d7d5574f8816ad992eb739c2c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "67245636",
+      "source_content": "The [`flexWrap`](layout-props#flexwrap) property is set on containers and it controls what happens when children overflow the size of the container along the main axis. By default, children are forced into a single line (which can shrink elements). If wrapping is allowed, items are wrapped into multiple lines along the main axis if needed.",
+      "source_content_hash": "1b2bc65b6fdbc3821bbb37700cbda31630d7bdcf2e9779eb9cd02bb7617a3f7b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5a832bdd",
+      "source_content": "When wrapping lines, `alignContent` can be used to specify how the lines are placed in the container. Learn more [here](https://www.yogalayout.dev/docs/styling/flex-wrap).",
+      "source_content_hash": "7c8111de27cdcba7a4ba95d26f88873e3ef7e2f518d894750074adade3ae61a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當需要換行時，可使用 `alignContent` 來指定行在容器中的排列方式。了解更多請參閱[這裡](https://www.yogalayout.dev/docs/styling/flex-wrap)。"
+      }
+    },
+    {
+      "segment_id": "20026f44",
+      "source_content": "```SnackPlayer name=Flex%20Wrap\nimport React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\n\nconst FlexWrapLayout = () => {\n  const [flexWrap, setFlexWrap] = useState(\"wrap\");\n\n  return (\n    <PreviewLayout\n      label=\"flexWrap\"\n      selectedValue={flexWrap}\n      values={[\"wrap\", \"nowrap\"]}\n      setSelectedValue={setFlexWrap}>\n      <View\n        style={[styles.box, { backgroundColor: \"orangered\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"orange\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"mediumseagreen\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"deepskyblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"mediumturquoise\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"mediumslateblue\" }]}\n      />\n      <View\n        style={[styles.box, { backgroundColor: \"purple\" }]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value &&\n                styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View\n      style={[\n        styles.container,\n        { [label]: selectedValue },\n      ]}\n    >\n      {children}\n    </View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n    maxHeight: 400,\n  },\n  box: {\n    width: 50,\n    height: 80,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default FlexWrapLayout;\n```",
+      "source_content_hash": "a24fcb7c72fe51952aa06267da1369aa4da747d6ed7e5b2dd5862d0075b7b92c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_20026f44"
+      }
+    },
+    {
+      "segment_id": "79d78c81",
+      "source_content": "## Flex Basis, Grow, and Shrink",
+      "source_content_hash": "8acecf6054c35b03920f4b8a6252a3a1e97a03254843bfc79319b34123224b1e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Flex Basis、Grow 與 Shrink"
+      }
+    },
+    {
+      "segment_id": "ae0ae37d",
+      "source_content": "- [`flexBasis`](layout-props#flexbasis) is an axis-independent way of providing the default size of an item along the main axis. Setting the `flexBasis` of a child is similar to setting the `width` of that child if its parent is a container with `flexDirection: row` or setting the `height` of a child if its parent is a container with `flexDirection: column`. The `flexBasis` of an item is the default size of that item, the size of the item before any `flexGrow` and `flexShrink` calculations are performed.\n\n- [`flexGrow`](layout-props#flexgrow) describes how any space within a container should be distributed among its children along the main axis. After laying out its children, a container will distribute any remaining space according to the flex grow values specified by its children.\n\n  `flexGrow` accepts any floating point value >= 0, with 0 being the default value. A container will distribute any remaining space among its children weighted by the children’s `flexGrow` values.\n\n- [`flexShrink`](layout-props#flexshrink) describes how to shrink children along the main axis in the case in which the total size of the children overflows the size of the container on the main axis. `flexShrink` is very similar to `flexGrow` and can be thought of in the same way if any overflowing size is considered to be negative remaining space. These two properties also work well together by allowing children to grow and shrink as needed.\n\n  `flexShrink` accepts any floating point value >= 0, with 0 being the default value (on the web, the default is 1). A container will shrink its children weighted by the children’s `flexShrink` values.",
+      "source_content_hash": "4bd11f9e54d5812c960cc17db89a887b12e2018f97d63bc4cae277e38ffbefb9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [`flexBasis`](layout-props#flexbasis) 是一種與軸向無關的方式，用於設定項目在主軸上的預設大小。設定子項目的 `flexBasis` 類似於在父容器為 `flexDirection: row` 時設定該子項目的 `width`，或在父容器為 `flexDirection: column` 時設定其 `height`。項目的 `flexBasis` 是該項目的預設大小，即在進行任何 `flexGrow` 和 `flexShrink` 計算之前的尺寸。\n\n- [`flexGrow`](layout-props#flexgrow) 描述了容器內沿主軸的剩餘空間應如何在其子項目之間分配。在佈局其子項目後，容器將根據子項目指定的 flex grow 值分配任何剩餘空間。\n\n  `flexGrow` 接受任何大於或等於 0 的浮點數值，預設值為 0。容器將根據子項目的 `flexGrow` 值加權分配剩餘空間。\n\n- [`flexShrink`](layout-props#flexshrink) 描述了當子項目在主軸上的總大小超出容器大小時，應如何沿主軸縮小子項目。`flexShrink` 與 `flexGrow` 非常相似，可以將任何溢出的空間視為負的剩餘空間來理解。這兩個屬性協同工作，允許子項目根據需要進行擴展和收縮。\n\n  `flexShrink` 接受任何大於或等於 0 的浮點數值，預設值為 0（在網頁上，預設值為 1）。容器將根據子項目的 `flexShrink` 值加權縮小子項目。"
+      }
+    },
+    {
+      "segment_id": "5f2b8c7c",
+      "source_content": "You can learn more [here](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink).",
+      "source_content_hash": "5458d253bbb99ff108a7c3fe9af852408e3428675a6bb8e21d1c51091f47425b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "了解更多請參閱[這裡](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink)。"
+      }
+    },
+    {
+      "segment_id": "bb8a0853",
+      "source_content": "```SnackPlayer name=Flex%20Basis%2C%20Grow%2C%20and%20Shrink\nimport React, { useState } from \"react\";\nimport {\n  View,\n  Text,\n  TextInput,\n  StyleSheet,\n} from \"react-native\";\n\nconst App = () => {\n  const [powderblue, setPowderblue] = useState({\n    flexGrow: 0,\n    flexShrink: 1,\n    flexBasis: \"auto\",\n  });\n  const [skyblue, setSkyblue] = useState({\n    flexGrow: 1,\n    flexShrink: 0,\n    flexBasis: 100,\n  });\n  const [steelblue, setSteelblue] = useState({\n    flexGrow: 0,\n    flexShrink: 1,\n    flexBasis: 200,\n  });\n  return (\n    <View style={styles.container}>\n      <View\n        style={[\n          styles.container,\n          {\n            flexDirection: \"row\",\n            alignContent: \"space-between\",\n          },\n        ]}\n      >\n        <BoxInfo\n          color=\"powderblue\"\n          {...powderblue}\n          setStyle={setPowderblue}\n        />\n        <BoxInfo\n          color=\"skyblue\"\n          {...skyblue}\n          setStyle={setSkyblue}\n        />\n        <BoxInfo\n          color=\"steelblue\"\n          {...steelblue}\n          setStyle={setSteelblue}\n        />\n      </View>\n      <View style={styles.previewContainer}>\n        <View\n          style={[\n            styles.box,\n            {\n              flexBasis: powderblue.flexBasis,\n              flexGrow: powderblue.flexGrow,\n              flexShrink: powderblue.flexShrink,\n              backgroundColor: \"powderblue\",\n            },\n          ]}\n        />\n        <View\n          style={[\n            styles.box,\n            {\n              flexBasis: skyblue.flexBasis,\n              flexGrow: skyblue.flexGrow,\n              flexShrink: skyblue.flexShrink,\n              backgroundColor: \"skyblue\",\n            },\n          ]}\n        />\n        <View\n          style={[\n            styles.box,\n            {\n              flexBasis: steelblue.flexBasis,\n              flexGrow: steelblue.flexGrow,\n              flexShrink: steelblue.flexShrink,\n              backgroundColor: \"steelblue\",\n            },\n          ]}\n        />\n      </View>\n    </View>\n  );\n};\n\nconst BoxInfo = ({\n  color,\n  flexBasis,\n  flexShrink,\n  setStyle,\n  flexGrow,\n}) => (\n  <View style={[styles.row, { flexDirection: \"column\" }]}>\n    <View\n      style={[\n        styles.boxLabel,\n        {\n          backgroundColor: color,\n        },\n      ]}\n    >\n      <Text\n        style={{\n          color: \"#fff\",\n          fontWeight: \"500\",\n          textAlign: \"center\",\n        }}\n      >\n        Box\n      </Text>\n    </View>\n    <Text style={styles.label}>flexBasis</Text>\n    <TextInput\n      value={flexBasis}\n      style={styles.input}\n      onChangeText={(fB) =>\n        setStyle((value) => ({\n          ...value,\n          flexBasis: isNaN(parseInt(fB))\n            ? \"auto\"\n            : parseInt(fB),\n        }))\n      }\n    />\n    <Text style={styles.label}>flexShrink</Text>\n    <TextInput\n      value={flexShrink}\n      style={styles.input}\n      onChangeText={(fS) =>\n        setStyle((value) => ({\n          ...value,\n          flexShrink: isNaN(parseInt(fS))\n            ? \"\"\n            : parseInt(fS),\n        }))\n      }\n    />\n    <Text style={styles.label}>flexGrow</Text>\n    <TextInput\n      value={flexGrow}\n      style={styles.input}\n      onChangeText={(fG) =>\n        setStyle((value) => ({\n          ...value,\n          flexGrow: isNaN(parseInt(fG))\n            ? \"\"\n            : parseInt(fG),\n        }))\n      }\n    />\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    paddingHorizontal: 10,\n  },\n  box: {\n    flex: 1,\n    height: 50,\n    width: 50,\n  },\n  boxLabel: {\n    minWidth: 80,\n    padding: 8,\n    borderRadius: 4,\n    marginTop: 8,\n  },\n  label: {\n    marginTop: 6,\n    fontSize: 16,\n    fontWeight: \"100\",\n  },\n  previewContainer: {\n    flex: 1,\n    flexDirection: \"row\",\n    backgroundColor: \"aliceblue\",\n  },\n  row: {\n    flex: 1,\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n    alignItems: \"center\",\n    marginBottom: 10,\n  },\n  input: {\n    borderBottomWidth: 1,\n    paddingVertical: 3,\n    width: 50,\n    textAlign: \"center\",\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "d511e44aa3f8bd0763e591dd06111d15e5985d88f404b5a23483577de611a17f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bb8a0853"
+      }
+    },
+    {
+      "segment_id": "ca673227",
+      "source_content": "## Width and Height",
+      "source_content_hash": "9abbaf8e3e1ca33cc2531be5a07ce1f4a30152e6c9ea262cf2c40404c9e93b70",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 寬度與高度"
+      }
+    },
+    {
+      "segment_id": "980acd92",
+      "source_content": "The `width` property specifies the width of an element's content area. Similarly, the `height` property specifies the height of an element's content area.",
+      "source_content_hash": "ba3f3f1f7e3896523edd822d9c66a32f6fcaec897cb423da503254b958cd0c99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`width` 屬性指定元素內容區域的寬度。類似地，`height` 屬性指定元素內容區域的高度。"
+      }
+    },
+    {
+      "segment_id": "2649696d",
+      "source_content": "Both `width` and `height` can take the following values:",
+      "source_content_hash": "ff802e94b2a831ade1b2bb0dae051600bbd034ffef6cb6dce953b980cd17c121",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`width` 和 `height` 可以接受以下值："
+      }
+    },
+    {
+      "segment_id": "7caee055",
+      "source_content": "- `auto` (**default value**) React Native calculates the width/height for the element based on its content, whether that is other children, text, or an image.\n\n- `pixels` Defines the width/height in absolute pixels. Depending on other styles set on the component, this may or may not be the final dimension of the node.\n\n- `percentage` Defines the width or height in percentage of its parent's width or height, respectively.",
+      "source_content_hash": "f1e38242231f2176e69efed4260cf9f104a0c1ea266388646468516d7e5c17d0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `auto`（**預設值**）React Native 會根據元素的內容（無論是其他子項目、文字還是圖片）計算其寬度/高度。\n\n- `pixels` 以絕對像素定義寬度/高度。根據組件上設置的其他樣式，這可能不是節點的最終尺寸。\n\n- `percentage` 以父項目寬度或高度的百分比定義寬度或高度。"
+      }
+    },
+    {
+      "segment_id": "593309f1",
+      "source_content": "```SnackPlayer name=Width%20and%20Height\nimport React, { useState } from \"react\";\nimport {\n  View,\n  SafeAreaView,\n  TouchableOpacity,\n  Text,\n  StyleSheet,\n} from \"react-native\";\n\nconst WidthHeightBasics = () => {\n  const [widthType, setWidthType] = useState(\"auto\");\n  const [heightType, setHeightType] = useState(\"auto\");\n\n  return (\n    <PreviewLayout\n      widthType={widthType}\n      heightType={heightType}\n      widthValues={[\"auto\", 300, \"80%\"]}\n      heightValues={[\"auto\", 200, \"60%\"]}\n      setWidthType={setWidthType}\n      setHeightType={setHeightType}\n    >\n      <View\n        style={{\n          alignSelf: \"flex-start\",\n          backgroundColor: \"aliceblue\",\n          height: heightType,\n          width: widthType,\n          padding: 15,\n        }}\n      >\n        <View\n          style={[\n            styles.box,\n            { backgroundColor: \"powderblue\" },\n          ]}\n        />\n        <View\n          style={[\n            styles.box,\n            { backgroundColor: \"skyblue\" },\n          ]}\n        />\n        <View\n          style={[\n            styles.box,\n            { backgroundColor: \"steelblue\" },\n          ]}\n        />\n      </View>\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  children,\n  widthType,\n  heightType,\n  widthValues,\n  heightValues,\n  setWidthType,\n  setHeightType,\n}) => (\n  <SafeAreaView style={{ flex: 1, padding: 10 }}>\n    <View style={styles.row}>\n      <Text style={styles.label}>width </Text>\n      {widthValues.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setWidthType(value)}\n          style={[\n            styles.button,\n            widthType === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              widthType === value && styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View style={styles.row}>\n      <Text style={styles.label}>height </Text>\n      {heightValues.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setHeightType(value)}\n          style={[\n            styles.button,\n            heightType === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              heightType === value && styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    {children}\n  </SafeAreaView>\n);\n\nconst styles = StyleSheet.create({\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    padding: 8,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginRight: 10,\n    marginBottom: 10,\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    shadowOpacity: 0,\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default WidthHeightBasics;\n```",
+      "source_content_hash": "4f0648ace752785f9e1a1740e0d57b4fe9b129195d0c5b594c53da0c7d8274da",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_593309f1"
+      }
+    },
+    {
+      "segment_id": "899e3814",
+      "source_content": "## Absolute & Relative Layout",
+      "source_content_hash": "275d4cb2b200784a38ceb1fd8e4b4599e5bab38290f7e3dff9dc48291b2d288f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 絕對與相對佈局"
+      }
+    },
+    {
+      "segment_id": "3f7bd67f",
+      "source_content": "The `position` type of an element defines how it is positioned within its parent.",
+      "source_content_hash": "e8373765b0cd584c0fa51b11684aabea5eddaa1b25280d9cd20e3e826d510ea5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "元素的 `position` 類型定義了其在父項目中的定位方式。"
+      }
+    },
+    {
+      "segment_id": "156e12ce",
+      "source_content": "- `relative` (**default value**) By default, an element is positioned relatively. This means an element is positioned according to the normal flow of the layout, and then offset relative to that position based on the values of `top`, `right`, `bottom`, and `left`. The offset does not affect the position of any sibling or parent elements.\n\n- `absolute` When positioned absolutely, an element doesn't take part in the normal layout flow. It is instead laid out independent of its siblings. The position is determined based on the `top`, `right`, `bottom`, and `left` values.",
+      "source_content_hash": "92734ce1f016dae867a704ac87910f9a8623405d576cb750d43667d3db01ed62",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `relative`（**預設值**）預設情況下，元素是相對定位的。這意味著元素根據佈局的正常流進行定位，然後根據 `top`、`right`、`bottom` 和 `left` 的值相對於該位置進行偏移。偏移不會影響任何兄弟或父項目的位置。\n\n- `absolute` 當元素絕對定位時，它不參與正常的佈局流。相反，它獨立於其兄弟項目進行佈局。位置由 `top`、`right`、`bottom` 和 `left` 的值決定。"
+      }
+    },
+    {
+      "segment_id": "039e0f6b",
+      "source_content": "```SnackPlayer name=Absolute%20%26%20Relative%20Layout\nimport React, { useState } from \"react\";\nimport {\n  View,\n  SafeAreaView,\n  TouchableOpacity,\n  Text,\n  StyleSheet,\n} from \"react-native\";\n\nconst PositionLayout = () => {\n  const [position, setPosition] = useState(\"relative\");\n\n  return (\n    <PreviewLayout\n      label=\"position\"\n      selectedValue={position}\n      values={[\"relative\", \"absolute\"]}\n      setSelectedValue={setPosition}\n    >\n      <View\n        style={[\n          styles.box,\n          {\n            top: 25,\n            left: 25,\n            position,\n            backgroundColor: \"powderblue\",\n          },\n        ]}\n      />\n      <View\n        style={[\n          styles.box,\n          {\n            top: 50,\n            left: 50,\n            position,\n            backgroundColor: \"skyblue\",\n          },\n        ]}\n      />\n      <View\n        style={[\n          styles.box,\n          {\n            top: 75,\n            left: 75,\n            position,\n            backgroundColor: \"steelblue\",\n          },\n        ]}\n      />\n    </PreviewLayout>\n  );\n};\n\nconst PreviewLayout = ({\n  label,\n  children,\n  values,\n  selectedValue,\n  setSelectedValue,\n}) => (\n  <View style={{ padding: 10, flex: 1 }}>\n    <Text style={styles.label}>{label}</Text>\n    <View style={styles.row}>\n      {values.map((value) => (\n        <TouchableOpacity\n          key={value}\n          onPress={() => setSelectedValue(value)}\n          style={[\n            styles.button,\n            selectedValue === value && styles.selected,\n          ]}\n        >\n          <Text\n            style={[\n              styles.buttonLabel,\n              selectedValue === value &&\n                styles.selectedLabel,\n            ]}\n          >\n            {value}\n          </Text>\n        </TouchableOpacity>\n      ))}\n    </View>\n    <View style={styles.container}>{children}</View>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    marginTop: 8,\n    backgroundColor: \"aliceblue\",\n    minHeight: 200,\n  },\n  box: {\n    width: 50,\n    height: 50,\n  },\n  row: {\n    flexDirection: \"row\",\n    flexWrap: \"wrap\",\n  },\n  button: {\n    paddingHorizontal: 8,\n    paddingVertical: 6,\n    borderRadius: 4,\n    backgroundColor: \"oldlace\",\n    alignSelf: \"flex-start\",\n    marginHorizontal: \"1%\",\n    marginBottom: 6,\n    minWidth: \"48%\",\n    textAlign: \"center\",\n  },\n  selected: {\n    backgroundColor: \"coral\",\n    borderWidth: 0,\n  },\n  buttonLabel: {\n    fontSize: 12,\n    fontWeight: \"500\",\n    color: \"coral\",\n  },\n  selectedLabel: {\n    color: \"white\",\n  },\n  label: {\n    textAlign: \"center\",\n    marginBottom: 10,\n    fontSize: 24,\n  },\n});\n\nexport default PositionLayout;\n```",
+      "source_content_hash": "1ca4006e29b85f3570c8431264701e404248910e0103b06cd643b9a2c8fd16cc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_039e0f6b"
+      }
+    },
+    {
+      "segment_id": "9b777749",
+      "source_content": "## Going Deeper",
+      "source_content_hash": "114681f45611e2d3608fc0c48990004df4456990bae7f0ce627ab9741a4a558d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 深入學習"
+      }
+    },
+    {
+      "segment_id": "74e45245",
+      "source_content": "Check out the interactive [yoga playground](https://www.yogalayout.dev/playground) that you can use to get a better understanding of flexbox.",
+      "source_content_hash": "c92df8d94f281ed6ad390e09dfc198b600d3ce2cb382d1620783cb4cfedb6dbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查看互動式的 [yoga playground](https://www.yogalayout.dev/playground)，以更深入理解 flexbox。"
+      }
+    },
+    {
+      "segment_id": "67816239",
+      "source_content": "We've covered the basics, but there are many other styles you may need for layouts. The full list of props that control layout is documented [here](./layout-props.md).",
+      "source_content_hash": "9c446e259e14cdebf77556ea06f4254694806509d2666f62d74a6cf73654b294",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已經涵蓋了基礎知識，但還有許多其他樣式可能需要用於佈局。控制佈局的完整屬性列表記錄在[這裡](./layout-props.md)。"
+      }
+    },
+    {
+      "segment_id": "b07eb24e",
+      "source_content": "Additionally, you can see some examples from [Wix Engineers](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c).",
+      "source_content_hash": "87f1ff7db5ecd3e2ca95e25e1cf669e041fb86634a28fe14ec7b800023f25612",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/flexbox.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.374160+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "15f6e9ca360ddd9c7b4d0d9aaa7827b87b22ea8650cb653e2ee9d748a4944924"
+  }
+}

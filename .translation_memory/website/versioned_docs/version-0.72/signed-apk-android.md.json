@@ -1,0 +1,562 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/signed-apk-android.md",
+  "source_file_content_hash": "ffeffcc07a5dcfb731875775eb9239b5890f4e856f375b707e7c54e1975a0fdc",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: signed-apk-android\ntitle: Publishing to Google Play Store\n---",
+      "source_content_hash": "e9961357cee4fecf541a783f41f0bf29b18c113b47297b47427a8ed50e6e8e0c",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Android requires that all apps be digitally signed with a certificate before they can be installed. In order to distribute your Android application via [Google Play store](https://play.google.com/store) it needs to be signed with a release key that then needs to be used for all future updates. Since 2017 it is possible for Google Play to manage signing releases automatically thanks to [App Signing by Google Play](https://developer.android.com/studio/publish/app-signing#app-signing-google-play) functionality. However, before your application binary is uploaded to Google Play it needs to be signed with an upload key. The [Signing Your Applications](https://developer.android.com/tools/publishing/app-signing.html) page on Android Developers documentation describes the topic in detail. This guide covers the process in brief, as well as lists the steps required to package the JavaScript bundle.",
+      "source_content_hash": "88299823d7df7c02ad1358b62c6567d5e177a43063f6a04d71a9855f94a8ac0f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 要求所有應用程式在安裝前都必須使用憑證進行數位簽署。若要透過 [Google Play 商店](https://play.google.com/store) 發佈您的 Android 應用程式，必須使用發布金鑰進行簽署，且後續所有更新都需使用同一金鑰。自 2017 年起，Google Play 可透過 [App Signing by Google Play](https://developer.android.com/studio/publish/app-signing#app-signing-google-play) 功能自動管理發布簽署。但在將應用程式二進位檔上傳至 Google Play 前，仍需使用上傳金鑰進行簽署。Android 開發者文件中的 [Signing Your Applications](https://developer.android.com/tools/publishing/app-signing.html) 頁面詳細說明了此主題。本指南將簡要介紹流程，並列出打包 JavaScript bundle 所需的步驟。"
+      }
+    },
+    {
+      "segment_id": "6cae1da3",
+      "source_content": ":::info\nIf you are using Expo, read the Expo guide for [Deploying to App Stores](https://docs.expo.dev/distribution/app-stores/) to build and submit your app for the Google Play Store. This guide works with any React Native app to automate the deployment process.\n:::",
+      "source_content_hash": "8c57ff4edaf388ef8028cdef99669891653a66b0b45f0ad3da79a1882a7732d9",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n若您使用 Expo，請參閱 Expo 的 [Deploying to App Stores](https://docs.expo.dev/distribution/app-stores/) 指南，以建置並提交應用程式至 Google Play 商店。本指南適用於任何 React Native 應用程式，可自動化部署流程。\n:::"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Generating an upload key",
+      "source_content_hash": "23ded6278b10c2b7be2901269128260a41b8b0f067a1d2ac511a35adf4b94d81",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 產生上傳金鑰"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "You can generate a private signing key using `keytool`.",
+      "source_content_hash": "f042b8dbdd66d8bedf2198f6c6850b01419950a6f55c5e166ddea623ff46d497",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以使用 `keytool` 產生私密簽署金鑰。"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### Windows",
+      "source_content_hash": "d058ae1f65b4dea63e068ea196d6658a15c9065b85332663fe24e97805dbe179",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Windows"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "On Windows `keytool` must be run from `C:\\Program Files\\Java\\jdkx.x.x_x\\bin`, as administrator.",
+      "source_content_hash": "987906f43e636430d0a198179817cc737ded8227406086023abca65957ab2b19",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Windows 上，必須以管理員身分從 `C:\\Program Files\\Java\\jdkx.x.x_x\\bin` 執行 `keytool`。"
+      }
+    },
+    {
+      "segment_id": "9eee5787",
+      "source_content": "```shell\nkeytool -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000\n```",
+      "source_content_hash": "0995be42a65654ddf5046d07f1f9c9d643f82f4bc5056aafe207f18256f092cc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9eee5787"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "This command prompts you for passwords for the keystore and key and for the Distinguished Name fields for your key. It then generates the keystore as a file called `my-upload-key.keystore`.",
+      "source_content_hash": "d6ece9fbb247b96836f5537ed4e515d5355202a30d6a4b06296f6af20b14f4a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此命令會提示您輸入金鑰庫和金鑰的密碼，以及金鑰的 Distinguished Name 欄位。接著會產生名為 `my-upload-key.keystore` 的金鑰庫檔案。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "The keystore contains a single key, valid for 10000 days. The alias is a name that you will use later when signing your app, so remember to take note of the alias.",
+      "source_content_hash": "fac64949044e651c106dbe3f7a9700bdd9b091bfeaf00a9b5a6c0c9fb5dbf76d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該金鑰庫包含單一金鑰，有效期為 10000 天。別名是您後續簽署應用程式時使用的名稱，請務必記下此別名。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### macOS",
+      "source_content_hash": "20ecfa0f6df2c4a55a6438bad9c65a8a8c14548b804b59e65bfd94c5a9ec714f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### macOS"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "On macOS, if you're not sure where your JDK bin folder is, then perform the following command to find it:",
+      "source_content_hash": "d006dcda8ca57252e9613e9bcf26eff9193041e1a524bb39c535902a0913e5a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 macOS 上，若不確定 JDK bin 資料夾的位置，可執行以下命令查詢："
+      }
+    },
+    {
+      "segment_id": "6543a19e",
+      "source_content": "```shell\n/usr/libexec/java_home\n```",
+      "source_content_hash": "b0c4626f56bdd340064c6f92672e12acaf1df6f0288d1ef7405416d0a935ac4a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6543a19e"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "It will output the directory of the JDK, which will look something like this:",
+      "source_content_hash": "5cee194a01b2791f437b0078893d57e45b387720e3f05b4f161918d4dddf8c28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "命令會輸出 JDK 的目錄路徑，格式類似："
+      }
+    },
+    {
+      "segment_id": "a11df754",
+      "source_content": "```shell\n/Library/Java/JavaVirtualMachines/jdkX.X.X_XXX.jdk/Contents/Home\n```",
+      "source_content_hash": "b04df703d7a7d85cc26e8012631dea534164255ae7a58d286adbbfa31a4013f2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a11df754"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "Navigate to that directory by using the command `cd /your/jdk/path` and use the keytool command with sudo permission as shown below.",
+      "source_content_hash": "ff27ab7e6e5b1396b62a797aefd18d27a4db60eff92a2aa8245a124fbc236fc5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `cd /your/jdk/path` 命令切換至該目錄，並以 sudo 權限執行如下所示的 keytool 命令。"
+      }
+    },
+    {
+      "segment_id": "4ec2920d",
+      "source_content": "```shell\nsudo keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000\n```",
+      "source_content_hash": "1f68830d7371bcd5dfb10495d251a6bbdacf00b2aea3f21048058ac1e972036e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4ec2920d"
+      }
+    },
+    {
+      "segment_id": "7d0728d9",
+      "source_content": ":::caution\nRemember to keep the keystore file private. In case you've lost upload key or it's been compromised you should [follow these instructions](https://support.google.com/googleplay/android-developer/answer/7384423#reset).\n:::",
+      "source_content_hash": "55529bc8fe33729b2cfacf43fa40e621bd5cd807f39afafe17010ecf689f0428",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution\n請妥善保管金鑰庫檔案。若遺失上傳金鑰或金鑰遭洩露，應 [遵循這些指示](https://support.google.com/googleplay/android-developer/answer/7384423#reset) 進行重置。\n:::"
+      }
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "## Setting up Gradle variables",
+      "source_content_hash": "f614b1424eaf5b6eeb650e95b1b6a86eb22d5d15549e8adaebc1c45d7df009bd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 設定 Gradle 變數"
+      }
+    },
+    {
+      "segment_id": "9b797309",
+      "source_content": "1. Place the `my-upload-key.keystore` file under the `android/app` directory in your project folder.\n2. Edit the file `~/.gradle/gradle.properties` or `android/gradle.properties`, and add the following (replace `*****` with the correct keystore password, alias and key password),",
+      "source_content_hash": "35acf1f6bd3f8c99cca1f76b7eca185d4aa48f76960ffa308ba4fbb720c81f24",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 將 `my-upload-key.keystore` 檔案置於專案目錄的 `android/app` 資料夾下。\n2. 編輯 `~/.gradle/gradle.properties` 或 `android/gradle.properties` 檔案，並加入以下內容（將 `*****` 替換為正確的金鑰庫密碼、別名和金鑰密碼）："
+      }
+    },
+    {
+      "segment_id": "6d254e09",
+      "source_content": "```\nMYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore\nMYAPP_UPLOAD_KEY_ALIAS=my-key-alias\nMYAPP_UPLOAD_STORE_PASSWORD=*****\nMYAPP_UPLOAD_KEY_PASSWORD=*****\n```",
+      "source_content_hash": "68c0d1e11b094d0837838e1e20b2a4f5ce0119f864e1908bfa0b79f7d0f71ddb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6d254e09"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "These are going to be global Gradle variables, which we can later use in our Gradle config to sign our app.",
+      "source_content_hash": "0768bd2d85234161dc7ecb7231c83e07d29ad1039a21122103a0caeeb3ec0b20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些將成為全域 Gradle 變數，後續我們可在 Gradle 配置中用於簽署應用程式。"
+      }
+    },
+    {
+      "segment_id": "fc8cba88",
+      "source_content": ":::note[Note about using git]\nSaving the above Gradle variables in `~/.gradle/gradle.properties` instead of `android/gradle.properties` prevents them from being checked in to git. You may have to create the `~/.gradle/gradle.properties` file in your user's home directory before you can add the variables.\n:::",
+      "source_content_hash": "cbfcdf21a03b0809d5e104a2cafe3272a1f707ef0cb4c41cff59217d2edf437a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[關於 git 使用的注意事項]\n將上述 Gradle 變數儲存在 `~/.gradle/gradle.properties` 而非 `android/gradle.properties` 中，可避免其被提交至 git。您可能需在使用者主目錄中建立 `~/.gradle/gradle.properties` 檔案後才能新增變數。\n:::"
+      }
+    },
+    {
+      "segment_id": "c1d6a7ca",
+      "source_content": ":::note[Note about security]\nIf you are not keen on storing your passwords in plaintext, and you are running macOS, you can also [store your credentials in the Keychain Access app](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/). Then you can skip the two last rows in `~/.gradle/gradle.properties`.\n:::",
+      "source_content_hash": "a60604fd53861f851f494d7e12a35f08ac581c2e7b3a77fadfd02f844d0531b6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[關於安全性的注意事項]\n若不願以明文儲存密碼且使用 macOS，可 [將憑證儲存在 Keychain Access 應用程式](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/) 中。如此便可省略 `~/.gradle/gradle.properties` 中的最後兩行。\n:::"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "## Adding signing config to your app's Gradle config",
+      "source_content_hash": "1409274384d9cac4c25635f7e5f63012a7257ef21c18188480fd9fc5f163a80b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將簽署配置新增至應用程式的 Gradle 配置"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "The last configuration step that needs to be done is to setup release builds to be signed using upload key. Edit the file `android/app/build.gradle` in your project folder, and add the signing config,",
+      "source_content_hash": "b39d08f05d940a0177bc6cea7de9c14fc7109abc07fe960d8c50831f5a6fa9f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一個需要完成的配置步驟是設定使用上傳金鑰簽署正式版建置。編輯專案目錄中的 `android/app/build.gradle` 檔案，並加入簽署配置："
+      }
+    },
+    {
+      "segment_id": "7b2110d8",
+      "source_content": "```groovy\n...\nandroid {\n    ...\n    defaultConfig { ... }\n    signingConfigs {\n        release {\n            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {\n                storeFile file(MYAPP_UPLOAD_STORE_FILE)\n                storePassword MYAPP_UPLOAD_STORE_PASSWORD\n                keyAlias MYAPP_UPLOAD_KEY_ALIAS\n                keyPassword MYAPP_UPLOAD_KEY_PASSWORD\n            }\n        }\n    }\n    buildTypes {\n        release {\n            ...\n            signingConfig signingConfigs.release\n        }\n    }\n}\n...\n```",
+      "source_content_hash": "c8259a433dae8c8260bb02b7621edf3f59bf5dcbe1998ebf5f24e48c99acea4f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7b2110d8"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "## Generating the release AAB",
+      "source_content_hash": "1cf35a0ecb0f882b6691b91ec301addb68b8d0a2fc761e8c099823e1e7505b66",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 產生正式版 AAB"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Run the following command in a terminal:",
+      "source_content_hash": "cfdc40abdb27570386210f4f21263aadc8be3dad6439358c289bf03e554de76f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在終端機中執行以下指令："
+      }
+    },
+    {
+      "segment_id": "c9873cf8",
+      "source_content": "```shell\nnpx react-native build-android --mode=release\n```",
+      "source_content_hash": "45caacf55dc52a92a20758d1d97e6b385643e5e96d0c14b060c308a918e6b2b0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9873cf8"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "This command uses Gradle's `bundleRelease` under the hood that bundles all the JavaScript needed to run your app into the AAB ([Android App Bundle](https://developer.android.com/guide/app-bundle)). If you need to change the way the JavaScript bundle and/or drawable resources are bundled (e.g. if you changed the default file/folder names or the general structure of the project), have a look at `android/app/build.gradle` to see how you can update it to reflect these changes.",
+      "source_content_hash": "7cf099d198185981814b402d087b965dd1cc930e2b7d86813219d56b40ed2780",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此指令底層使用 Gradle 的 `bundleRelease` 任務，會將應用程式執行所需的所有 JavaScript 程式碼打包至 AAB ([Android App Bundle](https://developer.android.com/guide/app-bundle))。若需調整 JavaScript 套件或繪圖資源的打包方式（例如變更預設檔案/資料夾名稱或專案結構），請參閱 `android/app/build.gradle` 檔案以進行相應修改。"
+      }
+    },
+    {
+      "segment_id": "da9f1cf7",
+      "source_content": ":::note\nMake sure `gradle.properties` does not include `org.gradle.configureondemand=true` as that will make the release build skip bundling JS and assets into the app binary.\n:::",
+      "source_content_hash": "1cc76e7a893e71161896adb2b2522fc2322ac6f7c9086375fe4096d51d2a4269",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n請確認 `gradle.properties` 未包含 `org.gradle.configureondemand=true`，否則正式版建置會跳過將 JS 與資源打包至應用程式二進位檔的步驟。\n:::"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "The generated AAB can be found under `android/app/build/outputs/bundle/release/app-release.aab`, and is ready to be uploaded to Google Play.",
+      "source_content_hash": "c5846eb933731f11d1d70c1d2100f812c07d7d03c91eb9ec53b402c9ddccc741",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "產生的 AAB 檔案位於 `android/app/build/outputs/bundle/release/app-release.aab`，可直接上傳至 Google Play。"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "In order for Google Play to accept AAB format the App Signing by Google Play needs to be configured for your application on the Google Play Console. If you are updating an existing app that doesn't use App Signing by Google Play, please check our [migration section](#migrating-old-android-react-native-apps-to-use-app-signing-by-google-play) to learn how to perform that configuration change.",
+      "source_content_hash": "4223a0e2f8003988b462a8fd05477a4256d78f751e848e9e1cced165fbe06694",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Google Play 需為您的應用程式在 Google Play 控制台啟用「Google Play 應用程式簽署」功能才能接受 AAB 格式。若您要更新未使用此功能的現有應用程式，請參閱我們的[遷移章節](#migrating-old-android-react-native-apps-to-use-app-signing-by-google-play)了解如何進行配置變更。"
+      }
+    },
+    {
+      "segment_id": "b9b8694c",
+      "source_content": "## Testing the release build of your app",
+      "source_content_hash": "5cd231ad1216201e9abaccab7c3e0f0405a8eb0d31bddf8e42c5681719ad908f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 測試應用程式正式版"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "Before uploading the release build to the Play Store, make sure you test it thoroughly. First uninstall any previous version of the app you already have installed. Install it on the device using the following command in the project root:",
+      "source_content_hash": "7f787aca2e1a1ea1d591cf8d7c1c810e95fa3b60b975639595aebc9412849091",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將正式版上傳至 Play 商店前，請務必徹底測試。先解除安裝裝置上所有舊版應用程式，接著在專案根目錄執行以下指令進行安裝："
+      }
+    },
+    {
+      "segment_id": "a80fd598",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm run android -- --mode=\"release\"\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn android --mode release\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "bb8bd968b7aa2869dd7a9199f3b8d70527d83bc945bafaefcdb2034abcb9a05e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a80fd598"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "Note that `--mode release` is only available if you've set up signing as described above.",
+      "source_content_hash": "0532a4bc0fb1e121cb24db229a2874d6fdbf8571e1b0d7211efbdd78eea4f2b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意：僅有當您完成上述簽署設定後，才能使用 `--mode release` 參數。"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "You can terminate any running bundler instances, since all your framework and JavaScript code is bundled in the APK's assets.",
+      "source_content_hash": "4932124db6bbb09dbfb779bdc64bcb0e34d999391f2e37fb7db904410d4dc6dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以終止所有正在執行的打包程序，因為所有框架與 JavaScript 程式碼都已打包至 APK 的資源中。"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "## Publishing to other stores",
+      "source_content_hash": "7206178a09ebcd3b11b0e57cf6ff2db903fb8b33e6a7a47f2aad9e1e282755fc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 發布至其他商店"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "By default, the generated APK has the native code for both `x86`, `x86_64`, `ARMv7a` and `ARM64-v8a` CPU architectures. This makes it easier to share APKs that run on almost all Android devices. However, this has the downside that there will be some unused native code on any device, leading to unnecessarily bigger APKs.",
+      "source_content_hash": "1c1044eb6a3767e677e147f2d1b055918c58ef7f311795f8876314e191966484",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設產生的 APK 包含 `x86`、`x86_64`、`ARMv7a` 和 `ARM64-v8a` 四種 CPU 架構的原生程式碼，這使得單一 APK 能在多數 Android 裝置上執行。但此做法會導致裝置上存在未使用的原生程式碼，造成 APK 體積不必要地增大。"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "You can create an APK for each CPU by adding the following line in your `android/app/build.gradle` file:",
+      "source_content_hash": "c99e9d673376912774b3036181d25c2237b31c43f4c31e6f8f40ddbdf43f45da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 `android/app/build.gradle` 檔案中加入以下設定，為每種 CPU 架構產生獨立 APK："
+      }
+    },
+    {
+      "segment_id": "5d30fd9b",
+      "source_content": "```diff\nandroid {\n\n    splits {\n        abi {\n            reset()\n            enable true\n            universalApk false\n            include \"armeabi-v7a\", \"arm64-v8a\", \"x86\", \"x86_64\"\n        }\n    }\n\n}\n```",
+      "source_content_hash": "7dd4cc6318fb8e4809a486164ad8af784035c667352e16f8e3ceb0902d99a6fa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5d30fd9b"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "Upload these files to markets which support device targeting, such as [Amazon AppStore](https://developer.amazon.com/docs/app-submission/device-filtering-and-compatibility.html) or [F-Droid](https://f-droid.org/en/), and the users will automatically get the appropriate APK. If you want to upload to other markets, such as [APKFiles](https://www.apkfiles.com/), which do not support multiple APKs for a single app, change the `universalApk false` line to `true` to create the default universal APK with binaries for both CPUs.",
+      "source_content_hash": "a1d4656aadaaf33c5717ce08798ff786887a3006d63d8d29d300dafe0486286f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將這些檔案上傳至支援裝置篩選的商店（如 [Amazon AppStore](https://developer.amazon.com/docs/app-submission/device-filtering-and-compatibility.html) 或 [F-Droid](https://f-droid.org/en/)），使用者將自動取得對應的 APK。若需上傳至其他不支援多 APK 的商店（如 [APKFiles](https://www.apkfiles.com/)），請將 `universalApk false` 改為 `true` 以產生包含所有 CPU 架構的通用 APK。"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "Please note that you will also have to configure distinct version codes, as [suggested in this page](https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions) from the official Android documentation.",
+      "source_content_hash": "e4575bfbd6aa81f379c914a580462381b436b4d1b80b96aa4df90bbcda3a855a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，您還需依照 [Android 官方文件建議](https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions) 設定不同的版本代碼。"
+      }
+    },
+    {
+      "segment_id": "6ffd1ebe",
+      "source_content": "## Enabling Proguard to reduce the size of the APK (optional)",
+      "source_content_hash": "3951a87ff921e33a02773ebbdad28bdbcaaf032a4b103e17d79ce4879346c35d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 啟用 Proguard 縮減 APK 體積（選用）"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "Proguard is a tool that can slightly reduce the size of the APK. It does this by stripping parts of the React Native Java bytecode (and its dependencies) that your app is not using.",
+      "source_content_hash": "10596fc8eaf72e3e19761af7cfbe3607ddb331a1ba411e79981117ae5a2c6bda",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Proguard 工具能透過移除 React Native Java 位元碼（及其依賴庫）中未使用的部分，略微縮減 APK 體積。"
+      }
+    },
+    {
+      "segment_id": "b826038b",
+      "source_content": ":::caution[Important]\nMake sure to thoroughly test your app if you've enabled Proguard. Proguard often requires configuration specific to each native library you're using. See `app/proguard-rules.pro`.\n:::",
+      "source_content_hash": "d9288d9777cf69defbba2fde62119a402e6d5d09c4d546707d4d0a377db4c992",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution[重要]\n啟用 Proguard 後請務必徹底測試應用程式。Proguard 通常需針對每個原生函式庫進行特定配置，請參閱 `app/proguard-rules.pro`。\n:::"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "To enable Proguard, edit `android/app/build.gradle`:",
+      "source_content_hash": "57c3bac17f4143d6d3b194e4a921238d20bafb744ddc01ed739f36810d11ac38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要啟用 Proguard，請編輯 `android/app/build.gradle`："
+      }
+    },
+    {
+      "segment_id": "b26685f5",
+      "source_content": "```groovy\n/**\n * Run Proguard to shrink the Java bytecode in release builds.\n */\ndef enableProguardInReleaseBuilds = true\n```",
+      "source_content_hash": "44369015ce88fbb4606e1bd566232fac1744adb141743b5568ffdfb76e7d3d22",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b26685f5"
+      }
+    },
+    {
+      "segment_id": "4b62f7d8",
+      "source_content": "## Migrating old Android React Native apps to use App Signing by Google Play",
+      "source_content_hash": "cd4f1bde6e60936d4f6354b0fd6eb5b52c5014c3f87065b82f282f6d90135142",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將舊版 Android React Native 應用遷移至使用 Google Play 應用簽署"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "If you are migrating from previous version of React Native chances are your app does not use App Signing by Google Play feature. We recommend you enable that in order to take advantage from things like automatic app splitting. In order to migrate from the old way of signing you need to start by [generating new upload key](#generating-an-upload-key) and then replacing release signing config in `android/app/build.gradle` to use the upload key instead of the release one (see section about [adding signing config to gradle](#adding-signing-config-to-your-apps-gradle-config)). Once that's done you should follow the [instructions from Google Play Help website](https://support.google.com/googleplay/android-developer/answer/7384423) in order to send your original release key to Google Play.",
+      "source_content_hash": "3f46be9486e3c6ed3d4461291f81429041aea292a9ec9241f9121b49cc39fb90",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您正在從舊版 React Native 遷移，您的應用很可能尚未使用 Google Play 應用簽署功能。我們建議您啟用此功能以利用自動應用拆分等優勢。要從舊版簽署方式遷移，您需要先[生成新的上傳金鑰](#generating-an-upload-key)，然後將 `android/app/build.gradle` 中的發佈簽署配置替換為使用上傳金鑰而非發佈金鑰（參見[將簽署配置添加到應用的 Gradle 配置](#adding-signing-config-to-your-apps-gradle-config)一節）。完成後，請按照 [Google Play 幫助網站上的指示](https://support.google.com/googleplay/android-developer/answer/7384423)將您的原始發佈金鑰發送給 Google Play。"
+      }
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "## Default Permissions",
+      "source_content_hash": "404a1ba22463a740933768d2513cf6a8b2547a504d9f1bd1d5fec84c5cd5ee81",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 預設權限"
+      }
+    },
+    {
+      "segment_id": "af016b8e",
+      "source_content": "By default, `INTERNET` permission is added to your Android app as pretty much all apps use it. `SYSTEM_ALERT_WINDOW` permission is added to your Android APK in debug mode but it will be removed in production.",
+      "source_content_hash": "64fbfe70ae148a6e88467a509f8e14d95fa6aad05a8836a14526df69f7a68f4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，`INTERNET` 權限會被添加到您的 Android 應用中，因為幾乎所有應用都會使用它。`SYSTEM_ALERT_WINDOW` 權限會在除錯模式下添加到您的 Android APK 中，但在生產環境中會被移除。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/signed-apk-android.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.407443+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ffeffcc07a5dcfb731875775eb9239b5890f4e856f375b707e7c54e1975a0fdc"
+  }
+}

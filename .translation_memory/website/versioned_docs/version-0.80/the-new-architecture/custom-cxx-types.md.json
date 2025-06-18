@@ -1,0 +1,672 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/the-new-architecture/custom-cxx-types.md",
+  "source_file_content_hash": "190d1250d00a0deb304a2d908053819e817a96a4f36c449d987e359f779bace8",
+  "segments": [
+    {
+      "segment_id": "a9b642df",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9b642df"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "# Advanced: Custom C++ Types",
+      "source_content_hash": "2d2026737566ad47ab1ad40764ac7b29b11c17a8af71a083163e5c279dc7a297",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 進階：自訂 C++ 型別"
+      }
+    },
+    {
+      "segment_id": "8218387e",
+      "source_content": ":::note\nThis guide assumes that you are familiar with the [**Pure C++ Turbo Native Modules**](pure-cxx-modules.md) guide. This will build on top of that guide.\n:::",
+      "source_content_hash": "9492eeb944073043fa68bf4d02861523249a70ebc8b732305c736c0aa9eeb705",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n本指南假設您已熟悉[**純 C++ Turbo 原生模組**](pure-cxx-modules.md)指南。本文將在此基礎上進一步延伸。\n:::"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "C++ Turbo Native Modules support [bridging functionality](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging) for most `std::` standard types. You can use most of those types in your modules without any additional code required.",
+      "source_content_hash": "eb6b2149c6b3f6f93f7a4f0b108a2db7ba9d7f0f6a579d3eabd22f2a5d69427a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "C++ Turbo 原生模組支援對大多數 `std::` 標準型別的[橋接功能](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging)。您可以在模組中直接使用這些型別，無需額外編寫程式碼。"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "If you want to add support for new and custom types in your app or library, you need to provide the necessary `bridging` header file.",
+      "source_content_hash": "c115abe3d0c6bd8ab2f0b1abf3d58670defc09d4f098f41ca4370171a6397e75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若需在應用程式或函式庫中新增自訂型別支援，您必須提供對應的 `bridging` 標頭檔案。"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Adding a New Custom: Int64",
+      "source_content_hash": "8cf8874838ade1a2bb89684b19d30af8593dd5f264217cba96a9f7b219b6acea",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 新增自訂型別：Int64"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "C++ Turbo Native Modules don't support `int64_t` numbers yet - because JavaScript doesn't support numbers greater 2^53. To represent numbers greater than 2^53, we can use a `string` type in JS and automatically convert it to `int64_t` in C++.",
+      "source_content_hash": "b8a30e93f451b676fda7cddaca2dc32c69484a309fefaf263e7bb58101fc165c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於 JavaScript 不支援大於 2^53 的數字，C++ Turbo 原生模組目前尚未支援 `int64_t` 型別。我們可以在 JS 端使用 `string` 型別表示大數字，並在 C++ 端自動轉換為 `int64_t`。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### 1. Create the Bridging Header file",
+      "source_content_hash": "a64fd3ab051320b1d95acb030bb5c55b02aec72b129906a1844acef6f354520f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 建立橋接標頭檔案"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "The first step to support a new custom type is to define the bridging header that takes care of converting the type **from** the JS representation to the C++ representation, and from the C++ representation **to** the JS one.",
+      "source_content_hash": "990e7cb216bef7211894d544653bbb249ca308c5216290dd9ecf503e6c8c7a5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支援新自訂型別的第一步，是定義負責將型別從 JS 表示法轉換為 C++ 表示法（以及反向轉換）的橋接標頭。"
+      }
+    },
+    {
+      "segment_id": "0787cf7f",
+      "source_content": "1. In the `shared` folder, add a new file called `Int64.h`\n2. Add the following code to that file:",
+      "source_content_hash": "f351ca6fbc2ba4969cd06a65bb274181f3382dfa71d64b97daddb66573be784e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在 `shared` 資料夾中新增名為 `Int64.h` 的檔案\n2. 將以下程式碼加入該檔案："
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```cpp title=\"Int64.h\"\n#pragma once\n\n#include <react/bridging/Bridging.h>\n\nnamespace facebook::react {\n\ntemplate <>\nstruct Bridging<int64_t> {\n  // Converts from the JS representation to the C++ representation\n  static int64_t fromJs(jsi::Runtime &rt, const jsi::String &value) {\n    try {\n      size_t pos;\n      auto str = value.utf8(rt);\n      auto num = std::stoll(str, &pos);\n      if (pos != str.size()) {\n        throw std::invalid_argument(\"Invalid number\"); // don't support alphanumeric strings\n      }\n      return num;\n    } catch (const std::logic_error &e) {\n      throw jsi::JSError(rt, e.what());\n    }\n  }\n\n  // Converts from the C++ representation to the JS representation\n  static jsi::String toJs(jsi::Runtime &rt, int64_t value) {\n    return bridging::toJs(rt, std::to_string(value));\n  }\n};\n\n}\n```",
+      "source_content_hash": "3d61ea4fc10d068b7ef1a1095ee2b87136ec0b7976e1aec01dfa048e7f321bf2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "The key components for your custom bridging header are:",
+      "source_content_hash": "e204cafe01e62996adc320c0ba4586016e9a44abf48d6969ee5bdfe89b7cfe47",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自訂橋接標頭的關鍵組件包括："
+      }
+    },
+    {
+      "segment_id": "30193704",
+      "source_content": "- Explicit specialization of the `Bridging` struct for your custom type. In this case, the template specify the `int64_t` type.\n- A `fromJs` function to convert from the JS representation to the C++ representation\n- A `toJs` function to convert from the C++ representation to the JS representation",
+      "source_content_hash": "76a4bc97edd86fcf03722361881380ce45f4bc06b1c89c75616f1fa1bde55d55",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 為自訂型別明確特化的 `Bridging` 結構體（此處模板指定 `int64_t` 型別）\n- 將 JS 表示法轉換為 C++ 表示法的 `fromJs` 函式\n- 將 C++ 表示法轉換為 JS 表示法的 `toJs` 函式"
+      }
+    },
+    {
+      "segment_id": "3a4225d7",
+      "source_content": ":::note\nOn iOS, remember to add the `Int64.h` file to the Xcode project.\n:::",
+      "source_content_hash": "32b93aa66dc9e5aec5318b5e38c925819278bb3cedece6b32d6b55e646ab0579",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n在 iOS 平台，請記得將 `Int64.h` 檔案加入 Xcode 專案。\n:::"
+      }
+    },
+    {
+      "segment_id": "a5a4323e",
+      "source_content": "### 2. Modify the JS Spec",
+      "source_content_hash": "32f55123fadcb3e43709ba25880650766249826d2a23773d2d9e2d618eb24e47",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 修改 JS 規格"
+      }
+    },
+    {
+      "segment_id": "657c2b20",
+      "source_content": "Now, we can modify the JS spec to add a method that uses the new type. As usual, we can use either Flow or TypeScript for our specs.",
+      "source_content_hash": "633213b97de0f6b04a5cd91bc8cdd17ecc33adcc81d2fd37eff04c2011036a27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著我們可以修改 JS 規格，新增使用此型別的方法。與往常一樣，我們可以使用 Flow 或 TypeScript 撰寫規格。"
+      }
+    },
+    {
+      "segment_id": "af6ca965",
+      "source_content": "1. Open the `specs/NativeSampleTurbomodule`\n2. Modify the spec as follows:",
+      "source_content_hash": "86e0945dcb10ee0c50d7944b17889a8b854adb2e7314cdc58dcfc9a00ac56bda",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `specs/NativeSampleTurbomodule`\n2. 按以下方式修改規格："
+      }
+    },
+    {
+      "segment_id": "68209f5c",
+      "source_content": "<Tabs groupId=\"custom-int64\" queryString defaultValue={constants.defaultJavaScriptSpecLanguages} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\n```diff title=\"NativeSampleModule.ts\"\nimport {TurboModule, TurboModuleRegistry} from 'react-native';\n\nexport interface Spec extends TurboModule {\n  readonly reverseString: (input: string) => string;\n+  readonly cubicRoot: (input: string) => number;\n}\n\nexport default TurboModuleRegistry.getEnforcing<Spec>(\n  'NativeSampleModule',\n);\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\n```diff title=\"NativeSampleModule.js\"\n// @flow\nimport type {TurboModule} from 'react-native';\nimport { TurboModuleRegistry } from \"react-native\";\n\nexport interface Spec extends TurboModule {\n  +reverseString: (input: string) => string;\n+  +cubicRoot: (input: string) => number;\n}\n\nexport default (TurboModuleRegistry.getEnforcing<Spec>(\n  \"NativeSampleModule\"\n): Spec);\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b61ef3568a1d5366660ccf6513c5facb494b5684a939f8ddfa7c32acc6589361",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_68209f5c"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "In this files, we are defining the function that needs to be implemented in C++.",
+      "source_content_hash": "1ab004eba83298000892d2ec305a3b681386f0db3dd8f630a4aaa8af353d8129",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此檔案中我們定義了需要在 C++ 實作的函式。"
+      }
+    },
+    {
+      "segment_id": "8574d51c",
+      "source_content": "### 3. Implement the Native Code",
+      "source_content_hash": "6be0598677c471290087112736f2da9ed43ed48dc93ebe74da7924f538e52d1e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 實作原生程式碼"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "Now, we need to implement the function that we declared in the JS specification.",
+      "source_content_hash": "4a5f88d42de5ac2fb115ade3c33801a23c810df8b902847804e1eb751b317c4b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們需要實作在 JS 規格中宣告的函式。"
+      }
+    },
+    {
+      "segment_id": "2890f5b2",
+      "source_content": "1. Open the `specs/NativeSampleModule.h` file and apply the following changes:",
+      "source_content_hash": "4e6a9c8ae2d720c463694969bf4e68c0e9b45a28ab5b96f6656e4c20e61fde5a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `specs/NativeSampleModule.h` 檔案並進行以下修改："
+      }
+    },
+    {
+      "segment_id": "36ae9dc7",
+      "source_content": "```diff title=\"NativeSampleModule.h\"\n#pragma once\n\n#include <AppSpecsJSI.h>\n#include <memory>\n#include <string>\n\n+ #include \"Int64.h\"\n\nnamespace facebook::react {\n\nclass NativeSampleModule : public NativeSampleModuleCxxSpec<NativeSampleModule> {\npublic:\n  NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker);\n\n  std::string reverseString(jsi::Runtime& rt, std::string input);\n+ int32_t cubicRoot(jsi::Runtime& rt, int64_t input);\n};\n\n} // namespace facebook::react\n\n```",
+      "source_content_hash": "eb07a7d2d3b769acdaf45315613e5956ab01defe2f4e4ceec03012226a2aef1f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_36ae9dc7"
+      }
+    },
+    {
+      "segment_id": "eb70e807",
+      "source_content": "2. Open the `specs/NativeSampleModule.cpp` file and apply the implement the new function:",
+      "source_content_hash": "6339a74ae1df7761622d783b2703a8bb636bc5b850dc6b7753280d3569fac68a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 開啟 `specs/NativeSampleModule.cpp` 檔案並實作新函式："
+      }
+    },
+    {
+      "segment_id": "01a167f4",
+      "source_content": "```diff title=\"NativeSampleModule.cpp\"\n#include \"NativeSampleModule.h\"\n+ #include <cmath>\n\nnamespace facebook::react {\n\nNativeSampleModule::NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker)\n    : NativeSampleModuleCxxSpec(std::move(jsInvoker)) {}\n\nstd::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string input) {\n  return std::string(input.rbegin(), input.rend());\n}\n\n+int32_t NativeSampleModule::cubicRoot(jsi::Runtime& rt, int64_t input) {\n+    return std::cbrt(input);\n+}\n\n} // namespace facebook::react\n```",
+      "source_content_hash": "d839e5584a5ee1ba358b7c9286d304a495973333d4352ea8fed87aa4c37bc6cb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_01a167f4"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "The implementation imports the `<cmath>` C++ library to perform mathematical operations, then it implements the `cubicRoot` function using the `cbrt` primitive from the `<cmath>` module.",
+      "source_content_hash": "bdcacdd7178092e6eac4623c9850bc3ca9b23e146abf0f1d23868ca1abdbdde0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此實作導入 `<cmath>` C++ 函式庫來執行數學運算，並使用 `<cmath>` 模組的 `cbrt` 原語來實作 `cubicRoot` 函式。"
+      }
+    },
+    {
+      "segment_id": "a5905b07",
+      "source_content": "### 4. Test your code in Your App",
+      "source_content_hash": "edb07df136ef95b3c6152b0d2f3d11ff0481227a7c7a35bd6abc307779f96960",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 4. 在應用程式中測試程式碼"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "Now, we can test the code in our app.",
+      "source_content_hash": "fb70e4c4a005ced25f250bdca33c1e2fae1484e8e5a88f5ae9e5c246a38a5d52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們可以在應用程式中測試程式碼。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "First, we need to update the `App.tsx` file to use the new method from the TurboModule. Then, we can build our apps in Android and iOS.",
+      "source_content_hash": "2e4d1f332d1fe0c6f8dd24702a1f45b4b808c3adc1fdb77d614b2eee1f6c7240",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先需更新 `App.tsx` 檔案以使用 TurboModule 的新方法，接著可建置 Android 和 iOS 應用程式。"
+      }
+    },
+    {
+      "segment_id": "8a75aa33",
+      "source_content": "1. Open the `App.tsx` code apply the following changes:",
+      "source_content_hash": "496826be4c1d0795edfd9ddf2fbadadc27d1777af03fadcb2ecd6777eb1e0a42",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `App.tsx` 程式碼並進行以下修改："
+      }
+    },
+    {
+      "segment_id": "a1af15b5",
+      "source_content": "```diff title=\"App.tsx\"\n// ...\n+ const [cubicSource, setCubicSource] = React.useState('')\n+ const [cubicRoot, setCubicRoot] = React.useState(0)\n  return (\n    <SafeAreaView style={styles.container}>\n      <View>\n        <Text style={styles.title}>\n          Welcome to C++ Turbo Native Module Example\n        </Text>\n        <Text>Write down here the text you want to revert</Text>\n        <TextInput\n          style={styles.textInput}\n          placeholder=\"Write your text here\"\n          onChangeText={setValue}\n          value={value}\n        />\n        <Button title=\"Reverse\" onPress={onPress} />\n        <Text>Reversed text: {reversedValue}</Text>\n+        <Text>For which number do you want to compute the Cubic Root?</Text>\n+        <TextInput\n+          style={styles.textInput}\n+          placeholder=\"Write your text here\"\n+          onChangeText={setCubicSource}\n+          value={cubicSource}\n+        />\n+        <Button title=\"Get Cubic Root\" onPress={() => setCubicRoot(SampleTurboModule.cubicRoot(cubicSource))} />\n+        <Text>The cubic root is: {cubicRoot}</Text>\n      </View>\n    </SafeAreaView>\n  );\n}\n//...\n```",
+      "source_content_hash": "0c546ac66968eef93098ee6c48c734b1a6937d37c0eda3afdeb48773efaee42c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a1af15b5"
+      }
+    },
+    {
+      "segment_id": "e4eabd76",
+      "source_content": "2. To test the app on Android, run `yarn android` from the root folder of your project.\n3. To test the app on iOS, run `yarn ios` from the root folder of your project.",
+      "source_content_hash": "9e78e0ff173d68891026a09be06734bcce27c7368b9fa007c977705fb0f547c8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 在 Android 測試應用程式：從專案根目錄執行 `yarn android`\n3. 在 iOS 測試應用程式：從專案根目錄執行 `yarn ios`"
+      }
+    },
+    {
+      "segment_id": "197e1a1b",
+      "source_content": "## Adding a New Structured Custom Type: Address",
+      "source_content_hash": "d0a20993812b8bc97bc70864337c58287daaa5d0f7f1638aade63b11c112e9f9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 新增結構化自訂型別：地址"
+      }
+    },
+    {
+      "segment_id": "09512450",
+      "source_content": "The approach above can be generalized to any kind of type. For structured types, React Native provides some helper functions that make it easier to bridge them from JS to C++ and vice versa.",
+      "source_content_hash": "8b70821fdc5acca48caa257489445246c6faaca53147327ed634fc46d6ffe456",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "上述方法可通用於任何類型。對於結構化類型，React Native 提供了一些輔助函數，能更簡便地實現 JS 與 C++ 之間的橋接。"
+      }
+    },
+    {
+      "segment_id": "09f901c3",
+      "source_content": "Let's assume that we want to bridge a custom `Address` type with the following properties:",
+      "source_content_hash": "84efb90ebc095d69bf915944e1dc720af406f3dff24a718a2ba4704b5111d62d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "假設我們需要橋接一個自定義的 `Address` 類型，其屬性如下："
+      }
+    },
+    {
+      "segment_id": "ca792546",
+      "source_content": "```ts\ninterface Address {\n  street: string;\n  num: number;\n  isInUS: boolean;\n}\n```",
+      "source_content_hash": "a6bbcd94f809710761bc4af1ff480befa5414e0a9de658bf0ea6b4f03c1657ba",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ca792546"
+      }
+    },
+    {
+      "segment_id": "dae9676f",
+      "source_content": "### 1. Define the type in the specs",
+      "source_content_hash": "4d60f8b11799ebd587366b1d3818f14903e9a7610eebf0f076e278be7508b880",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 在規格中定義類型"
+      }
+    },
+    {
+      "segment_id": "18ca7861",
+      "source_content": "For the first step, let's define the new custom type in the JS specs, so that Codegen can output all the supporting code. In this way, we don't have to manually write the code.",
+      "source_content_hash": "91027a7a2e0dbdff88fb9e04751cbf0d6121d791995175549dd6f8b27561a17d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先在 JS 規格中定義新的自定義類型，讓 Codegen 能自動生成所有支援代碼，這樣就不需手動編寫。"
+      }
+    },
+    {
+      "segment_id": "d5f26ef2",
+      "source_content": "1. Open the `specs/NativeSampleModule` file and add the following changes.",
+      "source_content_hash": "f41b2f45ef7d7c75e4bce5c2b1a42274302504ed57d04ed7759ddfa42d021bfa",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `specs/NativeSampleModule` 檔案並加入以下修改："
+      }
+    },
+    {
+      "segment_id": "17d89a55",
+      "source_content": "<Tabs groupId=\"custom-int64\" queryString defaultValue={constants.defaultJavaScriptSpecLanguages} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\n```diff title=\"NativeSampleModule (Add Address type and validateAddress function)\"\nimport {TurboModule, TurboModuleRegistry} from 'react-native';\n\n+export type Address = {\n+  street: string,\n+  num: number,\n+  isInUS: boolean,\n+};\n\nexport interface Spec extends TurboModule {\n  readonly reverseString: (input: string) => string;\n+ readonly validateAddress: (input: Address) => boolean;\n}\n\nexport default TurboModuleRegistry.getEnforcing<Spec>(\n  'NativeSampleModule',\n);\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\n```diff title=\"NativeSampleModule (Add Address type and validateAddress function)\"\n\n// @flow\nimport type {TurboModule} from 'react-native';\nimport { TurboModuleRegistry } from \"react-native\";\n\n+export type Address = {\n+  street: string,\n+  num: number,\n+  isInUS: boolean,\n+};\n\n\nexport interface Spec extends TurboModule {\n  +reverseString: (input: string) => string;\n+ +validateAddress: (input: Address) => boolean;\n}\n\nexport default (TurboModuleRegistry.getEnforcing<Spec>(\n  \"NativeSampleModule\"\n): Spec);\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "3d5c17ab41f5295ad15bdef9456af9bb5b347743fa07dacbe38d987f33224f3f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_17d89a55"
+      }
+    },
+    {
+      "segment_id": "e962484d",
+      "source_content": "This code defines the new `Address` type and defines a new `validateAddress` function for the Turbo Native Module. Notice that the `validateFunction` requires an `Address` object as parameter.",
+      "source_content_hash": "c8500f132bfbee80773e05e41a6eacc46fc66c19e5eb4e85dcd127f58aa973e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這段代碼定義了新的 `Address` 類型，並為 Turbo Native Module 新增了 `validateAddress` 函數。注意 `validateFunction` 需要以 `Address` 物件作為參數。"
+      }
+    },
+    {
+      "segment_id": "740d2e67",
+      "source_content": "It is also possible to have functions that return custom types.",
+      "source_content_hash": "6e885d60b2b2110635345a566feb6e3ab392088a01b725dda3c2b1a1b91e3b86",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "也可以定義返回自定義類型的函數。"
+      }
+    },
+    {
+      "segment_id": "1d7c4366",
+      "source_content": "### 2. Define the bridging code",
+      "source_content_hash": "c6117aa61122e4a060cc49393c9879758fdd24ee0aaeec368a0a390847dca968",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 定義橋接代碼"
+      }
+    },
+    {
+      "segment_id": "7fa65ec5",
+      "source_content": "From the `Address` type defined in the specs, Codegen will generate two helper types: `NativeSampleModuleAddress` and `NativeSampleModuleAddressBridging`.",
+      "source_content_hash": "558819af99bc3173dbcf033770922b580358765fdfee1650ed151e308580c52b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "根據規格中定義的 `Address` 類型，Codegen 會生成兩個輔助類型：`NativeSampleModuleAddress` 和 `NativeSampleModuleAddressBridging`。"
+      }
+    },
+    {
+      "segment_id": "7eb5b32d",
+      "source_content": "The first type is the definition of the `Address`. The second type contains all the infrastructure to bridge the custom type from JS to C++ and vice versa. The only extra step we need to add is to define the `Bridging` structure that extends the `NativeSampleModuleAddressBridging` type.",
+      "source_content_hash": "ea641fef007ca20a6d03ce60085b7c9a21c95f04141b961ffb24ca859a0da950",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一個類型是 `Address` 的定義，第二個類型包含所有用於 JS 與 C++ 雙向橋接的基礎設施。我們只需額外定義擴展 `NativeSampleModuleAddressBridging` 的 `Bridging` 結構即可。"
+      }
+    },
+    {
+      "segment_id": "4c05eff6",
+      "source_content": "1. Open the `shared/NativeSampleModule.h` file\n2. Add the following code in the file:",
+      "source_content_hash": "4d31bec4cc5d8764a3efbcbf8e64c53309f9a5264b4f1de13665433bfb51c7c8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `shared/NativeSampleModule.h` 檔案\n2. 在檔案中加入以下代碼："
+      }
+    },
+    {
+      "segment_id": "45bc4861",
+      "source_content": "```diff title=\"NativeSampleModule.h (Bridging the Address type)\"\n#include \"Int64.h\"\n#include <memory>\n#include <string>\n\nnamespace facebook::react {\n+  using Address = NativeSampleModuleAddress<std::string, int32_t, bool>;\n\n+  template <>\n+  struct Bridging<Address>\n+      : NativeSampleModuleAddressBridging<Address> {};\n  // ...\n}\n```",
+      "source_content_hash": "6f8cf948cae75810f003fab828ef6913a66e09c2242ba4aed9b9039b62265a42",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45bc4861"
+      }
+    },
+    {
+      "segment_id": "b2ffb658",
+      "source_content": "This code defines an `Address` typealias for the generic type `NativeSampleModuleAddress`. **The order of the generics matters**: the first template argument refers to the first data type of the struct, the second refers to the second, and so forth.",
+      "source_content_hash": "9d034a02d37733c80ec2efca8dc21e160585dd2928a30f77da46b179b378264f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此代碼為泛型類型 `NativeSampleModuleAddress` 定義了 `Address` 類型別名。**泛型參數的順序很重要**：第一個模板參數對應結構體的第一個數據類型，第二個參數對應第二個，依此類推。"
+      }
+    },
+    {
+      "segment_id": "e020f7ed",
+      "source_content": "Then, the code adds the `Bridging` specialization for the new `Address` type, by extending `NativeSampleModuleAddressBridging` that is generated by Codegen.",
+      "source_content_hash": "2a68a4d22c973a78338f8bb820653aff47bcae3e3f45f4acae31fe386763aa65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著，代碼通過擴展 Codegen 生成的 `NativeSampleModuleAddressBridging`，為新的 `Address` 類型添加了 `Bridging` 特化。"
+      }
+    },
+    {
+      "segment_id": "ef35d58d",
+      "source_content": ":::note\nThere is a convention that is followed to generate this types:\n\n- The first part of the name is always the type of the module. `NativeSampleModule`, in this example.\n- The second part of the name is always the name of the JS type defined in the specs. `Address`, in this example.\n  :::",
+      "source_content_hash": "24a5a09c49b624c27bbd902257009a79c3d9430de94a9b33940d4f3e3e0a6acd",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n生成這些類型時遵循以下命名慣例：\n\n- 名稱的第一部分始終是模組類型（本例為 `NativeSampleModule`）\n- 名稱的第二部分始終是規格中定義的 JS 類型名稱（本例為 `Address`）\n:::"
+      }
+    },
+    {
+      "segment_id": "363f5ed5",
+      "source_content": "### 3. Implement the Native Code",
+      "source_content_hash": "6be0598677c471290087112736f2da9ed43ed48dc93ebe74da7924f538e52d1e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 實現原生代碼"
+      }
+    },
+    {
+      "segment_id": "ebe673d6",
+      "source_content": "Now, we need to implement the `validateAddress` function in C++. First, we need to add the function declaration into the `.h` file, and then we can implement it in the `.cpp` file.",
+      "source_content_hash": "1894701f29c29f00383f6f3016dc25979d98b0ed06255271bfa8cabde71d93f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在需要在 C++ 中實現 `validateAddress` 函數。首先在 `.h` 檔案中添加函數聲明，然後在 `.cpp` 檔案中實現。"
+      }
+    },
+    {
+      "segment_id": "1c74065e",
+      "source_content": "1. Open the `shared/NativeSampleModule.h` file and add the function definition",
+      "source_content_hash": "94208d7a932fbb26cf15dd42d00e9ed68aa94cfa2b6fe54d56f96af8535857ed",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `shared/NativeSampleModule.h` 檔案並添加函數定義"
+      }
+    },
+    {
+      "segment_id": "31df1954",
+      "source_content": "```diff title=\"NativeSampleModule.h (validateAddress function prototype)\"\n  std::string reverseString(jsi::Runtime& rt, std::string input);\n\n+  bool validateAddress(jsi::Runtime &rt, jsi::Object input);\n};\n\n} // namespace facebook::react\n```",
+      "source_content_hash": "f723e70fca7d42f40be46c0f37976aa07c9cefd8a8d7e6e5548142b35fe890b5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_31df1954"
+      }
+    },
+    {
+      "segment_id": "03b708ab",
+      "source_content": "2. Open the `shared/NativeSampleModule.cpp` file and add the function implementation",
+      "source_content_hash": "c467cd7d3909a28940abc59d9922f42dca46cff3257cfefbe9c61cc928bf089f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 開啟 `shared/NativeSampleModule.cpp` 檔案並添加函數實現"
+      }
+    },
+    {
+      "segment_id": "ac3ddfe5",
+      "source_content": "```c++ title=\"NativeSampleModule.cpp (validateAddress implementation)\"\nbool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {\n  std::string street = input.getProperty(rt, \"street\").asString(rt).utf8(rt);\n  int32_t number = input.getProperty(rt, \"num\").asNumber();\n\n  return !street.empty() && number > 0;\n}\n```",
+      "source_content_hash": "a1d75dd5ed0d0235b5b5d1f4dce5b4a3a1c5170177c577cbdb1117c8de52fb19",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ac3ddfe5"
+      }
+    },
+    {
+      "segment_id": "b3b952f2",
+      "source_content": "In the implementation, the object that represents the `Address` is a `jsi::Object`. To extract the values from this object, we need to use the accessors provided by `JSI`:",
+      "source_content_hash": "b3614e2275fe3686fb2e5afcdf4ebb90e639a9a2b1b85125bff95ecd6eda99e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在實現中，代表 `Address` 的物件是 `jsi::Object`。要從此物件提取值，需使用 `JSI` 提供的存取器："
+      }
+    },
+    {
+      "segment_id": "f64d7fb7",
+      "source_content": "- `getProperty()` retrieves the property from and object by name.\n- `asString()` converts the property to `jsi::String`.\n- `utf8()` converts the `jsi::String` to a `std::string`.\n- `asNumber()` converts the property to a `double`.",
+      "source_content_hash": "b59a33aec65610bf042ad5df56eb96d7b727016e1db35f9f12776ffef48e3734",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `getProperty()` 通過屬性名稱從物件檢索屬性\n- `asString()` 將屬性轉換為 `jsi::String`\n- `utf8()` 將 `jsi::String` 轉換為 `std::string`\n- `asNumber()` 將屬性轉換為 `double`"
+      }
+    },
+    {
+      "segment_id": "c419a086",
+      "source_content": "Once we manually parsed the object, we can implement the logic that we need.",
+      "source_content_hash": "7acf81a5aaaec067e610907f3eaaaecf561f36094f191b24c8f0b8c2753633ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "手動解析物件後，即可實現所需邏輯。"
+      }
+    },
+    {
+      "segment_id": "ffe47cd7",
+      "source_content": ":::note\nIf you want to learn more about `JSI` and how it works, have a look at this [great talk](https://youtu.be/oLmGInjKU2U?feature=shared) from App.JS 2024\n:::",
+      "source_content_hash": "ca1a99640d308f6a2814a4bf00360a691baf1c849cac4f787d150aed50d9dd32",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n若想深入了解 `JSI` 運作原理，可參考 [App.JS 2024 的精彩演講](https://youtu.be/oLmGInjKU2U?feature=shared)\n:::"
+      }
+    },
+    {
+      "segment_id": "d3c1b1bc",
+      "source_content": "### 4. Testing the code in the app",
+      "source_content_hash": "61ed91e38bb719eccf52b5d47bb70fd808e7ffb746d90b5de3270193c0e87144",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 4. 在應用中測試代碼"
+      }
+    },
+    {
+      "segment_id": "9d56f8f8",
+      "source_content": "To test the code in the app, we have to modify the `App.tsx` file.",
+      "source_content_hash": "79aa9306b19b13ccb25abb8efc82befccdd5a9ec656213d9f5243872d730082c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在應用程式中測試這段程式碼，我們需要修改 `App.tsx` 檔案。"
+      }
+    },
+    {
+      "segment_id": "019096a4",
+      "source_content": "1. Open the `App.tsx` file. Remove the content of the `App()` function.\n2. Replace the body of the `App()` function with the following code:",
+      "source_content_hash": "e40bc4c4b9f4e7dac823aac2d2f539e82309647b6eb05f8fa908383b3073a6f6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `App.tsx` 檔案，移除 `App()` 函式的內容。\n2. 將 `App()` 函式的主體替換為以下程式碼："
+      }
+    },
+    {
+      "segment_id": "3e084726",
+      "source_content": "```ts title=\"App.tsx (App function body replacement)\"\nconst [street, setStreet] = React.useState('');\nconst [num, setNum] = React.useState('');\nconst [isValidAddress, setIsValidAddress] = React.useState<\n  boolean | null\n>(null);\n\nconst onPress = () => {\n  let houseNum = parseInt(num, 10);\n  if (isNaN(houseNum)) {\n    houseNum = -1;\n  }\n  const address = {\n    street,\n    num: houseNum,\n    isInUS: false,\n  };\n  const result = SampleTurboModule.validateAddress(address);\n  setIsValidAddress(result);\n};\n\nreturn (\n  <SafeAreaView style={styles.container}>\n    <View>\n      <Text style={styles.title}>\n        Welcome to C Turbo Native Module Example\n      </Text>\n      <Text>Address:</Text>\n      <TextInput\n        style={styles.textInput}\n        placeholder=\"Write your address here\"\n        onChangeText={setStreet}\n        value={street}\n      />\n      <Text>Number:</Text>\n      <TextInput\n        style={styles.textInput}\n        placeholder=\"Write your address here\"\n        onChangeText={setNum}\n        value={num}\n      />\n      <Button title=\"Validate\" onPress={onPress} />\n      {isValidAddress != null && (\n        <Text>\n          Your address is {isValidAddress ? 'valid' : 'not valid'}\n        </Text>\n      )}\n    </View>\n  </SafeAreaView>\n);\n```",
+      "source_content_hash": "ad0fac11d25f0c9e36eb4e861a1684bf64df9462d520459f5f8a9196679cf6c4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3e084726"
+      }
+    },
+    {
+      "segment_id": "3bb26da2",
+      "source_content": "Congratulation! 🎉",
+      "source_content_hash": "b700e46fe8f3d2e07b8e4a4678ea9b754eb08ad66c53b04ccbd5eba3fc171793",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "恭喜！🎉"
+      }
+    },
+    {
+      "segment_id": "250c20ca",
+      "source_content": "You bridged your first types from JS to C++.",
+      "source_content_hash": "27634fd1002d4283c3bf5260288387919992b507fad8f056af057f7e2685882e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你已成功將第一個類型從 JS 橋接到 C++。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/the-new-architecture/custom-cxx-types.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.044250+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "190d1250d00a0deb304a2d908053819e817a96a4f36c449d987e359f779bace8"
+  }
+}

@@ -1,0 +1,522 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/optimizing-flatlist-configuration.md",
+  "source_file_content_hash": "6b1c1006ccbc2f2b2848ad8f86f2e137db43aaaa602c4e8b6263370e82f1febb",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: optimizing-flatlist-configuration\ntitle: Optimizing Flatlist Configuration\n---",
+      "source_content_hash": "6d14d08eb4d27b1ea9a9566b1d801cf782e413ab6e4dfc3f1d0fdb32918a0e5e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Terms",
+      "source_content_hash": "17be6000a3b19d122dbabb642871fd68803ea7415f70eddee285d02c6b421582",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 術語"
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- **VirtualizedList:** The component behind `FlatList` (React Native's implementation of the [`Virtual List`](https://bvaughn.github.io/react-virtualized/#/components/List) concept.)\n\n- **Memory consumption:** How much information about your list is being stored in memory, which could lead to an app crash.\n\n- **Responsiveness:** Application ability to respond to interactions. Low responsiveness, for instance, is when you touch on a component and it waits a bit to respond, instead of responding immediately as expected.\n\n- **Blank areas:** When `VirtualizedList` can't render your items fast enough, you may enter a part of your list with non-rendered components that appear as blank space.\n\n- **Viewport:** The visible area of content that is rendered to pixels.\n\n- **Window:** The area in which items should be mounted, which is generally much larger than the viewport.",
+      "source_content_hash": "9839c1edc77817c09c26de9bc1d858cb5b305afc72f1887d1b51352fc95a851e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **VirtualizedList:** `FlatList` 底層的組件（React Native 對 [`虛擬列表`](https://bvaughn.github.io/react-virtualized/#/components/List) 概念的實現。）\n\n- **記憶體消耗:** 列表相關資訊在記憶體中的佔用量，可能導致應用程式崩潰。\n\n- **響應性:** 應用程式對互動的反應能力。低響應性例如當你點擊組件時，它會延遲回應而非立即反應。\n\n- **空白區域:** 當 `VirtualizedList` 無法快速渲染項目時，列表可能出現未渲染組件的空白區域。\n\n- **視口:** 實際渲染為像素的可見內容區域。\n\n- **窗口:** 應掛載項目的區域，通常比視口大得多。"
+      }
+    },
+    {
+      "segment_id": "63622bf0",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Here are a list of props that can help to improve `FlatList` performance:",
+      "source_content_hash": "7ca251ae0511b663bd71a361f5e506f3873f14a97ea4f07f0b0771efaaa510f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是有助提升 `FlatList` 效能的屬性列表："
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "### removeClippedSubviews",
+      "source_content_hash": "99591e1f89a0ab48cd5c9abfa9775e674a1138f1b5722b16dc89a1805eb00664",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### removeClippedSubviews"
+      }
+    },
+    {
+      "segment_id": "fec94f74",
+      "source_content": "| Type    | Default |\n| ------- | ------- |\n| Boolean | False   |",
+      "source_content_hash": "6fd5982330597b0e8b55f82341d49e68b2462a838504c9df73a89e9a22af8b53",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fec94f74"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "If `true`, views that are outside of the viewport are detached from the native view hierarchy.",
+      "source_content_hash": "71ee54435058b0ecf9d956df46fa8498cab9b0740a9f68e68950d5e19f780c64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若設為 `true`，視口外的視圖會從原生視圖層級中分離。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "**Pros:** This reduces time spent on the main thread, and thus reduces the risk of dropped frames, by excluding views outside of the viewport from the native rendering and drawing traversals.",
+      "source_content_hash": "8a3ffac185c868fed1702b8b4c366c58726ab30cea6cd5391a1d226757695d53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**優點:** 減少主執行緒處理時間，從而降低掉幀風險，因為排除了視口外視圖的原生渲染和繪製遍歷。"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "**Cons:** Be aware that this implementation can have bugs, such as missing content (mainly observed on iOS), especially if you are doing complex things with transforms and/or absolute positioning. Also note this does not save significant memory because the views are not deallocated, only detached.",
+      "source_content_hash": "73b03bc5e5dfe1f720e85774aa91b027603b8eca0d5540278c11384c13a30869",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**缺點:** 請注意此實現可能存在錯誤，例如內容缺失（主要在iOS上觀察到），特別是當你進行複雜的變換和/或絕對定位時。另外這不會顯著節省記憶體，因為視圖未被釋放，僅被分離。"
+      }
+    },
+    {
+      "segment_id": "80d9e13c",
+      "source_content": "### maxToRenderPerBatch",
+      "source_content_hash": "c368e811e0ee129de47aa75e97c55f3deece0368be9d434df6e2efff1db9462b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### maxToRenderPerBatch"
+      }
+    },
+    {
+      "segment_id": "e6a4238f",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| Number | 10      |",
+      "source_content_hash": "853d9823e28c1d4da0bcc133498c05936f0d8798cce7f3a9b9f353be3fd052cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6a4238f"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "It is a `VirtualizedList` prop that can be passed through `FlatList`. This controls the amount of items rendered per batch, which is the next chunk of items rendered on every scroll.",
+      "source_content_hash": "46c0d27cc1b56b650dda708a46a2124134c158909c9c4714d574f0175f28b98b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是可透過 `FlatList` 傳遞的 `VirtualizedList` 屬性。控制每批次渲染的項目數量，即每次滾動時渲染的下一個項目塊。"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "**Pros:** Setting a bigger number means less visual blank areas when scrolling (increases the fill rate).",
+      "source_content_hash": "03b6a1870f56e7e110e07f4578e36e2a9aabb794e0aa0b6b7a01708c917a0b8b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**優點:** 設置較大數值可減少滾動時的視覺空白區域（提高填充率）。"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "**Cons:** More items per batch means longer periods of JavaScript execution potentially blocking other event processing, like presses, hurting responsiveness.",
+      "source_content_hash": "6fc6286091da7b5eb9fa804c39c6c15889e4d08a39095085c1916a33c91161f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**缺點:** 每批次更多項目意味著JavaScript執行時間更長，可能阻塞其他事件處理（如點擊），影響響應性。"
+      }
+    },
+    {
+      "segment_id": "6d28a77c",
+      "source_content": "### updateCellsBatchingPeriod",
+      "source_content_hash": "e34ecd57ef3b7a45c094b5cc98d58883eaf893f059e48772fa0d019889b9f6b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### updateCellsBatchingPeriod"
+      }
+    },
+    {
+      "segment_id": "84e35a30",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| Number | 50      |",
+      "source_content_hash": "49beef7f0ecdf49cbf974d83fe2832ea93b1c5f85e97adb272c9b995f2d7be61",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_84e35a30"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "While `maxToRenderPerBatch` tells the amount of items rendered per batch, setting `updateCellsBatchingPeriod` tells your `VirtualizedList` the delay in milliseconds between batch renders (how frequently your component will be rendering the windowed items).",
+      "source_content_hash": "1d7a8d7522ae4a45dc2e325fa03b343def4f0183aef85a3516c0dbceaf9720f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`maxToRenderPerBatch` 控制每批次渲染的項目數，而 `updateCellsBatchingPeriod` 設置 `VirtualizedList` 批次渲染間的延遲毫秒數（組件渲染窗口項目的頻率）。"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "**Pros:** Combining this prop with `maxToRenderPerBatch` gives you the power to, for example, render more items in a less frequent batch, or less items in a more frequent batch.",
+      "source_content_hash": "affff4a3f8c78692daa00c1d1f7671b88dc9cb173e3575242aac5f88866e8b4a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**優點:** 結合此屬性與 `maxToRenderPerBatch` 可實現靈活控制，例如以較低頻率渲染更多項目，或以較高頻率渲染較少項目。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "**Cons:** Less frequent batches may cause blank areas, More frequent batches may cause responsiveness issues.",
+      "source_content_hash": "15f94a94f3795b191e9a302d20d160b3a0559f3c77549fa0473852b63bb19390",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**缺點:** 較低頻率批次可能導致空白區域，較高頻率批次可能引發響應性問題。"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "### initialNumToRender",
+      "source_content_hash": "54210fdf1ef70d18ff45f703a614282906c65b7a124919a1634c1091b6d64eee",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### initialNumToRender"
+      }
+    },
+    {
+      "segment_id": "8dd718bb",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| Number | 10      |",
+      "source_content_hash": "853d9823e28c1d4da0bcc133498c05936f0d8798cce7f3a9b9f353be3fd052cb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8dd718bb"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "The initial amount of items to render.",
+      "source_content_hash": "77f3114e5cc05a84b03186d01eceffff27f6fb5d8801a21e59b5c023760f7faf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "初始渲染的項目數量。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "**Pros:** Define precise number of items that would cover the screen for every device. This can be a big performance boost for the initial render.",
+      "source_content_hash": "21b02676402ac4ce33b4652630f7a56b0c00420d0bcfaaaa45ce11b24c03391f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**優點:** 精確定義能覆蓋所有設備螢幕的項目數，可大幅提升初始渲染效能。"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "**Cons:** Setting a low `initialNumToRender` may cause blank areas, especially if it's too small to cover the viewport on initial render.",
+      "source_content_hash": "d45f6f883bed4c4711dead21623cbe272d8bd190c3198c9d4db56a11f0377480",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**缺點:** 設置過低的 `initialNumToRender` 可能導致空白區域，特別是當初始渲染無法覆蓋整個視口時。"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "### windowSize",
+      "source_content_hash": "7a70f899e5765b2af5f1e96abd4867dfb2c141fe8be2020fed7dc29195c5e777",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### windowSize"
+      }
+    },
+    {
+      "segment_id": "04d947b2",
+      "source_content": "| Type   | Default |\n| ------ | ------- |\n| Number | 21      |",
+      "source_content_hash": "b61e72130171381d9939235eb40713734602df7e97bb522de78c2cb7dc989b67",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_04d947b2"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "The number passed here is a measurement unit where 1 is equivalent to your viewport height. The default value is 21 (10 viewports above, 10 below, and one in between).",
+      "source_content_hash": "d29a12fd3881c26fbd5d1c3869f2cca199cc66d91d36736789f9511d10c724fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此處數值是以視口高度為單位的度量，預設值為21（上方10視口、下方10視口及中間1視口）。"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "**Pros:** Bigger `windowSize` will result in less chance of seeing blank space while scrolling. On the other hand, smaller `windowSize` will result in fewer items mounted simultaneously, saving memory.",
+      "source_content_hash": "58178df970fe6a5bad4df9e3045d2f822ce0dd944a5616a817d870c3aef3b919",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**優點:** 較大的 `windowSize` 可降低滾動時出現空白區域的機率。較小的 `windowSize` 則會同時掛載更少項目，節省記憶體。"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "**Cons:** For a bigger `windowSize`, you will have more memory consumption. For a lower `windowSize`, you will have a bigger chance of seeing blank areas.",
+      "source_content_hash": "0985d054118ada881b6d8c444fb29a05b7bc3f76088a3611c90eb9b3268b7266",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**缺點：** 較大的 `windowSize` 會消耗更多記憶體。較小的 `windowSize` 則可能增加出現空白區域的機率。"
+      }
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "## List items",
+      "source_content_hash": "8514dfacbc5c022ed6c3059bb9a5cce1ff2deb9147b414a973c9f65a6e0dc3b1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 列表項目"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "Below are some tips about list item components. They are the core of your list, so they need to be fast.",
+      "source_content_hash": "82fb1e7f1c4a33dfc152c56c2c524a56d348f0eab7fd5ad17280b6c8a749c32b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是一些關於列表項目元件的建議。它們是列表的核心，因此需要保持高效運作。"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "### Use basic components",
+      "source_content_hash": "17faf01e55017ffd12769a53293e27f9db01b9e955a7e22ae5862fd2fe189bef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用基礎元件"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "The more complex your components are, the slower they will render. Try to avoid a lot of logic and nesting in your list items. If you are reusing this list item component a lot in your app, create a component only for your big lists and make them with as little logic and nesting as possible.",
+      "source_content_hash": "5c39052ecdd4cd2ae7dd15fc1c5f85c340325c09f4f00bb3d1dd4485a4d11d07",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "元件越複雜，渲染速度越慢。盡量避免在列表項目中加入過多邏輯或嵌套結構。若該列表項目元件在應用中頻繁使用，可專門為大型列表創建一個元件，並盡可能減少邏輯和嵌套層級。"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### Use light components",
+      "source_content_hash": "f1b099380338f5094faf8d4f8ee570b9f80fedc042d9fa69a9c971aa88e196b4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用輕量元件"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "The heavier your components are, the slower they render. Avoid heavy images (use a cropped version or thumbnail for list items, as small as possible). Talk to your design team, use as little effects and interactions and information as possible in your list. Show them in your item's detail.",
+      "source_content_hash": "dcd5ab1cb2d63f5a20a1d7430329ac141dcaf8d01c45c5e9d0f96db7cdef157f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "元件越龐大，渲染速度越慢。避免使用高解析度圖片（改用裁剪版或縮圖，尺寸越小越好）。與設計團隊溝通，在列表中盡量減少特效、互動和資訊量，可將這些內容保留在項目詳情頁面展示。"
+      }
+    },
+    {
+      "segment_id": "f8edb6d2",
+      "source_content": "### Use shouldComponentUpdate",
+      "source_content_hash": "264f4f0cf8ff63fa5444edf7fbddfa73eb9a0bd6f41bcef9635894ed38066665",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用 shouldComponentUpdate"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "Implement update verification to your components. React's `PureComponent` implement a [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate) with shallow comparison. This is expensive here because it needs to check all your props. If you want a good bit-level performance, create the strictest rules for your list item components, checking only props that could potentially change. If your list is basic enough, you could even use",
+      "source_content_hash": "de00b196925bf8494bd2fdfc96a2a897bb5ad55b769766e007afe260829a051d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為元件實作更新驗證機制。React 的 `PureComponent` 已透過淺比較實作了 [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)，但此方法需檢查所有 props 較為耗能。若要追求位元級效能，應為列表項目元件制定嚴格的檢查規則，僅監控可能變動的 props。若列表結構簡單，甚至可直接使用"
+      }
+    },
+    {
+      "segment_id": "a476a172",
+      "source_content": "```jsx\nshouldComponentUpdate() {\n  return false\n}\n```",
+      "source_content_hash": "e052597fdf4f54ab4058359481d29339548933e89e7c999e2a0f567d75d13298",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a476a172"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "### Use cached optimized images",
+      "source_content_hash": "e26aaa94891a6f1427580ba4448a8d7265e59001f091013549558eaff96ef2b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用快取優化圖片"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "You can use the community packages (such as [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) from [@DylanVann](https://github.com/DylanVann)) for more performant images. Every image in your list is a `new Image()` instance. The faster it reaches the `loaded` hook, the faster your JavaScript thread will be free again.",
+      "source_content_hash": "e923dda36c651ef45cf75113b4ff91c82b4016d59d345982e03154e465116cb0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可選用社群套件（如 [@DylanVann](https://github.com/DylanVann) 的 [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)）來提升圖片效能。列表中每個圖片都是獨立的 `new Image()` 實例，越快觸發 `loaded` 鉤子，JavaScript 執行緒就能越快釋放。"
+      }
+    },
+    {
+      "segment_id": "722e4930",
+      "source_content": "### Use getItemLayout",
+      "source_content_hash": "66823ade2ff9547c8a45ba656fcf4a0230cadcaae7b1251b96de5c7cc4ed3a0a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用 getItemLayout"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "If all your list item components have the same height (or width, for a horizontal list), providing the [getItemLayout](flatlist#getitemlayout) prop removes the need for your `FlatList` to manage async layout calculations. This is a very desirable optimization technique.",
+      "source_content_hash": "1f9c7f30890607c864ebf1dc1a8eea641860d5885c28eb48b366708cc5c51c76",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若所有列表項目高度相同（水平列表則為寬度），提供 [getItemLayout](flatlist#getitemlayout) 屬性可免除 `FlatList` 的非同步佈局計算需求，這是極具價值的優化技巧。"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "If your components have dynamic size and you really need performance, consider asking your design team if they may think of a redesign in order to perform better.",
+      "source_content_hash": "f181ab62c179a1b0e43e7f1e3d51828f17c73a903d1920c4a79d09ae10039d18",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若元件尺寸動態變化且亟需效能提升，可考慮與設計團隊討論是否調整設計以優化表現。"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "### Use keyExtractor or key",
+      "source_content_hash": "5614f5cf4aa37b3410478345bab82e34ec0778b8259eca5a85ee6078539532ca",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用 keyExtractor 或 key"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "You can set the [`keyExtractor`](flatlist#keyextractor) to your `FlatList` component. This prop is used for caching and as the React `key` to track item re-ordering.",
+      "source_content_hash": "2899c2fe94280f0c4a8cd0c47e6470692e603e202d5d77ab72d7dfd78bad767b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可為 `FlatList` 元件設定 [`keyExtractor`](flatlist#keyextractor) 屬性，此屬性用於快取及作為 React 的 `key` 來追蹤項目重新排序。"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "You can also use a `key` prop in your item component.",
+      "source_content_hash": "48b586af53b6cf368270aeb5b3e924fc9dd5cb476979dba8d6e999112b0ae1a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "也可直接在項目元件中使用 `key` 屬性。"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### Avoid anonymous function on renderItem",
+      "source_content_hash": "fdad6baf85078125f8dbdf90b3d44a3d3272203bced8ab6783e57a81a027c783",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 避免在 renderItem 使用匿名函式"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "Move out the `renderItem` function to the outside of render function, so it won't recreate itself each time render function called.",
+      "source_content_hash": "0118ed89e94fdf8f03166f9745f0f06687b9eeb4caf79e8b559d8ed8f1d7dcbe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 `renderItem` 函式移至 render 函式外部，避免每次呼叫 render 時重新創建函式實例。"
+      }
+    },
+    {
+      "segment_id": "8607cf29",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"classical\">\n\n```jsx\nrenderItem = ({ item }) => (<View key={item.key}><Text>{item.title}</Text></View>);\n\nrender(){\n  // ...\n\n  <FlatList\n    data={items}\n    renderItem={this.renderItem}\n  />\n\n  // ...\n}\n\n```\n\n</TabItem>\n<TabItem value=\"functional\">\n\n```jsx\nconst renderItem = ({ item }) => (\n   <View key={item.key}>\n      <Text>{item.title}</Text>\n   </View>\n );\n\nreturn (\n  // ...\n\n  <FlatList data={items} renderItem={renderItem} />;\n  // ...\n);\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "34d01ab26459fa81defe9c1deefe4035df92077f6166f545545c989c2d6a8bce",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8607cf29"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/optimizing-flatlist-configuration.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.298120+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6b1c1006ccbc2f2b2848ad8f86f2e137db43aaaa602c4e8b6263370e82f1febb"
+  }
+}

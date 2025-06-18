@@ -1,0 +1,652 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/accessibilityinfo.md",
+  "source_file_content_hash": "b4b89b3250090ae826c55e9647da87b9aafc303baf0cb07f2ca3670358e3d6b1",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: accessibilityinfo\ntitle: AccessibilityInfo\n---",
+      "source_content_hash": "65929e720a78b0b187af5a02c6fb717994960b91e75ca7f0b346305e9ac0a0e1",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Sometimes it's useful to know whether or not the device has a screen reader that is currently active. The `AccessibilityInfo` API is designed for this purpose. You can use it to query the current state of the screen reader as well as to register to be notified when the state of the screen reader changes.",
+      "source_content_hash": "746f38725beb763ed3271b7b6dabd4df9399795591dfc33cf6101d58f03a5742",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時了解設備當前是否啟用了螢幕閱讀器非常有用。`AccessibilityInfo` API 正是為此目的設計。您可以用它來查詢螢幕閱讀器的當前狀態，並註冊以在螢幕閱讀器狀態變化時接收通知。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "321c5251",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=AccessibilityInfo%20Function%20Component%20Example&supportedPlatforms=android,ios\nimport React, {useState, useEffect} from 'react';\nimport {AccessibilityInfo, View, Text, StyleSheet} from 'react-native';\n\nconst App = () => {\n  const [reduceMotionEnabled, setReduceMotionEnabled] = useState(false);\n  const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);\n\n  useEffect(() => {\n    const reduceMotionChangedSubscription = AccessibilityInfo.addEventListener(\n      'reduceMotionChanged',\n      isReduceMotionEnabled => {\n        setReduceMotionEnabled(isReduceMotionEnabled);\n      },\n    );\n    const screenReaderChangedSubscription = AccessibilityInfo.addEventListener(\n      'screenReaderChanged',\n      isScreenReaderEnabled => {\n        setScreenReaderEnabled(isScreenReaderEnabled);\n      },\n    );\n\n    AccessibilityInfo.isReduceMotionEnabled().then(isReduceMotionEnabled => {\n      setReduceMotionEnabled(isReduceMotionEnabled);\n    });\n    AccessibilityInfo.isScreenReaderEnabled().then(isScreenReaderEnabled => {\n      setScreenReaderEnabled(isScreenReaderEnabled);\n    });\n\n    return () => {\n      reduceMotionChangedSubscription.remove();\n      screenReaderChangedSubscription.remove();\n    };\n  }, []);\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.status}>\n        The reduce motion is {reduceMotionEnabled ? 'enabled' : 'disabled'}.\n      </Text>\n      <Text style={styles.status}>\n        The screen reader is {screenReaderEnabled ? 'enabled' : 'disabled'}.\n      </Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  status: {\n    margin: 30,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=AccessibilityInfo%20Class%20Component%20Example&supportedPlatforms=android,ios&ext=js\nimport React, {Component} from 'react';\nimport {AccessibilityInfo, View, Text, StyleSheet} from 'react-native';\n\nclass AccessibilityStatusExample extends Component {\n  state = {\n    reduceMotionEnabled: false,\n    screenReaderEnabled: false,\n  };\n\n  componentDidMount() {\n    this.reduceMotionChangedSubscription = AccessibilityInfo.addEventListener(\n      'reduceMotionChanged',\n      reduceMotionEnabled => {\n        this.setState({reduceMotionEnabled});\n      },\n    );\n    this.screenReaderChangedSubscription = AccessibilityInfo.addEventListener(\n      'screenReaderChanged',\n      screenReaderEnabled => {\n        this.setState({screenReaderEnabled});\n      },\n    );\n\n    AccessibilityInfo.isReduceMotionEnabled().then(reduceMotionEnabled => {\n      this.setState({reduceMotionEnabled});\n    });\n    AccessibilityInfo.isScreenReaderEnabled().then(screenReaderEnabled => {\n      this.setState({screenReaderEnabled});\n    });\n  }\n\n  componentWillUnmount() {\n    this.reduceMotionChangedSubscription.remove();\n    this.screenReaderChangedSubscription.remove();\n  }\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Text style={styles.status}>\n          The reduce motion is{' '}\n          {this.state.reduceMotionEnabled ? 'enabled' : 'disabled'}.\n        </Text>\n        <Text style={styles.status}>\n          The screen reader is{' '}\n          {this.state.screenReaderEnabled ? 'enabled' : 'disabled'}.\n        </Text>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  status: {\n    margin: 30,\n  },\n});\n\nexport default AccessibilityStatusExample;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=AccessibilityInfo%20Class%20Component%20Example&supportedPlatforms=android,ios&ext=tsx\nimport React, {Component} from 'react';\nimport {AccessibilityInfo, View, Text, StyleSheet} from 'react-native';\nimport type {EmitterSubscription} from 'react-native';\n\nclass AccessibilityStatusExample extends Component {\n  reduceMotionChangedSubscription?: EmitterSubscription;\n  screenReaderChangedSubscription?: EmitterSubscription;\n\n  state = {\n    reduceMotionEnabled: false,\n    screenReaderEnabled: false,\n  };\n\n  componentDidMount() {\n    this.reduceMotionChangedSubscription = AccessibilityInfo.addEventListener(\n      'reduceMotionChanged',\n      reduceMotionEnabled => {\n        this.setState({reduceMotionEnabled});\n      },\n    );\n    this.screenReaderChangedSubscription = AccessibilityInfo.addEventListener(\n      'screenReaderChanged',\n      screenReaderEnabled => {\n        this.setState({screenReaderEnabled});\n      },\n    );\n\n    AccessibilityInfo.isReduceMotionEnabled().then(reduceMotionEnabled => {\n      this.setState({reduceMotionEnabled});\n    });\n    AccessibilityInfo.isScreenReaderEnabled().then(screenReaderEnabled => {\n      this.setState({screenReaderEnabled});\n    });\n  }\n\n  componentWillUnmount() {\n    this.reduceMotionChangedSubscription?.remove();\n    this.screenReaderChangedSubscription?.remove();\n  }\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Text style={styles.status}>\n          The reduce motion is{' '}\n          {this.state.reduceMotionEnabled ? 'enabled' : 'disabled'}.\n        </Text>\n        <Text style={styles.status}>\n          The screen reader is{' '}\n          {this.state.screenReaderEnabled ? 'enabled' : 'disabled'}.\n        </Text>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  status: {\n    margin: 30,\n  },\n});\n\nexport default AccessibilityStatusExample;\n```\n\n</TabItem>\n</Tabs>\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "8686a7d9af0bbd1ebf203ad63cc0f55870ddbd5c2206fc10949a676445e2b55a",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f8e4cb90",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "200685d4",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "c0f80a50",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "5e300688",
+      "source_content": "### `addEventListener()`",
+      "source_content_hash": "c14ee61a90cacc6adff71fa9f1ff675bde58b04df64bfe24a80a9a4a21f7ced0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addEventListener()`"
+      }
+    },
+    {
+      "segment_id": "d01e871e",
+      "source_content": "```tsx\nstatic addEventListener(\n  eventName: AccessibilityChangeEventName | AccessibilityAnnouncementEventName,\n  handler: (\n    event: AccessibilityChangeEvent | AccessibilityAnnouncementFinishedEvent,\n  ) => void,\n): EmitterSubscription;\n```",
+      "source_content_hash": "5e98c9d1c1a48a915ba733cb128a0fdf47cc71c9d87bd4b238f8b19011d48d22",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "Add an event handler. Supported events:",
+      "source_content_hash": "0a52122e4c2f07735c9afc527b9c3c81a70c66ad0dbd3f2343290f9f6aa6c7b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "添加事件處理程序。支援的事件："
+      }
+    },
+    {
+      "segment_id": "47f1ba32",
+      "source_content": "| Event name                                                                           | Description                                                                                                                                                                                                                                                                                              |\n| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `accessibilityServiceChanged`<br/><div class=\"label two-lines android\">Android</div> | Fires when some services such as TalkBack, other Android assistive technologies, and third-party accessibility services are enabled. The argument to the event handler is a boolean. The boolean is `true` when a some accessibility services is enabled and `false` otherwise.                          |\n| `announcementFinished`<br/><div class=\"label two-lines ios\">iOS</div>                | Fires when the screen reader has finished making an announcement. The argument to the event handler is a dictionary with these keys:<ul><li>`announcement`: The string announced by the screen reader.</li><li>`success`: A boolean indicating whether the announcement was successfully made.</li></ul> |\n| `boldTextChanged`<br/><div class=\"label two-lines ios\">iOS</div>                     | Fires when the state of the bold text toggle changes. The argument to the event handler is a boolean. The boolean is `true` when bold text is enabled and `false` otherwise.                                                                                                                             |\n| `grayscaleChanged`<br/><div class=\"label two-lines ios\">iOS</div>                    | Fires when the state of the gray scale toggle changes. The argument to the event handler is a boolean. The boolean is `true` when a gray scale is enabled and `false` otherwise.                                                                                                                         |\n| `invertColorsChanged`<br/><div class=\"label two-lines ios\">iOS</div>                 | Fires when the state of the invert colors toggle changes. The argument to the event handler is a boolean. The boolean is `true` when invert colors is enabled and `false` otherwise.                                                                                                                     |\n| `reduceMotionChanged`                                                                | Fires when the state of the reduce motion toggle changes. The argument to the event handler is a boolean. The boolean is `true` when a reduce motion is enabled (or when \"Transition Animation Scale\" in \"Developer options\" is \"Animation off\") and `false` otherwise.                                  |\n| `reduceTransparencyChanged`<br/><div class=\"label two-lines ios\">iOS</div>           | Fires when the state of the reduce transparency toggle changes. The argument to the event handler is a boolean. The boolean is `true` when reduce transparency is enabled and `false` otherwise.                                                                                                         |\n| `screenReaderChanged`                                                                | Fires when the state of the screen reader changes. The argument to the event handler is a boolean. The boolean is `true` when a screen reader is enabled and `false` otherwise.                                                                                                                          |",
+      "source_content_hash": "3060d2af798316eed641a2eb318387f3e79aa8da595222058e19675d17a84cd1",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "68d4b558",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "217cbd06",
+      "source_content": "### `announceForAccessibility()`",
+      "source_content_hash": "9aad789f040375ec9d5782090e0f8de8afd09813a3b430011d36022a5722d023",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `announceForAccessibility()`"
+      }
+    },
+    {
+      "segment_id": "5b5a3953",
+      "source_content": "```tsx\nstatic announceForAccessibility(announcement: string);\n```",
+      "source_content_hash": "21ad32aa7782d2cf142c481469935142f9f2e0e4c825f9cefca437743681e21a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2153a2fa",
+      "source_content": "Post a string to be announced by the screen reader.",
+      "source_content_hash": "41f76534ba1137a1199285783523a85918af3b0447598cf52b98422569ccf170",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "發佈一個字串供螢幕閱讀器朗讀。"
+      }
+    },
+    {
+      "segment_id": "929cd929",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "bb74dfa2",
+      "source_content": "### `announceForAccessibilityWithOptions()`",
+      "source_content_hash": "81c3e1b029b196f3d35d5dab2ba7a03ee015ae0a235de8f38ae41db673218d2f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `announceForAccessibilityWithOptions()`"
+      }
+    },
+    {
+      "segment_id": "cb0a9597",
+      "source_content": "```tsx\nstatic announceForAccessibilityWithOptions(\n  announcement: string,\n  options: options: {queue?: boolean},\n);\n```",
+      "source_content_hash": "45d24f41d5a5a73852dbce7c0a346dd5f8f767ea9e01de10267171aebea3aa9b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2f8456b2",
+      "source_content": "Post a string to be announced by the screen reader with modification options. By default announcements will interrupt any existing speech, but on iOS they can be queued behind existing speech by setting `queue` to `true` in the options object.",
+      "source_content_hash": "390dc71b97751223961387684713493be018dc449d4adcd49f246c46144641e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "發佈一個字串供螢幕閱讀器朗讀，並可設定選項。預設情況下，朗讀會中斷當前語音，但在 iOS 上可通過在選項物件中設定 `queue` 為 `true` 來將朗讀排隊在現有語音之後。"
+      }
+    },
+    {
+      "segment_id": "1d39fdbf",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "95a47993",
+      "source_content": "| Name                                                          | Type   | Description                                                                              |\n| ------------------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------- |\n| announcement <div class=\"label basic required\">Required</div> | string | The string to be announced                                                               |\n| options <div class=\"label basic required\">Required</div>      | object | `queue` - queue the announcement behind existing speech <div class=\"label ios\">iOS</div> |",
+      "source_content_hash": "82f15b34242bd552767d2bd95e60d7598a8f280516876b60fdbc4b5ecac12671",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ef5856f7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e151b2af",
+      "source_content": "### `getRecommendedTimeoutMillis()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "30c70f4154c64af862220a9d0e3de189aea1e341e96890f96d2b932706439cee",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getRecommendedTimeoutMillis()` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "00c94fa3",
+      "source_content": "```tsx\nstatic getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;\n```",
+      "source_content_hash": "431be1c46d2bec07fa2443993fbc6e6930f58ce02c6aca9ec955e72b1a7b710d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c95293b9",
+      "source_content": "Gets the timeout in millisecond that the user needs.\nThis value is set in \"Time to take action (Accessibility timeout)\" of \"Accessibility\" settings.",
+      "source_content_hash": "6edbbb45ddadac8b3a9f36c19c3c5c69004f87ca9560dc78e3cd13ce3dbbf75c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "獲取用戶所需的超時時間（毫秒）。此值在「無障礙」設定的「操作時間（無障礙超時）」中設定。"
+      }
+    },
+    {
+      "segment_id": "c9e08343",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "2b6d6f41",
+      "source_content": "| Name                                                             | Type   | Description                                                                           |\n| ---------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |\n| originalTimeout <div class=\"label basic required\">Required</div> | number | The timeout to return if \"Accessibility timeout\" is not set. Specify in milliseconds. |",
+      "source_content_hash": "b90cf9f9d0b6a5a1a51011a671bba1fa0eb3c2b264e685ae3e606fc98d6519ae",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1864a9c0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b8925cfb",
+      "source_content": "### `isAccessibilityServiceEnabled()` <div class=\"label android\">Android</div>",
+      "source_content_hash": "3c0c443ba1c6f2fadc961d7ba3c9cb4f67c26fc43eac0cdf0bc9399bda3e4847",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isAccessibilityServiceEnabled()` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "d96a088c",
+      "source_content": "```tsx\nstatic isAccessibilityServiceEnabled(): Promise<boolean>;\n```",
+      "source_content_hash": "8c597f0e86e9e94c6b802157596c6feeae49560fe7d134c36bd8d421b3d1ceea",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "45d5dee4",
+      "source_content": "Check whether any accessibility service is enabled. This includes TalkBack but also any third-party accessibility app that may be installed. To only check whether TalkBack is enabled, use [isScreenReaderEnabled](#isscreenreaderenabled). Returns a promise which resolves to a boolean. The result is `true` when some accessibility services is enabled and `false` otherwise.",
+      "source_content_hash": "413c1f5990d592b146dddb158ebfbd3afbdf7c50a22829f90924a5e5cf3aceef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "檢查是否有任何無障礙服務啟用。這包括 TalkBack 以及可能安裝的任何第三方無障礙應用。若僅需檢查 TalkBack 是否啟用，請使用 [isScreenReaderEnabled](#isscreenreaderenabled)。返回一個解析為布林值的 Promise。當某些無障礙服務啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "c58a8368",
+      "source_content": "> **Note**: Please use [isScreenReaderEnabled](#isscreenreaderenabled) if you only want to check the status of TalkBack.",
+      "source_content_hash": "d7df5d6c4e65df9082c5bcb6e0e29c29293b681c5d2f6ec58ad9ade678afeb39",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **注意**：若僅需檢查 TalkBack 的狀態，請使用 [isScreenReaderEnabled](#isscreenreaderenabled)。"
+      }
+    },
+    {
+      "segment_id": "e07d1959",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c06a14cd",
+      "source_content": "### `isBoldTextEnabled()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "706989b743046bee2c05540992fb0c6e7937f70ed39efd4ae5adc2e9ee74529e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isBoldTextEnabled()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "4aede6b2",
+      "source_content": "```tsx\nstatic isBoldTextEnabled(): Promise<boolean>:\n```",
+      "source_content_hash": "4a9cf862a28ed25435d29e2b33bbe98b0379caba0adef012bf919f6f54ce8e2f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e031d10",
+      "source_content": "Query whether a bold text is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when bold text is enabled and `false` otherwise.",
+      "source_content_hash": "37b4ae48324125e9efc7823b96d66e0168ba05937b99dc84a72f4586a877ef41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢粗體文字當前是否啟用。返回一個解析為布林值的 Promise。當粗體文字啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "71a1e0ef",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "450f22b0",
+      "source_content": "### `isGrayscaleEnabled()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "dba47a7a7dfaa0a314d5aeee2b4bcb18fd45b27e98092293e4d5a74e95b744a6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isGrayscaleEnabled()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "30d584f8",
+      "source_content": "```tsx\nstatic isGrayscaleEnabled(): Promise<boolean>;\n```",
+      "source_content_hash": "daa2519df971085d8f1b96751dc41b21850fa92dfba1e2807a786ae1ab95207d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4443801b",
+      "source_content": "Query whether grayscale is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when grayscale is enabled and `false` otherwise.",
+      "source_content_hash": "2bf23d3f655b3c75f2c6aeea0de34ee39bedf1147b791ab90376092d0e91e697",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢灰階模式當前是否啟用。返回一個解析為布林值的 Promise。當灰階模式啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "a0dd8d17",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5cdbe003",
+      "source_content": "### `isInvertColorsEnabled()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "080ecfa1636870b128e93c5bc65a89371563f63dbeea4724467cd1233d21b308",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isInvertColorsEnabled()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "8996d346",
+      "source_content": "```tsx\nstatic isInvertColorsEnabled(): Promise<boolean>;\n```",
+      "source_content_hash": "421baa0acef395e0a9d9774db88631693e446ea3e6067c95ae296680536f42df",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f10c482a",
+      "source_content": "Query whether invert colors is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when invert colors is enabled and `false` otherwise.",
+      "source_content_hash": "c168ce27203038421a298453b40497867fa8e3bea3ce59b171a83e8c5f3d3a6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢反轉顏色當前是否啟用。返回一個解析為布林值的 Promise。當反轉顏色啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "237c617c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "acfd6cd9",
+      "source_content": "### `isReduceMotionEnabled()`",
+      "source_content_hash": "ceda50070cf287b8751a1d50a131898feb4f63f8b0c613e69780dfeff708bae8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isReduceMotionEnabled()`"
+      }
+    },
+    {
+      "segment_id": "bab21133",
+      "source_content": "```tsx\nstatic isReduceMotionEnabled(): Promise<boolean>;\n```",
+      "source_content_hash": "ab022abb77a88d026dce6893e103a76b77d09ef36f5edbbefd27fb7e419412d5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "5b98f6e2",
+      "source_content": "Query whether reduce motion is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when reduce motion is enabled and `false` otherwise.",
+      "source_content_hash": "9f4bcf6022f807a5c33e5a12870173ea0bd8e51d306b0bfdfcf30067d8665ab4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢減少動畫效果當前是否啟用。返回一個解析為布林值的 Promise。當減少動畫效果啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "e7851494",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d67910b8",
+      "source_content": "### `isReduceTransparencyEnabled()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "8a61f924fb4454e0993cae1a265ce43bb0cedfc8bc32545433db8c20c983fcb1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isReduceTransparencyEnabled()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "63164279",
+      "source_content": "```tsx\nstatic isReduceTransparencyEnabled(): Promise<boolean>;\n```",
+      "source_content_hash": "c2c16004184f9752e32277ad2a7061c6d3d7180afee7b3e2e4f341a11438bc67",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_63164279"
+      }
+    },
+    {
+      "segment_id": "d67645cb",
+      "source_content": "Query whether reduce transparency is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when a reduce transparency is enabled and `false` otherwise.",
+      "source_content_hash": "4a4c50c6871419160ced408128d4e2a15e8d088579673183cd82c1416f874ce5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢當前是否啟用了降低透明度功能。回傳一個解析為布林值的 Promise。當降低透明度功能啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "c037f446",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7bd550b1",
+      "source_content": "### `isScreenReaderEnabled()`",
+      "source_content_hash": "b912fefcb92b27dedf290e306c6e5a70f585d21ed21096e939c2ec780403e1eb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isScreenReaderEnabled()`"
+      }
+    },
+    {
+      "segment_id": "0c4de445",
+      "source_content": "```tsx\nstatic isScreenReaderEnabled(): Promise<boolean>;\n```",
+      "source_content_hash": "25c3938c80062e0872f3c7ada5f229df7c0ef66062f541c7af76828649d2861a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0c4de445"
+      }
+    },
+    {
+      "segment_id": "4bfb1f31",
+      "source_content": "Query whether a screen reader is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when a screen reader is enabled and `false` otherwise.",
+      "source_content_hash": "705de80debf5efb7021fb3c69f9bc3c7c3f315d40a1c61b39c8f2ddbb6e74389",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢當前是否啟用了螢幕閱讀器。回傳一個解析為布林值的 Promise。當螢幕閱讀器啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "73f412a3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5ce48008",
+      "source_content": "### `prefersCrossFadeTransitions()` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "831553eb68049b6cd1f38c05aa0cd9fde302c27c2dc4a01d5d8be0c29733c5ff",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `prefersCrossFadeTransitions()` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "8e7e8fe4",
+      "source_content": "```tsx\nstatic prefersCrossFadeTransitions(): Promise<boolean>;\n```",
+      "source_content_hash": "4f1fb7534c6acb9c3b96b0168009aff5af87cee7e4d8c97c5774261ad2d75063",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8e7e8fe4"
+      }
+    },
+    {
+      "segment_id": "fe2c7f95",
+      "source_content": "Query whether reduce motion and prefer cross-fade transitions settings are currently enabled. Returns a promise which resolves to a boolean. The result is `true` when prefer cross-fade transitions is enabled and `false` otherwise.",
+      "source_content_hash": "555c3bad52d31390b82b82e5c4d348f24b9068c7ac2b0e9ac2464f84c6f9a5f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查詢當前是否同時啟用了減少動畫效果與偏好使用淡入淡出轉場設定。回傳一個解析為布林值的 Promise。當偏好淡入淡出轉場功能啟用時結果為 `true`，否則為 `false`。"
+      }
+    },
+    {
+      "segment_id": "4821d6da",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1e46ce2f",
+      "source_content": "### `setAccessibilityFocus()`",
+      "source_content_hash": "a0b98c83081ec5aa91b8334f4cb4b2aa2492371a0429b80e6382827c99451d51",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setAccessibilityFocus()`"
+      }
+    },
+    {
+      "segment_id": "92fa9171",
+      "source_content": "```tsx\nstatic setAccessibilityFocus(reactTag: number);\n```",
+      "source_content_hash": "4cda4cc7fc48418725804685df7ae108251e94c043813f8f894c9a452055e341",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_92fa9171"
+      }
+    },
+    {
+      "segment_id": "7acce358",
+      "source_content": "Set accessibility focus to a React component.",
+      "source_content_hash": "b2875d18beeca8fc3b2ae4912a06e00779e5997547b53e8f74c98d16a7563242",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將無障礙焦點設置到 React 元件上。"
+      }
+    },
+    {
+      "segment_id": "639926e9",
+      "source_content": "On Android, this calls `UIManager.sendAccessibilityEvent` method with passed `reactTag` and `UIManager.AccessibilityEventTypes.typeViewFocused` arguments.",
+      "source_content_hash": "d664869c7e37896fcf74829b768e889c4891c5823a9e2f6f04b62ffe9213c2e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，此方法會呼叫 `UIManager.sendAccessibilityEvent`，並傳入 `reactTag` 參數與 `UIManager.AccessibilityEventTypes.typeViewFocused` 參數。"
+      }
+    },
+    {
+      "segment_id": "28c88d0c",
+      "source_content": "> **Note**: Make sure that any `View` you want to receive the accessibility focus has `accessible={true}`.",
+      "source_content_hash": "bf5de5537097c3579e085fd24ee0b195caa82b007f747257e837b5c838709c4c",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **注意**：請確保任何要接收無障礙焦點的 `View` 都設定了 `accessible={true}`。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/accessibilityinfo.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.298687+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "b4b89b3250090ae826c55e9647da87b9aafc303baf0cb07f2ca3670358e3d6b1"
+  }
+}

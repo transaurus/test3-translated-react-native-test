@@ -1,0 +1,392 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/transforms.md",
+  "source_file_content_hash": "45544e8667cd4d6437bf948c0ae29ca3cdab39f6f785d05811b787d7516c1ca9",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: transforms\ntitle: Transforms\n---",
+      "source_content_hash": "35bec70963048b934bbb8d69d036cae0f32601311d05a24f4b2aaf58c8251fce",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Transforms are style properties that will help you modify the appearance and position of your components using 2D or 3D transformations. However, once you apply transforms, the layouts remain the same around the transformed component hence it might overlap with the nearby components. You can apply margin to the transformed component, the nearby components or padding to the container to prevent such overlaps.",
+      "source_content_hash": "63456467474dec6985a15c1f03d4f0b15b6a098be5e05d119fd5fbca25a2c15e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "變換(Transforms)是能幫助您使用2D或3D轉換來修改元件外觀和位置的樣式屬性。但請注意，當您套用變換後，變換元件周圍的佈局會保持原狀，這可能導致與相鄰元件重疊。您可以透過為變換元件添加邊距(margin)、調整相鄰元件或設置容器內邊距(padding)來避免此類重疊。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=Transforms\nimport React from 'react';\nimport {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';\n\nconst App = () => (\n  <SafeAreaView style={styles.container}>\n    <ScrollView contentContainerStyle={styles.scrollContentContainer}>\n      <View style={styles.box}>\n        <Text style={styles.text}>Original Object</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{scale: 2}],\n          },\n        ]}>\n        <Text style={styles.text}>Scale by 2</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{scaleX: 2}],\n          },\n        ]}>\n        <Text style={styles.text}>ScaleX by 2</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{scaleY: 2}],\n          },\n        ]}>\n        <Text style={styles.text}>ScaleY by 2</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{rotate: '45deg'}],\n          },\n        ]}>\n        <Text style={styles.text}>Rotate by 45 deg</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{rotateX: '45deg'}, {rotateZ: '45deg'}],\n          },\n        ]}>\n        <Text style={styles.text}>Rotate X&Z by 45 deg</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{rotateY: '45deg'}, {rotateZ: '45deg'}],\n          },\n        ]}>\n        <Text style={styles.text}>Rotate Y&Z by 45 deg</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{skewX: '45deg'}],\n          },\n        ]}>\n        <Text style={styles.text}>SkewX by 45 deg</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{skewY: '45deg'}],\n          },\n        ]}>\n        <Text style={styles.text}>SkewY by 45 deg</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{skewX: '30deg'}, {skewY: '30deg'}],\n          },\n        ]}>\n        <Text style={styles.text}>Skew X&Y by 30 deg</Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{translateX: -50}],\n          },\n        ]}>\n        <Text style={styles.text}>TranslateX by -50 </Text>\n      </View>\n\n      <View\n        style={[\n          styles.box,\n          {\n            transform: [{translateY: 50}],\n          },\n        ]}>\n        <Text style={styles.text}>TranslateY by 50 </Text>\n      </View>\n    </ScrollView>\n  </SafeAreaView>\n);\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n  },\n  scrollContentContainer: {\n    alignItems: 'center',\n    paddingBottom: 60,\n  },\n  box: {\n    height: 100,\n    width: 100,\n    borderRadius: 5,\n    marginVertical: 40,\n    backgroundColor: '#61dafb',\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  text: {\n    fontSize: 14,\n    fontWeight: 'bold',\n    margin: 8,\n    color: '#000',\n    textAlign: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "ecd5ccaaa98eb539c350a8cd0426e27286d1b16a1b82054aed061f690030b14f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "57180eb4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f6a06609",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "## Transform",
+      "source_content_hash": "d90361ba2c89bde3151252027350db73472034b68b230abed1fb9d12494e4bc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 變換(Transform)"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "`transform` accepts an array of transformation objects or space-separated string values. Each object specifies the property that will be transformed as the key, and the value to use in the transformation. Objects should not be combined. Use a single key/value pair per object.",
+      "source_content_hash": "2f320e97cf05f6984239b4e8b936d29f503870dff7a34898f19524364b14d964",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`transform`接受一個變換物件陣列或以空格分隔的字串值。每個物件以鍵值對形式指定要變換的屬性及其值。請注意，物件不應合併使用，每個物件應只包含一組鍵值對。"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "The rotate transformations require a string so that the transform may be expressed in degrees (deg) or radians (rad). For example:",
+      "source_content_hash": "24143081d2a2aa8cacbd49d594d1eb68a0ac0d5c896bdf9a81e8287aa4e2b235",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "旋轉變換需使用字串來表示角度(deg)或弧度(rad)。例如："
+      }
+    },
+    {
+      "segment_id": "ddf3de1d",
+      "source_content": "```js\n{\n  transform: [{rotateX: '45deg'}, {rotateZ: '0.785398rad'}],\n}\n```",
+      "source_content_hash": "3ad3343479c40a5f11546f59d832b91073a9f5399a70f521467fdc748042f4c8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ddf3de1d"
+      }
+    },
+    {
+      "segment_id": "61a78cbe",
+      "source_content": "The same could also be achieved using a space-separated string:",
+      "source_content_hash": "f4556cabedd070ffb9a63566f59ce781b50905488f62580b97f7d7fdc5cad81b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同樣效果也可透過空格分隔的字串實現："
+      }
+    },
+    {
+      "segment_id": "904df6eb",
+      "source_content": "```js\n{\n  transform: 'rotateX(45deg) rotateZ(0.785398rad)',\n}\n```",
+      "source_content_hash": "cfeddbdeacac4ceab9e721dec5dbcffacea3acc7c9dca887a3662e5212fa17aa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_904df6eb"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "The skew transformations require a string so that the transform may be expressed in degrees (deg). For example:",
+      "source_content_hash": "efafd24258f18ff2854b29894e7c09e622d18f1af5bcdcca46bd09015b7e77c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "傾斜變換需使用字串來表示角度(deg)。例如："
+      }
+    },
+    {
+      "segment_id": "bea1601a",
+      "source_content": "```js\n{\n  transform: [{skewX: '45deg'}],\n}\n```",
+      "source_content_hash": "a41b55924f9ba8108abca50d7f2b4599e622deac6608ee17de794a6ec9deadc7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bea1601a"
+      }
+    },
+    {
+      "segment_id": "144fc2d3",
+      "source_content": "| Type                                                                                                                                                                                                                                                                                                          | Required |\n| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |\n| array of objects: `{matrix: number[]}`, `{perspective: number}`, `{rotate: string}`, `{rotateX: string}`, `{rotateY: string}`, `{rotateZ: string}`, `{scale: number}`, `{scaleX: number}`, `{scaleY: number}`, `{translateX: number}`, `{translateY: number}`, `{skewX: string}`, `{skewY: string}` or string | No       |",
+      "source_content_hash": "b199dd1771c427e3e5942fdfa9a4d3bb5eda83a3fa3a7661f242b0079d2e0695",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_144fc2d3"
+      }
+    },
+    {
+      "segment_id": "7a9140d4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4d7a4554",
+      "source_content": "### `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`",
+      "source_content_hash": "1bf3b70ff6e93e60d2b1cf5d208dbdd12714634b42a4bbd9a4b4dad22425518e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`"
+      }
+    },
+    {
+      "segment_id": "93b7c17c",
+      "source_content": "> **Deprecated.** Use the [`transform`](transforms#transform) prop instead.",
+      "source_content_hash": "cb6ec416b1542a9b80730f0d7a9c015b0662f6be8d34028e8a2634913cd8d724",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **已棄用。** 請改用[`transform`](transforms#transform)屬性。"
+      }
+    },
+    {
+      "segment_id": "a9de5d69",
+      "source_content": "## Transform Origin",
+      "source_content_hash": "09decb5a2dd5e9c01efb7b211e1470818e17f0df8ad306b0f3d28f5ba58b34c0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 變換原點(Transform Origin)"
+      }
+    },
+    {
+      "segment_id": "e6ac016e",
+      "source_content": "The `transformOrigin` property sets the origin for a view's transformations. The transform origin is the point around which a transformation is applied. By default, the origin of a transform is `center`.",
+      "source_content_hash": "3e9598bfd510eb9cdfeda89b9d8a1b57a67c910e222143edc52c1b4db5815880",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`transformOrigin`屬性設定視圖變換的基準點。變換原點是應用變換時的中心點，預設為`center`。"
+      }
+    },
+    {
+      "segment_id": "e457c208",
+      "source_content": "# Example",
+      "source_content_hash": "8c0b95e11b3e8405926395129364e0b0db6e8a940f3fd2a1d54b9fbe1298ffb3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 範例"
+      }
+    },
+    {
+      "segment_id": "b3890715",
+      "source_content": "```SnackPlayer name=TransformOrigin&supportedPlatforms=ios,android\nimport React, {useEffect} from 'react';\nimport {Animated, View, StyleSheet, SafeAreaView, Easing, useAnimatedValue} from 'react-native';\n\nconst App = () => {\n  const rotateAnim = useAnimatedValue(0);\n\n  useEffect(() => {\n    Animated.loop(\n      Animated.timing(rotateAnim, {\n        toValue: 1,\n        duration: 5000,\n        easing: Easing.linear,\n        useNativeDriver: true,\n      }),\n    ).start();\n  }, [rotateAnim]);\n\n  const spin = rotateAnim.interpolate({\n    inputRange: [0, 1],\n    outputRange: ['0deg', '360deg'],\n  });\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <View style={styles.transformOriginWrapper}>\n        <Animated.View\n          style={[\n            styles.transformOriginView,\n            {\n              transform: [{rotate: spin}],\n            },\n          ]}\n        />\n      </View>\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  transformOriginWrapper: {\n    borderWidth: 1,\n    borderColor: 'rgba(0, 0, 0, 0.5)',\n  },\n  transformOriginView: {\n    backgroundColor: 'pink',\n    width: 100,\n    height: 100,\n    transformOrigin: 'top',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "0f2d680e74007df8e1d21f85b64d50125b1eccecae8de90909e02cda1849a348",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b3890715"
+      }
+    },
+    {
+      "segment_id": "bb74dfa2",
+      "source_content": "### Values",
+      "source_content_hash": "2f3411caa4975e1c45b4b42667d5a5c4c62fa46fdbd3ac5578ac98f9f5b9678e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 取值"
+      }
+    },
+    {
+      "segment_id": "f4b938fe",
+      "source_content": "Transform origin supports `px`, `percentage` and keywords `top`, `left`, `right`, `bottom`, `center` values.",
+      "source_content_hash": "6231ecf11b7b5329a4b53265e9f6eb66a69fc730b9927ad1d92a76d4c7031f3c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "變換原點支援`px`、`percentage`單位以及關鍵字`top`、`left`、`right`、`bottom`、`center`。"
+      }
+    },
+    {
+      "segment_id": "2d5a3f2f",
+      "source_content": "The `transformOrigin` property may be specified using one, two, or three values, where each value represents an offset.",
+      "source_content_hash": "ff2f99898480a0056875c0d6e5e75caacb014a86002ce375d670567470396e1d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`transformOrigin`屬性可使用一至三個值來指定偏移量："
+      }
+    },
+    {
+      "segment_id": "846134ef",
+      "source_content": "#### One-value syntax:",
+      "source_content_hash": "28c75d5df8a5290869e0749932058806df64435ece1b23def4321fe93b1aa11f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 單值語法："
+      }
+    },
+    {
+      "segment_id": "a8490b9a",
+      "source_content": "- The value must be a `px`, a `percentage`, or one of the keywords `left`, `center`, `right`, `top`, and `bottom`.",
+      "source_content_hash": "589ec41f806dbf3715c3c2b1767c760ce9e9c4d88481f18226b5852f09a30df7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 值必須為`px`、`percentage`或關鍵字`left`、`center`、`right`、`top`、`bottom`之一。"
+      }
+    },
+    {
+      "segment_id": "79d8cec2",
+      "source_content": "```js\n{\n  transformOrigin: '20px',\n  transformOrigin: 'bottom',\n}\n```",
+      "source_content_hash": "23a5a30c03acfa2f0719c3c75b21cf66ee17e87ccb2b3afd873330d73a7b5921",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_79d8cec2"
+      }
+    },
+    {
+      "segment_id": "bea5d450",
+      "source_content": "#### Two-value syntax:",
+      "source_content_hash": "7e88627b24fcf4701f2185e6f5232d95a9aebb9f44dd3a0e961598c1268b818b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 雙值語法："
+      }
+    },
+    {
+      "segment_id": "6cfa0721",
+      "source_content": "- First value (x-offset) must be a `px`, a `percentage`, or one of the keywords `left`, `center`, and `right`.\n- The second value (y-offset) must be a `px`, a `percentage`, or one of the keywords `top`, `center`, and `bottom`.",
+      "source_content_hash": "7fcb0a62b9475cfb9d02aa3e0731c49241549d48aa404fbc24ae8c17e5c98508",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 第一個值(x軸偏移)必須為`px`、`percentage`或關鍵字`left`、`center`、`right`\n- 第二個值(y軸偏移)必須為`px`、`percentage`或關鍵字`top`、`center`、`bottom`"
+      }
+    },
+    {
+      "segment_id": "00c94fa3",
+      "source_content": "```js\n{\n  transformOrigin: '10px 2px',\n  transformOrigin: 'left top',\n  transformOrigin: 'top right',\n}\n```",
+      "source_content_hash": "67c6aad0d1938ba344004be0bad967ab44e8e80597543f868f9ab6c8b9b66c0a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_00c94fa3"
+      }
+    },
+    {
+      "segment_id": "ad966a7e",
+      "source_content": "#### Three-value syntax:",
+      "source_content_hash": "21a5aac80bcd57ae99f29f4f154da9a5be85c1cccdb1e4b60d59855ae79e5028",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 三值語法："
+      }
+    },
+    {
+      "segment_id": "d20eeb48",
+      "source_content": "- The first two values are the same as for the two-value syntax.\n- The third value (z-offset) must be a `px`. It always represents the Z offset.",
+      "source_content_hash": "13204752547cc01b1437b78344d4f079b3b9760112b1d1a35f3993fad03aac7c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 前兩個值與雙值語法相同\n- 第三個值(z軸偏移)必須為`px`，始終表示Z軸偏移量"
+      }
+    },
+    {
+      "segment_id": "9b048e5d",
+      "source_content": "```js\n{\n  transformOrigin: '2px 30% 10px',\n  transformOrigin: 'right bottom 20px',\n}\n```",
+      "source_content_hash": "05bfd7f6bfcbe8dec72c29bea76ce2c0ced481a7e1f6bc303e0075fb277a4dc5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9b048e5d"
+      }
+    },
+    {
+      "segment_id": "becb5987",
+      "source_content": "#### Array syntax",
+      "source_content_hash": "5fda819ecee1bc42de5dd1fd9f6268f507220b970a7a48034a167037b7e69b1c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 陣列語法"
+      }
+    },
+    {
+      "segment_id": "d83b50df",
+      "source_content": "`transformOrigin` also supports an array syntax. It makes it convenient to use it with Animated APIs. It also avoids string parsing, so should be more efficient.",
+      "source_content_hash": "381352429e8f1f3dcd99af171ce24bc3cd32739d3bcd8af01049f2ac73567ba4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`transformOrigin`也支援陣列語法，這使得與Animated API配合使用更加方便，同時避免了字串解析，效能更高。"
+      }
+    },
+    {
+      "segment_id": "d7bc17bf",
+      "source_content": "```js\n{\n  // Using numeric values\n  transformOrigin: [10, 30, 40],\n  // Mixing numeric and percentage values\n  transformOrigin: [10, '20%', 0],\n}\n```",
+      "source_content_hash": "5122288658eef5da01d7ed2267d5fcee070f7d97d745f1d9a70e0bb5dd331eff",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7bc17bf"
+      }
+    },
+    {
+      "segment_id": "7e031d10",
+      "source_content": "You may refer to MDN's guide on [Transform origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) for additional information.",
+      "source_content_hash": "988f38399db5d923f74d5554a167b54fba36a72b9fc3e8142e2558088f7090e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多資訊可參考MDN的[變換原點指南](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/transforms.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.532624+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "45544e8667cd4d6437bf948c0ae29ca3cdab39f6f785d05811b787d7516c1ca9"
+  }
+}

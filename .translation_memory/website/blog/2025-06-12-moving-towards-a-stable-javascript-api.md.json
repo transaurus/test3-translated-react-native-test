@@ -1,0 +1,612 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2025-06-12-moving-towards-a-stable-javascript-api.md",
+  "source_file_content_hash": "caa195cec3fcc89c3ca3d54a446e9f99d6b1a7e6b4c0b709880a1f74daa2c7bf",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'Moving Towards a Stable JavaScript API (New Changes in 0.80)'\nauthors: [huntie, iwoplaza, jpiasecki, coado]\ntags: [announcement]\ndate: 2025-06-12T16:00\n---",
+      "source_content_hash": "6525f3117354adcffcb0b24a1819eafcec1ff186e64e0902bf28079e5070382e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "In React Native 0.80, we're introducing two significant changes to React Native's JavaScript API — the deprecation of deep imports, and our new Strict TypeScript API. These are part of an ongoing effort to accurately define our API and offer dependable type safety to users and frameworks.",
+      "source_content_hash": "d24cefc102fed6488573843038c4ec61ea58f624f86d6023c667237913355ab4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.80 中，我們將對 JavaScript API 進行兩項重大變更：棄用深度導入(deprecation of deep imports)與推出全新的嚴格 TypeScript API(Strict TypeScript API)。這些變更是為了精確定義我們的 API 架構，並為使用者與框架提供可靠的型別安全機制。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "**Quick takeaways:**",
+      "source_content_hash": "174f2c2057505a33b313accb83ea02545377c1b548245a48f1111111e11a18f9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**重點摘要：**"
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- **Deep imports deprecation**: From 0.80, we're introducing deprecation warnings for deep imports from the `react-native` package.\n- **Opt-in Strict TypeScript API**: We are moving to from-source TypeScript types and a new public API baseline under TypeScript. These enable stronger and more futureproof type accuracy, and will be a one-time breaking change. [Opt in](/blog/2025/06/12/moving-towards-a-stable-javascript-api#strict-typescript-api) via `compilerOptions` in your project's `tsconfig.json`.\n- We'll work with the community over time to ensure that these changes work for everyone, before enabling the Strict TypeScript API by default in a future React Native release.",
+      "source_content_hash": "98eb409e383c16df62ec3330826e2e8f3e097f5674232e1014a867821d761279",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **棄用深度導入**：自 0.80 版本起，我們將對從 `react-native` 套件進行深度導入的行為發出棄用警告。\n- **可選用的嚴格 TypeScript API**：我們正轉向基於原始碼生成的 TypeScript 型別定義，並在 TypeScript 下建立新的公共 API 基準。這些變更將帶來更強健且面向未來的型別準確性，屬於一次性重大變更。可透過專案 `tsconfig.json` 中的 `compilerOptions` [選擇啟用](/blog/2025/06/12/moving-towards-a-stable-javascript-api#strict-typescript-api)。\n- 我們將與社群持續合作，確保這些變更能適用於所有開發者，之後才會在未來的 React Native 版本中預設啟用嚴格 TypeScript API。"
+      }
+    },
+    {
+      "segment_id": "6429a3aa",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6429a3aa"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "## What's changing and why",
+      "source_content_hash": "a15cc2a17faf168dbc425767740f5a52e9ba0997540b53e48fd4eb5a5275a75e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 變更內容與原因"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "We are moving to improve and stabilise React Native's public JavaScript API — i.e. what you get when you import `'react-native'`.",
+      "source_content_hash": "4ffe2719299c1d5a200ded9ba707987e31538abfff1029da243b870289492e6c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們正著手改進並穩定 React Native 的公共 JavaScript API——也就是當你導入 `'react-native'` 時所獲得的介面。"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "Historically, we've approximated this. React Native is authored in [Flow](https://flow.org/), but the community has long since moved to TypeScript in open source, which is how the public API is consumed and validated for compatibility. Our types have been (lovingly) [community-contributed](https://www.npmjs.com/package/@types/react-native), and since merged and aligned in our codebase. However, these have relied on manual maintenance and no automated tooling, introducing correctness gaps.",
+      "source_content_hash": "bc7e0f41b0ac32bcdde1665bfe3aa2c808fd946cdb3375bd270509afb8b264f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "長期以來，我們對此僅採取近似做法。React Native 原始碼使用 [Flow](https://flow.org/) 撰寫，但開源社群早已轉向 TypeScript，這正是公共 API 被使用與驗證相容性的方式。我們的型別定義過去（充滿熱情地）由[社群貢獻](https://www.npmjs.com/package/@types/react-native)，後來被合併至程式碼庫中。然而這些型別依賴人工維護且缺乏自動化工具，導致正確性缺口。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "Additionally, our public JS API has been poorly defined in terms of module boundaries — e.g. internal `'react-native/Libraries/'` deep imports were reachable by app code, but could frequently change as we updated these internals.",
+      "source_content_hash": "f68016cd820815b4ad775f6e0824924bec9c652bf6daaefd539e7b0b32cfec64",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，我們的公共 JS API 在模組邊界定義上相當模糊——例如應用程式碼可存取內部 `'react-native/Libraries/'` 的深度導入路徑，但這些內部實作經常會隨更新而變動。"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "In 0.80, we're addressing these issues by deprecating deep imports, and introducing a user opt-in to a new, generated API baseline in TypeScript. We're calling this our **Strict TypeScript API**. Ultimately, this is the groundwork to offer a stable React Native API in future.",
+      "source_content_hash": "8c22ff97a07ccc18444d3acb540c052549fcc666cae71898fba8084c2a313fdd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.80 版本中，我們透過棄用深度導入與推出可選用的新型別生成基準（稱為**嚴格 TypeScript API**）來解決這些問題。這將為未來提供穩定的 React Native API 奠定基礎。"
+      }
+    },
+    {
+      "segment_id": "3c36424c",
+      "source_content": "## Deprecating deep imports from `react-native`",
+      "source_content_hash": "b08116986e7299d8096a88db0ea303351c5aeee263cca26fd1ef334014c93541",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 棄用從 `react-native` 進行深度導入"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "The main change we're making to our API today is deprecating the use of deep imports ([RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)), with warnings in ESLint and the JS console. Deep imports of values and types should be updated to `react-native`'s root import.",
+      "source_content_hash": "a01a5b3a43472e36d79588a061ae3fab4fc142eb88fcee215cc67a7457ad1077",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本次 API 變更的主要內容是棄用深度導入的使用（參見 [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)），並在 ESLint 與 JS 控制台發出警告。請將值與型別的深度導入更新為 `react-native` 的根導入路徑。"
+      }
+    },
+    {
+      "segment_id": "b017063d",
+      "source_content": "```js title=\"\"\n// Before - import from subpath\nimport {Alert} from 'react-native/Libraries/Alert/Alert';\n\n// After - import from `react-native`\nimport {Alert} from 'react-native';\n```",
+      "source_content_hash": "83f82a40b759851b1b701ae859088781526bca501df8f7382cc11e57889383c8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b017063d"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "This change reduces the total surface area of our JavaScript API into a fixed set of exports which we can control and make stable in a future release. We're targeting a removal of these import paths in 0.82.",
+      "source_content_hash": "7c154920164131b2886dcd15b31c547eae072680012c9afa200f9771e08cc6c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更能將 JavaScript API 的總表面積縮減為固定可控制的匯出集合，以便在未來版本中實現穩定化。我們預計在 0.82 版本移除這些導入路徑。"
+      }
+    },
+    {
+      "segment_id": "f331c5ef",
+      "source_content": ":::info[API feedback]\n\nSome APIs are not exported at root, and will become unavailable without deep imports. We have an **[open feedback thread](https://github.com/react-native-community/discussions-and-proposals/discussions/893)** and will be working with the community to finalize the exports in our public API. Please share your feedback!\n\n:::",
+      "source_content_hash": "cd131b033e424ead757aa1997b91aafbba9cece660c13bceb409a221b558db9a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info[API 意見回饋]\n\n部分 API 未從根路徑匯出，棄用深度導入後將無法使用。我們設有**[開放意見討論串](https://github.com/react-native-community/discussions-and-proposals/discussions/893)**，將與社群共同完善公共 API 的匯出定義。歡迎提供意見！\n\n:::"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "**Opting out**",
+      "source_content_hash": "e8e31dd3e0d41fdd40a117828d154b6bcf6cbbc1eb4a13d0e499e00d6602c5c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**選擇退出**"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "Please bear in mind that we aim to remove deep imports from React Native's API in a future release, and these should instead be updated to the root import.",
+      "source_content_hash": "f64ccdd6c9a3db8ae01015d65f057796d326be6523b175576a61741675632340",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，我們計劃在未來版本中從 React Native API 移除深度導入功能，建議將這些導入更新為根路徑形式。"
+      }
+    },
+    {
+      "segment_id": "b72935b5",
+      "source_content": "<details>\n<summary>**Opting out of warnings**</summary>\n\n#### ESLint\n\nDisable the `no-deep-imports` rule using `overrides`.\n\n<!-- prettier-ignore -->\n```js title=\".eslintrc.js\"\n  overrides: [\n    {\n      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],\n      rules: {\n        '@react-native/no-deep-imports': 0,\n      },\n    },\n  ]\n```\n\n#### Console warnings\n\nPass the `disableDeepImportWarnings` option to `@react-native/babel-preset`.\n\n<!-- prettier-ignore -->\n```js title=\"babel.config.js\"\nmodule.exports = {\n  presets: [\n    ['module:@react-native/babel-preset', {disableDeepImportWarnings: true}]\n  ],\n};\n```\n\nRestart your app with `--reset-cache` to clear the Metro cache.\n\n```sh title=\"\"\nnpx @react-native-community/cli start --reset-cache\n```\n\n</details>",
+      "source_content_hash": "3dd8b0727030e09c74a2c2ea1cd9ff74388207ff2a92556dd06a3b8a839e8c6b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b72935b5"
+      }
+    },
+    {
+      "segment_id": "3ca4b8b0",
+      "source_content": "<details>\n<summary>**Opting out of warnings (Expo)**</summary>\n\n#### ESLint\n\nDisable the `no-deep-imports` rule using `overrides`.\n\n<!-- prettier-ignore -->\n```js title=\".eslintrc.js\"\noverrides: [\n  {\n    files: ['*.js', '*.jsx', '*.ts', '*.tsx'],\n    rules: {\n      '@react-native/no-deep-imports': 0,\n    },\n  },\n];\n```\n\n#### Console warnings\n\nPass the `disableDeepImportWarnings` option to `babel-preset-expo`.\n\n<!-- prettier-ignore -->\n```js title=\"babel.config.js\"\nmodule.exports = function (api) {\n  api.cache(true);\n  return {\n    presets: [['babel-preset-expo', {disableDeepImportWarnings: true}]],\n  };\n};\n```\n\nRestart your app with `--clear` to clear the Metro cache.\n\n```sh name=\"\"\nnpx expo start --clear\n```\n\n</details>",
+      "source_content_hash": "6e3726054fbcaf61d39ea8a3fb605f0cde9f29270365c304ccd70728db984318",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ca4b8b0"
+      }
+    },
+    {
+      "segment_id": "47cd8dd6",
+      "source_content": "## Strict TypeScript API (opt-in)",
+      "source_content_hash": "3f6824cbf6a4c0b40b2c730311a39e563747c58d78e37ea1f45eb15da69a0685",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 嚴格 TypeScript API（可選用）"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "The Strict TypeScript API is a new set of TypeScript types in the `react-native` package, which can be opted into via your `tsconfig.json`. We're shipping these alongside our existing TS types, meaning you can choose to migrate when ready.",
+      "source_content_hash": "3b3d4d1aeaaf2d306ac47435f2638501bfa1ab8594cc96403855401acb4fc4aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "嚴格 TypeScript API 是 `react-native` 套件中的新型別集合，可透過 `tsconfig.json` 選擇啟用。這些新型別將與現有 TS 型別並存，您可自行決定遷移時機。"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "The new types are:",
+      "source_content_hash": "80e2e84ca0468e1cc71bd42ca53eb8bfb5b80730cfc114819e70b49a83945afd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "新型別具有以下特性："
+      }
+    },
+    {
+      "segment_id": "9ceae896",
+      "source_content": "1. **Generated directly from our source code** — improving coverage and correctness, so you can expect stronger compatibility guarantees.\n2. **Restricted to `react-native`'s index file** — more tightly defining our public API, and meaning we won't break the API when making internal file changes.",
+      "source_content_hash": "158447ec858d4bc69e3b58647482d06eed564a53c5faa03bcc1635ea848c01e4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. **直接從原始碼生成** — 提升覆蓋率與正確性，您將獲得更高的相容性保證。\n2. **限制於 `react-native` 的 index 檔案** — 更嚴格定義公共 API，意味著當我們修改內部檔案時不會破壞 API。"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "When the community is ready, the Strict TypeScript API will become our default API in future — synchronized with deep imports removal. This means it's a **good idea** to begin opting in, as you'll be ready for React Native's future stable JS API.",
+      "source_content_hash": "088dbe25928a57bc24cc18ba7460e9a9b0deda3489d01dc7b2804d192433b81c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當社群準備就緒時，嚴格 TypeScript API 將成為未來的預設 API — 與深層導入的移除同步進行。這意味著**現在開始啟用**是個好主意，您將為 React Native 未來穩定的 JS API 做好準備。"
+      }
+    },
+    {
+      "segment_id": "8a061704",
+      "source_content": "```json title=\"tsconfig.json\"\n{\n  \"extends\": \"@react-native/typescript-config\",\n  \"compilerOptions\": {\n    ...\n    \"customConditions\": [\"react-native-strict-api\"]\n  }\n}\n```",
+      "source_content_hash": "495066784917d0d329ea94dd2f61d9ee4150992e919ea63148070d2ced143c61",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a061704"
+      }
+    },
+    {
+      "segment_id": "91f76522",
+      "source_content": ":::note[Under the hood]\n\nThis will instruct TypeScript to resolve `react-native` types from our new [`types_generated/`](https://www.npmjs.com/package/react-native?activeTab=code) dir, instead of the previous [`types/`](https://www.npmjs.com/package/react-native?activeTab=code) dir (manually maintained). No restart of TypeScript or your editor is required.\n\n:::",
+      "source_content_hash": "d50686e5a7a1954ddb5496aa4782e386e55f3722836982fefe238a0699276ba6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[底層機制]\n\n這將指示 TypeScript 從我們新的 [`types_generated/`](https://www.npmjs.com/package/react-native?activeTab=code) 目錄解析 `react-native` 類型，而非先前手動維護的 [`types/`](https://www.npmjs.com/package/react-native?activeTab=code) 目錄。無需重啟 TypeScript 或您的編輯器。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### Breaking: Deep imports are disallowed",
+      "source_content_hash": "d7a35c6c248893459540c1850c7704b5811c7917ed79f7821379b361311b9207",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更：禁止深層導入"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "As above, types under the Strict TypeScript API are now only resolvable from the main `'react-native'` import path, enforcing [package encapsulation](/blog/2023/06/21/package-exports-support), per our above deprecation.",
+      "source_content_hash": "88e434e8fda44626edf0e96ae32b37616237a8b4177936add029c95f895d1bb3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如上所述，在嚴格 TypeScript API 下，類型現在僅能從主 `'react-native'` 導入路徑解析，根據前述的棄用政策強制執行[套件封裝](/blog/2023/06/21/package-exports-support)。"
+      }
+    },
+    {
+      "segment_id": "0029045f",
+      "source_content": "```tsx\n// Before - import from subpath\nimport {Alert} from 'react-native/Libraries/Alert/Alert';\n\n// After - MUST import from `react-native`\nimport {Alert} from 'react-native';\n```",
+      "source_content_hash": "1619b2f14c63ea44067fd7cdc4b40f94efa0af21ade8e2157859a3357e756785",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0029045f"
+      }
+    },
+    {
+      "segment_id": "cd539469",
+      "source_content": ":::tip[Key win]\n\nWe've scoped our public API to the exports of React Native's `index.js` file, which we carefully maintain. This means that file changes elsewhere in our codebase will no longer be breaking changes.\n\n:::",
+      "source_content_hash": "ccf6002e3e3d3163ec26eb5a4122c17226968046352edcc2aac50619adb91413",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip[關鍵優勢]\n\n我們已將公共 API 範圍限定於 React Native 的 `index.js` 檔案輸出，該檔案經過仔細維護。這意味著程式碼庫中其他檔案的變更將不再成為破壞性變更。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "67edbbc4",
+      "source_content": "### Breaking: Some type names / shapes have changed",
+      "source_content_hash": "9ec5ddb2dde4f73b6876690c60da520a51f03b74806bdf7c6857de734f540f1d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更：部分類型名稱/結構已變更"
+      }
+    },
+    {
+      "segment_id": "61a78cbe",
+      "source_content": "Types are now generated from source, rather than manually maintained. In doing this:",
+      "source_content_hash": "111979085ccef985ca07f40fe57c720ab2aba452abb81b30738148aa0462aaf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "類型現在從原始碼生成，而非手動維護。在此過程中："
+      }
+    },
+    {
+      "segment_id": "471486dc",
+      "source_content": "- We've aligned differences that had built up from the community contributed types — and also increased the type coverage of our source code.\n- We've intentionally updated some type names and type shapes, where there was scope to simplify or reduce ambiguity.",
+      "source_content_hash": "dabf143eaab52f27a1a7665b010e0c828a01e5b79ea128b971a5f093a2ee39da",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 我們已修正社群貢獻類型中累積的差異 — 同時增加了原始碼的類型覆蓋率。\n- 我們刻意更新了部分類型名稱與結構，以簡化或減少歧義。"
+      }
+    },
+    {
+      "segment_id": "dc9de01a",
+      "source_content": ":::tip[Key win]\n\nBecause types are now generated from React Native's source code, you can be confident that the typechecker is **always accurate** for a given version of `react-native`.\n\n:::",
+      "source_content_hash": "308b1199f56bb4961e566f6c1f4b49b16044fff83c317d7a7da48af766fbb0bd",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip[關鍵優勢]\n\n由於類型現在直接從 React Native 原始碼生成，您可以確信類型檢查器**始終準確**反映特定版本的 `react-native`。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "4b62f7d8",
+      "source_content": "#### Example: Stricter exported symbols",
+      "source_content_hash": "3d035ad5df5c0af3bb31c3e268a359e3045a601628e1663dadfbc55080746821",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 範例：更嚴格的導出符號"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "The `Linking` API is now a single `interface`, rather than two exports. This follows for a number of other APIs ([see docs](/docs/strict-typescript-api)).",
+      "source_content_hash": "4c23dd6509ddaf579071da0f16c39045c851fdfae3f9fe8bd4b67076ec23671f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Linking` API 現在是單一 `interface`，而非兩個導出項。此模式適用於多個其他 API（[參閱文件](/docs/strict-typescript-api)）。"
+      }
+    },
+    {
+      "segment_id": "21f43a9a",
+      "source_content": "```tsx\n// Before\nimport {Linking, LinkingStatic} from 'react-native';\n\nfunction foo(linking: LinkingStatic) {}\nfoo(Linking);\n\n// After\nimport {Linking} from 'react-native';\n\nfunction foo(linking: Linking) {}\nfoo(Linking);\n```",
+      "source_content_hash": "d605bc6eabcc6e07eb6d8dde2f58c1eecd89dee97e7c603a7ba97c600191d684",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_21f43a9a"
+      }
+    },
+    {
+      "segment_id": "778e087a",
+      "source_content": "#### Example: Fixed / more complete types",
+      "source_content_hash": "0eb91df415490103685f7b57eebf3f41e2089a30a08981ae32664d76bae0eb8d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 範例：修正/更完整的類型"
+      }
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "Previous manual type definitions left the opportunity for type gaps. Under generated Flow → TypeScript, these are no longer present (and at source, benefit from Flow's additional type validation for multi-platform code).",
+      "source_content_hash": "886d8ec04747dc79a911650289f5bf5ca0dfe96c346366d4fbdfbc695a18c598",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "先前手動定義的類型可能遺漏某些部分。透過 Flow → TypeScript 的自動生成，這些漏洞已不復存在（且在原始碼層級受益於 Flow 對多平台程式碼的額外類型驗證）。"
+      }
+    },
+    {
+      "segment_id": "f377fafa",
+      "source_content": "```tsx\nimport {Dimensions} from 'react-native';\n\n// Before - Type error\n// After - number | undefined\nconst {densityDpi} = Dimensions.get();\n```",
+      "source_content_hash": "56c2a35ee5454bfb93de9aae780544edd9f1c257df4efb7abe0f6c9ab7978522",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f377fafa"
+      }
+    },
+    {
+      "segment_id": "dc825187",
+      "source_content": "### Other breaking changes",
+      "source_content_hash": "c85df23bcc53800e8379b0c6b59878d957de784e9027d20361e7ad7097c3791a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他重大變更"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "Please refer to our [dedicated guide](/docs/strict-typescript-api) in the docs which details all breaking types changes and how to update your code.",
+      "source_content_hash": "efbaee317429a8969481181fc07e13694303603d25eedb306931ab6428ebeac6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請參閱我們文件中的[專用指南](/docs/strict-typescript-api)，其中詳述所有類型變更與遷移方法。"
+      }
+    },
+    {
+      "segment_id": "2c3ad447",
+      "source_content": "## Rollout",
+      "source_content_hash": "6b4c5c83aa5ee85f2cfdcd1e85382b7d125b82e043b9e2b37b54eeef14a09ab5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 推行時程"
+      }
+    },
+    {
+      "segment_id": "61e5dad6",
+      "source_content": "We appreciate that any breaking change to React Native will take time for developers to update to in their apps.",
+      "source_content_hash": "661182722cdb77a958763b64a4b130c394ddedf5dbacd1af99fcec60a228a674",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們理解任何 React Native 的破壞性變更都需要開發者花時間更新應用程式。"
+      }
+    },
+    {
+      "segment_id": "43662a16",
+      "source_content": "#### Now — Opt-in launch (0.80)",
+      "source_content_hash": "65b0971dedb1a8615d57d37d489b5b08697d08e2ab77240e68a13d321d36441e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 現階段 — 選擇性啟用 (0.80)"
+      }
+    },
+    {
+      "segment_id": "85821ad3",
+      "source_content": "The `\"react-native-strict-api\"` opt-in is stable in the 0.80 release.",
+      "source_content_hash": "2a0c96c8d9d91b509f840d2b765fc69f2044617582ca32137a64775c713a6aba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`\"react-native-strict-api\"` 選項已在 0.80 版本穩定釋出。"
+      }
+    },
+    {
+      "segment_id": "4f62aae3",
+      "source_content": "- This is a one-time migration. We aim for apps and libraries to opt in at their own pace over the next couple of releases.\n- Under either mode, nothing will change for your app at runtime — this affects TypeScript analysis only.\n- **And**, we will take feedback on missing APIs, via our [dedicated feedback thread](https://github.com/react-native-community/discussions-and-proposals/discussions/893).",
+      "source_content_hash": "4d1322361b66fd6154c78335ca586de9df77f30df2967e25986831343c82149a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 這是一次性遷移。我們預計應用程式與函式庫會在未來幾個版本中依自身步調啟用。\n- 無論採用哪種模式，您的應用程式在運行時都不會受影響 — 此變更僅涉及 TypeScript 分析。\n- **同時**，我們將透過[專用反饋討論串](https://github.com/react-native-community/discussions-and-proposals/discussions/893)收集關於缺失 API 的意見。"
+      }
+    },
+    {
+      "segment_id": "979d0fc6",
+      "source_content": ":::tip[Recommended]\n\nThe Strict TypeScript API will become our default API in future.\n\nIf you have time, it's worth testing the opt-in now in your `tsconfig.json`, to futureproof your app or library. This will immediately evaluate if there are any type errors introduced in your app under the Strict API. **There may be none(!)** — in which case, you're good to go.\n\n:::",
+      "source_content_hash": "73ea6def5af8b13be312d4a9582cdb790cd7ad730a52f27eac3980cc2b01efb1",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip[推薦]\n\n嚴格 TypeScript API 將成為我們未來的預設 API。\n\n如果您有時間，現在就值得在 `tsconfig.json` 中測試這個選擇加入功能，以確保您的應用程式或函式庫能適應未來。這將立即評估在嚴格 API 下，您的應用程式中是否有任何類型錯誤被引入。**可能完全沒有(!)** — 這樣的話，您就可以放心使用了。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "5f4381f8",
+      "source_content": "#### Future — Strict TypeScript API by default",
+      "source_content_hash": "fb01d18b4638d8d2d98ddef78abb7e38049ef352e38cb13447144d4cf4d3f71a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 未來 — 預設啟用嚴格 TypeScript API"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "In the future, we will require all codebases to use our Strict API, and will remove the legacy types.",
+      "source_content_hash": "503c3891e5f964c016d683333d28a1d033ad17735f329dae548916f334d5cb69",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "未來，我們將要求所有程式碼庫使用我們的嚴格 API，並移除舊有的類型定義。"
+      }
+    },
+    {
+      "segment_id": "d3f13bf4",
+      "source_content": "The timeline for this will be based on community feedback. For at least the next two React Native releases, the Strict API will remain an opt-in.",
+      "source_content_hash": "64e4b37856b3851c5f3250bc900a7cca7aea9aaaf1487750729dc4985504a38d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這個時間表將基於社群的回饋。至少在接下來的兩個 React Native 版本中，嚴格 API 將保持為選擇加入的功能。"
+      }
+    },
+    {
+      "segment_id": "13095ea3",
+      "source_content": "## FAQs",
+      "source_content_hash": "3bd810b3b5e6d0ff5d76e1b6274203676713250cc2873a02e39284054734cd17",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 常見問題"
+      }
+    },
+    {
+      "segment_id": "2d2470c7",
+      "source_content": "<details>\n<summary>\n**I'm using subpath imports today. What should I do?**\n</summary>\n\nPlease migrate to the root `'react-native'` import path.\n\n- Subpath imports (e.g. `'react-native/Libraries/Alert/Alert'`) are becoming private APIs. Without preventing access to implementation files inside React Native, we can’t offer a stable JavaScript API.\n- We want our deprecation warnings to motivate community feedback, which can be raised via our [centralized discussion thread](https://github.com/react-native-community/discussions-and-proposals/discussions/893), if you believe we are not exposing code paths that are crucial for your app. Where justified, we may promote APIs to the index export.\n\n</details>",
+      "source_content_hash": "bac32151a45363030736575ccb93a6ad893c64828bfedc207feba8f8fb4a039e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2d2470c7"
+      }
+    },
+    {
+      "segment_id": "6088d88d",
+      "source_content": "<details>\n<summary>\n**I'm a library maintainer. How does this change impact me?**\n</summary>\n\nBoth apps and libraries can opt in at their own pace, since `tsconfig.json` will only affect the immediate codebase.\n\n- Typically, `node_modules` is excluded from validation by the TypeScript server in a React Native project. Therefore, your package's exported type definitions are the source of truth.\n\n**💡 We want feedback!** As with changed subpath imports, if you encounter any integration issues with the Strict API, please let us know [on GitHub](https://github.com/react-native-community/discussions-and-proposals/discussions/893).\n\n</details>",
+      "source_content_hash": "9699a2d9a4c3d893973117147a9cd38d7ac278a1ae23c0f247123dee9e3ffd18",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6088d88d"
+      }
+    },
+    {
+      "segment_id": "005d858b",
+      "source_content": "<details>\n<summary>\n**Does this guarantee a final API for React Native yet?**\n</summary>\n\nSadly, not yet. In 0.80, we've made a tooling investment so that React Native's existing JS API baseline can be accurately consumed via TypeScript — enabling future stable changes. We're formalizing the existing API you know and love.\n\nIn the future, we will take action to finalise the APIs we currently offer in core — across each language surface. API changes will be communicated via RFCs/announcements, and typically a deprecation cycle.\n\n</details>",
+      "source_content_hash": "939665008bc59751c8b83ba2495530293843530c8ee4b94466dd6521eff00c50",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_005d858b"
+      }
+    },
+    {
+      "segment_id": "191b81b4",
+      "source_content": "<details>\n<summary>\n**Why isn't React Native written in TypeScript?**\n</summary>\n\nReact Native is core infrastructure at Meta. We test every merged change across our Family of Apps, before they hit general open source availability.\n\nAt this scale and sensitivity, correctness matters. The bottom line is that Flow offers us greater performance and greater strictness than TypeScript, including specific [multi-platform support for React Native](https://flow.org/en/docs/react/multiplatform/).\n\n</details>",
+      "source_content_hash": "22b6a3044733cf314df9cde3c9d85f80c39895160ca3f869d00abfc0128c0da4",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_191b81b4"
+      }
+    },
+    {
+      "segment_id": "295e85da",
+      "source_content": "## Thanks",
+      "source_content_hash": "1e57366f4f2b8342ce1186455878164e2c099d41b453de456c1a921520e0df59",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "a5a28988",
+      "source_content": "These changes were made possible by [Iwo Plaza](https://x.com/iwoplaza), [Jakub Piasecki](https://x.com/breskin67), [Dawid Małecki](https://github.com/coado), [Alex Hunt](https://x.com/huntie), and [Riccardo Cipolleschi](https://x.com/CipolleschiR).",
+      "source_content_hash": "d5c73a85ddcb69f71f93e47a6c59fb03ce0e73f17917212a2604716213c95968",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些變更得以實現，要感謝 [Iwo Plaza](https://x.com/iwoplaza)、[Jakub Piasecki](https://x.com/breskin67)、[Dawid Małecki](https://github.com/coado)、[Alex Hunt](https://x.com/huntie) 和 [Riccardo Cipolleschi](https://x.com/CipolleschiR)。"
+      }
+    },
+    {
+      "segment_id": "6c4ea90c",
+      "source_content": "Thanks also to [Pieter Vanderwerff](https://github.com/pieterv), [Rubén Norte](https://github.com/rubennorte), and [Rob Hogan](https://x.com/robjhogan) for their additional help and input.",
+      "source_content_hash": "9e43236530975407f4716bcbf218a36f7372ac15d53a0ad6979c2a43c35638c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同時也感謝 [Pieter Vanderwerff](https://github.com/pieterv)、[Rubén Norte](https://github.com/rubennorte) 和 [Rob Hogan](https://x.com/robjhogan) 的額外協助與意見。"
+      }
+    },
+    {
+      "segment_id": "da4dd472",
+      "source_content": ":::note[Learn more]\n\n<div style={{display: 'flex'}}>\n<p style={{flex: 1, marginRight: 40, marginBottom: 0}}>\n<strong style={{ display: 'block', marginTop: 8, marginBottom: 8 }}>Watch the talk!</strong>\n<span style={{ display: 'block', marginBottom: 8 }}>We shared a deep dive into our motivations and the work behind the Strict TypeScript API at <strong>App.js 2025</strong>.</span>\n**[View on YouTube](https://www.youtube.com/live/UTaJlqhTk2g?si=SDRmj80kss7hXuGG&t=6520)**\n</p>\n<img\n  src=\"/blog/assets/0.80-js-stable-api-appjs.jpg\"\n  style={{ flexShrink: 0, width: '200px', aspectRatio: '16/9', objectFit: 'contain' }}\n  alt=\"App.js 2025 Talk\"\n/>\n</div>\n\n:::",
+      "source_content_hash": "8849adccb73ae667dbd148f43ddce0ab7a3f2acf5cd9019bfab0ee757bde1169",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[了解更多]\n\n<div style={{display: 'flex'}}>\n<p style={{flex: 1, marginRight: 40, marginBottom: 0}}>\n<strong style={{ display: 'block', marginTop: 8, marginBottom: 8 }}>觀看演講！</strong>\n<span style={{ display: 'block', marginBottom: 8 }}>我們在 <strong>App.js 2025</strong> 上深入探討了嚴格 TypeScript API 背後的動機和工作。</span>\n**[在 YouTube 上觀看](https://www.youtube.com/live/UTaJlqhTk2g?si=SDRmj80kss7hXuGG&t=6520)**\n</p>\n<img\n  src=\"/blog/assets/0.80-js-stable-api-appjs.jpg\"\n  style={{ flexShrink: 0, width: '200px', aspectRatio: '16/9', objectFit: 'contain' }}\n  alt=\"App.js 2025 演講\"\n/>\n</div>\n\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2025-06-12-moving-towards-a-stable-javascript-api.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.243625+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "caa195cec3fcc89c3ca3d54a446e9f99d6b1a7e6b4c0b709880a1f74daa2c7bf"
+  }
+}

@@ -1,0 +1,640 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2023-06-21-0.72-metro-package-exports-symlinks.md",
+  "source_file_content_hash": "431cd0dcdd6c5c866be2205982b151056f19dd94899dde1aa592faa2b69377f9",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.72 - Symlink Support, Better Errors, and more'\nauthors: [kelset, fortmarek, cipolleschi, lunaleaps]\ntags: [announcement, release]\ndate: 2023-06-21\n---",
+      "source_content_hash": "191f9cd592694a9b9a348d0164511b10132b4c9cd7a7a61171475b949d062e2e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Today we’re releasing 0.72!",
+      "source_content_hash": "167ea10df36e0af73a105c24668322419cf3f0ed8db683a00e75b7faad52cf5b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們正式發佈 0.72 版本！"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "This release adds highly requested features for Metro, better error handling, and other developer experience improvements. So much of this work was prioritized from your feedback on the [2022 community survey](https://github.com/react-native-community/discussions-and-proposals/discussions/528) -- thank you to all those that participated!",
+      "source_content_hash": "114b1192c38cc7b00aeee0c00cfa1154250db1b0935313ad2b4a8a03889aa567",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本新增了 Metro 的熱門功能需求、更好的錯誤處理機制，以及其他開發者體驗改進。這些工作大多源自您在[2022 年社群調查](https://github.com/react-native-community/discussions-and-proposals/discussions/528)中的反饋——感謝所有參與者！"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "9e760345",
+      "source_content": "- [New Metro Features](/blog/2023/06/21/0.72-metro-package-exports-symlinks#new-metro-features)\n- [Developer Experience Improvements](/blog/2023/06/21/0.72-metro-package-exports-symlinks#developer-experience-improvements)\n- [Moving New Architecture Updates](/blog/2023/06/21/0.72-metro-package-exports-symlinks#moving-new-architecture-updates)",
+      "source_content_hash": "f87a0b1622d503750be89e3f87193dba3db21ca34dd5aa3d78c4db88a2d2e68e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Metro 新功能](/blog/2023/06/21/0.72-metro-package-exports-symlinks#new-metro-features)\n- [開發者體驗改進](/blog/2023/06/21/0.72-metro-package-exports-symlinks#developer-experience-improvements)\n- [新架構更新進展](/blog/2023/06/21/0.72-metro-package-exports-symlinks#moving-new-architecture-updates)"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### Breaking Changes",
+      "source_content_hash": "b20bc465acc06c0341aa5cea47dcbd02f8d0db580f667ab00da54cd49654879a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "3b695c37",
+      "source_content": "- [Deprecated Component Removals](/blog/2023/06/21/0.72-metro-package-exports-symlinks#deprecated-component-removals)\n- [Package Renames](/blog/2023/06/21/0.72-metro-package-exports-symlinks#package-renames)",
+      "source_content_hash": "827af844e7226839ba65a4a9aecc6456481d6217d64114eca090d31fd5e1a127",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [廢棄元件移除](/blog/2023/06/21/0.72-metro-package-exports-symlinks#deprecated-component-removals)\n- [套件更名](/blog/2023/06/21/0.72-metro-package-exports-symlinks#package-renames)"
+      }
+    },
+    {
+      "segment_id": "29e01ec2",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29e01ec2"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點功能"
+      }
+    },
+    {
+      "segment_id": "fa430ad4",
+      "source_content": "### New Metro Features",
+      "source_content_hash": "4ce4e1365453cb7e5f45a8334e9680962c6bb7fbb9e3b07be5fbbcc92ab0e490",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Metro 新功能"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "#### Symlink Support (Beta)",
+      "source_content_hash": "6ac391c45c4158fd89d5658e200bcee4bcb3512f2fc0dba90788cf83cbeece98",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 符號連結支援 (Beta)"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "Symlink support continues to be one of the top-requested features in Metro and, in React Native 0.72, we are happy to announce beta support for it.",
+      "source_content_hash": "2f07b198962103f2d108ecb5838c2f08096f68c60f5e5425cf849e7ce3043b59",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "符號連結支援長期位居 Metro 功能需求榜首，React Native 0.72 版我們很高興宣佈推出 Beta 版支援。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "Symlink support enables React Native to work transparently with monorepo setups and pnpm, removing the need for workarounds. See [Enabling Beta Features](/blog/2023/06/21/0.72-metro-package-exports-symlinks#enabling-beta-features) to use in your app.",
+      "source_content_hash": "a7463cbacaf2084a0b9c70b69dfaf37166a6ab705afbe97774c2355cf00b53a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此功能讓 React Native 能無縫支援 monorepo 架構與 pnpm，無需再使用變通方案。詳見[啟用 Beta 功能](/blog/2023/06/21/0.72-metro-package-exports-symlinks#enabling-beta-features)章節。"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "It is currently in beta to collect feedback on developer experience given varying workflows, see more details [here](https://twitter.com/robjhogan/status/1672293540632641554). We plan to default enable symlinks in 0.73.",
+      "source_content_hash": "cd0cf3b79e70f0b13a7eb0ca8bfb96a17fec32b6178845936a9e08d6680f23f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前處於 Beta 階段以收集不同工作流程下的開發者反饋，[此推文](https://twitter.com/robjhogan/status/1672293540632641554)有更多細節。我們計劃在 0.73 版預設啟用符號連結。"
+      }
+    },
+    {
+      "segment_id": "3b7478ea",
+      "source_content": "#### Package Exports Support (Beta)",
+      "source_content_hash": "0fd0c66624f549a9455c809d2ad02966610e307cb28e4013f965275394dcbbb9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 套件匯出支援 (Beta)"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "[Package Exports](https://nodejs.org/api/packages.html#exports) is the modern alternative to the package.json `\"main\"` field and provides new capabilities for npm packages to define their public API and target React Native.",
+      "source_content_hash": "3e7910b49a869e9699e03ea7f2169e5a6abce840c5e817a87c0bf4794f3af8b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[套件匯出](https://nodejs.org/api/packages.html#exports)是 package.json 中 `\"main\"` 欄位的現代替代方案，讓 npm 套件能定義公開 API 並鎖定 React Native 平台。"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "By enabling Package Exports support in your Metro config, your app will be compatible with the wider JavaScript ecosystem, including via the new [\"react-native\" community condition](https://nodejs.org/docs/latest-v19.x/api/packages.html#community-conditions-definitions). See [Enabling Beta Features](/blog/2023/06/21/0.72-metro-package-exports-symlinks#enabling-beta-features) to use in your app.",
+      "source_content_hash": "d0afa858efed58c6fa015d365fd5bf86937e3affabb344ddccf75484c0ff6b98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Metro 配置中啟用此功能後，您的應用將能相容更廣泛的 JavaScript 生態系，包括透過新的[\"react-native\" 社群條件](https://nodejs.org/docs/latest-v19.x/api/packages.html#community-conditions-definitions)。參見[啟用 Beta 功能](/blog/2023/06/21/0.72-metro-package-exports-symlinks#enabling-beta-features)章節。"
+      }
+    },
+    {
+      "segment_id": "18867dc1",
+      "source_content": ":::tip\nSee [Package Exports Support in React Native](/blog/2023/06/21/package-exports-support) to learn more about this feature and our plans for stable rollout.\n:::",
+      "source_content_hash": "ddb4bd2be0e2b2156a7f0371542300efe7cf9ccc4b15380ef3f1adc06dd0d705",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n詳閱 [React Native 中的套件匯出支援](/blog/2023/06/21/package-exports-support)了解此功能與我們的穩定版部署計劃。\n:::"
+      }
+    },
+    {
+      "segment_id": "f44c1398",
+      "source_content": "#### Enabling Beta Features",
+      "source_content_hash": "7bd071345a503a6f5a3fd4a04093c14059285637963491cdf03deab112d78243",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 啟用 Beta 功能"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "To enable these features in your project, update your app’s `metro.config.js` file and set either the `resolver.unstable_enableSymlinks` or `resolver.unstable_enablePackageExports` options.",
+      "source_content_hash": "23b348c3fa9921ec25e27eee6a65c5d581bd6a9d0d7bade84ee19091c99b3126",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請在專案的 `metro.config.js` 檔案中設定 `resolver.unstable_enableSymlinks` 或 `resolver.unstable_enablePackageExports` 選項來啟用這些功能。"
+      }
+    },
+    {
+      "segment_id": "4795a13d",
+      "source_content": "```js\nconst config = {\n  // ...\n  resolver: {\n    unstable_enableSymlinks: true,\n    unstable_enablePackageExports: true,\n  },\n};\n```",
+      "source_content_hash": "5c15b1c7591ba31145abbb35cffdbf47f49014e453f1c6b1aa8a1745022f8d1d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4795a13d"
+      }
+    },
+    {
+      "segment_id": "e912d935",
+      "source_content": "#### New `metro.config.js` Setup",
+      "source_content_hash": "722dac13dc7b2e781bd242ec34a786d8fd4732318cdcdab3ae8b477e8b9e2465",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 新版 `metro.config.js` 設定"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "In React Native 0.72, we’ve changed the config loading setup for Metro in React Native CLI. Please update your project’s `metro.config.js` file to match the [template’s version](https://github.com/facebook/react-native/blob/76a42c292de838a0dd537935db792eaa81410b9b/packages/react-native/template/metro.config.js).",
+      "source_content_hash": "dc6f540bc7dc756ada0d68dd9cdf79bf702a4890b1138927e3d4911f725dfc3a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.72 版變更了 Metro 在 React Native CLI 中的配置載入方式。請將專案的 `metro.config.js` 更新至[模板版本](https://github.com/facebook/react-native/blob/76a42c292de838a0dd537935db792eaa81410b9b/packages/react-native/template/metro.config.js)。"
+      }
+    },
+    {
+      "segment_id": "3e5cd42d",
+      "source_content": ":::info\nPlease update your config file to the following [format](https://github.com/facebook/react-native/blob/76a42c292de838a0dd537935db792eaa81410b9b/packages/react-native/template/metro.config.js). You can also follow the [upgrade-helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.0).\n\nThese format changes to `metro.config.js` will become required in 0.73. For 0.72, we will log a warning if not updated.\n:::",
+      "source_content_hash": "c157cd01ebc6dfb40734048a7ccc963107cc8dda6c437df6e69960047486ca5a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n請將您的設定檔更新為以下[格式](https://github.com/facebook/react-native/blob/76a42c292de838a0dd537935db792eaa81410b9b/packages/react-native/template/metro.config.js)。您也可以參考[升級助手](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.0)。\n\n這些針對 `metro.config.js` 的格式變更將在 0.73 版本成為強制要求。在 0.72 版本中，若未更新我們會顯示警告訊息。\n:::"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "This moves control over extending the base React Native Metro config into your project, and we’ve cleaned up the leftover defaults. In addition, this means that standalone Metro CLI commands, such as `metro get-dependencies`, will now work.",
+      "source_content_hash": "bb73396c86303681837c47299cfd4e14d6f1a9be81299f515ef6a0d2a751b59c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此變更將擴展基礎 React Native Metro 設定的控制權移交給您的專案，我們也清理了殘留的預設值。此外，這意味著獨立的 Metro CLI 指令（例如 `metro get-dependencies`）現在可以正常運作。"
+      }
+    },
+    {
+      "segment_id": "d422fb13",
+      "source_content": "### Developer Experience Improvements",
+      "source_content_hash": "ec7037429fad6dae5db9907e890f471f61c5b4c44f69a476ba801a9d8d753ec2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 開發者體驗改進"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "#### No more redboxes with invalid style properties",
+      "source_content_hash": "a44a23acbfe6b0300feb69721b452e86ef9d72f0029196d22cf927e831f6de91",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 無效樣式屬性不再觸發紅屏錯誤"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Prior to this release, providing an invalid style property in StyleSheet would result in a redbox. This is a high signal error that disrupts the developer workflow for a relatively low-risk error.",
+      "source_content_hash": "2899d650b5e0b16f7b0c037a9b1951dcb51f4d4b2959462c4070009ace431597",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此版本之前，在 StyleSheet 中提供無效的樣式屬性會導致紅屏錯誤。這是一個高強度的錯誤訊號，會因相對低風險的錯誤而中斷開發者工作流程。"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "In 0.72, we’ve relaxed this expectation to fail silently, like providing an invalid CSS property in the browser, and have updated types such that some errors may be caught in build-time vs. run-time.",
+      "source_content_hash": "a0ad521f9c9b698fe5ccb84a96bea04a794edd3e6d0c0142b6caeb3fa2d89f6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.72 版本中，我們放寬了此預期行為，改為靜默失敗（類似於瀏覽器中提供無效 CSS 屬性的情況），並更新了類型定義，使部分錯誤能在建置階段而非執行階段被捕捉。"
+      }
+    },
+    {
+      "segment_id": "b936dd6a",
+      "source_content": "#### Better error readability for Hermes",
+      "source_content_hash": "c838fad5074847257735902621353a56c68f0fbcf88cae46c8340109359ab3cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Hermes 錯誤訊息可讀性提升"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "Hermes has added a better error message when invoking an undefined callable.",
+      "source_content_hash": "6ce990df8710ec86d6f0a25d6666630179fff2ecc573638bad2b0ade42734f50",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 新增了更清晰的錯誤訊息，當呼叫未定義的可呼叫對象時會顯示。"
+      }
+    },
+    {
+      "segment_id": "65400624",
+      "source_content": "```\n    var x = undefined; x();\n    // Before: undefined is not a function\n    // After: x is not a function (it is undefined)\n```",
+      "source_content_hash": "0e8bcc93767f28ec394d019f9bc2d824f641ff53e4f3e0904bbcdfbe7e83de58",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "In addition, LogBox stack traces now filter out internal Hermes bytecode frames that are not relevant to app users.",
+      "source_content_hash": "52c1d41181dd7f31da21942f5e92356fbcbbdc56aa4ba2df034ec4e2b3211c9d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，LogBox 堆疊追蹤現在會過濾掉與應用程式使用者無關的 Hermes 位元碼內部框架。"
+      }
+    },
+    {
+      "segment_id": "39db08de",
+      "source_content": "#### Improved error output of the React Native CLI",
+      "source_content_hash": "6177db443740d874c692a4f3f598b33f7ff686db42d40f96a61c3094181ce73f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### React Native CLI 錯誤輸出改進"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "0.72 ships with React Native CLI v11 which includes improvements to reduce duplication, clarify wording, reduce verbose stack traces, and add deep links to relevant docs in the following commands `init`, `run-android`, and `run-ios`.",
+      "source_content_hash": "3358634384364ccd6b71f680c173d5d47e382b2cab719df3315b9db43522cf25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "0.72 版本搭載的 React Native CLI v11 包含多項改進：減少重複訊息、釐清用語、精簡冗長的堆疊追蹤，並在 `init`、`run-android` 和 `run-ios` 指令中加入相關文件的深度連結。"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "You can find other improvements in the [React Native CLI changelogs](https://github.com/react-native-community/cli/releases).",
+      "source_content_hash": "cfb5c141603070b5e07f0b0998ffe0e5d293d676d80597587069d65cfb92a79e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 [React Native CLI 更新日誌](https://github.com/react-native-community/cli/releases) 中找到其他改進項目。"
+      }
+    },
+    {
+      "segment_id": "e06c002e",
+      "source_content": "#### Faster Compilation and JSON Parsing in Hermes",
+      "source_content_hash": "eb41ad7d24214054abdb658433575ebcb9fe5513658cfa81e798e3b62c83fbf6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Hermes 編譯與 JSON 解析速度提升"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "Hermes has improved the compilation time of large object literals. For example, in one reported issue, [#852](https://github.com/facebook/hermes/issues/852), a user had an entire dataset written out as a large object literal. By improving the de-duplication algorithm Hermes uses, compilation sped up by 97% ([221c](https://github.com/facebook/hermes/commit/221ce21a209e2e32a3eaaa2d9e28ca81842fad20)). These improvements will benefit build times for apps that bundle many objects.",
+      "source_content_hash": "07db43ca966d450be468c0e37de766a0c0ebfa54df4a8286409f8aa1561f4f08",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 改進了大型物件字面量的編譯時間。例如在回報的 [#852](https://github.com/facebook/hermes/issues/852) 議題中，有使用者將整個資料集寫為大型物件字面量。透過改進 Hermes 使用的去重複演算法，編譯速度提升了 97% ([221c](https://github.com/facebook/hermes/commit/221ce21a209e2e32a3eaaa2d9e28ca81842fad20))。這些改進將使需打包大量物件的應用程式受益。"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "Multiple optimizations ([de9c](https://github.com/facebook/hermes/commit/de9cff2aa41fc1f297b568848143347823d73659), [6e2d](https://github.com/facebook/hermes/commit/6e2dd652c8d90c5d59737a81f66a259efffdcd00)) to JSON parsing have also landed, benefiting apps using libraries like redux-persist that rely heavily on JSON manipulation.",
+      "source_content_hash": "0a97a2bba600823d2b0ad2b1371c58ecff686656e67ae70dee4679e50017ced8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "JSON 解析也實現了多項優化 ([de9c](https://github.com/facebook/hermes/commit/de9cff2aa41fc1f297b568848143347823d73659), [6e2d](https://github.com/facebook/hermes/commit/6e2dd652c8d90c5d59737a81f66a259efffdcd00))，對重度依賴 JSON 操作的函式庫（如 redux-persist）特別有益。"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "#### More ECMAScript Support in Hermes",
+      "source_content_hash": "77bdd03a46e40868914b1d8acb875c29596fe42cf7069fb8ee351027ca68f108",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### Hermes 支援更多 ECMAScript 規範"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Support for the following specifications in Hermes has landed in React Native 0.72:",
+      "source_content_hash": "d5132bb6473b6b4b1e099cd0d9fa34cf77fb613e5f9648dbfb8ace76e88ba6e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.72 中的 Hermes 已實作以下規範支援："
+      }
+    },
+    {
+      "segment_id": "664ad8b1",
+      "source_content": "- `prototype.at` support for [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at), [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/at) and [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/at). See [#823](https://github.com/facebook/hermes/issues/823) ([ebe2](https://github.com/facebook/hermes/commit/ebe2915ac386a6b73dec39c2af4ac7063e68cd99)).\n- Implement [well-formed JSON.stringify](https://github.com/tc39/proposal-well-formed-stringify) ([d41d](https://github.com/facebook/hermes/commit/d41decf244aa814b1e58827a9de982f3b71667de)) to prevent ill-formed Unicode strings\n- Implement [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) ([9b25](https://github.com/facebook/hermes/commit/9b25a2530eb515f6c4fbd397ae290b6c97c049b2)) that represents several errors wrapped in a single error. Useful for multiple errors like from [`Promise.any()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any) when all promises passed to it reject.",
+      "source_content_hash": "2be4790260bc11f606b754c86a6566eb6c2ed09867bc35193884aba273915f88",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 支援 `prototype.at` 方法於 [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at)、[TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/at) 和 [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/at)。詳見 [#823](https://github.com/facebook/hermes/issues/823) ([ebe2](https://github.com/facebook/hermes/commit/ebe2915ac386a6b73dec39c2af4ac7063e68cd99))。\n- 實作 [well-formed JSON.stringify](https://github.com/tc39/proposal-well-formed-stringify) ([d41d](https://github.com/facebook/hermes/commit/d41decf244aa814b1e58827a9de982f3b71667de))，防止產生格式錯誤的 Unicode 字串。\n- 實作 [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) ([9b25](https://github.com/facebook/hermes/commit/9b25a2530eb515f6c4fbd397ae290b6c97c049b2))，用於封裝多個錯誤物件。此功能特別適用於處理如 [`Promise.any()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any) 當所有傳入的 Promise 都被拒絕時的情況。"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "For users on JSC, these features are already available.",
+      "source_content_hash": "473d0b439684b484ace01a981ff648746d74472607a85aa4bdea3708a859dd82",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 JSC 的用戶已可享有這些功能。"
+      }
+    },
+    {
+      "segment_id": "8172a0a5",
+      "source_content": "### Moving New Architecture Updates",
+      "source_content_hash": "693d67eb35b20ad7a468f4cd5390ddf7e7e15729ce35d3cf24ce0dcb98482821",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新架構更新動向"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "The New Architecture is currently experimental. To keep updates focused to their target audience, we are moving New Architecture updates in 0.72, and future releases, to the dedicated [working group](https://github.com/reactwg/react-native-new-architecture/discussions). This change will also allow for more frequent updates, such as work that ships in our nightlies.",
+      "source_content_hash": "008e2896dece591a0e8ed7c7d0d509cc82f10cc1e175b9a29abcb3348973603d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "新架構目前仍處於實驗階段。為使更新內容更聚焦目標受眾，我們將 0.72 版本及後續版本的新架構更新移至專屬的[工作小組](https://github.com/reactwg/react-native-new-architecture/discussions)。此變更亦能讓更新更頻繁，例如每日構建版本中的工作進展。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "You can read the 0.72 updates for the New Architecture [here](https://github.com/reactwg/react-native-new-architecture/discussions/136). Subscribe to the working group GitHub notifications to stay informed on our progress on the New Architecture.",
+      "source_content_hash": "5251709a9d785d55fd7f7d4ee817af4bc4a8db476be4a8b86ea336e8adddd479",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可於[此處](https://github.com/reactwg/react-native-new-architecture/discussions/136)閱讀 0.72 版本的新架構更新。訂閱工作小組的 GitHub 通知以掌握新架構的最新進展。"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重大變更"
+      }
+    },
+    {
+      "segment_id": "b9b8694c",
+      "source_content": "### Deprecated Component Removals",
+      "source_content_hash": "98b11835b3b4a696c2131ef95e99f732aee171d0289893fa43f070391176ff3c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 廢棄元件移除"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "The following packages have been removed from React Native in 0.72. Please migrate to the recommended community package:",
+      "source_content_hash": "8d109ed90f972e2e714f807a019b4287a6ed95c2f3db64b4a2b8477236b51a4c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下套件已於 React Native 0.72 中移除，請遷移至推薦的社群套件："
+      }
+    },
+    {
+      "segment_id": "40a587f3",
+      "source_content": "- [Slider](https://reactnative.dev/docs/0.72/slider) is superseded by [@react-native-community/slider](https://github.com/callstack/react-native-slider/tree/main/package)\n- [DatePickerIOS](https://reactnative.dev/docs/0.72/datepickerios) is superseded by [@react-native-community/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker)\n- [ProgressViewIOS](https://reactnative.dev/docs/0.72/progressviewios) is superseded by [@react-native-community/progress-view](https://github.com/react-native-progress-view/progress-view)",
+      "source_content_hash": "3d4896cc6bb8dd30c8e2387c410c1e6831c19ba0b34e6891f68eed29c85870f9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Slider](https://reactnative.dev/docs/0.72/slider) 由 [@react-native-community/slider](https://github.com/callstack/react-native-slider/tree/main/package) 取代\n- [DatePickerIOS](https://reactnative.dev/docs/0.72/datepickerios) 由 [@react-native-community/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker) 取代\n- [ProgressViewIOS](https://reactnative.dev/docs/0.72/progressviewios) 由 [@react-native-community/progress-view](https://github.com/react-native-progress-view/progress-view) 取代"
+      }
+    },
+    {
+      "segment_id": "c35e5786",
+      "source_content": "### Package Renames",
+      "source_content_hash": "ed4e4fed28ef38a07ff439b010f2e4c68757cd945b4dcf7f741d9b20b6341c43",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 套件重新命名"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "All packages published from the [`react-native`](https://github.com/facebook/react-native) core repository now live under `react-native/packages`, and are published under the [@react-native npm scope](https://www.npmjs.com/search?q=%40react-native) to ensure clear ownership.",
+      "source_content_hash": "e43c12ed66436978c3138ad4e610bede744b8d21c602d2c24ec038510f45f703",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "所有從 [`react-native`](https://github.com/facebook/react-native) 核心儲存庫發佈的套件現已移至 `react-native/packages` 目錄下，並以 [@react-native npm 範圍](https://www.npmjs.com/search?q=%40react-native)發佈，以確保所有權明確。"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "There are no changes to the [react-native](https://www.npmjs.com/package/react-native) package.",
+      "source_content_hash": "b1074498a275b0c63aafa984b90c958b2d5ab23d40dfbdfbcc202621cd52c3dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[react-native](https://www.npmjs.com/package/react-native) 套件本身並無變更。"
+      }
+    },
+    {
+      "segment_id": "06ca6f15",
+      "source_content": "| Old Package Name                        | New Package Name                 |\n| --------------------------------------- | -------------------------------- |\n| `@react-native-community/eslint-config` | `@react-native/eslint-config`    |\n| `@react-native-community/eslint-plugin` | `@react-native/eslint-plugin`    |\n| `@react-native/polyfills`               | `@react-native/js-polyfills`     |\n| `@react-native/normalize-color`         | `@react-native/normalize-colors` |\n| `@react-native/assets`                  | `@react-native/assets-registry`  |\n| `react-native-codegen`                  | `@react-native/codegen`          |\n| `react-native-gradle-plugin`            | `@react-native/gradle-plugin`    |",
+      "source_content_hash": "adc1f88368ab1a47fcab01893355dbabdb2b0c385a29731dea7ebf02eb66c3bc",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_06ca6f15"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "This change will not affect you if you have no direct dependency on a renamed package. Otherwise, when upgrading to React Native 0.72, update any renamed dependency to its ~0.72 version.",
+      "source_content_hash": "1225ffe9458269d30349b9e52d8a3d251b557d9c50974775bb4795f5a01b1cb6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您未直接依賴任何被重新命名的套件，此變更將不會影響您。若需升級至 React Native 0.72，請將任何被重新命名的相依套件更新至 ~0.72 版本。"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "You can read the motivation that led to these changes [in the dedicated RFC](https://github.com/react-native-community/discussions-and-proposals/pull/480).",
+      "source_content_hash": "2bbf27c4e5b4501bfad954de1984f33692184f241115972096a6564d88949f31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可於[專屬 RFC](https://github.com/react-native-community/discussions-and-proposals/pull/480) 中閱讀促成這些變更的動機說明。"
+      }
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "A lot of this release came from the direct feedback from the community. From reports on [noisy redboxes](https://twitter.com/baconbrix/status/1623039650775371792), [bugs with Package Exports](https://github.com/facebook/metro/issues/965), [benchmarks for the New Architecture](https://github.com/reactwg/react-native-new-architecture/discussions/85) — all of it is valuable to hear and we appreciate the time it takes to share feedback.",
+      "source_content_hash": "f48d5cac39123cab903cbc7fb570c8666884f98a84f9bc930dceaec9a2408434",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本次發布的許多改進都來自社群的直接反饋。從[雜亂的紅框錯誤報告](https://twitter.com/baconbrix/status/1623039650775371792)、[套件匯出的錯誤](https://github.com/facebook/metro/issues/965)到[新架構的基準測試](https://github.com/reactwg/react-native-new-architecture/discussions/85)，所有反饋都極具價值，我們非常感謝大家花時間分享意見。"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "0.72 contains over [1100 commits](https://github.com/facebook/react-native/compare/v0.71.8...v0.72.0) from 66 contributors. Thank you for all your hard work!",
+      "source_content_hash": "3fe248dd7cd4c9c33ebc38dd8ba3cecd0eb7ac45b908f44b50918c457e62ab3d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "0.72 版本包含來自 66 位貢獻者的超過 [1100 次提交](https://github.com/facebook/react-native/compare/v0.71.8...v0.72.0)。感謝所有人的辛勤付出！"
+      }
+    },
+    {
+      "segment_id": "b50cf7ff",
+      "source_content": "## Upgrade to 0.72",
+      "source_content_hash": "107f38d61ee73436fa71390c19c3a39b9fee373c738539421d0f64fc2905d0ce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 升級至 0.72 版本"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "Check out the list of needed changes in the [upgrade-helper](https://react-native-community.github.io/upgrade-helper/), or read the [upgrade documentation](/docs/upgrading) for how to update your existing project, or create a new project with `npx react-native@latest init MyProject`.",
+      "source_content_hash": "21c41d9c5030dbffd7ba6d9a4814d8d5a4d8da638cc35f27184b8097e2f4eb65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請查閱 [升級助手](https://react-native-community.github.io/upgrade-helper/) 中的必要變更清單，或參閱 [升級文件](/docs/upgrading) 了解如何更新現有專案，或使用 `npx react-native@latest init MyProject` 建立新專案。"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "If you use Expo, React Native version 0.72 will be supported in the Expo SDK 49 release.",
+      "source_content_hash": "0690dc6ca996e69793ef849e5a2660227432a2e7fdcbda959e75a68039b433d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 Expo，React Native 0.72 版本將在 Expo SDK 49 版本中獲得支援。"
+      }
+    },
+    {
+      "segment_id": "50e02753",
+      "source_content": ":::info\n0.72 is now the latest stable version of React Native and 0.69.x version moves now to unsupported. For more information see [React Native’s support policy](https://github.com/reactwg/react-native-releases#releases-support-policy).\n:::",
+      "source_content_hash": "7fa688c85a5a41c47cf128436e22b9460124376d3e608bf984b08c5148ec4baa",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.72 現為 React Native 的最新穩定版本，0.69.x 版本將不再獲得支援。更多資訊請參閱 [React Native 支援政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2023-06-21-0.72-metro-package-exports-symlinks.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.231143+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "431cd0dcdd6c5c866be2205982b151056f19dd94899dde1aa592faa2b69377f9"
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/react-18-and-react-native.md",
+  "source_file_content_hash": "a30e57581fcdfd502d9d84c52b6535a9742e913ce6372920f23031c52adee9ac",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: react-18-and-react-native\ntitle: React 18 & React Native\n---",
+      "source_content_hash": "260121c5e33b49a295e9875697ce51aed7a58ccaf9fc3397fc6e0c0b61a1ddd1",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';\nimport NewArchitectureWarning from './\\_markdown-new-architecture-warning.mdx';",
+      "source_content_hash": "fb624994bfad086cd41c33241313bd541f3daac3b1ebacbfdb639eea75d537a9",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "efb379d7",
+      "source_content": "<NewArchitectureWarning/>",
+      "source_content_hash": "354edeb0c73e9fa937f6ce973a446050d51c4fdff671e9ab28afc2581067c88d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_efb379d7"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "This page describes how to use React 18 with React Native using the React Native's New Architecture.",
+      "source_content_hash": "fb871c855ceaaa47f1d67ea4b5bbbdb96e5f8c59171581b3b47a970fd2fe282d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本頁面說明如何透過 React Native 的新架構（New Architecture）來使用 React 18。"
+      }
+    },
+    {
+      "segment_id": "511c851a",
+      "source_content": "> **tl;dr:** The first version of React Native compatible with React 18 is **0.69.0**. In order to use the new features in React 18 including automatic batching, `startTransition`, and `useDeferredValue`, you must migrate your React Native app to the New Architecture.",
+      "source_content_hash": "1eb3011a11a5d7819dda4d691377d4c749b17aa9a549fcbc4f1ded97301c9463",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **簡要說明：** 第一個相容於 React 18 的 React Native 版本是 **0.69.0**。若要使用 React 18 的新功能，包括自動批次處理（automatic batching）、`startTransition` 和 `useDeferredValue`，你必須將 React Native 應用程式遷移至新架構。"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "## React 18 and the React Native New Architecture",
+      "source_content_hash": "a85eb13d0d5be7a0ff22ce1562506465f8c156345ae527056cb4f5f46f266cec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## React 18 與 React Native 新架構"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "React 18 introduces [several new features](https://reactjs.org/blog/2022/03/29/react-v18.html) including:",
+      "source_content_hash": "587b2d487b99d9074bf0d92a26c3a0f66a04d4b0f8d5877c2c4fd7e92db3944d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React 18 引入了[多項新功能](https://reactjs.org/blog/2022/03/29/react-v18.html)，包括："
+      }
+    },
+    {
+      "segment_id": "034de896",
+      "source_content": "- Automatic batching\n- New Strict Mode behaviors\n- New hooks (`useId`, `useSyncExternalStore`)",
+      "source_content_hash": "b796b2b39892f8401eab07bb1fddcd4b8db40742a11045358ef01931a25dd62e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 自動批次處理\n- 新的嚴格模式行為\n- 新 Hook（`useId`、`useSyncExternalStore`）"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "It also includes new concurrent features:",
+      "source_content_hash": "b870814e08f85921e454880222e1e3069197ea2cef5c6557161f47f3456ecdc9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "同時也包含新的並行功能："
+      }
+    },
+    {
+      "segment_id": "44d89370",
+      "source_content": "- `startTransition`\n- `useTransition`\n- `useDeferredValue`\n- Full Suspense support",
+      "source_content_hash": "69be5d5540c7c97cd35625aea206b6e05a6f49363f4cf51796513c213e300051",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `startTransition`\n- `useTransition`\n- `useDeferredValue`\n- 完整的 Suspense 支援"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "The concurrent features in React 18 are built on top of the new concurrent rendering engine. Concurrent rendering is a new behind-the-scenes mechanism that enables React to prepare multiple versions of your UI at the same time.",
+      "source_content_hash": "f1c9e245cd513d965ef3d688f3435e5d7fa3c3bbc3232005ca0d02d5c3fb1aa4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React 18 的並行功能建立在新的並行渲染引擎之上。並行渲染是一種幕後機制，讓 React 能夠同時準備多個版本的 UI。"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "Previous versions of React Native built on the old architecture **cannot** support concurrent rendering or concurrent features. This is because the old architecture relied on mutating the native trees, which doesn’t allow for React to prepare multiple versions of the tree at the same time.",
+      "source_content_hash": "f0c2bd94c386d1855c4fb3b5236c2f85cf7b1a79ae445e50fd906c8f31eedfd7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基於舊架構的 React Native 舊版本**無法**支援並行渲染或並行功能，這是因為舊架構依賴於直接變更原生樹（native trees），而這種方式不允許 React 同時準備多個版本的樹。"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "Fortunately, the New Architecture was written bottom-up with concurrent rendering in mind, and is fully compatible with React 18. This means, in order to upgrade to React 18 in your React Native app, your application needs to be migrated to the React Native's New Architecture including Fabric Native Components and Turbo Native Modules.",
+      "source_content_hash": "7a0e34258f1909163b10e9e8ee23c6bff5d359fd115f328636fc5c96b2e4cb5f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "幸運的是，新架構從底層開始設計時就考慮了並行渲染的需求，因此完全相容於 React 18。這意味著，若要在 React Native 應用程式中升級至 React 18，你的應用程式必須遷移至新架構，包括使用 Fabric 原生元件（Fabric Native Components）和 Turbo 原生模組（Turbo Native Modules）。"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "## React 18 enabled by default",
+      "source_content_hash": "ac695bf30a071b37e8280865679eba22c3105a08886eaa7162c426e08a5df662",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 預設啟用 React 18"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Starting in React Native 0.69, React 18 is **enabled by default** when you enable the New Architecture.",
+      "source_content_hash": "873ae831becf8c8b5b87dcaa28993dd49d326f80b26753c3c23445277ec45b71",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 React Native 0.69 開始，當你啟用新架構時，React 18 會**預設啟用**。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "This means you’re able to use the new features in React 18 as soon as you migrate. Since the new concurrent features are opt-in by using features like `startTransition` or `Suspense`, we expect React 18 to work out-of-the-box with minimal changes for users who migrate to the New Architecture or create a new app with the New Architecture enabled.",
+      "source_content_hash": "e5fb155c5507c9071bdd33dd81972ba578d0771436f2a0338f49c8af7a967eca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這表示你可以在遷移後立即使用 React 18 的新功能。由於新的並行功能是透過 `startTransition` 或 `Suspense` 等功能選擇性啟用的，我們預期對於遷移至新架構或建立啟用新架構的新應用程式的使用者來說，React 18 能夠開箱即用，且僅需極少變更。"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "However, if you do hit any issues, we provide an option to opt-out of the new root in React 18. Opt-ing out means your app will run in React 17 mode, and none of the features of React 18 will be accessible.",
+      "source_content_hash": "559c9ccaa8b0255fcdd5fe30e11ed81e6a9e0d71df47d175ccf6bac7d28c8cf3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，如果你遇到任何問題，我們提供了退出 React 18 新根（new root）的選項。退出意味著你的應用程式將以 React 17 模式運行，且無法使用 React 18 的任何功能。"
+      }
+    },
+    {
+      "segment_id": "54268405",
+      "source_content": "### Opt-ing out of React 18 on Android",
+      "source_content_hash": "c262538d21efe0ac724afe818bcbda28c67dd7f9019640191175db0ee33243b9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 Android 上退出 React 18"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "On Android, you will be able to override the `isConcurrentRootEnabled` in your ActivityDelegate (in the `MainActivity` file), and enable/disable Concurrent React.",
+      "source_content_hash": "b8a2114e66934f48a645c64d220226cf9e706e41c5cf74690e8feba9d11ccac2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，你可以覆寫 `MainActivity` 檔案中的 `ActivityDelegate` 的 `isConcurrentRootEnabled` 方法，以啟用或停用並行 React。"
+      }
+    },
+    {
+      "segment_id": "2f83a0f4",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n\n<TabItem value=\"java\">\n\n```diff\npublic class MainActivity extends ReactActivity {\n\n  public static class MainActivityDelegate extends ReactActivityDelegate {\n    public MainActivityDelegate(ReactActivity activity, String mainComponentName) {\n      super(activity, mainComponentName);\n    }\n\n    @Override\n    protected ReactRootView createRootView() {\n      ReactRootView reactRootView = new ReactRootView(getContext());\n      // If you opted-in for the New Architecture, we enable the Fabric Renderer.\n      reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);\n      return reactRootView;\n    }\n\n+   @Override\n+   protected boolean isConcurrentRootEnabled() {\n+     // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).\n+     // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html\n+     return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;\n+   }\n  }\n}\n```\n\n</TabItem>\n\n<TabItem value=\"kotlin\">\n\n```diff\nclass MainActivity : ReactActivity() {\n\n    open class MainActivityDelegate(activity: ReactActivity?, mainComponentName: String?) : ReactActivityDelegate(activity, mainComponentName) {\n        override fun createRootView(): ReactRootView = ReactRootView(context).apply {\n            // If you opted-in for the New Architecture, we enable the Fabric Renderer.\n            setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED)\n        }\n\n+       // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).\n+       // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html\n+       override fun isConcurrentRootEnabled() = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ae4d5dab4f7e1a5da279edd6f5adac6da013bc8f442fa013c650328ca96c7334",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2f83a0f4"
+      }
+    },
+    {
+      "segment_id": "99d0dd9b",
+      "source_content": "### Opt-ing out of React 18 on iOS",
+      "source_content_hash": "ec3e065b3c1b80d83631441e5a951e1460fa2ac32a35a50325d094df3f87372a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 iOS 上退出 React 18"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "On iOS, you'll have access to the `concurrentRootEnabled` method on your `AppDelegate.mm` file. You should change the returned value to `false` (or `NO`) to disable the feature.",
+      "source_content_hash": "dada03b18242b923bf29ae71f4f8fe965f5d1829cf3a721041e6a8805ec7533b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 iOS 上，你可以在 `AppDelegate.mm` 檔案中存取 `concurrentRootEnabled` 方法。若要停用此功能，你應將回傳值改為 `false`（或 `NO`）。"
+      }
+    },
+    {
+      "segment_id": "64071bcc",
+      "source_content": "```objc\n/// This method controls whether the `concurrentRoot`feature of React18 is turned on or off.\n///\n/// @see: https://reactjs.org/blog/2022/03/29/react-v18.html\n/// @note: This requires to be rendering on Fabric (i.e. on the New Architecture).\n/// @return: `true` if the `concurrentRoot` feature is enabled. Otherwise, it returns `false`.\n- (BOOL)concurrentRootEnabled\n{\n  // Switch this bool to turn on and off the concurrent root\n  return true;\n}\n```",
+      "source_content_hash": "ebdc027e10830ac560c1b68c2c03a1cc38f8327bf51c23b6e14cae25befe3b84",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_64071bcc"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "### Users on React Native 0.69 not yet migrated to the New Architecture",
+      "source_content_hash": "e6256b9396c0d38afa58d7f6b5a5d308cbc8c95d2453da847bb284cb5bad4e15",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 尚未遷移至新架構的 React Native 0.69 使用者"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "Note: Users on React Native 0.69, but still on the Old Architecture will still use React 17 mode even if React 18 is installed in the `package.json` file.",
+      "source_content_hash": "f879ebbe6a3765c30f75caab975596896d5f7162342129d1d7be85aec9f21691",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意：使用 React Native 0.69 但仍在舊架構上的使用者，即使 `package.json` 檔案中安裝了 React 18，仍會以 React 17 模式運行。"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "Overriding the `isConcurrentRootEnabled` method will have no effect on your app.",
+      "source_content_hash": "b87c78e78ea0c30bb2b21c75ec6a238f37aee21bbdb3b56d075d123e001a8edf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "覆寫 `isConcurrentRootEnabled` 方法對你的應用程式不會產生任何影響。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/react-18-and-react-native.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.513480+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "a30e57581fcdfd502d9d84c52b6535a9742e913ce6372920f23031c52adee9ac"
+  }
+}

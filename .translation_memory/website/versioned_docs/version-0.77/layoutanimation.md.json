@@ -1,0 +1,492 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.77/layoutanimation.md",
+  "source_file_content_hash": "1bf292bc722d6f0eed6ec6e1814bcf2ace89ab8a7b5e0d04b24484df628cf009",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: layoutanimation\ntitle: LayoutAnimation\n---",
+      "source_content_hash": "fb06530523f69509477e97c97e331f12d8b232d1811214ac040534afe03c2f22",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Automatically animates views to their new positions when the next layout happens.",
+      "source_content_hash": "9e87a15ffd08774845ec3cd1051ede4981f40ab5187349b9d2a32ff293ede0e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當下一次佈局發生時，自動將視圖動畫過渡到新位置。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "A common way to use this API is to call it before updating the state hook in functional components and calling `setState` in class components.",
+      "source_content_hash": "5f879b29ca181ecbef67392f70cce5a8544ee75eb9837903b63c7f6da92243aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "常見的使用方式是在函數式組件中更新狀態鉤子前調用此API，或在類組件中調用`setState`前使用。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Note that in order to get this to work on **Android** you need to set the following flags via `UIManager`:",
+      "source_content_hash": "3b8fe7a7636d1c93a3d7e2f1520a80cb4404d9b2cc5d2eaee4ff24c3598cde70",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，在**Android**上要使此功能正常工作，需通過`UIManager`設置以下標誌："
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```js\nif (Platform.OS === 'android') {\n  if (UIManager.setLayoutAnimationEnabledExperimental) {\n    UIManager.setLayoutAnimationEnabledExperimental(true);\n  }\n}\n```",
+      "source_content_hash": "ed0521b6b4f62cbfcc17164a876e322f9cf4eb5f717b4340e1a343b40e20c311",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "bc633244",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "9eee5787",
+      "source_content": "```SnackPlayer name=LayoutAnimation%20Example&supportedPlatforms=android,ios\nimport React, {useState} from 'react';\nimport {\n  LayoutAnimation,\n  Platform,\n  StyleSheet,\n  Text,\n  TouchableOpacity,\n  UIManager,\n  View,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nif (\n  Platform.OS === 'android' &&\n  UIManager.setLayoutAnimationEnabledExperimental\n) {\n  UIManager.setLayoutAnimationEnabledExperimental(true);\n}\nconst App = () => {\n  const [expanded, setExpanded] = useState(false);\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={style.container}>\n        <TouchableOpacity\n          onPress={() => {\n            LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);\n            setExpanded(!expanded);\n          }}>\n          <Text>Press me to {expanded ? 'collapse' : 'expand'}!</Text>\n        </TouchableOpacity>\n        {expanded && (\n          <View style={style.tile}>\n            <Text>I disappear sometimes!</Text>\n          </View>\n        )}\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst style = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n    gap: 16,\n  },\n  tile: {\n    backgroundColor: 'lightgrey',\n    borderWidth: 0.5,\n    borderColor: '#d6d7da',\n    padding: 4,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "4f43dc2124a5df3357f9a1d7f50d186c59ea36bd1feb5ca95923e949c65e8c7e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9eee5787"
+      }
+    },
+    {
+      "segment_id": "678c3938",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文檔"
+      }
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "### `configureNext()`",
+      "source_content_hash": "2cf20d477c6c64770255d28366be7fcd716403438bca14036d85cf8d30343b2e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `configureNext()`"
+      }
+    },
+    {
+      "segment_id": "7d898a0e",
+      "source_content": "```tsx\nstatic configureNext(\n  config: LayoutAnimationConfig,\n  onAnimationDidEnd?: () => void,\n  onAnimationDidFail?: () => void,\n);\n```",
+      "source_content_hash": "7cde7947cfe125c9beebeed4ea0c9a5eb24cfdd5230aa221ed6cc873c90114e0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d898a0e"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "Schedules an animation to happen on the next layout.",
+      "source_content_hash": "341b2005f772fd23ab24f885955072e848ab9821a484912f2ec8e98c569ffa7e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "安排在下次佈局時執行動畫。"
+      }
+    },
+    {
+      "segment_id": "c19de48a",
+      "source_content": "#### Parameters:",
+      "source_content_hash": "ff8e5b43e53da587e0b9bd2f2b4e2f133abb3b2eb3f3984d5c8a5a5df7d9b025",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 參數："
+      }
+    },
+    {
+      "segment_id": "56967186",
+      "source_content": "| Name               | Type     | Required | Description                         |\n| ------------------ | -------- | -------- | ----------------------------------- |\n| config             | object   | Yes      | See config description below.       |\n| onAnimationDidEnd  | function | No       | Called when the animation finished. |\n| onAnimationDidFail | function | No       | Called when the animation failed.   |",
+      "source_content_hash": "a978bbc4c25bf143935ce25e90f1822acf6f9ae91f477af76740678f251f1344",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_56967186"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "The `config` parameter is an object with the keys below. [`create`](layoutanimation.md#create) returns a valid object for `config`, and the [`Presets`](layoutanimation.md#presets) objects can also all be passed as the `config`.",
+      "source_content_hash": "144be2dd51b1d4835adc03e4144a1901b9f1e7b87a522ac6bb376df94c8ff875",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`config`參數是一個包含以下鍵的對象。[`create`](layoutanimation.md#create)會返回一個有效的`config`對象，[`Presets`](layoutanimation.md#presets)對象也可直接作為`config`傳入。"
+      }
+    },
+    {
+      "segment_id": "2270deb6",
+      "source_content": "- `duration` in milliseconds\n- `create`, optional config for animating in new views\n- `update`, optional config for animating views that have been updated\n- `delete`, optional config for animating views as they are removed",
+      "source_content_hash": "113f2112c3a2003750c27951967feb024444ff6d36ee86f58a83e067536d1ab1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `duration` 以毫秒為單位\n- `create`，用於動畫新視圖的可選配置\n- `update`，用於動畫已更新視圖的可選配置\n- `delete`，用於動畫移除視圖的可選配置"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "The config that's passed to `create`, `update`, or `delete` has the following keys:",
+      "source_content_hash": "0390d69fcd4f28ecbf37f07099929b21b2a19c6d5aeff29af5eec7acb8f8941f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "傳遞給`create`、`update`或`delete`的配置包含以下鍵："
+      }
+    },
+    {
+      "segment_id": "2890f5b2",
+      "source_content": "- `type`, the [animation type](layoutanimation.md#types) to use\n- `property`, the [layout property](layoutanimation.md#properties) to animate (optional, but recommended for `create` and `delete`)\n- `springDamping` (number, optional and only for use with `type: Type.spring`)\n- `initialVelocity` (number, optional)\n- `delay` (number, optional)\n- `duration` (number, optional)",
+      "source_content_hash": "ccf4aa5d4a0532c8be8ff1c1046f573ba597dd49aa16ade0d69402059a4be0aa",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `type`，使用的[動畫類型](layoutanimation.md#types)\n- `property`，要動畫化的[佈局屬性](layoutanimation.md#properties)（可選，但建議用於`create`和`delete`）\n- `springDamping`（數字，可選且僅用於`type: Type.spring`）\n- `initialVelocity`（數字，可選）\n- `delay`（數字，可選）\n- `duration`（數字，可選）"
+      }
+    },
+    {
+      "segment_id": "cf53fc07",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "47516512",
+      "source_content": "### `create()`",
+      "source_content_hash": "129d96bef642b0bba6f4d5ce6bd151173ad439089228f7a4bd67c0166a8ca4c5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `create()`"
+      }
+    },
+    {
+      "segment_id": "1ae0b80d",
+      "source_content": "```tsx\nstatic create(duration, type, creationProp)\n```",
+      "source_content_hash": "c99cfa3734fc3233415ab4de12dddeadfa1b20081f405abfe3f6e1da3b757639",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1ae0b80d"
+      }
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "Helper that creates an object (with `create`, `update`, and `delete` fields) to pass into [`configureNext`](layoutanimation.md#configurenext). The `type` parameter is an [animation type](layoutanimation.md#types), and the `creationProp` parameter is a [layout property](layoutanimation.md#properties).",
+      "source_content_hash": "c4a956332036c6efd74f47c7bd66d37096d5b0f3747260b0850c470dbc373ebc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "輔助函數，創建一個包含`create`、`update`和`delete`字段的對象，用於傳入[`configureNext`](layoutanimation.md#configurenext)。`type`參數是[動畫類型](layoutanimation.md#types)，`creationProp`參數是[佈局屬性](layoutanimation.md#properties)。"
+      }
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "**Example:**",
+      "source_content_hash": "7cfe1b9c27bbfaa85c8030da8c6308bf8a1b92c6b8592754a77844c446e9722d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：**"
+      }
+    },
+    {
+      "segment_id": "601bdf38",
+      "source_content": "```SnackPlayer name=LayoutAnimation&supportedPlatforms=android,ios\nimport React, {useState} from 'react';\nimport {\n  View,\n  Platform,\n  UIManager,\n  LayoutAnimation,\n  StyleSheet,\n  Button,\n} from 'react-native';\n\nif (\n  Platform.OS === 'android' &&\n  UIManager.setLayoutAnimationEnabledExperimental\n) {\n  UIManager.setLayoutAnimationEnabledExperimental(true);\n}\n\nconst App = () => {\n  const [boxPosition, setBoxPosition] = useState('left');\n\n  const toggleBox = () => {\n    LayoutAnimation.configureNext({\n      duration: 500,\n      create: {type: 'linear', property: 'opacity'},\n      update: {type: 'spring', springDamping: 0.4},\n      delete: {type: 'linear', property: 'opacity'},\n    });\n    setBoxPosition(boxPosition === 'left' ? 'right' : 'left');\n  };\n\n  return (\n    <View style={styles.container}>\n      <View style={styles.buttonContainer}>\n        <Button title=\"Toggle Layout\" onPress={toggleBox} />\n      </View>\n      <View\n        style={[styles.box, boxPosition === 'left' ? null : styles.moveRight]}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'flex-start',\n    justifyContent: 'center',\n  },\n  box: {\n    height: 100,\n    width: 100,\n    borderRadius: 5,\n    margin: 8,\n    backgroundColor: 'blue',\n  },\n  moveRight: {\n    alignSelf: 'flex-end',\n    height: 200,\n    width: 200,\n  },\n  buttonContainer: {\n    alignSelf: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "80a537819a7a57067386411fb8b2834c3eb829c9f89f41edb6bf53ae59934935",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_601bdf38"
+      }
+    },
+    {
+      "segment_id": "a9de5d69",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "428f235a",
+      "source_content": "### Types",
+      "source_content_hash": "7bd9414ccce182ff61ac0bb88dff38d15d0fc465af95cf2a88bcb1729bf1421e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 類型"
+      }
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "An enumeration of animation types to be used in the [`create`](layoutanimation.md#create) method, or in the `create`/`update`/`delete` configs for [`configureNext`](layoutanimation.md#configurenext). (example usage: `LayoutAnimation.Types.easeIn`)",
+      "source_content_hash": "dda31c420171949776f2ca96f27efd8447b74239faade502a78aacb564706163",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "動畫類型的枚舉，用於[`create`](layoutanimation.md#create)方法或[`configureNext`](layoutanimation.md#configurenext)的`create`/`update`/`delete`配置中。（使用示例：`LayoutAnimation.Types.easeIn`）"
+      }
+    },
+    {
+      "segment_id": "f791c9dc",
+      "source_content": "| Types         |\n| ------------- |\n| spring        |\n| linear        |\n| easeInEaseOut |\n| easeIn        |\n| easeOut       |\n| keyboard      |",
+      "source_content_hash": "210b1fc9214dc85415137a00dfed8818a214c914dcf36ed22c93c0fba52f4386",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f791c9dc"
+      }
+    },
+    {
+      "segment_id": "db340436",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "976a3cd0",
+      "source_content": "### Properties",
+      "source_content_hash": "aebdd7e21f097f43be10085854c737bb7689d3434faf466f13789b084bcc6492",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 屬性"
+      }
+    },
+    {
+      "segment_id": "f6479c91",
+      "source_content": "An enumeration of layout properties to be animated to be used in the [`create`](layoutanimation.md#create) method, or in the `create`/`update`/`delete` configs for [`configureNext`](layoutanimation.md#configurenext). (example usage: `LayoutAnimation.Properties.opacity`)",
+      "source_content_hash": "c82560e5dac988ff49460b5d51d9c51883fcd50bb7569a14c0e4e2eca7e01e72",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "佈局屬性的枚舉，用於動畫化，可在[`create`](layoutanimation.md#create)方法或[`configureNext`](layoutanimation.md#configurenext)的`create`/`update`/`delete`配置中使用。（使用示例：`LayoutAnimation.Properties.opacity`）"
+      }
+    },
+    {
+      "segment_id": "89e54d43",
+      "source_content": "| Properties |\n| ---------- |\n| opacity    |\n| scaleX     |\n| scaleY     |\n| scaleXY    |",
+      "source_content_hash": "eb2bfa8b1bc6ebcb1040b546f00e77d2b1316a1286a905ff3603b3ce83bbc73e",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_89e54d43"
+      }
+    },
+    {
+      "segment_id": "40f71b18",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5e300688",
+      "source_content": "### Presets",
+      "source_content_hash": "62cb470e7691f20c654ab6e2698de098364c439630eb2a13f9d13f968d612d0d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 預設配置"
+      }
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "A set of predefined animation configs to pass into [`configureNext`](layoutanimation.md#configurenext).",
+      "source_content_hash": "1d43927ed2859dbdfe20d150ae59537d27c71758a66ef9c49a894d3cc826edee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "一組預定義的動畫配置，用於傳入[`configureNext`](layoutanimation.md#configurenext)。"
+      }
+    },
+    {
+      "segment_id": "972686b4",
+      "source_content": "| Presets       | Value                                                                                                                                                          |\n| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| easeInEaseOut | `create(300, 'easeInEaseOut', 'opacity')`                                                                                                                      |\n| linear        | `create(500, 'linear', 'opacity')`                                                                                                                             |\n| spring        | `{duration: 700, create: {type: 'linear', property: 'opacity'}, update: {type: 'spring', springDamping: 0.4}, delete: {type: 'linear', property: 'opacity'} }` |",
+      "source_content_hash": "7aa6d21f836d1cf53265bc5f0b9651b53711dbf3d7ee9190ab161c09f068e427",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_972686b4"
+      }
+    },
+    {
+      "segment_id": "b9e2ddae",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "936707a1",
+      "source_content": "### `easeInEaseOut`",
+      "source_content_hash": "b4b0f3603c355f662c0197b5542477db673b1b5170c45c64ca04728995bacba0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `easeInEaseOut`"
+      }
+    },
+    {
+      "segment_id": "6dc3e423",
+      "source_content": "Calls `configureNext()` with `Presets.easeInEaseOut`.",
+      "source_content_hash": "d0f44dc61558b08445acee599eac2121ec820204f40b353738095994c456120e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用`Presets.easeInEaseOut`調用`configureNext()`。"
+      }
+    },
+    {
+      "segment_id": "01e8fc3b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "89d451de",
+      "source_content": "### `linear`",
+      "source_content_hash": "f8fb2f110e6b4d31745fc8babd88a8e1730dd907ab7ec4169ef5eee8b3db1b7a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `linear`"
+      }
+    },
+    {
+      "segment_id": "32fb7230",
+      "source_content": "Calls `configureNext()` with `Presets.linear`.",
+      "source_content_hash": "197ec0c462a098062d7c6218b8bbd51eecfe0aa8ecc86084aca6d109d2e90c16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用`Presets.linear`調用`configureNext()`。"
+      }
+    },
+    {
+      "segment_id": "7b5a65a0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "371cb514",
+      "source_content": "### `spring`",
+      "source_content_hash": "464b5fc65bf347c2d20dd65d02f4955e543d642a63d4484afcc51c6005af148e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `spring`"
+      }
+    },
+    {
+      "segment_id": "5d5a3416",
+      "source_content": "Calls `configureNext()` with `Presets.spring`.",
+      "source_content_hash": "e8457319218980eb2b14f975f6d1370e2029ec78495e6419a665cc13a620ed4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用`Presets.spring`調用`configureNext()`。"
+      }
+    },
+    {
+      "segment_id": "070ff7a2",
+      "source_content": "**Example:**",
+      "source_content_hash": "7cfe1b9c27bbfaa85c8030da8c6308bf8a1b92c6b8592754a77844c446e9722d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**範例：**"
+      }
+    },
+    {
+      "segment_id": "703442ed",
+      "source_content": "```SnackPlayer name=LayoutAnimation&supportedPlatforms=android,ios\nimport React, {useState} from 'react';\nimport {\n  View,\n  Platform,\n  UIManager,\n  LayoutAnimation,\n  StyleSheet,\n  Button,\n} from 'react-native';\n\nif (\n  Platform.OS === 'android' &&\n  UIManager.setLayoutAnimationEnabledExperimental\n) {\n  UIManager.setLayoutAnimationEnabledExperimental(true);\n}\n\nconst App = () => {\n  const [firstBoxPosition, setFirstBoxPosition] = useState('left');\n  const [secondBoxPosition, setSecondBoxPosition] = useState('left');\n  const [thirdBoxPosition, setThirdBoxPosition] = useState('left');\n\n  const toggleFirstBox = () => {\n    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);\n    setFirstBoxPosition(firstBoxPosition === 'left' ? 'right' : 'left');\n  };\n\n  const toggleSecondBox = () => {\n    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);\n    setSecondBoxPosition(secondBoxPosition === 'left' ? 'right' : 'left');\n  };\n\n  const toggleThirdBox = () => {\n    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);\n    setThirdBoxPosition(thirdBoxPosition === 'left' ? 'right' : 'left');\n  };\n\n  return (\n    <View style={styles.container}>\n      <View style={styles.buttonContainer}>\n        <Button title=\"EaseInEaseOut\" onPress={toggleFirstBox} />\n      </View>\n      <View\n        style={[\n          styles.box,\n          firstBoxPosition === 'left' ? null : styles.moveRight,\n        ]}\n      />\n      <View style={styles.buttonContainer}>\n        <Button title=\"Linear\" onPress={toggleSecondBox} />\n      </View>\n      <View\n        style={[\n          styles.box,\n          secondBoxPosition === 'left' ? null : styles.moveRight,\n        ]}\n      />\n      <View style={styles.buttonContainer}>\n        <Button title=\"Spring\" onPress={toggleThirdBox} />\n      </View>\n      <View\n        style={[\n          styles.box,\n          thirdBoxPosition === 'left' ? null : styles.moveRight,\n        ]}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'flex-start',\n    justifyContent: 'center',\n  },\n  box: {\n    height: 100,\n    width: 100,\n    borderRadius: 5,\n    margin: 8,\n    backgroundColor: 'blue',\n  },\n  moveRight: {\n    alignSelf: 'flex-end',\n  },\n  buttonContainer: {\n    alignSelf: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "12a8a857463f1c7dea2303d77d311b9673ab4bc8361818c49e6db4cc8fc90978",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_703442ed"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.77/layoutanimation.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.717277+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "1bf292bc722d6f0eed6ec6e1814bcf2ace89ab8a7b5e0d04b24484df628cf009"
+  }
+}

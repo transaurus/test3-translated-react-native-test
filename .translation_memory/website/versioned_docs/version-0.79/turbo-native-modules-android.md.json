@@ -1,0 +1,152 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/turbo-native-modules-android.md",
+  "source_file_content_hash": "c411745436af42c9851d6c01df21c71959132de0f7ee03727c227babaee5b131",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: turbo-native-modules-android\ntitle: 'Turbo Native Modules: Android'\n---",
+      "source_content_hash": "2054350da1f0259e861ec81b3884c27f8667cded5ca2500b2cec6a15a72e66c2",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Now it's time to write some Android platform code to make sure `localStorage` survives after the application is closed.",
+      "source_content_hash": "3d70c92ac559d045f837b2791c159d4a87fd9927087e8aafdb241f9c1b14d792",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候編寫一些 Android 平台代碼，以確保應用程式關閉後 `localStorage` 仍能保留。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The first step is to implement the generated `NativeLocalStorageSpec` interface:",
+      "source_content_hash": "29571484284719b4a824da488e554043f7385c6be078203352bb5d5f25ca3062",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一步是實作生成的 `NativeLocalStorageSpec` 介面："
+      }
+    },
+    {
+      "segment_id": "321c5251",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java title=\"android/app/src/main/java/com/nativelocalstorage/NativeLocalStorageModule.java\"\npackage com.nativelocalstorage;\n\nimport android.content.Context;\nimport android.content.SharedPreferences;\nimport com.nativelocalstorage.NativeLocalStorageSpec;\nimport com.facebook.react.bridge.ReactApplicationContext;\n\npublic class NativeLocalStorageModule extends NativeLocalStorageSpec {\n\n  public static final String NAME = \"NativeLocalStorage\";\n\n  public NativeLocalStorageModule(ReactApplicationContext reactContext) {\n    super(reactContext);\n  }\n\n  @Override\n  public String getName() {\n    return NAME;\n  }\n\n  @Override\n  public void setItem(String value, String key) {\n    SharedPreferences sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE);\n    SharedPreferences.Editor editor = sharedPref.edit();\n    editor.putString(key, value);\n    editor.apply();\n  }\n\n  @Override\n  public String getItem(String key) {\n    SharedPreferences sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE);\n    String username = sharedPref.getString(key, null);\n    return username;\n  }\n\n  @Override\n  public void removeItem(String key) {\n    SharedPreferences sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE);\n    sharedPref.edit().remove(key).apply();\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"android/app/src/main/java/com/nativelocalstorage/NativeLocalStorageModule.kt\"\npackage com.nativelocalstorage\n\nimport android.content.Context\nimport android.content.SharedPreferences\nimport com.nativelocalstorage.NativeLocalStorageSpec\nimport com.facebook.react.bridge.ReactApplicationContext\n\nclass NativeLocalStorageModule(reactContext: ReactApplicationContext) : NativeLocalStorageSpec(reactContext) {\n\n  override fun getName() = NAME\n\n  override fun setItem(value: String, key: String) {\n    val sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE)\n    val editor = sharedPref.edit()\n    editor.putString(key, value)\n    editor.apply()\n  }\n\n  override fun getItem(key: String): String? {\n    val sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE)\n    val username = sharedPref.getString(key, null)\n    return username.toString()\n  }\n\n  override fun removeItem(key: String) {\n    val sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE)\n    val editor = sharedPref.edit()\n    editor.remove(key)\n    editor.apply()\n  }\n\n  override fun clear() {\n    val sharedPref = getReactApplicationContext().getSharedPreferences(\"my_prefs\", Context.MODE_PRIVATE)\n    val editor = sharedPref.edit()\n    editor.clear()\n    editor.apply()\n  }\n\n  companion object {\n    const val NAME = \"NativeLocalStorage\"\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "4f641284d216b5fc4697a504dcbe6c61dd30de5c18701a3f74d9661bdb14d707",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_321c5251"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "Next we need to create `NativeLocalStoragePackage`. It provides an object to register our Module in the React Native runtime, by wrapping it as a Base Native Package:",
+      "source_content_hash": "0af20447fdf320fcd6546b57224b2eb3135a9758176da58e608923157a9436c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接下來我們需要創建 `NativeLocalStoragePackage`。它提供了一個物件，通過將其包裝為基礎原生套件，在 React Native 運行時註冊我們的模組："
+      }
+    },
+    {
+      "segment_id": "bfdcf081",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java title=\"android/app/src/main/java/com/nativelocalstorage/NativeLocalStoragePackage.java\"\npackage com.nativelocalstorage;\n\nimport com.facebook.react.BaseReactPackage;\nimport com.facebook.react.bridge.NativeModule;\nimport com.facebook.react.bridge.ReactApplicationContext;\nimport com.facebook.react.module.model.ReactModuleInfo;\nimport com.facebook.react.module.model.ReactModuleInfoProvider;\n\nimport java.util.HashMap;\nimport java.util.Map;\n\npublic class NativeLocalStoragePackage extends BaseReactPackage {\n\n  @Override\n  public NativeModule getModule(String name, ReactApplicationContext reactContext) {\n    if (name.equals(NativeLocalStorageModule.NAME)) {\n      return new NativeLocalStorageModule(reactContext);\n    } else {\n      return null;\n    }\n  }\n\n  @Override\n  public ReactModuleInfoProvider getReactModuleInfoProvider() {\n    return new ReactModuleInfoProvider() {\n      @Override\n      public Map<String, ReactModuleInfo> getReactModuleInfos() {\n        Map<String, ReactModuleInfo> map = new HashMap<>();\n        map.put(NativeLocalStorageModule.NAME, new ReactModuleInfo(\n          NativeLocalStorageModule.NAME,       // name\n          NativeLocalStorageModule.NAME,       // className\n          false, // canOverrideExistingModule\n          false, // needsEagerInit\n          false, // isCXXModule\n          true   // isTurboModule\n        ));\n        return map;\n      }\n    };\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"android/app/src/main/java/com/nativelocalstorage/NativeLocalStoragePackage.kt\"\npackage com.nativelocalstorage\n\nimport com.facebook.react.BaseReactPackage\nimport com.facebook.react.bridge.NativeModule\nimport com.facebook.react.bridge.ReactApplicationContext\nimport com.facebook.react.module.model.ReactModuleInfo\nimport com.facebook.react.module.model.ReactModuleInfoProvider\n\nclass NativeLocalStoragePackage : BaseReactPackage() {\n\n  override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? =\n    if (name == NativeLocalStorageModule.NAME) {\n      NativeLocalStorageModule(reactContext)\n    } else {\n      null\n    }\n\n  override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {\n    mapOf(\n      NativeLocalStorageModule.NAME to ReactModuleInfo(\n        name = NativeLocalStorageModule.NAME,\n        className = NativeLocalStorageModule.NAME,\n        canOverrideExistingModule = false,\n        needsEagerInit = false,\n        isCxxModule = false,\n        isTurboModule = true\n      )\n    )\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "a78a65ec765fc16e6b2d2e3c2dc8cef89e8a3650d6564a9c3b271d38c625d150",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bfdcf081"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "Finally, we need to tell the React Native in our main application how to find this `Package`. We call this \"registering\" the package in React Native.",
+      "source_content_hash": "6eaec39ad29918d34c8a3663a35c02ce25db7c3953671fcd74cad26e8976fc45",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，我們需要告訴 React Native 主應用程式如何找到這個 `Package`。我們稱之為在 React Native 中「註冊」套件。"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "In this case, you add it to be returned by the [getPackages](https://github.com/facebook/react-native/blob/8d8b8c343e62115a5509e1aed62047053c2f6e39/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactNativeHost.java#L233) method.",
+      "source_content_hash": "a67fc298266c680239a8f23c3142587edbaa18a578ebef61b233b4d764a9133a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此情況下，您將其添加到 [getPackages](https://github.com/facebook/react-native/blob/8d8b8c343e62115a5509e1aed62047053c2f6e39/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactNativeHost.java#L233) 方法的返回中。"
+      }
+    },
+    {
+      "segment_id": "ba7527ce",
+      "source_content": ":::info\nLater you’ll learn how to distribute your Native Modules as [npm packages](the-new-architecture/create-module-library.md#publish-the-library-on-npm), which our build tooling will autolink for you.\n:::",
+      "source_content_hash": "fbe690f1f2c55f4dd54d78ec08aecfdec0c312bd3f966593edd3cd5cc29c21dc",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n稍後您將學習如何將您的原生模組作為 [npm 套件](the-new-architecture/create-module-library.md#publish-the-library-on-npm) 分發，我們的構建工具將自動為您連結。\n:::"
+      }
+    },
+    {
+      "segment_id": "48e2392c",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java title=\"android/app/src/main/java/com/turobmoduleexample/MainApplication.java\"\npackage com.inappmodule;\n\nimport android.app.Application;\nimport com.facebook.react.PackageList;\nimport com.facebook.react.ReactApplication;\nimport com.facebook.react.ReactHost;\nimport com.facebook.react.ReactNativeHost;\nimport com.facebook.react.ReactPackage;\nimport com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;\nimport com.facebook.react.defaults.DefaultReactHost;\nimport com.facebook.react.defaults.DefaultReactNativeHost;\nimport com.facebook.soloader.SoLoader;\n// highlight-add-next-line\nimport com.nativelocalstorage.NativeLocalStoragePackage;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class MainApplication extends Application implements ReactApplication {\n\n  private final ReactNativeHost reactNativeHost = new DefaultReactNativeHost(this) {\n    @Override\n    public List<ReactPackage> getPackages() {\n      List<ReactPackage> packages = new PackageList(this).getPackages();\n      // Packages that cannot be autolinked yet can be added manually here, for example:\n      // packages.add(new MyReactNativePackage());\n      // highlight-add-next-line\n      packages.add(new NativeLocalStoragePackage());\n      return packages;\n    }\n\n    @Override\n    public String getJSMainModuleName() {\n      return \"index\";\n    }\n\n    @Override\n    public boolean getUseDeveloperSupport() {\n      return BuildConfig.DEBUG;\n    }\n\n    @Override\n    public boolean isNewArchEnabled() {\n      return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;\n    }\n\n    @Override\n    public boolean isHermesEnabled() {\n      return BuildConfig.IS_HERMES_ENABLED;\n    }\n  };\n\n  @Override\n  public ReactHost getReactHost() {\n    return DefaultReactHost.getDefaultReactHost(getApplicationContext(), reactNativeHost);\n  }\n\n  @Override\n  public void onCreate() {\n    super.onCreate();\n    SoLoader.init(this, false);\n    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {\n      // If you opted-in for the New Architecture, we load the native entry point for this app.\n      DefaultNewArchitectureEntryPoint.load();\n    }\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"android/app/src/main/java/com/turobmoduleexample/MainApplication.kt\"\npackage com.inappmodule\n\nimport android.app.Application\nimport com.facebook.react.PackageList\nimport com.facebook.react.ReactApplication\nimport com.facebook.react.ReactHost\nimport com.facebook.react.ReactNativeHost\nimport com.facebook.react.ReactPackage\nimport com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load\nimport com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost\nimport com.facebook.react.defaults.DefaultReactNativeHost\nimport com.facebook.soloader.SoLoader\n// highlight-add-next-line\nimport com.nativelocalstorage.NativeLocalStoragePackage\n\nclass MainApplication : Application(), ReactApplication {\n\n  override val reactNativeHost: ReactNativeHost =\n      object : DefaultReactNativeHost(this) {\n        override fun getPackages(): List<ReactPackage> =\n            PackageList(this).packages.apply {\n              // Packages that cannot be autolinked yet can be added manually here, for example:\n              // add(MyReactNativePackage())\n              // highlight-add-next-line\n              add(NativeLocalStoragePackage())\n            }\n\n        override fun getJSMainModuleName(): String = \"index\"\n\n        override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG\n\n        override val isNewArchEnabled: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED\n        override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED\n      }\n\n  override val reactHost: ReactHost\n    get() = getDefaultReactHost(applicationContext, reactNativeHost)\n\n  override fun onCreate() {\n    super.onCreate()\n    SoLoader.init(this, false)\n    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {\n      // If you opted-in for the New Architecture, we load the native entry point for this app.\n      load()\n    }\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "93f1337adffa0cff70e44e6b0eea9abd95a95c80c8752cfdfcf1d3007b4b8f32",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48e2392c"
+      }
+    },
+    {
+      "segment_id": "e9a0d59a",
+      "source_content": "You can now build and run your code on an emulator:",
+      "source_content_hash": "8cd67b5687ff551308ad765f944056c518bb298574cdad80645d9d0b530a530f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您現在可以在模擬器上構建並運行您的代碼："
+      }
+    },
+    {
+      "segment_id": "98d1fe40",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n```bash\nnpm run android\n```\n</TabItem>\n<TabItem value=\"yarn\">\n```bash\nyarn run android\n```\n</TabItem>\n</Tabs>",
+      "source_content_hash": "54106a6aca3f9448f44b96e88060c79fadde7841fe465dab3e2075e384137148",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_98d1fe40"
+      }
+    },
+    {
+      "segment_id": "d443ff31",
+      "source_content": "<video width=\"30%\" height=\"30%\" playsinline=\"true\" autoplay=\"true\" muted=\"true\" loop=\"true\">\n    <source src=\"/docs/assets/turbo-native-modules/turbo-native-modules-android.webm\" type=\"video/webm\" />\n    <source src=\"/docs/assets/turbo-native-modules/turbo-native-modules-android.mp4\" type=\"video/mp4\" />\n</video>",
+      "source_content_hash": "62396c0e955e3328cc74bb29060f8bb82cbf7dd491a71aadfe5ae7ccce8e34d7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d443ff31"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/turbo-native-modules-android.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.003971+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "c411745436af42c9851d6c01df21c71959132de0f7ee03727c227babaee5b131"
+  }
+}

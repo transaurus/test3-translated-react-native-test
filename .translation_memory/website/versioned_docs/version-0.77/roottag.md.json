@@ -1,0 +1,212 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.77/roottag.md",
+  "source_file_content_hash": "4efe0cbed96d345cf9ec8e9cad7459b23bd1435e453726ab8619ca283ab2f7ab",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: roottag\ntitle: RootTag\n---",
+      "source_content_hash": "42b64bbb92964b6e5024d5b6966a0415dfb0af4bce0067065258a74d3624aeb9",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`RootTag` is an opaque identifier assigned to the native root view of your React Native surface — i.e. the `ReactRootView` or `RCTRootView` instance for Android or iOS respectively. In short, it is a surface identifier.",
+      "source_content_hash": "39882ec15fc55a8f2da791181c591b15eea891291c657af22ea3266a428ba94f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`RootTag` 是一個不透明的識別符，用於標識 React Native 介面的原生根視圖——即 Android 的 `ReactRootView` 或 iOS 的 `RCTRootView` 實例。簡而言之，它是一個介面識別符。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## When to use a RootTag?",
+      "source_content_hash": "97ea6fef0695c648fbe1578803ee6d9e611d72e32f7367fbf99eb272b29e95ad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 何時需要使用 RootTag？"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "For most React Native developers, you likely won’t need to deal with `RootTag`s.",
+      "source_content_hash": "5de12ec575312e6754dd748570346a57e368f4f1724c7998e4e0e04c3ddb6e68",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於大多數 React Native 開發者來說，您可能不需要直接處理 `RootTag`。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "`RootTag`s are useful for when an app renders **multiple React Native root views** and you need to handle native API calls differently depending on the surface. An example of this is when an app is using native navigation and each screen is a separate React Native root view.",
+      "source_content_hash": "0eaf0adf3b0d4a968ccec35729798aecdeb69b25c38133111319cd175349d7d6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當應用程式渲染**多個 React Native 根視圖**，並且需要根據不同的介面以不同方式處理原生 API 呼叫時，`RootTag` 就非常有用。例如，當應用程式使用原生導航且每個畫面都是一個獨立的 React Native 根視圖時。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "In native navigation, every React Native root view is rendered in a platform’s navigation view (e.g., `Activity` for Android, `UINavigationViewController` for iOS). By this, you are able to leverage the navigation paradigms of the platform such as native look and feel and navigation transitions. The functionality to interact with the native navigation APIs can be exposed to React Native via a [native module](https://reactnative.dev/docs/next/native-modules-intro).",
+      "source_content_hash": "b22f71ec43b2b3ac0439181176cf5aa1401248e2348a568dd893c824e9475564",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在原生導航中，每個 React Native 根視圖都會渲染在平台的導航視圖中（例如 Android 的 `Activity` 或 iOS 的 `UINavigationViewController`）。這樣，您就能利用平台的導航範例，例如原生的外觀和導航過渡效果。與原生導航 API 互動的功能可以通過 [原生模組](https://reactnative.dev/docs/next/native-modules-intro) 暴露給 React Native。"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "For example, to update the title bar of a screen, you would call the navigation module’s API `setTitle(\"Updated Title\")`, but it would need to know which screen in the stack to update. A `RootTag` is necessary here to identify the root view and its hosting container.",
+      "source_content_hash": "b94c2db12912e92af90f816e2ea3b9a15141548f0bd8311c70b63ad1cd35c931",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，要更新某個畫面的標題欄，您需要呼叫導航模組的 API `setTitle(\"Updated Title\")`，但它需要知道要更新堆疊中的哪個畫面。此時，`RootTag` 就是用來識別根視圖及其宿主容器的必要標識。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "Another use case for `RootTag` is when your app needs to attribute a certain JavaScript call to native based on its originating root view. A `RootTag` is necessary to differentiate the source of the call from different surfaces.",
+      "source_content_hash": "456a05571bc6a80b4b80f916f9b2c14dcafad455ac7945e7b3926c4cf62761a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個使用 `RootTag` 的情況是，當您的應用程式需要根據 JavaScript 呼叫的來源根視圖來歸因於原生呼叫時。`RootTag` 可以區分來自不同介面的呼叫來源。"
+      }
+    },
+    {
+      "segment_id": "63622bf0",
+      "source_content": "## How to access the RootTag... if you need it",
+      "source_content_hash": "95863246e0226c07cd5a3fafe156aa55d0935fc2d8c2d8f385f70c21437eb994",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 如何存取 RootTag（如果需要）"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "In versions 0.65 and below, RootTag is accessed via a [legacy context](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56). To prepare React Native for Concurrent features coming in React 18 and beyond, we are migrating to the latest [Context API](https://reactjs.org/docs/context.html#api) via `RootTagContext` in 0.66. Version 0.65 supports both the legacy context and the recommended `RootTagContext` to allow developers time to migrate their call-sites. See the breaking changes summary.",
+      "source_content_hash": "33d8b39ae936333567482b09b71ed085c6e08ada78eecfb4f788a398ceaf96de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.65 及以下版本中，RootTag 是通過 [舊版 Context](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56) 存取的。為了讓 React Native 準備迎接 React 18 及更高版本中的 Concurrent 功能，我們在 0.66 版本中遷移到了最新的 [Context API](https://reactjs.org/docs/context.html#api)，即通過 `RootTagContext` 存取。版本 0.65 同時支援舊版 Context 和推薦的 `RootTagContext`，以便開發者有時間遷移呼叫點。請參閱重大變更摘要。"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "How to access `RootTag` via the `RootTagContext`.",
+      "source_content_hash": "10644ea4737f1657fe3af23637ad97f80468c576ce4bf87f72c97d0dea2daae9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如何通過 `RootTagContext` 存取 `RootTag`。"
+      }
+    },
+    {
+      "segment_id": "15a1fd96",
+      "source_content": "```js\nimport {RootTagContext} from 'react-native';\nimport NativeAnalytics from 'native-analytics';\nimport NativeNavigation from 'native-navigation';\n\nfunction ScreenA() {\n  const rootTag = useContext(RootTagContext);\n\n  const updateTitle = title => {\n    NativeNavigation.setTitle(rootTag, title);\n  };\n\n  const handleOneEvent = () => {\n    NativeAnalytics.logEvent(rootTag, 'one_event');\n  };\n\n  // ...\n}\n\nclass ScreenB extends React.Component {\n  static contextType: typeof RootTagContext = RootTagContext;\n\n  updateTitle(title) {\n    NativeNavigation.setTitle(this.context, title);\n  }\n\n  handleOneEvent() {\n    NativeAnalytics.logEvent(this.context, 'one_event');\n  }\n\n  // ...\n}\n```",
+      "source_content_hash": "e1996b573fa165a88ef506038b138103325d5c88d6c9763d340ef5c7e2b4f22c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_15a1fd96"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "Learn more about the Context API for [classes](https://reactjs.org/docs/context.html#classcontexttype) and [hooks](https://reactjs.org/docs/hooks-reference.html#usecontext) from the React docs.",
+      "source_content_hash": "0766c0f900a10ec8a6f25fbfdcdc4d411a6ba7b663217665c1ccd3d29a1cd6ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 React 文件中了解更多關於 [類別](https://reactjs.org/docs/context.html#classcontexttype) 和 [鉤子](https://reactjs.org/docs/hooks-reference.html#usecontext) 的 Context API。"
+      }
+    },
+    {
+      "segment_id": "c315c636",
+      "source_content": "### Breaking Change in 0.65",
+      "source_content_hash": "015fc6f1a24d8109a2e7b9de2087f8bf0145295d55734bddd09614db3dcba13d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 0.65 版本的重大變更"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "`RootTagContext` was formerly named `unstable_RootTagContext` and changed to `RootTagContext` in 0.65. Please update any usages of `unstable_RootTagContext` in your codebase.",
+      "source_content_hash": "7567092abdc3970b9c7f0bed4e7186b20b072c7290ca3c5dda3cd5e026b3eba8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`RootTagContext` 在 0.65 版本之前名為 `unstable_RootTagContext`，並在 0.65 版本中更名為 `RootTagContext`。請更新程式碼庫中所有使用 `unstable_RootTagContext` 的地方。"
+      }
+    },
+    {
+      "segment_id": "bd92edfc",
+      "source_content": "### Breaking Change in 0.66",
+      "source_content_hash": "07b7baa5b9d86b5f2b463da4e02e9d6ae1f38c6ad197a4ebdd2617fb9f32ae48",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 0.66 版本的重大變更"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "The legacy context access to `RootTag` will be removed and replaced by `RootTagContext`. Beginning in 0.65, we encourage developers to proactively migrate `RootTag` accesses to `RootTagContext`.",
+      "source_content_hash": "9f8e474d283cb09c4f01663a49b0bf481c3b5d3f5524c8e1b20f0146bf497a89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "舊版 Context 存取 `RootTag` 的方式將被移除，並由 `RootTagContext` 取代。從 0.65 版本開始，我們鼓勵開發者主動將 `RootTag` 的存取遷移到 `RootTagContext`。"
+      }
+    },
+    {
+      "segment_id": "047c2395",
+      "source_content": "## Future Plans",
+      "source_content_hash": "05b255bce7f654160fb5a4c3c5167fc4f21811da7abc90bc24da7755d7294733",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 未來計劃"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "With the new React Native architecture progressing, there will be future iterations to `RootTag`, with the intention to keep the `RootTag` type opaque and prevent thrash in React Native codebases. Please do not rely on the fact that RootTag currently aliases to a number! If your app relies on RootTags, keep an eye on our version change logs, which you can find [here](https://github.com/facebook/react-native/blob/main/CHANGELOG.md).",
+      "source_content_hash": "7da068a58f0a2d4992a532bfb383da403e12679f9251bde091a8d4913bb06778",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著新的 React Native 架構進展，`RootTag` 將會有未來的迭代更新，目的是保持 `RootTag` 類型的不透明性，並避免 React Native 程式碼庫中的變動。請不要依賴目前 RootTag 是數字的別名這一事實！如果您的應用程式依賴 RootTag，請關注我們的版本變更日誌，您可以在 [這裡](https://github.com/facebook/react-native/blob/main/CHANGELOG.md) 找到。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.77/roottag.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.986161+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "4efe0cbed96d345cf9ec8e9cad7459b23bd1435e453726ab8619ca283ab2f7ab"
+  }
+}

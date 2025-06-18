@@ -1,0 +1,182 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/timers.md",
+  "source_file_content_hash": "34ba4a5232f965263110367f414b36f5ac09443056f58ebf00f8c957d4d7cf4f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: timers\ntitle: Timers\n---",
+      "source_content_hash": "da729dec29d1c0112ccad12bac0598efdd1e2605f22b8cb17574949ad6bf1443",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Timers are an important part of an application and React Native implements the [browser timers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals).",
+      "source_content_hash": "58fbfc054151cb738ed4e2ccca2447963ae3906a15a453d0cd6d011770867368",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "計時器是應用程式的重要組成部分，React Native 實現了[瀏覽器計時器](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals)。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Timers",
+      "source_content_hash": "43bb49a7a46bbb681d7b82b3f1d31c431eaffc0f9f0316209be8a740c2768b30",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 計時器"
+      }
+    },
+    {
+      "segment_id": "4a5b6a68",
+      "source_content": "- setTimeout, clearTimeout\n- setInterval, clearInterval\n- setImmediate, clearImmediate\n- requestAnimationFrame, cancelAnimationFrame",
+      "source_content_hash": "2c8ad708cdf71acb52b85d0d948322ef9b5ddd314b422adb8ab3599aae6d1430",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- setTimeout, clearTimeout\n- setInterval, clearInterval\n- setImmediate, clearImmediate\n- requestAnimationFrame, cancelAnimationFrame"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "`requestAnimationFrame(fn)` is not the same as `setTimeout(fn, 0)` - the former will fire after all the frames have flushed, whereas the latter will fire as quickly as possible (over 1000x per second on a iPhone 5S).",
+      "source_content_hash": "21b464217996c5a41e040c8089a8092420168967371e2c2a460637bd7f286e80",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`requestAnimationFrame(fn)` 與 `setTimeout(fn, 0)` 不同——前者會在所有畫面刷新後觸發，而後者會盡可能快地觸發（在 iPhone 5S 上每秒超過 1000 次）。"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "`setImmediate` is executed at the end of the current JavaScript execution block, right before sending the batched response back to native. Note that if you call `setImmediate` within a `setImmediate` callback, it will be executed right away, it won't yield back to native in between.",
+      "source_content_hash": "5cdf60077d8e5fcca6af45f8cba5988a86dc8f4a7d10bbcfae125b0d5a017f0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`setImmediate` 會在當前 JavaScript 執行區塊結束時執行，就在將批次回應送回原生端之前。請注意，如果在 `setImmediate` 回調中再次呼叫 `setImmediate`，它會立即執行，不會在中途返回原生端。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "The `Promise` implementation uses `setImmediate` as its asynchronicity implementation.",
+      "source_content_hash": "43be53c44e0dd4aefd7428e03b80619a792f6fd52e5a07f4a6f0f8a29d95bd27",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Promise` 的實現使用 `setImmediate` 作為其異步操作的實現方式。"
+      }
+    },
+    {
+      "segment_id": "cac45343",
+      "source_content": ":::note\nWhen debugging on Android, if the times between the debugger and device have drifted; things such as animation, event behavior, etc., might not work properly or the results may not be accurate.\nPlease correct this by running ``adb shell \"date `date +%m%d%H%M%Y.%S%3N`\"`` on your debugger machine. Root access is required for the use in real device.\n:::",
+      "source_content_hash": "bec45f38ffbf296f1d4c419a8c36d9435d2aae109bfbd623a14bc273c237a492",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n在 Android 上進行偵錯時，如果偵錯工具與裝置的時間不同步，可能會導致動畫、事件行為等功能無法正常運作或結果不準確。\n請在偵錯機器上執行 ``adb shell \"date `date +%m%d%H%M%Y.%S%3N`\"`` 來修正此問題。在實體裝置上使用需要 root 權限。\n:::"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "## InteractionManager",
+      "source_content_hash": "94eccf8a9afc19010effe80c6c5acb4a67a32a039badd7383e475cff8983a171",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## InteractionManager"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "One reason why well-built native apps feel so smooth is by avoiding expensive operations during interactions and animations. In React Native, we currently have a limitation that there is only a single JS execution thread, but you can use `InteractionManager` to make sure long-running work is scheduled to start after any interactions/animations have completed.",
+      "source_content_hash": "8fc98b504e8ce65a44585a2e84c948fd608a3fd68ca39717a2d2e62bc44e637a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生應用程式之所以感覺流暢，一個重要原因是它們在互動和動畫期間避免了耗時操作。在 React Native 中，目前有一個限制是只有單一的 JS 執行緒，但你可以使用 `InteractionManager` 來確保長時間運行的任務會在互動/動畫完成後才開始執行。"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "Applications can schedule tasks to run after interactions with the following:",
+      "source_content_hash": "3e8d0195890451f1e49e2264c83e749bbf72742b8aba1f3698238ca66a1aedc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "應用程式可以使用以下方式安排任務在互動後執行："
+      }
+    },
+    {
+      "segment_id": "b017063d",
+      "source_content": "```tsx\nInteractionManager.runAfterInteractions(() => {\n  // ...long-running synchronous task...\n});\n```",
+      "source_content_hash": "cf2de992b18b804752a6a8d6a44ed837b54d65101d560bd22a276b092d54a916",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b017063d"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "Compare this to other scheduling alternatives:",
+      "source_content_hash": "d1885c48b5a44f490b1aba490c245d691429c7203b34196bffb3dbb4e62903c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與其他排程方式進行比較："
+      }
+    },
+    {
+      "segment_id": "e7bc8c38",
+      "source_content": "- requestAnimationFrame(): for code that animates a view over time.\n- setImmediate/setTimeout/setInterval(): run code later, note this may delay animations.\n- runAfterInteractions(): run code later, without delaying active animations.",
+      "source_content_hash": "6d4419121639682b2cb99fa3984362337f99303808ac088827191a9d677d0aaf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- requestAnimationFrame(): 用於隨時間推移動畫化視圖的程式碼。\n- setImmediate/setTimeout/setInterval(): 稍後執行程式碼，請注意這可能會延遲動畫。\n- runAfterInteractions(): 稍後執行程式碼，且不會延遲正在進行的動畫。"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "The touch handling system considers one or more active touches to be an 'interaction' and will delay `runAfterInteractions()` callbacks until all touches have ended or been cancelled.",
+      "source_content_hash": "3c40960916a5f106e1f01d4a66e566cd480dda7322e9c959d606c5003ced821e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "觸控處理系統將一個或多個活動觸控視為「互動」，並會延遲 `runAfterInteractions()` 回調，直到所有觸控結束或被取消。"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "InteractionManager also allows applications to register animations by creating an interaction 'handle' on animation start, and clearing it upon completion:",
+      "source_content_hash": "09140bb3c364880dfa2b1618a6995d904f23d3a171d65712ddcd65a4801b3d79",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "InteractionManager 還允許應用程式通過在動畫開始時創建一個互動「句柄」，並在完成時清除它來註冊動畫："
+      }
+    },
+    {
+      "segment_id": "48ec8149",
+      "source_content": "```tsx\nconst handle = InteractionManager.createInteractionHandle();\n// run animation... (`runAfterInteractions` tasks are queued)\n// later, on animation completion:\nInteractionManager.clearInteractionHandle(handle);\n// queued tasks run if all handles were cleared\n```",
+      "source_content_hash": "6bb8ffa8c1ff44da2dac3d351d0d19db6b925ce68ce55a28e872f1a33ea08145",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48ec8149"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/timers.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.076940+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "34ba4a5232f965263110367f414b36f5ac09443056f58ebf00f8c957d4d7cf4f"
+  }
+}

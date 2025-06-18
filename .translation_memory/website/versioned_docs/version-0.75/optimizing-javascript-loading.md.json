@@ -1,0 +1,372 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.75/optimizing-javascript-loading.md",
+  "source_file_content_hash": "358be8550514bbde491af6ef64de1c4f7580a1ceb7bca83cf8a8eb2b88fc166f",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: optimizing-javascript-loading\ntitle: Optimizing JavaScript loading\n---",
+      "source_content_hash": "9721804b96d3081e259bb7cebf8767c3c1debc5f36d442d3e247120b40e8b600",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Parsing and running JavaScript code requires memory and time. Because of this, as your app grows, it's often useful to delay loading code until it's needed for the first time. React Native comes with some standard optimizations that are on by default, and there are techniques you can adopt in your own code to help React load your app more efficiently. There are also some advanced automatic optimizations (with their own tradeoffs) that are suitable for very large apps.",
+      "source_content_hash": "a86e3d0b16156c7532082877a362c597bfdf6bdf3de07e0687103d722bec9b63",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "解析和執行 JavaScript 程式碼需要記憶體和時間。因此，隨著應用程式的增長，延遲載入程式碼直到首次需要時才執行往往很有幫助。React Native 預設啟用了一些標準優化功能，您也可以在自己的程式碼中採用特定技術來幫助 React 更有效率地載入應用程式。對於非常大型的應用程式，還有一些進階的自動優化方案（各有其取捨考量）。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Recommended: Use Hermes",
+      "source_content_hash": "f6f9fd34df32500d9ac93232ad0b3b05c936253f45f2b96a6b63c776fb8ef052",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 建議：使用 Hermes 引擎"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Hermes is the default engine for new React Native apps, and is highly optimized for efficient code loading. In release builds, JavaScript code is fully compiled to bytecode ahead of time. Bytecode is loaded to memory on-demand and does not need to be parsed like plain JavaScript does.",
+      "source_content_hash": "4a9854957e5cf7170b424583df898388bd6e63b955dd619c561658f8243ac691",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Hermes 是新版 React Native 應用的預設引擎，並針對程式碼載入效率進行了高度優化。在正式版建置中，JavaScript 程式碼會預先完整編譯為位元組碼。位元組碼是按需載入到記憶體的，無需像純 JavaScript 那樣進行解析。"
+      }
+    },
+    {
+      "segment_id": "2a852f16",
+      "source_content": ":::info\nRead more about using Hermes in React Native [here](./hermes).\n:::",
+      "source_content_hash": "fd4557138c0822e999936b23650099b836e48edcb0356e9f302a9972e32106bb",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n詳細了解如何在 React Native 中使用 Hermes [請參閱此處](./hermes)。\n:::"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "## Recommended: Lazy-load large components",
+      "source_content_hash": "ff87d8a1df2e33bbad5724608473f4c8c685b6003b3fe0a97829e0a695917687",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 建議：延遲載入大型元件"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "If a component with a lot of code/dependencies is not likely to be used when initially rendering your app, you can use React's [`lazy`](https://react.dev/reference/react/lazy) API to defer loading its code until it's rendered for the first time. Typically, you should consider lazy-loading screen-level components in your app, so that adding new screens to your app does not increase its startup time.",
+      "source_content_hash": "fe64403b454336a5476bf5bc91f5ee9f635d2a8b72ec37bb479bfe0e9da5dd24",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若某個包含大量程式碼/依賴項的元件在應用初始渲染時不太可能被使用，您可以使用 React 的 [`lazy`](https://react.dev/reference/react/lazy) API 來延遲載入其程式碼，直到首次渲染時才執行。通常建議對應用中的畫面級元件進行延遲載入，這樣新增畫面時就不會增加應用啟動時間。"
+      }
+    },
+    {
+      "segment_id": "8a545039",
+      "source_content": ":::info\nRead more about [lazy-loading components with Suspense\n](https://react.dev/reference/react/lazy#suspense-for-code-splitting), including code examples, in React's documentation.\n:::",
+      "source_content_hash": "7db6b64b78c8dd18300dbb72a370218efc1ba84ccda8724d4b4d13bc73f73377",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n詳細了解如何[使用 Suspense 延遲載入元件](https://react.dev/reference/react/lazy#suspense-for-code-splitting)（包含程式碼範例），請參閱 React 官方文件。\n:::"
+      }
+    },
+    {
+      "segment_id": "fa430ad4",
+      "source_content": "### Tip: Avoid module side effects",
+      "source_content_hash": "ded489b28657cf603b27a8089b9fd8660cacc0be90b338d98a5f71472f993e33",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 技巧：避免模組副作用"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "Lazy-loading components can change the behavior of your app if your component modules (or their dependencies) have _side effects_, such as modifying global variables or subscribing to events outside of a component. Most modules in React apps should not have any side effects.",
+      "source_content_hash": "ba48164337eea566f6d46d4192e1fc0c2543f2f62c11764ac1ce85d89a3480d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您的元件模組（或其依賴項）具有_副作用_（例如修改全域變數或在元件外部訂閱事件），延遲載入元件可能會改變應用行為。React 應用中的大多數模組都不應有任何副作用。"
+      }
+    },
+    {
+      "segment_id": "cb57d798",
+      "source_content": "```tsx title=\"SideEffects.tsx\"\nimport Logger from './utils/Logger';\n\n//  🚩 🚩 🚩 Side effect! This must be executed before React can even begin to\n// render the SplashScreen component, and can unexpectedly break code elsewhere\n// in your app if you later decide to lazy-load SplashScreen.\nglobal.logger = new Logger();\n\nexport function SplashScreen() {\n  // ...\n}\n```",
+      "source_content_hash": "22a71ade06026b69d826a491a443a60e85d7e97ed0757c2105096b9ba64bfdfe",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cb57d798"
+      }
+    },
+    {
+      "segment_id": "54268405",
+      "source_content": "## Advanced: Call `require` inline",
+      "source_content_hash": "abac305f5f0735a8b39b16b462c92da67d9727bec16ecf3fc26112f20df62eea",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 進階：內聯呼叫 `require`"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "Sometimes you may want to defer loading some code until you use it for the first time, without using `lazy` or an asynchronous `import()`. You can do this by using the [`require()`](https://metrobundler.dev/docs/module-api/#require) function where you would otherwise use a static `import` at the top of the file.",
+      "source_content_hash": "5cb25b9ed1a3eee4811c8f652965d25025cdcecbe220efe41f8307a218b2daf4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時您可能希望延遲載入某些程式碼直到首次使用時才執行，但不想使用 `lazy` 或非同步的 `import()`。您可以在檔案頂部使用 [`require()`](https://metrobundler.dev/docs/module-api/#require) 函數來替代靜態的 `import` 語法實現此目的。"
+      }
+    },
+    {
+      "segment_id": "48ec8149",
+      "source_content": "```tsx title=\"VeryExpensive.tsx\"\nimport {Component} from 'react';\nimport {Text} from 'react-native';\n// ... import some very expensive modules\n\nexport default function VeryExpensive() {\n  // ... lots and lots of rendering logic\n  return <Text>Very Expensive Component</Text>;\n}\n```",
+      "source_content_hash": "e7f719e512bc2d7ec4f809c2dc6cb1e3d693e32e9944b2f4e8cb90fcfe646b9b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48ec8149"
+      }
+    },
+    {
+      "segment_id": "6d254e09",
+      "source_content": "```tsx title=\"Optimized.tsx\"\nimport {useCallback, useState} from 'react';\nimport {TouchableOpacity, View, Text} from 'react-native';\n// Usually we would write a static import:\n// import VeryExpensive from './VeryExpensive';\n\nlet VeryExpensive = null;\n\nexport default function Optimize() {\n  const [needsExpensive, setNeedsExpensive] = useState(false);\n  const didPress = useCallback(() => {\n    if (VeryExpensive == null) {\n      VeryExpensive = require('./VeryExpensive').default;\n    }\n\n    setNeedsExpensive(true);\n  }, []);\n\n  return (\n    <View style={{marginTop: 20}}>\n      <TouchableOpacity onPress={didPress}>\n        <Text>Load</Text>\n      </TouchableOpacity>\n      {needsExpensive ? <VeryExpensive /> : null}\n    </View>\n  );\n}\n```",
+      "source_content_hash": "244ca1ffb615b32fd78e82c88bba13ab787c4b5ff6d39a6f1e86191b546bbddc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6d254e09"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "## Advanced: Automatically inline `require` calls",
+      "source_content_hash": "3551ea9366960a7ceb65f4f72f148803ee6abc298f0f989709fed9fa4827e83b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 進階：自動內聯 `require` 呼叫"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "If you use the React Native CLI to build your app, `require` calls (but not `import`s) will automatically be inlined for you, both in your code and inside any third-party packages (`node_modules`) you use.",
+      "source_content_hash": "e5fc6e9c5561fd24b7c4b7237163feebece12eb1ecfbc5b9cf896d1067f12755",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若使用 React Native CLI 建置應用，`require` 呼叫（不包括 `import`）將會自動為您內聯處理，此優化同時作用於您的程式碼和使用的第三方套件（`node_modules`）。"
+      }
+    },
+    {
+      "segment_id": "f8065412",
+      "source_content": "```tsx\nimport {useCallback, useState} from 'react';\nimport {TouchableOpacity, View, Text} from 'react-native';\n\n// This top-level require call will be evaluated lazily as part of the component below.\nconst VeryExpensive = require('./VeryExpensive').default;\n\nexport default function Optimize() {\n  const [needsExpensive, setNeedsExpensive] = useState(false);\n  const didPress = useCallback(() => {\n    setNeedsExpensive(true);\n  }, []);\n\n  return (\n    <View style={{marginTop: 20}}>\n      <TouchableOpacity onPress={didPress}>\n        <Text>Load</Text>\n      </TouchableOpacity>\n      {needsExpensive ? <VeryExpensive /> : null}\n    </View>\n  );\n}\n```",
+      "source_content_hash": "de7c2260d93f2a114843d5aed77436a4c2597fca2ac3ab3017aa1c980da083f7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f8065412"
+      }
+    },
+    {
+      "segment_id": "5b81fcd1",
+      "source_content": ":::info\nSome React Native frameworks disable this behavior. In particular, in Expo projects, `require` calls are not inlined by default. You can enable this optimization by editing your project's Metro config and setting `inlineRequires: true` in [`getTransformOptions`](https://metrobundler.dev/docs/configuration#gettransformoptions).\n:::",
+      "source_content_hash": "1870e7bf79f2f3b394ca66d38ca4cc1d233cc041cd1963e5ab92c7711ede0f4b",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n部分 React Native 框架會禁用此行為。特別是在 Expo 專案中，`require` 呼叫預設不會被內聯。您可以透過編輯專案的 Metro 配置檔案，在 [`getTransformOptions`](https://metrobundler.dev/docs/configuration#gettransformoptions) 中設定 `inlineRequires: true` 來啟用此優化。\n:::"
+      }
+    },
+    {
+      "segment_id": "638efb88",
+      "source_content": "### Pitfalls of inline `require`s",
+      "source_content_hash": "d7dea8f87ba3883253b3ca09918ad7425837e0287bb802ec5f761f28642e9515",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 內聯 `require` 的潛在問題"
+      }
+    },
+    {
+      "segment_id": "558df877",
+      "source_content": "Inlining `require` calls changes the order in which modules are evaluated, and can even cause some modules to _never_ be evaluated. This is usually safe to do automatically, because JavaScript modules are often written to be side-effect-free.",
+      "source_content_hash": "3046ac2816d41fc10ea0f9cc19ab995f8557047e8ab835be358091ab2bb4831c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "內聯處理 `require` 呼叫會改變模組的評估順序，甚至可能導致某些模組_永遠不被_評估。由於 JavaScript 模組通常被設計為無副作用的，自動執行此優化通常是安全的。"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "If one of your modules does have side effects - for example, if it initializes some logging mechanism, or patches a global API used by the rest of your code - then you might see unexpected behavior or even crashes. In those cases, you may want to exclude certain modules from this optimization, or disable it entirely.",
+      "source_content_hash": "57f996da55f9f859861d466ce75e49252eb4f57237d419119fffc315b3d7e412",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您的某個模組確實具有副作用（例如初始化日誌機制或修補全域 API），則可能會出現意外行為甚至崩潰。在這些情況下，您可能需要將特定模組排除在此優化之外，或完全停用該功能。"
+      }
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "To **disable all automatic inlining of `require` calls:**",
+      "source_content_hash": "b10ff6f2b8dce7deddf5dc54851dfa1998556870867acb6787d6e0e3e8d1e868",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要**完全停用 `require` 呼叫的自動內聯處理**："
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "Update your `metro.config.js` to set the `inlineRequires` transformer option to `false`:",
+      "source_content_hash": "1a7876771f2d399ee1055fb553ab1ef5e75bb0a434556732f53fd76a3411557c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更新您的 `metro.config.js` 檔案，將 `inlineRequires` 轉換器選項設為 `false`："
+      }
+    },
+    {
+      "segment_id": "a3a1b8eb",
+      "source_content": "```tsx title=\"metro.config.js\"\nmodule.exports = {\n  transformer: {\n    async getTransformOptions() {\n      return {\n        transform: {\n          inlineRequires: false,\n        },\n      };\n    },\n  },\n};\n```",
+      "source_content_hash": "21078fbf987f55e9a0044326d323d54444b8216764dc8915d1a6cf8ea0c40b19",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a3a1b8eb"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "To only **exclude certain modules from `require` inlining:**",
+      "source_content_hash": "0156bf7893b3ebc5e2efea95a5caff0d3010e7bfb42b6edaffc1cc2fea93c441",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若僅需**將特定模組排除在 `require` 內聯處理之外**："
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "There are two relevant transformer options: `inlineRequires.blockList` and `nonInlinedRequires`. See the code snippet for examples of how to use each one.",
+      "source_content_hash": "545cdce8aacfcf579166b130c8192cf90e68dd183e2da54d2a24bdc216c6bd73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有兩個相關的轉換器選項：`inlineRequires.blockList` 和 `nonInlinedRequires`。請參閱程式碼片段以了解如何使用每個選項的範例。"
+      }
+    },
+    {
+      "segment_id": "e481745b",
+      "source_content": "```tsx title=\"metro.config.js\"\nmodule.exports = {\n  transformer: {\n    async getTransformOptions() {\n      return {\n        transform: {\n          inlineRequires: {\n            blockList: {\n              // require() calls in `DoNotInlineHere.js` will not be inlined.\n              [require.resolve('./src/DoNotInlineHere.js')]: true,\n\n              // require() calls anywhere else will be inlined, unless they\n              // match any entry nonInlinedRequires (see below).\n            },\n          },\n          nonInlinedRequires: [\n            // require('react') calls will not be inlined anywhere\n            'react',\n          ],\n        },\n      };\n    },\n  },\n};\n```",
+      "source_content_hash": "32dce6419c208c28ba30b9a3d9ccaad53e75c1c4cf6280be36e9aafc2728bc72",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e481745b"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "See the documentation for [`getTransformOptions` in Metro](https://metrobundler.dev/docs/configuration#gettransformoptions) for more details on setting up and fine-tuning your inline `require`s.",
+      "source_content_hash": "0d02e50fb92eef8f1b753bd813e57268b44e0255d84b3d8961d3f5f2d530e329",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 Metro 的 [`getTransformOptions` 文件](https://metrobundler.dev/docs/configuration#gettransformoptions)，以獲取更多關於設置和微調內聯 `require` 的詳細資訊。"
+      }
+    },
+    {
+      "segment_id": "a6b29dc7",
+      "source_content": "## Advanced: Use random access module bundles (non-Hermes)",
+      "source_content_hash": "1c86b5737262793c5890dda3a190c6d07369168053ead870c072931e6e695d51",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 進階：使用隨機存取模組包（非 Hermes）"
+      }
+    },
+    {
+      "segment_id": "f3377609",
+      "source_content": ":::info\n**Not supported when [using Hermes](#use-hermes).** Hermes bytecode is not compatible with the RAM bundle format, and provides the same (or better) performance in all use cases.\n:::",
+      "source_content_hash": "0623a4c9ec53a49681b5e8a378162719a54a4f6f0ee2650176e0addd6ff6b187",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n**不支援 [使用 Hermes 時](#use-hermes)。** Hermes 字節碼與 RAM 包格式不相容，且在各種使用場景下提供相同（或更好）的性能。\n:::"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "Random access module bundles (also known as RAM bundles) work in conjunction with the techniques mentioned above to limit the amount of JavaScript code that needs to be parsed and loaded into memory. Each module is stored as a separate string (or file) which is only parsed when the module needs to be executed.",
+      "source_content_hash": "244eb4e57c5237e9f0c2d807ae0b7aaeb563c967794c42b7dbeb99129f10c00f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨機存取模組包（亦稱 RAM 包）與上述技術協同工作，以限制需要解析並載入記憶體的 JavaScript 代碼量。每個模組儲存為獨立的字串（或檔案），僅在模組需要執行時才進行解析。"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "RAM bundles may be physically split into separate files, or they may use the _indexed_ format, consisting of a lookup table of multiple modules in a single file.",
+      "source_content_hash": "844a4870409e622a3b50a32c89898ff336d2a1cb57b4b38337545b1d94052f91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "RAM 包可以物理上分割為多個檔案，或使用 _索引_ 格式，即在單一檔案中包含多個模組的查找表。"
+      }
+    },
+    {
+      "segment_id": "e106568d",
+      "source_content": "<Tabs groupId=\"platform\" queryString defaultValue={constants.defaultPlatform} values={constants.platforms}>\n<TabItem value=\"android\">\n\nOn Android enable the RAM format by editing your `android/app/build.gradle` file. Before the line `apply from: \"../../node_modules/react-native/react.gradle\"` add or amend the `project.ext.react` block:\n\n```\nproject.ext.react = [\n  bundleCommand: \"ram-bundle\",\n]\n```\n\nUse the following lines on Android if you want to use a single indexed file:\n\n```\nproject.ext.react = [\n  bundleCommand: \"ram-bundle\",\n  extraPackagerArgs: [\"--indexed-ram-bundle\"]\n]\n```\n\n</TabItem>\n<TabItem value=\"ios\">\n\nOn iOS, RAM bundles are always indexed ( = single file).\n\nEnable the RAM format in Xcode by editing the build phase \"Bundle React Native code and images\". Before `../node_modules/react-native/scripts/react-native-xcode.sh` add `export BUNDLE_COMMAND=\"ram-bundle\"`:\n\n```\nexport BUNDLE_COMMAND=\"ram-bundle\"\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "f94b885d432ab74df4cb8d26924f777eb646667607ba94d74bb0c3104be02072",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e106568d"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "See the documentation for [`getTransformOptions` in Metro](https://metrobundler.dev/docs/configuration#gettransformoptions) for more details on setting up and fine-tuning your RAM bundle build.",
+      "source_content_hash": "60bd5e003d5255817f7dc24dc4cf3b1a4e4a0d3b57f9ce19ed1c0a0b76247948",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "詳見 Metro 的 [`getTransformOptions` 文件](https://metrobundler.dev/docs/configuration#gettransformoptions)，以獲取更多關於設置和微調 RAM 包構建的詳細資訊。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.75/optimizing-javascript-loading.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.644685+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "358be8550514bbde491af6ef64de1c4f7580a1ceb7bca83cf8a8eb2b88fc166f"
+  }
+}

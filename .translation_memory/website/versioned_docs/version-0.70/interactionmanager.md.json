@@ -1,0 +1,282 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/interactionmanager.md",
+  "source_file_content_hash": "ab0cf4d94cd94e4497a4a67deac41107cd267337530472ccc4015580d8b740e1",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: interactionmanager\ntitle: InteractionManager\n---",
+      "source_content_hash": "d35d77a62811bb3c3d59b5a09d7b8deda232fc13ad383121193099e4a0ea8294",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "InteractionManager allows long-running work to be scheduled after any interactions/animations have completed. In particular, this allows JavaScript animations to run smoothly.",
+      "source_content_hash": "998a2edf15a37e067385677b019cb11dcc99ac9719986f25ded54a8091ceff90",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Applications can schedule tasks to run after interactions with the following:",
+      "source_content_hash": "3e8d0195890451f1e49e2264c83e749bbf72742b8aba1f3698238ca66a1aedc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```jsx\nInteractionManager.runAfterInteractions(() => {\n  // ...long-running synchronous task...\n});\n```",
+      "source_content_hash": "16187aeba203c30d2a457e9ba3915cd1328bbbe2b7e62e1f707291c304b2ac4c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Compare this to other scheduling alternatives:",
+      "source_content_hash": "d1885c48b5a44f490b1aba490c245d691429c7203b34196bffb3dbb4e62903c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "11c829ab",
+      "source_content": "- requestAnimationFrame(): for code that animates a view over time.\n- setImmediate/setTimeout(): run code later, note this may delay animations.\n- runAfterInteractions(): run code later, without delaying active animations.",
+      "source_content_hash": "04b27a23f326e86332c45b4f05525f960e76b7b2242eec905c9dc3f26e200ab7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "The touch handling system considers one or more active touches to be an 'interaction' and will delay `runAfterInteractions()` callbacks until all touches have ended or been cancelled.",
+      "source_content_hash": "3c40960916a5f106e1f01d4a66e566cd480dda7322e9c959d606c5003ced821e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "InteractionManager also allows applications to register animations by creating an interaction 'handle' on animation start, and clearing it upon completion:",
+      "source_content_hash": "09140bb3c364880dfa2b1618a6995d904f23d3a171d65712ddcd65a4801b3d79",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a89b882e",
+      "source_content": "```jsx\nvar handle = InteractionManager.createInteractionHandle();\n// run animation... (`runAfterInteractions` tasks are queued)\n// later, on animation completion:\nInteractionManager.clearInteractionHandle(handle);\n// queued tasks run if all handles were cleared\n```",
+      "source_content_hash": "210ea6b10bdba4eb0b899c2f92a0746af4800949a72b5d7b1382e226805fd75c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "`runAfterInteractions` takes either a plain callback function, or a `PromiseTask` object with a `gen` method that returns a `Promise`. If a `PromiseTask` is supplied, then it is fully resolved (including asynchronous dependencies that also schedule more tasks via `runAfterInteractions`) before starting on the next task that might have been queued up synchronously earlier.",
+      "source_content_hash": "20a5a2599db8a49dc9182977371408c98a62b4992266935799f2b97808f5d5ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "By default, queued tasks are executed together in a loop in one `setImmediate` batch. If `setDeadline` is called with a positive number, then tasks will only be executed until the deadline (in terms of js event loop run time) approaches, at which point execution will yield via setTimeout, allowing events such as touches to start interactions and block queued tasks from executing, making apps more responsive.",
+      "source_content_hash": "f26b6fdf0f66e0f99a03dc052febcc084c2f40402ef4ae1bc138a176aefebe4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "91afe33f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "782c902a",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "### Basic",
+      "source_content_hash": "40d6e857abf13beb94484f2bcc31ef42239e57b236f03e57852e7039bd689134",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "45022e4f",
+      "source_content": "```SnackPlayer name=InteractionManager%20Function%20Component%20Basic%20Example&supportedPlatforms=ios,android\nimport React, { useEffect } from \"react\";\nimport {\n  Alert,\n  Animated,\n  InteractionManager,\n  Platform,\n  StyleSheet,\n  Text,\n  View,\n  useAnimatedValue,\n} from \"react-native\";\n\nconst instructions = Platform.select({\n  ios: \"Press Cmd+R to reload,\\n\" + \"Cmd+D or shake for dev menu\",\n  android:\n    \"Double tap R on your keyboard to reload,\\n\" +\n    \"Shake or press menu button for dev menu\",\n});\n\nconst useMount = func => useEffect(() => func(), []);\n\nconst useFadeIn = (duration = 5000) => {\n  const opacity = useAnimatedValue(0);\n\n  // Running the animation when the component is mounted\n  useMount(() => {\n    // Animated.timing() create a interaction handle by default, if you want to disabled that\n    // behaviour you can set isInteraction to false to disabled that.\n    Animated.timing(opacity, {\n      toValue: 1,\n      duration,\n    }).start();\n  });\n\n  return opacity;\n};\n\nconst Ball = ({ onShown }) => {\n  const opacity = useFadeIn();\n\n  // Running a method after the animation\n  useMount(() => {\n    const interactionPromise = InteractionManager.runAfterInteractions(() => onShown());\n    return () => interactionPromise.cancel();\n  });\n\n  return <Animated.View style={[styles.ball, { opacity }]} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <Text>{instructions}</Text>\n      <Ball onShown={() => Alert.alert(\"Animation is done\")} />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: { flex: 1, justifyContent: \"center\", alignItems: \"center\" },\n  ball: {\n    width: 100,\n    height: 100,\n    backgroundColor: \"salmon\",\n    borderRadius: 100,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "f29652838e19dcea36f815fe035cb06f71533117b80434b1b1810817dbdd9cf1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "### Advanced",
+      "source_content_hash": "72a0384392abbba414ef627bb1064eab704fde49f29fbcf7cfb07f68c891b55d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5347a9b5",
+      "source_content": "```SnackPlayer name=InteractionManager%20Function%20Component%20Advanced%20Example&supportedPlatforms=ios,android\nimport React, { useEffect } from \"react\";\nimport {\n  Alert,\n  Animated,\n  InteractionManager,\n  Platform,\n  StyleSheet,\n  Text,\n  View,\n} from \"react-native\";\n\nconst instructions = Platform.select({\n  ios: \"Press Cmd+R to reload,\\n\" + \"Cmd+D or shake for dev menu\",\n  android:\n    \"Double tap R on your keyboard to reload,\\n\" +\n    \"Shake or press menu button for dev menu\",\n});\n\nconst useMount = func => useEffect(() => func(), []);\n\n// You can create a custom interaction/animation and add\n// support for InteractionManager\nconst useCustomInteraction = (timeLocked = 2000) => {\n  useMount(() => {\n    const handle = InteractionManager.createInteractionHandle();\n\n    setTimeout(\n      () => InteractionManager.clearInteractionHandle(handle),\n      timeLocked\n    );\n\n    return () => InteractionManager.clearInteractionHandle(handle);\n  });\n};\n\nconst Ball = ({ onInteractionIsDone }) => {\n  useCustomInteraction();\n\n  // Running a method after the interaction\n  useMount(() => {\n    InteractionManager.runAfterInteractions(() => onInteractionIsDone());\n  });\n\n  return <Animated.View style={[styles.ball]} />;\n};\n\nconst App = () => {\n  return (\n    <View style={styles.container}>\n      <Text>{instructions}</Text>\n      <Ball onInteractionIsDone={() => Alert.alert(\"Interaction is done\")} />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: { flex: 1, justifyContent: \"center\", alignItems: \"center\" },\n  ball: {\n    width: 100,\n    height: 100,\n    backgroundColor: \"salmon\",\n    borderRadius: 100,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "dd456ff78c460988e1ed8e714b55c54fb5151b80d3299c7531afaf529f6a0c25",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c4ac6a6f",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cce332f2",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "af250a10",
+      "source_content": "### `runAfterInteractions()`",
+      "source_content_hash": "370533b020e25fe6a649864e323fcd21ac6a8023f94580b28510316e7ad7474d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "54dd003b",
+      "source_content": "```jsx\nstatic runAfterInteractions(task)\n```",
+      "source_content_hash": "187d9d384ef7211890dcc2e3d189c60a18a9ca7caf807b3700b1ac5245c67fc5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "Schedule a function to run after all interactions have completed. Returns a cancellable \"promise\".",
+      "source_content_hash": "ec238e03391f39a4b950ec1c690a69e26067dae9d7336463a2db979c0d8db31e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7a9140d4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d7a4554",
+      "source_content": "### `createInteractionHandle()`",
+      "source_content_hash": "78336c404ccf243c58d7784596c82f9dffacdb7a87b4008910d159b80981e0d7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3c6be27a",
+      "source_content": "```jsx\nstatic createInteractionHandle()\n```",
+      "source_content_hash": "8390e5051fa61827dfeb0cb4aa4b34df164d5b9b84a42355115dc8ccfb8e69a5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e6ac016e",
+      "source_content": "Notify manager that an interaction has started.",
+      "source_content_hash": "5be73f3b311864a1d3927e49af7868c635d6bff92a55c9f26e300f2676ebb87b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7c4902d8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e8f71c1",
+      "source_content": "### `clearInteractionHandle()`",
+      "source_content_hash": "499cdd21897d2fc52794ac27aaf0ba7235f4400ca4250b16b0a67de1bb8984e7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ade38aab",
+      "source_content": "```jsx\nstatic clearInteractionHandle(handle)\n```",
+      "source_content_hash": "a4c33b327edb57e1fa258956eefd0de2e976724a4fb5604adc8dfc26a2788767",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "Notify manager that an interaction has completed.",
+      "source_content_hash": "57615ea893e3418bec45dbe0b72ce73d11ec810b8d9723155d3b4242e3fa20ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6db567c3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "### `setDeadline()`",
+      "source_content_hash": "4e5f971660610fd8a8a497fdddab4eda496a909b7543821d4510f1963519df6c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "93bf74a6",
+      "source_content": "```jsx\nstatic setDeadline(deadline)\n```",
+      "source_content_hash": "7c316eef968eed538bbccb6fc418bd3aea8ecac03b409f44271f51484d8ee2be",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "A positive number will use setTimeout to schedule any tasks after the eventLoopRunningTime hits the deadline value, otherwise all tasks will be executed in one setImmediate batch (default).",
+      "source_content_hash": "ad9ba402538f9f5e51cc9c429611dcc86a20f0db264e2636e162f91e1901683e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/interactionmanager.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.852551+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

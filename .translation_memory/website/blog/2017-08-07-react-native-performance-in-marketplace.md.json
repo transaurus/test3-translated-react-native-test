@@ -1,0 +1,226 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2017-08-07-react-native-performance-in-marketplace.md",
+  "source_file_content_hash": "45d48a05bc1ff51ecf354cb0b5dd125aea9ed47161350bc3fb6bae82e40792a6",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: React Native Performance in Marketplace\nauthor: Aaron Chiu\nauthorTitle: Software Engineer at Facebook\nauthorURL: 'https://www.facebook.com/aaronechiu'\nauthorFBID: 1057500063\nauthorTwitter: AaaChiuuu\ntags: [engineering]\n---",
+      "source_content_hash": "edf7226eb57dccd2333f789592a1d8f91a1e0b1a3a32eb83139b520586170e58",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "React Native is used in multiple places across multiple apps in the Facebook family including a top level tab in the main Facebook apps. Our focus for this post is a highly visible product, [Marketplace](https://newsroom.fb.com/news/2016/10/introducing-marketplace-buy-and-sell-with-your-local-community/). It is available in a dozen or so countries and enables users to discover products and services provided by other users.",
+      "source_content_hash": "55d5f7d9a4074d49ecf0eeea8f17cf23c37f51a0a91261c08b3965248567bb60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 在 Facebook 系列的多個應用程式中被廣泛使用，包括主 Facebook 應用程式中的頂層標籤。本文的重點是一個高度可見的產品——[Marketplace](https://newsroom.fb.com/news/2016/10/introducing-marketplace-buy-and-sell-with-your-local-community/)。該產品已在十幾個國家推出，讓用戶能夠發現其他用戶提供的產品和服務。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "In the first half of 2017, through the joint effort of the Relay Team, the Marketplace team, the Mobile JS Platform team, and the React Native team, we cut Marketplace Time to Interaction (TTI) in half for Android [Year Class 2010-11 devices](https://code.facebook.com/posts/307478339448736/year-class-a-classification-system-for-android/). Facebook has historically considered these devices as low-end Android devices, and they have the slowest TTIs on any platform or device type.",
+      "source_content_hash": "0477e67545d60a2406afb7236422bab9cd9b6b8db202a5ea6692991f132ffcd4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2017 年上半年，通過 Relay 團隊、Marketplace 團隊、Mobile JS Platform 團隊和 React Native 團隊的共同努力，我們將 Marketplace 的「互動時間」（Time to Interaction, TTI）在 Android [2010-11 年級設備](https://code.facebook.com/posts/307478339448736/year-class-a-classification-system-for-android/)上縮短了一半。Facebook 歷來將這些設備視為低端 Android 設備，它們在任何平台或設備類型上的 TTI 都是最慢的。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "A typical React Native startup looks something like this:",
+      "source_content_hash": "5fc74b871509b2e58aea8a9fc8c1d8e188f2554db292dc7ca9ea7afbe9feae5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "典型的 React Native 啟動過程大致如下："
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "![](/blog/assets/RNPerformanceStartup.png)",
+      "source_content_hash": "e484ee688511c96128f115651c74336ca29ae4689e3cc63698d82ff4f3e3a58b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/RNPerformanceStartup.png)"
+      }
+    },
+    {
+      "segment_id": "27514802",
+      "source_content": "> Disclaimer: ratios aren't representative and will vary depending on how React Native is configured and used.",
+      "source_content_hash": "54d4e73b103df24c4ac0f40894752e9216e0448a67886df457814549e0030d24",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 免責聲明：比例不代表實際情況，會根據 React Native 的配置和使用方式而有所不同。"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "We first initialize the React Native core (aka the “Bridge”) before running the product specific JavaScript which determines what native views React Native will render in the Native Processing Time.",
+      "source_content_hash": "bd693e35d3d989f9ce14eb4c13adc96580091a3bf7160cfd8b020366d20116d3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們首先初始化 React Native 核心（即「Bridge」），然後運行產品特定的 JavaScript 代碼，這些代碼決定了 React Native 將在「原生處理時間」中渲染哪些原生視圖。"
+      }
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "### A different approach",
+      "source_content_hash": "c8e55d38a02b33fe800cc63008a88113279308bb0ae1aefb40b2d72e7db7f23a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 不同的方法"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "One of the earlier mistakes that we made was to let [Systrace and CTScan](https://code.facebook.com/posts/747457662026706/performance-instrumentation-for-android-apps/) drive our performance efforts. These tools helped us find a lot of low-hanging fruit in 2016, but we discovered that both Systrace and CTScan are **not representative of production scenarios** and cannot emulate what happens in the wild. Ratios of time spent in the breakdowns are often incorrect and, wildly off-base at times. At the extreme, some things that we expected to take a few milliseconds actually take hundreds or thousands of milliseconds. That said, CTScan is useful and we've found it catches a third of regressions before they hit production.",
+      "source_content_hash": "8acc2d5ee8724eeb1ab3a2ce13e1fb3c1e6cb490ca459649049dc8b2592739c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們早期犯的一個錯誤是讓 [Systrace 和 CTScan](https://code.facebook.com/posts/747457662026706/performance-instrumentation-for-android-apps/) 主導我們的性能優化工作。這些工具在 2016 年幫助我們發現了很多低垂的果實，但我們發現 Systrace 和 CTScan **並不能代表實際生產場景**，也無法模擬真實環境中的情況。時間分配的比例經常不準確，有時甚至完全偏離實際。極端情況下，我們預期只需幾毫秒的操作實際上可能耗費數百甚至數千毫秒。話雖如此，CTScan 仍然有用，我們發現它能在大約三分之一的性能退化問題進入生產環境之前捕捉到它們。"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "On Android, we attribute the shortcomings of these tools to the fact that 1) React Native is a multithreaded framework, 2) Marketplace is co-located with a multitude of complex views such as Newsfeed and other top-level tabs, and 3) computation times vary wildly. Thus, this half, we let production measurements and breakdowns drive almost all of our decision making and prioritization.",
+      "source_content_hash": "7e2be5e9edfad18b11d8101676baa07e79e75e8043a4a64abf27fb9f13e8d387",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 上，我們將這些工具的不足歸因於以下事實：1) React Native 是一個多線程框架；2) Marketplace 與許多複雜視圖（如 Newsfeed 和其他頂層標籤）共存；3) 計算時間差異極大。因此，今年上半年，我們幾乎完全讓生產環境的測量和細分數據來驅動我們的決策和優先級排序。"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "### Down the path of production instrumentation",
+      "source_content_hash": "3f1cfcd43e7d6d9d09b082886a10ad81fe70d0ca398b40e69f302a551eb05bf3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 生產環境檢測之路"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "Instrumenting production may sound simple on the surface, but it turned out to be quite a complex process. It took multiple iteration cycles of 2-3 weeks each; due to the latency of landing a commit in master, to pushing the app to the Play Store, to gathering sufficient production samples to have confidence in our work. Each iteration cycle involved discovering if our breakdowns were accurate, if they had the right level of granularity, and if they properly added up to the whole time span. We could not rely on alpha and beta releases because they are not representative of the general population. In essence, we very tediously built a very accurate production trace based on the aggregate of millions of samples.",
+      "source_content_hash": "43925a9adb74f7373b3a47dab50519ab4f4cde2d6ca587bc1db67b23059b3836",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表面上看，檢測生產環境似乎很簡單，但實際上這是一個相當複雜的過程。我們經歷了多次迭代週期，每次耗時 2-3 週；這是由於從提交代碼到主分支，再到將應用推送到 Play Store，最後收集足夠的生產樣本以確保我們的工作可靠，整個過程存在延遲。每個迭代週期都涉及確認我們的細分數據是否準確、粒度是否合適，以及它們是否能正確累加為總時間。我們不能依賴 alpha 和 beta 版本，因為它們無法代表一般用戶群體。本質上，我們非常細緻地構建了一個基於數百萬樣本聚合的、極其準確的生產環境追蹤系統。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "One of the reasons we meticulously verified that every millisecond in breakdowns properly added up to their parent metrics was that we realized early on there were gaps in our instrumentation. It turned out that our initial breakdowns did not account for stalls caused by thread jumps. Thread jumps themselves aren't expensive, but thread jumps to busy threads already doing work are very expensive. We eventually reproduced these blockages locally by sprinkling `Thread.sleep()` calls at the right moments, and we managed to fix them by:",
+      "source_content_hash": "932ada31a71931b0e48db5525a020d7bd1c6c6132226e6879bdd724ef8ba835a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們之所以仔細驗證每一毫秒的細分數據是否正確累加到其父指標，是因為我們很早就意識到檢測中存在漏洞。事實證明，我們最初的細分數據沒有考慮到線程跳轉導致的停頓。線程跳轉本身並不耗時，但跳轉到已經在處理任務的繁忙線程則非常耗時。我們最終通過在適當的時機插入 `Thread.sleep()` 調用來在本地重現這些阻塞問題，並通過以下方式修復了它們："
+      }
+    },
+    {
+      "segment_id": "fc8eadc3",
+      "source_content": "1. removing our dependency on AsyncTask,\n2. undoing the forced initialization of ReactContext and NativeModules on the UI thread, and\n3. removing the dependency on measuring the ReactRootView at initialization time.",
+      "source_content_hash": "15a720ae54fed99e600a55604a8891bba083880834fa9b8804c112f45e9c8314",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 移除對 AsyncTask 的依賴，\n2. 取消在 UI 線程上強制初始化 ReactContext 和 NativeModules 的做法，以及\n3. 移除在初始化時測量 ReactRootView 的依賴。"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "Together, removing these thread blockage issues reduced the startup time by over 25%.",
+      "source_content_hash": "df46bc716ba4c6ca365067c1a4d5ab79b1bc82b43acba05f0df84f9a97286e06",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些線程阻塞問題的解決，總共讓啟動時間減少了超過 25%。"
+      }
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "Production metrics also challenged some of our prior assumptions. For example, we used to pre-load many JavaScript modules on the startup path under the assumption that co-locating modules in one bundle would reduce their initialization cost. However, the cost of pre-loading and co-locating these modules far outweighed the benefits. By re-configuring our inline require blacklists and removing JavaScript modules from the startup path, we were able to avoid loading unnecessary modules such as Relay Classic (when only [Relay Modern](https://relay.dev/docs/new-in-relay-modern) was necessary). Today, our `RUN_JS_BUNDLE` breakdown is over 75% faster.",
+      "source_content_hash": "6be7f0080638035664a4b171d825259dcfe3ee168b0b14cf8830320d4ad2c203",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "We also found wins by investigating product-specific native modules. For example, by lazily injecting a native module's dependencies, we reduced that native module's cost by 98%. By removing the contention of Marketplace startup with other products, we reduced startup by an equivalent interval.",
+      "source_content_hash": "f975e609cc72a9e084ddf747bc95911dd0c8f7b7c6f100a41732fd696333bb8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "The best part is that many of these improvements are broadly applicable to all screens built with React Native.",
+      "source_content_hash": "618fa9d713553275da7ab809dc10c286818b77e3a35ba5ef6756b4f13e0b6e6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f44c1398",
+      "source_content": "## Conclusion",
+      "source_content_hash": "be031d37bb75d96ef08ca9ec5b0e83bb6f91172f60d3c31a78feae8d7dc4a0b0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "People assume that React Native startup performance problems are caused by JavaScript being slow or exceedingly high network times. While speeding up things like JavaScript would bring down TTI by a non-trivial sum, each of these contribute a much smaller percentage of TTI than was previously believed.",
+      "source_content_hash": "e406ebb5f33b5b0a326a1d5b592c768e358d64368eb1738c4473f25b6fe00fc6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "The lesson so far has been to _measure, measure, measure!_ Some wins come from moving run-time costs to build time, such as Relay Modern and [Lazy NativeModules](https://github.com/facebook/react-native/commit/797ca6c219b2a44f88f10c61d91e8cc21e2f306e). Other wins come from avoiding work by being smarter about parallelizing code or removing dead code. And some wins come from large architectural changes to React Native, such as cleaning up thread blockages. There is no grand solution to performance, and longer-term performance wins will come from incremental instrumentation and improvements. Do not let cognitive bias influence your decisions. Instead, carefully gather and interpret production data to guide future work.",
+      "source_content_hash": "b2910da52352e495b397a9abb66e2795adbac4909eaca8e04d8d24b2dc7f4a0f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c6cc90a0",
+      "source_content": "## Future plans",
+      "source_content_hash": "a34e8ef352d1cd18c8b59382e6c5fe10c5024f284a1f79d253d5893719457983",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "In the long term, we want Marketplace TTI to be comparable to similar products built with Native, and, in general, have React Native performance on par with native performance. Further more, although this half we drastically reduced the bridge startup cost by about 80%, we plan to bring the cost of the React Native bridge close to zero via projects like [Prepack](https://prepack.io/) and more build time processing.",
+      "source_content_hash": "8d1335b70f88caaaa554603ae2f747f0237a30600ddbbf2af3a8035808182cf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2017-08-07-react-native-performance-in-marketplace.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.215954+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "45d48a05bc1ff51ecf354cb0b5dd125aea9ed47161350bc3fb6bae82e40792a6"
+  }
+}

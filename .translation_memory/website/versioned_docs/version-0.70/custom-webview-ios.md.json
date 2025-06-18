@@ -1,0 +1,282 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/custom-webview-ios.md",
+  "source_file_content_hash": "8813334654ec651bf2f7478880c581ec044c9260749d9bf0489989537a015884",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: custom-webview-ios\ntitle: Custom WebView\n---",
+      "source_content_hash": "1157fa1fe03bc61140e2f459715bdc0ebbdecef1b50d1c24792ca4f676f39019",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "While the built-in web view has a lot of features, it is not possible to handle every use-case in React Native. You can, however, extend the web view with native code without forking React Native or duplicating all the existing web view code.",
+      "source_content_hash": "a28d0025a76f89e5b9ffcac80e3c1c2845a8f0603003631ddd6fc4ddc60a0250",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Before you do this, you should be familiar with the concepts in [native UI components](native-components-ios). You should also familiarise yourself with the [native code for web views](https://github.com/react-native-webview/react-native-webview/blob/master/apple/RNCWebViewManager.mm), as you will have to use this as a reference when implementing new features—although a deep understanding is not required.",
+      "source_content_hash": "7b800098354e048cb7e9e8d1982269b5ded13513391dfa0c91fe366f18a351f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Native Code",
+      "source_content_hash": "04df0b84c8de69419654e019d9c42547958b02f75e3bf84245a8f1d1a30522d3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Like for regular native components, you need a view manager and a web view.",
+      "source_content_hash": "5134cce588387e411d80e0ebbc20dcafb5f233e7a53572c1bb548c1a8a8362da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "For the view, you'll need to make a subclass of `RCTWebView`.",
+      "source_content_hash": "437fc592194fccc0d4d71d4847ffdd1a29d096ab077f67a87eecfc5a9161db0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "41ad46a6",
+      "source_content": "```objc\n// RCTCustomWebView.h\n#import <React/RCTWebView.h>\n\n@interface RCTCustomWebView : RCTWebView\n\n@end\n\n// RCTCustomWebView.m\n#import \"RCTCustomWebView.h\"\n\n@interface RCTCustomWebView ()\n\n@end\n\n@implementation RCTCustomWebView { }\n\n@end\n```",
+      "source_content_hash": "5b985809f36632e642c363417cb922a1f555757ae0f64b17ee86925b58d92f7c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "For the view manager, you need to make a subclass `RCTWebViewManager`. You must still include:",
+      "source_content_hash": "29d42b2771b37c113ec912f6a3fea56a98f40750b454889b59827dbdb6e55da1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "157151e9",
+      "source_content": "- `(UIView *)view` that returns your custom view\n- The `RCT_EXPORT_MODULE()` tag",
+      "source_content_hash": "4ab84de1ae4042be08b165f10061f05e7747d17a0e2ebab0738246ac0c7389fa",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bca33820",
+      "source_content": "```objc\n// RCTCustomWebViewManager.h\n#import <React/RCTWebViewManager.h>\n\n@interface RCTCustomWebViewManager : RCTWebViewManager\n\n@end\n\n// RCTCustomWebViewManager.m\n#import \"RCTCustomWebViewManager.h\"\n#import \"RCTCustomWebView.h\"\n\n@interface RCTCustomWebViewManager () <RCTWebViewDelegate>\n\n@end\n\n@implementation RCTCustomWebViewManager { }\n\nRCT_EXPORT_MODULE()\n\n- (UIView *)view\n{\n  RCTCustomWebView *webView = [RCTCustomWebView new];\n  webView.delegate = self;\n  return webView;\n}\n\n@end\n```",
+      "source_content_hash": "56919f6c165144bd657be200837e008a1abbbfcea3ba3d760093ff4fa1e0de66",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "### Adding New Events and Properties",
+      "source_content_hash": "2fb4975ebe0769fe8ea28185cb7de58b5d1631c4c962d9f2c2e6f25c9944ede7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "eab056be",
+      "source_content": "Adding new properties and events is the same as regular UI components. For properties, you define an `@property` in the header. For events, you define a `RCTDirectEventBlock` in the view's `@interface`.",
+      "source_content_hash": "34cc1a79716e5e261528842d4650ed1584060d9a0e9f238c2e5dfde69768c6ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9f3b4022",
+      "source_content": "```objc\n// RCTCustomWebView.h\n@property (nonatomic, copy) NSString *finalUrl;\n\n// RCTCustomWebView.m\n@interface RCTCustomWebView ()\n\n@property (nonatomic, copy) RCTDirectEventBlock onNavigationCompleted;\n\n@end\n```",
+      "source_content_hash": "5bab0c86742dc723b23aa0571b681d339958a2478bc53eb2188d5c2582f7f2bc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "Then expose it in the view manager's `@implementation`.",
+      "source_content_hash": "da47c9d150b65710ef22bf91c04e8ed80fc3556af84c0326d7d89c2ee15b6440",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6563256",
+      "source_content": "```objc\n// RCTCustomWebViewManager.m\nRCT_EXPORT_VIEW_PROPERTY(onNavigationCompleted, RCTDirectEventBlock)\nRCT_EXPORT_VIEW_PROPERTY(finalUrl, NSString)\n```",
+      "source_content_hash": "bf82bc91e3a01b68f7420eaaaea3a563509e5f4c19f5c9f89dcdb44281b44ea6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "### Extending Existing Events",
+      "source_content_hash": "d3c17461444b0b796ff6c444b434e0236f5e9df5e1a8f18e2dc90da01dfa2ef2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "You should refer to [RCTWebView.m](https://github.com/react-native-webview/react-native-webview/blob/master/apple/RNCWebView.m) in the React Native WebView codebase to see what handlers are available and how they are implemented. You can extend any methods here to provide extra functionality.",
+      "source_content_hash": "3bae6fe3c91236045988971f86ec03887b6d9fa0e335b3604ef82964f1d159e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "By default, most methods aren't exposed from RCTWebView. If you need to expose them, you need to create an [Objective C category](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html), and then expose all the methods you need to use.",
+      "source_content_hash": "12da03155244a81cbf3a36447b28d2132d3da19c3d6eea7548a00d0617dfa0f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "efbe5e3f",
+      "source_content": "```objc\n// RCTWebView+Custom.h\n#import <React/RCTWebView.h>\n\n@interface RCTWebView (Custom)\n- (BOOL)webView:(__unused UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;\n- (NSMutableDictionary<NSString *, id> *)baseEvent;\n@end\n```",
+      "source_content_hash": "e5751651ee976f801cf132cd021677f3b18f27bdbda270b33f5de619c13618e3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Once these are exposed, you can reference them in your custom web view class.",
+      "source_content_hash": "bc175ad38c745eee6197e74871501c1d487b87a2dfe42e1033aa3246047c1bff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f39e109c",
+      "source_content": "```objc\n// RCTCustomWebView.m\n\n// Remember to import the category file.\n#import \"RCTWebView+Custom.h\"\n\n- (BOOL)webView:(__unused UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request\n navigationType:(UIWebViewNavigationType)navigationType\n{\n  BOOL allowed = [super webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];\n\n  if (allowed) {\n    NSString* url = request.URL.absoluteString;\n    if (url && [url isEqualToString:_finalUrl]) {\n      if (_onNavigationCompleted) {\n        NSMutableDictionary<NSString *, id> *event = [self baseEvent];\n        _onNavigationCompleted(event);\n      }\n    }\n  }\n\n  return allowed;\n}\n```",
+      "source_content_hash": "40f8ed5fa8cc2f59a88074e50d08238be7ee7e92c1b5263d925fa20686d515f1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "13292277",
+      "source_content": "## JavaScript Interface",
+      "source_content_hash": "b6ec99a36340acb35a427eaceea530a51eca6dbe8a5421a90c607e04e3325061",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "To use your custom web view, you'll need to create a class for it. Your class must:",
+      "source_content_hash": "1d13de28c0786c165e63427d57d973d18a3f59a8a548fda84f7c429c6b955178",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "eb70e807",
+      "source_content": "- Export all the prop types from `WebView.propTypes`\n- Return a `WebView` component with the prop `nativeConfig.component` set to your native component (see below)",
+      "source_content_hash": "2120efef8e43671685f7dff198cb206d9bc3aaed5c3b10ee85bcac6e47346481",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "To get your native component, you must use `requireNativeComponent`: the same as for regular custom components. However, you must pass in an extra third argument, `WebView.extraNativeComponentConfig`. This third argument contains prop types that are only required for native code.",
+      "source_content_hash": "461b67eb583c21a54d8d29402135cb0812eff85aa33209e4df7ff9383e1f736c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4a107b4",
+      "source_content": "```jsx\nimport React, {Component, PropTypes} from 'react';\nimport {\n  WebView,\n  requireNativeComponent,\n  NativeModules,\n} from 'react-native';\nconst {CustomWebViewManager} = NativeModules;\n\nexport default class CustomWebView extends Component {\n  static propTypes = WebView.propTypes;\n\n  render() {\n    return (\n      <WebView\n        {...this.props}\n        nativeConfig={{\n          component: RCTCustomWebView,\n          viewManager: CustomWebViewManager,\n        }}\n      />\n    );\n  }\n}\n\nconst RCTCustomWebView = requireNativeComponent(\n  'RCTCustomWebView',\n  CustomWebView,\n  WebView.extraNativeComponentConfig,\n);\n```",
+      "source_content_hash": "87b7c58dc5127bfb05bda03e2be3960f910662c70872d3acdb48ec360aec8663",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "61a78cbe",
+      "source_content": "If you want to add custom props to your native component, you can use `nativeConfig.props` on the web view. For iOS, you should also set the `nativeConfig.viewManager` prop with your custom WebView ViewManager as in the example above.",
+      "source_content_hash": "c561f5cdacb0ee81185e2a537047d175f43328759511f781a47d20810cbbca30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "For events, the event handler must always be set to a function. This means it isn't safe to use the event handler directly from `this.props`, as the user might not have provided one. The standard approach is to create an event handler in your class, and then invoking the event handler given in `this.props` if it exists.",
+      "source_content_hash": "7cfaee623aa536281b7cef327bb3b9e8bc36df137e3763add9ee1609b95fc80c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "If you are unsure how something should be implemented from the JS side, look at [WebView.ios.tsx](https://github.com/react-native-webview/react-native-webview/blob/master/src/WebView.ios.tsx) in the React Native source.",
+      "source_content_hash": "bb6f9e3bf2d9830e8e996692338392187e8e4fafe9c95fe4d5a1ab22c1e5c1eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44ecd2e3",
+      "source_content": "```jsx\nexport default class CustomWebView extends Component {\n  static propTypes = {\n    ...WebView.propTypes,\n    finalUrl: PropTypes.string,\n    onNavigationCompleted: PropTypes.func,\n  };\n\n  static defaultProps = {\n    finalUrl: 'about:blank',\n  };\n\n  _onNavigationCompleted = event => {\n    const {onNavigationCompleted} = this.props;\n    onNavigationCompleted && onNavigationCompleted(event);\n  };\n\n  render() {\n    return (\n      <WebView\n        {...this.props}\n        nativeConfig={{\n          component: RCTCustomWebView,\n          props: {\n            finalUrl: this.props.finalUrl,\n            onNavigationCompleted: this._onNavigationCompleted,\n          },\n          viewManager: CustomWebViewManager,\n        }}\n      />\n    );\n  }\n}\n```",
+      "source_content_hash": "9ab99cc6c1937f0c42722bce2ffa05354748db334dd4dac0b5f03a9699e8e1f9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d8c366cc",
+      "source_content": "Similar to regular native components, you must provide all your prop types in the component to have them forwarded on to the native component. However, if you have some prop types that are only used internally in component, you can add them to the `nativeOnly` property of the third argument previously mentioned. For event handlers, you have to use the value `true` instead of a regular prop type.",
+      "source_content_hash": "26add6f96b797f7f0aaf3a0886665456fa260c165a2c9575fba0bc6f6e469bb7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與常規原生元件類似，您必須在元件中提供所有屬性類型，以便將它們轉發到原生元件。然而，如果您有一些僅在元件內部使用的屬性類型，可以將它們添加到前面提到的第三個參數的 `nativeOnly` 屬性中。對於事件處理程序，您必須使用值 `true` 而不是常規的屬性類型。"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "For example, if you wanted to add an internal event handler called `onScrollToBottom`, you would use,",
+      "source_content_hash": "a1ed03da1f746d28b05ef88aa99883a7e4576cf029edc5c48ddacc2d90f8c6d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，如果您想添加一個名為 `onScrollToBottom` 的內部事件處理程序，您可以使用，"
+      }
+    },
+    {
+      "segment_id": "3d4d9546",
+      "source_content": "```jsx\nconst RCTCustomWebView = requireNativeComponent(\n  'RCTCustomWebView',\n  CustomWebView,\n  {\n    ...WebView.extraNativeComponentConfig,\n    nativeOnly: {\n      ...WebView.extraNativeComponentConfig.nativeOnly,\n      onScrollToBottom: true,\n    },\n  },\n);\n```",
+      "source_content_hash": "efec27bd36ef4ed120a51287258e1f94a0fe12b43ff64ddc957df759a8b387b5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3d4d9546"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/custom-webview-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.361441+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "8813334654ec651bf2f7478880c581ec044c9260749d9bf0489989537a015884"
+  }
+}

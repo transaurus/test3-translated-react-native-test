@@ -1,0 +1,1652 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/pushnotificationios.md",
+  "source_file_content_hash": "93971b8f9d0a604d12271651d76f9d527a30a1001ccfde448ac60bf89160a882",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: pushnotificationios\ntitle: '🚧 PushNotificationIOS'\n---",
+      "source_content_hash": "62294fc57cb53000574680246524b76a8e22ce6dbbc38163cbbc6eb1b46e1de8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "f1ef2f7d",
+      "source_content": "> **Deprecated.** Use one of the [community packages](https://reactnative.directory/?search=push+notification) instead.",
+      "source_content_hash": "9112c46e65a1438bd65d9f30aa37f12d60ff1b5006fee482c2f4c2edad09fc59",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **已棄用。** 請改用 [社群套件](https://reactnative.directory/?search=push+notification)。"
+      }
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<div className=\"banner-native-code-required\">\n  <h3>Projects with Native Code Only</h3>\n  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href=\"https://docs.expo.dev/versions/latest/sdk/notifications/\">Notifications</a> in the Expo documentation for the appropriate alternative.</p>\n</div>",
+      "source_content_hash": "49049824a4001e19b72978c8ba8de95e36e338b6b915304542e7f49804d4ceac",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_37387e33"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Handle push notifications for your app, including permission handling and icon badge number.",
+      "source_content_hash": "ecb82ab949af97197731ff03b51a8f0b358b0496fa91854409a909127ea04941",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "處理應用程式的推播通知，包括權限處理和應用圖示徽章數字。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "To get up and running, [configure your notifications with Apple](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW6) and your server-side system.",
+      "source_content_hash": "52ef582c1a09244afce85303ee2f3fa4c5672c2541e42b0b024073abced9bf25",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要開始使用，請先[向 Apple 設定您的通知](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW6)以及您的伺服器端系統。"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "React Native version equal or higher than 0.60.0:",
+      "source_content_hash": "db09c36ef21e2d1e87a88ccdcee4613b54a8e27f6cf11628bd37e76f59b0f36c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 版本 0.60.0 或更高："
+      }
+    },
+    {
+      "segment_id": "034de896",
+      "source_content": "- Autolinking in 0.60.0 handles the linking for you!",
+      "source_content_hash": "e4a0a342b6e35dbb3a68d4a57a8715ddc2b53ab5993385cd9236e010bfcc799d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 0.60.0 版本的自動連結功能會為您處理連結！"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "React Native versions lower than 0.60.0:",
+      "source_content_hash": "0e3eebeb3d4d32281d6b83673278d806465b679f5ce38c9dd0756dcae7b3b72e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 版本低於 0.60.0："
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Add the PushNotificationIOS library to your Podfile: ./ios/Podfile",
+      "source_content_hash": "521ee8fe2e29471d311dbeea45305819fa0269566e2891aa5f517fa3f81c72fb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 PushNotificationIOS 函式庫加入您的 Podfile：./ios/Podfile"
+      }
+    },
+    {
+      "segment_id": "44d89370",
+      "source_content": "- CocoaPods:\n\n  - Add the PushNotificationIOS library to your Podfile: ./ios/Podfile\n\n    ```ruby\n    target 'myAwesomeApp' do\n      # Pods for myAwesomeApp\n      pod 'React-RCTPushNotification', :path => '../node_modules/react-native/Libraries/PushNotificationIOS'\n    end\n    ```\n\n- [Manually link](linking-libraries-ios.md#manual-linking) the PushNotificationIOS library:\n  - Add the following to your Project: `node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj`\n  - Add the following to `Link Binary With Libraries`: `libRCTPushNotification.a`",
+      "source_content_hash": "b5852fba954f551f4c04949a753628b1e852a54b87180b60a529b88638ec2e81",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- CocoaPods：\n\n  - 將 PushNotificationIOS 函式庫加入您的 Podfile：./ios/Podfile\n\n    ```ruby\n    target 'myAwesomeApp' do\n      # Pods for myAwesomeApp\n      pod 'React-RCTPushNotification', :path => '../node_modules/react-native/Libraries/PushNotificationIOS'\n    end\n    ```\n\n- [手動連結](linking-libraries-ios.md#manual-linking) PushNotificationIOS 函式庫：\n  - 將以下內容加入您的專案：`node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj`\n  - 將以下內容加入 `Link Binary With Libraries`：`libRCTPushNotification.a`"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "Finally, to enable support for `notification` and `register` events you need to augment your AppDelegate.",
+      "source_content_hash": "2517e2079d7dfb22328b43ea531eaf306f82ae3ba79f4d562fb503109f2bcbe3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，為了支援 `notification` 和 `register` 事件，您需要擴充您的 AppDelegate。"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "At the top of your `AppDelegate.m`:",
+      "source_content_hash": "680ac044f6d3212f01228fa867fbe61127805c88816323b19a71daa13cd62052",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 `AppDelegate.m` 頂部："
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "`#import <React/RCTPushNotificationManager.h>`",
+      "source_content_hash": "2736721a9aabe8570138a46b30e22c815ccdf6bc7fd0839bdcc29c93e778a6aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`#import <React/RCTPushNotificationManager.h>`"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "And then in your AppDelegate implementation add the following:",
+      "source_content_hash": "cc04ef962ce481a58c26db5e430d73da6f652daf5b6e7614980e3ca08a9dbae3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後在您的 AppDelegate 實作中加入以下內容："
+      }
+    },
+    {
+      "segment_id": "48ec8149",
+      "source_content": "```objectivec\n // Required to register for notifications\n - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings\n {\n  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];\n }\n // Required for the register event.\n - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken\n {\n  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];\n }\n // Required for the notification event. You must call the completion handler after handling the remote notification.\n - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo\n                                                        fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler\n {\n   [RCTPushNotificationManager didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];\n }\n // Required for the registrationError event.\n - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error\n {\n  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];\n }\n // Required for the localNotification event.\n - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification\n {\n  [RCTPushNotificationManager didReceiveLocalNotification:notification];\n }\n```",
+      "source_content_hash": "dbcc54d06d84cc155d69f7039d1b5a18600d175ed9dc7a3ccf9a65b1a33dad61",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48ec8149"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "To show notifications while being in the foreground (available starting from iOS 10) add the following lines:",
+      "source_content_hash": "6e9c68b288215f03f0b6814ac8ce727a59089812ccf73236a3ec0b54f47f38a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在前景顯示通知（從 iOS 10 開始支援），請加入以下幾行："
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "At the top of your `AppDelegate.m`:",
+      "source_content_hash": "680ac044f6d3212f01228fa867fbe61127805c88816323b19a71daa13cd62052",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 `AppDelegate.m` 頂部："
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "`#import <UserNotifications/UserNotifications.h>`",
+      "source_content_hash": "724747d15e27180e0bc6135b26d5aa2158bff531ec2971bc32d080fd3ff22a31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`#import <UserNotifications/UserNotifications.h>`"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "And then in your AppDelegate implementation add the following:",
+      "source_content_hash": "cc04ef962ce481a58c26db5e430d73da6f652daf5b6e7614980e3ca08a9dbae3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後在您的 AppDelegate 實作中加入以下內容："
+      }
+    },
+    {
+      "segment_id": "65400624",
+      "source_content": "```objectivec\n- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions\n{\n  ...\n  // Define UNUserNotificationCenter\n  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];\n  center.delegate = self;\n\n  return YES;\n}\n\n//Called when a notification is delivered to a foreground app.\n-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler\n{\n  completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);\n}\n```",
+      "source_content_hash": "f99297ac4a00e126545d9f0874661a113bac4238caf6b81a7d35cceee2c7b23c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65400624"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "Then enable Background Modes/Remote notifications to be able to use remote notifications properly. The easiest way to do this is via the project settings. Navigate to Targets -> Your App -> Capabilities -> Background Modes and check Remote notifications. This will automatically enable the required settings.",
+      "source_content_hash": "3b0af5ff3496d2870c0c8e1ebfc8277562a7948e265c6122cc0bff8912f831eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著啟用「背景模式/遠端通知」以正確使用遠端通知。最簡單的方法是透過專案設定。導航至 Targets -> 您的應用 -> Capabilities -> Background Modes 並勾選 Remote notifications。這將自動啟用所需的設定。"
+      }
+    },
+    {
+      "segment_id": "e9ae42a9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "42a5832e",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "### `presentLocalNotification()`",
+      "source_content_hash": "07ee72edc87accd0b524cd5698b28dad4732023efd009c885b0dcd6710aac554",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `presentLocalNotification()`"
+      }
+    },
+    {
+      "segment_id": "f39e109c",
+      "source_content": "```tsx\nstatic presentLocalNotification(details: PresentLocalNotificationDetails);\n```",
+      "source_content_hash": "76bac5de3a84a997cf8bbe185b78ecce7527628ee98870518619104c271e4a0b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f39e109c"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "Schedules the localNotification for immediate presentation.",
+      "source_content_hash": "caf7d8826b59f4fd9126e625f2e6a90a0bd4552fab8a91b62a114fceb955de99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "排程立即顯示的本地通知。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "9a765bfc",
+      "source_content": "| Name    | Type   | Required | Description |\n| ------- | ------ | -------- | ----------- |\n| details | object | Yes      | See below.  |",
+      "source_content_hash": "68c38965e52f24365d6f9ba60374ccca4a9c93ed40ff848cb221aaf6db684b72",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9a765bfc"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "details is an object containing:",
+      "source_content_hash": "29be65a4f44c47aa9a6d787d9720a7baef281998c2176d2293a3bde3e95fcd48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "details 是一個包含以下內容的物件："
+      }
+    },
+    {
+      "segment_id": "40a587f3",
+      "source_content": "- `alertBody` : The message displayed in the notification alert.\n- `alertAction` : The \"action\" displayed beneath an actionable notification. Defaults to \"view\". Note that Apple no longer shows this in iOS 10 +\n- `alertTitle` : The text displayed as the title of the notification alert.\n- `soundName` : The sound played when the notification is fired (optional).\n- `isSilent` : If true, the notification will appear without sound (optional).\n- `category` : The category of this notification, required for actionable notifications (optional).\n- `userInfo` : An object containing additional notification data (optional).\n- `applicationIconBadgeNumber` The number to display as the app's icon badge. The default value of this property is 0, which means that no badge is displayed (optional).",
+      "source_content_hash": "5d61658cb53f8c77399edbd9f5a9c7889bd699b550a6b14ea315fa2c08745ced",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `alertBody` : 通知警示中顯示的訊息。\n- `alertAction` : 在可操作通知下方顯示的「動作」。預設為「檢視」。請注意，Apple 從 iOS 10 開始不再顯示此內容。\n- `alertTitle` : 通知警示中顯示的標題文字。\n- `soundName` : 觸發通知時播放的聲音（可選）。\n- `isSilent` : 若為 true，通知將無聲顯示（可選）。\n- `category` : 此通知的類別，用於可操作通知（可選）。\n- `userInfo` : 包含額外通知資料的物件（可選）。\n- `applicationIconBadgeNumber` 顯示在應用圖示上的徽章數字。此屬性的預設值為 0，表示不顯示徽章（可選）。"
+      }
+    },
+    {
+      "segment_id": "f1a2be1a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "13292277",
+      "source_content": "### `scheduleLocalNotification()`",
+      "source_content_hash": "ad590e9c96fac5ac9d9c67d4a20e3f6de2502ad2ac0ee1e7284b6b0d6026cb42",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scheduleLocalNotification()`"
+      }
+    },
+    {
+      "segment_id": "9ed0f908",
+      "source_content": "```tsx\nstatic scheduleLocalNotification(details: ScheduleLocalNotificationDetails);\n```",
+      "source_content_hash": "1749434addae4e64310e489d768efdd7e2e7e08c28e968290d973279532ac532",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9ed0f908"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "Schedules the localNotification for future presentation.",
+      "source_content_hash": "2385f4c97b1f35ea2e9c6cd589d9b388af89633003157ac0e7bb09b6355f5e69",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "排程未來顯示的本地通知。"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "c9fc9c02",
+      "source_content": "| Name    | Type   | Required | Description |\n| ------- | ------ | -------- | ----------- |\n| details | object | Yes      | See below.  |",
+      "source_content_hash": "68c38965e52f24365d6f9ba60374ccca4a9c93ed40ff848cb221aaf6db684b72",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9fc9c02"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "details is an object containing:",
+      "source_content_hash": "29be65a4f44c47aa9a6d787d9720a7baef281998c2176d2293a3bde3e95fcd48",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "details 是一個包含以下屬性的物件："
+      }
+    },
+    {
+      "segment_id": "3670cec0",
+      "source_content": "- `fireDate` : The date and time when the system should deliver the notification.\n- `alertTitle` : The text displayed as the title of the notification alert.\n- `alertBody` : The message displayed in the notification alert.\n- `alertAction` : The \"action\" displayed beneath an actionable notification. Defaults to \"view\". Note that Apple no longer shows this in iOS 10 +\n- `soundName` : The sound played when the notification is fired (optional).\n- `isSilent` : If true, the notification will appear without sound (optional).\n- `category` : The category of this notification, required for actionable notifications (optional).\n- `userInfo` : An object containing additional notification data (optional).\n- `applicationIconBadgeNumber` The number to display as the app's icon badge. Setting the number to 0 removes the icon badge (optional).\n- `repeatInterval` : The interval to repeat as a string. Possible values: `minute`, `hour`, `day`, `week`, `month`, `year` (optional).",
+      "source_content_hash": "ca03b3bfe847d8617a275033e40b8b34dd70146f0bdac2b8a563025bc7ac2ae2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `fireDate` : 系統應觸發通知的日期與時間。\n- `alertTitle` : 顯示為通知警示標題的文字。\n- `alertBody` : 顯示在通知警示中的訊息內容。\n- `alertAction` : 顯示於可操作通知下方的「動作」文字。預設為「檢視」。注意：Apple 自 iOS 10 起不再顯示此項目。\n- `soundName` : 觸發通知時播放的音效（可選）。\n- `isSilent` : 若為 true，通知將以靜音方式顯示（可選）。\n- `category` : 此通知的分類，用於可操作通知（可選）。\n- `userInfo` : 包含額外通知資料的物件（可選）。\n- `applicationIconBadgeNumber` : 顯示於應用程式圖示上的徽章數字。設為 0 可移除徽章（可選）。\n- `repeatInterval` : 重複間隔的字符串值。可能選項：`minute`、`hour`、`day`、`week`、`month`、`year`（可選）。"
+      }
+    },
+    {
+      "segment_id": "1af652fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "### `cancelAllLocalNotifications()`",
+      "source_content_hash": "094ab9093a2a59da127f514121abd1ececd32830dc442b9871280c45f9a94bc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `cancelAllLocalNotifications()`"
+      }
+    },
+    {
+      "segment_id": "71969be5",
+      "source_content": "```tsx\nstatic cancelAllLocalNotifications();\n```",
+      "source_content_hash": "df7c42ef6d9e03439258c92e2cd3aad85c91af6f6e126a092471c0912a4a1d6c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71969be5"
+      }
+    },
+    {
+      "segment_id": "62d066b0",
+      "source_content": "Cancels all scheduled localNotifications",
+      "source_content_hash": "bd9c3b35c4d74f12d01a861998788851f9e752ecff666c94a3c2d1ba390f5c1e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取消所有已排程的本地通知"
+      }
+    },
+    {
+      "segment_id": "f28724b0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "67edbbc4",
+      "source_content": "### `removeAllDeliveredNotifications()`",
+      "source_content_hash": "64931ee9c582b96282f5f194cf89b1f431f3810c9da30b6b7754d6789eb8d86a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeAllDeliveredNotifications()`"
+      }
+    },
+    {
+      "segment_id": "028bef0a",
+      "source_content": "```tsx\nstatic removeAllDeliveredNotifications();\n```",
+      "source_content_hash": "468521f584bae658f060a1e6ba2f9b98e87772b472e8b3fa8327ee23437a321b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_028bef0a"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "Remove all delivered notifications from Notification Center",
+      "source_content_hash": "9eb7b52016d252f9b97ca8bdf5796d725cf69bdf664daa7da44fb067fc1d980b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從通知中心移除所有已送達的通知"
+      }
+    },
+    {
+      "segment_id": "96311fc6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c4ac6a6f",
+      "source_content": "### `getDeliveredNotifications()`",
+      "source_content_hash": "b2feb3d213b9728cb82183fcd390762cf294e5eec35ca97bca4ecfba4a8b77e2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getDeliveredNotifications()`"
+      }
+    },
+    {
+      "segment_id": "bea1601a",
+      "source_content": "```tsx\nstatic getDeliveredNotifications(callback: (notifications: Object[]) => void);\n```",
+      "source_content_hash": "0d46f9c668dd97c409355f385a88b33517486bd27515d1678e06f41696ef820d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bea1601a"
+      }
+    },
+    {
+      "segment_id": "295367fa",
+      "source_content": "Provides you with a list of the app’s notifications that are still displayed in Notification Center",
+      "source_content_hash": "986a6a5711e738fbca5a243a80921f058e0f32d795cc90f8129c606f992cc82c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "提供仍顯示在通知中心內的應用程式通知清單"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "ae4c3f3f",
+      "source_content": "| Name     | Type     | Required | Description                                                 |\n| -------- | -------- | -------- | ----------------------------------------------------------- |\n| callback | function | Yes      | Function which receive an array of delivered notifications. |",
+      "source_content_hash": "bf7d59bea8721a3428ab407200e92d9a2d67f78cb65c3f169d813da3d1de7147",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ae4c3f3f"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "A delivered notification is an object containing:",
+      "source_content_hash": "eb078bbdbeabc9f668035327890bc27496843011b7f35135ec6ae110ee2e4361",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "已送達通知為包含以下屬性的物件："
+      }
+    },
+    {
+      "segment_id": "d796d443",
+      "source_content": "- `identifier` : The identifier of this notification.\n- `title` : The title of this notification.\n- `body` : The body of this notification.\n- `category` : The category of this notification (optional).\n- `userInfo` : An object containing additional notification data (optional).\n- `thread-id` : The thread identifier of this notification, if has one.",
+      "source_content_hash": "d26fa6a3349d4521216709f2df763bf7a7f5589ef5b6ea0ab09143f79e8eaac0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `identifier` : 此通知的唯一識別碼。\n- `title` : 此通知的標題。\n- `body` : 此通知的內文。\n- `category` : 此通知的分類（可選）。\n- `userInfo` : 包含額外通知資料的物件（可選）。\n- `thread-id` : 此通知的執行緒識別碼（若存在）。"
+      }
+    },
+    {
+      "segment_id": "ec9dd3c8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "197e1a1b",
+      "source_content": "### `removeDeliveredNotifications()`",
+      "source_content_hash": "8b6a478732b2fe03b95049c6fa21490a1ecb23fe12a9fb7643393e4b7ff0d0e4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeDeliveredNotifications()`"
+      }
+    },
+    {
+      "segment_id": "a414aca8",
+      "source_content": "```tsx\nstatic removeDeliveredNotifications(identifiers: string[]);\n```",
+      "source_content_hash": "73ecbcdb573f09fbae6085572ae1d32ed84b1f4dc694a86172daa0eb675e6bf2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a414aca8"
+      }
+    },
+    {
+      "segment_id": "be0f7233",
+      "source_content": "Removes the specified notifications from Notification Center",
+      "source_content_hash": "412e7ded4f4327c31bd2f61049ca4b6eedf11abdb24b1b9c72f69ed651725915",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從通知中心移除指定的通知"
+      }
+    },
+    {
+      "segment_id": "d8c366cc",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "b8bf77d8",
+      "source_content": "| Name        | Type  | Required | Description                        |\n| ----------- | ----- | -------- | ---------------------------------- |\n| identifiers | array | Yes      | Array of notification identifiers. |",
+      "source_content_hash": "b6c307a156c8d5b60d5f61c84ad42c69014fde60eda88c3eee2763e34fddc89d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b8bf77d8"
+      }
+    },
+    {
+      "segment_id": "bb689d85",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "43662a16",
+      "source_content": "### `setApplicationIconBadgeNumber()`",
+      "source_content_hash": "461698320b35c0d244c7ff6200597fa20f63c3dbd794d4f7e11ce9521884f47e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setApplicationIconBadgeNumber()`"
+      }
+    },
+    {
+      "segment_id": "a7e764c4",
+      "source_content": "```tsx\nstatic setApplicationIconBadgeNumber(number: number);\n```",
+      "source_content_hash": "b3471d13bd821c494192abc754c5d0fb48313f5790aef410027cd79415b3bd1c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a7e764c4"
+      }
+    },
+    {
+      "segment_id": "85b17c36",
+      "source_content": "Sets the badge number for the app icon on the home screen",
+      "source_content_hash": "bd97142d998925c64665387e5fbdd4be4a49cf0da96571344e94f4dc4f1b99a3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定主畫面應用程式圖示的徽章數字"
+      }
+    },
+    {
+      "segment_id": "d3912b2e",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "4e844e8c",
+      "source_content": "| Name   | Type   | Required | Description                    |\n| ------ | ------ | -------- | ------------------------------ |\n| number | number | Yes      | Badge number for the app icon. |",
+      "source_content_hash": "d7b9434f395f21b87467203e6154da8a64e7aed2ed288ac9001fb2c55e237e62",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e844e8c"
+      }
+    },
+    {
+      "segment_id": "56f3dd31",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5f4381f8",
+      "source_content": "### `getApplicationIconBadgeNumber()`",
+      "source_content_hash": "63bbbe6076affac10a7c161da23981cd9e9b6cf4464fbc8b4f96d96321c38446",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getApplicationIconBadgeNumber()`"
+      }
+    },
+    {
+      "segment_id": "2de995af",
+      "source_content": "```tsx\nstatic getApplicationIconBadgeNumber(callback: (badge: number) => void);\n```",
+      "source_content_hash": "b5e4997c3a37a25c740e491ec4899ce89046ec642df0b360b451e1f6d4516fa5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2de995af"
+      }
+    },
+    {
+      "segment_id": "e636ba62",
+      "source_content": "Gets the current badge number for the app icon on the home screen",
+      "source_content_hash": "33a59b2846bee4cc0445e49f47afe30191c8573ff0ffc9b1a9b2d94c21667248",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取得主畫面應用程式圖示的當前徽章數字"
+      }
+    },
+    {
+      "segment_id": "b0c30ab4",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "aaf8810e",
+      "source_content": "| Name     | Type     | Required | Description                                              |\n| -------- | -------- | -------- | -------------------------------------------------------- |\n| callback | function | Yes      | A function that will be passed the current badge number. |",
+      "source_content_hash": "077234db7a345188fb2c22b9fe517128a2438761119ef23b13415a4b6b307348",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_aaf8810e"
+      }
+    },
+    {
+      "segment_id": "53e78d36",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cb2e9dbf",
+      "source_content": "### `cancelLocalNotifications()`",
+      "source_content_hash": "ed2943053aa89866f65ef16b83c2ee94d274116ee2d32b1bdd2e0b23f4147d6f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `cancelLocalNotifications()`"
+      }
+    },
+    {
+      "segment_id": "1ee98bc6",
+      "source_content": "```tsx\nstatic cancelLocalNotifications(userInfo: Object);\n```",
+      "source_content_hash": "22a2844b35ece557c8387f6af9cc8b7ebc3087775fcdca6ffa9fb5a941d6f672",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1ee98bc6"
+      }
+    },
+    {
+      "segment_id": "12bc7444",
+      "source_content": "Cancel local notifications.",
+      "source_content_hash": "ae5779a91128c0549c7a8835fe672783eeb10ae00d571720d9e0d9b82d24dc0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取消本地通知。"
+      }
+    },
+    {
+      "segment_id": "f50056c0",
+      "source_content": "Optionally restricts the set of canceled notifications to those notifications whose `userInfo` fields match the corresponding fields in the `userInfo` argument.",
+      "source_content_hash": "2a580f26647e6e0d3ff19127f8c6c7ac1a5e0be8261338c7401fe7563b7543fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可選限制條件：僅取消 `userInfo` 欄位與參數相符的通知。"
+      }
+    },
+    {
+      "segment_id": "30aa9816",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "4905ea6b",
+      "source_content": "| Name     | Type   | Required | Description |\n| -------- | ------ | -------- | ----------- |\n| userInfo | object | No       |             |",
+      "source_content_hash": "570bf3aed4960acaa63e5cd6a3e2b9a206481493c7be7e7b3020243699f00cae",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4905ea6b"
+      }
+    },
+    {
+      "segment_id": "dc468763",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "92505e51",
+      "source_content": "### `getScheduledLocalNotifications()`",
+      "source_content_hash": "cd1803aa0f1e1bdf13a129b20b9fa5225634fe32f78d5dc3dfd314eb70db8d84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getScheduledLocalNotifications()`"
+      }
+    },
+    {
+      "segment_id": "e6da31bf",
+      "source_content": "```tsx\nstatic getScheduledLocalNotifications(\n  callback: (notifications: ScheduleLocalNotificationDetails[]) => void,\n);\n```",
+      "source_content_hash": "f6f4574ffeffcb8f8cdf50a56747324aee5680a13b2fd808c5e258555a504af5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6da31bf"
+      }
+    },
+    {
+      "segment_id": "46e586a3",
+      "source_content": "Gets the local notifications that are currently scheduled.",
+      "source_content_hash": "8e0e63310460dcb76179d50d0e0b937c608bd71635714b3de8d6a51c56f5985c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取得當前已排程的本地通知清單。"
+      }
+    },
+    {
+      "segment_id": "66e62938",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "181ae0e1",
+      "source_content": "| Name     | Type     | Required | Description                                                                        |\n| -------- | -------- | -------- | ---------------------------------------------------------------------------------- |\n| callback | function | Yes      | A function that will be passed an array of objects describing local notifications. |",
+      "source_content_hash": "9b68fec6ea67bec3bc964cec2ae1e545e252e52384ef9e77ba5ee108fd11bbd2",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_181ae0e1"
+      }
+    },
+    {
+      "segment_id": "f3f517b3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a99db0f6",
+      "source_content": "### `addEventListener()`",
+      "source_content_hash": "c14ee61a90cacc6adff71fa9f1ff675bde58b04df64bfe24a80a9a4a21f7ced0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addEventListener()`"
+      }
+    },
+    {
+      "segment_id": "d0a5d100",
+      "source_content": "```tsx\nstatic addEventListener(\n  type: PushNotificationEventName,\n  handler:\n    | ((notification: PushNotification) => void)\n    | ((deviceToken: string) => void)\n    | ((error: {message: string; code: number; details: any}) => void),\n);\n```",
+      "source_content_hash": "9d14bbcd36c95378b74b89e07fa38441178b20ca8f52e6d2d5350d0eeb4def9c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d0a5d100"
+      }
+    },
+    {
+      "segment_id": "d1996877",
+      "source_content": "Attaches a listener to remote or local notification events while the app is running in the foreground or the background.",
+      "source_content_hash": "fbaf2700fd057292fe54a07b388eca068ae9a4c8505bf884980df5a075f19e72",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在應用程式於前景或背景運行時，為遠端或本地通知事件附加監聽器。"
+      }
+    },
+    {
+      "segment_id": "95b3e282",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "d01dc4cd",
+      "source_content": "| Name    | Type     | Required | Description |\n| ------- | -------- | -------- | ----------- |\n| type    | string   | Yes      | Event type. |\n| handler | function | Yes      | Listener.   |",
+      "source_content_hash": "2ca3cec74776e7937023b2200c474a8726eae8b062a4b1b320ba404d10bcee93",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d01dc4cd"
+      }
+    },
+    {
+      "segment_id": "b16b56a2",
+      "source_content": "Valid events are:",
+      "source_content_hash": "b274b48f64be01ec37c9f055febd075c4c7db4e47737c1f54fdc190eadc61588",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有效事件包括："
+      }
+    },
+    {
+      "segment_id": "0b30c085",
+      "source_content": "- `notification` : Fired when a remote notification is received. The handler will be invoked with an instance of `PushNotificationIOS`.\n- `localNotification` : Fired when a local notification is received. The handler will be invoked with an instance of `PushNotificationIOS`.\n- `register`: Fired when the user registers for remote notifications. The handler will be invoked with a hex string representing the deviceToken.\n- `registrationError`: Fired when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. The handler will be invoked with `{message: string, code: number, details: any}`.",
+      "source_content_hash": "079f2492f1c8a5f6228fdedcee9e64c86dacec937e71e393d09a042077b1a9f4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `notification`：當收到遠端通知時觸發。處理程序將以 `PushNotificationIOS` 的實例調用。\n- `localNotification`：當收到本地通知時觸發。處理程序將以 `PushNotificationIOS` 的實例調用。\n- `register`：當用戶註冊遠端通知時觸發。處理程序將以代表設備令牌的十六進制字符串調用。\n- `registrationError`：當用戶註冊遠端通知失敗時觸發。通常發生在 APNS 出現問題或設備為模擬器時。處理程序將以 `{message: string, code: number, details: any}` 調用。"
+      }
+    },
+    {
+      "segment_id": "f875b13d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9faeed88",
+      "source_content": "### `removeEventListener()`",
+      "source_content_hash": "580d5f83b079715fc27c51f759bd020e5e7276577bfa7a851e15dd88c9386f43",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `removeEventListener()`"
+      }
+    },
+    {
+      "segment_id": "31df1954",
+      "source_content": "```tsx\nstatic removeEventListener(\n  type: PushNotificationEventName,\n  handler:\n    | ((notification: PushNotification) => void)\n    | ((deviceToken: string) => void)\n    | ((error: {message: string; code: number; details: any}) => void),\n);\n```",
+      "source_content_hash": "007208423c755d8ad281e45525a69af55ce82a6de5ed9b996b9d869729909256",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_31df1954"
+      }
+    },
+    {
+      "segment_id": "7441a9ec",
+      "source_content": "Removes the event listener. Do this in `componentWillUnmount` to prevent memory leaks",
+      "source_content_hash": "1d7c7ba3b965e91d06e076cd07f1b078c7ef55e3ab68966e8bc93a9dcc15a980",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "移除事件監聽器。在 `componentWillUnmount` 中執行此操作以防止記憶體洩漏。"
+      }
+    },
+    {
+      "segment_id": "a30b7214",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "caa7d816",
+      "source_content": "| Name    | Type     | Required | Description |\n| ------- | -------- | -------- | ----------- |\n| type    | string   | Yes      | Event type. |\n| handler | function | Yes      | Listener.   |",
+      "source_content_hash": "2ca3cec74776e7937023b2200c474a8726eae8b062a4b1b320ba404d10bcee93",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_caa7d816"
+      }
+    },
+    {
+      "segment_id": "a915c64f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1e5c4bc8",
+      "source_content": "### `requestPermissions()`",
+      "source_content_hash": "77f56bf126d6eaada4eba7d34e0bd45fdf6c180786306acfd967213ad7eec4a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `requestPermissions()`"
+      }
+    },
+    {
+      "segment_id": "37e16f6b",
+      "source_content": "```tsx\nstatic requestPermissions(permissions?: PushNotificationPermissions[]);\n```",
+      "source_content_hash": "c1e2b512da684915f111560687a6f1beee9aa3dc30d90939ff11206a3357894a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_37e16f6b"
+      }
+    },
+    {
+      "segment_id": "c419a086",
+      "source_content": "Requests notification permissions from iOS, prompting the user's dialog box. By default, it will request all notification permissions, but a subset of these can be requested by passing a map of requested permissions. The following permissions are supported:",
+      "source_content_hash": "aa522c724e8ab85965d5e527d0ca5a66bf3bbd6593b05f86bf7f7aeb91772147",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "向 iOS 請求通知權限，彈出用戶對話框。默認情況下，它會請求所有通知權限，但可以通過傳遞請求權限的映射來請求其中的一部分。支援以下權限："
+      }
+    },
+    {
+      "segment_id": "b60d3a33",
+      "source_content": "- `alert`\n- `badge`\n- `sound`",
+      "source_content_hash": "317a28b5213626598e96fd7b0f053a49d45926297cf8e24f724ac03bb2424cfb",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `alert`\n- `badge`\n- `sound`"
+      }
+    },
+    {
+      "segment_id": "f7f08e35",
+      "source_content": "If a map is provided to the method, only the permissions with truthy values will be requested.",
+      "source_content_hash": "a1c1010d735d613c46e2de9476d5f820262a6a1ef5d13776d47dac9b705d9d23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果向方法提供了映射，則僅會請求值為真值的權限。"
+      }
+    },
+    {
+      "segment_id": "9d56f8f8",
+      "source_content": "This method returns a promise that will resolve when the user accepts, rejects, or if the permissions were previously rejected. The promise resolves to the current state of the permission.",
+      "source_content_hash": "93c0f266eed6a6d5f718b61ef36b69e9717b2024994430a634e0e887a0a187bf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法返回一個 Promise，當用戶接受、拒絕或權限先前已被拒絕時，該 Promise 會解析。Promise 解析為權限的當前狀態。"
+      }
+    },
+    {
+      "segment_id": "c08b6492",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "0cdd4424",
+      "source_content": "| Name        | Type  | Required | Description            |\n| ----------- | ----- | -------- | ---------------------- |\n| permissions | array | No       | alert, badge, or sound |",
+      "source_content_hash": "d42f890ad564cd216f750673587db2f6526163ec244984097fc318b6185b1da0",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0cdd4424"
+      }
+    },
+    {
+      "segment_id": "8e96038b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "06d2929c",
+      "source_content": "### `abandonPermissions()`",
+      "source_content_hash": "aa7673b54d58e7eac3d355602d1fa5cf1da206c113e4f7c9ccfc32532b34e7b1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `abandonPermissions()`"
+      }
+    },
+    {
+      "segment_id": "ccc51bd3",
+      "source_content": "```tsx\nstatic abandonPermissions();\n```",
+      "source_content_hash": "c0eb6b12635fcc0c7f244dff7687bf5112d9fa510451db1e1f17403dbbd7a65b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ccc51bd3"
+      }
+    },
+    {
+      "segment_id": "249869cc",
+      "source_content": "Unregister for all remote notifications received via Apple Push Notification service.",
+      "source_content_hash": "2607222297e804f41f6bc5b1953508da668411dd1b8c795fbab729d23c0204ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取消註冊通過 Apple 推送通知服務接收的所有遠端通知。"
+      }
+    },
+    {
+      "segment_id": "06537fe7",
+      "source_content": "You should call this method in rare circumstances only, such as when a new version of the app removes support for all types of remote notifications. Users can temporarily prevent apps from receiving remote notifications through the Notifications section of the Settings app. Apps unregistered through this method can always re-register.",
+      "source_content_hash": "91a145f431e5561bcee00159b08292673f40afb82af3900a5386821b8bc0b114",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅在極少數情況下應調用此方法，例如當應用程式的新版本移除對所有類型遠端通知的支援時。用戶可以通過「設定」應用中的「通知」部分暫時阻止應用程式接收遠端通知。通過此方法取消註冊的應用程式始終可以重新註冊。"
+      }
+    },
+    {
+      "segment_id": "e5292056",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "63b4ae1d",
+      "source_content": "### `checkPermissions()`",
+      "source_content_hash": "f7f7c6c2da20d24f92aa3f1138dfea651123ae61dfb9dff77a5bb026f421c571",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `checkPermissions()`"
+      }
+    },
+    {
+      "segment_id": "fb74007a",
+      "source_content": "```tsx\nstatic checkPermissions(\n  callback: (permissions: PushNotificationPermissions) => void,\n);\n```",
+      "source_content_hash": "2312cb62a186a81d14d9dada3de0438d2d485be315637096540b81d5ebd008c9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fb74007a"
+      }
+    },
+    {
+      "segment_id": "991164fd",
+      "source_content": "See what push permissions are currently enabled.",
+      "source_content_hash": "fe4fe09b6314fbcc9993af707b76001ae4bd24ae05f36aeb45a68b94599912b5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查看當前啟用的推送權限。"
+      }
+    },
+    {
+      "segment_id": "c4d69fe4",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "0c30f2cf",
+      "source_content": "| Name     | Type     | Required | Description |\n| -------- | -------- | -------- | ----------- |\n| callback | function | Yes      | See below.  |",
+      "source_content_hash": "87fad138af2dc11edf46d848a63cc11054f25ee49d0635ce4a315ee3092b0ef0",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0c30f2cf"
+      }
+    },
+    {
+      "segment_id": "a290533e",
+      "source_content": "`callback` will be invoked with a `permissions` object:",
+      "source_content_hash": "6f4fd276d032b13aacf82a074f2e4368ea491a0552afe191e3953ba26d687ba7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`callback` 將以 `permissions` 物件調用："
+      }
+    },
+    {
+      "segment_id": "1051b351",
+      "source_content": "- `alert: boolean`\n- `badge: boolean`\n- `sound: boolean`",
+      "source_content_hash": "826467c5c0936ceb76dbbef0726020532a5dbf6e7fa0b8a4432f48e241d301c4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `alert: boolean`\n- `badge: boolean`\n- `sound: boolean`"
+      }
+    },
+    {
+      "segment_id": "33dcd58c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4f8527a0",
+      "source_content": "### `getInitialNotification()`",
+      "source_content_hash": "7d95a44ab8551c26c534182a72415af37bbd389578e3d7060ef59d9cc4269bb1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getInitialNotification()`"
+      }
+    },
+    {
+      "segment_id": "d68d5d0e",
+      "source_content": "```tsx\nstatic getInitialNotification(): Promise<PushNotification | null>;\n```",
+      "source_content_hash": "dea48613485b6e27adde4d1d6973ba0cc09250ef85e04db7bd36afe2087325f6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d68d5d0e"
+      }
+    },
+    {
+      "segment_id": "69acbca3",
+      "source_content": "This method returns a promise. If the app was launched by a push notification, this promise resolves to an object of type `PushNotificationIOS`. Otherwise, it resolves to `null`.",
+      "source_content_hash": "09d50c719a783fef053fb70981e373b4627db7785987ea074adc352f4c56d81b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法返回一個 Promise。如果應用程式是由推送通知啟動的，則此 Promise 解析為類型為 `PushNotificationIOS` 的物件。否則，解析為 `null`。"
+      }
+    },
+    {
+      "segment_id": "65c15b77",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "548b3ae8",
+      "source_content": "### `finish()`",
+      "source_content_hash": "5ebeba4db0a66323dde3c9a8465ed9465db99b4b1cf7b2b5a161a13b6d0dfdf1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `finish()`"
+      }
+    },
+    {
+      "segment_id": "86df7636",
+      "source_content": "```tsx\nfinish(result: string);\n```",
+      "source_content_hash": "72ee5e0f3e6198a6397a4b4346dbb98bf78cebfb68defea5aa191fc25929f5e5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_86df7636"
+      }
+    },
+    {
+      "segment_id": "2fc2d2cf",
+      "source_content": "This method is available for remote notifications that have been received via: `application:didReceiveRemoteNotification:fetchCompletionHandler:` https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc",
+      "source_content_hash": "fc3d97bf7d344953eece3c95b3b63bc4b1a14d8a7e7875f6df24302c71b5e6f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法適用於通過以下方式接收的遠端通知：`application:didReceiveRemoteNotification:fetchCompletionHandler:` https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc"
+      }
+    },
+    {
+      "segment_id": "a2532daf",
+      "source_content": "Call this to execute when the remote notification handling is complete. When calling this block, pass in the fetch result value that best describes the results of your operation. You _must_ call this handler and should do so as soon as possible. For a list of possible values, see `PushNotificationIOS.FetchResult`.",
+      "source_content_hash": "cbf29abf8d71756414039d14a79dff4608adf4865186e86a6adc45648f2fd71d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "調用此方法以在遠端通知處理完成時執行。調用此區塊時，傳入最能描述操作結果的獲取結果值。您_必須_調用此處理程序，並應盡快執行。有關可能值的列表，請參見 `PushNotificationIOS.FetchResult`。"
+      }
+    },
+    {
+      "segment_id": "7e0b49a3",
+      "source_content": "If you do not call this method your background remote notifications could be throttled, to read more about it see the above documentation link.",
+      "source_content_hash": "39542379cfef165d277f8b87f3985d3f17950910a0dd0f936f17be7be7ba3ed4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若未呼叫此方法，您的背景遠端通知可能會被節流，詳細資訊請參閱上述文件連結。"
+      }
+    },
+    {
+      "segment_id": "e8ba3209",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ff14ba36",
+      "source_content": "### `getMessage()`",
+      "source_content_hash": "5a1ffe9c94def3be2339724005babf7bdf9a37e82065c125799bf387e811fab9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getMessage()`"
+      }
+    },
+    {
+      "segment_id": "2be9fcf6",
+      "source_content": "```tsx\ngetMessage(): string | Object;\n```",
+      "source_content_hash": "51a533ad9e738033eac51d45cc4bd71ccb0a1dcc60ae160ea389f9e8da223131",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2be9fcf6"
+      }
+    },
+    {
+      "segment_id": "a5a5c34e",
+      "source_content": "An alias for `getAlert` to get the notification's main message string",
+      "source_content_hash": "104c78eae2afc62a79fd3e484b353697e22cb803d36acb272d0f142a3b179f26",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為 `getAlert` 的別名，用於取得通知的主要訊息字串"
+      }
+    },
+    {
+      "segment_id": "10afb48a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "625dc480",
+      "source_content": "### `getSound()`",
+      "source_content_hash": "d262f9bcc2d854c0e95f7cfe5a929447118de73d3c6312e06c06bb0cce652022",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getSound()`"
+      }
+    },
+    {
+      "segment_id": "0246fc33",
+      "source_content": "```tsx\ngetSound(): string;\n```",
+      "source_content_hash": "122922e9aefc62cf24664eea540bfc9e7f23dca89224186c47c7519b2b6a4675",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0246fc33"
+      }
+    },
+    {
+      "segment_id": "40e5a2ef",
+      "source_content": "Gets the sound string from the `aps` object",
+      "source_content_hash": "3634c151bc41b27d125a2d3a784f6943c1a2ecad5209aa61374f08519097cc5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `aps` 物件中取得聲音字串"
+      }
+    },
+    {
+      "segment_id": "66bc07c8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "95a0af4d",
+      "source_content": "### `getCategory()`",
+      "source_content_hash": "6b59dc3759d7dceefed285c5fe7189b175554f93634ee397934154bbd8858c26",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getCategory()`"
+      }
+    },
+    {
+      "segment_id": "5bd6d687",
+      "source_content": "```tsx\ngetCategory(): string;\n```",
+      "source_content_hash": "dba407b7bb53156e2fc6b4b39f8387dbce71e35bd4be614f17fd12ef952abc8f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5bd6d687"
+      }
+    },
+    {
+      "segment_id": "46a44d60",
+      "source_content": "Gets the category string from the `aps` object",
+      "source_content_hash": "0827227fc00a8c5a9c62fa201841db67d7665db4704d54ab5cd79ac4bd79c367",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `aps` 物件中取得分類字串"
+      }
+    },
+    {
+      "segment_id": "5335a076",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "486ab0ab",
+      "source_content": "### `getAlert()`",
+      "source_content_hash": "cf20cfef6ae39467c4655f271a88bbb7a42ce74dc7c022b4cd1280ed42b433f6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getAlert()`"
+      }
+    },
+    {
+      "segment_id": "3ca8cf3e",
+      "source_content": "```tsx\ngetAlert(): string | Object;\n```",
+      "source_content_hash": "1c7c53446f3af3c82c997255ad5c2c9bad06979c459340e9c05cec0850033e1c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3ca8cf3e"
+      }
+    },
+    {
+      "segment_id": "60ce13be",
+      "source_content": "Gets the notification's main message from the `aps` object",
+      "source_content_hash": "c51c3e3f0f93fb38a1047173b230e8b8fb6f69d15a7d125ce71685e161ede836",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `aps` 物件中取得通知的主要訊息"
+      }
+    },
+    {
+      "segment_id": "a9a69b39",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "18cd16ae",
+      "source_content": "### `getContentAvailable()`",
+      "source_content_hash": "2d4ba4e34cec6bd1edc149d0de6220f9a1eb92875f1c577095f0513fdda1c6f2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getContentAvailable()`"
+      }
+    },
+    {
+      "segment_id": "a0d841d7",
+      "source_content": "```tsx\ngetContentAvailable(): number;\n```",
+      "source_content_hash": "49f72352fc2d5c0bb535ac6a1e12c4c4142e6b7f007008ce5ef0efa24ad63cfe",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a0d841d7"
+      }
+    },
+    {
+      "segment_id": "cb857be4",
+      "source_content": "Gets the content-available number from the `aps` object",
+      "source_content_hash": "853d5deab15f85c3960f5859645d70c4e5dba9093ee0303b49ab0c89623cc21e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `aps` 物件中取得 content-available 數值"
+      }
+    },
+    {
+      "segment_id": "aa4cdf41",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c5ae9e2c",
+      "source_content": "### `getBadgeCount()`",
+      "source_content_hash": "9531159285e4db91a5f262d553bb16e979630c443aad560abbba5dbc30dc6c07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getBadgeCount()`"
+      }
+    },
+    {
+      "segment_id": "f353467d",
+      "source_content": "```tsx\ngetBadgeCount(): number;\n```",
+      "source_content_hash": "9f1852d0a6b53957fdb62b4051fef6ce4e854dd4cbbadb04505f8522a829b2ed",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f353467d"
+      }
+    },
+    {
+      "segment_id": "4ddcc352",
+      "source_content": "Gets the badge count number from the `aps` object",
+      "source_content_hash": "16cec220ff06a353adece44aefff0554467cadf4f77845df9493209449d21fc9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從 `aps` 物件中取得徽章計數數值"
+      }
+    },
+    {
+      "segment_id": "e082518b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "58e141d3",
+      "source_content": "### `getData()`",
+      "source_content_hash": "e2504ff99e3d8131d1b4946433a1c95a4534939cc2bc7d3ab5353157e4948bc6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getData()`"
+      }
+    },
+    {
+      "segment_id": "74f81e8f",
+      "source_content": "```tsx\ngetData(): Object;\n```",
+      "source_content_hash": "f7d2342053fbadc9fdff152b7cbed362188b43ad82cd71d716d8ec72b46a7f1b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_74f81e8f"
+      }
+    },
+    {
+      "segment_id": "734995d4",
+      "source_content": "Gets the data object on the notification",
+      "source_content_hash": "e4ebbee3b2a795d83335cfb97d35507ee594896cc39abb2db0b2a5ff1a8dc7d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取得通知上的資料物件"
+      }
+    },
+    {
+      "segment_id": "a23eced3",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "df371c55",
+      "source_content": "### `getThreadID()`",
+      "source_content_hash": "61470451b3366bb82abafefdb58d02475feba748e6f09b306327184a9d82ef73",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getThreadID()`"
+      }
+    },
+    {
+      "segment_id": "b6fff5fe",
+      "source_content": "```tsx\ngetThreadID();\n```",
+      "source_content_hash": "0c89f365aa722b25faa77f5175ef63a59ca694d3ae8a483f98d3f3bde714538b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b6fff5fe"
+      }
+    },
+    {
+      "segment_id": "fa770099",
+      "source_content": "Gets the thread ID on the notification",
+      "source_content_hash": "8c6b581776319a851806f6bfb36f2f08d79e0f5da413debfea5bd7428fc472d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "取得通知上的執行緒ID"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/pushnotificationios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.492254+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "93971b8f9d0a604d12271651d76f9d527a30a1001ccfde448ac60bf89160a882"
+  }
+}

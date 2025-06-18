@@ -1,0 +1,1002 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/_integration-with-existing-apps-java.md",
+  "source_file_content_hash": "d8ecd66d257b667de9b9455d0f7901fc81ddd5042ca8a3dedd2c3193d522205c",
+  "segments": [
+    {
+      "segment_id": "a9b642df",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a9b642df"
+      }
+    },
+    {
+      "segment_id": "adbc947a",
+      "source_content": "## Key Concepts",
+      "source_content_hash": "dfa7c52d142437bb74c4b7713c923cc1f67dda7d1ce85a63282198e6bf1e47b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 核心概念"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "The keys to integrating React Native components into your Android application are to:",
+      "source_content_hash": "60e9ed87b53c396e29051e5f7504974f2bacbd3cdf951800759df21057555870",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將 React Native 元件整合至 Android 應用的關鍵在於："
+      }
+    },
+    {
+      "segment_id": "57e757df",
+      "source_content": "1. Set up React Native dependencies and directory structure.\n2. Develop your React Native components in JavaScript.\n3. Add a `ReactRootView` to your Android app. This view will serve as the container for your React Native component.\n4. Start the React Native server and run your native application.\n5. Verify that the React Native aspect of your application works as expected.",
+      "source_content_hash": "6e2144154013ce76992c3d53b251176a5e73d8e5651b3b3ca933dbbfa983f044",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 設定 React Native 依賴項與目錄結構\n2. 使用 JavaScript 開發 React Native 元件\n3. 在 Android 應用中添加 `ReactRootView`，該視圖將作為 React Native 元件的容器\n4. 啟動 React Native 伺服器並運行原生應用\n5. 驗證應用的 React Native 功能是否正常運作"
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Prerequisites",
+      "source_content_hash": "bbd3d4949a6f237efd8d4ff5c7c5f30d968e7a989ad12f3d7dcef69c98053912",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 必要條件"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "Follow the guide on [setting up your development environment](set-up-your-environment) to configure your development environment for building React Native apps for Android.",
+      "source_content_hash": "9b169a0aa6eac1a319948564619feb100219760a3d0e537a84a080a8e77bbf9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請遵循[設定開發環境指南](set-up-your-environment)，配置用於構建 Android 版 React Native 應用的開發環境。"
+      }
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### 1. Set up directory structure",
+      "source_content_hash": "608eaf807b2dd9f81ca43051d95d088da7edcc2a1ca245bc360838dcfda12ec5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 設定目錄結構"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "To ensure a smooth experience, create a new folder for your integrated React Native project, then copy your existing Android project to an `/android` subfolder.",
+      "source_content_hash": "01ec890cb7b4f5d4e1e3982f0f0b76730db114f6bb91d242ae8598caa9f1906b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為確保流程順暢，請為整合的 React Native 專案新建資料夾，然後將現有 Android 專案複製到 `/android` 子資料夾中。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "### 2. Install JavaScript dependencies",
+      "source_content_hash": "4615207b16af1c40cf80956f54472ff45aba578dab75bea9864abeef62596026",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 安裝 JavaScript 依賴項"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Go to the root directory for your project and create a new `package.json` file with the following contents:",
+      "source_content_hash": "432177b1d6a1b80705670ca96cda3489a06b7bd256bcd4202df4599b5a556818",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進入專案根目錄，創建包含以下內容的 `package.json` 檔案："
+      }
+    },
+    {
+      "segment_id": "3569d545",
+      "source_content": "```\n{\n  \"name\": \"MyReactNativeApp\",\n  \"version\": \"0.0.1\",\n  \"private\": true,\n  \"scripts\": {\n    \"start\": \"react-native start\"\n  }\n}\n```",
+      "source_content_hash": "4480a77900c1b6423736466853cfa5ef195fccd89095bbb11db5ade471011721",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3569d545"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "Next, install the `react` and `react-native` packages. Open a terminal or command prompt, then navigate to the directory with your `package.json` file and run:",
+      "source_content_hash": "f94a9b5c10582cb5acb71dbadf8ee3bf5512ecc56a80a5b58be002d33fe50454",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著安裝 `react` 和 `react-native` 套件。開啟終端機或命令提示字元，導航至包含 `package.json` 的目錄並執行："
+      }
+    },
+    {
+      "segment_id": "720d606f",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm install react-native\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn add react-native\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "9a766b920b18d28ffcb8e169762a697c755384dbfdc6ec11dfbdfde090ae6334",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_720d606f"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "This will print a message similar to the following (scroll up in the installation command output to see it):",
+      "source_content_hash": "bae449a5999febd939168b3a718801eda2738a4152d287ade89cb08a47553185",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這將顯示類似以下的訊息（請向上滾動安裝命令輸出以查看）："
+      }
+    },
+    {
+      "segment_id": "07262d7e",
+      "source_content": "> warning \"`react-native@0.70.5`\" has unmet peer dependency \"`react@18.1.0`\"",
+      "source_content_hash": "d5c98db162f2242b89d473193629b194b572b75d0498d3b8cc0f62a2a9ef6c8f",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 警告：\"`react-native@0.70.5`\" 有未滿足的對等依賴 \"`react@18.1.0`\""
+      }
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "This is OK, it means we also need to install React:",
+      "source_content_hash": "c7f2d0d66dc987353a5833f04de7e8df91ee17837f4a32070978db7d009108dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是正常的，表示我們還需要安裝 React："
+      }
+    },
+    {
+      "segment_id": "d37a3b88",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm install react@version_printed_above\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn add react@version_printed_above\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "40602c25eb7ca4ea5e96180e91111a17e1927bb7b10318710904d3f68fdf46c8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d37a3b88"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Installation process has created a new `/node_modules` folder. This folder stores all the JavaScript dependencies required to build your project.",
+      "source_content_hash": "a51cb223e66c57cf57b882710221b726ec47b6d962e1d2a93656ef5975ea5b35",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "安裝過程會創建新的 `/node_modules` 資料夾，該資料夾儲存構建專案所需的所有 JavaScript 依賴項。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "Add `node_modules/` to your `.gitignore` file.",
+      "source_content_hash": "cfbc32f52d174acd68deb40e5e900a0d5f97afb5a0c6f291ce53f97da7ce143d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請將 `node_modules/` 加入你的 `.gitignore` 檔案。"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "## Adding React Native to your app",
+      "source_content_hash": "97ba33aa5260008be04afb92970426fc31206ed01100d193512acdd1760605b5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將 React Native 加入應用"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "### Configuring Gradle",
+      "source_content_hash": "c367d1b989fb077825bc3d3b3ecc455efb75dc46b3e285de798926156aa14074",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 配置 Gradle"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "React Native uses the React Native Gradle Plugin to configure your dependencies and project setup.",
+      "source_content_hash": "76964bc65bef587224f807be52dc4bd84bda0ca55039501c9e1aa6d92bd27e4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 使用 React Native Gradle 插件來配置依賴項與專案設定。"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "First, let's edit your `settings.gradle` file by adding this line:",
+      "source_content_hash": "f8f992b62e60b0e2b2664b79facece06bb962bce190038a1e378d84b604598ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先編輯 `settings.gradle` 檔案，加入這行："
+      }
+    },
+    {
+      "segment_id": "7d898a0e",
+      "source_content": "```groovy\nincludeBuild('../node_modules/@react-native/gradle-plugin')\n```",
+      "source_content_hash": "9406a13997a8aaded831c16feb69681794ecbf2146c36c6475d7775655428ff9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d898a0e"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Then you need to open your top level `build.gradle` and include this line:",
+      "source_content_hash": "7fe7f3063ec0655a4eaa506f39d200b5fb2e0645ad7bfe55535c896f8a9ddea3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著開啟頂層的 `build.gradle` 並包含這行："
+      }
+    },
+    {
+      "segment_id": "19913a56",
+      "source_content": "```diff\nbuildscript {\n    repositories {\n        google()\n        mavenCentral()\n    }\n    dependencies {\n        classpath(\"com.android.tools.build:gradle:7.3.1\")\n+       classpath(\"com.facebook.react:react-native-gradle-plugin\")\n    }\n}\n```",
+      "source_content_hash": "26e453b8fa9238464baab123c7f4fea7e15a02ba84357e99f94b972638d13e24",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_19913a56"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "This makes sure the React Native Gradle Plugin is available inside your project.\nFinally, add those lines inside your app's `build.gradle` file (it's a different `build.gradle` file inside your app folder):",
+      "source_content_hash": "044199a6e25722f1b579a41fbd44246d0294dc792e4c2837c45c670b6bfc9634",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這確保 React Native Gradle 插件在專案中可用。\n最後在應用的 `build.gradle` 檔案（位於應用資料夾內的另一個 `build.gradle` 檔案）中加入這些行："
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```diff\napply plugin: \"com.android.application\"\n+apply plugin: \"com.facebook.react\"\n\nrepositories {\n    mavenCentral()\n}\n\ndependencies {\n    // Other dependencies here\n+   implementation \"com.facebook.react:react-android\"\n+   implementation \"com.facebook.react:hermes-android\"\n}\n```",
+      "source_content_hash": "eeae3e82c0b45e714a85cd66f809c7d0c8c8ad380aec933faef17c43e78a1a05",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "Those dependencies are available on `mavenCentral()` so make sure you have it defined in your `repositories{}` block.",
+      "source_content_hash": "fd53dc321497cb107547bb3a6dd29e49ba635b86be77c86f8fde6b2cc9a16c40",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些依賴項可在 `mavenCentral()` 取得，請確認已在 `repositories{}` 區塊中定義。"
+      }
+    },
+    {
+      "segment_id": "c424756f",
+      "source_content": ":::info\nWe intentionally don't specify the version for those `implementation` dependencies as the React Native Gradle Plugin will take care of it. If you don't use the React Native Gradle Plugin, you'll have to specify version manually.\n:::",
+      "source_content_hash": "be86782ea7677496b62d33825ce61a17569e647b82013d27054889c0bcbdc969",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n我們刻意不指定這些 `implementation` 依賴項的版本，因為 React Native Gradle 插件會自動處理。若未使用該插件，則需手動指定版本。\n:::"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "### Enable native modules autolinking",
+      "source_content_hash": "cfbc49dd1021813061ee1c0f818db406e4991f91d951bc691386d7715d2abf3c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 啟用原生模組自動連結"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "To use the power of [autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md), we have to apply it a few places. First add the following entry to `settings.gradle`:",
+      "source_content_hash": "9dd9ec9d38b3fb5f8b87fe387c4d95b7b92bc79391f8026eb020e74754bc7852",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要使用[自動連結](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md)功能，需在幾處進行配置。首先在 `settings.gradle` 中加入："
+      }
+    },
+    {
+      "segment_id": "f2f9d525",
+      "source_content": "```gradle\napply from: file(\"../node_modules/@react-native-community/cli-platform-android/native_modules.gradle\"); applyNativeModulesSettingsGradle(settings)\n```",
+      "source_content_hash": "e8c74d3adc1327901787005be112ca9388c07333cafb8dd7fe82e91442334770",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2f9d525"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "Next add the following entry at the very bottom of the `app/build.gradle`:",
+      "source_content_hash": "d39cfa0eb23adc41d5243d9719e3ffb147fe9974d11e3ac75be27e66157bfba4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著在 `app/build.gradle` 最底部加入："
+      }
+    },
+    {
+      "segment_id": "8a061704",
+      "source_content": "```gradle\napply from: file(\"../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle\"); applyNativeModulesAppBuildGradle(project)\n```",
+      "source_content_hash": "8d343aa712eb387c40a99c3eecb81f1223071633449dad3460625294785c987d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a061704"
+      }
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "### Configuring permissions",
+      "source_content_hash": "61de7420cf10a6d4f36ae8ebad93235a068dd8dfc8d79901bb4bc2f3ad0f1cb1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 配置權限"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "Next, make sure you have the Internet permission in your `AndroidManifest.xml`:",
+      "source_content_hash": "961b59a3940b497ab4b6cda819c4d07d2c6d88b9779a28e992a094586e3dd180",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接下來，確保 `AndroidManifest.xml` 中包含網路權限："
+      }
+    },
+    {
+      "segment_id": "7d56fc4b",
+      "source_content": "```xml\n<uses-permission android:name=\"android.permission.INTERNET\" />\n```",
+      "source_content_hash": "88517c3a90ca8981670ca75ca09b9576a2aaf7b110544e9cd9d0805bbd752672",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d56fc4b"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "If you need to access to the `DevSettingsActivity` add to your `AndroidManifest.xml`:",
+      "source_content_hash": "8eb1a74392586ac0845634b4d38705fb54374e16c3a400377a86539c6f2987d1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如需存取 `DevSettingsActivity`，請在 `AndroidManifest.xml` 中添加："
+      }
+    },
+    {
+      "segment_id": "520cfa65",
+      "source_content": "```xml\n<activity android:name=\"com.facebook.react.devsupport.DevSettingsActivity\" />\n```",
+      "source_content_hash": "cdd7b89b19365b76f55c9b22effcc994f38e80772ea581474552bf51c1e2dbcf",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_520cfa65"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "This is only used in dev mode when reloading JavaScript from the development server, so you can strip this in release builds if you need to.",
+      "source_content_hash": "735eba4ff91efeb33a10860952cb58ecbdb85c6de2fe44e87569bb2b94a23206",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這僅在開發模式下使用，當從開發伺服器重新載入 JavaScript 時，因此如果需要，您可以在正式版本中移除這部分。"
+      }
+    },
+    {
+      "segment_id": "7312e69e",
+      "source_content": "### Cleartext Traffic (API level 28+)",
+      "source_content_hash": "a8eff887e82e24da33142454ec3da4038a761b003dddab1710d236b210f6897c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 明文流量 (API 等級 28+)"
+      }
+    },
+    {
+      "segment_id": "ec407d79",
+      "source_content": "> Starting with Android 9 (API level 28), cleartext traffic is disabled by default; this prevents your application from connecting to the [Metro bundler][metro]. The changes below allow cleartext traffic in debug builds.",
+      "source_content_hash": "ab1fb07ea20e16590d430dbeec96c655c6003ded3c4323e1135d7c08be2dce85",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 從 Android 9 (API 等級 28) 開始，預設禁用明文流量；這會阻止您的應用程式連接到 [Metro 打包器][metro]。以下變更允許在除錯版本中使用明文流量。"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "#### 1. Apply the `usesCleartextTraffic` option to your Debug `AndroidManifest.xml`",
+      "source_content_hash": "b87d979034ba7f6217f5207b796ab7f5523370d359086c7300837a286425e5cc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 1. 將 `usesCleartextTraffic` 選項應用到您的除錯版 `AndroidManifest.xml`"
+      }
+    },
+    {
+      "segment_id": "71969be5",
+      "source_content": "```xml\n<!-- ... -->\n<application\n  android:usesCleartextTraffic=\"true\" tools:targetApi=\"28\" >\n  <!-- ... -->\n</application>\n<!-- ... -->\n```",
+      "source_content_hash": "d15a59c9340bc19a246b1d438ac3c0e294084eecf377ee3f4a506811a23d31f3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71969be5"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "This is not required for Release builds.",
+      "source_content_hash": "4e22b503ca19453d188d37d52ca41ba76f854704cc33477112cf0c0330d96a61",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "正式版本不需要此設定。"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "To learn more about Network Security Config and the cleartext traffic policy [see this link](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted).",
+      "source_content_hash": "750409c9f60303d5e3d129717347ad02a0b4883d5fed22d2ba6174581b0584c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要了解更多關於網路安全配置和明文流量政策的資訊，[請參閱此連結](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted)。"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "### Code integration",
+      "source_content_hash": "747649fde456f22e0e918af188b18638342af1002cb270b066d1308dfcc35862",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 程式碼整合"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "Now we will actually modify the native Android application to integrate React Native.",
+      "source_content_hash": "ca4e7dfb9a5d4afde9c808f3648b7966e7af17ffa3b69ad7776b0dbceaf08455",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們將實際修改原生 Android 應用程式以整合 React Native。"
+      }
+    },
+    {
+      "segment_id": "188a0310",
+      "source_content": "#### The React Native component",
+      "source_content_hash": "b9cf3e6b64a50f7c632f948ff3c4df5c43a10a1f521628df446ea7e83c2d24ec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### React Native 元件"
+      }
+    },
+    {
+      "segment_id": "5cf1bce4",
+      "source_content": "The first bit of code we will write is the actual React Native code for the new \"High Score\" screen that will be integrated into our application.",
+      "source_content_hash": "d42f23f8f5d535d0661ee5b3f2217faa662458c1123c5e7c33d86f58306d0834",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們將編寫的第一段程式碼是用於新「高分」畫面的實際 React Native 程式碼，該畫面將整合到我們的應用程式中。"
+      }
+    },
+    {
+      "segment_id": "4b62f7d8",
+      "source_content": "##### 1. Create a `index.js` file",
+      "source_content_hash": "a3ce4e104f66a67d8efcde3a4a37fd49ca50c9d8f542823a5c4ee3b149aea103",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 1. 建立 `index.js` 檔案"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "First, create an empty `index.js` file in the root of your React Native project.",
+      "source_content_hash": "222b302ac1b091af71896a3a39045a87eef629b8f8bcc827cc344dfed4e22814",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先，在您的 React Native 專案根目錄中建立一個空的 `index.js` 檔案。"
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "`index.js` is the starting point for React Native applications, and it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will put everything in `index.js`.",
+      "source_content_hash": "d579fa561dab2da1034d1c16dd03e9c4f396dfd3ceb9a5743a5cdb7b42aea3af",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`index.js` 是 React Native 應用程式的起點，並且總是必需的。它可以是一個小檔案，`require` 其他屬於您的 React Native 元件或應用程式的檔案，或者它可以包含所需的所有程式碼。在我們的例子中，我們將把所有內容放在 `index.js` 中。"
+      }
+    },
+    {
+      "segment_id": "de588fa2",
+      "source_content": "##### 2. Add your React Native code",
+      "source_content_hash": "4c82570928ce247c39d426b9ac434a75fdf6380906f4e2a93ae64fb81ae6e205",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 2. 新增您的 React Native 程式碼"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "In your `index.js`, create your component. In our sample here, we will add a `<Text>` component within a styled `<View>`:",
+      "source_content_hash": "79f81edcc7b754acb45fff0c8826cba04f47d47deae42962c14fb1505d630203",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 `index.js` 中，建立您的元件。在我們的範例中，我們將在一個帶樣式的 `<View>` 中新增一個 `<Text>` 元件："
+      }
+    },
+    {
+      "segment_id": "ec2ce541",
+      "source_content": "```jsx\nimport React from 'react';\nimport {AppRegistry, StyleSheet, Text, View} from 'react-native';\n\nconst HelloWorld = () => {\n  return (\n    <View style={styles.container}>\n      <Text style={styles.hello}>Hello, World</Text>\n    </View>\n  );\n};\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n  hello: {\n    fontSize: 20,\n    textAlign: 'center',\n    margin: 10,\n  },\n});\n\nAppRegistry.registerComponent(\n  'MyReactNativeApp',\n  () => HelloWorld,\n);\n```",
+      "source_content_hash": "4c8804d381adb630ae309766d979498b54de4e3e743e12fbb38dbaa0d1e82915",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ec2ce541"
+      }
+    },
+    {
+      "segment_id": "8e2354b8",
+      "source_content": "##### 3. Configure permissions for development error overlay",
+      "source_content_hash": "d948f2ef654b921124425e0e98da5c86882e6fd48cd17f87911af669b1d80843",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 3. 為開發錯誤覆蓋配置權限"
+      }
+    },
+    {
+      "segment_id": "dbeb30c1",
+      "source_content": "If your app is targeting the Android `API level 23` or greater, make sure you have the permission `android.permission.SYSTEM_ALERT_WINDOW` enabled for the development build. You can check this with `Settings.canDrawOverlays(this);`. This is required in dev builds because React Native development errors must be displayed above all the other windows. Due to the new permissions system introduced in the API level 23 (Android M), the user needs to approve it. This can be achieved by adding the following code to your Activity's in `onCreate()` method.",
+      "source_content_hash": "9cbb5d8cd2b605722b449e000977999d76405e53e0892907b5f20823f72a539f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您的應用程式目標是 Android `API 等級 23` 或更高，請確保您已為開發版本啟用 `android.permission.SYSTEM_ALERT_WINDOW` 權限。您可以使用 `Settings.canDrawOverlays(this);` 來檢查這一點。這在開發版本中是必需的，因為 React Native 開發錯誤必須顯示在所有其他視窗之上。由於在 API 等級 23 (Android M) 中引入了新的權限系統，用戶需要批准它。這可以通過在您的 Activity 的 `onCreate()` 方法中新增以下程式碼來實現。"
+      }
+    },
+    {
+      "segment_id": "489cbec9",
+      "source_content": "```java\nprivate final int OVERLAY_PERMISSION_REQ_CODE = 1;  // Choose any value\n\n...\n\nif (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\n    if (!Settings.canDrawOverlays(this)) {\n        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,\n                                   Uri.parse(\"package:\" + getPackageName()));\n        startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);\n    }\n}\n```",
+      "source_content_hash": "9099c81cc00fde7b418d646e8d0eb03c484e7310f5d212ed2af18c43f6451888",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_489cbec9"
+      }
+    },
+    {
+      "segment_id": "43287462",
+      "source_content": "Finally, the `onActivityResult()` method (as shown in the code below) has to be overridden to handle the permission Accepted or Denied cases for consistent UX. Also, for integrating Native Modules which use `startActivityForResult`, we need to pass the result to the `onActivityResult` method of our `ReactInstanceManager` instance.",
+      "source_content_hash": "c166801545e6f8afa2ca5dcc0af009de3f720726df3cf8c0c94748c5f7d3d5f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，必須覆寫 `onActivityResult()` 方法（如下面的程式碼所示）以處理權限被接受或拒絕的情況，以確保一致的用戶體驗。此外，為了整合使用 `startActivityForResult` 的原生模組，我們需要將結果傳遞給我們的 `ReactInstanceManager` 實例的 `onActivityResult` 方法。"
+      }
+    },
+    {
+      "segment_id": "fa8763ec",
+      "source_content": "```java\n@Override\nprotected void onActivityResult(int requestCode, int resultCode, Intent data) {\n    if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\n            if (!Settings.canDrawOverlays(this)) {\n                // SYSTEM_ALERT_WINDOW permission not granted\n            }\n        }\n    }\n    mReactInstanceManager.onActivityResult( this, requestCode, resultCode, data );\n}\n```",
+      "source_content_hash": "3626899278702e8475db07895093f4f1a8dfdad17d4d67428e67bfe8ce309932",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_fa8763ec"
+      }
+    },
+    {
+      "segment_id": "90032345",
+      "source_content": "#### The Magic: `ReactRootView`",
+      "source_content_hash": "b3aaeed6eafbb3ff87663d28916f4cbe29560bf40203ee897f0e9ccffaad7351",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 魔法：`ReactRootView`"
+      }
+    },
+    {
+      "segment_id": "715a86e2",
+      "source_content": "Let's add some native code in order to start the React Native runtime and tell it to render our JS component. To do this, we're going to create an `Activity` that creates a `ReactRootView`, starts a React application inside it and sets it as the main content view.",
+      "source_content_hash": "fb0471e15c38f7970f07846ac443099ad948f01a85c00698c40bcddb48dbf913",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓我們新增一些原生程式碼來啟動 React Native 運行時並告訴它渲染我們的 JS 元件。為此，我們將建立一個 `Activity`，該 Activity 建立一個 `ReactRootView`，在其中啟動一個 React 應用程式，並將其設為主要內容視圖。"
+      }
+    },
+    {
+      "segment_id": "fc44139c",
+      "source_content": "> If you are targeting Android version &lt;5, use the `AppCompatActivity` class from the `com.android.support:appcompat` package instead of `Activity`.",
+      "source_content_hash": "219091c7c4eb1069b07068e0e482a9a949f21821ec7f923a9b77f4d9c6f0ca1e",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果您的目標是 Android 版本 &lt;5，請使用 `com.android.support:appcompat` 套件中的 `AppCompatActivity` 類別，而不是 `Activity`。"
+      }
+    },
+    {
+      "segment_id": "b1274b5e",
+      "source_content": "```java\npublic class MyReactActivity extends Activity implements DefaultHardwareBackBtnHandler {\n    private ReactRootView mReactRootView;\n    private ReactInstanceManager mReactInstanceManager;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        SoLoader.init(this, false);\n\n        mReactRootView = new ReactRootView(this);\n        List<ReactPackage> packages = new PackageList(getApplication()).getPackages();\n        // Packages that cannot be autolinked yet can be added manually here, for example:\n        // packages.add(new MyReactNativePackage());\n        // Remember to include them in `settings.gradle` and `app/build.gradle` too.\n\n        mReactInstanceManager = ReactInstanceManager.builder()\n                .setApplication(getApplication())\n                .setCurrentActivity(this)\n                .setBundleAssetName(\"index.android.bundle\")\n                .setJSMainModulePath(\"index\")\n                .addPackages(packages)\n                .setUseDeveloperSupport(BuildConfig.DEBUG)\n                .setInitialLifecycleState(LifecycleState.RESUMED)\n                .build();\n        // The string here (e.g. \"MyReactNativeApp\") has to match\n        // the string in AppRegistry.registerComponent() in index.js\n        mReactRootView.startReactApplication(mReactInstanceManager, \"MyReactNativeApp\", null);\n\n        setContentView(mReactRootView);\n    }\n\n    @Override\n    public void invokeDefaultOnBackPressed() {\n        super.onBackPressed();\n    }\n}\n```",
+      "source_content_hash": "8244b11111af3aa4f7fcdebafbcc31afb4ef275ee9eb426c943000df74c5c631",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b1274b5e"
+      }
+    },
+    {
+      "segment_id": "4ac14629",
+      "source_content": "> If you are using a starter kit for React Native, replace the \"HelloWorld\" string with the one in your index.js file (it’s the first argument to the `AppRegistry.registerComponent()` method).",
+      "source_content_hash": "5876e3f3a28a97cba973a13799fffbe345b2ff1a20a314ae54bd12e4aeac8dbd",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 如果您使用的是 React Native 的入門套件，請將 \"HelloWorld\" 字串替換為您的 index.js 檔案中的字串（這是 `AppRegistry.registerComponent()` 方法的第一個參數）。"
+      }
+    },
+    {
+      "segment_id": "95b3e282",
+      "source_content": "Perform a “Sync Project files with Gradle” operation.",
+      "source_content_hash": "34baac0a35f21eae84da7305bd3b93912561cb2fa6f2ab122f8df56785e5c310",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行「Sync Project files with Gradle」操作。"
+      }
+    },
+    {
+      "segment_id": "1f92e934",
+      "source_content": "If you are using Android Studio, use `Alt + Enter` to add all missing imports in your MyReactActivity class. Be careful to use your package’s `BuildConfig` and not the one from the `facebook` package.",
+      "source_content_hash": "77a736391b9d0a2e491549c0151d9e2ed4216f8fcc23dcfd87e21076a068e21b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您使用的是 Android Studio，請使用 `Alt + Enter` 來新增您的 MyReactActivity 類別中所有缺少的導入。請注意使用您的套件的 `BuildConfig`，而不是 `facebook` 套件的。"
+      }
+    },
+    {
+      "segment_id": "45d5dee4",
+      "source_content": "We need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar` because some React Native UI components rely on this theme.",
+      "source_content_hash": "3d2ee20caa55ac14ef9e7812625d03f647e478b908399e9e6aaccb401cd2caae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們需要將 `MyReactActivity` 的主題設為 `Theme.AppCompat.Light.NoActionBar`，因為部分 React Native UI 元件依賴此主題。"
+      }
+    },
+    {
+      "segment_id": "b19953ed",
+      "source_content": "```xml\n<activity\n  android:name=\".MyReactActivity\"\n  android:label=\"@string/app_name\"\n  android:theme=\"@style/Theme.AppCompat.Light.NoActionBar\">\n</activity>\n```",
+      "source_content_hash": "14e65ad7939e8a14f8b4d8e6629a091a0f8995db65d6cdf51de918638468c313",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b19953ed"
+      }
+    },
+    {
+      "segment_id": "c4967bbc",
+      "source_content": "> A `ReactInstanceManager` can be shared by multiple activities and/or fragments. You will want to make your own `ReactFragment` or `ReactActivity` and have a singleton _holder_ that holds a `ReactInstanceManager`. When you need the `ReactInstanceManager` (e.g., to hook up the `ReactInstanceManager` to the lifecycle of those Activities or Fragments) use the one provided by the singleton.",
+      "source_content_hash": "ae19f82b0bd7d78ea2fb3e8378028a529c4e58590a6e3d0969e68c7fa60b637c",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 一個 `ReactInstanceManager` 可被多個活動(Activity)或片段(Fragment)共享。建議建立自己的 `ReactFragment` 或 `ReactActivity`，並透過單例持有者保存 `ReactInstanceManager`。當需要時（例如將 `ReactInstanceManager` 與這些活動的生命週期綁定），使用該單例提供的實例。"
+      }
+    },
+    {
+      "segment_id": "7e031d10",
+      "source_content": "Next, we need to pass some activity lifecycle callbacks to the `ReactInstanceManager` and `ReactRootView`:",
+      "source_content_hash": "8408f23c44e9cd6616e1d6ed6ff9a162b3c8bb9927629aa47c0bbe3ed3dba8c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著，我們需要將部分活動生命週期回調傳遞給 `ReactInstanceManager` 和 `ReactRootView`："
+      }
+    },
+    {
+      "segment_id": "31df1954",
+      "source_content": "```java\n@Override\nprotected void onPause() {\n    super.onPause();\n\n    if (mReactInstanceManager != null) {\n        mReactInstanceManager.onHostPause(this);\n    }\n}\n\n@Override\nprotected void onResume() {\n    super.onResume();\n\n    if (mReactInstanceManager != null) {\n        mReactInstanceManager.onHostResume(this, this);\n    }\n}\n\n@Override\nprotected void onDestroy() {\n    super.onDestroy();\n\n    if (mReactInstanceManager != null) {\n        mReactInstanceManager.onHostDestroy(this);\n    }\n    if (mReactRootView != null) {\n        mReactRootView.unmountReactApplication();\n    }\n}\n```",
+      "source_content_hash": "74f1638dac1a67d80ca90b64cf156db998533f630f897d67b09955f3de7d3bc0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_31df1954"
+      }
+    },
+    {
+      "segment_id": "4667c154",
+      "source_content": "We also need to pass back button events to React Native:",
+      "source_content_hash": "647905843ddc6c5958024aeb3c2df8631177f1651b10dcf82156220d61f416c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們還需將返回按鈕事件傳遞給 React Native："
+      }
+    },
+    {
+      "segment_id": "63164279",
+      "source_content": "```java\n@Override\n public void onBackPressed() {\n    if (mReactInstanceManager != null) {\n        mReactInstanceManager.onBackPressed();\n    } else {\n        super.onBackPressed();\n    }\n}\n```",
+      "source_content_hash": "149b5c3a79af03e653c47f49e379f264ba040a144bf4561fc7d1a971ac0d55d8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_63164279"
+      }
+    },
+    {
+      "segment_id": "f613e20b",
+      "source_content": "This allows JavaScript to control what happens when the user presses the hardware back button (e.g. to implement navigation). When JavaScript doesn't handle the back button press, your `invokeDefaultOnBackPressed` method will be called. By default this finishes your `Activity`.",
+      "source_content_hash": "5eda10cfe9eb4d6cd4ed83705bc53dd849dc89a50aafde82d79128370017aaa9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這允許 JavaScript 控制用戶按下硬體返回鍵時的行為（例如實現導航）。若 JavaScript 未處理返回事件，則會調用 `invokeDefaultOnBackPressed` 方法，預設情況下會結束當前 `Activity`。"
+      }
+    },
+    {
+      "segment_id": "323eea94",
+      "source_content": "Finally, we need to hook up the dev menu. By default, this is activated by (rage) shaking the device, but this is not very useful in emulators. So we make it show when you press the hardware menu button (use <kbd>Ctrl</kbd> + <kbd>M</kbd> if you're using Android Studio emulator):",
+      "source_content_hash": "7a9b3a71313ecd4642672be53ba6abac8b368dd285989b28fb7db33f30c3c292",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，我們需要啟用開發者選單。預設通過搖動設備觸發，但在模擬器中不太實用。因此改為按下硬體選單鍵觸發（Android Studio 模擬器請使用 <kbd>Ctrl</kbd> + <kbd>M</kbd>）："
+      }
+    },
+    {
+      "segment_id": "29431851",
+      "source_content": "```java\n@Override\npublic boolean onKeyUp(int keyCode, KeyEvent event) {\n    if (keyCode == KeyEvent.KEYCODE_MENU && mReactInstanceManager != null) {\n        mReactInstanceManager.showDevOptionsDialog();\n        return true;\n    }\n    return super.onKeyUp(keyCode, event);\n}\n```",
+      "source_content_hash": "1c31b89756c98c8609ea1743fbcb3e1ed3fb6a55094f8107231ced93ce5e181f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29431851"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "Now your activity is ready to run some JavaScript code.",
+      "source_content_hash": "7d034b10f109a14e2697aeecf4bc7a3e45fc671c8af8a95e17fb94bcf3f417e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您的活動已準備好執行 JavaScript 程式碼。"
+      }
+    },
+    {
+      "segment_id": "1e46ce2f",
+      "source_content": "### Test your integration",
+      "source_content_hash": "fffaf65d7a20d5038ac87ff2638541e80a41aeeb40cb3100cdc72ba6567441cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試整合效果"
+      }
+    },
+    {
+      "segment_id": "fee14fdc",
+      "source_content": "You have now done all the basic steps to integrate React Native with your current application. Now we will start the [Metro bundler][metro] to build the `index.bundle` package and the server running on localhost to serve it.",
+      "source_content_hash": "4c4550192fbae7bfaef8e4e21246ef7e977483be6eca19b7d71ceedadd2b524b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "至此已完成 React Native 與現有應用整合的基本步驟。現在我們將啟動 [Metro 打包工具][metro] 來建構 `index.bundle` 套件，並啟動本地伺服器提供該套件。"
+      }
+    },
+    {
+      "segment_id": "c48959e1",
+      "source_content": "##### 1. Run the packager",
+      "source_content_hash": "51cafc4a730c9c46703c59a08d5a15c1c0b83048e78ce745cbbf94211c959096",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 1. 執行打包伺服器"
+      }
+    },
+    {
+      "segment_id": "7acce358",
+      "source_content": "To run your app, you need to first start the development server. To do this, run the following command in the root directory of your React Native project:",
+      "source_content_hash": "175dd853e25493af4ccd0714158ea622ad815c192c70cd8b5bb0d71a9698eff8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要運行應用，需先啟動開發伺服器。在 React Native 專案根目錄執行以下命令："
+      }
+    },
+    {
+      "segment_id": "6cc3787e",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm start\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn start\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "c237368f53d424fc0258cdfede32c6cec163bfb5057a3e532e5e4fd9921f4fdf",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6cc3787e"
+      }
+    },
+    {
+      "segment_id": "babe18c8",
+      "source_content": "##### 2. Run the app",
+      "source_content_hash": "295ec915cdfc780384dad43024bbca0dee6bf2215d5edd83480a14ef7103bb6c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 2. 運行應用"
+      }
+    },
+    {
+      "segment_id": "e3448845",
+      "source_content": "Now build and run your Android app as normal.",
+      "source_content_hash": "2274a2b1266bf358570841ba50790f10ed52a4e3e87aff814419c328fb735464",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在像往常一樣建構並運行您的 Android 應用。"
+      }
+    },
+    {
+      "segment_id": "0273ea32",
+      "source_content": "Once you reach your React-powered activity inside the app, it should load the JavaScript code from the development server and display:",
+      "source_content_hash": "45e92dc319416c4d8d508fb4de413ea68e10a9726e8143c405cd403e7b5f9d07",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當進入應用中由 React 驅動的活動時，應會從開發伺服器載入 JavaScript 程式碼並顯示："
+      }
+    },
+    {
+      "segment_id": "9f46c1b6",
+      "source_content": "![Screenshot](/docs/assets/EmbeddedAppAndroid.png)",
+      "source_content_hash": "6095cbfb941a47e900dce229fe26c55c102df453494bfd6a8ca7eea53ba80f50",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![螢幕截圖](/docs/assets/EmbeddedAppAndroid.png)"
+      }
+    },
+    {
+      "segment_id": "3405442c",
+      "source_content": "### Creating a release build in Android Studio",
+      "source_content_hash": "00b59b0a51a1190cf107409af485fa49ed63d544ca45312109df560a21653bbd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 Android Studio 建立正式版"
+      }
+    },
+    {
+      "segment_id": "2fc2d2cf",
+      "source_content": "You can use Android Studio to create your release builds too! It’s as quick as creating release builds of your previously-existing native Android app.",
+      "source_content_hash": "1eba54d8273d4302461b69cf51f7783c48f3e98ff118aa05ad2c477e369c7d86",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您也可以使用 Android Studio 建立正式版！流程與建構既有原生 Android 應用的正式版同樣快速。"
+      }
+    },
+    {
+      "segment_id": "a2532daf",
+      "source_content": "If you use the React Native Gradle Plugin as described above, everything should work when running app from Android Studio.",
+      "source_content_hash": "84bb43ac256e6639a07509014b3027ebf073833ea714881eda141c7a90e43dbc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若按照前述方式使用 React Native Gradle 插件，從 Android Studio 運行應用時應能正常運作。"
+      }
+    },
+    {
+      "segment_id": "7e0b49a3",
+      "source_content": "If you're not using the React Native Gradle Plugin, there’s one additional step which you’ll have to do before every release build. You need to execute the following to create a React Native bundle, which will be included with your native Android app:",
+      "source_content_hash": "d7133d708f70f01af1cc350c7184a6ed35bb837c1c4daa4ddeff67e30f226330",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若未使用該插件，則每次建構正式版前需額外執行以下命令來建立 React Native 套件（該套件將包含在原生應用中）："
+      }
+    },
+    {
+      "segment_id": "c34e4bdd",
+      "source_content": "```shell\n$ npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/com/your-company-name/app-package-name/src/main/assets/index.android.bundle --assets-dest android/com/your-company-name/app-package-name/src/main/res/\n```",
+      "source_content_hash": "d6585043c855f440f4dc8b228460e35dcd8ad67c635d3aff406299bfaa7d7e71",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c34e4bdd"
+      }
+    },
+    {
+      "segment_id": "17d66f05",
+      "source_content": "> Don’t forget to replace the paths with correct ones and create the assets folder if it doesn’t exist.",
+      "source_content_hash": "436fdeb02458d0fb500f76f63f0c3af36f969400c5b1d05a7fe4d2e22f2ae016",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意替換正確路徑，若 assets 資料夾不存在請先建立。"
+      }
+    },
+    {
+      "segment_id": "ac7dd250",
+      "source_content": "Now, create a release build of your native app from within Android Studio as usual and you should be good to go!",
+      "source_content_hash": "4d9597809622d2dcfa73c7607a7aca9005aad351102f9c2e4db2fe7823059af0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在像往常一樣透過 Android Studio 建構正式版即可！"
+      }
+    },
+    {
+      "segment_id": "489e5683",
+      "source_content": "### Now what?",
+      "source_content_hash": "3f41131596e2a049d4d00c4f4c304ff87d8d3cc0474a4c61c485847d9bafeca5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 後續步驟"
+      }
+    },
+    {
+      "segment_id": "a1cac8e0",
+      "source_content": "At this point you can continue developing your app as usual. Refer to our [debugging](debugging) and [deployment](running-on-device) docs to learn more about working with React Native.",
+      "source_content_hash": "2a765e765a3af5281841e72ffe76592a8162446ba5f35a892d9224be47053a1e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您可以繼續常規開發。參考我們的[除錯指南](debugging)和[部署文件](running-on-device)以深入瞭解 React Native 開發。"
+      }
+    },
+    {
+      "segment_id": "a6317b33",
+      "source_content": "[metro]: https://metrobundler.dev/",
+      "source_content_hash": "8c5ea598f1617ded21c97316c723153cb950dfa6243784130f5b320382243ad1",
+      "node_type": "definition",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[metro]: https://metrobundler.dev/"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/_integration-with-existing-apps-java.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.552171+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "d8ecd66d257b667de9b9455d0f7901fc81ddd5042ca8a3dedd2c3193d522205c"
+  }
+}

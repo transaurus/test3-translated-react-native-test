@@ -1,0 +1,322 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/keyboard.md",
+  "source_file_content_hash": "74e1c2b6ef919dbca89977dd6f297d796036bab92bdc6865ba6bd3277d92a177",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: keyboard\ntitle: Keyboard\n---",
+      "source_content_hash": "a728555f246a4ab879c7ce0615fa93b8412173cb4cac9ef5c06f0529bbe2277d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "`Keyboard` module to control keyboard events.",
+      "source_content_hash": "42d39eebb9c82bcd69a1b41fc54d650233e97f696cba69da104c0a8385f6528a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### Usage",
+      "source_content_hash": "7a5b2d87044217ebeda4e071a80585106bae705217da72a3ec329261002e16ff",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The Keyboard module allows you to listen for native events and react to them, as well as make changes to the keyboard, like dismissing it.",
+      "source_content_hash": "fb44d1877764c26373fa77b3a045e831d24eb6ce8de691ed09971f0891cc8947",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "899bc9b4",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=Keyboard%20Function%20Component%20Example&supportedPlatforms=ios,android\nimport React, { useState, useEffect } from \"react\";\nimport { Keyboard, Text, TextInput, StyleSheet, View } from \"react-native\";\n\nconst Example = () => {\n  const [keyboardStatus, setKeyboardStatus] = useState(undefined);\n\n  useEffect(() => {\n    const showSubscription = Keyboard.addListener(\"keyboardDidShow\", () => {\n      setKeyboardStatus(\"Keyboard Shown\");\n    });\n    const hideSubscription = Keyboard.addListener(\"keyboardDidHide\", () => {\n      setKeyboardStatus(\"Keyboard Hidden\");\n    });\n\n    return () => {\n      showSubscription.remove();\n      hideSubscription.remove();\n    };\n  }, []);\n\n  return (\n    <View style={style.container}>\n      <TextInput\n        style={style.input}\n        placeholder='Click here…'\n        onSubmitEditing={Keyboard.dismiss}\n      />\n      <Text style={style.status}>{keyboardStatus}</Text>\n    </View>\n  );\n}\n\nconst style = StyleSheet.create({\n  container: {\n    flex: 1,\n    padding: 36\n  },\n  input: {\n    padding: 10,\n    borderWidth: 0.5,\n    borderRadius: 4\n  },\n  status: {\n    padding: 10,\n    textAlign: \"center\"\n  }\n});\n\nexport default Example;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=Keyboard%20Class%20Component%20Example&supportedPlatforms=ios,android\nimport React, { Component } from 'react';\nimport { Keyboard, Text, TextInput, StyleSheet, View } from 'react-native';\n\nclass Example extends Component {\n  state = {\n    keyboardStatus: undefined\n  };\n\n  componentDidMount() {\n    this.keyboardDidShowSubscription = Keyboard.addListener(\n      'keyboardDidShow',\n      () => {\n        this.setState({ keyboardStatus: 'Keyboard Shown' });\n      },\n    );\n    this.keyboardDidHideSubscription = Keyboard.addListener(\n      'keyboardDidHide',\n      () => {\n        this.setState({ keyboardStatus: 'Keyboard Hidden' });\n      },\n    );\n  }\n\n  componentWillUnmount() {\n    this.keyboardDidShowSubscription.remove();\n    this.keyboardDidHideSubscription.remove();\n  }\n\n  render() {\n    return (\n      <View style={style.container}>\n        <TextInput\n          style={style.input}\n          placeholder='Click here…'\n          onSubmitEditing={Keyboard.dismiss}\n        />\n        <Text style={style.status}>\n          {this.state.keyboardStatus}\n        </Text>\n      </View>\n    )\n  }\n}\n\nconst style = StyleSheet.create({\n  container: {\n    flex: 1,\n    padding: 36\n  },\n  input: {\n    padding: 10,\n    borderWidth: 0.5,\n    borderRadius: 4\n  },\n  status: {\n    padding: 10,\n    textAlign: \"center\"\n  }\n});\n\nexport default Example;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "98a9a67e688f9bdba93b8197351cf33974091e37dbef11a49ebff2fd6ab2665e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8bafd2d7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fff17ff8",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "734d40d8",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "af843cee",
+      "source_content": "### `addListener()`",
+      "source_content_hash": "a50f03e5bde48e915a4c91b4c5babd8389cd47e2a74195fb91a3c391fe1103cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4a107b4",
+      "source_content": "```jsx\nstatic addListener(eventName, callback)\n```",
+      "source_content_hash": "c18e2f899defc4ef9cb6f450ad6035fef92df66b3c176943398b639cc09c1f3f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "The `addListener` function connects a JavaScript function to an identified native keyboard notification event.",
+      "source_content_hash": "960f0656cd8a354e0392182efa76a1d2007a7e35f65b47160b0d3e2d51e0e02e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "This function then returns the reference to the listener.",
+      "source_content_hash": "a6415e2d7e000e6e289248746482003187aff8325ff4a19df3d5f8783f53a8ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2215fd35",
+      "source_content": "| Name                                                                     | Type     | Description                                                                    |\n| ------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |\n| eventName <div className=\"label basic two-lines required\">Required</div> | string   | The string that identifies the event you're listening for. See the list below. |\n| callback <div className=\"label basic two-lines required\">Required</div>  | function | The function to be called when the event fires                                 |",
+      "source_content_hash": "5bfb25822a81cd4409cd605652bc5b433ba2247027b02654b57c230078b2848c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "**`eventName`**",
+      "source_content_hash": "57f36129d1f0b8df6705a447e95247e7e9820a318f58aeb6449f2e5bef1a25c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "This can be any of the following:",
+      "source_content_hash": "6c8828cb0ac25e60680ca17245cf14d32e52b5efe1219b26cc875af6d1b4dc94",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e258929d",
+      "source_content": "- `keyboardWillShow`\n- `keyboardDidShow`\n- `keyboardWillHide`\n- `keyboardDidHide`\n- `keyboardWillChangeFrame`\n- `keyboardDidChangeFrame`",
+      "source_content_hash": "e1ae9853c0b9c82df55257f3f300dc79a330092e1e4393c2131b97373d5e4c0e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "04e608c7",
+      "source_content": "> Note that only `keyboardDidShow` and `keyboardDidHide` events are available on Android. The events will not be fired when using Android 10 and under if your activity has `android:windowSoftInputMode` set to `adjustNothing`.",
+      "source_content_hash": "3b8fcb1c028e1f1b7db7755341b698f1d860fa0563c28d0bf84b41a4dbd18ac1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f28724b0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "67edbbc4",
+      "source_content": "### `removeListener()`",
+      "source_content_hash": "d729a1fe733b3a2ab9a955bc0c1e962e6fccf17e80f517c3431f908a1da13a5f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "028bef0a",
+      "source_content": "```jsx\nstatic removeListener(eventName, callback)\n```",
+      "source_content_hash": "9b981364178eb3f8c570065bf87d83cd4e9be83c8cff44a2b69b11637ec4fc23",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "001e6f78",
+      "source_content": "> **Deprecated.** Use the `remove()` method on the event subscription returned by [`addListener()`](#addlistener).",
+      "source_content_hash": "f2ef604520bc1f9813f3f184e3f369e3163257fde178963223627360c0f6eabb",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e5821418",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "864536ba",
+      "source_content": "| Name      | Type     | Required | Description                                                                    |\n| --------- | -------- | -------- | ------------------------------------------------------------------------------ |\n| eventName | string   | Yes      | The `nativeEvent` is the string that identifies the event you're listening for |\n| callback  | function | Yes      | The function to be called when the event fires                                 |",
+      "source_content_hash": "12f70e58811020b7b0755a82e84677a07aa47d280ab93409e90e6f5b8030ee46",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "44ffe19e",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "### `removeAllListeners()`",
+      "source_content_hash": "b45c01815653c87af296a90446a0b1bdbedc532831970bd8f7e4752ba87e7c84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "de34d0f2",
+      "source_content": "```jsx\nstatic removeAllListeners(eventName)\n```",
+      "source_content_hash": "08d9bbf801b5e47e08d2142efbe472e5c4ec37e046b8d51f3b69a29372c9f588",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "Removes all listeners for a specific event type.",
+      "source_content_hash": "720113543a607406db014d947f5fb27577d6e6d70623bba69359f50241894e69",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d251d5be",
+      "source_content": "| Name      | Type   | Required | Description                                                          |\n| --------- | ------ | -------- | -------------------------------------------------------------------- |\n| eventType | string | Yes      | The native event string listeners are watching which will be removed |",
+      "source_content_hash": "a309ed3fdd3f738c681e53f87046a18ea46bf8a53d71973c7e741f4e1d9afde7",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ba014c2d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bf3eb388",
+      "source_content": "### `dismiss()`",
+      "source_content_hash": "c0b4c4a3708ba48251dda4a43bbddafafa369fb0d3ea5e3c96536591957eb3c6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f377fafa",
+      "source_content": "```jsx\nstatic dismiss()\n```",
+      "source_content_hash": "a6fcc079bf19a58e67edfb85b09858d4e7e58efa0718989296263ba755603e0f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "09f901c3",
+      "source_content": "Dismisses the active keyboard and removes focus.",
+      "source_content_hash": "ef11292b5320642438ac25bf14afbb7b79262b2d72d84df1a078b0b2f0ec3848",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c60fccc8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dc825187",
+      "source_content": "### `scheduleLayoutAnimation`",
+      "source_content_hash": "00d194b345e38b8ce3e0730a7d919a15bfcd721904c80c82d413d313cca3b925",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "daad2e28",
+      "source_content": "```jsx\nstatic scheduleLayoutAnimation(event)\n```",
+      "source_content_hash": "81e3809e9cd2fd3e80106d767b4afe36e44521fbd2630e6346290477f0c6f6ad",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "61e5dad6",
+      "source_content": "Useful for syncing TextInput (or other keyboard accessory view) size of position changes with keyboard movements.",
+      "source_content_hash": "ca5c465864e395c1b815f41f47862b8d05a0f90127f038b7fd6f2deb50e239f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/keyboard.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.777231+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

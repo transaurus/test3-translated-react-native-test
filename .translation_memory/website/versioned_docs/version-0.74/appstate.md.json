@@ -1,0 +1,292 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/appstate.md",
+  "source_file_content_hash": "75361c8a9a4cf4212480bd0aebb9b7181e7f93d7caf77cc7352cbf293094e363",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: appstate\ntitle: AppState\n---",
+      "source_content_hash": "3c1a490e2d3e810188c34ded3291afc02b31b010f1a1fc53473b5f616de8eb7e",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "`AppState` can tell you if the app is in the foreground or background, and notify you when the state changes.",
+      "source_content_hash": "9aa21ae40152b808ece4d6a68ed92794a4b128fd09827678816feb3267c629fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`AppState` 可以告訴您應用程式目前處於前景或背景狀態，並在狀態改變時通知您。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "AppState is frequently used to determine the intent and proper behavior when handling push notifications.",
+      "source_content_hash": "dca6669f1c17eb8611ea310bbed3b9340c2ca5b71648b01a8fa0ef8e80038954",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "AppState 常被用來判斷處理推播通知時的意圖和適當行為。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### App States",
+      "source_content_hash": "bf7a33a48812ca09882d8175bd9f489b28d224c1795fe4b79ff139a72d2d2f94",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 應用程式狀態"
+      }
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- `active` - The app is running in the foreground\n- `background` - The app is running in the background. The user is either:\n  - in another app\n  - on the home screen\n  - [Android] on another `Activity` (even if it was launched by your app)\n- [iOS] `inactive` - This is a state that occurs when transitioning between foreground & background, and during periods of inactivity such as entering the multitasking view, opening the Notification Center or in the event of an incoming call.",
+      "source_content_hash": "0cfbe19e70436658d8b7445b350eba4dcb2ea26aea22d974953c245b1242835e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `active` - 應用程式正在前景執行\n- `background` - 應用程式正在背景執行。使用者可能處於以下情況：\n  - 使用其他應用程式\n  - 在主畫面\n  - [Android] 在其他 `Activity` 中（即使是由您的應用程式啟動）\n- [iOS] `inactive` - 此狀態發生在前景與背景轉換期間，以及多工檢視、開啟通知中心或來電等非活動期間。"
+      }
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "For more information, see [Apple's documentation](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)",
+      "source_content_hash": "54c92eb53e86f198158e8bf18ca7d49891209c920a14651af8da4bf100f97a60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多資訊請參閱 [Apple 官方文件](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## Basic Usage",
+      "source_content_hash": "2e1f823b8f972f8b6b6da0c66804fcea6cc6439142480a758b86f9fa649954e9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 基本用法"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "To see the current state, you can check `AppState.currentState`, which will be kept up-to-date. However, `currentState` will be null at launch while `AppState` retrieves it over the bridge.",
+      "source_content_hash": "d690ff6ff0a2395eb4d3ac9cc8e0dff48ac11378e050ca5a7fa79c75dc1fdd9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要查看當前狀態，您可以檢查 `AppState.currentState`，該值會保持最新狀態。但在啟動時，`currentState` 會暫時為 null，直到 `AppState` 透過橋接器取得狀態。"
+      }
+    },
+    {
+      "segment_id": "3569d545",
+      "source_content": "```SnackPlayer name=AppState%20Example\nimport React, {useRef, useState, useEffect} from 'react';\nimport {AppState, StyleSheet, Text, View} from 'react-native';\n\nconst AppStateExample = () => {\n  const appState = useRef(AppState.currentState);\n  const [appStateVisible, setAppStateVisible] = useState(appState.current);\n\n  useEffect(() => {\n    const subscription = AppState.addEventListener('change', nextAppState => {\n      if (\n        appState.current.match(/inactive|background/) &&\n        nextAppState === 'active'\n      ) {\n        console.log('App has come to the foreground!');\n      }\n\n      appState.current = nextAppState;\n      setAppStateVisible(appState.current);\n      console.log('AppState', appState.current);\n    });\n\n    return () => {\n      subscription.remove();\n    };\n  }, []);\n\n  return (\n    <View style={styles.container}>\n      <Text>Current state is: {appStateVisible}</Text>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n\nexport default AppStateExample;\n```",
+      "source_content_hash": "0b4f3e219542fb8365ecddfa0172322652da6a67c5b0f5bbaf2826a07612c85d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3569d545"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "This example will only ever appear to say \"Current state is: active\" because the app is only visible to the user when in the `active` state, and the null state will happen only momentarily. If you want to experiment with the code we recommend to use your own device instead of embedded preview.",
+      "source_content_hash": "6cfe23a54bb8a45fef504df266ab2099e989f5c9bc1945b82c937e20353104f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此範例永遠只會顯示「當前狀態為：active」，因為應用程式只有在 `active` 狀態時對使用者可見，而 null 狀態只會短暫出現。若要實驗此程式碼，建議使用自己的裝置而非嵌入式預覽。"
+      }
+    },
+    {
+      "segment_id": "456190ad",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考資料"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "## Events",
+      "source_content_hash": "f4776ba3d0fd53ce403170cc2d8cca7a2863d1d0adf8a34232db931e60e91830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 事件"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "### `change`",
+      "source_content_hash": "4c9f4d88c433b76f32c85b06a31b3f9ff155bfb7a6e0b3f41acc08e4dd28822b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `change`"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "This event is received when the app state has changed. The listener is called with one of [the current app state values](appstate#app-states).",
+      "source_content_hash": "4e9a18f6bbbf0e7936846eca147a4d05537e54648b08f2edc7374fbbbb7a7ed8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當應用程式狀態改變時會觸發此事件。監聽器會收到[當前應用程式狀態值](appstate#app-states)之一。"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### `memoryWarning`",
+      "source_content_hash": "a39aaa65a7491b5467bea906da52cf740e7c444824e2fc29fff90ffb01ef9e57",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `memoryWarning`"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "This event is used in the need of throwing memory warning or releasing it.",
+      "source_content_hash": "b0f3f56e6a72dd5c594864dc845a914a6e9409f764525f14236a28b73690421f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此事件用於需要發出記憶體警告或釋放記憶體時。"
+      }
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "### `focus` <div class=\"label android\">Android</div>",
+      "source_content_hash": "388ca4f703940b8c76a692405e6954c722d8477652edebc2adda8bd04780503b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `focus` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "Received when the app gains focus (the user is interacting with the app).",
+      "source_content_hash": "8a198b57b8302a85ea884f96c4ea33737a993aa7388cf049f843b27834bff9fb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當應用程式獲得焦點時觸發（使用者正在與應用程式互動）。"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "### `blur` <div class=\"label android\">Android</div>",
+      "source_content_hash": "293d40f0dbf154164567fd27cf57e9935cb0f5013f914b97df844f851168dc53",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `blur` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "Received when the user is not actively interacting with the app. Useful in situations when the user pulls down the [notification drawer](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer). `AppState` won't change but the `blur` event will get fired.",
+      "source_content_hash": "dde5af15329374936e48c6a90c1a3883c66f8d84740f48de77c67b93d1baf898",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當使用者未主動與應用程式互動時觸發。適用於使用者下拉[通知抽屜](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer)的情況。此時 `AppState` 不會改變，但會觸發 `blur` 事件。"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "5baf88e2",
+      "source_content": "### `addEventListener()`",
+      "source_content_hash": "c14ee61a90cacc6adff71fa9f1ff675bde58b04df64bfe24a80a9a4a21f7ced0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addEventListener()`"
+      }
+    },
+    {
+      "segment_id": "7fa46732",
+      "source_content": "```tsx\nstatic addEventListener(\n  type: AppStateEvent,\n  listener: (state: AppStateStatus) => void,\n): NativeEventSubscription;\n```",
+      "source_content_hash": "bc809123b577e31f6d4be517a3c2b55ac11d6c45068cbcf8fc6b40a4fb53d272",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7fa46732"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "Sets up a function that will be called whenever the specified event type on AppState occurs. Valid values for `eventType` are\n[listed above](#events). Returns the `EventSubscription`.",
+      "source_content_hash": "2ee98234e146e638e17ecce0d8f9d11385c0d3fa637ab898dd9141236f3762d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定當 AppState 發生指定事件類型時要呼叫的函式。有效的 `eventType` 值請參閱[上方事件列表](#events)。回傳 `EventSubscription`。"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "### `currentState`",
+      "source_content_hash": "28f74018823babf46759f160a17fd2f7c40e6f0730c25ec44422627c0a8ac644",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `currentState`"
+      }
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```tsx\nstatic currentState: AppStateStatus;\n```",
+      "source_content_hash": "f9e41d98fd4dd70bc32de738001df36c73d70678ba6f0144b1af7254532b698f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_03a9ab41"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/appstate.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.571094+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "75361c8a9a4cf4212480bd0aebb9b7181e7f93d7caf77cc7352cbf293094e363"
+  }
+}

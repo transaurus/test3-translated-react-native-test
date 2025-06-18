@@ -1,0 +1,152 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2017-03-13-idx-the-existential-function.md",
+  "source_file_content_hash": "ae894e8fcc4c6a0f748ff4f0e827f614fa4eaadef954ffb91265d35a67782c18",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'idx: The Existential Function'\nauthor: Timothy Yung\nauthorTitle: Engineering Manager at Facebook\nauthorURL: 'https://github.com/yungsters'\nauthorImageURL: 'https://pbs.twimg.com/profile_images/1592444107/image.jpg'\nauthorTwitter: yungsters\ntags: [engineering]\n---",
+      "source_content_hash": "6f1e39c42dfc923c76373dbcd98c630ae37ef83c7b93cacbc3489384dfc91f50",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "At Facebook, we often need to access deeply nested values in data structures fetched with GraphQL. On the way to accessing these deeply nested values, it is common for one or more intermediate fields to be nullable. These intermediate fields may be null for a variety of reasons, from failed privacy checks to the mere fact that null happens to be the most flexible way to represent non-fatal errors.",
+      "source_content_hash": "9f0dab5f467560df152610b5be8de50e92d044051245c22cc67324c5a94c1081",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Facebook，我們經常需要存取透過 GraphQL 取得的資料結構中的深層嵌套值。在存取這些深層嵌套值的過程中，經常會遇到一個或多個中間欄位為可空值的情況。這些中間欄位可能因多種原因而為空，從隱私檢查失敗到單純因為「空值」恰好是表示非致命錯誤最靈活的方式。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Unfortunately, accessing these deeply nested values is currently tedious and verbose.",
+      "source_content_hash": "24818d62a633d3a86b3ebd86356c6eef1a9a83a524d1eb6c30ab0cd1b1408fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "不幸的是，目前存取這些深層嵌套值的過程既繁瑣又冗長。"
+      }
+    },
+    {
+      "segment_id": "4b395385",
+      "source_content": "```jsx\nprops.user &&\n  props.user.friends &&\n  props.user.friends[0] &&\n  props.user.friends[0].friends;\n```",
+      "source_content_hash": "14f46356419a1379566f66bf5a0283bf18deeb5aadbe440e17a4e81048dfe0ce",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b395385"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "There is [an ECMAScript proposal to introduce the existential operator](https://github.com/claudepache/es-optional-chaining) which will make this much more convenient. But until a time when that proposal is finalized, we want a solution that improves our quality of life, maintains existing language semantics, and encourages type safety with Flow.",
+      "source_content_hash": "b3216235ae3f16604df1d4ff223bd89f4f6015ae9cdd6ffea24d1df778349092",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前有一個 [ECMAScript 提案建議引入存在運算子](https://github.com/claudepache/es-optional-chaining)，這將使此操作更加便利。但在該提案最終確定之前，我們需要一個能改善開發體驗、維持現有語言語義，並能透過 Flow 強化型別安全的解決方案。"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "We came up with an existential _function_ we call `idx`.",
+      "source_content_hash": "3a2831784e71e51d43b9ea42fb3dac8da1d55ee04cb11dcd99607f67b640e55e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們設計了一個稱為 `idx` 的存在性 _函式_。"
+      }
+    },
+    {
+      "segment_id": "a89b882e",
+      "source_content": "```jsx\nidx(props, _ => _.user.friends[0].friends);\n```",
+      "source_content_hash": "2d12045fd7ec2218d66806ef1e44e8fe3711a65c020a28aa09115544b2de60f0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a89b882e"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "The invocation in this code snippet behaves similarly to the boolean expression in the code snippet above, except with significantly less repetition. The `idx` function takes exactly two arguments:",
+      "source_content_hash": "9319eb16d842c4e81ed3426cc32ba19f4596d1858380caf45a1a3ac50fd029be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此程式碼片段中的調用行為與上述程式碼片段中的布林表達式類似，但重複性大幅降低。`idx` 函式嚴格接受兩個參數："
+      }
+    },
+    {
+      "segment_id": "86b525ab",
+      "source_content": "- Any value, typically an object or array into which you want to access a nested value.\n- A function that receives the first argument and accesses a nested value on it.",
+      "source_content_hash": "5ea3d7850f608871c6af80e3744eab00778534cb276112a66db1a377014a72e7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 任何值，通常是您想存取嵌套值的物件或陣列。\n- 一個接收第一個參數並對其存取嵌套值的函式。"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "In theory, the `idx` function will try-catch errors that are the result of accessing properties on null or undefined. If such an error is caught, it will return either null or undefined. (And you can see how this might be implemented in [idx.js](https://github.com/facebookincubator/idx/blob/master/packages/idx/src/idx.js).)",
+      "source_content_hash": "dd2fb361f0ed88aed9b8147e52cae2e028875445199349705baa4d358f5e387d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "理論上，`idx` 函式會嘗試捕捉因存取 null 或 undefined 屬性而產生的錯誤。若捕捉到此類錯誤，將返回 null 或 undefined。（您可以在 [idx.js](https://github.com/facebookincubator/idx/blob/master/packages/idx/src/idx.js) 中查看實作方式。）"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "In practice, try-catching every nested property access is slow, and differentiating between specific kinds of TypeErrors is fragile. To deal with these shortcomings, we created a Babel plugin that transforms the above `idx` invocation into the following expression:",
+      "source_content_hash": "6991c83ae45a00fc16c1c4038ba5d5485468ed3d98a124627f94619fb9c8eb98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實際上，對每個嵌套屬性存取進行 try-catch 的效率很低，且區分特定類型的 TypeError 並不穩定。為解決這些缺點，我們創建了一個 Babel 插件，將上述 `idx` 調用轉換為以下表達式："
+      }
+    },
+    {
+      "segment_id": "de8f60af",
+      "source_content": "```jsx\nprops.user == null\n  ? props.user\n  : props.user.friends == null\n    ? props.user.friends\n    : props.user.friends[0] == null\n      ? props.user.friends[0]\n      : props.user.friends[0].friends;\n```",
+      "source_content_hash": "406a1768fc8ba9cd66e04cb2342ff13780cb5b38171b7855a4cfe4c1656c22ff",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de8f60af"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "Finally, we added a custom Flow type declaration for `idx` that allows the traversal in the second argument to be properly type-checked while permitting nested access on nullable properties.",
+      "source_content_hash": "a27b1e07c3a1bd0d8e3a3b8b1bc875ab59dd2a2a11e721f287a79f689fea1f8b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，我們為 `idx` 添加了自訂的 Flow 型別宣告，允許在第二個參數中的遍歷操作能正確進行型別檢查，同時允許對可空屬性進行嵌套存取。"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "The function, Babel plugin, and Flow declaration are now [available on GitHub](https://github.com/facebookincubator/idx). They are used by installing the **idx** and **babel-plugin-idx** npm packages, and adding “idx” to the list of plugins in your `.babelrc` file.",
+      "source_content_hash": "e6e844277cc100c1cd61251c3759cf315a3ab028128871cfcd6d2f255d9818f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該函式、Babel 插件和 Flow 宣告現已 [在 GitHub 上提供](https://github.com/facebookincubator/idx)。使用方式為安裝 **idx** 和 **babel-plugin-idx** npm 套件，並將 \"idx\" 加入您的 `.babelrc` 檔案中的插件列表。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2017-03-13-idx-the-existential-function.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.211113+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "ae894e8fcc4c6a0f748ff4f0e827f614fa4eaadef954ffb91265d35a67782c18"
+  }
+}

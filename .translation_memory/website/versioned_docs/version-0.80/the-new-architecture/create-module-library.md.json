@@ -1,0 +1,552 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/the-new-architecture/create-module-library.md",
+  "source_file_content_hash": "bfe8980b9e75c0e21d9468beb78fa2adee1b1de155f2f5f7fa8f7d4759223e91",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "# Create a Library for Your Module",
+      "source_content_hash": "5edc6348544c1f0950a98f77ec30f41ecbc307dbfadaf763aa53deed03acba83",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 為你的模組建立函式庫"
+      }
+    },
+    {
+      "segment_id": "faebdc62",
+      "source_content": "React Native has a rich ecosystem of libraries to solve common problems. We collect React Native libraries in the [reactnative.directory](https://reactnative.directory) website, and this is a great resource to bookmark for every React Native developer.",
+      "source_content_hash": "df247f265ae16b63b4ef9a8d47b89e73d0105b2f6ff7155ad9c548cbaf0a33f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 擁有豐富的函式庫生態系統來解決常見問題。我們在 [reactnative.directory](https://reactnative.directory) 網站上收集了 React Native 函式庫，這是每位 React Native 開發者都值得收藏的寶貴資源。"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "Sometimes, you might be working on a module that is worth extracting in a separate library for code reuse. This can be a library that you want to reuse in all your apps, a library that you want to distribute to the ecosystem as an open source component, or even a library you'd like to sell.",
+      "source_content_hash": "9bafa8d168b4fa81d6bbfeadbba1f10722c5f8cd7ff0ba2dd2a067ea5739d214",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時，你可能會開發一個值得提取為獨立函式庫以供重複使用的模組。這可能是你想在所有應用中重用的函式庫、想作為開源元件分發給生態系統的函式庫，甚至是打算銷售的函式庫。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "In this guide, you'll learn:",
+      "source_content_hash": "25a16406df9a170fc31e1c7baac17128feb464159e7fcde2d193c70d03c4146e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將教你："
+      }
+    },
+    {
+      "segment_id": "abcf54e3",
+      "source_content": "- how to extract a module into a library\n- how to distribute the library using NPM",
+      "source_content_hash": "c7cd1c54053024cb4d997733376960c9c692758bb443e49b085fe69d5dc71e0b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 如何將模組提取為函式庫\n- 如何使用 NPM 分發函式庫"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "## Extract the Module into a Library",
+      "source_content_hash": "984d33f0e3e7344b562af843d710a804504d0ff3d139a6ae010c1cf5901fe881",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將模組提取為函式庫"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "You can use the [`create-react-native-library`](https://callstack.github.io/react-native-builder-bob/create) tool to create a new library. This tool sets up a new library with all the boilerplate code that is needed: all the configuration files and all files required by the various platforms. It also comes with a nice interactive menu to guide you through the creation of the library.",
+      "source_content_hash": "68539f39b12a2adfb85bbd52d5148eeb07a61cbde6ee6d3384fed05a383bb6fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以使用 [`create-react-native-library`](https://callstack.github.io/react-native-builder-bob/create) 工具來建立新函式庫。此工具會設置一個包含所有必要樣板程式碼的新函式庫：所有配置檔案和各平台所需的檔案。它還提供了一個方便的互動式選單，引導你完成函式庫的建立過程。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "To extract a module into a separate library, you can follow these steps:",
+      "source_content_hash": "bc86ab82103109a3055a479a4ddb5c27995b0336ff61c0c80838e9b00fd5dc77",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要將模組提取為獨立函式庫，你可以按照以下步驟操作："
+      }
+    },
+    {
+      "segment_id": "11c829ab",
+      "source_content": "1. Create the new library\n2. Move the code from the App to the Library\n3. Update the code to reflect the new structure\n4. Publish it.",
+      "source_content_hash": "8d28bd6b15084117224f4e67ace192ba6d444effebf80ddc5dfddb62b203d479",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 建立新函式庫\n2. 將程式碼從應用移至函式庫\n3. 更新程式碼以反映新結構\n4. 發佈它。"
+      }
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "### 1. Create a Library",
+      "source_content_hash": "9d113687742117aa21578c5604f8102c825815ba1736912dd1e17049f9f8aff9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 建立函式庫"
+      }
+    },
+    {
+      "segment_id": "44d89370",
+      "source_content": "1. Start the creation process by running the command:",
+      "source_content_hash": "c0af40dd32031b1b3bb8c5f4476cf2f4ed7a66ae01f7032c69bc5153ead468c6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 執行以下命令開始建立過程："
+      }
+    },
+    {
+      "segment_id": "08021a08",
+      "source_content": "```sh\nnpx create-react-native-library@latest <Name of Your Library>\n```",
+      "source_content_hash": "0a5531d082fef1e1efb5784dca3551178566b317bd5acc6d899ec4186c797f68",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_08021a08"
+      }
+    },
+    {
+      "segment_id": "c6dea11f",
+      "source_content": "2. Add a name for your module. It must be a valid npm name, so it should be all lowercase. You can use `-` to separate words.\n3. Add a description for the package.\n4. Continue filling the form until you reach the question _\"What type of library do you want to develop?\"_\n   ![What type of Library](/docs/assets/what-library.png)\n5. For the sake of this guide, select the _Turbo module_ option. Notice that you can create libraries for both New Architecture and Legacy Architecture.\n6. Then, you can choose whether you want a library that access the platform (Kotlin & Objective-C) or a shared C++ library (C++ for Android and iOS).\n7. Finally, select the `Test App` as last option. This option creates the library with a separate app already configured within the library folder.",
+      "source_content_hash": "27d973c3b9aa93afe31cdcd7980cdb3b23a9faf98f719769a4a264bd8125c1f5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 為你的模組添加名稱。它必須是有效的 npm 名稱，因此應全部使用小寫字母。你可以使用 `-` 分隔單詞。\n3. 為套件添加描述。\n4. 繼續填寫表單，直到遇到問題 _\"你想開發什麼類型的函式庫？\"_\n   ![函式庫類型](/docs/assets/what-library.png)\n5. 為了本指南的目的，選擇 _Turbo 模組_ 選項。請注意，你可以為新架構和舊架構建立函式庫。\n6. 接著，你可以選擇是否要一個能存取平台（Kotlin 和 Objective-C）的函式庫，或是一個共享的 C++ 函式庫（適用於 Android 和 iOS 的 C++）。\n7. 最後，選擇 `Test App` 作為最後一個選項。此選項會在函式庫資料夾內建立一個已配置好的獨立應用程式。"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "Once the interactive prompt is done, the tool creates a folder whose structure looks like this in Visual Studio Code:",
+      "source_content_hash": "6ec445a0ae7d6082d15b217894905a704a58d230edeb833fe19cea7b75ae6212",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "互動式提示完成後，工具會建立一個資料夾，其在 Visual Studio Code 中的結構如下："
+      }
+    },
+    {
+      "segment_id": "d1ce550c",
+      "source_content": "<img class=\"half-size\" alt=\"Folder structure after initializing a new library.\" src=\"/docs/assets/turbo-native-modules/c++visualstudiocode.webp\" />",
+      "source_content_hash": "d407dc9f16e7a71f06f277741646609b4788a0ca4815dfc2bd0253c52909482c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d1ce550c"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "Feel free to explore the code that has been created for you. However, the most important parts:",
+      "source_content_hash": "939149c32160c704bd9967b4a764c0cc505388d0273fe1c0def1561137eebbc6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以自由探索為你建立的程式碼。然而，最重要的部分包括："
+      }
+    },
+    {
+      "segment_id": "4c077b92",
+      "source_content": "- The `android` folder: this is where the Android code lives\n- The `cpp` folder: this is where the c++ code lives\n- The `ios` folder: this is where the iOS code lives\n- The `src` folder: this is where the JS code lives.",
+      "source_content_hash": "dc5140065dc3989e6d707bb19c9222193b0514c18aa7e77b3f02f25aa6938422",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `android` 資料夾：這裡存放 Android 程式碼\n- `cpp` 資料夾：這裡存放 C++ 程式碼\n- `ios` 資料夾：這裡存放 iOS 程式碼\n- `src` 資料夾：這裡存放 JS 程式碼。"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "The `package.json` is already configured with all the information that we provided to the `create-react-native-library` tool, including the name and the description of the package. Notice that the `package.json` is also already configured to run Codegen.",
+      "source_content_hash": "8066d3ccb716d3c4750177e310d2ec0b75d9dc7c9a63a253ab0483b08e0f646e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`package.json` 已經配置了我們提供給 `create-react-native-library` 工具的所有資訊，包括套件的名稱和描述。請注意，`package.json` 也已配置為執行 Codegen。"
+      }
+    },
+    {
+      "segment_id": "64b6f348",
+      "source_content": "```json\n  \"codegenConfig\": {\n    \"name\": \"RN<your module name>Spec\",\n    \"type\": \"all\",\n    \"jsSrcsDir\": \"src\",\n    \"outputDir\": {\n      \"ios\": \"ios/generated\",\n      \"android\": \"android/generated\"\n    },\n    \"android\": {\n      \"javaPackageName\": \"com.<name-of-the-module>\"\n    }\n  },\n```",
+      "source_content_hash": "f6c41e69a040055c20408aa1194a58ac0498e29d4dfa1608b6d8b50ff8e60095",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_64b6f348"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "Finally, the library contains already all the infrastructure to let the library be linked with iOS and Android.",
+      "source_content_hash": "b7898fc2699e67c3c5338e2435a01e9ad64e6713831c881077a1627f1df3bd99",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，函式庫已經包含了所有讓函式庫能與 iOS 和 Android 連結的基礎設施。"
+      }
+    },
+    {
+      "segment_id": "3ef18741",
+      "source_content": "### 2. Copy the Code over from Your App",
+      "source_content_hash": "0fe29035626bfd3efdfbe6832c9327fa86f143334cbca70a97f31577c3348aa1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 從你的應用複製程式碼"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "The rest of the guide assumes that you have a local Turbo Native Module in your app, created following the guidelines shown in the other guides in the website: platform specific Turbo Native Modules, or [cross-platform Turbo Native Modules](./pure-cxx-modules). But it works also for Components and legacy architecture modules and components. You'll have to adapt the files you need to copy and update.",
+      "source_content_hash": "b1db524c51d77239cdd22ce6b43e20e44730d9c7f14bfca00bf07b87feade92c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南的其餘部分假設你在應用中有一個本地 Turbo Native Module，是依照網站上其他指南的指示建立的：平台特定的 Turbo Native Modules，或 [跨平台 Turbo Native Modules](./pure-cxx-modules)。但它也適用於元件和舊架構的模組與元件。你需要根據情況調整需要複製和更新的檔案。"
+      }
+    },
+    {
+      "segment_id": "2c0bc267",
+      "source_content": "<!-- TODO: add links for Turbo Native Modules -->",
+      "source_content_hash": "bea3b521e61d1a7490d83141abf7f9c63f25d408a87a693532edf4499b1282c3",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2c0bc267"
+      }
+    },
+    {
+      "segment_id": "aa0bd54f",
+      "source_content": "1. **[Not required for legacy architecture modules and components]** Move the code you have in the `specs` folder in your app into the `src` folder created by the `create-react-native-library` folder.\n2. Update the `index.ts` file to properly export the Turbo Native Module spec so that it is accessible from the library. For example:",
+      "source_content_hash": "9128e2a4825934bd78c7159b93fbd8c60a0dd0c91db70e3411ad18aeb4ef4144",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. **[傳統架構模組與元件無需此步驟]** 將應用中 `specs` 資料夾的程式碼移至 `create-react-native-library` 工具生成的 `src` 資料夾。\n2. 更新 `index.ts` 檔案以正確匯出 Turbo Native Module 規格，使其可從程式庫存取。例如："
+      }
+    },
+    {
+      "segment_id": "8a9e710a",
+      "source_content": "```ts\nimport NativeSampleModule from './NativeSampleModule';\n\nexport default NativeSampleModule;\n```",
+      "source_content_hash": "4decb497da5ed34c70b64f120d5e3ca81a7ecb24f8adb002b73bd08374417b98",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a9e710a"
+      }
+    },
+    {
+      "segment_id": "c142abbb",
+      "source_content": "3. Copy the native module over:\n\n   - Replace the code in the `android/src/main/java/com/<name-of-the-module>` with the code you wrote in the app for your native module, if any.\n   - Replace the code in the `ios` folder with the code you wrote in your app for your native module, if any.\n   - Replace the code in the `cpp` folder with the code you wrote in your app for your native module, if any.\n\n4. **[Not required for legacy architecture modules and components]** Update all the references from the previous spec name to the new spec name, the one that is defined in the `codegenConfig` field of the library's `package.json`. For example, if in the app `package.json` you set `AppSpecs` as `codegenConfig.name` and in the library it is called `RNNativeSampleModuleSpec`, you have to replace every occurrence of `AppSpecs` with `RNNativeSampleModuleSpec`.",
+      "source_content_hash": "c49c37cf19b5a178191911d8d15187a9201fe258c3ca524816d7bca11794a3f5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "3. 複製原生模組程式碼：\n\n   - 若有 Android 原生模組程式碼，將其替換至 `android/src/main/java/com/<模組名稱>` 路徑下。\n   - 若有 iOS 原生模組程式碼，將其替換至 `ios` 資料夾。\n   - 若有 C++ 原生模組程式碼，將其替換至 `cpp` 資料夾。\n\n4. **[傳統架構模組與元件無需此步驟]** 更新所有舊規格名稱參照至新名稱（即程式庫 `package.json` 中 `codegenConfig` 欄位定義的名稱）。例如：若應用中設定為 `AppSpecs` 而程式庫中命名為 `RNNativeSampleModuleSpec`，需將所有 `AppSpecs` 替換為 `RNNativeSampleModuleSpec`。"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "That's it! You have moved all the required code out of your app and in a separate library.",
+      "source_content_hash": "c4ea9554786ce81797fec6df216bc5841ac4fe95fde0cb4a606bbe5274d5987d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成！您已將所有必要程式碼從應用移至獨立程式庫。"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "## Testing your Library",
+      "source_content_hash": "038eb6e8884b90960eac48b4054f7fead5a10c955e221166ebb0ac9d6e9232f6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 測試您的程式庫"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "The `create-react-native-library` comes with a useful example application that is already configured to work properly with the library. This is a great way to test it!",
+      "source_content_hash": "9133d46427d518f2ec7a7649a2c94a8597649fd3330a584e50b7a6fabb19d790",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`create-react-native-library` 工具內建已預先配置好的範例應用程式，這是測試程式庫的絕佳方式！"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "If you look at the `example` folder, you can find the same structure of a new React Native application that you can create from the [`react-native-community/template`](https://github.com/react-native-community/template).",
+      "source_content_hash": "3bb2c5f0d3755a43baa55d5629c599d7b33eda497122b563e43bbda174e2e125",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查看 `example` 資料夾，其結構與透過 [`react-native-community/template`](https://github.com/react-native-community/template) 建立的新 React Native 應用相同。"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "To test your library:",
+      "source_content_hash": "33f01dfaf043c55391b346ae9132bf1dc4d34ca0a2a7d6a0ac2ec82a181ad3a2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測試步驟："
+      }
+    },
+    {
+      "segment_id": "2d15468d",
+      "source_content": "1. Navigate to the `example` folder.\n2. Run `yarn install` to install all the dependencies.\n3. For iOS only, you need to install CocoaPods: `cd ios && pod install`.\n4. Build and run Android with `yarn android` from the `example` folder.\n5. Build and run iOS with `yarn ios` from the `example` folder.",
+      "source_content_hash": "b8e22f7cfc2db8ee130e0d7ea0ff4a83d9d85a231704ea046d552567a2c3fce4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 進入 `example` 資料夾。\n2. 執行 `yarn install` 安裝所有依賴項。\n3. 僅限 iOS：需安裝 CocoaPods，執行 `cd ios && pod install`。\n4. 在 `example` 資料夾下執行 `yarn android` 建置並運行 Android。\n5. 在 `example` 資料夾下執行 `yarn ios` 建置並運行 iOS。"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "## Use your library as a Local Module",
+      "source_content_hash": "7d15cb98b1b9f0758eaf3b2ebb733ab39503c0463e2e5ecbf972c4ba520f9f4f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將程式庫作為本地模組使用"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "There are some scenario where you might want to reuse your library as a local module for your applications, without publishing it to NPM.",
+      "source_content_hash": "e74464f629bbfed9ea4363c2b4f156e46cf374a926afe43ac79a1e0235d02693",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "某些情境下，您可能希望直接將程式庫作為本地模組重用，無需發佈至 NPM。"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "In this case, you might end up in a scenario where you have your library sitting as a sibling of your apps.",
+      "source_content_hash": "9f1ed43725f4c7118096f80574cd5fbc0e77593c51120c2e7551218e740d3a2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時您的專案結構可能會呈現應用程式與程式庫並列存放。"
+      }
+    },
+    {
+      "segment_id": "99070903",
+      "source_content": "```shell\nDevelopment\n├── App\n└── Library\n```",
+      "source_content_hash": "7be5992e4d00f0f84095e45cfc002a99e1c005b7faed21c61f50256a825649e9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_99070903"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "You can use the library created with `create-react-native-library` also in this case.",
+      "source_content_hash": "d3cfdf1ffffdba7165d728758207db1c5afbe35bbfc2fd9ae8fdfd0d05188dd6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "透過 `create-react-native-library` 建立的程式庫仍可在此情境使用。"
+      }
+    },
+    {
+      "segment_id": "10e4f9ca",
+      "source_content": "1. add you library to your app by navigating into the `App` folder and running `yarn add ../Library`.\n2. For iOS only, navigate in the `App/ios` folder and run `bundle exec pod install` to install your dependencies.\n3. Update the `App.tsx` code to import the code in your library. For example:",
+      "source_content_hash": "995af5f76f7c00cdb8669ef525eff5b454fb48a3b61275627412ba35ac1fc6a7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在應用程式根目錄執行 `yarn add ../Library` 新增程式庫。\n2. 僅限 iOS：進入 `App/ios` 資料夾執行 `bundle exec pod install` 安裝依賴項。\n3. 更新 `App.tsx` 以導入程式庫程式碼。例如："
+      }
+    },
+    {
+      "segment_id": "e2c67c87",
+      "source_content": "```tsx\nimport NativeSampleModule from '@site/versioned_docs/version-0.80/Library/src/index';\n```",
+      "source_content_hash": "3fb28b6c9609d0a497d2f652d65d5c9f1f268061bf2279ca967d47913b180772",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e2c67c87"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "If you run your app right now, Metro would not find the JS files that it needs to serve to the app. That's because metro will be running starting from the `App` folder and it would not have access to the JS files located in the `Library` folder. To fix this, let's update the `metro.config.js` file as it follows",
+      "source_content_hash": "85ed61af341375ab9d8d1862e413d7178832ef956dd0cabbdcb0a6653f388ec6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若立即運行應用，Metro 將無法找到需提供給應用的 JS 檔案。這是因為 Metro 從 `App` 資料夾啟動時，無法存取位於 `Library` 資料夾的 JS 檔案。請按以下方式更新 `metro.config.js` 檔案："
+      }
+    },
+    {
+      "segment_id": "b474abd5",
+      "source_content": "```diff\nconst {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');\n\n/**\n * Metro configuration\n * https://reactnative.dev/docs/metro\n *\n * @type {import('metro-config').MetroConfig}\n */\n+ const path = require('path');\n\n- const config = {}\n+ const config = {\n+  // Make Metro able to resolve required external dependencies\n+  watchFolders: [\n+    path.resolve(__dirname, '../Library'),\n+  ],\n+  resolver: {\n+    extraNodeModules: {\n+      'react-native': path.resolve(__dirname, 'node_modules/react-native'),\n+    },\n+  },\n+};\n\nmodule.exports = mergeConfig(getDefaultConfig(__dirname), config);\n```",
+      "source_content_hash": "984e7bf74ff31403ef6a7511bae77119a065744b157fb58e22e5dc6b8e8adf23",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b474abd5"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "The `watchFolders` configs tells Metro to watch for files and changes in some additional paths, in this case to the `../Library` path, which contains the `src/index` file you need.\nThe `resolver`property is required to feed to the library the React Native code used by the app. The library might refer and import code from React Native: without the additional resolver, the imports in the library will fail.",
+      "source_content_hash": "88d5c874e044034897093715832ba3ca3f14fbba6191656eb8e2108ff12b1d42",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`watchFolders` 配置指示 Metro 監控指定路徑（此處為包含 `src/index` 檔案的 `../Library`）的檔案變更。\n`resolver` 屬性則確保程式庫能正確引用應用使用的 React Native 程式碼。若無此配置，程式庫中的 React Native 導入會失敗。"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "At this point, you can build and run your app as usual:",
+      "source_content_hash": "d8c8c3022e92e1ef427a2ebe2db8d508262dd7596184321e1773d3990ce54bcd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成後，即可如常建置並運行應用："
+      }
+    },
+    {
+      "segment_id": "93fcd90c",
+      "source_content": "- Build and run Android with `yarn android` from the `example` folder.\n- Build and run iOS with `yarn ios` from the `example` folder.",
+      "source_content_hash": "194fa77758e1db604db709f8b4ba11f707b86a473af57ab1e1c7abd4ad9e5ad1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在 `example` 資料夾中執行 `yarn android` 來建置並運行 Android 應用。\n- 在 `example` 資料夾中執行 `yarn ios` 來建置並運行 iOS 應用。"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "## Publish the Library on NPM",
+      "source_content_hash": "4beb479b6d9ed3a436dcdcc8dab57d7be228e263bc41c4ebef82be4ad995efb1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 將函式庫發佈至 NPM"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "The setup to publish everything on NPM is already in place, thanks to `create-react-native-library`.",
+      "source_content_hash": "d8a23e8869b5a07b6508213cec00d302dcdca4cfc3bbc5465c54a2689a3842e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`create-react-native-library` 已預設配置好發佈至 NPM 所需的設定。"
+      }
+    },
+    {
+      "segment_id": "093c95e5",
+      "source_content": "1. Install the dependencies in your module `yarn install`.\n2. Build the library running `yarn prepare`.\n3. Release it with `yarn release`.",
+      "source_content_hash": "c3828f791811879b4fb8163b275c58d775a6e2bf45fd244326ed53031ac81c81",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在模組中安裝相依套件：執行 `yarn install`。\n2. 建置函式庫：執行 `yarn prepare`。\n3. 發佈函式庫：執行 `yarn release`。"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "After a while, you'll find your library on NPM. To verify that, run:",
+      "source_content_hash": "4e6ec2686839fc8f568eee9aaddd6c2020aea5f02ccb4b223f26dcaa6b1d2a16",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "稍候片刻，您的函式庫就會出現在 NPM 上。若要驗證，請執行："
+      }
+    },
+    {
+      "segment_id": "31b98214",
+      "source_content": "```bash\nnpm view <package.name>\n```",
+      "source_content_hash": "cb37d7e5c5e8cf216346b4d11548c323aa6b6313bda7d70152f018e36b468326",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_31b98214"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "where `package.name` is the `name` you set up in the `package.json` file during the initialization of the library.",
+      "source_content_hash": "c7bdc50024c4d475b917a2d680e51fff26629086df027b0c444593fb293f2ad1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "其中 `package.name` 是您在初始化函式庫時於 `package.json` 檔案中設定的名稱。"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "Now, you can install the library in your application by running:",
+      "source_content_hash": "d382c80e091c387428535f7f3fdb80783bbf938eb4f878543c5e0d5a1c75ce4c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在，您可以透過執行以下指令將函式庫安裝至應用程式中："
+      }
+    },
+    {
+      "segment_id": "44ecd2e3",
+      "source_content": "```bash\nyarn add <package.name>\n```",
+      "source_content_hash": "29db01479595cc74f1bfc590580af23af495f292b06558495be98d5a68521be6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_44ecd2e3"
+      }
+    },
+    {
+      "segment_id": "34f28dd8",
+      "source_content": ":::note\nFor iOS only, whenever you install a new module with some native code, you have to reinstall CocoaPods, by running `bundle exec pod install` (recommended) or `pod install` if you are not using Ruby's Bundler (not recommended).\n:::",
+      "source_content_hash": "d7fa91489115854acc7df897dd5b6d2e7de7445d991d06728809229160c35f54",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n僅限 iOS：每當安裝含有原生程式碼的新模組時，必須重新安裝 CocoaPods，建議執行 `bundle exec pod install`（若未使用 Ruby 的 Bundler 則執行 `pod install`，但不建議）。\n:::"
+      }
+    },
+    {
+      "segment_id": "295367fa",
+      "source_content": "Congratulations! You published your first React Native library.",
+      "source_content_hash": "e127b654bfa08b7fe0a41bebbbf19ba2342428e9c358ea668d6fb6e869ccf298",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "恭喜！您已成功發佈第一個 React Native 函式庫。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/the-new-architecture/create-module-library.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.059004+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "bfe8980b9e75c0e21d9468beb78fa2adee1b1de155f2f5f7fa8f7d4759223e91"
+  }
+}

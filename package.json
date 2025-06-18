@@ -1,0 +1,34 @@
+{
+  "name": "react-native-website-monorepo",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "website",
+    "plugins/*",
+    "scripts/*",
+    "sync-api-docs"
+  ],
+  "scripts": {
+    "update-lock": "yarn dedupe",
+    "docusaurus": "yarn --cwd website docusaurus",
+    "start": "yarn --cwd website start",
+    "build": "yarn --cwd website build",
+    "build:fast": "yarn --cwd website build:fast",
+    "serve": "yarn --cwd website serve",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-mdx": "^3.2.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-yml": "^1.17.0",
+    "husky": "^9.1.7",
+    "netlify-plugin-cache": "^1.0.3",
+    "prettier": "^3.5.3",
+    "pretty-quick": "^4.1.1"
+  },
+  "packageManager": "yarn@4.7.0"
+}

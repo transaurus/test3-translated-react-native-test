@@ -1,0 +1,582 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.74/native-components-android.md",
+  "source_file_content_hash": "16b05122da285c7676198ead3035709c20b7afaa6c33570441be7ffa6ee2aee9",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: native-components-android\ntitle: Android Native UI Components\n---",
+      "source_content_hash": "aad7b08e8d81095d4678f7a51c4b6df3ba56d7b11c2f1135dac25687f35091f4",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';\nimport NativeDeprecated from './the-new-architecture/\\_markdown_native_deprecation.mdx'",
+      "source_content_hash": "8c06bd024d69589a5b677c81e9e9ccc283ab2bcf4228fb61fb44d40c11600022",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "efb379d7",
+      "source_content": "<NativeDeprecated />",
+      "source_content_hash": "1680a0727658899157f198b9f9f0a950c884554cdfaa045c2229262db270638c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_efb379d7"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "There are tons of native UI widgets out there ready to be used in the latest apps - some of them are part of the platform, others are available as third-party libraries, and still more might be in use in your very own portfolio. React Native has several of the most critical platform components already wrapped, like `ScrollView` and `TextInput`, but not all of them, and certainly not ones you might have written yourself for a previous app. Fortunately, we can wrap up these existing components for seamless integration with your React Native application.",
+      "source_content_hash": "538787c38c889e971a3c753c17ab28c853efa9e6168d25e25d6efe0cabcbdab4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現有大量原生UI元件可供最新應用程式使用——其中部分屬於平台內建元件，其他則來自第三方函式庫，甚至可能是您過往專案中自行開發的元件。React Native 已封裝了如 `ScrollView` 和 `TextInput` 等關鍵平台元件，但並未涵蓋所有元件，特別是您可能為先前應用程式自行開發的元件。幸運的是，我們可以封裝這些現有元件，使其與您的 React Native 應用無縫整合。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Like the native module guide, this too is a more advanced guide that assumes you are somewhat familiar with Android SDK programming. This guide will show you how to build a native UI component, walking you through the implementation of a subset of the existing `ImageView` component available in the core React Native library.",
+      "source_content_hash": "da98d272da4c4038433d2856046220f87fba1a6568bbb1499a002a78d245b1ed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與原生模組指南類似，這同樣屬於進階指南，假設您已具備 Android SDK 開發基礎。本指南將透過實作核心 React Native 函式庫中現有 `ImageView` 元件的部分功能，示範如何建構原生UI元件。"
+      }
+    },
+    {
+      "segment_id": "ac44a45c",
+      "source_content": ":::info\nYou can also setup local library containing native component with one command. Read the guide to [Local libraries setup](local-library-setup) for more details.\n:::",
+      "source_content_hash": "0379447e4c42907444ec65f9ce327f5fdc9a237e3777f7f10c48c584ce980f4f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n您亦可透過單一指令設定包含原生元件的本地函式庫。詳情請參閱[本地函式庫設定指南](local-library-setup)。\n:::"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "## ImageView example",
+      "source_content_hash": "5539a5a8e32635b8e4ba9f17d05ea84d8b652d20a1c635ec0514f81ee6618c32",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## ImageView 範例"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "For this example we are going to walk through the implementation requirements to allow the use of ImageViews in JavaScript.",
+      "source_content_hash": "223213ae3824ff3f8f0bc66dd8ac58253e6516e8ba813887148d7aa0b0e5eb45",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本範例將逐步說明如何實現在 JavaScript 中使用 ImageView 的必要條件。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Native views are created and manipulated by extending `ViewManager` or more commonly `SimpleViewManager` . A `SimpleViewManager` is convenient in this case because it applies common properties such as background color, opacity, and Flexbox layout.",
+      "source_content_hash": "f19f4986d0300deaff22561e2bc1e58bdd3d64c7ac7ef33939bd2cc4391616d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生視圖透過繼承 `ViewManager` 或更常用的 `SimpleViewManager` 來建立與操作。此案例中使用 `SimpleViewManager` 較為便利，因其已實作背景色、透明度及 Flexbox 佈局等通用屬性。"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "These subclasses are essentially singletons - only one instance of each is created by the bridge. They send native views to the `NativeViewHierarchyManager`, which delegates back to them to set and update the properties of the views as necessary. The `ViewManagers` are also typically the delegates for the views, sending events back to JavaScript via the bridge.",
+      "source_content_hash": "dc25069029dfcc6cfa045ce7c89dff4d20f5960631f356062e1722292ec0361b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些子類本質上是單例模式——橋接器僅會建立每個子類的一個實例。它們將原生視圖傳送至 `NativeViewHierarchyManager`，該管理器會反過來委派它們按需設定與更新視圖屬性。`ViewManagers` 通常也作為視圖的代理，透過橋接器將事件回傳至 JavaScript。"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "To send a view:",
+      "source_content_hash": "bb2308908fd1e3f5d3525336d3d56d983557df7263d7b506bf9011f3573902e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "發送視圖的步驟："
+      }
+    },
+    {
+      "segment_id": "77bf3ec9",
+      "source_content": "1. Create the ViewManager subclass.\n2. Implement the `createViewInstance` method\n3. Expose view property setters using `@ReactProp` (or `@ReactPropGroup`) annotation\n4. Register the manager in `createViewManagers` of the applications package.\n5. Implement the JavaScript module",
+      "source_content_hash": "5baa71634f84ce868067299a5184ca26144bc6f5c72c9e7a743962f0af1e8b0c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 建立 ViewManager 子類\n2. 實作 `createViewInstance` 方法\n3. 使用 `@ReactProp`（或 `@ReactPropGroup`）註解公開視圖屬性設置器\n4. 在應用程式套件的 `createViewManagers` 中註冊管理器\n5. 實作 JavaScript 模組"
+      }
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "### 1. Create the `ViewManager` subclass",
+      "source_content_hash": "c4ad2c4defb2b30172ebb8b2caf31163d5419a16b1d2c19947b4f976ff9a9212",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 建立 `ViewManager` 子類"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "In this example we create view manager class `ReactImageManager` that extends `SimpleViewManager` of type `ReactImageView`. `ReactImageView` is the type of object managed by the manager, this will be the custom native view. Name returned by `getName` is used to reference the native view type from JavaScript.",
+      "source_content_hash": "bd1f30ff721fc087a7fe17f2703cfc24a5d85e054895a212c14f5edb4f6e24ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本範例中，我們建立繼承 `SimpleViewManager<ReactImageView>` 的視圖管理器類別 `ReactImageManager`。`ReactImageView` 是管理器所處理的物件類型，這將作為自訂原生視圖。`getName` 返回的名稱用於從 JavaScript 引用原生視圖類型。"
+      }
+    },
+    {
+      "segment_id": "100eac36",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass ReactImageManager(\n    private val callerContext: ReactApplicationContext\n) : SimpleViewManager<ReactImageView>() {\n\n  override fun getName() = REACT_CLASS\n\n  companion object {\n    const val REACT_CLASS = \"RCTImageView\"\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\npublic class ReactImageManager extends SimpleViewManager<ReactImageView> {\n\n  public static final String REACT_CLASS = \"RCTImageView\";\n  ReactApplicationContext mCallerContext;\n\n  public ReactImageManager(ReactApplicationContext reactContext) {\n    mCallerContext = reactContext;\n  }\n\n  @Override\n  public String getName() {\n    return REACT_CLASS;\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "4a9dab88edbbff77012e7b5ceec79b4e7f18630ec205f2141a8e7603315930e2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_100eac36"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "### 2. Implement method `createViewInstance`",
+      "source_content_hash": "32c2e2cf41453c363edad01d02402ed798337b52f31d2e930b5ae532bb679cb0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 實作 `createViewInstance` 方法"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "Views are created in the `createViewInstance` method, the view should initialize itself in its default state, any properties will be set via a follow up call to `updateView.`",
+      "source_content_hash": "1367468306b00c7aece00b562111c899be70b7fbf2c280f82e652e619977cfe7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "視圖在 `createViewInstance` 方法中建立，視圖應以預設狀態初始化自身，任何屬性將透過後續呼叫 `updateView` 進行設定。"
+      }
+    },
+    {
+      "segment_id": "41b1e179",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\n  override fun createViewInstance(context: ThemedReactContext) =\n      ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, callerContext)\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\n  @Override\n  public ReactImageView createViewInstance(ThemedReactContext context) {\n    return new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);\n  }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "a9363eb30f606d94cf9ba94480ff1e4f5c95b9854f3150ee977591872b15bade",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41b1e179"
+      }
+    },
+    {
+      "segment_id": "94145a94",
+      "source_content": "### 3. Expose view property setters using `@ReactProp` (or `@ReactPropGroup`) annotation",
+      "source_content_hash": "3dd9e86fcb1be83ba944a3690b757f6d4e0d0f0dee3c65b28e7fb7f06e9d78de",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 使用 `@ReactProp`（或 `@ReactPropGroup`）註解公開視圖屬性設置器"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "Properties that are to be reflected in JavaScript needs to be exposed as setter method annotated with `@ReactProp` (or `@ReactPropGroup`). Setter method should take view to be updated (of the current view type) as a first argument and property value as a second argument. Setter should be public and not return a value (i.e. return type should be `void` in Java or `Unit` in Kotlin). Property type sent to JS is determined automatically based on the type of value argument of the setter. The following type of values are currently supported (in Java): `boolean`, `int`, `float`, `double`, `String`, `Boolean`, `Integer`, `ReadableArray`, `ReadableMap`. The corresponding types in Kotlin are `Boolean`, `Int`, `Float`, `Double`, `String`, `ReadableArray`, `ReadableMap`.",
+      "source_content_hash": "5ed29f899087ac97031145026cb97d3c875f273aa22605f80964744ff9b515dd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需在 JavaScript 中反映的屬性必須透過使用 `@ReactProp`（或 `@ReactPropGroup`）註解的設置器方法公開。設置器方法的第一個參數應為待更新的視圖（當前視圖類型），第二個參數為屬性值。設置器應為公開方法且不返回值（即 Java 中的返回類型應為 `void`，Kotlin 中為 `Unit`）。傳送至 JS 的屬性類型會根據設置器值參數的類型自動判定。目前支援以下值類型（Java中）：`boolean`、`int`、`float`、`double`、`String`、`Boolean`、`Integer`、`ReadableArray`、`ReadableMap`。Kotlin 中對應類型為 `Boolean`、`Int`、`Float`、`Double`、`String`、`ReadableArray`、`ReadableMap`。"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Annotation `@ReactProp` has one obligatory argument `name` of type `String`. Name assigned to the `@ReactProp` annotation linked to the setter method is used to reference the property on JS side.",
+      "source_content_hash": "d71478b8436cc281289ac4ec2a0a203fd2c2d76416fdb3e939551daf24a74abd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "註解 `@ReactProp` 有一個必要參數 `name`（類型為 `String`）。分配給設置器方法的 `@ReactProp` 註解名稱用於在 JS 端引用該屬性。"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "Except from `name`, `@ReactProp` annotation may take following optional arguments: `defaultBoolean`, `defaultInt`, `defaultFloat`. Those arguments should be of the corresponding type (accordingly `boolean`, `int`, `float` in Java and `Boolean`, `Int`, `Float` in Kotlin) and the value provided will be passed to the setter method in case when the property that the setter is referencing has been removed from the component. Note that \"default\" values are only provided for primitive types, in case when setter is of some complex type, `null` will be provided as a default value in case when corresponding property gets removed.",
+      "source_content_hash": "9c836000ad5e9b8a0b7c52d3cca9dc63c74f349430714dcd8fe93edaf218a58f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了`name`之外，`@ReactProp`註解還可以接受以下可選參數：`defaultBoolean`、`defaultInt`、`defaultFloat`。這些參數應為對應的類型（在Java中分別為`boolean`、`int`、`float`，在Kotlin中為`Boolean`、`Int`、`Float`），當setter方法引用的屬性從組件中移除時，提供的值將傳遞給setter方法。請注意，\"default\"值僅適用於基本類型，若setter為複雜類型，當對應屬性被移除時，將提供`null`作為默認值。"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Setter declaration requirements for methods annotated with `@ReactPropGroup` are different than for `@ReactProp`, please refer to the `@ReactPropGroup` annotation class docs for more information about it. **IMPORTANT!** in ReactJS updating the property value will result in setter method call. Note that one of the ways we can update component is by removing properties that have been set before. In that case setter method will be called as well to notify view manager that property has changed. In that case \"default\" value will be provided (for primitive types \"default\" value can be specified using `defaultBoolean`, `defaultFloat`, etc. arguments of `@ReactProp` annotation, for complex types setter will be called with value set to `null`).",
+      "source_content_hash": "c55069eb1c95c7867607e01eb47ed1e9318bbf8ba4f3eba4c3dcb63c770be244",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用`@ReactPropGroup`註解的方法在setter聲明要求上與`@ReactProp`不同，請參考`@ReactPropGroup`註解類別的文檔以獲取更多資訊。**重要提示！**在ReactJS中更新屬性值會觸發setter方法調用。請注意，更新組件的方式之一是移除先前設置的屬性。在這種情況下，setter方法同樣會被調用以通知視圖管理器屬性已變更。此時將提供\"default\"值（對於基本類型，可使用`@ReactProp`註解的`defaultBoolean`、`defaultFloat`等參數指定\"default\"值；對於複雜類型，setter將以`null`值被調用）。"
+      }
+    },
+    {
+      "segment_id": "65095059",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\n  @ReactProp(name = \"src\")\n  fun setSrc(view: ReactImageView, sources: ReadableArray?) {\n    view.setSource(sources)\n  }\n\n  @ReactProp(name = \"borderRadius\", defaultFloat = 0f)\n  override fun setBorderRadius(view: ReactImageView, borderRadius: Float) {\n    view.setBorderRadius(borderRadius)\n  }\n\n  @ReactProp(name = ViewProps.RESIZE_MODE)\n  fun setResizeMode(view: ReactImageView, resizeMode: String?) {\n    view.setScaleType(ImageResizeMode.toScaleType(resizeMode))\n  }\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\n  @ReactProp(name = \"src\")\n  public void setSrc(ReactImageView view, @Nullable ReadableArray sources) {\n    view.setSource(sources);\n  }\n\n  @ReactProp(name = \"borderRadius\", defaultFloat = 0f)\n  public void setBorderRadius(ReactImageView view, float borderRadius) {\n    view.setBorderRadius(borderRadius);\n  }\n\n  @ReactProp(name = ViewProps.RESIZE_MODE)\n  public void setResizeMode(ReactImageView view, @Nullable String resizeMode) {\n    view.setScaleType(ImageResizeMode.toScaleType(resizeMode));\n  }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "d63d89b3d26e1e875b8c4b272b5ae612ee55d17f8eec85784140f45d03c179ab",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65095059"
+      }
+    },
+    {
+      "segment_id": "2f2d5f01",
+      "source_content": "### 4. Register the `ViewManager`",
+      "source_content_hash": "cb665c74e7d161f140a17a47a3ff801fab8de72dede21dd8c6730154083e5b5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 4. 註冊`ViewManager`"
+      }
+    },
+    {
+      "segment_id": "44285072",
+      "source_content": "The final step is to register the ViewManager to the application, this happens in a similar way to [Native Modules](native-modules-android.md), via the applications package member function `createViewManagers`.",
+      "source_content_hash": "3c1e6d5abcdc8467c8d544026015555672c7a4a6625f929c25e6c7bd72021148",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是將ViewManager註冊到應用程序中，這與[Native Modules](native-modules-android.md)的方式類似，通過應用程序包成員函數`createViewManagers`完成。"
+      }
+    },
+    {
+      "segment_id": "a6c20a74",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\n  override fun createViewManagers(\n      reactContext: ReactApplicationContext\n  ) = listOf(ReactImageManager(reactContext))\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\n  @Override\n  public List<ViewManager> createViewManagers(\n                            ReactApplicationContext reactContext) {\n    return Arrays.<ViewManager>asList(\n      new ReactImageManager(reactContext)\n    );\n  }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "2208ce6e6aff916a9ef9b92014f91441bed716a1d7ab1e1d324b9519dc9d07d5",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a6c20a74"
+      }
+    },
+    {
+      "segment_id": "61282bab",
+      "source_content": "### 5. Implement the JavaScript module",
+      "source_content_hash": "079cc12b5e35f6143ecaa7fb710f563588742af058f97e3387649a317daf018b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 5. 實作JavaScript模組"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "The very final step is to create the JavaScript module that defines the interface layer between Java/Kotlin and JavaScript for the users of your new view. It is recommended for you to document the component interface in this module (e.g. using TypeScript, Flow, or plain old comments).",
+      "source_content_hash": "a90f793cb6d776c34122f7d0da6a7952add41a7d1c7633f5007514e764cc8e32",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是創建JavaScript模組，該模組定義了Java/Kotlin與JavaScript之間的接口層，供新視圖的使用者使用。建議在此模組中記錄組件接口（例如使用TypeScript、Flow或普通註釋）。"
+      }
+    },
+    {
+      "segment_id": "bea1601a",
+      "source_content": "```tsx title=\"ImageView.tsx\"\nimport {requireNativeComponent} from 'react-native';\n\n/**\n * Composes `View`.\n *\n * - src: Array<{url: string}>\n * - borderRadius: number\n * - resizeMode: 'cover' | 'contain' | 'stretch'\n */\nmodule.exports = requireNativeComponent('RCTImageView');\n```",
+      "source_content_hash": "d83ed626ad97a339c3bbbffd7ef6a4067b265c1b087975aa2b1befe172b8134e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bea1601a"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "The `requireNativeComponent` function takes the name of the native view. Note that if your component needs to do anything more sophisticated (e.g. custom event handling), you should wrap the native component in another React component. This is illustrated in the `MyCustomView` example below.",
+      "source_content_hash": "bdd56a3bca9207e7781d58ab80044589d8849b7a94767525008e34b885c1c9eb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`requireNativeComponent`函數接受原生視圖的名稱。請注意，如果您的組件需要更複雜的功能（例如自定義事件處理），則應將原生組件包裝在另一個React組件中。這在下面的`MyCustomView`示例中有所說明。"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "## Events",
+      "source_content_hash": "f4776ba3d0fd53ce403170cc2d8cca7a2863d1d0adf8a34232db931e60e91830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 事件"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "So now we know how to expose native view components that we can control freely from JS, but how do we deal with events from the user, like pinch-zooms or panning? When a native event occurs the native code should issue an event to the JavaScript representation of the View, and the two views are linked with the value returned from the `getId()` method.",
+      "source_content_hash": "754f64c9bf6f9638b6493ede4784c7d18e69ae3d25f8ff316eda97d13d264b44",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們知道如何暴露可以從JS自由控制的原生視圖組件，但如何處理來自用戶的事件，例如縮放或平移？當原生事件發生時，原生代碼應向視圖的JavaScript表示發出事件，兩個視圖通過`getId()`方法返回的值進行鏈接。"
+      }
+    },
+    {
+      "segment_id": "87307808",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass MyCustomView(context: Context) : View(context) {\n  ...\n  fun onReceiveNativeEvent() {\n    val event = Arguments.createMap().apply {\n      putString(\"message\", \"MyMessage\")\n    }\n    val reactContext = context as ReactContext\n    reactContext\n        .getJSModule(RCTEventEmitter::class.java)\n        .receiveEvent(id, \"topChange\", event)\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\nclass MyCustomView extends View {\n   ...\n   public void onReceiveNativeEvent() {\n      WritableMap event = Arguments.createMap();\n      event.putString(\"message\", \"MyMessage\");\n      ReactContext reactContext = (ReactContext)getContext();\n      reactContext\n          .getJSModule(RCTEventEmitter.class)\n          .receiveEvent(getId(), \"topChange\", event);\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ee2f4251e2e5e68a7989be68e1e8bae73378a46d8b3a7a6c4779efcccc966189",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_87307808"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "To map the `topChange` event name to the `onChange` callback prop in JavaScript, register it by overriding the `getExportedCustomBubblingEventTypeConstants` method in your `ViewManager`:",
+      "source_content_hash": "8ffb232cd35a2ed09d87ecc559366a4d5c607baf932661583a8e368d78984d15",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要將`topChange`事件名稱映射到JavaScript中的`onChange`回調屬性，請通過在`ViewManager`中覆蓋`getExportedCustomBubblingEventTypeConstants`方法來註冊它："
+      }
+    },
+    {
+      "segment_id": "d3dda283",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass ReactImageManager : SimpleViewManager<MyCustomView>() {\n  ...\n  override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {\n    return mapOf(\n      \"topChange\" to mapOf(\n        \"phasedRegistrationNames\" to mapOf(\n          \"bubbled\" to \"onChange\"\n        )\n      )\n    )\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java\npublic class ReactImageManager extends SimpleViewManager<MyCustomView> {\n    ...\n    public Map getExportedCustomBubblingEventTypeConstants() {\n        return MapBuilder.builder().put(\n            \"topChange\",\n            MapBuilder.of(\n                \"phasedRegistrationNames\",\n                MapBuilder.of(\"bubbled\", \"onChange\")\n            )\n        ).build();\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "89d70c5cf3ba955ca1d590bc51600be7bab2a902a281f9cd7471904738aeb113",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d3dda283"
+      }
+    },
+    {
+      "segment_id": "e3bf03eb",
+      "source_content": "This callback is invoked with the raw event, which we typically process in the wrapper component to make a simpler API:",
+      "source_content_hash": "f32ac400684d209cb3bfcc4575fdfa7cec87496180f534c963bc7f13c15081dd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此回調以原始事件調用，我們通常在包裝組件中處理以創建更簡單的API："
+      }
+    },
+    {
+      "segment_id": "eb13dcb2",
+      "source_content": "```tsx title=\"MyCustomView.tsx\"\nclass MyCustomView extends React.Component {\n  constructor(props) {\n    super(props);\n    this._onChange = this._onChange.bind(this);\n  }\n  _onChange(event) {\n    if (!this.props.onChangeMessage) {\n      return;\n    }\n    this.props.onChangeMessage(event.nativeEvent.message);\n  }\n  render() {\n    return <RCTMyCustomView {...this.props} onChange={this._onChange} />;\n  }\n}\nMyCustomView.propTypes = {\n  /**\n   * Callback that is called continuously when the user is dragging the map.\n   */\n  onChangeMessage: PropTypes.func,\n  ...\n};\n\nconst RCTMyCustomView = requireNativeComponent(`RCTMyCustomView`);\n```",
+      "source_content_hash": "97de22846ee51111a9ff92afdf616118d18a5b50ef1f76c684de77e497f2d535",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eb13dcb2"
+      }
+    },
+    {
+      "segment_id": "e0e9d747",
+      "source_content": "## Integration with an Android Fragment example",
+      "source_content_hash": "69fffca3c61d8b358f9dcdeb22ac0854dce3bfac8167262f7545057a7468063e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 與Android Fragment的整合示例"
+      }
+    },
+    {
+      "segment_id": "2e76bd58",
+      "source_content": "In order to integrate existing Native UI elements to your React Native app, you might need to use Android Fragments to give you a more granular control over your native component than returning a `View` from your `ViewManager`. You will need this if you want to add custom logic that is tied to your view with the help of [lifecycle methods](https://developer.android.com/guide/fragments/lifecycle), such as `onViewCreated`, `onPause`, `onResume`. The following steps will show you how to do it:",
+      "source_content_hash": "6eec88e1065ea1301e7feac8c131c438b9f4884aa1ae8d3ba0ea56417bd3f757",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了將現有的原生UI元素整合到您的React Native應用中，您可能需要使用Android Fragments來對原生組件進行更精細的控制，而不僅僅是從`ViewManager`返回一個`View`。如果您希望通過[生命週期方法](https://developer.android.com/guide/fragments/lifecycle)（如`onViewCreated`、`onPause`、`onResume`）添加與視圖相關的自定義邏輯，則需要此功能。以下步驟將展示如何實現："
+      }
+    },
+    {
+      "segment_id": "c06a14cd",
+      "source_content": "### 1. Create an example custom view",
+      "source_content_hash": "0963798dc761d961f19a33094a976232b4a1aca7f3ef79cdeb0fc33187fd8a3e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 創建示例自定義視圖"
+      }
+    },
+    {
+      "segment_id": "b8954ec9",
+      "source_content": "First, let's create a `CustomView` class which extends `FrameLayout` (the content of this view can be any view that you'd like to render)",
+      "source_content_hash": "038245f36f6a70a23c1bb1b529e6116cb813e66abd09ec18fbb3672614a69ea8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先，我們創建一個`CustomView`類，該類擴展`FrameLayout`（此視圖的內容可以是您希望渲染的任何視圖）"
+      }
+    },
+    {
+      "segment_id": "1cc17c9f",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"CustomView.kt\"\n// replace with your package\npackage com.mypackage\n\nimport android.content.Context\nimport android.graphics.Color\nimport android.widget.FrameLayout\nimport android.widget.TextView\n\nclass CustomView(context: Context) : FrameLayout(context) {\n  init {\n    // set padding and background color\n    setPadding(16,16,16,16)\n    setBackgroundColor(Color.parseColor(\"#5FD3F3\"))\n\n    // add default text view\n    addView(TextView(context).apply {\n      text = \"Welcome to Android Fragments with React Native.\"\n    })\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java title=\"CustomView.java\"\n// replace with your package\npackage com.mypackage;\n\nimport android.content.Context;\nimport android.graphics.Color;\nimport android.widget.FrameLayout;\nimport android.widget.ImageView;\nimport android.widget.TextView;\n\nimport androidx.annotation.NonNull;\n\npublic class CustomView extends FrameLayout {\n  public CustomView(@NonNull Context context) {\n    super(context);\n    // set padding and background color\n    this.setPadding(16,16,16,16);\n    this.setBackgroundColor(Color.parseColor(\"#5FD3F3\"));\n\n    // add default text view\n    TextView text = new TextView(context);\n    text.setText(\"Welcome to Android Fragments with React Native.\");\n    this.addView(text);\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "55797611272da4d5cfb1fa24534a6b5a8bd353c24dd8f1bde18495222366da4b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1cc17c9f"
+      }
+    },
+    {
+      "segment_id": "357f5c2e",
+      "source_content": "### 2. Create a `Fragment`",
+      "source_content_hash": "6309224c2d73f1b9467b6474198cff44c7e344f7e5ae534e406f1da8ef610b07",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 創建`Fragment`"
+      }
+    },
+    {
+      "segment_id": "7595a833",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"MyFragment.kt\"\n// replace with your package\npackage com.mypackage\n\nimport android.os.Bundle\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport androidx.fragment.app.Fragment\n\n// replace with your view's import\nimport com.mypackage.CustomView\n\nclass MyFragment : Fragment() {\n  private lateinit var customView: CustomView\n\n  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {\n    super.onCreateView(inflater, container, savedInstanceState)\n    customView = CustomView(requireNotNull(context))\n    return customView // this CustomView could be any view that you want to render\n  }\n\n  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n    super.onViewCreated(view, savedInstanceState)\n    // do any logic that should happen in an `onCreate` method, e.g:\n    // customView.onCreate(savedInstanceState);\n  }\n\n  override fun onPause() {\n    super.onPause()\n    // do any logic that should happen in an `onPause` method\n    // e.g.: customView.onPause();\n  }\n\n  override fun onResume() {\n    super.onResume()\n    // do any logic that should happen in an `onResume` method\n    // e.g.: customView.onResume();\n  }\n\n  override fun onDestroy() {\n    super.onDestroy()\n    // do any logic that should happen in an `onDestroy` method\n    // e.g.: customView.onDestroy();\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java title=\"MyFragment.java\"\n// replace with your package\npackage com.mypackage;\n\nimport android.os.Bundle;\nimport android.view.LayoutInflater;\nimport android.view.View;\nimport android.view.ViewGroup;\nimport androidx.fragment.app.Fragment;\n\n// replace with your view's import\nimport com.mypackage.CustomView;\n\npublic class MyFragment extends Fragment {\n    CustomView customView;\n\n    @Override\n    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {\n        super.onCreateView(inflater, parent, savedInstanceState);\n        customView = new CustomView(this.getContext());\n        return customView; // this CustomView could be any view that you want to render\n    }\n\n    @Override\n    public void onViewCreated(View view, Bundle savedInstanceState) {\n        super.onViewCreated(view, savedInstanceState);\n        // do any logic that should happen in an `onCreate` method, e.g:\n        // customView.onCreate(savedInstanceState);\n    }\n\n    @Override\n    public void onPause() {\n        super.onPause();\n        // do any logic that should happen in an `onPause` method\n        // e.g.: customView.onPause();\n    }\n\n    @Override\n    public void onResume() {\n        super.onResume();\n       // do any logic that should happen in an `onResume` method\n       // e.g.: customView.onResume();\n    }\n\n    @Override\n    public void onDestroy() {\n        super.onDestroy();\n        // do any logic that should happen in an `onDestroy` method\n        // e.g.: customView.onDestroy();\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "d062c2f012b1861a8bf3f1a3f3e0d01327c9260ceb3bbadfa5ac6b76bc3083e3",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7595a833"
+      }
+    },
+    {
+      "segment_id": "a8b7718a",
+      "source_content": "### 3. Create the `ViewManager` subclass",
+      "source_content_hash": "bec3452977e4a3add5e6e0ed80c4e63a09486168c5e0bd5f447856d4c4b87b57",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 建立 `ViewManager` 子類別"
+      }
+    },
+    {
+      "segment_id": "d087c8ee",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"MyViewManager.kt\"\n// replace with your package\npackage com.mypackage\n\nimport android.view.Choreographer\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.FrameLayout\nimport androidx.fragment.app.FragmentActivity\nimport com.facebook.react.bridge.ReactApplicationContext\nimport com.facebook.react.bridge.ReadableArray\nimport com.facebook.react.uimanager.ThemedReactContext\nimport com.facebook.react.uimanager.ViewGroupManager\nimport com.facebook.react.uimanager.annotations.ReactPropGroup\n\nclass MyViewManager(\n    private val reactContext: ReactApplicationContext\n) : ViewGroupManager<FrameLayout>() {\n  private var propWidth: Int? = null\n  private var propHeight: Int? = null\n\n  override fun getName() = REACT_CLASS\n\n  /**\n   * Return a FrameLayout which will later hold the Fragment\n   */\n  override fun createViewInstance(reactContext: ThemedReactContext) =\n      FrameLayout(reactContext)\n\n  /**\n   * Map the \"create\" command to an integer\n   */\n  override fun getCommandsMap() = mapOf(\"create\" to COMMAND_CREATE)\n\n  /**\n   * Handle \"create\" command (called from JS) and call createFragment method\n   */\n  override fun receiveCommand(\n      root: FrameLayout,\n      commandId: String,\n      args: ReadableArray?\n  ) {\n    super.receiveCommand(root, commandId, args)\n    val reactNativeViewId = requireNotNull(args).getInt(0)\n\n    when (commandId.toInt()) {\n      COMMAND_CREATE -> createFragment(root, reactNativeViewId)\n    }\n  }\n\n  @ReactPropGroup(names = [\"width\", \"height\"], customType = \"Style\")\n  fun setStyle(view: FrameLayout, index: Int, value: Int) {\n    if (index == 0) propWidth = value\n    if (index == 1) propHeight = value\n  }\n\n  /**\n   * Replace your React Native view with a custom fragment\n   */\n  fun createFragment(root: FrameLayout, reactNativeViewId: Int) {\n    val parentView = root.findViewById<ViewGroup>(reactNativeViewId)\n    setupLayout(parentView)\n\n    val myFragment = MyFragment()\n    val activity = reactContext.currentActivity as FragmentActivity\n    activity.supportFragmentManager\n        .beginTransaction()\n        .replace(reactNativeViewId, myFragment, reactNativeViewId.toString())\n        .commit()\n  }\n\n  fun setupLayout(view: View) {\n    Choreographer.getInstance().postFrameCallback(object: Choreographer.FrameCallback {\n      override fun doFrame(frameTimeNanos: Long) {\n        manuallyLayoutChildren(view)\n        view.viewTreeObserver.dispatchOnGlobalLayout()\n        Choreographer.getInstance().postFrameCallback(this)\n      }\n    })\n  }\n\n  /**\n   * Layout all children properly\n   */\n  private fun manuallyLayoutChildren(view: View) {\n    // propWidth and propHeight coming from react-native props\n    val width = requireNotNull(propWidth)\n    val height = requireNotNull(propHeight)\n\n    view.measure(\n        View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),\n        View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))\n\n    view.layout(0, 0, width, height)\n  }\n\n  companion object {\n    private const val REACT_CLASS = \"MyViewManager\"\n    private const val COMMAND_CREATE = 1\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java title=\"MyViewManager.java\"\n// replace with your package\npackage com.mypackage;\n\nimport android.view.Choreographer;\nimport android.view.View;\nimport android.view.ViewGroup;\nimport android.widget.FrameLayout;\n\nimport androidx.annotation.NonNull;\nimport androidx.annotation.Nullable;\nimport androidx.fragment.app.FragmentActivity;\n\nimport com.facebook.react.bridge.ReactApplicationContext;\nimport com.facebook.react.bridge.ReadableArray;\nimport com.facebook.react.common.MapBuilder;\nimport com.facebook.react.uimanager.annotations.ReactProp;\nimport com.facebook.react.uimanager.annotations.ReactPropGroup;\nimport com.facebook.react.uimanager.ViewGroupManager;\nimport com.facebook.react.uimanager.ThemedReactContext;\n\nimport java.util.Map;\n\npublic class MyViewManager extends ViewGroupManager<FrameLayout> {\n\n  public static final String REACT_CLASS = \"MyViewManager\";\n  public final int COMMAND_CREATE = 1;\n  private int propWidth;\n  private int propHeight;\n\n  ReactApplicationContext reactContext;\n\n  public MyViewManager(ReactApplicationContext reactContext) {\n    this.reactContext = reactContext;\n  }\n\n  @Override\n  public String getName() {\n    return REACT_CLASS;\n  }\n\n  /**\n   * Return a FrameLayout which will later hold the Fragment\n   */\n  @Override\n  public FrameLayout createViewInstance(ThemedReactContext reactContext) {\n    return new FrameLayout(reactContext);\n  }\n\n  /**\n   * Map the \"create\" command to an integer\n   */\n  @Nullable\n  @Override\n  public Map<String, Integer> getCommandsMap() {\n    return MapBuilder.of(\"create\", COMMAND_CREATE);\n  }\n\n  /**\n   * Handle \"create\" command (called from JS) and call createFragment method\n   */\n  @Override\n  public void receiveCommand(\n    @NonNull FrameLayout root,\n    String commandId,\n    @Nullable ReadableArray args\n  ) {\n    super.receiveCommand(root, commandId, args);\n    int reactNativeViewId = args.getInt(0);\n    int commandIdInt = Integer.parseInt(commandId);\n\n    switch (commandIdInt) {\n      case COMMAND_CREATE:\n        createFragment(root, reactNativeViewId);\n        break;\n      default: {}\n    }\n  }\n\n  @ReactPropGroup(names = {\"width\", \"height\"}, customType = \"Style\")\n  public void setStyle(FrameLayout view, int index, Integer value) {\n    if (index == 0) {\n      propWidth = value;\n    }\n\n    if (index == 1) {\n      propHeight = value;\n    }\n  }\n\n  /**\n   * Replace your React Native view with a custom fragment\n   */\n  public void createFragment(FrameLayout root, int reactNativeViewId) {\n    ViewGroup parentView = (ViewGroup) root.findViewById(reactNativeViewId);\n    setupLayout(parentView);\n\n    final MyFragment myFragment = new MyFragment();\n    FragmentActivity activity = (FragmentActivity) reactContext.getCurrentActivity();\n    activity.getSupportFragmentManager()\n            .beginTransaction()\n            .replace(reactNativeViewId, myFragment, String.valueOf(reactNativeViewId))\n            .commit();\n  }\n\n  public void setupLayout(View view) {\n    Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {\n      @Override\n      public void doFrame(long frameTimeNanos) {\n        manuallyLayoutChildren(view);\n        view.getViewTreeObserver().dispatchOnGlobalLayout();\n        Choreographer.getInstance().postFrameCallback(this);\n      }\n    });\n  }\n\n  /**\n   * Layout all children properly\n   */\n  public void manuallyLayoutChildren(View view) {\n      // propWidth and propHeight coming from react-native props\n      int width = propWidth;\n      int height = propHeight;\n\n      view.measure(\n              View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),\n              View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));\n\n      view.layout(0, 0, width, height);\n  }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "3a9d1f1cc219757d8ebbefa425470fccae4b3aea343dcf642b2e259ffe690a94",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d087c8ee"
+      }
+    },
+    {
+      "segment_id": "18c0bc86",
+      "source_content": "### 4. Register the `ViewManager`",
+      "source_content_hash": "cb665c74e7d161f140a17a47a3ff801fab8de72dede21dd8c6730154083e5b5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 4. 註冊 `ViewManager`"
+      }
+    },
+    {
+      "segment_id": "9695d31c",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"MyPackage.kt\"\n// replace with your package\npackage com.mypackage\n\nimport com.facebook.react.ReactPackage\nimport com.facebook.react.bridge.ReactApplicationContext\nimport com.facebook.react.uimanager.ViewManager\n\nclass MyPackage : ReactPackage {\n  ...\n  override fun createViewManagers(\n      reactContext: ReactApplicationContext\n  ) = listOf(MyViewManager(reactContext))\n}\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java title=\"MyPackage.java\"\n// replace with your package\npackage com.mypackage;\n\nimport com.facebook.react.ReactPackage;\nimport com.facebook.react.bridge.ReactApplicationContext;\nimport com.facebook.react.uimanager.ViewManager;\n\nimport java.util.Arrays;\nimport java.util.List;\n\npublic class MyPackage implements ReactPackage {\n\n   @Override\n   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {\n       return Arrays.<ViewManager>asList(\n            new MyViewManager(reactContext)\n       );\n   }\n\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "9f7de22a75a22b42a0fd1774fe317d2a1fccddf9b0071f640a7472a016d25947",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9695d31c"
+      }
+    },
+    {
+      "segment_id": "01d62133",
+      "source_content": "### 5. Register the `Package`",
+      "source_content_hash": "6ae73c612e6e160ec389d672163c650c1bbe2bb352d66f067039d87bfde9ea1d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 5. 註冊 `Package`"
+      }
+    },
+    {
+      "segment_id": "8bf75cb8",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"kotlin\">\n\n```kotlin title=\"MainApplication.kt\"\noverride fun getPackages(): List<ReactPackage> =\n    PackageList(this).packages.apply {\n        // Packages that cannot be autolinked yet can be added manually here, for example:\n        // add(MyReactNativePackage())\n        add(MyAppPackage())\n    }\n```\n\n</TabItem>\n<TabItem value=\"java\">\n\n```java title=\"MainApplication.java\"\n@Override\nprotected List<ReactPackage> getPackages() {\n    List<ReactPackage> packages = new PackageList(this).getPackages();\n    // Packages that cannot be autolinked yet can be added manually here, for example:\n    // packages.add(new MyReactNativePackage());\n    packages.add(new MyAppPackage());\n    return packages;\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "6c6d87a582ffa2f44be956337db0dc1f9cbdbd9430584d6f05f17ad8a4250f07",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8bf75cb8"
+      }
+    },
+    {
+      "segment_id": "bd22d2d0",
+      "source_content": "### 6. Implement the JavaScript module",
+      "source_content_hash": "74969692747a927a44b802f5f650def02c88253ee4bd9abab2f9d68ec26bb40b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 6. 實作 JavaScript 模組"
+      }
+    },
+    {
+      "segment_id": "3fbab5e3",
+      "source_content": "I. Start with custom View manager:",
+      "source_content_hash": "f5d864521f41c81a6ab458ba9b482838855feeac6aa0874ca49796aa590f4df8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "I. 首先建立自訂 View 管理器："
+      }
+    },
+    {
+      "segment_id": "608ae36f",
+      "source_content": "```tsx title=\"MyViewManager.tsx\"\nimport {requireNativeComponent} from 'react-native';\n\nexport const MyViewManager =\n  requireNativeComponent('MyViewManager');\n```",
+      "source_content_hash": "ee7b6a593bceddf86082754c29dd22c088573a1b6213cca469c40853d9a262a9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_608ae36f"
+      }
+    },
+    {
+      "segment_id": "177bff0d",
+      "source_content": "II. Then implement custom View calling the `create` method:",
+      "source_content_hash": "8192b426dcd492de1eb4f9a4214f1e7a35364050087d808e56907226a5d5cf18",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "II. 接著實作呼叫 `create` 方法的自訂 View："
+      }
+    },
+    {
+      "segment_id": "9c33147d",
+      "source_content": "```tsx title=\"MyView.tsx\"\nimport React, {useEffect, useRef} from 'react';\nimport {\n  PixelRatio,\n  UIManager,\n  findNodeHandle,\n} from 'react-native';\n\nimport {MyViewManager} from './my-view-manager';\n\nconst createFragment = viewId =>\n  UIManager.dispatchViewManagerCommand(\n    viewId,\n    // we are calling the 'create' command\n    UIManager.MyViewManager.Commands.create.toString(),\n    [viewId],\n  );\n\nexport const MyView = () => {\n  const ref = useRef(null);\n\n  useEffect(() => {\n    const viewId = findNodeHandle(ref.current);\n    createFragment(viewId);\n  }, []);\n\n  return (\n    <MyViewManager\n      style={{\n        // converts dpi to px, provide desired height\n        height: PixelRatio.getPixelSizeForLayoutSize(200),\n        // converts dpi to px, provide desired width\n        width: PixelRatio.getPixelSizeForLayoutSize(200),\n      }}\n      ref={ref}\n    />\n  );\n};\n```",
+      "source_content_hash": "7d781acae01d314963ce52132b926149692ae0d5201e636c69ef9377f0e82b57",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9c33147d"
+      }
+    },
+    {
+      "segment_id": "68aa928a",
+      "source_content": "If you want to expose property setters using `@ReactProp` (or `@ReactPropGroup`) annotation see the [ImageView example](#imageview-example) above.",
+      "source_content_hash": "748a60263e75f286ea352d68d3bd1a782800e58590df6a0cad02ce3f80702f7c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若需透過 `@ReactProp`（或 `@ReactPropGroup`）註解公開屬性設定器，請參閱上方的 [ImageView 範例](#imageview-example)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.74/native-components-android.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.526552+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "16b05122da285c7676198ead3035709c20b7afaa6c33570441be7ffa6ee2aee9"
+  }
+}

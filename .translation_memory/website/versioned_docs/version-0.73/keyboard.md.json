@@ -1,0 +1,352 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.73/keyboard.md",
+  "source_file_content_hash": "734a0821b7bd8786aa810bf2b238e7dfb221b1ac68d76ed529c4c1a17ca32d67",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: keyboard\ntitle: Keyboard\n---",
+      "source_content_hash": "a728555f246a4ab879c7ce0615fa93b8412173cb4cac9ef5c06f0529bbe2277d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "`Keyboard` module to control keyboard events.",
+      "source_content_hash": "42d39eebb9c82bcd69a1b41fc54d650233e97f696cba69da104c0a8385f6528a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Keyboard` 模組用於控制鍵盤事件。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "### Usage",
+      "source_content_hash": "7a5b2d87044217ebeda4e071a80585106bae705217da72a3ec329261002e16ff",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 使用方法"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The Keyboard module allows you to listen for native events and react to them, as well as make changes to the keyboard, like dismissing it.",
+      "source_content_hash": "fb44d1877764c26373fa77b3a045e831d24eb6ce8de691ed09971f0891cc8947",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Keyboard 模組允許您監聽原生事件並作出反應，同時也能對鍵盤進行操作，例如關閉鍵盤。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=Keyboard%20Example&supportedPlatforms=ios,android\nimport React, {useState, useEffect} from 'react';\nimport {Keyboard, Text, TextInput, StyleSheet, View} from 'react-native';\n\nconst Example = () => {\n  const [keyboardStatus, setKeyboardStatus] = useState('');\n\n  useEffect(() => {\n    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {\n      setKeyboardStatus('Keyboard Shown');\n    });\n    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {\n      setKeyboardStatus('Keyboard Hidden');\n    });\n\n    return () => {\n      showSubscription.remove();\n      hideSubscription.remove();\n    };\n  }, []);\n\n  return (\n    <View style={style.container}>\n      <TextInput\n        style={style.input}\n        placeholder=\"Click here…\"\n        onSubmitEditing={Keyboard.dismiss}\n      />\n      <Text style={style.status}>{keyboardStatus}</Text>\n    </View>\n  );\n};\n\nconst style = StyleSheet.create({\n  container: {\n    flex: 1,\n    padding: 36,\n  },\n  input: {\n    padding: 10,\n    borderWidth: 0.5,\n    borderRadius: 4,\n  },\n  status: {\n    padding: 10,\n    textAlign: 'center',\n  },\n});\n\nexport default Example;\n```",
+      "source_content_hash": "b6f84f7f8895126742074b49d10cb199bf61ef8c43fda2e41e96a906702a1d83",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "bcda0ab1",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "bd92edfc",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "ee8401db",
+      "source_content": "### `addListener()`",
+      "source_content_hash": "a50f03e5bde48e915a4c91b4c5babd8389cd47e2a74195fb91a3c391fe1103cd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addListener()`"
+      }
+    },
+    {
+      "segment_id": "4fb3ded8",
+      "source_content": "```tsx\nstatic addListener: (\n  eventType: KeyboardEventName,\n  listener: KeyboardEventListener,\n) => EmitterSubscription;\n```",
+      "source_content_hash": "bc43cabad8e210741f53954fcb62ac0e4efb128092fce01c82b38be6c436cc91",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fb3ded8"
+      }
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "The `addListener` function connects a JavaScript function to an identified native keyboard notification event.",
+      "source_content_hash": "960f0656cd8a354e0392182efa76a1d2007a7e35f65b47160b0d3e2d51e0e02e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`addListener` 函數將 JavaScript 函數連接到指定的原生鍵盤通知事件。"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "This function then returns the reference to the listener.",
+      "source_content_hash": "a6415e2d7e000e6e289248746482003187aff8325ff4a19df3d5f8783f53a8ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該函數會返回監聽器的引用。"
+      }
+    },
+    {
+      "segment_id": "a5c5772a",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "d40dc481",
+      "source_content": "| Name                                                                     | Type     | Description                                                                    |\n| ------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |\n| eventName <div className=\"label basic two-lines required\">Required</div> | string   | The string that identifies the event you're listening for. See the list below. |\n| callback <div className=\"label basic two-lines required\">Required</div>  | function | The function to be called when the event fires                                 |",
+      "source_content_hash": "5bfb25822a81cd4409cd605652bc5b433ba2247027b02654b57c230078b2848c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d40dc481"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "**`eventName`**",
+      "source_content_hash": "57f36129d1f0b8df6705a447e95247e7e9820a318f58aeb6449f2e5bef1a25c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**`eventName`**"
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "This can be any of the following:",
+      "source_content_hash": "6c8828cb0ac25e60680ca17245cf14d32e52b5efe1219b26cc875af6d1b4dc94",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可以是以下任意一種："
+      }
+    },
+    {
+      "segment_id": "023197ab",
+      "source_content": "- `keyboardWillShow`\n- `keyboardDidShow`\n- `keyboardWillHide`\n- `keyboardDidHide`\n- `keyboardWillChangeFrame`\n- `keyboardDidChangeFrame`",
+      "source_content_hash": "e1ae9853c0b9c82df55257f3f300dc79a330092e1e4393c2131b97373d5e4c0e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `keyboardWillShow`\n- `keyboardDidShow`\n- `keyboardWillHide`\n- `keyboardDidHide`\n- `keyboardWillChangeFrame`\n- `keyboardDidChangeFrame`"
+      }
+    },
+    {
+      "segment_id": "d12c7ba8",
+      "source_content": "> Note that only `keyboardDidShow` and `keyboardDidHide` events are available on Android. The events will not be fired when using Android 10 and under if your activity has `android:windowSoftInputMode` set to `adjustNothing`.",
+      "source_content_hash": "3b8fcb1c028e1f1b7db7755341b698f1d860fa0563c28d0bf84b41a4dbd18ac1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：Android 上僅支持 `keyboardDidShow` 和 `keyboardDidHide` 事件。如果您的 activity 將 `android:windowSoftInputMode` 設置為 `adjustNothing`，則在 Android 10 及以下版本中不會觸發這些事件。"
+      }
+    },
+    {
+      "segment_id": "4c30a6aa",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "### `dismiss()`",
+      "source_content_hash": "c0b4c4a3708ba48251dda4a43bbddafafa369fb0d3ea5e3c96536591957eb3c6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `dismiss()`"
+      }
+    },
+    {
+      "segment_id": "de26f08a",
+      "source_content": "```tsx\nstatic dismiss();\n```",
+      "source_content_hash": "6da268ef72ab4d11715c2844132c0a0a0bc2a5931322a1e8937fb7f43e83f0e5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de26f08a"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Dismisses the active keyboard and removes focus.",
+      "source_content_hash": "ef11292b5320642438ac25bf14afbb7b79262b2d72d84df1a078b0b2f0ec3848",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "關閉當前鍵盤並移除焦點。"
+      }
+    },
+    {
+      "segment_id": "42bfcc5d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8172a0a5",
+      "source_content": "### `scheduleLayoutAnimation`",
+      "source_content_hash": "00d194b345e38b8ce3e0730a7d919a15bfcd721904c80c82d413d313cca3b925",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `scheduleLayoutAnimation`"
+      }
+    },
+    {
+      "segment_id": "342e4d80",
+      "source_content": "```tsx\nstatic scheduleLayoutAnimation(event: KeyboardEvent);\n```",
+      "source_content_hash": "b90027276e92283fb5d59919c6db08bd1d9f520939ab8f0afee5c7bbf9dc939c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_342e4d80"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "Useful for syncing TextInput (or other keyboard accessory view) size of position changes with keyboard movements.",
+      "source_content_hash": "ca5c465864e395c1b815f41f47862b8d05a0f90127f038b7fd6f2deb50e239f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於同步 TextInput（或其他鍵盤附屬視圖）的大小或位置變化與鍵盤移動。"
+      }
+    },
+    {
+      "segment_id": "862bb4be",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ed644f52",
+      "source_content": "### `isVisible()`",
+      "source_content_hash": "fa53ac266ae11d7448fa24172ade6047e19d012e3a92fdb366dc0b72a96ce008",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isVisible()`"
+      }
+    },
+    {
+      "segment_id": "4e583d18",
+      "source_content": "```tsx\nstatic isVisible(): boolean;\n```",
+      "source_content_hash": "a2a1fb86f5d639e88d73225357f94f659dd601b34ad42ee846ec0afb64acbfda",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4e583d18"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "Whether the keyboard is last known to be visible.",
+      "source_content_hash": "22ffbc4d8baf2c2345e4b42619dea5a24b863d99c396f0d723c19cc20e67f5ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "鍵盤是否已知為可見狀態。"
+      }
+    },
+    {
+      "segment_id": "cf542fb4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "d53c8ed4",
+      "source_content": "### `metrics()`",
+      "source_content_hash": "ee4827f27e2ef4c29d892d01d443cbb4bd3f9289faa32d1a8d28719a7ad30e30",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `metrics()`"
+      }
+    },
+    {
+      "segment_id": "f2f9d525",
+      "source_content": "```tsx\nstatic metrics(): KeyboardMetrics | undefined;\n```",
+      "source_content_hash": "a5bbe9ef482e39fb2917e3321fcf1e8a40d663f9c26db3f4e7d9ebef0a2681ea",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2f9d525"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "Return the metrics of the soft-keyboard if visible.",
+      "source_content_hash": "cd2f1497282f200e3a600fa37b53074fca9311a705b9c9bb9521cbca185be024",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "返回當前可見的軟鍵盤的度量信息。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.73/keyboard.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.469535+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "734a0821b7bd8786aa810bf2b238e7dfb221b1ac68d76ed529c4c1a17ca32d67"
+  }
+}

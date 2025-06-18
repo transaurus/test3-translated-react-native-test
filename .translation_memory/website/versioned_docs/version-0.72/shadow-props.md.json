@@ -1,0 +1,232 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/shadow-props.md",
+  "source_file_content_hash": "99d6f49250384411b58421cc499d48e5e83738b6b690bdc2dcc13c23d3e6de46",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: shadow-props\ntitle: Shadow Props\n---",
+      "source_content_hash": "1009d46b08984b76d1572a86723ce3dd96d530d9de90fae52ab2a4492931ce4d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios&ext=js&dependencies=@react-native-community/slider\nimport React, {useState} from 'react';\nimport {Text, View, StyleSheet} from 'react-native';\nimport Slider from '@react-native-community/slider';\nconst ShadowPropSlider = ({label, value, ...props}) => {\n  return (\n    <>\n      <Text>\n        {label} ({value.toFixed(2)})\n      </Text>\n      <Slider step={1} value={value} {...props} />\n    </>\n  );\n};\n\nconst App = () => {\n  const [shadowOffsetWidth, setShadowOffsetWidth] = useState(0);\n  const [shadowOffsetHeight, setShadowOffsetHeight] = useState(0);\n  const [shadowRadius, setShadowRadius] = useState(0);\n  const [shadowOpacity, setShadowOpacity] = useState(0.1);\n\n  return (\n    <View style={styles.container}>\n      <View\n        style={[\n          styles.square,\n          {\n            shadowOffset: {\n              width: shadowOffsetWidth,\n              height: -shadowOffsetHeight,\n            },\n            shadowOpacity,\n            shadowRadius,\n          },\n        ]}\n      />\n      <View style={styles.controls}>\n        <ShadowPropSlider\n          label=\"shadowOffset - X\"\n          minimumValue={-50}\n          maximumValue={50}\n          value={shadowOffsetWidth}\n          onValueChange={setShadowOffsetWidth}\n        />\n        <ShadowPropSlider\n          label=\"shadowOffset - Y\"\n          minimumValue={-50}\n          maximumValue={50}\n          value={shadowOffsetHeight}\n          onValueChange={setShadowOffsetHeight}\n        />\n        <ShadowPropSlider\n          label=\"shadowRadius\"\n          minimumValue={0}\n          maximumValue={100}\n          value={shadowRadius}\n          onValueChange={setShadowRadius}\n        />\n        <ShadowPropSlider\n          label=\"shadowOpacity\"\n          minimumValue={0}\n          maximumValue={1}\n          step={0.05}\n          value={shadowOpacity}\n          onValueChange={val => setShadowOpacity(val)}\n        />\n      </View>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'space-around',\n    backgroundColor: '#ecf0f1',\n    padding: 8,\n  },\n  square: {\n    alignSelf: 'center',\n    backgroundColor: 'white',\n    borderRadius: 4,\n    height: 150,\n    shadowColor: 'black',\n    width: 150,\n  },\n  controls: {\n    paddingHorizontal: 12,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios&ext=tsx&dependencies=@react-native-community/slider\nimport React, {useState} from 'react';\nimport {Text, View, StyleSheet} from 'react-native';\nimport Slider from '@react-native-community/slider';\nimport type {SliderProps} from '@react-native-community/slider';\n\ntype ShadowPropSliderProps = SliderProps & {\n  label: string;\n};\n\nconst ShadowPropSlider = ({label, value, ...props}: ShadowPropSliderProps) => {\n  return (\n    <>\n      <Text>\n        {label} ({value?.toFixed(2)})\n      </Text>\n      <Slider step={1} value={value} {...props} />\n    </>\n  );\n};\n\nconst App = () => {\n  const [shadowOffsetWidth, setShadowOffsetWidth] = useState(0);\n  const [shadowOffsetHeight, setShadowOffsetHeight] = useState(0);\n  const [shadowRadius, setShadowRadius] = useState(0);\n  const [shadowOpacity, setShadowOpacity] = useState(0.1);\n\n  return (\n    <View style={styles.container}>\n      <View\n        style={[\n          styles.square,\n          {\n            shadowOffset: {\n              width: shadowOffsetWidth,\n              height: -shadowOffsetHeight,\n            },\n            shadowOpacity,\n            shadowRadius,\n          },\n        ]}\n      />\n      <View style={styles.controls}>\n        <ShadowPropSlider\n          label=\"shadowOffset - X\"\n          minimumValue={-50}\n          maximumValue={50}\n          value={shadowOffsetWidth}\n          onValueChange={setShadowOffsetWidth}\n        />\n        <ShadowPropSlider\n          label=\"shadowOffset - Y\"\n          minimumValue={-50}\n          maximumValue={50}\n          value={shadowOffsetHeight}\n          onValueChange={setShadowOffsetHeight}\n        />\n        <ShadowPropSlider\n          label=\"shadowRadius\"\n          minimumValue={0}\n          maximumValue={100}\n          value={shadowRadius}\n          onValueChange={setShadowRadius}\n        />\n        <ShadowPropSlider\n          label=\"shadowOpacity\"\n          minimumValue={0}\n          maximumValue={1}\n          step={0.05}\n          value={shadowOpacity}\n          onValueChange={val => setShadowOpacity(val)}\n        />\n      </View>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'space-around',\n    backgroundColor: '#ecf0f1',\n    padding: 8,\n  },\n  square: {\n    alignSelf: 'center',\n    backgroundColor: 'white',\n    borderRadius: 4,\n    height: 150,\n    shadowColor: 'black',\n    width: 150,\n  },\n  controls: {\n    paddingHorizontal: 12,\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "bf70df3a14621705494175ac87dcbdf3fa76c574cc2959dc6fda40658ebcafe1",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_37387e33"
+      }
+    },
+    {
+      "segment_id": "203a64ec",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "97496aad",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "ba4aa94e",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "be106497",
+      "source_content": "### `shadowColor`",
+      "source_content_hash": "5401c7cee727aee3efd72cd05e772bb8f643221c4855216ba780350ec8c0632a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `shadowColor`"
+      }
+    },
+    {
+      "segment_id": "c277c3c0",
+      "source_content": "Sets the drop shadow color.",
+      "source_content_hash": "e947da258ea394073670b6c08f01355d7875d5d97e83cd340ad565d3778320a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定陰影顏色。"
+      }
+    },
+    {
+      "segment_id": "5eedf0a1",
+      "source_content": "This property will only work on Android API 28 and above. For similar functionality on lower Android APIs, use the [`elevation` property](view-style-props#elevation-android).",
+      "source_content_hash": "8eb56b9f9d593c1234e02fcf91b204118256f6338c22e0e331efb018fb1ef839",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此屬性僅在 Android API 28 及以上版本有效。若需在較低版本的 Android API 實現類似功能，請使用 [`elevation` 屬性](view-style-props#elevation-android)。"
+      }
+    },
+    {
+      "segment_id": "9e594654",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9e594654"
+      }
+    },
+    {
+      "segment_id": "04dab02c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "8e2354b8",
+      "source_content": "### `shadowOffset` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "fd5764dbbb6d62c45cf30d2ac7aa524b594559429fba57f327d862ef04453b39",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `shadowOffset` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "dbeb30c1",
+      "source_content": "Sets the drop shadow offset.",
+      "source_content_hash": "97e0a76e1a8582141ce5807a00224e45a04ce1fff662996ad763c17c22cf053e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定陰影偏移量。"
+      }
+    },
+    {
+      "segment_id": "793b6449",
+      "source_content": "| Type                                     |\n| ---------------------------------------- |\n| object: `{width: number,height: number}` |",
+      "source_content_hash": "506a87cbb17bff67626330a1405cf360c336a57e8b55f5bfdf3bf67b8b27c463",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_793b6449"
+      }
+    },
+    {
+      "segment_id": "7d0c5ba2",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "7eac7922",
+      "source_content": "### `shadowOpacity` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "09074290c92e936af83a493f845f48a69e695732c2e105eb097477c544659919",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `shadowOpacity` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "8f4e752e",
+      "source_content": "Sets the drop shadow opacity (multiplied by the color's alpha component).",
+      "source_content_hash": "b801a6dfa8dacb0f5fced27f8060999d3704a96609c5c38f414ea620df7e9ce2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定陰影不透明度（會乘以顏色的 alpha 分量）。"
+      }
+    },
+    {
+      "segment_id": "0faad314",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0faad314"
+      }
+    },
+    {
+      "segment_id": "9c66f3e4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "52dd49af",
+      "source_content": "### `shadowRadius` <div class=\"label ios\">iOS</div>",
+      "source_content_hash": "39e14cab9f8dd5b7cad4f7698d0e997845239b036944f81f07d221f8cfd4cc73",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `shadowRadius` <div class=\"label ios\">iOS</div>"
+      }
+    },
+    {
+      "segment_id": "ceb4fd26",
+      "source_content": "Sets the drop shadow blur radius.",
+      "source_content_hash": "1f498412b036a90cfe116e34264d88a706340320774da796983eb6b4c2fd6f42",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設定陰影模糊半徑。"
+      }
+    },
+    {
+      "segment_id": "cd7684b7",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cd7684b7"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/shadow-props.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.409704+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "99d6f49250384411b58421cc499d48e5e83738b6b690bdc2dcc13c23d3e6de46"
+  }
+}

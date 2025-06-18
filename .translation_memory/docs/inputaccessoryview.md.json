@@ -1,0 +1,162 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/inputaccessoryview.md",
+  "source_file_content_hash": "527792dca1efe0a4e26eb7240352d1c49f64bc271d5b206e757cd8d8f26afef4",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: inputaccessoryview\ntitle: InputAccessoryView\n---",
+      "source_content_hash": "f4323126d724a8e6c89f9a2cc1dc2d360f6354e97f23e34edd5aad8baf849002",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "A component which enables customization of the keyboard input accessory view on iOS. The input accessory view is displayed above the keyboard whenever a `TextInput` has focus. This component can be used to create custom toolbars.",
+      "source_content_hash": "d16bc9e515d003e16a81d1e10229b04dd8ead5f40b83ecc85b951c2bfa302602",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "To use this component wrap your custom toolbar with the InputAccessoryView component, and set a `nativeID`. Then, pass that `nativeID` as the `inputAccessoryViewID` of whatever `TextInput` you desire. A basic example:",
+      "source_content_hash": "667292e9f9b35e5e0943e950bbf537cd92a75a10c611d4bf1d10508acaf4cafe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios\nimport React, {useState} from 'react';\nimport {\n  Button,\n  InputAccessoryView,\n  ScrollView,\n  TextInput,\n  StyleSheet,\n} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst inputAccessoryViewID = 'uniqueID';\nconst initialText = '';\n\nconst App = () => {\n  const [text, setText] = useState(initialText);\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <ScrollView keyboardDismissMode=\"interactive\">\n          <TextInput\n            style={styles.textInput}\n            inputAccessoryViewID={inputAccessoryViewID}\n            onChangeText={setText}\n            value={text}\n            placeholder={'Please type here…'}\n          />\n        </ScrollView>\n      </SafeAreaView>\n      <InputAccessoryView nativeID={inputAccessoryViewID}>\n        <Button onPress={() => setText(initialText)} title=\"Clear text\" />\n      </InputAccessoryView>\n    </SafeAreaProvider>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    paddingHorizontal: 20,\n  },\n  textInput: {\n    padding: 16,\n    borderColor: 'black',\n    borderWidth: 1,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "d59b9ef74503e84a31c468d305655e1ab660cdcd607cc84b4bdfbc63cf916ed3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "This component can also be used to create sticky text inputs (text inputs which are anchored to the top of the keyboard). To do this, wrap a `TextInput` with the `InputAccessoryView` component, and don't set a `nativeID`. For an example, look at [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js).",
+      "source_content_hash": "2022324b6f7e0bd98b25f224b93cf91498b50b0fabe389bc9a45767162ca1793",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42c293cc",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a5a4323e",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3ef18741",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "52388877",
+      "source_content": "### `backgroundColor`",
+      "source_content_hash": "025725f2b031ec6f9807ec405c4a8f8691ad8652446c7f936d6c8a5159d12237",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "088cb147",
+      "source_content": "| Type               |\n| ------------------ |\n| [color](colors.md) |",
+      "source_content_hash": "8632e6c1f1b54cc7faa3ecbab5f8e6ef0ebdba99dde80616d750401474098649",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "63e1d83c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "58ed925f",
+      "source_content": "### `nativeID`",
+      "source_content_hash": "157dbabe7da1e6477d223af8aea3d0045181cfaad08511e049648be26c80d1c8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "An ID which is used to associate this `InputAccessoryView` to specified TextInput(s).",
+      "source_content_hash": "9a233eb0c48f88240ee6f553a70051e120d9e088f08c4e2fb9b0bcf5942e6486",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc57a63f",
+      "source_content": "| Type   |\n| ------ |\n| string |",
+      "source_content_hash": "f6fdc4c4e48a0fd4403866c93d58d6fd94287810ec227946601aa88b1cb1eced",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "be625c00",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3a8d2b95",
+      "source_content": "### `style`",
+      "source_content_hash": "13724cc4fc79fe456e2ca97c82efa2ac5ced724471bd3e09daa7d3c8b5f20a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9be2808c",
+      "source_content": "| Type                              |\n| --------------------------------- |\n| [View Style](view-style-props.md) |",
+      "source_content_hash": "f4fb06d2318f9f111d5e287541c887f93cd3442a49effd8d1079893305c5ced4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "# Known issues",
+      "source_content_hash": "8c2b620309aaae36b42a64b7c3cec0a70a954f61c956e785c658864b8057b9d9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b264104e",
+      "source_content": "- [react-native#18997](https://github.com/facebook/react-native/issues/18997): Doesn't support multiline `TextInput`\n- [react-native#20157](https://github.com/facebook/react-native/issues/20157): Can't use with a bottom tab bar",
+      "source_content_hash": "c00ceff3710f7734a259c3327258225ad95c5bff29c95eb7a3bc62d155089588",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/inputaccessoryview.md",
+  "last_updated_timestamp": "2025-06-18T17:57:11.349390+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

@@ -1,0 +1,542 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2016-08-19-right-to-left-support-for-react-native-apps.md",
+  "source_file_content_hash": "9cd9f17e7ffcfe7c008777cbb8917d6100008f9e4cc708e37c59e904af1258c4",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Right-to-Left Layout Support For React Native Apps\nauthor: Mengjue (Mandy) Wang\nauthorTitle: Software Engineer Intern at Facebook\nauthorURL: 'https://github.com/MengjueW'\nauthorImageURL: 'https://avatars0.githubusercontent.com/u/13987140?v=3&s=128'\ntags: [engineering]\n---",
+      "source_content_hash": "68254062c9de748d4890423ef978caf225fbd82e6c14bc5e20cd3e3b97f4cb5d",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "After launching an app to the app stores, internationalization is the next step to further your audience reach. Over 20 countries and numerous people around the world use Right-to-Left (RTL) languages. Thus, making your app support RTL for them is necessary.",
+      "source_content_hash": "fcaefa93c1c57bc2906ffd1c36ba1de22bfcea7ea52ea3448f22525761c07f89",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在將應用程式發布至應用商店後，國際化是擴大受眾範圍的下一步。全球有超過20個國家和無數人口使用從右至左（RTL）的語言。因此，讓您的應用程式支援RTL對這些使用者來說是必要的。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "We're glad to announce that React Native has been improved to support RTL layouts. This is now available in the [react-native](https://github.com/facebook/react-native) master branch today, and will be available in the next RC: [`v0.33.0-rc`](https://github.com/facebook/react-native/releases).",
+      "source_content_hash": "e606f745021c28974135370fa623ea24dd970c097b53511c5435fd6224f718b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們很高興地宣布，React Native已進行改進以支援RTL佈局。這項功能現已在[react-native](https://github.com/facebook/react-native)的主分支中提供，並將在下一個RC版本[`v0.33.0-rc`](https://github.com/facebook/react-native/releases)中推出。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "This involved changing [css-layout](https://github.com/facebook/css-layout), the core layout engine used by RN, and RN core implementation, as well as specific OSS JS components to support RTL.",
+      "source_content_hash": "43f86ba82fc6c4e3267db81c25a5e650846af06d8e170f04755089867f00fd2b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這涉及更改[css-layout](https://github.com/facebook/css-layout)（RN使用的核心佈局引擎）、RN核心實現，以及特定的開源JS元件以支援RTL。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "To battle test the RTL support in production, the latest version of the **Facebook Ads Manager** app (the first cross-platform 100% RN app) is now available in Arabic and Hebrew with RTL layouts for both [iOS](https://itunes.apple.com/app/id964397083) and [Android](https://play.google.com/store/apps/details?id=com.facebook.adsmanager). Here is how it looks like in those RTL languages:",
+      "source_content_hash": "3cf370e0255229bfabc18e10843e29b181586dfe960ebdaf28810daf6d574509",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了在生產環境中測試RTL支援，最新版本的**Facebook廣告管理員**應用（首個跨平台100% RN應用）現已提供阿拉伯語和希伯來語的RTL佈局，適用於[iOS](https://itunes.apple.com/app/id964397083)和[Android](https://play.google.com/store/apps/details?id=com.facebook.adsmanager)。以下是這些RTL語言中的顯示效果："
+      }
+    },
+    {
+      "segment_id": "21c93b79",
+      "source_content": "<>\n<img src=\"/blog/assets/rtl-ama-ios-arabic.png\" width={280} style={{ margin: 10 }} />\n<img src=\"/blog/assets/rtl-ama-android-hebrew.png\" width={280} style={{ margin: 10 }} />\n</>",
+      "source_content_hash": "8ccf2f0f5deabf779fa0f31df44c801f71b7c49e9f074a9bed757fcdb8a5f671",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_21c93b79"
+      }
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## Overview Changes in RN for RTL support",
+      "source_content_hash": "6d485f21f890370aef743bc5c1d0388eff8cf4ce43aa359f309568673f8b0ed9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## RN中RTL支援的概述變更"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "[css-layout](https://github.com/facebook/css-layout) already has a concept of `start` and `end` for the layout. In the Left-to-Right (LTR) layout, `start` means `left`, and `end` means `right`. But in RTL, `start` means `right`, and `end` means `left`. This means we can make RN depend on the `start` and `end` calculation to compute the correct layout, which includes `position`, `padding`, and `margin`.",
+      "source_content_hash": "798a4c29c4f425b44ea81a11863ae3ddd023121170278ba785241e5fbd193bc6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[css-layout](https://github.com/facebook/css-layout)已經有`start`和`end`的佈局概念。在從左至右（LTR）佈局中，`start`表示`left`，`end`表示`right`。但在RTL中，`start`表示`right`，`end`表示`left`。這意味著我們可以讓RN依賴`start`和`end`的計算來得出正確的佈局，包括`position`、`padding`和`margin`。"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "In addition, [css-layout](https://github.com/facebook/css-layout) already makes each component's direction inherits from its parent. This means, we simply need to set the direction of the root component to RTL, and the entire app will flip.",
+      "source_content_hash": "67a4fef050282753da381fa8984d1f083c1e7a56945b329178960ec8af0e181e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，[css-layout](https://github.com/facebook/css-layout)已經讓每個元件的方向繼承自其父元件。這意味著，我們只需將根元件的方向設置為RTL，整個應用程式就會翻轉。"
+      }
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "The diagram below describes the changes at high level:",
+      "source_content_hash": "a218d08ccd9f7816bc5c0fc6e6270df229a009eaa4d154084f8dfa652d5a2fef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "下圖從高層次描述了這些變更："
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "![](/blog/assets/rtl-rn-core-updates.png)",
+      "source_content_hash": "22df9d140728ea5fd5ab48d7fb3774b30c01364fd061c2bff31d3b68514d94b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/rtl-rn-core-updates.png)"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "These include:",
+      "source_content_hash": "48681dfb0d6949219c1f8e771cb4dc1d512ec5474007dd893d7c1b91744b96f7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些包括："
+      }
+    },
+    {
+      "segment_id": "fc8eadc3",
+      "source_content": "- [css-layout RTL support for absolute positioning](https://github.com/facebook/css-layout/commit/46c842c71a1232c3c78c4215275d104a389a9a0f)\n- mapping `left` and `right` to `start` and `end` in RN core implementation for shadow nodes\n- and exposing a [bridged utility module](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js) to help control the RTL layout",
+      "source_content_hash": "8f962d4439eea5bfc5fa63d452a176dad7013a447b80cb29054cf6bdf8e47f8a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [css-layout對絕對定位的RTL支援](https://github.com/facebook/css-layout/commit/46c842c71a1232c3c78c4215275d104a389a9a0f)\n- 在RN核心實現中將`left`和`right`映射到`start`和`end`以用於陰影節點\n- 並公開一個[橋接實用模組](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js)來幫助控制RTL佈局"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "With this update, when you allow RTL layout for your app:",
+      "source_content_hash": "0bec552c95c77da2f1feec17c9f701aae6ecfdda504db2a46b03d182ba727d9b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "通過此更新，當您允許應用程式使用RTL佈局時："
+      }
+    },
+    {
+      "segment_id": "8a01ee7b",
+      "source_content": "- every component layout will flip horizontally\n- some gestures and animations will automatically have RTL layout, if you are using RTL-ready OSS components\n- minimal additional effort may be needed to make your app fully RTL-ready",
+      "source_content_hash": "6ef22a94859c5180101f29efc8cbeb63f43d116d652cded46617763f69f56aa9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 每個元件的佈局將水平翻轉\n- 如果您使用支援RTL的開源元件，某些手勢和動畫將自動具有RTL佈局\n- 可能需要最少額外努力來讓您的應用程式完全支援RTL"
+      }
+    },
+    {
+      "segment_id": "35a77014",
+      "source_content": "## Making an App RTL-ready",
+      "source_content_hash": "f0ee4c99c04d752d9d12c92d01b76a2faf1f1d10d8f5005cb4b5a0ae922b522d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 讓應用程式支援RTL"
+      }
+    },
+    {
+      "segment_id": "b93ddfac",
+      "source_content": "1. To support RTL, you should first add the RTL language bundles to your app.\n\n   - See the general guides from [iOS](https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/LocalizingYourApp/LocalizingYourApp.html#//apple_ref/doc/uid/10000171i-CH5-SW1) and [Android](https://developer.android.com/training/basics/supporting-devices/languages.html).\n\n2. Allow RTL layout for your app by calling the `allowRTL()` function at the beginning of native code. We provided this utility to only apply to an RTL layout when your app is ready. Here is an example:\n\n   iOS:\n\n   ```objc\n   // in AppDelegate.m\n     [[RCTI18nUtil sharedInstance] allowRTL:YES];\n   ```\n\n   Android:\n\n   ```java\n   // in MainActivity.java\n     I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();\n     sharedI18nUtilInstance.allowRTL(context, true);\n   ```\n\n3. For Android, you need add `android:supportsRtl=\"true\"` to the [`<application>`](https://developer.android.com/guide/topics/manifest/application-element.html) element in `AndroidManifest.xml` file.",
+      "source_content_hash": "606744cb1debb8b5758dd7253f2cc5f6c52d3e0ab786e4bf7daa04ae662cf309",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 要支援 RTL，首先需將 RTL 語言套件加入你的應用程式。\n\n   - 參閱 [iOS](https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/LocalizingYourApp/LocalizingYourApp.html#//apple_ref/doc/uid/10000171i-CH5-SW1) 和 [Android](https://developer.android.com/training/basics/supporting-devices/languages.html) 的通用指南。\n\n2. 在原生代碼起始處呼叫 `allowRTL()` 函式以啟用 RTL 佈局。此工具函式可確保僅在應用程式準備就緒時套用 RTL 佈局。範例如下：\n\n   iOS:\n\n   ```objc\n   // 在 AppDelegate.m 中\n     [[RCTI18nUtil sharedInstance] allowRTL:YES];\n   ```\n\n   Android:\n\n   ```java\n   // 在 MainActivity.java 中\n     I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();\n     sharedI18nUtilInstance.allowRTL(context, true);\n   ```\n\n3. Android 需在 `AndroidManifest.xml` 檔案的 [`<application>`](https://developer.android.com/guide/topics/manifest/application-element.html) 元素中加入 `android:supportsRtl=\"true\"`。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "Now, when you recompile your app and change the device language to an RTL language (e.g. Arabic or Hebrew), your app layout should change to RTL automatically.",
+      "source_content_hash": "e4b2a8a6a33598342dd1cae74c53a738fef1154a95c6f098a0bcda956ab31856",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "重新編譯應用程式並將裝置語言切換為 RTL 語言（如阿拉伯語或希伯來語）後，應用程式佈局應會自動切換為 RTL 模式。"
+      }
+    },
+    {
+      "segment_id": "047c2395",
+      "source_content": "## Writing RTL-ready Components",
+      "source_content_hash": "eae8ddd7d6e8c15e7c1f52d9464e07ea882e4dae0a140de0077092ad5bb83ce1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 撰寫 RTL 相容元件"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "In general, most components are already RTL-ready, for example:",
+      "source_content_hash": "7bfafb3746281872614d9a37fd1f33d73fb73a38421559f733faf02c56ae6d87",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "大多數元件本身已支援 RTL，例如："
+      }
+    },
+    {
+      "segment_id": "4fe53981",
+      "source_content": "- Left-to-Right Layout",
+      "source_content_hash": "c3c35590199bb361bed1d35168f890117ce58e2417807eb7a2f9a2fabff4f566",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 左至右佈局"
+      }
+    },
+    {
+      "segment_id": "95729a46",
+      "source_content": "<img src=\"/blog/assets/rtl-demo-listitem-ltr.png\" width=\"300\" />",
+      "source_content_hash": "1399aa88656357654e46ecd40ab85c2f626babcfc5b26db11f1967be3f8f8e42",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_95729a46"
+      }
+    },
+    {
+      "segment_id": "ca1573da",
+      "source_content": "- Right-to-Left Layout",
+      "source_content_hash": "70b4985d09ceb5e6bc7751e4f03b0b05c0e48debf7f66aef663828473b4557d8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 右至左佈局"
+      }
+    },
+    {
+      "segment_id": "41b1e179",
+      "source_content": "<img src=\"/blog/assets/rtl-demo-listitem-rtl.png\" width=\"300\" />",
+      "source_content_hash": "bd65a0c06905e70b50f67d6824a83ea7c2033237e59d3647784968da7f81bae5",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41b1e179"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "However, there are several cases to be aware of, for which you will need the [`I18nManager`](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js). In [`I18nManager`](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js), there is a constant `isRTL` to tell if layout of app is RTL or not, so that you can make the necessary changes according to the layout.",
+      "source_content_hash": "06a904d33f39fabc58e45ab0fc447fcaa5a0c530e421f3fb678a4b494383ff01",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但需注意某些特殊情況，此時需使用 [`I18nManager`](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js)。[`I18nManager`](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js) 中的常數 `isRTL` 可判斷當前佈局方向，據此進行必要調整。"
+      }
+    },
+    {
+      "segment_id": "1c598ecd",
+      "source_content": "#### Icons with Directional Meaning",
+      "source_content_hash": "cb7d7283b42c9f7ff3d8c1dd15b031b2b019f168db0ac9af466a81f390825ca2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 具方向性意義的圖示"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "If your component has icons or images, they will be displayed the same way in LTR and RTL layout, because RN will not flip your source image. Therefore, you should flip them according to the layout style.",
+      "source_content_hash": "27b718bb0416e382a5908427a74f4fe2ba8a867a0a9079528423673ecccd99de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若元件包含圖示或圖片，由於 RN 不會自動翻轉原始圖像，這些元素在 LTR 和 RTL 佈局中會以相同方向顯示。因此需根據佈局手動翻轉："
+      }
+    },
+    {
+      "segment_id": "4d429946",
+      "source_content": "- Left-to-Right Layout",
+      "source_content_hash": "c3c35590199bb361bed1d35168f890117ce58e2417807eb7a2f9a2fabff4f566",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 左至右佈局"
+      }
+    },
+    {
+      "segment_id": "9cb0b344",
+      "source_content": "<img src=\"/blog/assets/rtl-demo-icon-ltr.png\" width=\"300\" />",
+      "source_content_hash": "46a919e2acf34d0cfc56608380794ed1271345719b15777fa1c22c9338adcc7c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9cb0b344"
+      }
+    },
+    {
+      "segment_id": "023197ab",
+      "source_content": "- Right-to-Left Layout",
+      "source_content_hash": "70b4985d09ceb5e6bc7751e4f03b0b05c0e48debf7f66aef663828473b4557d8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 右至左佈局"
+      }
+    },
+    {
+      "segment_id": "2fb90ce3",
+      "source_content": "<img src=\"/blog/assets/rtl-demo-icon-rtl.png\" width=\"300\" />",
+      "source_content_hash": "f8149d67a16e0a32484c50cab353c3d0701d0243992d7854101866d5512484de",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2fb90ce3"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "Here are two ways to flip the icon according to the direction:",
+      "source_content_hash": "fb66e4d386db49fc33e76dcbf57e5415077e7cd52ca8fc92fd8f12141f2094bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是兩種根據方向翻轉圖示的方法："
+      }
+    },
+    {
+      "segment_id": "85aeef6c",
+      "source_content": "- Adding a `transform` style to the image component:\n\n  ```jsx\n  <Image\n    source={...}\n    style={{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}\n  />\n  ```\n\n- Or, changing the image source according to the direction:\n\n  ```jsx\n  let imageSource = require('./back.png');\n  if (I18nManager.isRTL) {\n    imageSource = require('./forward.png');\n  }\n  return <Image source={imageSource} />;\n  ```",
+      "source_content_hash": "7f8eb8e9a70c83b42cb0473925749132d4e47e9a11c3c6e4123a75056176b8c6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 對圖片元件添加 `transform` 樣式：\n\n  ```jsx\n  <Image\n    source={...}\n    style={{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}}\n  />\n  ```\n\n- 或根據方向切換圖片來源：\n\n  ```jsx\n  let imageSource = require('./back.png');\n  if (I18nManager.isRTL) {\n    imageSource = require('./forward.png');\n  }\n  return <Image source={imageSource} />;\n  ```"
+      }
+    },
+    {
+      "segment_id": "37fca32e",
+      "source_content": "#### Gestures and Animations",
+      "source_content_hash": "d0dac5d5052a0d12904cb51d453fd1b3c70972a85eabbcc41784152a0080dd0f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 手勢與動畫"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "In Android and iOS development, when you change to RTL layout, the gestures and animations are the opposite of LTR layout. Currently, in RN, gestures and animations are not supported on RN core code level, but on components level. The good news is, some of these components already support RTL today, such as [`SwipeableRow`](https://github.com/facebook/react-native/blob/38a6eec0db85a5204e85a9a92b4dee2db9641671/Libraries/Experimental/SwipeableRow/SwipeableRow.js) and [`NavigationExperimental`](https://github.com/facebook/react-native/tree/master/Libraries/NavigationExperimental). However, other components with gestures will need to support RTL manually.",
+      "source_content_hash": "d900977dd54a9297fe8a3224c91b255e2f1ea36e6d421cff5e3fa242582e550d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Android 和 iOS 開發中，切換至 RTL 佈局時，手勢與動畫方向會與 LTR 佈局相反。目前 RN 核心代碼層級尚未支援手勢與動畫的自動轉換，需在元件層級實作。好消息是部分元件（如 [`SwipeableRow`](https://github.com/facebook/react-native/blob/38a6eec0db85a5204e85a9a92b4dee2db9641671/Libraries/Experimental/SwipeableRow/SwipeableRow.js) 和 [`NavigationExperimental`](https://github.com/facebook/react-native/tree/master/Libraries/NavigationExperimental)）已原生支援 RTL，但其他包含手勢操作的元件仍需手動實作 RTL 相容性。"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "A good example to illustrate gesture RTL support is [`SwipeableRow`](https://github.com/facebook/react-native/blob/38a6eec0db85a5204e85a9a92b4dee2db9641671/Libraries/Experimental/SwipeableRow/SwipeableRow.js).",
+      "source_content_hash": "223000ffa15849c6effb2003a4072ea2a4997473046fa6620d4712007e7af14a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "說明手勢RTL支援的一個好例子是[`SwipeableRow`](https://github.com/facebook/react-native/blob/38a6eec0db85a5204e85a9a92b4dee2db9641671/Libraries/Experimental/SwipeableRow/SwipeableRow.js)。"
+      }
+    },
+    {
+      "segment_id": "c9aa4683",
+      "source_content": "<p align=\"center\">\n  <img src=\"/blog/assets/rtl-demo-swipe-ltr.png\" width={280} style={{margin: 10}} />\n  <img src=\"/blog/assets/rtl-demo-swipe-rtl.png\" width={280} style={{margin: 10}} />\n</p>",
+      "source_content_hash": "c2cd4f2ca60ea7285de43b9b1d17fba2aaee670d56c4004be9d1f27d90805450",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9aa4683"
+      }
+    },
+    {
+      "segment_id": "4dd6a631",
+      "source_content": "##### Gestures Example",
+      "source_content_hash": "30711ea565c28106b322bb68abe82c82077300e45d92c6a01c44c0059b685bed",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 手勢範例"
+      }
+    },
+    {
+      "segment_id": "b474abd5",
+      "source_content": "```js\n// SwipeableRow.js\n_isSwipingExcessivelyRightFromClosedPosition(gestureState: Object): boolean {\n  // ...\n  const gestureStateDx = IS_RTL ? -gestureState.dx : gestureState.dx;\n  return (\n    this._isSwipingRightFromClosed(gestureState) &&\n    gestureStateDx > RIGHT_SWIPE_THRESHOLD\n  );\n},\n```",
+      "source_content_hash": "066695e34fe72f9f5f6ee07c887062b4e91adf0d992635c19565ffe8512e7a68",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b474abd5"
+      }
+    },
+    {
+      "segment_id": "0d5321b7",
+      "source_content": "##### Animation Example",
+      "source_content_hash": "f0c1a36d2256ad930a3d2f105790569011ce18682ed8436564785364ce4143e6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 動畫範例"
+      }
+    },
+    {
+      "segment_id": "4fe849d4",
+      "source_content": "```js\n// SwipeableRow.js\n_animateBounceBack(duration: number): void {\n  // ...\n  const swipeBounceBackDistance = IS_RTL ?\n    -RIGHT_SWIPE_BOUNCE_BACK_DISTANCE :\n    RIGHT_SWIPE_BOUNCE_BACK_DISTANCE;\n  this._animateTo(\n    -swipeBounceBackDistance,\n    duration,\n    this._animateToClosedPositionDuringBounce,\n  );\n},\n```",
+      "source_content_hash": "5c4cf43be710ee4545225bcc5c611c43969d1c576d32bd11970de71a0f17bdea",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fe849d4"
+      }
+    },
+    {
+      "segment_id": "3c6dd548",
+      "source_content": "## Maintaining Your RTL-ready App",
+      "source_content_hash": "cf26889a556f2863ad4b607cfd84c1c98cdc288e164a0f2b1b6e379a9b863c88",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 維護您的RTL相容應用程式"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "Even after the initial RTL-compatible app release, you will likely need to iterate on new features. To improve development efficiency, [`I18nManager`](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js) provides the `forceRTL()` function for faster RTL testing without changing the test device language. You might want to provide a simple switch for this in your app. Here's an example from the RTL example in the RNTester:",
+      "source_content_hash": "714ce251a181bf9f5de5bdf6e0a01f3ae0f8babc96b46cb900987f3d43fd6487",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "即使在初始發布RTL相容應用程式後，您很可能仍需迭代新功能。為了提高開發效率，[`I18nManager`](https://github.com/facebook/react-native/blob/f0fb228ec76ed49e6ed6d786d888e8113b8959a2/Libraries/Utilities/I18nManager.js)提供了`forceRTL()`函數，可在不更改測試設備語言的情況下更快地測試RTL。您可能希望在應用程式中為此提供一個簡單的切換開關。以下是RNTester中RTL範例的一個例子："
+      }
+    },
+    {
+      "segment_id": "5c5fbd5d",
+      "source_content": "<p align=\"center\">\n  <img src=\"/blog/assets/rtl-demo-forcertl.png\" width=\"300\" />\n</p>",
+      "source_content_hash": "563ad58aa30b66e1f9057ffe28f3e2e3d022b710aae6b076bf370b53cda34d9f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5c5fbd5d"
+      }
+    },
+    {
+      "segment_id": "71969be5",
+      "source_content": "```js\n<RNTesterBlock title={'Quickly Test RTL Layout'}>\n  <View style={styles.flexDirectionRow}>\n    <Text style={styles.switchRowTextView}>forceRTL</Text>\n    <View style={styles.switchRowSwitchView}>\n      <Switch\n        onValueChange={this._onDirectionChange}\n        style={styles.rightAlignStyle}\n        value={this.state.isRTL}\n      />\n    </View>\n  </View>\n</RNTesterBlock>;\n\n_onDirectionChange = () => {\n  I18nManager.forceRTL(!this.state.isRTL);\n  this.setState({isRTL: !this.state.isRTL});\n  Alert.alert(\n    'Reload this page',\n    'Please reload this page to change the UI direction! ' +\n      'All examples in this app will be affected. ' +\n      'Check them out to see what they look like in RTL layout.',\n  );\n};\n```",
+      "source_content_hash": "5463db320784543e456b98bc084b65a6f44d30a179e50362225ca70c011433b9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71969be5"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "When working on a new feature, you can easily toggle this button and reload the app to see RTL layout. The benefit is you won't need to change the language setting to test, however some text alignment won't change, as explained in the next section. Therefore, it's always a good idea to test your app in the RTL language before launching.",
+      "source_content_hash": "41175f45ada3661f6523635d840f58397f679161e6d622f3e04fd7b9edc6a72d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在開發新功能時，您可以輕鬆切換此按鈕並重新載入應用程式以查看RTL佈局。這樣的好處是您無需更改語言設置來進行測試，但某些文字對齊方式不會改變，如下一節所述。因此，在發布前始終使用RTL語言測試您的應用程式是一個好習慣。"
+      }
+    },
+    {
+      "segment_id": "dfa23ddf",
+      "source_content": "## Limitations and Future Plan",
+      "source_content_hash": "41a83032a92930d54691c10ffaf2abf65fc4f5234461bbd5261d21dd106588f0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 限制與未來計劃"
+      }
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "The RTL support should cover most of the UX in your app; however, there are some limitations for now:",
+      "source_content_hash": "377123e0b86ef066a5d8913f49348172b13c44f4c9335daee8b3680ee0f58a31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "RTL支援應涵蓋您應用程式中的大多數用戶體驗；然而，目前存在一些限制："
+      }
+    },
+    {
+      "segment_id": "3c3cd438",
+      "source_content": "- Text alignment behaviors differ in Android and iOS\n  - In iOS, the default text alignment depends on the active language bundle, they are consistently on one side. In Android, the default text alignment depends on the language of the text content, i.e. English will be left-aligned and Arabic will be right-aligned.\n  - In theory, this should be made consistent across platform, but some people may prefer one behavior to another when using an app. More user experience research may be needed to find out the best practice for text alignment.",
+      "source_content_hash": "20a66bbf728c35a570b9bf48ff8fb8e71d4895c92b87f4c7765b0b781c4899b4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 文字對齊行為在Android和iOS上有所不同\n  - 在iOS上，預設的文字對齊方式取決於活動的語言包，它們始終位於一側。在Android上，預設的文字對齊方式取決於文字內容的語言，即英文將左對齊，阿拉伯文將右對齊。\n  - 理論上，這應該在平台上保持一致，但有些用戶在使用應用程式時可能更喜歡其中一種行為。可能需要更多的用戶體驗研究來找出文字對齊的最佳實踐。"
+      }
+    },
+    {
+      "segment_id": "c53e56f7",
+      "source_content": "* There is no \"true\" left/right\n\n  As discussed before, we map the `left`/`right` styles from the JS side to `start`/`end`, all `left` in code for RTL layout becomes \"right\" on screen, and `right` in code becomes \"left\" on screen. This is convenient because you don't need to change your product code too much, but it means there is no way to specify \"true left\" or \"true right\" in the code. In the future, allowing a component to control its direction regardless of the language may be necessary.\n\n* Make RTL support for gestures and animations more developer friendly\n\n  Currently, there is still some programming effort required to make gestures and animations RTL compatible. In the future, it would be ideal to find a way to make gestures and animations RTL support more developer friendly.",
+      "source_content_hash": "28c6b5e1df27aedb58013d98493f2aea4370674cb45e1789bb352745deac7045",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "* 沒有「真正的」左/右\n\n  如前所述，我們將JS端的`left`/`right`樣式映射到`start`/`end`，所有在RTL佈局中代碼中的`left`在螢幕上變為「右」，而代碼中的`right`在螢幕上變為「左」。這很方便，因為您無需大幅更改產品代碼，但這意味著無法在代碼中指定「真正的左」或「真正的右」。未來可能需要允許組件控制其方向，而不受語言影響。\n\n* 使手勢和動畫的RTL支援對開發者更友好\n\n  目前，要使手勢和動畫RTL相容仍需要一些編程工作。未來，找到一種方法使手勢和動畫的RTL支援對開發者更友好將是理想的。"
+      }
+    },
+    {
+      "segment_id": "97496aad",
+      "source_content": "## Try it Out!",
+      "source_content_hash": "403d357bfa635d7288826256313a235ee9c4f4b53bfe96a78126775dc5bce814",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 試試看！"
+      }
+    },
+    {
+      "segment_id": "af834e0d",
+      "source_content": "Check out the [`RTLExample`](https://github.com/facebook/react-native/blob/master/packages/rn-tester/js/examples/RTL/RTLExample.js) in the `RNTester` to understand more about RTL support, and let us know how it works for you!",
+      "source_content_hash": "02ff44be6baec1bc472d235effd0203f06088cbc86e43f7a63a222c25178e593",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "查看`RNTester`中的[`RTLExample`](https://github.com/facebook/react-native/blob/master/packages/rn-tester/js/examples/RTL/RTLExample.js)以了解更多關於RTL支援的資訊，並告訴我們它的效果如何！"
+      }
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "Finally, thank you for reading! We hope that the RTL support for React Native helps you grow your apps for international audience!",
+      "source_content_hash": "f7510dbc1da39498d84eda533eab58864bc0c6d385615811fa2f33b191a69260",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，感謝您的閱讀！我們希望React Native的RTL支援能幫助您為國際用戶擴展您的應用程式！"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2016-08-19-right-to-left-support-for-react-native-apps.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.210798+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "9cd9f17e7ffcfe7c008777cbb8917d6100008f9e4cc708e37c59e904af1258c4"
+  }
+}

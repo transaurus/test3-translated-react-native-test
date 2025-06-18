@@ -1,0 +1,314 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.76/build-speed.md",
+  "source_file_content_hash": "c8da06fc0eae8f8af1c55e92aa6e202beb91db39ec1bf105b722072af92bcbe3",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: build-speed\ntitle: Speeding up your Build phase\n---",
+      "source_content_hash": "dc5c6f51270d4ac3762b7aea50405316394ac220442b05f5eeee2052c6ce0f07",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Building your React Native app could be **expensive** and take several minutes of developers time.\nThis can be problematic as your project grows and generally in bigger organizations with multiple React Native developers.",
+      "source_content_hash": "085542a71122c099fabd23e5f42b7efeb68526cdad512b2b9faf3de0c7d308b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "To mitigate this performance hit, this page shares some suggestions on how to **improve your build time**.",
+      "source_content_hash": "d409df97c191d1f24c3310eb511daa4549e6ece16e8ed30e35379cf55134b524",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "## Build only one ABI during development (Android-only)",
+      "source_content_hash": "f2cf18cbdc1be154b7c7a7b8b1226de0f35aaf7dc11cff16e4d44ae36093b24b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "When building your android app locally, by default you build all the 4 [Application Binary Interfaces (ABIs)](https://developer.android.com/ndk/guides/abis) : `armeabi-v7a`, `arm64-v8a`, `x86` & `x86_64`.",
+      "source_content_hash": "e38047a6f89d8202aae9c5fba101a6053938432e10f9e7a1d504091813a8b58c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "However, you probably don't need to build all of them if you're building locally and testing your emulator or on a physical device.",
+      "source_content_hash": "8824f226392a2c387fb5a8c194efc170b5d07960a38ae2b7e15313759509d985",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "This should reduce your **native build time** by a ~75% factor.",
+      "source_content_hash": "a87e4c19ccca0116c86cf1cf27005aa035d641d7bb46045e6ac62b751a513537",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "If you're using the React Native CLI, you can add the `--active-arch-only` flag to the `run-android` command. This flag will make sure the correct ABI is picked up from either the running emulator or the plugged in phone. To confirm that this approach is working fine, you'll see a message like `info Detected architectures arm64-v8a` on console.",
+      "source_content_hash": "c9ef589218a98e990170439d107e66095d7ad92127b60afa84fadced16566e44",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cbbebf8e",
+      "source_content": "```\n$ yarn react-native run-android --active-arch-only\n\n[ ... ]\ninfo Running jetifier to migrate libraries to AndroidX. You can disable it using \"--no-jetifier\" flag.\nJetifier found 1037 file(s) to forward-jetify. Using 32 workers...\ninfo JS server already running.\ninfo Detected architectures arm64-v8a\ninfo Installing the app...\n```",
+      "source_content_hash": "89aa9e583027faa6f091b3d2426edf5777f4911f9459423b3a4421ceea35f358",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "This mechanism relies on the `reactNativeArchitectures` Gradle property.",
+      "source_content_hash": "1bfe1f21a9eed015bf9ac0f81de1c2c7e56d329d2bc733b7a631d30038eff331",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "Therefore, if you're building directly with Gradle from the command line and without the CLI, you can specify the ABI you want to build as follows:",
+      "source_content_hash": "850fadae7cd69709a08ea0a6f4e73170ed8cd362e12b2fc562358149a7cd836a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "076d64d1",
+      "source_content": "```\n$ ./gradlew :app:assembleDebug -PreactNativeArchitectures=x86,x86_64\n```",
+      "source_content_hash": "1bee901d66b4d89a7115531786b4e7303bfd15db75312a87cfe8a4e826be3531",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "This can be useful if you wish to build your Android App on a CI and use a matrix to parallelize the build of the different architectures.",
+      "source_content_hash": "8c457877fcdab66293e1581c30eea9ce7693e5ec9cab56e4d94539cacdfc9510",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "If you wish, you can also override this value locally, using the `gradle.properties` file you have in the [top-level folder](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33) of your project:",
+      "source_content_hash": "2be180c7667d50dacab59fd3306b03b129f503a3313aac5c9958b174b0343184",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "45022e4f",
+      "source_content": "```\n# Use this property to specify which architecture you want to build.\n# You can also override it from the CLI using\n# ./gradlew <task> -PreactNativeArchitectures=x86_64\nreactNativeArchitectures=armeabi-v7a,arm64-v8a,x86,x86_64\n```",
+      "source_content_hash": "ba3105c374a641a2580a2d7474fc6d127de0aef9504498ec6c53b3de6f8fb6f3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Once you build a **release version** of your app, don't forget to remove those flags as you want to build an apk/app bundle that works for all the ABIs and not only for the one you're using in your daily development workflow.",
+      "source_content_hash": "d427ca1dcb10d49496f38f5272b542432dddf8ef910c5ec4330a72472cf3cfed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c6cc90a0",
+      "source_content": "## Use a compiler cache",
+      "source_content_hash": "9516c344edb6b800c2dd55e2974eb63ea157aa5f6b1ee9ed182fe8df17a1c6f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "If you're running frequent native builds (either C++ or Objective-C), you might benefit from using a **compiler cache**.",
+      "source_content_hash": "c4aa7443008470a9075a7086fd626b8484d771e48556465118d21f0aff7b4a2b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "Specifically you can use two type of caches: local compiler caches and distributed compiler caches.",
+      "source_content_hash": "da9089319cd250309d2e36391cd838d7a91f4fa9fce54ac244d6d330c52ec46f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "### Local caches",
+      "source_content_hash": "75a67473c36537ccc703ecce66c36e04849cf8fb09555a0553082f4fc73ac829",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "416beea7",
+      "source_content": ":::info\nThe following instructions will work for **both Android & iOS**.\nIf you're building only Android apps, you should be good to go.\nIf you're building also iOS apps, please follow the instructions in the [XCode Specific Setup](#xcode-specific-setup) section below.\n:::",
+      "source_content_hash": "f85a329ed6d3a5955ec894bab65db6f97430aefa187d880690a4bb7009da608d",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "We suggest to use [**ccache**](https://ccache.dev/) to cache the compilation of your native builds.\nCcache works by wrapping the C++ compilers, storing the compilation results, and skipping the compilation\nif an intermediate compilation result was originally stored.",
+      "source_content_hash": "97494a16a6ce8f42f9c0dd1ada04879ddd9b2e4913fb66a22ff7ab8c60ef4a9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "Ccache is available in the package manager for most operating systems. On macOS, we can install ccache with `brew install ccache`.\nOr you can follow the [official installation instructions](https://github.com/ccache/ccache/blob/master/doc/INSTALL.md) to install from source.",
+      "source_content_hash": "8a78aedb0a353a5b9d34e4b0936a67681d11da988ec237988b732cb74b3672ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "You can then do two clean builds (e.g. on Android you can first run `yarn react-native run-android`, delete the `android/app/build` folder and run the first command once more). You will notice that the second build was way faster than the first one (it should take seconds rather than minutes).\nWhile building, you can verify that `ccache` works correctly and check the cache hits/miss rate `ccache -s`",
+      "source_content_hash": "e5e04d8991fd2fc71b42b79e5fcbd7062af81aea5c8bf10cd311b9e4fc307afe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c808e01e",
+      "source_content": "```\n$ ccache -s\nSummary:\n  Hits:             196 /  3068 (6.39 %)\n    Direct:           0 /  3068 (0.00 %)\n    Preprocessed:   196 /  3068 (6.39 %)\n  Misses:          2872\n    Direct:        3068\n    Preprocessed:  2872\n  Uncacheable:        1\nPrimary storage:\n  Hits:             196 /  6136 (3.19 %)\n  Misses:          5940\n  Cache size (GB): 0.60 / 20.00 (3.00 %)\n```",
+      "source_content_hash": "7948a85d967b4a28eb0d2997e11f5d796952d7ee162625725b30292219eb18ae",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "Note that `ccache` aggregates the stats over all builds. You can use `ccache --zero-stats` to reset them before a build to verify the cache-hit ratio.",
+      "source_content_hash": "52174c345c8ceaeb40c5538bd32198584754d6a916169be93e69f479e08a7077",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "Should you need to wipe your cache, you can do so with `ccache --clear`",
+      "source_content_hash": "8fe3c6b9b611feebe3532d6f309a910af7b0236354ef547cd9145461475cd5e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b10963d7",
+      "source_content": "#### XCode Specific Setup",
+      "source_content_hash": "770cb6ebf07cf1a6ebbaabf05585f7302017423e815a23826edcfbefe659d276",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "To make sure `ccache` works correctly with iOS and XCode, you need to enable React Native support for ccache in `ios/Podfile`.",
+      "source_content_hash": "0b6bbc8beb0e66e062b564b1808c5e85c4b052d928adc22897404f139a241c8a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "Open `ios/Podfile` in your editor and uncomment the `ccache_enabled` line.",
+      "source_content_hash": "bd566ac17f31ce2a1d7f479648e6eff9593bda81d728afd1a61f981fb2c9a1d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cae897fb",
+      "source_content": "```ruby\n  post_install do |installer|\n    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202\n    react_native_post_install(\n      installer,\n      config[:reactNativePath],\n      :mac_catalyst_enabled => false,\n      # TODO: Uncomment the line below\n      :ccache_enabled => true\n    )\n  end\n```",
+      "source_content_hash": "1a22a74f8ad3f5438703bf8ff2be3f6b8c6fa7d69a986fdc9d98be2a9e8d7846",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "#### Using this approach on a CI",
+      "source_content_hash": "686feb6fee874400ab696579f5f96b0b7ff569db86403ca2febc54191d139ee0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "Ccache uses the `/Users/$USER/Library/Caches/ccache` folder on macOS to store the cache.\nTherefore you could save & restore the corresponding folder also on CI to speedup your builds.",
+      "source_content_hash": "0a4c976cba47d92b0d4b43d16294c9c044eaccaf4b6f5af9a1ac4d6b9d0c5004",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "However, there are a couple of things to be aware:",
+      "source_content_hash": "ef1fff3f61847caf7b59bf5b280cb08f53fcf7fbb52edb52ebb1d0776c789896",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9673e622",
+      "source_content": "1. On CI, we recommend to do a full clean build, to avoid poisoned cache problems. If you follow the approach mentioned in the previous paragraph, you should be able to parallelize the native build on 4 different ABIs and you will most likely not need `ccache` on CI.\n\n2. `ccache` relies on timestamps to compute a cache hit. This doesn't work well on CI as files are re-downloaded at every CI run. To overcome this, you'll need to use the `compiler_check content` option which relies instead on [hashing the content of the file](https://ccache.dev/manual/4.3.html).",
+      "source_content_hash": "2a921ebaff43e1de6849872861ddf8429cc67eaff3876774221c467d4f1e15a8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "23b96cc0",
+      "source_content": "### Distributed caches",
+      "source_content_hash": "a71572ffef70e67e357ce1d84dcf5df5c64b0e48049bdd114425e33200542be1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "Similar to local caches, you might want to consider using a distributed cache for your native builds.\nThis could be specifically useful in bigger organizations that are doing frequent native builds.",
+      "source_content_hash": "40a46711cd22c96d154ebd9ab7b7384634499d1e46841e76bcfbb2f77f897667",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "We recommend to use [sccache](https://github.com/mozilla/sccache) to achieve this.\nWe defer to the sccache [distributed compilation quickstart](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md) for instructions on how to setup and use this tool.",
+      "source_content_hash": "934ebdf0af8557af6b234b126abd9fbe09df30b7101acb99c6d759f93357f0fb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.76/build-speed.md",
+  "last_updated_timestamp": "2025-06-18T17:57:14.287260+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

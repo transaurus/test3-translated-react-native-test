@@ -1,0 +1,492 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.78/troubleshooting.md",
+  "source_file_content_hash": "1de251eeb68c608a01d563525298dfb08035d149c77cbb9bed8093a0794f6424",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: troubleshooting\ntitle: Troubleshooting\n---",
+      "source_content_hash": "7d56f239f793b7b83813756408aa15134277d8f186c2c1635d3a09c994b88ff6",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "These are some common issues you may run into while setting up React Native. If you encounter something that is not listed here, try [searching for the issue in GitHub](https://github.com/facebook/react-native/issues/).",
+      "source_content_hash": "54abb3fcfe8b2096f7bb44ea947d39008e3211324632eaf3506d61623f185c62",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是設定 React Native 時可能遇到的一些常見問題。若您遇到的問題未列於此，請嘗試[在 GitHub 上搜尋相關議題](https://github.com/facebook/react-native/issues/)。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "### Port already in use",
+      "source_content_hash": "e0dfd863bb9863025766da3ec2abad9af70cd36f76f7ba1d7fee8481d7397235",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 連接埠已被佔用"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The [Metro bundler][metro] runs on port 8081. If another process is already using that port, you can either terminate that process, or change the port that the bundler uses.",
+      "source_content_hash": "61d3d490b6bed301a9faae3120f110ee505b3854d728305f2462cd5e1e1316f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Metro 打包工具][metro]預設使用 8081 連接埠。若該連接埠已被其他進程佔用，您可以選擇終止該進程，或變更打包工具使用的連接埠。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "#### Terminating a process on port 8081",
+      "source_content_hash": "0a71f7f6664f9114c9c1001efc621699f88f271a789c4a97dd3f3d5e463d5934",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 終止佔用 8081 連接埠的進程"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Run the following command to find the id for the process that is listening on port 8081:",
+      "source_content_hash": "ff99684d14ef0ce2c448f7d0d65f55820ab122c089663c78513262603ef6ea62",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "執行以下指令找出正在監聽 8081 連接埠的進程 ID："
+      }
+    },
+    {
+      "segment_id": "6e5ba8fb",
+      "source_content": "```shell\nsudo lsof -i :8081\n```",
+      "source_content_hash": "7434820c096863553b52b1b1bcf660cd2ed786215485ef561af9aad665573ee5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6e5ba8fb"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "Then run the following to terminate the process:",
+      "source_content_hash": "a3fcf7a8ec735804090ed4172ab501de7156ab42e6e5bb60274d664b73b8b816",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著執行以下指令終止該進程："
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```shell\nkill -9 <PID>\n```",
+      "source_content_hash": "784cab3d19b105d6f8acda730840782bdc73a15c37f5a518fda916fcfa0c3aea",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "On Windows you can find the process using port 8081 using [Resource Monitor](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows) and stop it using Task Manager.",
+      "source_content_hash": "fd86ec209523048202c8b1bb883fa63368acf40258074925c1a3834b3e1933bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 Windows 系統上，您可以使用[資源監視器](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows)找出佔用 8081 連接埠的進程，並透過工作管理員將其關閉。"
+      }
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "#### Using a port other than 8081",
+      "source_content_hash": "364c655ebfd2c70b3835835e55e3c23a7badba52ae5782d74ad17d87f79b75c3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 使用 8081 以外的連接埠"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "You can configure the bundler to use a port other than 8081 by using the `port` parameter, from the root of your project run:",
+      "source_content_hash": "d301875cb772857ed97256bc700b25acb3edfd20fd2e83c1d77634c96c8a6fd5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以透過 `port` 參數設定打包工具使用其他連接埠，在專案根目錄下執行："
+      }
+    },
+    {
+      "segment_id": "d0d484a6",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm start -- --port=8088\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn start --port 8088\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ef8320f4621065eefde762e9f25c1133c5dad9b77d4195cdeb47898d367832f8",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d0d484a6"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "You will also need to update your applications to load the JavaScript bundle from the new port. If running on device from Xcode, you can do this by updating occurrences of `8081` to your chosen port in the `ios/__App_Name__.xcodeproj/project.pbxproj` file.",
+      "source_content_hash": "76e43743d75b50e15436c9d4e025606cc7c02426282a7996609d83f8949a84e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您還需更新應用程式以從新連接埠載入 JavaScript 套件組合。若在 Xcode 中於裝置上執行，可透過修改 `ios/__App_Name__.xcodeproj/project.pbxproj` 檔案中所有 `8081` 為您選擇的連接埠來達成。"
+      }
+    },
+    {
+      "segment_id": "c6cc90a0",
+      "source_content": "### NPM locking error",
+      "source_content_hash": "f3406f3a5958de789532da42a6cb9a9fd31e6c119bdca0c7c12a89922209aa71",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### NPM 鎖定錯誤"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "If you encounter an error such as `npm WARN locking Error: EACCES` while using the React Native CLI, try running the following:",
+      "source_content_hash": "9cbb289250d39a670413ba4ce2fbfbe58c7a16cefc323ab29ae2f6d7ce75f071",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若使用 React Native CLI 時遇到類似 `npm WARN locking Error: EACCES` 的錯誤，請嘗試執行以下指令："
+      }
+    },
+    {
+      "segment_id": "c3955998",
+      "source_content": "```shell\nsudo chown -R $USER ~/.npm\nsudo chown -R $USER /usr/local/lib/node_modules\n```",
+      "source_content_hash": "34c4397558b9505d8e2b973536490f0a16401eb046867b3e8720d0a870cffe79",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c3955998"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "### Missing libraries for React",
+      "source_content_hash": "a8c17287478f2e0b4d0436b78abc47f9b979c9fde896c3abd4a4bf4c63564a6c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 缺少 React 相關函式庫"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "If you added React Native manually to your project, make sure you have included all the relevant dependencies that you are using, like `RCTText.xcodeproj`, `RCTImage.xcodeproj`. Next, the binaries built by these dependencies have to be linked to your app binary. Use the `Linked Frameworks and Binaries` section in the Xcode project settings. More detailed steps are here: [Linking Libraries](linking-libraries-ios.md#content).",
+      "source_content_hash": "39e4bd10c025672bcb160e3bbf6446ea3ab398568c3a000841b5f3639d318894",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您手動將 React Native 加入專案，請確認已包含所有使用到的相關依賴項，例如 `RCTText.xcodeproj`、`RCTImage.xcodeproj`。接著，這些依賴項建置出的二進位檔必須連結至您的應用程式二進位檔。請在 Xcode 專案設定的 `Linked Frameworks and Binaries` 區段中進行設定。更詳細步驟請參閱：[連結函式庫](linking-libraries-ios.md#content)。"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "If you are using CocoaPods, verify that you have added React along with the subspecs to the `Podfile`. For example, if you were using the `<Text />`, `<Image />` and `fetch()` APIs, you would need to add these in your `Podfile`:",
+      "source_content_hash": "0a543d6151102c0c0a64f6eab704d58bd4345837c01ee2a8bd867637dbacb78b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若使用 CocoaPods，請確認已在 `Podfile` 中添加 React 及相關子規格。例如，若您使用 `<Text />`、`<Image />` 和 `fetch()` API，則需在 `Podfile` 中添加："
+      }
+    },
+    {
+      "segment_id": "67b24fc5",
+      "source_content": "```\npod 'React', :path => '../node_modules/react-native', :subspecs => [\n  'RCTText',\n  'RCTImage',\n  'RCTNetwork',\n  'RCTWebSocket',\n]\n```",
+      "source_content_hash": "8845c6f6758f042aba29546454944d79b57f14fedde3fd9ad4b8f1c67e7a960e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_67b24fc5"
+      }
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Next, make sure you have run `pod install` and that a `Pods/` directory has been created in your project with React installed. CocoaPods will instruct you to use the generated `.xcworkspace` file henceforth to be able to use these installed dependencies.",
+      "source_content_hash": "20e25cf3f1a3ed81b2d8921aad676a3d1a37b79d62af98a4b6ca43f940dfca3a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著請確認已執行 `pod install` 且專案中已建立包含 React 的 `Pods/` 目錄。CocoaPods 會指示您後續需使用產生的 `.xcworkspace` 檔案才能使用這些安裝的依賴項。"
+      }
+    },
+    {
+      "segment_id": "58ed925f",
+      "source_content": "#### React Native does not compile when being used as a CocoaPod",
+      "source_content_hash": "03062239172a0d63a41c9dd4b6b6b8f78fb060919f3278753825802fc6af1a0f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 作為 CocoaPod 使用時 React Native 無法編譯"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "There is a CocoaPods plugin called [cocoapods-fix-react-native](https://github.com/orta/cocoapods-fix-react-native) which handles any potential post-fixing of the source code due to differences when using a dependency manager.",
+      "source_content_hash": "662bf38ea2c514b00adc659eef3d25f06329bce23282120eaaa0fe8a57dbee0d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有一個名為 [cocoapods-fix-react-native](https://github.com/orta/cocoapods-fix-react-native) 的 CocoaPods 插件，可處理因使用依賴管理器導致的原始碼差異所需的後續修正。"
+      }
+    },
+    {
+      "segment_id": "66819c78",
+      "source_content": "#### Argument list too long: recursive header expansion failed",
+      "source_content_hash": "25ef945066378efd128dfde880fcc868a7ca6c8877f64a0b6928e85efdc0291d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 參數列表過長：遞迴標頭檔展開失敗"
+      }
+    },
+    {
+      "segment_id": "fbc2db85",
+      "source_content": "In the project's build settings, `User Search Header Paths` and `Header Search Paths` are two configs that specify where Xcode should look for `#import` header files specified in the code. For Pods, CocoaPods uses a default array of specific folders to look in. Verify that this particular config is not overwritten, and that none of the folders configured are too large. If one of the folders is a large folder, Xcode will attempt to recursively search the entire directory and throw above error at some point.",
+      "source_content_hash": "a76af8fe6406976bf88f0ea6d686383eb7286b9986dd7885ddd0ccd9cd5a5f6d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在專案的建置設定中，`User Search Header Paths` 和 `Header Search Paths` 是兩個指定 Xcode 應在何處尋找程式碼中 `#import` 標頭檔的設定。對於 Pods，CocoaPods 使用預設的特定資料夾陣列進行搜尋。請確認此設定未被覆寫，且所設定的資料夾皆未過大。若其中一個資料夾過大，Xcode 將嘗試遞迴搜尋整個目錄，並在某個時間點拋出上述錯誤。"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "To revert the `User Search Header Paths` and `Header Search Paths` build settings to their defaults set by CocoaPods - select the entry in the Build Settings panel, and hit delete. It will remove the custom override and return to the CocoaPod defaults.",
+      "source_content_hash": "0d4d0a46497ba1e400ba61e35dffdf6d9b44ccdae168eda4ecaad282e4654349",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要將「User Search Header Paths」和「Header Search Paths」的建置設定恢復為 CocoaPods 預設值，請在「Build Settings」面板中選取該項目並按下刪除鍵。這將移除自訂覆寫並恢復為 CocoaPod 的預設值。"
+      }
+    },
+    {
+      "segment_id": "3a8d2b95",
+      "source_content": "### No transports available",
+      "source_content_hash": "4974d4f721d4b68b51ca136b3596b0c1d9cb01d4483eaede940dd35223d789cf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 無可用傳輸協定"
+      }
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "React Native implements a polyfill for WebSockets. These [polyfills](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) are initialized as part of the react-native module that you include in your application through `import React from 'react'`. If you load another module that requires WebSockets, such as [Firebase](https://github.com/facebook/react-native/issues/3645), be sure to load/require it after react-native:",
+      "source_content_hash": "c9d193a260ccd0c21e25a5faa48a94dc960a7e1d613e4d1f314838a7ac6211d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 實作了 WebSocket 的 polyfill。這些 [polyfill](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) 會隨著你透過 `import React from 'react'` 引入的 react-native 模組一起初始化。如果你載入了其他需要 WebSocket 的模組（例如 [Firebase](https://github.com/facebook/react-native/issues/3645)），請確保在 react-native 之後載入/引入它："
+      }
+    },
+    {
+      "segment_id": "5782e280",
+      "source_content": "```\nimport React from 'react';\nimport Firebase from 'firebase';\n```",
+      "source_content_hash": "6ec47b253cc8d64e59acbbc8b42fffaac501ffa51e776a41f7d2a55f881b8927",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5782e280"
+      }
+    },
+    {
+      "segment_id": "f8edb6d2",
+      "source_content": "## Shell Command Unresponsive Exception",
+      "source_content_hash": "eefea4ddcd1e032388ba07f83069dfa3115a6ce6018a578c863797533487d9f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Shell 指令無回應例外"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "If you encounter a ShellCommandUnresponsiveException exception such as:",
+      "source_content_hash": "4d6f03f923970ca45e4f99d18b2395efd7cc9e5c318f5666548ab88331fa473c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若遇到類似以下的 ShellCommandUnresponsiveException 例外："
+      }
+    },
+    {
+      "segment_id": "a476a172",
+      "source_content": "```\nExecution failed for task ':app:installDebug'.\n  com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException\n```",
+      "source_content_hash": "dec8c03bae1e4989e62e744cbb7aa3511b4cc4058f2a32e806d68a5b9d8e9bd9",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a476a172"
+      }
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Try [downgrading your Gradle version to 1.2.3](https://github.com/facebook/react-native/issues/2720) in `android/build.gradle`.",
+      "source_content_hash": "dfeb2e5aae25e04bb4201b8d201fe48bc15100df9fe506892f5fe47dcacca35e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請嘗試在 `android/build.gradle` 中 [將 Gradle 版本降級至 1.2.3](https://github.com/facebook/react-native/issues/2720)。"
+      }
+    },
+    {
+      "segment_id": "f947c8e4",
+      "source_content": "## react-native init hangs",
+      "source_content_hash": "d3795bd7691693924f2f299a1ecfc322ba5de277cf5967a47d6c39d47cf7f8e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## react-native init 卡住"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "If you run into issues where running `npx react-native init` hangs in your system, try running it again in verbose mode and referring to [#2797](https://github.com/facebook/react-native/issues/2797) for common causes:",
+      "source_content_hash": "1cbbf257476cef9fabd37206f5a9645bb9abce51a67e2898da4d2ed0cfe642f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果在執行 `npx react-native init` 時卡住，請嘗試以詳細模式重新執行，並參考 [#2797](https://github.com/facebook/react-native/issues/2797) 了解常見原因："
+      }
+    },
+    {
+      "segment_id": "f39e109c",
+      "source_content": "```shell\nnpx react-native init --verbose\n```",
+      "source_content_hash": "26d3e33e093ac29a3d2c2d0b50c22b554da9700993b118e03204af34af4b398a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f39e109c"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "When you're debugging a process or need to know a little more about the error being thrown, you may want to use the verbose option to output more logs and information to nail down your issue.",
+      "source_content_hash": "93b37a26d56d7199c006d4db9ebdc97b9004aa4e04f21fd07e71e0958dfcb6e2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當你在除錯程序或需要更詳細的錯誤資訊時，可以使用詳細選項來輸出更多日誌和資訊，以鎖定問題所在。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "Run the following command in your project's root directory.",
+      "source_content_hash": "492331103449c9ee67a286ce7987d3149bb4dc9cf03a581e5087fa7963c5553d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請在專案的根目錄下執行以下指令。"
+      }
+    },
+    {
+      "segment_id": "b9e4680c",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm run android -- --verbose\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn android --verbose\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "c83fa811d8c7ee33ddd9b4e25840c66582e4330672ba18ce6c8ccae58fb8fc5e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b9e4680c"
+      }
+    },
+    {
+      "segment_id": "13292277",
+      "source_content": "## Unable to start react-native package manager (on Linux)",
+      "source_content_hash": "2842da2512445065d566d6bac768c4501328aae2d485a83a978329e6246b13c4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 無法啟動 react-native 套件管理器（Linux 系統）"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "### Case 1: Error \"code\":\"ENOSPC\",\"errno\":\"ENOSPC\"",
+      "source_content_hash": "fde81e212e33e1bfc1836868dd0f438f2363679a6dfbf441f1c0be8b4cacc926",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 情況 1：錯誤 \"code\":\"ENOSPC\",\"errno\":\"ENOSPC\""
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "Issue caused by the number of directories [inotify](https://github.com/guard/listen/blob/master/README.md#increasing-the-amount-of-inotify-watchers) (used by watchman on Linux) can monitor. To solve it, run this command in your terminal window",
+      "source_content_hash": "f56faada0bcc2df0b9a589f00e5e20ce09b8c400cbc7df819d4896c727891e6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此問題是由於 [inotify](https://github.com/guard/listen/blob/master/README.md#increasing-the-amount-of-inotify-watchers)（Linux 上由 watchman 使用）可監控的目錄數量不足所致。解決方法是終端機中執行以下指令："
+      }
+    },
+    {
+      "segment_id": "01a167f4",
+      "source_content": "```shell\necho fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p\n```",
+      "source_content_hash": "b62ea389213022056b034db9ff0abbf5adfcf91c5a87903ff3a90249ac5d59f0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_01a167f4"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "### Error: spawnSync ./gradlew EACCES",
+      "source_content_hash": "a83e12fa7cd8bc72d7413d4021bfd6013e24572f46f5ab0425327283287913be",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 錯誤：spawnSync ./gradlew EACCES"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "If you run into issue where executing `npm run android` or `yarn android` on macOS throws the above error, try to run `sudo chmod +x android/gradlew` command to make `gradlew` files into executable.",
+      "source_content_hash": "d9958b3491fe7a8bdc471d84125f3f31aa8310fb404f873e9ab59dca4de37a13",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若在 macOS 上執行 `npm run android` 或 `yarn android` 時遇到上述錯誤，請嘗試執行 `sudo chmod +x android/gradlew` 指令，將 `gradlew` 檔案設為可執行。"
+      }
+    },
+    {
+      "segment_id": "ba66d7bf",
+      "source_content": "[metro]: https://metrobundler.dev/",
+      "source_content_hash": "8c5ea598f1617ded21c97316c723153cb950dfa6243784130f5b320382243ad1",
+      "node_type": "definition",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[metro]: https://metrobundler.dev/"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.78/troubleshooting.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.953888+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "1de251eeb68c608a01d563525298dfb08035d149c77cbb9bed8093a0794f6424"
+  }
+}

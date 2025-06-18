@@ -1,0 +1,412 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/toastandroid.md",
+  "source_file_content_hash": "23769e11f1ed7a8a0c4d0e0fd6dcac32eb269fb502ac1c60f7a2a1a6191bf0a2",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: toastandroid\ntitle: ToastAndroid\n---",
+      "source_content_hash": "416d90a2c09d610ecd783462cc1416dee5cc7c5c6fe8b7928f0862d6858fce97",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "React Native's ToastAndroid API exposes the Android platform's ToastAndroid module as a JS module. It provides the method `show(message, duration)` which takes the following parameters:",
+      "source_content_hash": "5a7b7f2fd41987e570331a8a3c72672d12a587492791b6769da6e5e5cf95dee4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 的 ToastAndroid API 將 Android 平台的 ToastAndroid 模組作為 JS 模組公開。它提供方法 `show(message, duration)`，接收以下參數："
+      }
+    },
+    {
+      "segment_id": "df80d009",
+      "source_content": "- _message_ A string with the text to toast\n- _duration_ The duration of the toast—either `ToastAndroid.SHORT` or `ToastAndroid.LONG`",
+      "source_content_hash": "c16181fca05c0776b27e2d94821e0dd68e7ba2335a2e2470451b0e1b69807eda",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- _message_ 要顯示的提示文字字串\n- _duration_ 提示顯示的持續時間——可選 `ToastAndroid.SHORT` 或 `ToastAndroid.LONG`"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "You can alternatively use `showWithGravity(message, duration, gravity)` to specify where the toast appears in the screen's layout. May be `ToastAndroid.TOP`, `ToastAndroid.BOTTOM` or `ToastAndroid.CENTER`.",
+      "source_content_hash": "8cdd8ac2720312f1f20c1de08dd3f729f4ae967aec802ea6b43358ef5319af59",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您也可以使用 `showWithGravity(message, duration, gravity)` 來指定提示在螢幕佈局中的顯示位置。可選值為 `ToastAndroid.TOP`、`ToastAndroid.BOTTOM` 或 `ToastAndroid.CENTER`。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "The 'showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)' method adds the ability to specify an offset with in pixels.",
+      "source_content_hash": "f567f22821b0931ea709a7781cdaccab132578122558b71c79ca63cf842071a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "方法 'showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)' 增加了以像素為單位指定偏移量的功能。"
+      }
+    },
+    {
+      "segment_id": "4b395385",
+      "source_content": "```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android\nimport React from \"react\";\nimport { View, StyleSheet, ToastAndroid, Button, StatusBar } from \"react-native\";\n\nconst App = () => {\n  const showToast = () => {\n    ToastAndroid.show(\"A pikachu appeared nearby !\", ToastAndroid.SHORT);\n  };\n\n  const showToastWithGravity = () => {\n    ToastAndroid.showWithGravity(\n      \"All Your Base Are Belong To Us\",\n      ToastAndroid.SHORT,\n      ToastAndroid.CENTER\n    );\n  };\n\n  const showToastWithGravityAndOffset = () => {\n    ToastAndroid.showWithGravityAndOffset(\n      \"A wild toast appeared!\",\n      ToastAndroid.LONG,\n      ToastAndroid.BOTTOM,\n      25,\n      50\n    );\n  };\n\n  return (\n    <View style={styles.container}>\n      <Button title=\"Toggle Toast\" onPress={() => showToast()} />\n      <Button\n        title=\"Toggle Toast With Gravity\"\n        onPress={() => showToastWithGravity()}\n      />\n      <Button\n        title=\"Toggle Toast With Gravity & Offset\"\n        onPress={() => showToastWithGravityAndOffset()}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: \"center\",\n    paddingTop: StatusBar.currentHeight,\n    backgroundColor: \"#888888\",\n    padding: 8\n  }\n});\n\nexport default App;\n```",
+      "source_content_hash": "c7fd2697402a03eea157f89d4d61e3d41ff878b66fa7177d8876a1335683be3f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b395385"
+      }
+    },
+    {
+      "segment_id": "ee8401db",
+      "source_content": "### Imperative hack",
+      "source_content_hash": "d001018da506fa0c7161e19f8e1e5c766279ee7182a794747525ba4bf339d64d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 命令式用法"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "The ToastAndroid API is imperative, but there is a way to expose a declarative component from it as in this example:",
+      "source_content_hash": "e37b068787861484ba8977542d7c97ac71cbc3135391fec68393516ec5326b5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "ToastAndroid API 是命令式的，但可以透過以下範例將其封裝為宣告式元件："
+      }
+    },
+    {
+      "segment_id": "af983f82",
+      "source_content": "```SnackPlayer name=Advanced%20Toast%20Android%20API%20Example&supportedPlatforms=android\nimport React, { useState, useEffect } from \"react\";\nimport { View, StyleSheet, ToastAndroid, Button, StatusBar } from \"react-native\";\n\nconst Toast = ({ visible, message }) => {\n  if (visible) {\n    ToastAndroid.showWithGravityAndOffset(\n      message,\n      ToastAndroid.LONG,\n      ToastAndroid.BOTTOM,\n      25,\n      50\n    );\n    return null;\n  }\n  return null;\n};\n\nconst App = () => {\n  const [visibleToast, setVisibleToast] = useState(false);\n\n  useEffect(() => setVisibleToast(false), [visibleToast]);\n\n  const handleButtonPress = () => {\n    setVisibleToast(true);\n  };\n\n  return (\n    <View style={styles.container}>\n      <Toast visible={visibleToast} message=\"Example\" />\n      <Button title=\"Toggle Toast\" onPress={() => handleButtonPress()} />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: \"center\",\n    paddingTop: StatusBar.currentHeight,\n    backgroundColor: \"#888888\",\n    padding: 8\n  }\n});\n\nexport default App;\n```",
+      "source_content_hash": "49bdca4e2e6ea7691c6e360235f313957ca168d2ec0bc222e8f85ca40141edcc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_af983f82"
+      }
+    },
+    {
+      "segment_id": "256e0c86",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "47516512",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "### `show()`",
+      "source_content_hash": "2f18473afc455d3d681c32aaceb01f37ad5b43b353d100f399485182c724a294",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `show()`"
+      }
+    },
+    {
+      "segment_id": "a3a1b8eb",
+      "source_content": "```jsx\nstatic show(message, duration)\n```",
+      "source_content_hash": "514a236c7fe69c5131f4ecad1f932a759a009bde60843b7311984351a0043c88",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a3a1b8eb"
+      }
+    },
+    {
+      "segment_id": "f539b80c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c83259bb",
+      "source_content": "### `showWithGravity()`",
+      "source_content_hash": "04b69833626f56041076ff3a1fc61beb35726515df0855b5ecb92f4a6bb1af37",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showWithGravity()`"
+      }
+    },
+    {
+      "segment_id": "8d1b00fd",
+      "source_content": "```jsx\nstatic showWithGravity(message, duration, gravity)\n```",
+      "source_content_hash": "9b5a7aae377f1d715ea29ef52be9acf3cea084a62d98c8df85760849a329ee90",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8d1b00fd"
+      }
+    },
+    {
+      "segment_id": "8144f6e8",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0d5321b7",
+      "source_content": "### `showWithGravityAndOffset()`",
+      "source_content_hash": "aca5b3cad9aeb068f1aef171ca9f06410271a501ca040c243c7a8fd09bed70c5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showWithGravityAndOffset()`"
+      }
+    },
+    {
+      "segment_id": "4fe849d4",
+      "source_content": "```jsx\nstatic showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)\n```",
+      "source_content_hash": "446d8833ae8d74fb4e518f94d81805c4823f9756a6353d5fc733828a4cbb63ee",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fe849d4"
+      }
+    },
+    {
+      "segment_id": "35353302",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "6ab1b234",
+      "source_content": "### `SHORT`",
+      "source_content_hash": "72bb8c5c85a49790addde5edf548f507c6fae0c84ba2188bbd93b0a78bef5b64",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `SHORT`"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "Indicates the duration on the screen.",
+      "source_content_hash": "10c07dd08c49305913db0a6cd296f416005134f6873181dcb6a6997009675d09",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示提示在螢幕上顯示的持續時間。"
+      }
+    },
+    {
+      "segment_id": "68d4860d",
+      "source_content": "```jsx\nToastAndroid.SHORT;\n```",
+      "source_content_hash": "7aea7cfab16288beb5a5b8bd182787dc47060aba4f82cd168c491fdcd0265296",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_68d4860d"
+      }
+    },
+    {
+      "segment_id": "b6796530",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ee213c98",
+      "source_content": "### `LONG`",
+      "source_content_hash": "fba7c192f5070b9468342de11594d54c7924b53eb76a04354c03a1bb3fb9600b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `LONG`"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "Indicates the duration on the screen.",
+      "source_content_hash": "10c07dd08c49305913db0a6cd296f416005134f6873181dcb6a6997009675d09",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示提示在螢幕上顯示的持續時間。"
+      }
+    },
+    {
+      "segment_id": "71779666",
+      "source_content": "```jsx\nToastAndroid.LONG;\n```",
+      "source_content_hash": "575a8e04c1ae0a510f116973ba28d057bba041c59a2126b161ca28382d307f02",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71779666"
+      }
+    },
+    {
+      "segment_id": "8d3c9893",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "89b740fe",
+      "source_content": "### `TOP`",
+      "source_content_hash": "03ac7e36218b731114826cea84ad5ef0cf349f6c72a3d62414321307f5142c46",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `TOP`"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Indicates the position on the screen.",
+      "source_content_hash": "cff72564f5f03cdffc872224d581c8402885005e1016a9d95bc75ebc4f2484f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示提示在螢幕上的顯示位置。"
+      }
+    },
+    {
+      "segment_id": "5010ec34",
+      "source_content": "```jsx\nToastAndroid.TOP;\n```",
+      "source_content_hash": "2f013f769f0e561493650f3604e8e2819bd5453aa1f49e0df244ceb1b232ecaa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5010ec34"
+      }
+    },
+    {
+      "segment_id": "33b68b3f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c66e62ef",
+      "source_content": "### `BOTTOM`",
+      "source_content_hash": "2a11d87f13f45791e52474c948193e84b00151e43eb2f9e20ee5fde9e7d2cf3c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `BOTTOM`"
+      }
+    },
+    {
+      "segment_id": "fe25bd72",
+      "source_content": "Indicates the position on the screen.",
+      "source_content_hash": "cff72564f5f03cdffc872224d581c8402885005e1016a9d95bc75ebc4f2484f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示提示在螢幕上的顯示位置。"
+      }
+    },
+    {
+      "segment_id": "65ba7468",
+      "source_content": "```jsx\nToastAndroid.BOTTOM;\n```",
+      "source_content_hash": "377fd2397d30b0c61b73bb50c634a6c73fef305ea74557d8bb19cd77fe0c3178",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65ba7468"
+      }
+    },
+    {
+      "segment_id": "b9ccd7b4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "be4b1cbf",
+      "source_content": "### `CENTER`",
+      "source_content_hash": "ea7f5b334c6bccda0d96c0d074c20d5d26a476b98b9392edbe0e80325df4f770",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `CENTER`"
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "Indicates the position on the screen.",
+      "source_content_hash": "cff72564f5f03cdffc872224d581c8402885005e1016a9d95bc75ebc4f2484f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示提示在螢幕上的顯示位置。"
+      }
+    },
+    {
+      "segment_id": "de34d0f2",
+      "source_content": "```jsx\nToastAndroid.CENTER;\n```",
+      "source_content_hash": "7d20d7de17de111f30633c559692d048fe1e3ea918b536d8b98532b08ff5cf75",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_de34d0f2"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/toastandroid.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.285255+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "23769e11f1ed7a8a0c4d0e0fd6dcac32eb269fb502ac1c60f7a2a1a6191bf0a2"
+  }
+}

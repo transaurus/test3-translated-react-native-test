@@ -1,0 +1,272 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/actionsheetios.md",
+  "source_file_content_hash": "2f91c5650d576a55c1c9e8e5a7bfdec7936ed9d5405f492f289525790ece29ed",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: actionsheetios\ntitle: ActionSheetIOS\n---",
+      "source_content_hash": "ea80411a90cff752b1938323cb4a04cc8132ae9829ed51241f02849c10958be8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Displays native to iOS [Action Sheet](https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/) component.",
+      "source_content_hash": "e3f7454b26f871af7152d2e5f7508fb7dbd9dbde9981f80fd66b118f85e4433f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯示 iOS 原生的 [動作選單](https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/) 元件。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "71b63116",
+      "source_content": "```SnackPlayer name=ActionSheetIOS%20Example&supportedPlatforms=ios\nimport React, {useState} from 'react';\nimport {ActionSheetIOS, Button, StyleSheet, Text} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const [result, setResult] = useState('🔮');\n\n  const onPress = () =>\n    ActionSheetIOS.showActionSheetWithOptions(\n      {\n        options: ['Cancel', 'Generate number', 'Reset'],\n        destructiveButtonIndex: 2,\n        cancelButtonIndex: 0,\n        userInterfaceStyle: 'dark',\n      },\n      buttonIndex => {\n        if (buttonIndex === 0) {\n          // cancel action\n        } else if (buttonIndex === 1) {\n          setResult(String(Math.floor(Math.random() * 100) + 1));\n        } else if (buttonIndex === 2) {\n          setResult('🔮');\n        }\n      },\n    );\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <Text style={styles.result}>{result}</Text>\n        <Button onPress={onPress} title=\"Show Action Sheet\" />\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n  result: {\n    fontSize: 64,\n    textAlign: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "87cc4126b0bd52d3c813bbcf1881e6293d7ff84e15de799ce946aafb3d8083e7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71b63116"
+      }
+    },
+    {
+      "segment_id": "e912d935",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "9e95fc4a",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "126950d7",
+      "source_content": "### `showActionSheetWithOptions()`",
+      "source_content_hash": "e5ae3a4c8d6c27c914d23f158bd5e9319dc43c2a98e003505460cc4d3040b33c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showActionSheetWithOptions()`"
+      }
+    },
+    {
+      "segment_id": "1d510af2",
+      "source_content": "```tsx\nstatic showActionSheetWithOptions: (\n  options: ActionSheetIOSOptions,\n  callback: (buttonIndex: number) => void,\n);\n```",
+      "source_content_hash": "dc2c46019f95eb8804e303cfdcf56f4af4d1e81fabfd5f486c5173ab1bd761d8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1d510af2"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "Display an iOS action sheet. The `options` object must contain one or more of:",
+      "source_content_hash": "c45ca794b53e57965cd12efdcdb796984a67bbcb423b0f5229bc0eccb1a7a1f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯示 iOS 動作選單。`options` 物件必須包含以下一或多項："
+      }
+    },
+    {
+      "segment_id": "4fe53981",
+      "source_content": "- `options` (array of strings) - a list of button titles (required)\n- `cancelButtonIndex` (int) - index of cancel button in `options`\n- `cancelButtonTintColor` (string) - the [color](colors) used for the change the text color of the cancel button\n- `destructiveButtonIndex` (int or array of ints) - indices of destructive buttons in `options`\n- `title` (string) - a title to show above the action sheet\n- `message` (string) - a message to show below the title\n- `anchor` (number) - the node to which the action sheet should be anchored (used for iPad)\n- `tintColor` (string) - the [color](colors) used for non-destructive button titles\n- `disabledButtonIndices` (array of numbers) - a list of button indices which should be disabled\n- `userInterfaceStyle` (string) - the interface style used for the action sheet, can be set to `light` or `dark`, otherwise the default system style will be used",
+      "source_content_hash": "8a117de997afcae3861e0b19780bcc8aa6d0e9e8a71479ef990f6c32d9cb82f9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `options` (字串陣列) - 按鈕標題列表 (必填)\n- `cancelButtonIndex` (整數) - `options` 中取消按鈕的索引\n- `cancelButtonTintColor` (字串) - 用於變更取消按鈕文字顏色的 [顏色](colors)\n- `destructiveButtonIndex` (整數或整數陣列) - `options` 中破壞性按鈕的索引\n- `title` (字串) - 顯示在動作選單上方的標題\n- `message` (字串) - 顯示在標題下方的訊息\n- `anchor` (數字) - 動作選單應錨定的節點 (用於 iPad)\n- `tintColor` (字串) - 用於非破壞性按鈕標題的 [顏色](colors)\n- `disabledButtonIndices` (數字陣列) - 應禁用的按鈕索引列表\n- `userInterfaceStyle` (字串) - 動作選單使用的介面樣式，可設為 `light` 或 `dark`，否則將使用預設系統樣式"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "The 'callback' function takes one parameter, the zero-based index of the selected item.",
+      "source_content_hash": "fe8cdb7276621aab6009199bf1a4709c1875ffd09667fae0b4bd51cb6c4d89a6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "'callback' 函式接受一個參數，即所選項目的從零開始的索引。"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "Minimal example:",
+      "source_content_hash": "4e30c96bad96ccd449a3dafa3057e61cf39fffe208a2c5cbad04c2e4eeeb4714",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最小範例："
+      }
+    },
+    {
+      "segment_id": "5dd0e3a7",
+      "source_content": "```tsx\nActionSheetIOS.showActionSheetWithOptions(\n  {\n    options: ['Cancel', 'Remove'],\n    destructiveButtonIndex: 1,\n    cancelButtonIndex: 0,\n  },\n  buttonIndex => {\n    if (buttonIndex === 1) {\n      /* destructive action */\n    }\n  },\n);\n```",
+      "source_content_hash": "29cc27e1f08ca27d88777351a241b3ced7f1691aa65c5ec85b23a58c8f77f9f8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5dd0e3a7"
+      }
+    },
+    {
+      "segment_id": "05765487",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "### `dismissActionSheet()`",
+      "source_content_hash": "2fd04306fcddca7845cde3e63195d633a30d4dc8990e7c366239c6549c8bdc01",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `dismissActionSheet()`"
+      }
+    },
+    {
+      "segment_id": "7ded566f",
+      "source_content": "```tsx\nstatic dismissActionSheet();\n```",
+      "source_content_hash": "180f4c92696d65d3263ed84be0c99736854f2e38410efe38d71f7b603bd090d6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7ded566f"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "Dismisses the most upper iOS action sheet presented, if no action sheet is present a warning is displayed.",
+      "source_content_hash": "1d1926bad5b96759bcaeca3b254e23057e60326441e87477f5bc64940bb05f68",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "關閉最上層的 iOS 動作選單，如果沒有動作選單則顯示警告。"
+      }
+    },
+    {
+      "segment_id": "55c9cb00",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "### `showShareActionSheetWithOptions()`",
+      "source_content_hash": "d5ba568952d977ca397315e47fbd6ceafdda0b0f351a97f1a1b4cccc98b3fd12",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `showShareActionSheetWithOptions()`"
+      }
+    },
+    {
+      "segment_id": "353ca453",
+      "source_content": "```tsx\nstatic showShareActionSheetWithOptions: (\n  options: ShareActionSheetIOSOptions,\n  failureCallback: (error: Error) => void,\n  successCallback: (success: boolean, method: string) => void,\n);\n```",
+      "source_content_hash": "a2410eb537e20f1b2d77a5a05d40d534e50d462b7b4e96d52989c7e1a039c0cf",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_353ca453"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "Display the iOS share sheet. The `options` object should contain one or both of `message` and `url` and can additionally have a `subject` or `excludedActivityTypes`:",
+      "source_content_hash": "da8a0f6fdc9e30a9ab5711f3dda60690251aff2199a4facd0b048b175f3fdc7b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "顯示 iOS 分享選單。`options` 物件應包含 `message` 和 `url` 其中一項或兩項，並可額外包含 `subject` 或 `excludedActivityTypes`："
+      }
+    },
+    {
+      "segment_id": "d9b1e67e",
+      "source_content": "- `url` (string) - a URL to share\n- `message` (string) - a message to share\n- `subject` (string) - a subject for the message\n- `excludedActivityTypes` (array) - the activities to exclude from the ActionSheet",
+      "source_content_hash": "bb5f2a974cbab93fbff275e3d33bfeeafacdb1ecf12eb75a10f4b4b528be0019",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `url` (字串) - 要分享的 URL\n- `message` (字串) - 要分享的訊息\n- `subject` (字串) - 訊息的主題\n- `excludedActivityTypes` (陣列) - 要從動作選單中排除的活動類型"
+      }
+    },
+    {
+      "segment_id": "7abf650f",
+      "source_content": "> **Note:** If `url` points to a local file, or is a base64-encoded uri, the file it points to will be loaded and shared directly. In this way, you can share images, videos, PDF files, etc. If `url` points to a remote file or address it must conform to URL format as described in [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt). For example, a web URL without a proper protocol (HTTP/HTTPS) will not be shared.",
+      "source_content_hash": "4eb615641da99e54ae2801e732615aa5d6926bd3dfad6e459b45162e219bac28",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> **注意：** 如果 `url` 指向本地檔案或是 base64 編碼的 uri，則會直接載入並分享該檔案。透過這種方式，您可以分享圖片、影片、PDF 檔案等。如果 `url` 指向遠端檔案或地址，則必須符合 [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt) 中描述的 URL 格式。例如，沒有正確協定 (HTTP/HTTPS) 的網頁 URL 將無法分享。"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "The 'failureCallback' function takes one parameter, an error object. The only property defined on this object is an optional `stack` property of type `string`.",
+      "source_content_hash": "822937100e1af57a61168ed5e29262b31a78f8869b53708802849dc2694f7f9f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "'failureCallback' 函式接受一個參數，即錯誤物件。此物件上唯一定義的屬性是選用的 `stack` 屬性，類型為 `字串`。"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "The 'successCallback' function takes two parameters:",
+      "source_content_hash": "95a2cb4c7021b412e4dc782c14d83dac375d0b090f2a61b4f6a4224b3bdd6ffa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "'successCallback' 函式接受兩個參數："
+      }
+    },
+    {
+      "segment_id": "8c9c56b6",
+      "source_content": "- a boolean value signifying success or failure\n- a string that, in the case of success, indicates the method of sharing",
+      "source_content_hash": "9636bced1ed6eb6c31592f107e066bf08d17fff4bd682485e71d7bdf0f3b752e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 表示成功或失敗的布林值\n- 在成功情況下，表示分享方式的字串"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/actionsheetios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.972343+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "2f91c5650d576a55c1c9e8e5a7bfdec7936ed9d5405f492f289525790ece29ed"
+  }
+}

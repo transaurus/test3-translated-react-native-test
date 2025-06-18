@@ -1,0 +1,672 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/drawerlayoutandroid.md",
+  "source_file_content_hash": "100ff781dcdf2dbf5f2a79ae76cb205fee99d8338dce71199b8cb885886ff983",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: drawerlayoutandroid\ntitle: DrawerLayoutAndroid\n---",
+      "source_content_hash": "ad3f679051142dce6aec68f54318d13fb5dcbb99921b5911323100d16b84308f",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "React component that wraps the platform `DrawerLayout` (Android only). The Drawer (typically used for navigation) is rendered with `renderNavigationView` and direct children are the main view (where your content goes). The navigation view is initially not visible on the screen, but can be pulled in from the side of the window specified by the `drawerPosition` prop and its width can be set by the `drawerWidth` prop.",
+      "source_content_hash": "994ab4fc83756734225ff476e7770f2feff0201e64211d038b8a5d9e4875dee8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "封裝平台專用 `DrawerLayout` 的 React 元件（僅限 Android）。抽屜式導航欄（通常用於導航功能）透過 `renderNavigationView` 渲染，而直接子元件則作為主視圖（放置主要內容）。導航視圖初始狀態不會顯示在畫面上，但可從 `drawerPosition` 屬性指定的視窗側邊拉出，其寬度可由 `drawerWidth` 屬性設定。"
+      }
+    },
+    {
+      "segment_id": "1cc03ec8",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "321c5251",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android&ext=js\nimport React, {useRef, useState} from 'react';\nimport {\n  Button,\n  DrawerLayoutAndroid,\n  Text,\n  StyleSheet,\n  View,\n} from 'react-native';\n\nconst App = () => {\n  const drawer = useRef(null);\n  const [drawerPosition, setDrawerPosition] = useState('left');\n  const changeDrawerPosition = () => {\n    if (drawerPosition === 'left') {\n      setDrawerPosition('right');\n    } else {\n      setDrawerPosition('left');\n    }\n  };\n\n  const navigationView = () => (\n    <View style={[styles.container, styles.navigationContainer]}>\n      <Text style={styles.paragraph}>I'm in the Drawer!</Text>\n      <Button\n        title=\"Close drawer\"\n        onPress={() => drawer.current.closeDrawer()}\n      />\n    </View>\n  );\n\n  return (\n    <DrawerLayoutAndroid\n      ref={drawer}\n      drawerWidth={300}\n      drawerPosition={drawerPosition}\n      renderNavigationView={navigationView}>\n      <View style={styles.container}>\n        <Text style={styles.paragraph}>Drawer on the {drawerPosition}!</Text>\n        <Button\n          title=\"Change Drawer Position\"\n          onPress={() => changeDrawerPosition()}\n        />\n        <Text style={styles.paragraph}>\n          Swipe from the side or press button below to see it!\n        </Text>\n        <Button\n          title=\"Open drawer\"\n          onPress={() => drawer.current.openDrawer()}\n        />\n      </View>\n    </DrawerLayoutAndroid>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n    padding: 16,\n  },\n  navigationContainer: {\n    backgroundColor: '#ecf0f1',\n  },\n  paragraph: {\n    padding: 16,\n    fontSize: 15,\n    textAlign: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android&ext=tsx\nimport React, {useRef, useState} from 'react';\nimport {\n  Button,\n  DrawerLayoutAndroid,\n  Text,\n  StyleSheet,\n  View,\n} from 'react-native';\n\nconst App = () => {\n  const drawer = useRef<DrawerLayoutAndroid>(null);\n  const [drawerPosition, setDrawerPosition] = useState<'left' | 'right'>(\n    'left',\n  );\n  const changeDrawerPosition = () => {\n    if (drawerPosition === 'left') {\n      setDrawerPosition('right');\n    } else {\n      setDrawerPosition('left');\n    }\n  };\n\n  const navigationView = () => (\n    <View style={[styles.container, styles.navigationContainer]}>\n      <Text style={styles.paragraph}>I'm in the Drawer!</Text>\n      <Button\n        title=\"Close drawer\"\n        onPress={() => drawer.current?.closeDrawer()}\n      />\n    </View>\n  );\n\n  return (\n    <DrawerLayoutAndroid\n      ref={drawer}\n      drawerWidth={300}\n      drawerPosition={drawerPosition}\n      renderNavigationView={navigationView}>\n      <View style={styles.container}>\n        <Text style={styles.paragraph}>Drawer on the {drawerPosition}!</Text>\n        <Button\n          title=\"Change Drawer Position\"\n          onPress={() => changeDrawerPosition()}\n        />\n        <Text style={styles.paragraph}>\n          Swipe from the side or press button below to see it!\n        </Text>\n        <Button\n          title=\"Open drawer\"\n          onPress={() => drawer.current?.openDrawer()}\n        />\n      </View>\n    </DrawerLayoutAndroid>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n    padding: 16,\n  },\n  navigationContainer: {\n    backgroundColor: '#ecf0f1',\n  },\n  paragraph: {\n    padding: 16,\n    fontSize: 15,\n    textAlign: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "616cc8dd7a8c1aec8b1a2a465eb3530ce8f0110fe0bfbe31e6373498e948f44d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_321c5251"
+      }
+    },
+    {
+      "segment_id": "5659490c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a49ac2ed",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文件"
+      }
+    },
+    {
+      "segment_id": "67edbbc4",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "a75f8411",
+      "source_content": "### [View Props](view.md#props)",
+      "source_content_hash": "5abc0ecb9b082df0a14d0acf49d9fb24aba2dd14af791f05af5bed51ba51fcdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [View 屬性](view.md#props)"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [View 屬性](view.md#props)。"
+      }
+    },
+    {
+      "segment_id": "7b35e1b7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "61282bab",
+      "source_content": "### `drawerBackgroundColor`",
+      "source_content_hash": "a4d26279e4ddb3c20882bb6604317fa3ccac8da51092fa50fc07d0a9e426d77a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `drawerBackgroundColor`"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "Specifies the background color of the drawer. The default value is `white`. If you want to set the opacity of the drawer, use rgba. Example:",
+      "source_content_hash": "678209257e440e6405c71de4a55ab25f3f822571dbe4c27defc1e209a150f0e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定抽屜的背景顏色。預設值為 `white`。若需設定抽屜透明度，請使用 rgba 值。範例："
+      }
+    },
+    {
+      "segment_id": "bea1601a",
+      "source_content": "```tsx\nreturn (\n  <DrawerLayoutAndroid drawerBackgroundColor=\"rgba(0,0,0,0.5)\" />\n);\n```",
+      "source_content_hash": "3c259e0278bc31619aa3f5e86dcb6c450257f563ba574f8ae3e60749b29380de",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bea1601a"
+      }
+    },
+    {
+      "segment_id": "144fc2d3",
+      "source_content": "| Type               | Required |\n| ------------------ | -------- |\n| [color](colors.md) | No       |",
+      "source_content_hash": "8e6246d1c315c61d8055ed8fe71f67fe0769817a9ce45ee4bf0d53c4f0477bb9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_144fc2d3"
+      }
+    },
+    {
+      "segment_id": "7a9140d4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "4d7a4554",
+      "source_content": "### `drawerLockMode`",
+      "source_content_hash": "008c3a1d07e8dd036384fddb095e4478415146ea3bf4abad6500c29dc714b4d5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `drawerLockMode`"
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "Specifies the lock mode of the drawer. The drawer can be locked in 3 states:",
+      "source_content_hash": "8c36a1a492e674ea18bb0adcf31d842e28227e0053a0e56477cdeddc6ff983c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定抽屜的鎖定模式。抽屜可鎖定為以下 3 種狀態："
+      }
+    },
+    {
+      "segment_id": "c53e56f7",
+      "source_content": "- unlocked (default), meaning that the drawer will respond (open/close) to touch gestures.\n- locked-closed, meaning that the drawer will stay closed and not respond to gestures.\n- locked-open, meaning that the drawer will stay opened and not respond to gestures. The drawer may still be opened and closed programmatically (`openDrawer`/`closeDrawer`).",
+      "source_content_hash": "def0637ef668462c35f2aad5f3721b9ad081c048416b070b6758cb50ebb8d75e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 未鎖定（預設值），抽屜會響應觸控手勢（開啟/關閉）。\n- 鎖定關閉，抽屜保持關閉狀態且不響應手勢。\n- 鎖定開啟，抽屜保持開啟狀態且不響應手勢。抽屜仍可透過程式控制開啟/關閉（`openDrawer`/`closeDrawer`）。"
+      }
+    },
+    {
+      "segment_id": "1de6abbc",
+      "source_content": "| Type                                             | Required |\n| ------------------------------------------------ | -------- |\n| enum('unlocked', 'locked-closed', 'locked-open') | No       |",
+      "source_content_hash": "c52e2ac7ebd5e43c0e25a4027551963ec525d13a3acba0273cea783c12857966",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1de6abbc"
+      }
+    },
+    {
+      "segment_id": "a025b260",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "ba4aa94e",
+      "source_content": "### `drawerPosition`",
+      "source_content_hash": "2d718e70ac451d06dfbcb57da18045fec8dfe3f6f05e1440eccf5d2db66c6e70",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `drawerPosition`"
+      }
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "Specifies the side of the screen from which the drawer will slide in. By default it is set to `left`.",
+      "source_content_hash": "017af90561ea3c299395b8e7c8bb3a494b8ccab64174780abaf6a40e1d01ed11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定抽屜從螢幕哪一側滑入。預設值為 `left`（左側）。"
+      }
+    },
+    {
+      "segment_id": "12cbb2c8",
+      "source_content": "| Type                  | Required |\n| --------------------- | -------- |\n| enum('left', 'right') | No       |",
+      "source_content_hash": "fdfdf5276948353d8af7e04d77619167c5163075dbd69d21abaf6f2a34b26e36",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_12cbb2c8"
+      }
+    },
+    {
+      "segment_id": "fe7bdddf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "950e5c6c",
+      "source_content": "### `drawerWidth`",
+      "source_content_hash": "88ffdc5915aaa991f52105a27e59246896580394343c803788d86a9c5ac6ea4d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `drawerWidth`"
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "Specifies the width of the drawer, more precisely the width of the view that be pulled in from the edge of the window.",
+      "source_content_hash": "3e834574513b892fc90ee4427e072ae481a0c69b9ae1b1ea7082c007065add8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "指定抽屜寬度，更精確地說是指可從視窗邊緣拉入的視圖寬度。"
+      }
+    },
+    {
+      "segment_id": "46f9cb25",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_46f9cb25"
+      }
+    },
+    {
+      "segment_id": "40f71b18",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "5e300688",
+      "source_content": "### `keyboardDismissMode`",
+      "source_content_hash": "94a9ca0d35c25eb155e02e3b099d2ea45fbf9718c35c4eccc2bb17caa189f7f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `keyboardDismissMode`"
+      }
+    },
+    {
+      "segment_id": "130a77cc",
+      "source_content": "Determines whether the keyboard gets dismissed in response to a drag.",
+      "source_content_hash": "cf2d04d3b64f40e962fadf71ab1dab2a609d6593efec33e1a6f6d986dccde651",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定鍵盤是否因拖曳操作而關閉。"
+      }
+    },
+    {
+      "segment_id": "3316217c",
+      "source_content": "- 'none' (the default), drags do not dismiss the keyboard.\n- 'on-drag', the keyboard is dismissed when a drag begins.",
+      "source_content_hash": "899787f8d9e8bf9c548eb12f2e977f0710fbb9a5cd4eb322e99866d5fc0966e0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 'none'（預設值），拖曳時不會關閉鍵盤。\n- 'on-drag'，開始拖曳時立即關閉鍵盤。"
+      }
+    },
+    {
+      "segment_id": "72704001",
+      "source_content": "| Type                    | Required |\n| ----------------------- | -------- |\n| enum('none', 'on-drag') | No       |",
+      "source_content_hash": "5ac59a70b138ba6b955ee1495015ed2b699981edd323780fcacf7620ee9ffefb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_72704001"
+      }
+    },
+    {
+      "segment_id": "5c6097d9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "9349ceaa",
+      "source_content": "### `onDrawerClose`",
+      "source_content_hash": "6833e5a3e0384acb8d13e119db856247218b1be81916ea2abfd13abc5135591c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onDrawerClose`"
+      }
+    },
+    {
+      "segment_id": "e636ba62",
+      "source_content": "Function called whenever the navigation view has been closed.",
+      "source_content_hash": "c3bac87360c08d8496b2b43f799ae9152b1eb53928c6e3de780e6d4e361b18de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當導航視圖關閉時呼叫的函式。"
+      }
+    },
+    {
+      "segment_id": "60648883",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_60648883"
+      }
+    },
+    {
+      "segment_id": "be494d29",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "50e53dff",
+      "source_content": "### `onDrawerOpen`",
+      "source_content_hash": "f84c7f5297a6d5803864b6207dc33b81cbbc2061e1ff99f5e0509421a89daed5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onDrawerOpen`"
+      }
+    },
+    {
+      "segment_id": "f6e7e6a7",
+      "source_content": "Function called whenever the navigation view has been opened.",
+      "source_content_hash": "2059fa65a6e529ecff4dcba0d857f0329a1c92251c0b605e8ed7fac80e121734",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當導航視圖開啟時呼叫的函式。"
+      }
+    },
+    {
+      "segment_id": "eddf8763",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_eddf8763"
+      }
+    },
+    {
+      "segment_id": "ac476bec",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b1889ce8",
+      "source_content": "### `onDrawerSlide`",
+      "source_content_hash": "b4f66efbf060fb88a9849b197fd4d49cae7a6b9f0a4a28b09fd4302bc79336ca",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onDrawerSlide`"
+      }
+    },
+    {
+      "segment_id": "30aa9816",
+      "source_content": "Function called whenever there is an interaction with the navigation view.",
+      "source_content_hash": "457d757085b2a50c8614682594c41546f9e646ca0333450feb0eb70f53f6fa73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當與導航視圖發生互動時呼叫的函式。"
+      }
+    },
+    {
+      "segment_id": "4905ea6b",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4905ea6b"
+      }
+    },
+    {
+      "segment_id": "dc468763",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "92505e51",
+      "source_content": "### `onDrawerStateChanged`",
+      "source_content_hash": "650abdf7220c8f720898bbe5b37b0fb0c91c1fcb9a4ee22c758748bb0d768fce",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `onDrawerStateChanged`"
+      }
+    },
+    {
+      "segment_id": "2f8456b2",
+      "source_content": "Function called when the drawer state has changed. The drawer can be in 3 states:",
+      "source_content_hash": "df7b7e8fdc0b6a52ee81a189410798d52b9d46e8a5299420ca7c815dfdd894c1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當抽屜狀態改變時呼叫的函式。抽屜可能處於以下 3 種狀態："
+      }
+    },
+    {
+      "segment_id": "941578d7",
+      "source_content": "- idle, meaning there is no interaction with the navigation view happening at the time\n- dragging, meaning there is currently an interaction with the navigation view\n- settling, meaning that there was an interaction with the navigation view, and the navigation view is now finishing its closing or opening animation",
+      "source_content_hash": "6188c9dd11ab801f0001eab935d183085fc9b3f2bae7d11315eba58dae8f753c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- idle（閒置），表示當前沒有與導航視圖的互動\n- dragging（拖曳中），表示正在與導航視圖互動\n- settling（過渡中），表示已完成與導航視圖的互動，且導航視圖正在執行關閉或開啟的動畫"
+      }
+    },
+    {
+      "segment_id": "0e9ec07f",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0e9ec07f"
+      }
+    },
+    {
+      "segment_id": "a4d015fb",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f996c0b9",
+      "source_content": "### `renderNavigationView`",
+      "source_content_hash": "5afec9336cba1702ade9406aa71a6cd6878044dd1ec98e43ef919a04a75de857",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `renderNavigationView`"
+      }
+    },
+    {
+      "segment_id": "4e994fc3",
+      "source_content": "The navigation view that will be rendered to the side of the screen and can be pulled in.",
+      "source_content_hash": "52022373b66cbc651ad28b7fc67f2f74f386235911b0606b0e6a7a9ed332f929",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將被渲染於螢幕側邊並可拉入的導航視圖元件。"
+      }
+    },
+    {
+      "segment_id": "22492613",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | Yes      |",
+      "source_content_hash": "b8efdc3ebb570e54d65022bcfbe09d44d5d47f72768095186658c7adfe6706b4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_22492613"
+      }
+    },
+    {
+      "segment_id": "f520e64b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0b7ed806",
+      "source_content": "### `statusBarBackgroundColor`",
+      "source_content_hash": "2ade203700fccd2546190ace9592b3f57b301ff8f50e3108dac54478c4b9dbbb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `statusBarBackgroundColor`"
+      }
+    },
+    {
+      "segment_id": "8517ac25",
+      "source_content": "Make the drawer take the entire screen and draw the background of the status bar to allow it to open over the status bar. It will only have an effect on API 21+.",
+      "source_content_hash": "6336f0203d6b3cb5e8a6379e559834d7161d65287fe563e17826df14bbf01586",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓抽屜佔據整個屏幕並繪製狀態欄的背景，使其能夠在狀態欄上方開啟。此屬性僅在 API 21+ 上有效。"
+      }
+    },
+    {
+      "segment_id": "a22d2e7b",
+      "source_content": "| Type               | Required |\n| ------------------ | -------- |\n| [color](colors.md) | No       |",
+      "source_content_hash": "8e6246d1c315c61d8055ed8fe71f67fe0769817a9ce45ee4bf0d53c4f0477bb9",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a22d2e7b"
+      }
+    },
+    {
+      "segment_id": "d087570f",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "db1c4f18",
+      "source_content": "### `closeDrawer()`",
+      "source_content_hash": "684f45914226111515036007b26f92c95cfe9c91f002fd793387c0943eef5575",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `closeDrawer()`"
+      }
+    },
+    {
+      "segment_id": "bdb6a28d",
+      "source_content": "```tsx\ncloseDrawer();\n```",
+      "source_content_hash": "729db9e759d8836548b10fc06bfaae247e62938315b4cc43189d2cccf0aef4fd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bdb6a28d"
+      }
+    },
+    {
+      "segment_id": "2e76bd58",
+      "source_content": "Closes the drawer.",
+      "source_content_hash": "8dc61085babd1065f2784f5ff89b3784019073db815e9175e86cb1a0c09980ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "關閉抽屜。"
+      }
+    },
+    {
+      "segment_id": "bc6814dd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "363f5ed5",
+      "source_content": "### `openDrawer()`",
+      "source_content_hash": "f8daba566aad6896a5e72d6f7f15b3c2423db1ab21e39e76c673dc68a1a6ba57",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `openDrawer()`"
+      }
+    },
+    {
+      "segment_id": "e0b4ec91",
+      "source_content": "```tsx\nopenDrawer();\n```",
+      "source_content_hash": "08d32aeb584b02ca662dc21b1f94ebd6d766204f713f73c578ae3b2e46002930",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e0b4ec91"
+      }
+    },
+    {
+      "segment_id": "71e7acda",
+      "source_content": "Opens the drawer.",
+      "source_content_hash": "71027a1351d68e3c418261fca834374f6e4ded67bcbc82c6a2e373728283e2d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開啟抽屜。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/drawerlayoutandroid.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.358248+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "100ff781dcdf2dbf5f2a79ae76cb205fee99d8338dce71199b8cb885886ff983"
+  }
+}

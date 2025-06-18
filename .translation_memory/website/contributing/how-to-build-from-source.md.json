@@ -1,0 +1,212 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "contributing/how-to-build-from-source.md",
+  "source_file_content_hash": "2529cd6f34b94d7db4400aa4369fd5743954e66506985080e9cb2e0c1f832e3d",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: How to Build from Source\n---",
+      "source_content_hash": "9d7e46bedd7fbaf7ca9358319637be120c02465a5592f965805b2ec66c40d254",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "You will need to build React Native from source if you want to work on a new feature/bug fix, try out the latest features which are not released yet, or maintain your own fork with patches that cannot be merged to the core.",
+      "source_content_hash": "877439ffa69a53df1d9ccd38aac1dbb867dd6fe702e2216938f9db899604f3ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您想開發新功能/修復錯誤、測試尚未發布的最新功能，或維護包含無法合併至核心程式碼的修補程式的自訂分支，您需要從原始碼建構 React Native。"
+      }
+    },
+    {
+      "segment_id": "a703643c",
+      "source_content": "## Android",
+      "source_content_hash": "316e75861152fcfa906997e1907c00f2f5d4b433627b3e340e68a8123ad35991",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## Android 平台"
+      }
+    },
+    {
+      "segment_id": "d912d376",
+      "source_content": "### Prerequisites",
+      "source_content_hash": "06853ecee3d6e5f20a40c0d198df12313c0c9b1a182563a0014a7fb4945c7081",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 必要條件"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "To build from source, you need to have the Android SDK installed. If you followed the [Setting up the development environment](/docs/environment-setup) guide, you should already be set up.",
+      "source_content_hash": "1417a6d6ec846039b4340a6f32cd381eb3c2bb5614b789baf48de13bea9288dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要從原始碼建構，您需要安裝 Android SDK。若您已遵循[設定開發環境](/docs/environment-setup)指南，應已完成相關設定。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "There is no need to install other tools like specific version of NDK or CMake as the Android SDK will **automatically download** whatever is needed for the build from source.",
+      "source_content_hash": "f1ad3b457ea0d356747504a5117ae79d20cf5e20e673f74b5de74241948108ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無需額外安裝 NDK 或 CMake 等工具特定版本，Android SDK 會**自動下載**建構所需的所有項目。"
+      }
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "### Point your project to a nightly",
+      "source_content_hash": "4fc1da5c53b7b3b28fb343f70e26cafdc437766391ed8a37c4847c7dbc2f3a24",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 將專案指向 nightly 版本"
+      }
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "To use the latest fixes and features of React Native, you can update your project to use a nightly version of React Native with:",
+      "source_content_hash": "62e7587cd9dddec20e2d7c769a0d2d4e362fa72664797a0aa2e5d96a005e2176",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要使用 React Native 的最新修復與功能，可透過以下指令將專案更新至 nightly 版本："
+      }
+    },
+    {
+      "segment_id": "940e34e3",
+      "source_content": "```\nyarn add react-native@nightly\n```",
+      "source_content_hash": "a7c93090457be78a348658dc7892a087b69efaaf18ff63c0860b9dfc44da6e8a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_940e34e3"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "This will update your project to use a nightly version of React Native that gets released every night with the latest changes.",
+      "source_content_hash": "3264959a88dd44480c2b9d80d5494b91ff7d4cf018f21423912e2f5aeff6746a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這會將您的專案更新為每日發布、包含最新變更的 React Native nightly 版本。"
+      }
+    },
+    {
+      "segment_id": "ed7dde9c",
+      "source_content": "### Update your project to build from source",
+      "source_content_hash": "4fd3a69d08f55f3989b79aa0cc16e7a49098d351d9a6a201d43d6df50b5dbfbf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 將專案設定為從原始碼建構"
+      }
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "Both with stable releases and nightlies, you will be consuming **precompiled** artifacts. If instead you want to switch to building from source, so you can test your changes to the framework directly, you will have to edit the `android/settings.gradle` file as follows:",
+      "source_content_hash": "d0cda4876e23d97536fada22e71f48fa1ee8ee87604d6625b6bb25858510e5e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無論是穩定版或 nightly 版，您通常會使用**預編譯**成品。若想改為從原始碼建構以直接測試框架修改，需按以下方式編輯 `android/settings.gradle` 檔案："
+      }
+    },
+    {
+      "segment_id": "0c911872",
+      "source_content": "```diff\n  // ...\n  include ':app'\n  includeBuild('../node_modules/@react-native/gradle-plugin')\n  \n+ includeBuild('../node_modules/react-native') {\n+     dependencySubstitution {\n+         substitute(module(\"com.facebook.react:react-android\")).using(project(\":packages:react-native:ReactAndroid\"))\n+         substitute(module(\"com.facebook.react:react-native\")).using(project(\":packages:react-native:ReactAndroid\"))\n+         substitute(module(\"com.facebook.react:hermes-android\")).using(project(\":packages:react-native:ReactAndroid:hermes-engine\"))\n+         substitute(module(\"com.facebook.react:hermes-engine\")).using(project(\":packages:react-native:ReactAndroid:hermes-engine\"))\n+     }\n+ }\n```",
+      "source_content_hash": "e21687e12611f1a73188da61619f16260b588f588cbcb7c6131f7bd590a2219a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0c911872"
+      }
+    },
+    {
+      "segment_id": "54268405",
+      "source_content": "### Additional notes",
+      "source_content_hash": "e43ca6a455b3188bcfd89f9ba9b86dcedff8d245b39007a3111c10d270304b86",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 補充說明"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "Building from source can take a long time, especially for the first build, as it needs to download ~200 MB of artifacts and compile the native code.",
+      "source_content_hash": "724f9ef219eff01394fa7a5d90f7d99f2075a1f49ede434c0c1cb128e2f9ec32",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從原始碼建構可能耗時較長，特別是首次建構時需下載約 200 MB 成品並編譯原生程式碼。"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Every time you update the `react-native` version from your repo, the build directory may get deleted, and all the files are re-downloaded.\nTo avoid this, you might want to change your build directory path by editing the `~/.gradle/init.gradle` file:",
+      "source_content_hash": "599b502d969cfdbce0f130e46bc75a5eb7c18391b27597a41f7b396b6843ebf9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每次從儲存庫更新 `react-native` 版本時，建構目錄可能被刪除並重新下載所有檔案。\n若要避免此情況，可透過編輯 `~/.gradle/init.gradle` 檔案變更建構目錄路徑："
+      }
+    },
+    {
+      "segment_id": "4795a13d",
+      "source_content": "```groovy\ngradle.projectsLoaded {\n    rootProject.allprojects {\n        buildDir = \"/path/to/build/directory/${rootProject.name}/${project.name}\"\n    }\n}\n```",
+      "source_content_hash": "c325ed7aa0bc4ddae3b7d5cf8d47ff63dc2ca0a42387a55ef828e41d899bb58c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4795a13d"
+      }
+    },
+    {
+      "segment_id": "7283cdac",
+      "source_content": "## Rationale",
+      "source_content_hash": "e0682f7fa92faabf4e7019619e38e5c354daf233cff6ff3f9b1890a8982bb2db",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 實施依據"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "The recommended approach to working with React Native is to always update to the latest version. The support we provide for older versions is [described in our support policy](https://github.com/reactwg/react-native-releases/#releases-support-policy).",
+      "source_content_hash": "dde00d76ebc47c075a24d77965e2ea0241c313d7aee9ae301d8e614c433c07aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議的 React Native 開發方式是始終更新至最新版本。我們對舊版提供的支援[詳見版本支援政策](https://github.com/reactwg/react-native-releases/#releases-support-policy)。"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "The build from source approach should be used to end-to-end test a fix before submitting a pull request to React Native, and we're not encouraging its usages in the long run. Especially forking React Native or switching your setup to always use a build from source, will result in projects that are harder to update and generally a worse developer experience.",
+      "source_content_hash": "3499e7e1127a1425212034850ef8da811265549ddea547d0d4b13712fb58ecae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "從原始碼建構的方式應僅用於提交 PR 前進行端到端測試，不建議長期使用。特別是分叉 React Native 或設定為始終從原始碼建構，將導致專案更難更新，整體開發體驗也會較差。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-contributing/how-to-build-from-source.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.308128+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "2529cd6f34b94d7db4400aa4369fd5743954e66506985080e9cb2e0c1f832e3d"
+  }
+}

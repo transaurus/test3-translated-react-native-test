@@ -1,0 +1,322 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.77/appearance.md",
+  "source_file_content_hash": "3787a4203710cfd2d400de730e1deebb1421b33946d697cc630d9b4c8ac7ea07",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: appearance\ntitle: Appearance\n---",
+      "source_content_hash": "6317475b27f8e7e389cac4b2dd25e10e26a614b110f96dd90e27a07fbd8a9308",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "e6a5da7c",
+      "source_content": "```tsx\nimport {Appearance} from 'react-native';\n```",
+      "source_content_hash": "878b4af45edb2e0a2145f491c8df5f0ad71a63387eb34cc2de3add05f68efd75",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e6a5da7c"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The `Appearance` module exposes information about the user's appearance preferences, such as their preferred color scheme (light or dark).",
+      "source_content_hash": "6ddf94837581bd9a97a6b532197368a011f38bf20d3423fded7664ee3e81c21d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Appearance` 模組提供了使用者外觀偏好的相關資訊，例如他們偏好的配色方案（淺色或深色）。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "#### Developer notes",
+      "source_content_hash": "66e953d4565d4aaa29f8e46c15a35a647c771f450704cb6a726e362a63753246",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 開發者注意事項"
+      }
+    },
+    {
+      "segment_id": "cc3676fa",
+      "source_content": "<Tabs groupId=\"guide\" queryString defaultValue=\"web\" values={constants.getDevNotesTabs([\"android\", \"ios\", \"web\"])}>\n\n<TabItem value=\"web\">\n\n> The `Appearance` API is inspired by the [Media Queries draft](https://drafts.csswg.org/mediaqueries-5/) from the W3C. The color scheme preference is modeled after the [`prefers-color-scheme` CSS media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme).\n\n</TabItem>\n<TabItem value=\"android\">\n\n> The color scheme preference will map to the user's Light or [Dark theme](https://developer.android.com/guide/topics/ui/look-and-feel/darktheme) preference on Android 10 (API level 29) devices and higher.\n\n</TabItem>\n<TabItem value=\"ios\">\n\n> The color scheme preference will map to the user's Light or [Dark Mode](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) preference on iOS 13 devices and higher.\n\n> Note: When taking a screenshot, by default, the color scheme may flicker between light and dark mode. It happens because the iOS takes snapshots on both color schemes and updating the user interface with color scheme is asynchronous.\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b868b2758477e11d8d2fad4e437d0e3189b05b43537a2509c5418b0defff8fc7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cc3676fa"
+      }
+    },
+    {
+      "segment_id": "3b7478ea",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "You can use the `Appearance` module to determine if the user prefers a dark color scheme:",
+      "source_content_hash": "b038a16623f96e4baa8c4466abfc4d21ca8fb0a832cc784b4dab6885a769fe9a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以使用 `Appearance` 模組來判斷使用者是否偏好深色配色方案："
+      }
+    },
+    {
+      "segment_id": "bca33820",
+      "source_content": "```tsx\nconst colorScheme = Appearance.getColorScheme();\nif (colorScheme === 'dark') {\n  // Use dark color scheme\n}\n```",
+      "source_content_hash": "9920e44e2fc26f4f0fe76fb1fd53c5aa6bf888b817842328bd9d573e2017d883",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bca33820"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Although the color scheme is available immediately, this may change (e.g. scheduled color scheme change at sunrise or sunset). Any rendering logic or styles that depend on the user preferred color scheme should try to call this function on every render, rather than caching the value. For example, you may use the [`useColorScheme`](usecolorscheme) React hook as it provides and subscribes to color scheme updates, or you may use inline styles rather than setting a value in a `StyleSheet`.",
+      "source_content_hash": "2798d78e0339b0ef92fa42ab97e37da384a8898c1da3b363b5829cdeb292ff8c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然配色方案可立即取得，但這可能會改變（例如在日出或日落時預定的配色方案變更）。任何依賴使用者偏好配色方案的渲染邏輯或樣式，應在每次渲染時調用此函數，而非快取值。例如，您可以使用 [`useColorScheme`](usecolorscheme) React 鉤子，因為它提供並訂閱配色方案的更新，或者您可以使用內聯樣式而非在 `StyleSheet` 中設定值。"
+      }
+    },
+    {
+      "segment_id": "816a06a6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "cb5b269c",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考"
+      }
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "2c1b51df",
+      "source_content": "### `getColorScheme()`",
+      "source_content_hash": "455b038cfe473cc85b0a043a403d34fb850ba2b3070113202fb404e490e0b6f9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `getColorScheme()`"
+      }
+    },
+    {
+      "segment_id": "ef0d086d",
+      "source_content": "```tsx\nstatic getColorScheme(): 'light' | 'dark' | null;\n```",
+      "source_content_hash": "b1b6c971cbe2fdd810a32aad336e06793ae94ddb2cbfc5f413947c36de7cf691",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ef0d086d"
+      }
+    },
+    {
+      "segment_id": "6ea4c715",
+      "source_content": "Indicates the current user preferred color scheme. The value may be updated later, either through direct user action (e.g. theme selection in device settings or application-level selected user interface style via `setColorScheme`) or on a schedule (e.g. light and dark themes that follow the day/night cycle).",
+      "source_content_hash": "4f9f322a80bdfe2eb2f56fbbfe26860c0fcd2b03a90366a9b2158870325c2222",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "表示當前使用者偏好的配色方案。該值可能會在之後更新，無論是通過直接的使用者操作（例如在設備設定中選擇主題或通過 `setColorScheme` 在應用程式層級選擇的使用者介面風格），或是根據排程（例如遵循日夜循環的淺色和深色主題）。"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "Supported color schemes:",
+      "source_content_hash": "17dc62e06ae174e255fd044d92c43f04b27b7da2c78b3b7e5ad0bb7ea370ac54",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支援的配色方案："
+      }
+    },
+    {
+      "segment_id": "2eb5ba30",
+      "source_content": "- `light`: The user prefers a light color theme.\n- `dark`: The user prefers a dark color theme.\n- null: The user has not indicated a preferred color theme.",
+      "source_content_hash": "d5f978a236e1e81f5e7c3f356866c50aecc599fb6fea7ea6c7ccf92a6118dd30",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `light`：使用者偏好淺色主題。\n- `dark`：使用者偏好深色主題。\n- null：使用者未指定偏好的配色方案。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "See also: `useColorScheme` hook.",
+      "source_content_hash": "87d6df424fbdd8230d9d9e0958bc9b49b227d2db714f0e3fabb1485f351991a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另請參閱：`useColorScheme` 鉤子。"
+      }
+    },
+    {
+      "segment_id": "bd4bfa7f",
+      "source_content": "> Note: `getColorScheme()` will always return `light` when debugging with Chrome.",
+      "source_content_hash": "fbdb2acb866ffa18ca094aae8568977644d043c9c11a70ad636a7de6e5136c50",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：使用 Chrome 進行偵錯時，`getColorScheme()` 將始終返回 `light`。"
+      }
+    },
+    {
+      "segment_id": "7afb38f4",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b051b70c",
+      "source_content": "### `setColorScheme()`",
+      "source_content_hash": "2f6c7f9dee644688d46e702413354f7b5c26a36be296b1f192eea9d551a5cf4a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `setColorScheme()`"
+      }
+    },
+    {
+      "segment_id": "8a9e710a",
+      "source_content": "```tsx\nstatic setColorScheme('light' | 'dark' | null): void;\n```",
+      "source_content_hash": "0af2becfa38a37975cc85b9cc904e3d12056b4bc4d6304b3ca2fd299263c77a1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8a9e710a"
+      }
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "Force the application to always adopt a light or dark interface style. The default value is `null` which causes the application to inherit the system's interface style. If you assign a different value, the new style applies to the application and all native elements within the application (Alerts, Pickers etc).",
+      "source_content_hash": "95f4545015123cb3f3b3329c4118010c7b54a9c160e215113f6ad42f7409a1b3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "強制應用程式始終採用淺色或深色介面風格。預設值為 `null`，這會使應用程式繼承系統的介面風格。如果您指定了不同的值，新的風格將應用於應用程式及其內部的所有原生元素（如警示、選擇器等）。"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "Supported color schemes:",
+      "source_content_hash": "17dc62e06ae174e255fd044d92c43f04b27b7da2c78b3b7e5ad0bb7ea370ac54",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "支援的配色方案："
+      }
+    },
+    {
+      "segment_id": "cc9271fb",
+      "source_content": "- `light`: Apply light user interface style.\n- `dark`: Apply dark user interface style.\n- null: Follow the system's interface style.",
+      "source_content_hash": "97b7ca47d6d4f6e7fe2fd1c5dd0855b88acf937f0c7accc054d9f716b2d034b1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `light`：應用淺色使用者介面風格。\n- `dark`：應用深色使用者介面風格。\n- null：遵循系統的介面風格。"
+      }
+    },
+    {
+      "segment_id": "30d027a1",
+      "source_content": "> Note: The change will not affect the system's selected interface style or any style set in other applications.",
+      "source_content_hash": "bb7c0d96bee5425d811f0ce65833bcf441748a82cd17640d08f8638e13729cf0",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 注意：此變更不會影響系統選擇的介面風格或其他應用程式中的任何風格設定。"
+      }
+    },
+    {
+      "segment_id": "9006437d",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "f6b04a59",
+      "source_content": "### `addChangeListener()`",
+      "source_content_hash": "3dc8c0adf095e22dc5b35cbe042e6b01299a0d0782b0297e0d36d06dc5c13c75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `addChangeListener()`"
+      }
+    },
+    {
+      "segment_id": "19913a56",
+      "source_content": "```tsx\nstatic addChangeListener(\n  listener: (preferences: {colorScheme: 'light' | 'dark' | null}) => void,\n): NativeEventSubscription;\n```",
+      "source_content_hash": "84642aa78f352515376d70c0020f4967e9b985681ef811b1745fe157e61bbbbe",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_19913a56"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "Add an event handler that is fired when appearance preferences change.",
+      "source_content_hash": "c2995abe5a5f96a8520effaa6a46c5c63b5bd1137bfefb54b443d0e43f0b1c56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "添加一個事件處理器，當外觀偏好變更時觸發。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.77/appearance.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.696409+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "3787a4203710cfd2d400de730e1deebb1421b33946d697cc630d9b4c8ac7ea07"
+  }
+}

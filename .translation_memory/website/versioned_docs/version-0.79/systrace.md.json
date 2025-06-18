@@ -1,0 +1,292 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/systrace.md",
+  "source_file_content_hash": "f1a05fb6dc878adc3169d9a28558fd4cea7b00c6dd775742b8decb737aa2d105",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: systrace\ntitle: Systrace\n---",
+      "source_content_hash": "6e16545cbca2de36ef74eab26b6314caade206a544c6670e9a471d1796c95c15",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "`Systrace` is a standard Android marker-based profiling tool (and is installed when you install the Android platform-tools package). Profiled code blocks are surrounded by start/end markers which are then visualized in a colorful chart format. Both the Android SDK and React Native framework provide standard markers that you can visualize.",
+      "source_content_hash": "85437ef53a74b8ee4e80645b8a4e7a92c444ed72ce68efb61363b4cfcc6cae0e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Systrace` 是 Android 標準的基於標記的分析工具（安裝 Android platform-tools 套件時會一併安裝）。被分析的程式碼區塊會被開始/結束標記包圍，並以彩色圖表形式可視化。Android SDK 和 React Native 框架都提供了可視化的標準標記。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "`Systrace` allows you to mark JavaScript (JS) events with a tag and an integer value. Capture the non-Timed JS events in EasyProfiler.",
+      "source_content_hash": "208c39aae41815dfb91c4a1530d6cf239ca3eac898e6f758d4112ed778ecb248",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Systrace` 允許您用標籤和整數值標記 JavaScript (JS) 事件。在 EasyProfiler 中捕獲非計時的 JS 事件。"
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```SnackPlayer name=Systrace%20Example\nimport React from 'react';\nimport {Button, Text, View, StyleSheet, Systrace} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const enableProfiling = () => {\n    Systrace.setEnabled(true); // Call setEnabled to turn on the profiling.\n    Systrace.beginEvent('event_label');\n    Systrace.counterEvent('event_label', 10);\n  };\n\n  const stopProfiling = () => {\n    Systrace.endEvent();\n  };\n\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <Text style={[styles.header, styles.paragraph]}>\n          React Native Systrace API\n        </Text>\n        <View style={styles.buttonsColumn}>\n          <Button\n            title=\"Capture the non-Timed JS events in EasyProfiler\"\n            onPress={() => enableProfiling()}\n          />\n          <Button\n            title=\"Stop capturing\"\n            onPress={() => stopProfiling()}\n            color=\"#FF0000\"\n          />\n        </View>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#fff',\n    alignItems: 'center',\n    justifyContent: 'center',\n    padding: 8,\n    gap: 16,\n  },\n  header: {\n    fontSize: 18,\n    fontWeight: 'bold',\n    textAlign: 'center',\n  },\n  paragraph: {\n    fontSize: 25,\n    textAlign: 'center',\n  },\n  buttonsColumn: {\n    gap: 16,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "416dbf8d72a7d278fc342c2303238f685357ee6951a716ee44ad095ed09ce069",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "fe5fa73a",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "98355e36",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### `isEnabled()`",
+      "source_content_hash": "a36c2440c4a8bee0c18e0b3d95342d9abfced8c57e689c5892a54b282a3be99b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `isEnabled()`"
+      }
+    },
+    {
+      "segment_id": "d8159289",
+      "source_content": "```tsx\nstatic isEnabled(): boolean;\n```",
+      "source_content_hash": "8f7e4c77e9f9a5b44a07832b0b95817b29ddb41f25eb0b675b900d47d87faa78",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d8159289"
+      }
+    },
+    {
+      "segment_id": "8b0ba3cf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "### `beginEvent()`",
+      "source_content_hash": "3c4cf6815a458a4a1bb495a0e11476dcc4270f1a96319b5cf33775caafb4acb6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `beginEvent()`"
+      }
+    },
+    {
+      "segment_id": "f8065412",
+      "source_content": "```tsx\nstatic beginEvent(eventName: string | (() => string), args?: EventArgs);\n```",
+      "source_content_hash": "2dbf09a6f74292d51df94d492f57a4161c41546a01abcb3365d276f745613c47",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f8065412"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "beginEvent/endEvent for starting and then ending a profile within the same call stack frame.",
+      "source_content_hash": "2cfdbae363d2bb84d832cda5f598134bf7074f8d4d1985fdecbb7b6384ab82c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "beginEvent/endEvent 用於在同一個呼叫堆疊框架內開始和結束分析。"
+      }
+    },
+    {
+      "segment_id": "ab3df6e6",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c19de48a",
+      "source_content": "### `endEvent()`",
+      "source_content_hash": "5904bedb446fe39992a16904fc5291cb222f3cea4e3e7f1ec0d5274ef7818606",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `endEvent()`"
+      }
+    },
+    {
+      "segment_id": "a476a172",
+      "source_content": "```tsx\nstatic endEvent(args?: EventArgs);\n```",
+      "source_content_hash": "e239381845a9c45f5ffb846712ce2cc40a6bb2c103318136eb6807862721482f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a476a172"
+      }
+    },
+    {
+      "segment_id": "05765487",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "### `beginAsyncEvent()`",
+      "source_content_hash": "6c2b8fec6920924e8adb72105920ba8480f9d69c357f37372bb52ff86d43d3c5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `beginAsyncEvent()`"
+      }
+    },
+    {
+      "segment_id": "7ded566f",
+      "source_content": "```tsx\nstatic beginAsyncEvent(\n  eventName: string | (() => string),\n  args?: EventArgs,\n): number;\n```",
+      "source_content_hash": "d8551900cb4e5fbd2340088b8d830ea605e61a1f1cfaf6020c5c5be1c3011552",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7ded566f"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "beginAsyncEvent/endAsyncEvent for starting and then ending a profile where the end can either occur on another thread or out of the current stack frame, eg await the returned cookie variable should be used as input into the endAsyncEvent call to end the profile.",
+      "source_content_hash": "31bf5714b85d968d03d4228892ae2327f62be1f37f401b86bdbbe10319c18732",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "beginAsyncEvent/endAsyncEvent 用於開始和結束分析，其中結束可能發生在另一個執行緒或當前堆疊框架之外，例如 await 返回的 cookie 變量應作為輸入傳遞給 endAsyncEvent 呼叫以結束分析。"
+      }
+    },
+    {
+      "segment_id": "6ad15270",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "### `endAsyncEvent()`",
+      "source_content_hash": "45fddbe6f402704c470ccd5533b8ba8100f725aa9b9ca523cc5cd12096869b10",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `endAsyncEvent()`"
+      }
+    },
+    {
+      "segment_id": "7102653e",
+      "source_content": "```tsx\nstatic endAsyncEvent(\n  eventName: EventName,\n  cookie: number,\n  args?: EventArgs,\n);\n```",
+      "source_content_hash": "f6a86eb12ede5a040f7890c3c86378161035df6089e4517309454a9cf379db0c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7102653e"
+      }
+    },
+    {
+      "segment_id": "75603060",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "### `counterEvent()`",
+      "source_content_hash": "82f3fd4249ba29787472b9050f6f241a7cffa9687d8f94ca148a76ea5a27d98c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `counterEvent()`"
+      }
+    },
+    {
+      "segment_id": "43cca4d3",
+      "source_content": "```tsx\nstatic counterEvent(eventName: string | (() => string), value: number);\n```",
+      "source_content_hash": "467e2faa665be2b1740390dacd1c50148e4ca9d3d49976c0e5e083bb6368f706",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_43cca4d3"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Register the value to the profileName on the systrace timeline.",
+      "source_content_hash": "187bbe3daa84ffc8312db6f824cf5bc545c85b233fd7c286e6a9d22262e3bb41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將數值註冊到 systrace 時間軸上的 profileName。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/systrace.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.995411+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "f1a05fb6dc878adc3169d9a28558fd4cea7b00c6dd775742b8decb737aa2d105"
+  }
+}

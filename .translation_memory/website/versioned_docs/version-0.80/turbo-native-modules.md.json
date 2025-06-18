@@ -1,0 +1,342 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/turbo-native-modules.md",
+  "source_file_content_hash": "11d144ed5c0dda9f2d58d9f3b5d783e7065bd4a249221c8e2039c23e46d97735",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: turbo-native-modules-introduction\ntitle: 'Native Modules: Introduction'\n---",
+      "source_content_hash": "4cd2d1925e4b6e9af0a33fc7877a29c2469f59fb6383811c9271dfc8076a74ed",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';\nimport {TurboNativeModulesAndroid, TurboNativeModulesIOS} from './\\_turbo-native-modules-components';",
+      "source_content_hash": "eb85b3e0fa9668c768030bb78c19df8a514e545137404ac546ff2d0b69c74329",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "d912d376",
+      "source_content": "# Native Modules",
+      "source_content_hash": "3276aa0977d8c4ca2a21ebc48ce27c9d29836b634521a388c88a67acf0abaa4a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 原生模組"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Your React Native application code may need to interact with native platform APIs that aren't provided by React Native or an existing library. You can write the integration code yourself using a **Turbo Native Module**. This guide will show you how to write one.",
+      "source_content_hash": "9108944516bd3aeda0f5f6d2fe4b2a529f822165e663bdb8db4e3335207f9de2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您的 React Native 應用程式可能需要與 React Native 或現有函式庫未提供的原生平台 API 進行互動。您可以使用 **Turbo 原生模組**自行編寫整合程式碼。本指南將展示如何撰寫此類模組。"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "The basic steps are:",
+      "source_content_hash": "60d12842eb9d8f8319a0e680ded9c5683f29a3693c79921f6f59c61e3244b086",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "基本步驟如下："
+      }
+    },
+    {
+      "segment_id": "4269e691",
+      "source_content": "1. **define a typed JavaScript specification** using one of the most popular JavaScript type annotation languages: Flow or TypeScript;\n2. **configure your dependency management system to run Codegen**, which converts the specification into native language interfaces;\n3. **write your application code** using your specification; and\n4. **write your native platform code using the generated interfaces** to write and hook your native code into the React Native runtime environment.",
+      "source_content_hash": "e6a127b54fea4771f5c6893ebe86f2255ce05201e1fa5f7c554df0a8d4c145bd",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. **使用 Flow 或 TypeScript 等 JavaScript 類型註解語言定義一個類型化的 JavaScript 規格**；\n2. **配置您的依賴管理系統以執行 Codegen**，該工具會將規格轉換為原生語言介面；\n3. **使用您的規格撰寫應用程式程式碼**；以及\n4. **使用生成的介面撰寫原生平台程式碼**，將您的原生程式碼掛接到 React Native 運行時環境中。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "Lets work through each of these steps by building an example Turbo Native Module. The rest of this guide assume that you have created your application running the command:",
+      "source_content_hash": "7be26317963978fb4cfe33895545a3fb39f85b7ddd036dade2578e84054efb45",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓我們通過構建一個 Turbo 原生模組的範例來逐步完成這些步驟。本指南的其餘部分假設您已使用以下命令創建了應用程式："
+      }
+    },
+    {
+      "segment_id": "9eee5787",
+      "source_content": "```shell\nnpx @react-native-community/cli@latest init TurboModuleExample --version 0.76.0\n```",
+      "source_content_hash": "935e7aa70a867edea2a6a16f52a877be919689fe50a7f84cd19e38bea6271456",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9eee5787"
+      }
+    },
+    {
+      "segment_id": "79b2d0b9",
+      "source_content": "## Native Persistent Storage",
+      "source_content_hash": "ae9bf3ae4f5c8d670a67bab58a335a82e83eb0124df1ade5e01e53ec49653f2e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 原生持久化儲存"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "This guide will show you how to write an implementation of the [Web Storage API](https://html.spec.whatwg.org/multipage/webstorage.html#dom-localstorage-dev): `localStorage`. The API is relatable to a React developer who might be writing application code on your project.",
+      "source_content_hash": "da39469cdf816dc308e8266f7cac1dc8210c6cc33ba9804b3c1a0376bf184f3b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將展示如何實作 [Web Storage API](https://html.spec.whatwg.org/multipage/webstorage.html#dom-localstorage-dev) 的 `localStorage`。該 API 對於可能在您的專案上撰寫應用程式程式碼的 React 開發者來說是熟悉的。"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "To make this work on mobile, we need to use Android and iOS APIs:",
+      "source_content_hash": "95985ebc5afdaaf22884f87eb49294e72b3c155792f82688800dc73f5731ada2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了在移動設備上實現這一點，我們需要使用 Android 和 iOS 的 API："
+      }
+    },
+    {
+      "segment_id": "86b525ab",
+      "source_content": "- Android: [SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences), and\n- iOS: [NSUserDefaults](https://developer.apple.com/documentation/foundation/nsuserdefaults).",
+      "source_content_hash": "4025355ac1e9bd4b2045c2b021d1e802cd7e25a9b20fc1e138d99214b6234bb8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- Android: [SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences)，以及\n- iOS: [NSUserDefaults](https://developer.apple.com/documentation/foundation/nsuserdefaults)。"
+      }
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "### 1. Declare Typed Specification",
+      "source_content_hash": "34a64a8714fe940849ffbf3d5f43c63165a196672858641d4f56866acedd4d7d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 宣告類型化規格"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "React Native provides a tool called [Codegen](/the-new-architecture/what-is-codegen.md), which takes a specification written in TypeScript or Flow and generates platform specific code for Android and iOS. The specification declares the methods and data types that will pass back and forth between your native code and the React Native JavaScript runtime. A Turbo Native Module is both your specification, the native code you write, and the Codegen interfaces generated from your specification.",
+      "source_content_hash": "d5c76c6eb3edad658366776a085c8e719d2cab501a52ce0f75c1b3182c93962e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 提供了一個名為 [Codegen](/the-new-architecture/what-is-codegen.md) 的工具，該工具會讀取以 TypeScript 或 Flow 撰寫的規格，並為 Android 和 iOS 生成平台特定的程式碼。該規格宣告了將在您的原生程式碼和 React Native JavaScript 運行時之間傳遞的方法和資料類型。Turbo 原生模組既是您的規格，也是您撰寫的原生程式碼，以及從您的規格生成的 Codegen 介面。"
+      }
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "To create a specs file:",
+      "source_content_hash": "5ca1754d5e7bc793f1adfa9351562e3f65589d047c3aa2a73c222f6ee518897f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "創建規格檔案的步驟如下："
+      }
+    },
+    {
+      "segment_id": "8a01ee7b",
+      "source_content": "1. Inside the root folder of your app, create a new folder called `specs`.\n2. Create a new file called `NativeLocalStorage.ts`.",
+      "source_content_hash": "2ac57db51a3429cfde153c0708bc6f72a85d913cec06407910ab25fa411dea56",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在您的應用程式的根目錄中，創建一個名為 `specs` 的新資料夾。\n2. 創建一個名為 `NativeLocalStorage.ts` 的新檔案。"
+      }
+    },
+    {
+      "segment_id": "73f75a5c",
+      "source_content": ":::info\nYou can see all of the types you can use in your specification and the native types that are generated in the [Appendix](/appendix.md) documentation.\n:::",
+      "source_content_hash": "80338a629fb9e5792c79dca4c9ffb1a63a734549b4fd85be2e6ca76d65d17994",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n您可以在 [附錄](/appendix.md) 文件中查看所有可在規格中使用的類型以及生成的原生類型。\n:::"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Here is an implementation of the `localStorage` specification:",
+      "source_content_hash": "af57f866ac732e14d3eee6a05fd60f50b503fbbe21dcf3a65aceafee5769c2f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是 `localStorage` 規格的實作範例："
+      }
+    },
+    {
+      "segment_id": "ece60464",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\n```typescript title=\"specs/NativeLocalStorage.ts\"\nimport type {TurboModule} from 'react-native';\nimport {TurboModuleRegistry} from 'react-native';\n\nexport interface Spec extends TurboModule {\n  setItem(value: string, key: string): void;\n  getItem(key: string): string | null;\n  removeItem(key: string): void;\n  clear(): void;\n}\n\nexport default TurboModuleRegistry.getEnforcing<Spec>(\n  'NativeLocalStorage',\n);\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\n```flow title=\"NativeLocalStorage.js\"\nimport type {TurboModule} from 'react-native';\nimport {TurboModule, TurboModuleRegistry} from 'react-native';\n\nexport interface Spec extends TurboModule {\n  setItem(value: string, key: string): void;\n  getItem(key: string): ?string;\n  removeItem(key: string): void;\n  clear(): void;\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "e2bd2f7efbdabbde18bc6bacb85279268201d47846f22d1ab0f32c5d67920987",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ece60464"
+      }
+    },
+    {
+      "segment_id": "759d12dd",
+      "source_content": "### 2. Configure Codegen to run",
+      "source_content_hash": "9f46078b2ae9feadbcda5c0a23a8da001518dd92e9dd76fcd00937f200a6671b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 配置 Codegen 執行"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "The specification is used by the React Native Codegen tools to generate platform specific interfaces and boilerplate for us. To do this, Codegen needs to know where to find our specification and what to do with it. Update your `package.json` to include:",
+      "source_content_hash": "da316e7899c7161914caeb679d775595445fbdd613664f96ed07364c282de5c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "該規格由 React Native Codegen 工具使用，以生成平台特定的介面和樣板程式碼。為此，Codegen 需要知道在哪裡找到我們的規格以及如何處理它。更新您的 `package.json` 以包含以下內容："
+      }
+    },
+    {
+      "segment_id": "5dd0e3a7",
+      "source_content": "```json title=\"package.json\"\n     \"start\": \"react-native start\",\n     \"test\": \"jest\"\n   },\n   // highlight-add-start\n   \"codegenConfig\": {\n     \"name\": \"NativeLocalStorageSpec\",\n     \"type\": \"modules\",\n     \"jsSrcsDir\": \"specs\",\n     \"android\": {\n       \"javaPackageName\": \"com.nativelocalstorage\"\n     }\n   },\n   // highlight-add-end\n   \"dependencies\": {\n```",
+      "source_content_hash": "ccbe21f3d8fcc501210ef3249d48e2519da7b0fcad9f89d01ebf8ea664f168a7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5dd0e3a7"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "With everything wired up for Codegen, we need to prepare our native code to hook into our generated code.",
+      "source_content_hash": "720f084c91dedbe3bd9c6bd813257dfc0ad21896b3ac61524794bfd07ed6acee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在為 Codegen 配置好一切後，我們需要準備我們的原生程式碼以掛接到生成的程式碼中。"
+      }
+    },
+    {
+      "segment_id": "32dbde37",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n<TabItem value=\"android\" label=\"Android\">\nCodegen is executed through the `generateCodegenArtifactsFromSchema` Gradle task:\n\n```bash\ncd android\n./gradlew generateCodegenArtifactsFromSchema\n\nBUILD SUCCESSFUL in 837ms\n14 actionable tasks: 3 executed, 11 up-to-date\n```\n\nThis is automatically run when you build your Android application.\n</TabItem>\n<TabItem value=\"ios\" label=\"iOS\">\nCodegen is run as part of the script phases that's automatically added to the project generated by CocoaPods.\n\n```bash\ncd ios\nbundle install\nbundle exec pod install\n```\n\nThe output will look like this:\n\n```shell\n...\nFramework build type is static library\n[Codegen] Adding script_phases to ReactCodegen.\n[Codegen] Generating ./build/generated/ios/ReactCodegen.podspec.json\n[Codegen] Analyzing /Users/me/src/TurboModuleExample/package.json\n[Codegen] Searching for codegen-enabled libraries in the app.\n[Codegen] Found TurboModuleExample\n[Codegen] Searching for codegen-enabled libraries in the project dependencies.\n[Codegen] Found react-native\n...\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b7e4a8124986cffcc1c6d79f180c2e782d8e102f35564cc2e98670b647b8ca1c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_32dbde37"
+      }
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "### 3. Write Application Code using the Turbo Native Module",
+      "source_content_hash": "71e1b883ba383fecddfb48b0233d08557e3e0a60407413e22b4566d95f432310",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 使用 Turbo 原生模組撰寫應用程式程式碼"
+      }
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "Using `NativeLocalStorage`, here’s a modified `App.tsx` that includes some text we want persisted, an input field and some buttons to update this value.",
+      "source_content_hash": "ae332bbfb8a61822cdcf3fdb2a7486c262daa78d1b55de22c1e5aa661052e835",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 `NativeLocalStorage`，以下是修改後的 `App.tsx`，其中包含一些我們希望持久化的文字、一個輸入欄位和一些按鈕來更新這個值。"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "The `TurboModuleRegistry` supports 2 modes of retrieving a Turbo Native Module:",
+      "source_content_hash": "9d526b807b1f0b0db102c8ccafa5f579fac105b3cd264fdad95e5bc47ac2ac07",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`TurboModuleRegistry` 支援兩種檢索 Turbo 原生模組的模式："
+      }
+    },
+    {
+      "segment_id": "e99d73d3",
+      "source_content": "- `get<T>(name: string): T | null` which will return `null` if the Turbo Native Module is unavailable.\n- `getEnforcing<T>(name: string): T` which will throw an exception if the Turbo Native Module is unavailable. This assumes the module is always available.",
+      "source_content_hash": "30efe7f8478fab3762cc50f5c20e71cd02403f9f9c64fa3e3ec0ea0ad5f7b8cf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `get<T>(name: string): T | null`，如果 Turbo 原生模組不可用，則返回 `null`。\n- `getEnforcing<T>(name: string): T`，如果 Turbo 原生模組不可用，則會拋出異常。這假設模組始終可用。"
+      }
+    },
+    {
+      "segment_id": "5680b15c",
+      "source_content": "```tsx title=\"App.tsx\"\nimport React from 'react';\nimport {\n  SafeAreaView,\n  StyleSheet,\n  Text,\n  TextInput,\n  Button,\n} from 'react-native';\n\nimport NativeLocalStorage from './specs/NativeLocalStorage';\n\nconst EMPTY = '<empty>';\n\nfunction App(): React.JSX.Element {\n  const [value, setValue] = React.useState<string | null>(null);\n\n  const [editingValue, setEditingValue] = React.useState<\n    string | null\n  >(null);\n\n  React.useEffect(() => {\n    const storedValue = NativeLocalStorage?.getItem('myKey');\n    setValue(storedValue ?? '');\n  }, []);\n\n  function saveValue() {\n    NativeLocalStorage?.setItem(editingValue ?? EMPTY, 'myKey');\n    setValue(editingValue);\n  }\n\n  function clearAll() {\n    NativeLocalStorage?.clear();\n    setValue('');\n  }\n\n  function deleteValue() {\n    NativeLocalStorage?.removeItem('myKey');\n    setValue('');\n  }\n\n  return (\n    <SafeAreaView style={{flex: 1}}>\n      <Text style={styles.text}>\n        Current stored value is: {value ?? 'No Value'}\n      </Text>\n      <TextInput\n        placeholder=\"Enter the text you want to store\"\n        style={styles.textInput}\n        onChangeText={setEditingValue}\n      />\n      <Button title=\"Save\" onPress={saveValue} />\n      <Button title=\"Delete\" onPress={deleteValue} />\n      <Button title=\"Clear\" onPress={clearAll} />\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  text: {\n    margin: 10,\n    fontSize: 20,\n  },\n  textInput: {\n    margin: 10,\n    height: 40,\n    borderColor: 'black',\n    borderWidth: 1,\n    paddingLeft: 5,\n    paddingRight: 5,\n    borderRadius: 5,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "16e77e012da2cb579f26dc1767cf43f8c3d327047f216b4854a179bf28a05c62",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5680b15c"
+      }
+    },
+    {
+      "segment_id": "263073b1",
+      "source_content": "### 4. Write your Native Platform code",
+      "source_content_hash": "415868c53f16a4bcda90c4c983c611367ee44e23546affd73069e263d1dc1504",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 4. 撰寫您的原生平台程式碼"
+      }
+    },
+    {
+      "segment_id": "d119b75c",
+      "source_content": "With everything prepared, we're going to start writing native platform code. We do this in 2 parts:",
+      "source_content_hash": "24590d1b0d4d2c69606ccdc16b67ea9428b8f99fb4afc499abceedb109b4272b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在一切準備就緒後，我們將開始撰寫原生平台程式碼。我們分為兩部分進行："
+      }
+    },
+    {
+      "segment_id": "0b194c02",
+      "source_content": ":::note\nThis guide shows you how to create a Turbo Native Module that only works with the New Architecture. If you need to support both the New Architecture and the Legacy Architecture, please refer to our [backwards compatibility guide](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md).\n:::",
+      "source_content_hash": "6b5fe62a78e656050e364ce4e3674bef09bbc3481a545c870a5fbeb2196aee0d",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n本指南展示如何建立僅適用於新架構的 Turbo 原生模組。若需同時支援新架構與舊架構，請參閱我們的[向後相容性指南](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md)。\n:::"
+      }
+    },
+    {
+      "segment_id": "f8ba1091",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n    <TabItem value=\"android\" label=\"Android\">\n        <TurboNativeModulesAndroid />\n    </TabItem>\n    <TabItem value=\"ios\" label=\"iOS\">\n        <TurboNativeModulesIOS/>\n    </TabItem>\n</Tabs>",
+      "source_content_hash": "455903d3f15b59fc7baf26ef76160e2774fe1a2b4962f03e0ed3e0c8c7c95697",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f8ba1091"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/turbo-native-modules.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.047323+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "11d144ed5c0dda9f2d58d9f3b5d783e7065bd4a249221c8e2039c23e46d97735"
+  }
+}

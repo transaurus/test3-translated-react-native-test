@@ -1,0 +1,266 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.75/debugging.md",
+  "source_file_content_hash": "91fd3878adaf35177c1b8e0a9b01c7191bc9a704c9c49a502c6dd231dbda8d32",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: debugging\ntitle: Debugging Basics\n---",
+      "source_content_hash": "ff8bbf31f8509c7ea8e556d2bb1d20d41dd67a0b3c4e423b18fcdd865cfdabed",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Accessing the Dev Menu",
+      "source_content_hash": "2ce4091b69683e2536a6f864f396d5f37b9956c09c626c2673a710e9ecafd4e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "React Native provides an in-app developer menu which offers several debugging options. You can access the Dev Menu by shaking your device or via keyboard shortcuts:",
+      "source_content_hash": "cd3005d009e8bd4caeebd137d5168f5e8ef7881744a6a93764833167489f39ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "143e51c1",
+      "source_content": "- iOS Simulator: <kbd>Cmd ⌘</kbd> + <kbd>D</kbd> (or Device > Shake)\n- Android emulators: <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS) or <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows and Linux)",
+      "source_content_hash": "2e55d361632b98d00b2ebf91ff7843c8a646ac61647d77bbc700951029baec18",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "Alternatively for Android devices and emulators, you can run `adb shell input keyevent 82` in your terminal.",
+      "source_content_hash": "a3c8dd19d83b08387002e38e0836a4bfef76aee89c720f398ef39ae36c799650",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "![The React Native Dev Menu](/docs/assets/debugging-dev-menu.jpg)",
+      "source_content_hash": "49b14b88ac9a231f4b32fe35c9129317e7f55eb9443c545ce9f7158a06a59ece",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f55b9485",
+      "source_content": ":::note\nThe Dev Menu is disabled in release (production) builds.\n:::",
+      "source_content_hash": "2acaa8759b09df9c57d380a7a7a927f79b2a22d403888a4ab9b0fbad7afaddf6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "40f9552a",
+      "source_content": "## Opening the Debugger",
+      "source_content_hash": "f3273c4fd97c2bd150b9f1dc62023e7027b45e3d812f72320c36693318c82b6f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "The debugger allows you to understand and debug how your JavaScript code is running, similar to a web browser.",
+      "source_content_hash": "c4b4fc79601ec2a7477e4e863581c76627db2340709774d617195d79ae84e4e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b3596a2",
+      "source_content": ":::info\n**In Expo projects**, press <kbd>j</kbd> in the CLI to directly open the Hermes Debugger.\n:::",
+      "source_content_hash": "b38903f9dbb7d55643dd4efebff4e915e969df9d18fdbef5c3d2b9d0bde82df7",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ea37d64a",
+      "source_content": "<Tabs groupId=\"js-debugger\" queryString defaultValue={constants.defaultJsDebugger} values={constants.jsDebuggers}>\n<TabItem value=\"hermes\">\n\nHermes supports the Chrome debugger by implementing the Chrome DevTools Protocol. This means Chrome's tools can be used to directly debug JavaScript running on Hermes, on an emulator or on a physical device.\n\n1. In a Chrome browser window, navigate to `chrome://inspect`.\n2. Use the \"Configure...\" button to add the dev server address (typically `localhost:8081`).\n3. You should now see a \"Hermes React Native\" target with an **\"inspect\"** link. Click this to open the debugger.\n\n![Overview of Chrome's inspect interface and a connected Hermes debugger window](/docs/assets/debugging-hermes-debugger-instructions.jpg)\n\n</TabItem>\n<TabItem value=\"flipper\">\n\n[Flipper](https://fbflipper.com/) is a native debugging tool which provides JavaScript debugging capabilities for React Native via an embedded Chrome DevTools panel.\n\nTo debug JavaScript code in Flipper, select **\"Open Debugger\"** from the Dev Menu. Learn more about Flipper [here](https://fbflipper.com/docs/features/react-native/).\n\n:::info\nTo debug using Flipper, the Flipper app must be [installed on your system](https://fbflipper.com/docs/getting-started/).\n:::\n\n![The Flipper desktop app opened to the Hermes debugger panel](/docs/assets/debugging-flipper-console.jpg)\n\n:::warning\nDebugging React Native apps with Flipper is [deprecated in React Native 0.73](https://github.com/react-native-community/discussions-and-proposals/pull/641). We will eventually remove out-of-the box support for JS debugging via Flipper.\n:::\n\n:::tip\n\n#### Alternative debugging tools\n\nAs React Native transitions away from Flipper, we recommend other existing methods, including first party IDEs, to inspect your application's native code and behaviour.\n\n- [Debugging Native Code](./debugging-native-code)\n- <a href=\"https://shift.infinite.red/why-you-dont-need-flipper-in-your-react-native-app-and-how-to-get-by-without-it-3af461955109\" target=\"_blank\">Why you don’t need Flipper in your React Native app … and how to get by without it ↗</a>\n\n:::\n\n</TabItem>\n<TabItem value=\"new-debugger\">\n\n:::note\n**This is an experimental feature** and several features may not work reliably today. When this feature does launch in future, we intend for it to work more completely than the current debugging methods.\n:::\n\nThe React Native team is working on a new JavaScript debugger experience, intended to replace Flipper, with a preview available as of React Native 0.73.\n\nThe new debugger can be enabled via React Native CLI. This will also enable <kbd>j</kbd> to debug.\n\n```sh\nnpx react-native start --experimental-debugger\n```\n\nWhen selecting **\"Open Debugger\"** in the Dev Menu, this will launch the new debugger using Google Chrome or Microsoft Edge.\n\n![The new debugger frontend opened to the \"Welcome\" pane](/docs/assets/debugging-debugger-welcome.jpg)\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "df1412e796851605c83987515b4bb127d0399aaa369773a1ffd9fcac386d6a88",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "## React DevTools",
+      "source_content_hash": "b5f311672799e50ddec7b8d9740bfd221bb1cfa34625605effba1d4145ed7c25",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "You can use React DevTools to inspect the React element tree, props, and state.",
+      "source_content_hash": "b283138d58bce2155084ac888ab9e19cf8711890b62e9acae7f4ab63e1db54b1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "19913a56",
+      "source_content": "```sh\nnpx react-devtools\n```",
+      "source_content_hash": "c08d1ebbb1343ba552f4a7002bf6524e286b44bf53fb80fbdf51670668faae7b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "![A React DevTools window](/docs/assets/debugging-react-devtools-blank.jpg)",
+      "source_content_hash": "33f20c10cec96919d611fb6d3abce48dd5615c7830131133dc9d17b1d638beee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5064856a",
+      "source_content": ":::tip\n\n#### Learn how to use React DevTools!\n\n- [React DevTools guide](./react-devtools)\n- [React Developer Tools on react.dev](https://react.dev/learn/react-developer-tools)\n\n:::",
+      "source_content_hash": "db9ce0371892734ecdd70219843aa6040aebc06fd8a1a061d4f122e7903a5496",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "## LogBox",
+      "source_content_hash": "7acc997fbbe39eb75d08a7456fd6efaaa51decdadc53e00c6948142842fd1acd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "Errors and warnings in development builds are displayed in LogBox inside your app.",
+      "source_content_hash": "c9ca2947a2194c0a478c264b42824dd065c99edb3f2fe44c47ea53f1dc1a5b4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "![A LogBox warning and an expanded LogBox syntax error](/docs/assets/debugging-logbox.jpg)",
+      "source_content_hash": "bb9328ee749e0d82589da416bcaabcdc52b2a01a34b6f909287daa35d824878f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "379173ce",
+      "source_content": ":::note\nLogBox is disabled in release (production) builds.\n:::",
+      "source_content_hash": "cd02b3e078b9b9c5156db835bd42bbfffb4eea82de64da795089a9520df13912",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c7fa1e8d",
+      "source_content": "### Console Errors and Warnings",
+      "source_content_hash": "3f0b8a170e840b1e0a1929a7be35b9f93f74eec497cabd323e3ed41669d7d8f3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "Console errors and warnings are displayed as on-screen notifications with a red or yellow badge, and a notification count. To see more about an error or warning, tap the notification to see an expanded view and to paginate through other logs.",
+      "source_content_hash": "f73386e7f4c177bd2cb655806b4420b55d93b3e6d0b6b5e7ed0f157f2a9522fa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "LogBox notifications can be disabled using `LogBox.ignoreAllLogs()`. This can be useful when giving product demos, for example. Additionally, notifications can be disabled on a per-log basis via `LogBox.ignoreLogs()`. This can be useful for noisy warnings or those that cannot be fixed, e.g. in a third-party dependency.",
+      "source_content_hash": "d4e201565c76d64b16d757b2e895a86ee208378242c55c9e022d3055cf885380",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9913b39e",
+      "source_content": ":::info\nIgnore logs as a last resort and create a task to fix any logs that are ignored.\n:::",
+      "source_content_hash": "7893c96ec458f5f6cd75825ed464a9fb41f2c14740ef2805cf97b72edb16a262",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5be4f25e",
+      "source_content": "```js\nimport {LogBox} from 'react-native';\n\n// Ignore log notification by message\nLogBox.ignoreLogs([\n  // Exact message\n  'Warning: componentWillReceiveProps has been renamed',\n\n  // Substring or regex match\n  /GraphQL error: .*/,\n]);\n\n// Ignore all log notifications\nLogBox.ignoreAllLogs();\n```",
+      "source_content_hash": "58b58d778615db23dcb7f4612f698ca63647f418c918bd0cb5e502f044364682",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "### Syntax Errors",
+      "source_content_hash": "4c446605c271e174bea81061a0d20855dbd113f09f0e28f94f8989d4abee6d08",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "When a JavaScript syntax error occurs, LogBox will open with the location of the error. In this state, LogBox is not dismissable since your code cannot be executed. LogBox will automatically dismiss once the syntax error is fixed — either via Fast Refresh or after a manual reload.",
+      "source_content_hash": "6ade4db8f66f808c09ae87ce2f64d06632932ae18ab16a1e16cb407ca9569d2e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "## Performance Monitor",
+      "source_content_hash": "cf243bb2c6c0d9fd0fad28d295cabb7499b02d988f249ee2af1fcaaf81ebe113",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "On Android and iOS, an in-app performance overlay can be toggled during development by selecting **\"Perf Monitor\"** in the Dev Menu. Learn more about this feature [here](/docs/performance).",
+      "source_content_hash": "bb7f897be36ecbe5e1f77bead6f530c04ba7d6d67b2d65b0dc11df8d1b98006e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "![The Performance Monitor overlay on iOS and Android](/docs/assets/debugging-performance-monitor.jpg)",
+      "source_content_hash": "bcb320ed51d2e9a99708d37b36db0e41c0c744f369defcc95223a1cf4e21a69d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "abf8393b",
+      "source_content": ":::info\nThe Performance Monitor runs in-app and is a guide. We recommend investigating the native tooling under Android Studio and Xcode for accurate performance measurements.\n:::",
+      "source_content_hash": "40cfd646097061eda909a66500b2fffdcc85bc6905ddd0952d732c771f5f9026",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.75/debugging.md",
+  "last_updated_timestamp": "2025-06-18T17:57:12.742795+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

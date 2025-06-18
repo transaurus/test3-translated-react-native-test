@@ -1,0 +1,902 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2024-04-22-release-0.74.md",
+  "source_file_content_hash": "5a208afd1bba8db5427c60ab06c36f897fa2b81fef41ccd652a9cd41e78d799e",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.74 - Yoga 3.0, Bridgeless New Architecture, and more'\nauthors: [hurali, alanjhughes, alfonsocj, huntie, cortinico]\ntags: [announcement, release, yoga]\ndate: 2024-04-22\n---",
+      "source_content_hash": "7e557051cd1ae5e1dc290a4895cf5f563c1d17aa8c0501c5d05c636325ca1da7",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "Today we're releasing React Native 0.74! This release adds Yoga 3.0, Bridgeless by default under the New Architecture, batched `onLayout` updates (New Architecture), and Yarn 3 as the default package manager for new projects.",
+      "source_content_hash": "60267979606662f58dd8d55ce0837c0265eab60ee376deffd81456cb8b3ff42e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們正式發佈 React Native 0.74！此版本新增了 Yoga 3.0 佈局引擎、在新架構中預設啟用無橋接模式(Bridgeless)、批次處理 `onLayout` 更新（新架構功能），並將 Yarn 3 設為新專案的預設套件管理工具。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "We are also removing deprecated APIs, with the removal of `PropTypes` and breaking changes to `PushNotificationIOS`. On Android, SDK 23 (Android 6.0) is now the minimum supported version.",
+      "source_content_hash": "21cf9a13738d2fed1b42669c023f61ea869c879b18255e46b279a4c63b25e9d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們同時移除了多項已棄用的 API，包括刪除 `PropTypes` 以及對 `PushNotificationIOS` 進行重大變更。在 Android 平台，最低支援版本現在提升至 SDK 23（Android 6.0）。"
+      }
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "9e760345",
+      "source_content": "- [Yoga 3.0](/blog/2024/04/22/release-0.74#yoga-30)\n- [New Architecture: Bridgeless by Default](/blog/2024/04/22/release-0.74#new-architecture-bridgeless-by-default)\n- [New Architecture: Batched `onLayout` Updates](/blog/2024/04/22/release-0.74#new-architecture-batched-onlayout-updates)\n- [Yarn 3 for New Projects](/blog/2024/04/22/release-0.74#yarn-3-for-new-projects)",
+      "source_content_hash": "44f786c7c30550e3fb7baea5a1b3b03cb49d438656e6195f594083a95fd07faf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Yoga 3.0](/blog/2024/04/22/release-0.74#yoga-30)\n- [新架構：預設啟用無橋接模式](/blog/2024/04/22/release-0.74#new-architecture-bridgeless-by-default)\n- [新架構：批次處理 `onLayout` 更新](/blog/2024/04/22/release-0.74#new-architecture-batched-onlayout-updates)\n- [新專案預設使用 Yarn 3](/blog/2024/04/22/release-0.74#yarn-3-for-new-projects)"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "### Breaking Changes",
+      "source_content_hash": "b20bc465acc06c0341aa5cea47dcbd02f8d0db580f667ab00da54cd49654879a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重大變更"
+      }
+    },
+    {
+      "segment_id": "0787cf7f",
+      "source_content": "- [Android Minimum SDK Bump (Android 6.0)](/blog/2024/04/22/release-0.74#android-minimum-sdk-bump-android-60)\n- [API Changes to PushNotificationIOS (Deprecated)](/blog/2024/04/22/release-0.74#api-changes-to-pushnotificationios-deprecated)\n- [Removal of Deprecated `PropTypes`](/blog/2024/04/22/release-0.74#removal-of-deprecated-proptypes)\n- [Removal of Flipper React Native Plugin](/blog/2024/04/22/release-0.74#removal-of-flipper-react-native-plugin)\n- [Other Breaking Changes](/blog/2024/04/22/release-0.74#other-breaking-changes)",
+      "source_content_hash": "ffa648a255dfa9189b76218a848c3858cca4c9efeae84f14c62fca168add7552",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Android 最低 SDK 版本提升（Android 6.0）](/blog/2024/04/22/release-0.74#android-minimum-sdk-bump-android-60)\n- [PushNotificationIOS API 變更（已棄用）](/blog/2024/04/22/release-0.74#api-changes-to-pushnotificationios-deprecated)\n- [移除已棄用的 `PropTypes`](/blog/2024/04/22/release-0.74#removal-of-deprecated-proptypes)\n- [移除 Flipper React Native 插件](/blog/2024/04/22/release-0.74#removal-of-flipper-react-native-plugin)\n- [其他重大變更](/blog/2024/04/22/release-0.74#other-breaking-changes)"
+      }
+    },
+    {
+      "segment_id": "c5c72dc0",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c5c72dc0"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點功能詳述"
+      }
+    },
+    {
+      "segment_id": "48847fd4",
+      "source_content": "### Yoga 3.0",
+      "source_content_hash": "419a0d5f777fa60e6f1bbaeb764eff315835050a95b769fc9a06f28eee474a57",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Yoga 3.0"
+      }
+    },
+    {
+      "segment_id": "0037ff70",
+      "source_content": "#### New Layout Behaviors",
+      "source_content_hash": "b4e148021241d0aa14938bbd51853d17bc386a56e547ec6b960f6b03be7e83ef",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 新版佈局行為"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "React Native 0.74 includes [Yoga 3.0](https://yogalayout.dev/blog/announcing-yoga-3.0), the newest version of our layout engine. Yoga 3.0 improves layout by making styling more predictable, and supports rendering components written for the web.",
+      "source_content_hash": "60ad7ca9ed0ceb4e74656e7f2feb71e9ffc7c770c217beaa38ce74eebfe000f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.74 搭載了 [Yoga 3.0](https://yogalayout.dev/blog/announcing-yoga-3.0) 佈局引擎。此版本透過更可預測的樣式處理來改善佈局，並支援渲染為網頁編寫的元件。"
+      }
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "React Native continues to intentionally preserve some incorrect layout behaviors, where fixing them was found to effect a significant number of real-world components. Layout conformance will be able to be configured more granularly in future versions of React Native.",
+      "source_content_hash": "629a66dfb2c31326b18d71454d71bd68ada99fcf9ed285cdd545cb3d3f48c647",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 仍會刻意保留某些不正確的佈局行為，因為修正這些行為會影響大量現有元件。未來版本將提供更細緻的佈局一致性配置選項。"
+      }
+    },
+    {
+      "segment_id": "84650edb",
+      "source_content": ":::warning\n\nReact Native [previously flipped](https://yogalayout.dev/blog/announcing-yoga-3.0#correct-handling-of-logical-edges-in-row-reverse-containers) `left`/`right` (and `start`/`end`) edges when dealing with `margin`, `padding`, or `border`, set on a `row-reverse` container. Now, behavior of these properties lines up with web. Code which previously relied on edges being inverted may need to be updated to continue rendering correctly.\n\n<table>\n<tr>\n  <th>Style</th>\n  <th>Before</th>\n  <th>After</th>\n</tr>\n<tr>\n<td width=\"350\">\n\n```jsx\n<View\n  style={{\n    flexDirection: 'row',\n    backgroundColor: 'red',\n    margin: 10,\n    width: 200,\n    height: 100,\n  }}>\n  <View\n    style={{\n      flexDirection: 'row-reverse',\n      backgroundColor: 'blue',\n      flex: 1,\n      marginLeft: 50,\n    }}>\n    <View\n      style={{\n        backgroundColor: 'green',\n        height: '50%',\n        flex: 1,\n        marginLeft: 50,\n      }}\n    />\n  </View>\n</View>\n```\n\n</td>\n<td>\n\n![Previous layout](/blog/assets/0.74-row-reverse-before.png)\n\n</td>\n<td>\n\n![New layout](/blog/assets/0.74-row-reverse-after.png)\n\n</td>\n</tr>\n</table>\n\n:::",
+      "source_content_hash": "ad359d86218106c2ba96b0c5d3630870be8c9572709bb0cf93bc7bc21ff981fd",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n\nReact Native [先前會翻轉](https://yogalayout.dev/blog/announcing-yoga-3.0#correct-handling-of-logical-edges-in-row-reverse-containers) `row-reverse` 容器中設定的 `left`/`right`（及 `start`/`end`）邊距、內距或邊框。現在這些屬性的行為已與網頁標準一致。若原有程式碼依賴邊緣翻轉特性，可能需要調整才能正確渲染。\n\n<table>\n<tr>\n  <th>樣式</th>\n  <th>變更前</th>\n  <th>變更後</th>\n</tr>\n<tr>\n<td width=\"350\">\n\n```jsx\n<View\n  style={{\n    flexDirection: 'row',\n    backgroundColor: 'red',\n    margin: 10,\n    width: 200,\n    height: 100,\n  }}>\n  <View\n    style={{\n      flexDirection: 'row-reverse',\n      backgroundColor: 'blue',\n      flex: 1,\n      marginLeft: 50,\n    }}>\n    <View\n      style={{\n        backgroundColor: 'green',\n        height: '50%',\n        flex: 1,\n        marginLeft: 50,\n      }}\n    />\n  </View>\n</View>\n```\n\n</td>\n<td>\n\n![舊版佈局](/blog/assets/0.74-row-reverse-before.png)\n\n</td>\n<td>\n\n![新版佈局](/blog/assets/0.74-row-reverse-after.png)\n\n</td>\n</tr>\n</table>\n\n:::"
+      }
+    },
+    {
+      "segment_id": "5baf88e2",
+      "source_content": "#### Support for `align-content: 'space-evenly'`",
+      "source_content_hash": "ba33b1e11105f4dbe2088c5e363f60612febfb8ba49f9e9869f52de5929b9364",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 支援 `align-content: 'space-evenly'`"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "Yoga 3.0 brings support for [`alignContent: 'space-evenly'`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content#space-evenly). `space-evenly` distributes the lines in a multi-line flex container using evenly spaced gaps, placed between line and container edges.",
+      "source_content_hash": "b37938f30d8846772a5dc96f8a0a12fba4e3442a80f561bd15cba596488948e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Yoga 3.0 新增了對 [`alignContent: 'space-evenly'`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content#space-evenly) 的支援。`space-evenly` 會在多行彈性容器中均勻分配行間距，使各行與容器邊緣之間的間距相等。"
+      }
+    },
+    {
+      "segment_id": "45444c80",
+      "source_content": "<figure>\n  <img alt=\"Visual reference for alignContent behaviors\" src=\"/blog/assets/0.74-align-content.png\" width=\"360\" />\n  <figcaption><small>Source: [World Wide Web Consortium](https://www.w3.org/TR/css-align-3/#distribution-values)</small></figcaption>\n</figure>",
+      "source_content_hash": "1eef4dcb950c11e01ddb6a0c2d4055f6ed6d5a7435f08c3d6bbf897226be22cc",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_45444c80"
+      }
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "#### Support for `position: 'static'`",
+      "source_content_hash": "5c693e42040f89b24a8c251ff463fa3a88859b1353014e704748498777c15066",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 支援 `position: 'static'`"
+      }
+    },
+    {
+      "segment_id": "467b2691",
+      "source_content": ":::info\n`position: 'static'` is supported only in the New Architecture.\n:::",
+      "source_content_hash": "4e656fed9dacf34458be9f9a9308dbcc74d0ef703a1064213792bb6c21454978",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n`position: 'static'` 僅在新架構中支援。\n:::"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Elements marked as [`position: 'static'`](https://developer.mozilla.org/en-US/docs/Web/CSS/position#static) may not be offset, and are not considered when determining the [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block) of an absolutely positioned element. This allows positioning an element relative to an ancestor which is not its direct parent.",
+      "source_content_hash": "83a2dcafd81f55bf32bfa3f84d7cb26ad20f8451d71f29fe9a19a6d32546a199",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "標記為 [`position: 'static'`](https://developer.mozilla.org/en-US/docs/Web/CSS/position#static) 的元素不會偏移，也不會被視為決定絕對定位元素的 [包含區塊](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block)。這允許將元素定位在非直接父元素的祖先元素相對位置。"
+      }
+    },
+    {
+      "segment_id": "65095059",
+      "source_content": "<table>\n<tr>\n<td width=\"350\">\n\n```jsx\n<View\n  style={{\n    backgroundColor: 'blue',\n    width: 200,\n    height: 200,\n    flexDirection: 'row-reverse',\n  }}>\n  <View\n    style={{\n      backgroundColor: 'red',\n      width: 100,\n      height: 100,\n      position: 'static',\n    }}>\n    <View\n      style={{\n        backgroundColor: 'green',\n        width: 25,\n        height: '25%',\n        left: 25,\n        top: 25,\n        position: 'absolute',\n      }}\n    />\n  </View>\n</View>\n```\n\n</td>\n<td width=\"300\">\n\n![Static Example](/blog/assets/0.74-static-example.png)\n\n</td>\n</tr>\n</table>",
+      "source_content_hash": "bec85d658e41ff7d357e952998ba7a89c5a2193ae1a924716c2bc57690af2190",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_65095059"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "Notice how the green `<View>` declares `left` and `top` and it is positioned relative to the blue `<View>`, not its parent.",
+      "source_content_hash": "a2c75601baaa68da6889fa316619708deef4d9d39424082577f4624ed6aaeca1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意綠色 `<View>` 宣告了 `left` 和 `top`，它是相對於藍色 `<View>` 而非其父元素定位的。"
+      }
+    },
+    {
+      "segment_id": "63565425",
+      "source_content": "React Native continues to default to `position: 'relative'` when no `position` is set.",
+      "source_content_hash": "cbd04c8e6e619247970fae3a3333a2ccdd32cc759eef3afc5cd9285224c075fc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 在未設定 `position` 時仍預設為 `position: 'relative'`。"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### New Architecture: Bridgeless by Default",
+      "source_content_hash": "b45defeefa9421c8f04f7929f30ec3b79e717888dfdbf60225ced1b1fa319638",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新架構：預設啟用無橋接模式"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "In this release, we are making Bridgeless Mode the default when the New Architecture is enabled. You can learn more about our switch to Bridgeless as the default in [this post](https://github.com/reactwg/react-native-new-architecture/discussions/174). To make the transition smoother we enhanced the interop layers to cover Bridgeless and worked with several libraries to make sure they will work in Bridgeless from day one.",
+      "source_content_hash": "03ca911e0eb9efac1b84c310851ad18e81914d543b76802979775a8166a2cb74",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此版本中，當啟用新架構時，我們將無橋接模式設為預設值。您可以在[這篇文章](https://github.com/reactwg/react-native-new-architecture/discussions/174)中了解更多關於我們將無橋接設為預設的轉換過程。為了使過渡更順利，我們增強了互操作層以涵蓋無橋接模式，並與多個函式庫合作確保它們從第一天起就能在無橋接模式下運作。"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "Bridgeless is not the only interop layer we worked on: we improved the New Renderer Interop layers too. The most exciting bit is that it is now enabled by default: you don't need to specify the components that have to go through it! You can read more about them [here](https://github.com/reactwg/react-native-new-architecture/discussions/175).",
+      "source_content_hash": "ccf85da8d066609e9f14b2ed0a8c91b6a519bc873eec43eaae891e36f2b3ba43",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "無橋接並非我們唯一改進的互操作層：我們也改善了新渲染器的互操作層。最令人興奮的是，它現在預設啟用：您無需指定需要通過它的元件！您可以在[這裡](https://github.com/reactwg/react-native-new-architecture/discussions/175)閱讀更多相關資訊。"
+      }
+    },
+    {
+      "segment_id": "2dbfc5f7",
+      "source_content": "Finally, if you want to learn more about the New Architecture, you can find documentation in the [react-native-new-architecture](https://github.com/reactwg/react-native-new-architecture/tree/main/docs) repo. When the New Architecture becomes the default, this information will be incorporated into [reactnative.dev](https://reactnative.dev).",
+      "source_content_hash": "f8d014ef62c6eaacfc8a3b89ba5d5e2cb9c40c95475592f7c34b1a1ad5b4f481",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，如果您想了解更多關於新架構的資訊，可以在 [react-native-new-architecture](https://github.com/reactwg/react-native-new-architecture/tree/main/docs) 儲存庫中找到文件。當新架構成為預設時，這些資訊將被整合到 [reactnative.dev](https://reactnative.dev) 中。"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "### New Architecture: Batched `onLayout` updates",
+      "source_content_hash": "f16034a73496f4116ff6825e6079131cecbbcefdb6094b0bec5f45c2d30b6c22",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新架構：批次處理 `onLayout` 更新"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "State updates in `onLayout` callbacks are now batched. Previously, each state update in the `onLayout` event would result in a new render commit.",
+      "source_content_hash": "55a94832e67369208de1d959080f8fc421427f04c6c7c0262768a1dcf845a2e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在，`onLayout` 回調中的狀態更新會被批次處理。以前，`onLayout` 事件中的每個狀態更新都會導致新的渲染提交。"
+      }
+    },
+    {
+      "segment_id": "8ecb92db",
+      "source_content": "```jsx\nfunction MyComponent(props) {\n  const [state1, setState1] = useState(false);\n  const [state2, setState2] = useState(false);\n\n  return (\n    <View>\n      <View\n        onLayout={() => {\n          setState1(true);\n       }}>\n      <View\n         onLayout={() => {\n          // When this event is executed, state1's new value is no longer observable here.\n          setState2(true);\n        }}>\n      </View>\n    </View>\n  );\n}\n```",
+      "source_content_hash": "a03a91803f72753ad671c9b8defdae1ff4951dbeef5579eba3e475c22f618662",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8ecb92db"
+      }
+    },
+    {
+      "segment_id": "295367fa",
+      "source_content": "In 0.74, `setState1` and `setState2` updates are batched together. This change is [expected behavior in React](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates) and allows for less re-renders.",
+      "source_content_hash": "52308a48edb1f0baedc659d45869473901e2011160d73df7da63460a71886ad5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.74 版本中，`setState1` 和 `setState2` 的更新會被批次處理在一起。此變更符合 [React 的預期行為](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates)，可以減少重新渲染的次數。"
+      }
+    },
+    {
+      "segment_id": "61a348bf",
+      "source_content": ":::danger\nThis change **may break code** that has relied on un-batched state updates. You'll need to refactor this code to use [updater functions](https://react.dev/learn/queueing-a-series-of-state-updates#updating-the-same-state-multiple-times-before-the-next-render) or equivalent.\n:::",
+      "source_content_hash": "fa994ae96396980c8b732f50a1760210f7be8dda7e1e9687ddfa497eebd9aac4",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::danger\n此變更**可能會破壞**依賴非批次狀態更新的程式碼。您需要重構此程式碼以使用 [更新函數](https://react.dev/learn/queueing-a-series-of-state-updates#updating-the-same-state-multiple-times-before-the-next-render) 或等效方法。\n:::"
+      }
+    },
+    {
+      "segment_id": "17fd5988",
+      "source_content": "### Yarn 3 for New Projects",
+      "source_content_hash": "7af99f6747c5de37f8d23a707672a6389f850c8027806b5e6cd249f9772e3ab7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新專案預設使用 Yarn 3"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "[Yarn 3](https://yarnpkg.com/blog/release/3.0) is now the default JavaScript package manager for new projects initialized with React Native Community CLI.",
+      "source_content_hash": "7f5680a199cdaecad38cfa2ddca66a53619bef333bc697498741556a95ece639",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Yarn 3](https://yarnpkg.com/blog/release/3.0) 現在是使用 React Native Community CLI 初始化新專案時的預設 JavaScript 套件管理工具。"
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "Yarn 3.x will be used with `nodeLinker: node-modules`, a mode providing compatibility with React Native libraries. This replaces Yarn Classic (1.x, deprecated) as the previous default. To upgrade Yarn version inside your existing app you can follow this [guide](https://yarnpkg.com/migration/guide).",
+      "source_content_hash": "6d59d1ae92e8ecdb0bf2ce139802dc6bb66c4a720e45937cd3f2ffaba6045620",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Yarn 3.x 將使用 `nodeLinker: node-modules` 模式，這是一種提供與 React Native 函式庫相容性的模式。這取代了 Yarn Classic (1.x，已棄用) 作為先前的預設值。要升級現有應用中的 Yarn 版本，您可以遵循此[指南](https://yarnpkg.com/migration/guide)。"
+      }
+    },
+    {
+      "segment_id": "117486ca",
+      "source_content": "```sh\n$ yarn --help\n━━━ Yarn Package Manager - 3.6.4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  $ yarn <command>\n```",
+      "source_content_hash": "2be3ea2267892c8835592fde0865ddbbc68e096764018ac593095bd105d43e80",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_117486ca"
+      }
+    },
+    {
+      "segment_id": "1f9058cd",
+      "source_content": "The Community CLI also supports initializing projects with other package managers via the `--pm` flag ([read more](https://github.com/react-native-community/cli/blob/main/docs/init.md)).",
+      "source_content_hash": "b751a138f83f470813a7a7dfc142e3315b2a49f3d8bb2d2363d3e7cc9e2bb360",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "社群 CLI 也支援透過 `--pm` 旗標初始化使用其他套件管理器的專案（[了解更多](https://github.com/react-native-community/cli/blob/main/docs/init.md)）。"
+      }
+    },
+    {
+      "segment_id": "dd21637d",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重大變更"
+      }
+    },
+    {
+      "segment_id": "49007f24",
+      "source_content": "### Android Minimum SDK Bump (Android 6.0)",
+      "source_content_hash": "9d76bbefc8aeea8d5ce0ac6e0a80ce31511171ff55acb6c2c332033bc83fd28b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android 最低 SDK 版本提升 (Android 6.0)"
+      }
+    },
+    {
+      "segment_id": "be0f7233",
+      "source_content": "React Native 0.74 has a minimum Android SDK version requirement of 23 (Android 6.0). Previously, this was Android 5.0 (API 21). See our context for this change [here](https://github.com/react-native-community/discussions-and-proposals/discussions/740).",
+      "source_content_hash": "d8a2ea92e793b22e99197ece0ff6b2f3ee6e739cfa19a5df32f238958703b4be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.74 的最低 Android SDK 版本要求為 23 (Android 6.0)。先前版本為 Android 5.0 (API 21)。此變更的背景說明請參閱[此處](https://github.com/react-native-community/discussions-and-proposals/discussions/740)。"
+      }
+    },
+    {
+      "segment_id": "dc825187",
+      "source_content": "#### Bonus: Android app size reduction",
+      "source_content_hash": "e7f0c90b15a4e4df64ca9d3a460857b8e6a24d649d78b12afd7a364dcfc0c331",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 額外好處：Android 應用程式體積縮減"
+      }
+    },
+    {
+      "segment_id": "833ce577",
+      "source_content": "The minimum SDK bump, together with several improvements at our native build, allowed us to greatly reduce the app size on user devices.",
+      "source_content_hash": "c324d3617c75b54e9c94b1b64533c9e191b3e0a60518e3851df33ec564422fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最低 SDK 版本提升，加上我們在原生建置方面的多項改進，使得使用者裝置上的應用程式體積大幅減少。"
+      }
+    },
+    {
+      "segment_id": "f6479c91",
+      "source_content": "For example a newly created app with React Native 0.74 occupies ~13% less space on user device, resulting in ~4MB saved on device.",
+      "source_content_hash": "cc04b0cf7e02ffd82a9769133c7883bbff9a84b66292fc6510314586a02af996",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，新建立的 React Native 0.74 應用程式在使用者裝置上佔用的空間減少了約 13%，相當於節省了約 4MB 的裝置儲存空間。"
+      }
+    },
+    {
+      "segment_id": "61e5dad6",
+      "source_content": "![Side-by-side comparison of a new React Native app in the Android system storage view](/blog/assets/0.74-android-app-size.jpg)",
+      "source_content_hash": "8c71c8551b1774043fbec617411777d8ce86d04f3225bf3b1aee186358416341",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Android 系統儲存檢視中新舊 React Native 應用程式的並排比較](/blog/assets/0.74-android-app-size.jpg)"
+      }
+    },
+    {
+      "segment_id": "43662a16",
+      "source_content": "### Removal of Deprecated `PropTypes`",
+      "source_content_hash": "560afd5fb4c4ec0f0119c4271fd42c6c17ceb1b15a74863aeaa7745fa849ad0b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除已棄用的 `PropTypes`"
+      }
+    },
+    {
+      "segment_id": "85821ad3",
+      "source_content": "Before 0.74, React Native continued to ship with `PropTypes`, an API that has been deprecated since React 15.5 in 2017! We are now removing all built-in `PropTypes` from React Native, reducing app size (26.4kB in a minified bundle) and memory overhead.",
+      "source_content_hash": "15858aaee28268126804be43626a7b24b846b692dad5c787db6272aaec7276a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.74 版本之前，React Native 仍內建提供 `PropTypes`，這個 API 自 2017 年 React 15.5 起已被棄用！我們現在將從 React Native 中移除所有內建的 `PropTypes`，從而減少應用程式體積（在壓縮後的套件中減少 26.4kB）和記憶體開銷。"
+      }
+    },
+    {
+      "segment_id": "228d01d5",
+      "source_content": "The following `PropTypes` properties are removed: `Image.propTypes`, `Text.propTypes`, `TextInput.propTypes`, `ColorPropType`, `EdgeInsetsPropType`, `PointPropType`, `ViewPropTypes` (see [commit](https://github.com/facebook/react-native/commit/228cb80af9ded20107f3c7a30ffe00e24471bfeb)).",
+      "source_content_hash": "ee0f2c8e8a28963d8f281d8d7cee0705360f36ad3eaa265aafeab054f282643d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下 `PropTypes` 屬性已被移除：`Image.propTypes`、`Text.propTypes`、`TextInput.propTypes`、`ColorPropType`、`EdgeInsetsPropType`、`PointPropType`、`ViewPropTypes`（參見[提交記錄](https://github.com/facebook/react-native/commit/228cb80af9ded20107f3c7a30ffe00e24471bfeb)）。"
+      }
+    },
+    {
+      "segment_id": "85b17c36",
+      "source_content": "If your app or library relies on `PropTypes`, we highly recommend migrating to a type system like TypeScript.",
+      "source_content_hash": "65ba179d1e05abceaa7c39d1930ddcc60221069e92111fbf0417cfb741047cd8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您的應用程式或函式庫依賴 `PropTypes`，我們強烈建議遷移到 TypeScript 等型別系統。"
+      }
+    },
+    {
+      "segment_id": "f210f942",
+      "source_content": "### API Changes to PushNotificationIOS (Deprecated)",
+      "source_content_hash": "05a4436ad09c1f55041d882e1d323903b752c92311f5abb91aef8d2e37f8487f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### PushNotificationIOS（已棄用）的 API 變更"
+      }
+    },
+    {
+      "segment_id": "2dbbb313",
+      "source_content": "In React Native 0.74, we are making steps to remove the deprecated [PushNotificationIOS](https://reactnative.dev/docs/pushnotificationios) library. The changes in this release are focused on removing references to older iOS APIs. PushNotificationIOS has been migrated onto Apple’s [User Notifications](https://developer.apple.com/documentation/usernotifications?language=objc) framework and exposes new APIs for scheduling and handling notifications.",
+      "source_content_hash": "7ad1e6bce65bd26dd8b9927d9610c6bd8ea116661c99337a1e9eafb5406a0bf2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 0.74 中，我們正逐步移除已棄用的 [PushNotificationIOS](https://reactnative.dev/docs/pushnotificationios) 函式庫。此版本的變更主要聚焦於移除對舊版 iOS API 的引用。PushNotificationIOS 已遷移至 Apple 的 [User Notifications](https://developer.apple.com/documentation/usernotifications?language=objc) 框架，並公開了用於排程和處理通知的新 API。"
+      }
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "In the next release (0.75), we are planning to **remove this library**, relocating it out of React Native core and into the community package, [@react-native-community/push-notification-ios](https://github.com/react-native-push-notification/ios). If you are still relying on PushNotificationIOS, you’ll need to migrate over before the next release.",
+      "source_content_hash": "be43a6c59eb70cff78893c085b14157939ac7646f0f0f568bb74c83facd3fbe2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在下一個版本 (0.75) 中，我們計劃**移除此函式庫**，將其從 React Native 核心中移除並轉移至社群套件 [@react-native-community/push-notification-ios](https://github.com/react-native-push-notification/ios)。如果您仍依賴 PushNotificationIOS，您需要在下一版本發布前完成遷移。"
+      }
+    },
+    {
+      "segment_id": "2f833a4d",
+      "source_content": "#### API Changes",
+      "source_content_hash": "6d91c8d1921964009cfccdebe49a70ae234226a15603363730f7e69bda9b63b8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### API 變更"
+      }
+    },
+    {
+      "segment_id": "dfb6fc67",
+      "source_content": "The `didRegisterUserNotificationSettings:` callback on `RCTPushNotificationManager` was a no-op and has been deleted.",
+      "source_content_hash": "58c94f40b7251bd89b438b15de3571912fc7bae548276725b601cfaad9bf6f1a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`RCTPushNotificationManager` 上的 `didRegisterUserNotificationSettings:` 回調函式已無實際作用，現已刪除。"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "The following callbacks on `RCTPushNotificationManager` have been deprecated and will be removed in 0.75:",
+      "source_content_hash": "2dfca416f2f560ac40b3fdd1d20d36e0a8dd410efbf3b57432864a766f9acf91",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下 `RCTPushNotificationManager` 上的回調函式已被棄用，將在 0.75 版本中移除："
+      }
+    },
+    {
+      "segment_id": "4f217d4a",
+      "source_content": "```objectivec\n+ (void)didReceiveLocalNotification:(UILocalNotification *)notification;\n+ (void)didReceiveRemoteNotification:(NSDictionary *)notification;\n```",
+      "source_content_hash": "366f5d2f0d530246ef11ef747409fb08109421985bfdf1e2af594581212e9a0b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4f217d4a"
+      }
+    },
+    {
+      "segment_id": "65be34cb",
+      "source_content": "In order to retrieve the notification which launched the app using `getInitialNotification()`, you’ll now need to explicitly set the `initialNotification` on `RCTPushNotificationManager`:",
+      "source_content_hash": "b5c133a655037ea3637ff7bc3ff5b5e1170e78512221ddd3116a8f3ee099de12",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要使用 `getInitialNotification()` 取得啟動應用程式的通知，您現在需要明確設定 `RCTPushNotificationManager` 上的 `initialNotification`："
+      }
+    },
+    {
+      "segment_id": "f4341a93",
+      "source_content": "```objectivec\n[RCTPushNotificationManager setInitialNotification:response.notification];\n```",
+      "source_content_hash": "67b2ea4050fdb1dcc425c2271cce9b0d0cfe9a9d3607acd631158993648d4920",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f4341a93"
+      }
+    },
+    {
+      "segment_id": "15d5abf0",
+      "source_content": "On the JS side, properties on `Notification` have changed. `alertAction` and `repeatInterval` are now deprecated and will be removed in 0.75:",
+      "source_content_hash": "09e17bd4358b50dee73dc1d760303cecbd2e210845d1c89c88eeb5b83260ca79",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 JS 端，`Notification` 上的屬性已變更。`alertAction` 和 `repeatInterval` 現已被棄用，將在 0.75 版本中移除："
+      }
+    },
+    {
+      "segment_id": "5ce70a8c",
+      "source_content": "```js\ntype Notification = {\n  ...\n  // NEW: Seconds from now to display the notification.\n  fireIntervalSeconds?: ?number,\n\n  // CHANGED: Used only for scheduling notifications. Will be null when\n  // retrieving notifications using `getScheduledLocalNotifications` or\n  // `getDeliveredNotifications`.\n  soundName?: ?string,\n\n  // DEPRECATED: This was used for iOS's legacy UILocalNotification.\n  alertAction?: ?string,\n\n  // DEPRECATED: Use `fireDate` or `fireIntervalSeconds` instead.\n  repeatInterval?: ?string,\n};\n```",
+      "source_content_hash": "ab7b4c0cfa4a7d98662500c8647bc31819f819b1b78659e8d6eaa8173c869f37",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5ce70a8c"
+      }
+    },
+    {
+      "segment_id": "2f8456b2",
+      "source_content": "Finally, the `handler` parameter on `PushNotificationIOS.removeEventListener` is unused and has been removed.",
+      "source_content_hash": "185df89aaadb87c7ffc1c6d3a4ee2ebbe0782ac738e6ad4d20aa2d309f6aa072",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，`PushNotificationIOS.removeEventListener` 上的 `handler` 參數未被使用，現已移除。"
+      }
+    },
+    {
+      "segment_id": "3f53ecbf",
+      "source_content": "<details>\n<summary>**💡 How to Migrate**</summary>\n\n#### iOS\n\nYour `AppDelegate` will need to implement `UNUserNotificationCenterDelegate`. This should be done on app startup in `application:willFinishLaunchingWithOptions:` or `application:didFinishLaunchingWithOptions:` (see [Apple Docs](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate?language=objc) for more details).\n\n```objectivec\n- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions\n{\n  ...\n  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];\n  center.delegate = self;\n\n  return YES;\n}\n```\n\nImplement <code>[userNotificationCenter:willPresentNotification:withCompletionHandler:](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/1649518-usernotificationcenter?language=objc)</code>, which is called when a notification arrives and the app is in the <em>foreground</em>. Use the <code>completionHandler</code> to determine if the notification will be shown to the user and notify <code>RCTPushNotificationManager</code> accordingly:\n\n```objectivec\n- (void)userNotificationCenter:(UNUserNotificationCenter *)center\n       willPresentNotification:(UNNotification *)notification\n         withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler\n{\n  // This will trigger 'notification' and 'localNotification' events on PushNotificationIOS\n  [RCTPushNotificationManager didReceiveNotification:notification];\n  // Decide if and how the notification will be shown to the user\n  completionHandler(UNNotificationPresentationOptionNone);\n}\n```\n\nTo handle when a notification is tapped, implement <code>[userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/1649501-usernotificationcenter?language=objc)</code>. Note that if you set foreground notifications to be shown in <code>userNotificationCenter:willPresentNotification:withCompletionHandler:</code>, you should only notify <code>RCTPushNotificationManager</code> in one of these callbacks.\n\nIf the tapped notification resulted in app launch, call `setInitialNotification:`. If the notification was not previously handled by `userNotificationCenter:willPresentNotification:withCompletionHandler:`, call `didReceiveNotification:` as well:\n\n```objectivec\n- (void)  userNotificationCenter:(UNUserNotificationCenter *)center\n  didReceiveNotificationResponse:(UNNotificationResponse *)response\n           withCompletionHandler:(void (^)(void))completionHandler\n{\n  // This condition passes if the notification was tapped to launch the app\n  if ([response.actionIdentifier isEqualToString:UNNotificationDefaultActionIdentifier]) {\n  // Allow the notification to be retrieved on the JS side using getInitialNotification()\n    [RCTPushNotificationManager setInitialNotification:response.notification];\n  }\n // This will trigger 'notification' and 'localNotification' events on PushNotificationIOS\n  [RCTPushNotificationManager didReceiveNotification:response.notification];\n  completionHandler();\n}\n```\n\nFinally, delete the following methods and adapt the logic into the callbacks above which will be called instead:\n\n1. <code>[application:didReceiveLocalNotification:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622930-application?language=objc)</code> [deprecated]\n2. <code>[application:didReceiveRemoteNotification:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623117-application?language=objc)</code> [deprecated]\n3. <code>[application:didReceiveRemoteNotification:fetchCompletionHandler:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc)</code> [not deprecated, but is superseded by the <code>UNUserNotificationCenterDelegate</code> methods]\n\nDelete any usages of <code>[application:didRegisterUserNotificationSettings:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623022-application?language=objc)</code> and <code>RCTPushNotificationManager</code>’s corresponding <code>didRegisterUserNotificationSettings:</code> as well.\n\n**Example:** See the RNTester <code>[AppDelegate.mm](https://github.com/facebook/react-native/blob/main/packages/rn-tester/RNTester/AppDelegate.mm)</code>.\n\n#### JS\n\n1. Remove any references to `alertAction`.\n2. Remove the `handler` argument on any calls to `removeEventListener`.\n3. Replace any usages of `repeatInterval` by firing multiple notifications using `fireDate` or `fireIntervalSeconds` instead.\n4. Note that `soundName` will be null when it is accessed on a `Notification` returned from `getScheduledLocalNotifications()` and `getDeliveredNotifications()`.\n\n</details>",
+      "source_content_hash": "1ce4b63816b9c9eb01d208e2e9c1f01f1dc4cf919fffc84f80855be493fe4132",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3f53ecbf"
+      }
+    },
+    {
+      "segment_id": "b8884e3b",
+      "source_content": "### Removal of Flipper React Native Plugin",
+      "source_content_hash": "6087f9be85355e8ed5576800f139675a4b825b6a03b9ceb8d29be7914a1fd88c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 移除 Flipper React Native 外掛"
+      }
+    },
+    {
+      "segment_id": "c419a086",
+      "source_content": "Use of [Flipper](https://fbflipper.com/) for inspecting React Native layouts, network requests, and [other React Native plugin features](https://fbflipper.com/docs/features/react-native/), is now unsupported. In 0.74, we have removed the native Flipper libraries and setup code from new React Native projects. This means fewer dependencies and quicker local setup (see [original RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0641-decoupling-flipper-from-react-native-core.md)).",
+      "source_content_hash": "c410d80756c83bb3225f9a85f0d13bf0eb3256ef46a29760bc7d5956fee6c4bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[Flipper](https://fbflipper.com/) 用於檢查 React Native 佈局、網路請求以及[其他 React Native 插件功能](https://fbflipper.com/docs/features/react-native/)的功能現已不再支援。在 0.74 版本中，我們已從新的 React Native 專案中移除了原生的 Flipper 函式庫和設定程式碼。這意味著更少的依賴項和更快的本地設定（參見[原始 RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0641-decoupling-flipper-from-react-native-core.md)）。"
+      }
+    },
+    {
+      "segment_id": "d58af824",
+      "source_content": "The diff for removing Flipper in your app can be seen in the [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/). If you want to preserve Flipper in an existing app, ignore the relevant diff lines.",
+      "source_content_hash": "42a30e6a79481a876e4647d56c97c1cad08d53f2bbb6fe0a80a527a6e1e04b02",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "移除 Flipper 的差異可以在 [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 中查看。如果您想在現有應用中保留 Flipper，請忽略相關的差異行。"
+      }
+    },
+    {
+      "segment_id": "85a41517",
+      "source_content": "<details>\n<summary>**💡 To re-integrate Flipper**</summary>\n\nFlipper can still be used as a standalone tool for debugging an Android or iOS app, and can be manually integrated by following the Flipper docs ([Android guide](https://fbflipper.com/docs/getting-started/android-native/), [iOS guide](https://fbflipper.com/docs/getting-started/ios-native/)).\n\nWe recommend that teams invest in switching to native debugging tooling in Android Studio and Xcode.\n\n</details>",
+      "source_content_hash": "6d0da2479087b26ed20965b26a1a0f165807a03151158bb6864a9dc29e4c1759",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_85a41517"
+      }
+    },
+    {
+      "segment_id": "51512191",
+      "source_content": ":::tip\n\n#### Replacing Flipper\n\nThere are a number of dedicated debugging tools which replace Flipper features. For more information, we recommend reading the excellent [_Why you don't need Flipper in your React Native app_](https://shift.infinite.red/why-you-dont-need-flipper-in-your-react-native-app-and-how-to-get-by-without-it-3af461955109) article by Jamon Holmgren.\n\n:::",
+      "source_content_hash": "8a8acb18b6532f10f81f2bb67e86e0b2405b6d6297d6563e8ac7687fbcf3b86f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n\n#### 替代 Flipper\n\n有許多專用的除錯工具可以替代 Flipper 的功能。更多資訊，我們推薦閱讀 Jamon Holmgren 的優秀文章《[為什麼你的 React Native 應用不需要 Flipper 以及如何應對](https://shift.infinite.red/why-you-dont-need-flipper-in-your-react-native-app-and-how-to-get-by-without-it-3af461955109)》。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "f7420cb5",
+      "source_content": "#### JavaScript debugging",
+      "source_content_hash": "1f8a1e56a9e618341eeabcab194e15b8add60ac6fb06036a36b1b592984768f1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### JavaScript 除錯"
+      }
+    },
+    {
+      "segment_id": "dbea1fe8",
+      "source_content": "Using the [Hermes Debugger](https://reactnative.dev/docs/debugging?js-debugger=hermes#opening-the-debugger) remains our recommended debugging option for 0.74. You can also try the [Experimental New Debugger](https://reactnative.dev/docs/debugging?js-debugger=new-debugger#opening-the-debugger), which is also the default in Expo. This continues to be an early preview — known issues and updates can be followed [here](https://github.com/react-native-community/discussions-and-proposals/discussions/733).",
+      "source_content_hash": "12ad08bf951f2f42468b7b73071d59d40bc8bd97ea6180e5feb2f4c626365422",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 [Hermes Debugger](https://reactnative.dev/docs/debugging?js-debugger=hermes#opening-the-debugger) 仍然是我們在 0.74 版本中推薦的除錯選項。您也可以嘗試 [Experimental New Debugger](https://reactnative.dev/docs/debugging?js-debugger=new-debugger#opening-the-debugger)，這也是 Expo 中的預設選項。這仍然是一個早期預覽版——已知問題和更新可以在[這裡](https://github.com/react-native-community/discussions-and-proposals/discussions/733)追蹤。"
+      }
+    },
+    {
+      "segment_id": "5ce48008",
+      "source_content": "### Other Breaking Changes",
+      "source_content_hash": "39a3fee4305e149be253dd5d52033d827569d41d307326f83607c634f65347a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他重大變更"
+      }
+    },
+    {
+      "segment_id": "4869d0e4",
+      "source_content": "**General**",
+      "source_content_hash": "99ced0b296d7a1fa3b4545a5d8538cfe4fc1d05ca9acd39e722997e7bb4ccca6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**一般**"
+      }
+    },
+    {
+      "segment_id": "46200cfe",
+      "source_content": "- Make `start`/`end` in styles always refer to writing direction ([#42251](https://github.com/facebook/react-native/pull/42251)).",
+      "source_content_hash": "56a43f95eb6bae5155975cc804004d56f09054866a95c0f602f0da33e7a587a0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使樣式中的 `start`/`end` 始終指向書寫方向 ([#42251](https://github.com/facebook/react-native/pull/42251))。"
+      }
+    },
+    {
+      "segment_id": "fe2c7f95",
+      "source_content": "**Android**",
+      "source_content_hash": "1f62c6f73d602b62722b01190f9bc7373feff42be1d50f671d1165ee3402a16d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**Android**"
+      }
+    },
+    {
+      "segment_id": "fcdaed61",
+      "source_content": "- Remove of `JSIModule*` from `FabricUIManagerProvider` ([#42059](https://github.com/facebook/react-native/pull/42059)).\n  - This API was unused in open source — use [TurboModules](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/turbo-modules.md) instead.\n- Deprecate `UIManagerModule.showPopupMenu` and `UIManagerModule.dismissPopupMenu` ([#42441](https://github.com/facebook/react-native/pull/42441))\n  - This API has been moved to the [`@react-native/popup-menu-android`](https://www.npmjs.com/package/@react-native/popup-menu-android) npm package and will be removed in 0.75.",
+      "source_content_hash": "dca2bbb1edf83e90820ea66cd21960f1f81fa5226acf3b7008dfdd26f89d2e3b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 從 `FabricUIManagerProvider` 中移除 `JSIModule*` ([#42059](https://github.com/facebook/react-native/pull/42059))。\n  - 此 API 在開源專案中未使用——請改用 [TurboModules](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/turbo-modules.md)。\n- 棄用 `UIManagerModule.showPopupMenu` 和 `UIManagerModule.dismissPopupMenu` ([#42441](https://github.com/facebook/react-native/pull/42441))\n  - 此 API 已移至 [`@react-native/popup-menu-android`](https://www.npmjs.com/package/@react-native/popup-menu-android) npm 套件，並將在 0.75 版本中移除。"
+      }
+    },
+    {
+      "segment_id": "991164fd",
+      "source_content": "**iOS**",
+      "source_content_hash": "2f22fc1311b123d61671f506f5aecc129912b45a24393aab1a3d48bcadfbb1a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**iOS**"
+      }
+    },
+    {
+      "segment_id": "ea44092c",
+      "source_content": "- Delete `configFilename` and `configKey` arguments from iOS codegen CLI ([#41533](https://github.com/facebook/react-native/pull/41533)).\n- Change how [`bundleURL`](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29) is handled ([#43994](https://github.com/facebook/react-native/pull/43994)).\n  - Before, `bundleURL` was set when React Native was started in an instance variable and it was not possible to update it.\n  - Now, [`bundleUrl` is a function](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29) which is re-evaluated when needed, enabling the use of a different URL across refreshes.\n  - This change will affect your app only if you were changing the `bundleURL` variable after the app is started. In this case, move the logic that updates the variable to the [`bundleURL` function](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29) in `AppDelegate`.",
+      "source_content_hash": "50dba0a963b7316892a9d00eb387e2f262f35ff3fadbd8256efb491ade22491b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 從 iOS 代碼生成 CLI 中刪除 `configFilename` 和 `configKey` 參數 ([#41533](https://github.com/facebook/react-native/pull/41533))。\n- 變更 [`bundleURL`](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29) 的處理方式 ([#43994](https://github.com/facebook/react-native/pull/43994))。\n  - 之前，`bundleURL` 在 React Native 啟動時被設定為一個實例變量，且無法更新。\n  - 現在，[`bundleUrl` 是一個函式](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29)，會在需要時重新評估，從而允許在不同刷新時使用不同的 URL。\n  - 此變更僅在您於應用啟動後更改 `bundleURL` 變量時會影響您的應用。在這種情況下，請將更新變量的邏輯移至 `AppDelegate` 中的 [`bundleURL` 函式](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29)。"
+      }
+    },
+    {
+      "segment_id": "a290533e",
+      "source_content": "Please see the [full changelog](https://github.com/facebook/react-native/blob/main/CHANGELOG.md) for a complete list of breaking changes.",
+      "source_content_hash": "298c5e6fa58a5d2561db970d9ba0441b431dc25b1e782855e6dbed19ccbbdab9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請查看[完整變更日誌](https://github.com/facebook/react-native/blob/main/CHANGELOG.md)以獲取所有重大變更的完整列表。"
+      }
+    },
+    {
+      "segment_id": "3e195122",
+      "source_content": "## Known Issues",
+      "source_content_hash": "427290813867a00ab39f088de3e6b1ab2f003d37d94dda7a9bd8bea22fceacdd",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 已知問題"
+      }
+    },
+    {
+      "segment_id": "5a6dd931",
+      "source_content": "**iOS**",
+      "source_content_hash": "2f22fc1311b123d61671f506f5aecc129912b45a24393aab1a3d48bcadfbb1a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**iOS**"
+      }
+    },
+    {
+      "segment_id": "0ae749c4",
+      "source_content": "- Edge case when using multiple windows: When the main window is inactive and the system tries to present a dialog, the dialog is not presented in the right position on the screen. A fix is incoming in [#44167](https://github.com/facebook/react-native/pull/44167) and will ship in 0.74.1.",
+      "source_content_hash": "7c8c0de2a1fe819f3157410af18cc4b07ae6a1c8ce623009bbad7107b5fb247d",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用多視窗時的邊緣案例：當主視窗處於非活動狀態且系統嘗試顯示對話框時，對話框不會出現在螢幕的正確位置。修復方案將在 [#44167](https://github.com/facebook/react-native/pull/44167) 中發布，並隨 0.74.1 版本推出。"
+      }
+    },
+    {
+      "segment_id": "4f8527a0",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "1b707117",
+      "source_content": "React Native 0.74 contains over [1673 commits](https://github.com/facebook/react-native/compare/v0.73.6...v0.74.0) from 57 contributors. Thanks for all your hard work!",
+      "source_content_hash": "74f8d48e24e65272efe0dc1815a4249184acb53dba5e21b1cb090ff1f2e8f93f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.74 包含了來自 57 位貢獻者的超過 [1673 次提交](https://github.com/facebook/react-native/compare/v0.73.6...v0.74.0)。感謝大家的辛勤工作！"
+      }
+    },
+    {
+      "segment_id": "a24efd7d",
+      "source_content": "Thanks to all the additional authors that worked on documenting features in this release post:",
+      "source_content_hash": "d238edb562844e7d53eb091c098caacdb00c5573aabfde63efacea8ad1dd58ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "感謝以下額外作者在本版本發布文章中記錄功能："
+      }
+    },
+    {
+      "segment_id": "463adac5",
+      "source_content": "- [Nick Gerleman](https://github.com/NickGerleman) for _Yoga 3.0_\n- [Joe Vilches](https://github.com/joevilches) for _Yoga 3.0_\n- [Riccardo Cipolleschi](https://twitter.com/CipolleschiR) for _New Architecture: Bridgeless by Default_\n- [Samuel Susla](https://twitter.com/SamuelSusla) for _New Architecture: Batched `onLayout` updates_\n- [Tim Yung](https://twitter.com/yungsters) for _Removal of Deprecated `PropTypes`_\n- [Ingrid Wang](https://github.com/ingridwang) for _API Changes to PushNotificationIOS (Deprecated)_",
+      "source_content_hash": "73b7a4f1e20157ac7873bb3aa128980784814104ad34839f8600985e4f0b7a9b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Nick Gerleman](https://github.com/NickGerleman) 負責 _Yoga 3.0_\n- [Joe Vilches](https://github.com/joevilches) 負責 _Yoga 3.0_\n- [Riccardo Cipolleschi](https://twitter.com/CipolleschiR) 負責 _新架構：預設無橋接_\n- [Samuel Susla](https://twitter.com/SamuelSusla) 負責 _新架構：批次處理 `onLayout` 更新_\n- [Tim Yung](https://twitter.com/yungsters) 負責 _移除已棄用的 `PropTypes`_\n- [Ingrid Wang](https://github.com/ingridwang) 負責 _PushNotificationIOS 的 API 變更（已棄用）_"
+      }
+    },
+    {
+      "segment_id": "52c6a5e7",
+      "source_content": "## Upgrade to 0.74",
+      "source_content_hash": "3e6c3120c59f7ca706cd6e26a105391bef1388025c31e4179863dc201c87dced",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 升級至 0.74"
+      }
+    },
+    {
+      "segment_id": "a279d6f8",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the [Upgrading docs](/docs/upgrading).",
+      "source_content_hash": "4162abff8218beb76775bc544029b278dd95084c45c77bf06fdc9f871e27ad75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看現有專案在 React Native 版本之間的程式碼變更，並參考 [升級文件](/docs/upgrading)。"
+      }
+    },
+    {
+      "segment_id": "033308da",
+      "source_content": "To create a new project:",
+      "source_content_hash": "556b556603ebc735e5193d4598f99a66d8ca11d2cbdc58dd6e21bac27a143f9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要建立新專案："
+      }
+    },
+    {
+      "segment_id": "0e8f4883",
+      "source_content": "```sh\nnpx react-native@latest init MyProject\n```",
+      "source_content_hash": "41c5d6d7b47e26f56409ae882fb3a77b978a9f02365146aad6a82db3bb1f6e91",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0e8f4883"
+      }
+    },
+    {
+      "segment_id": "ac91a2d7",
+      "source_content": "If you use Expo, React Native 0.74 will be supported in Expo SDK 51.",
+      "source_content_hash": "9bc7ed830d5707b8c4120ad78854a646f5539b61b0b8e6cdcebc91a456509484",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您使用 Expo，React Native 0.74 將在 Expo SDK 51 中獲得支援。"
+      }
+    },
+    {
+      "segment_id": "93a7ca8d",
+      "source_content": ":::info\n0.74 is now the latest stable version of React Native and **0.71.x moves to unsupported**. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases#releases-support-policy). We aim to publish a final end-of-life update of 0.71 at the beginning of May.\n:::",
+      "source_content_hash": "66484024763d859a5dbcfbecab77b078f3ec58175a865a25b19f343545ef0669",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n0.74 現在是 React Native 的最新穩定版本，**0.71.x 將不再獲得支援**。更多資訊請參閱 [React Native 的支援政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。我們計劃在五月初發布 0.71 的最終終止支援更新。\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2024-04-22-release-0.74.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.236487+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "5a208afd1bba8db5427c60ab06c36f897fa2b81fef41ccd652a9cd41e78d799e"
+  }
+}

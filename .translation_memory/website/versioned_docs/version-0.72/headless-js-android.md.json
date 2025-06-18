@@ -1,0 +1,352 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.72/headless-js-android.md",
+  "source_file_content_hash": "6ed27ec1aee0dd42fdc5c8b6ad8fc898e1426d84ab23d72807cbd7f7ee30c7c4",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: headless-js-android\ntitle: Headless JS\n---",
+      "source_content_hash": "b4dfcea1adb7e09a10577bad2620d6d6737150c35762fd725c4d38ff1406660a",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';\nimport constants from '@site/core/TabsConstants';",
+      "source_content_hash": "02d56ebedf7f9d2a7d68f3456bf26c643a77c9023f4a4d898638a230b683cb01",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "Headless JS is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music.",
+      "source_content_hash": "798a663dd4948c0ea6fb0d11583fe37dfc81d2527d0409d3381e77fb12a6515d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Headless JS 是一種在應用程式處於背景時執行 JavaScript 任務的方式。例如可用於同步最新資料、處理推播通知或播放音樂。"
+      }
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "## The JS API",
+      "source_content_hash": "6d2af57c5e1d6374742212ab62cc4f437b70dd65f3fa1af9607c3042a0b1202d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## JS API"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "A task is an async function that you register on `AppRegistry`, similar to registering React applications:",
+      "source_content_hash": "037db83196be3d3f733d3298f09274e4a3e5f7bc102cd0fd1b513d31e4ee5819",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "任務是一個在 `AppRegistry` 上註冊的異步函數，類似於註冊 React 應用程式："
+      }
+    },
+    {
+      "segment_id": "4b395385",
+      "source_content": "```tsx\nimport {AppRegistry} from 'react-native';\nAppRegistry.registerHeadlessTask('SomeTaskName', () =>\n  require('SomeTaskName'),\n);\n```",
+      "source_content_hash": "17589a845fb0fac42e8e5caed8045d201a0901249bc4f4af6aee240e5d6b9041",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4b395385"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "Then, in `SomeTaskName.js`:",
+      "source_content_hash": "a6718a53b6a2fdcb72f0fbe1122dd1f7629ba673d7bd470dec4b5ad604a81571",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著在 `SomeTaskName.js` 中："
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```tsx\nmodule.exports = async taskData => {\n  // do stuff\n};\n```",
+      "source_content_hash": "b9489b4c28098cc6981ba4b520c2738e8a8cbf97333af68ab36efc0fb13b5e3e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "You can do anything in your task such as network requests, timers and so on, as long as it doesn't touch UI. Once your task completes (i.e. the promise is resolved), React Native will go into \"paused\" mode (unless there are other tasks running, or there is a foreground app).",
+      "source_content_hash": "d34bd2ac8cee59e55a4170972eba9c68ee74a8e3bb693afd4936b31367bed9c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你可以在任務中執行任何操作（如網路請求、計時器等），只要不涉及 UI。當任務完成（即 Promise 被解析）後，React Native 將進入「暫停」模式（除非有其他任務正在執行或應用處於前台）。"
+      }
+    },
+    {
+      "segment_id": "b25f21be",
+      "source_content": "## The Platform API",
+      "source_content_hash": "2baff51203ec023af69c1fb2df67686981e8b5fe02b0f35975acf970627edda8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 平台 API"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "Yes, this does still require some native code, but it's pretty thin. You need to extend `HeadlessJsTaskService` and override `getTaskConfig`, e.g.:",
+      "source_content_hash": "08b4db7116e6a61b6f8903b58e5fc2ec627fe65d931e53cb9b86d5e0469fd8aa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這仍需要少量原生程式碼。你需要擴展 `HeadlessJsTaskService` 並覆寫 `getTaskConfig`，例如："
+      }
+    },
+    {
+      "segment_id": "e7c54101",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npackage com.your_application_name;\n\nimport android.content.Intent;\nimport android.os.Bundle;\nimport com.facebook.react.HeadlessJsTaskService;\nimport com.facebook.react.bridge.Arguments;\nimport com.facebook.react.jstasks.HeadlessJsTaskConfig;\nimport javax.annotation.Nullable;\n\npublic class MyTaskService extends HeadlessJsTaskService {\n\n  @Override\n  protected @Nullable HeadlessJsTaskConfig getTaskConfig(Intent intent) {\n    Bundle extras = intent.getExtras();\n    if (extras != null) {\n      return new HeadlessJsTaskConfig(\n          \"SomeTaskName\",\n          Arguments.fromBundle(extras),\n          5000, // timeout in milliseconds for the task\n          false // optional: defines whether or not the task is allowed in foreground. Default is false\n        );\n    }\n    return null;\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\npackage com.your_application_name;\n\nimport android.content.Intent\nimport com.facebook.react.HeadlessJsTaskService\nimport com.facebook.react.bridge.Arguments\nimport com.facebook.react.jstasks.HeadlessJsTaskConfig\n\nclass MyTaskService : HeadlessJsTaskService() {\n    override fun getTaskConfig(intent: Intent): HeadlessJsTaskConfig? {\n        return intent.extras?.let {\n            HeadlessJsTaskConfig(\n                \"SomeTaskName\",\n                Arguments.fromBundle(it),\n                5000, // timeout for the task\n                false // optional: defines whether or not the task is allowed in foreground.\n                // Default is false\n            )\n        }\n    }\n}\n\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "67072b74efab48c73f829880139771614318a1838ed69d8f2c1e1e6236e5394f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e7c54101"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "Then add the service to your `AndroidManifest.xml` file:",
+      "source_content_hash": "3240acdbfd7540344a5614dca04c6e03e9e13fa142f9c297bd0f9326247d631c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著將服務加入 `AndroidManifest.xml` 檔案："
+      }
+    },
+    {
+      "segment_id": "890e01bc",
+      "source_content": "```xml\n<service android:name=\"com.example.MyTaskService\" />\n```",
+      "source_content_hash": "996456e9fefd6e5e7b06464230944240f5001379b0782428c242f4b95060be19",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_890e01bc"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "Now, whenever you [start your service][0], e.g. as a periodic task or in response to some system event / broadcast, JS will spin up, run your task, then spin down.",
+      "source_content_hash": "6ad7db143e9f6c058d7187007d9412e679f1f1ad4b51298d1137f27b5482ad67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在，每當你[啟動服務][0]（例如作為定期任務或響應系統事件/廣播時），JS 環境會啟動、執行任務後關閉。"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "Example:",
+      "source_content_hash": "872887e563e75957ffc20b021332504f2ddd0a8f3964cb93070863bfaf13cdad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例："
+      }
+    },
+    {
+      "segment_id": "488abec8",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nIntent service = new Intent(getApplicationContext(), MyTaskService.class);\nBundle bundle = new Bundle();\n\nbundle.putString(\"foo\", \"bar\");\nservice.putExtras(bundle);\n\ngetApplicationContext().startService(service);\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nval service = Intent(applicationContext, MyTaskService::class.java)\nval bundle = Bundle()\n\nbundle.putString(\"foo\", \"bar\")\n\nservice.putExtras(bundle)\n\napplicationContext.startService(service)\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "945bb4f5d9f10ccb63d0cfb0b558bce6c831465dac7bfb668c276ab431c76262",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_488abec8"
+      }
+    },
+    {
+      "segment_id": "a461a67b",
+      "source_content": "## Retries",
+      "source_content_hash": "75124adce611aae6c3787c477be4be08ea13b022189ed5497e9a0d909692ef53",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重試機制"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "By default, the headless JS task will not perform any retries. In order to do so, you need to create a `HeadlessJsRetryPolicy` and throw a specific `Error`.",
+      "source_content_hash": "7742c5b6aeb478d33f404a523f2274775b22ebb49203e16d32d341bac9c6f03c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "預設情況下，Headless JS 任務不會自動重試。若要實現重試，需建立 `HeadlessJsRetryPolicy` 並拋出特定 `Error`。"
+      }
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "`LinearCountingRetryPolicy` is an implementation of `HeadlessJsRetryPolicy` that allows you to specify a maximum number of retries with a fixed delay between each attempt. If that does not suit your needs then you can implement your own `HeadlessJsRetryPolicy`. These policies can be passed as an extra argument to the `HeadlessJsTaskConfig` constructor, e.g.",
+      "source_content_hash": "667d1805fde2242d1f8f61b6b9a3bddd0a875491c039cf71eb84bcd2b096a8e6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`LinearCountingRetryPolicy` 是 `HeadlessJsRetryPolicy` 的實作，允許指定最大重試次數與固定重試間隔。若不符合需求，可自行實作策略。這些策略可透過 `HeadlessJsTaskConfig` 建構函式的額外參數傳入，例如："
+      }
+    },
+    {
+      "segment_id": "b1edb09b",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nHeadlessJsRetryPolicy retryPolicy = new LinearCountingRetryPolicy(\n  3, // Max number of retry attempts\n  1000 // Delay between each retry attempt\n);\n\nreturn new HeadlessJsTaskConfig(\n  'SomeTaskName',\n  Arguments.fromBundle(extras),\n  5000,\n  false,\n  retryPolicy\n);\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nval retryPolicy: HeadlessJsTaskRetryPolicy =\n    LinearCountingRetryPolicy(\n        3, // Max number of retry attempts\n        1000 // Delay between each retry attempt\n    )\n\nreturn HeadlessJsTaskConfig(\"SomeTaskName\", Arguments.fromBundle(extras), 5000, false, retryPolicy)\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "362b3c8c40c76458b7d92ab06ce542634a9fdfc65b0a5a4901afb352865697f6",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b1edb09b"
+      }
+    },
+    {
+      "segment_id": "808b0414",
+      "source_content": "A retry attempt will only be made when a specific `Error` is thrown. Inside a headless JS task, you can import the error and throw it when a retry attempt is required.",
+      "source_content_hash": "39a08b919ecc3bc7b825d2d5337691caa38d2e8857a03b9efe7602375adb0438",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "僅當拋出特定 `Error` 時才會觸發重試。在 Headless JS 任務中，可導入該錯誤並在需要重試時拋出。"
+      }
+    },
+    {
+      "segment_id": "61a78cbe",
+      "source_content": "Example:",
+      "source_content_hash": "872887e563e75957ffc20b021332504f2ddd0a8f3964cb93070863bfaf13cdad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "範例："
+      }
+    },
+    {
+      "segment_id": "904df6eb",
+      "source_content": "```tsx\nimport {HeadlessJsTaskError} from 'HeadlessJsTask';\n\nmodule.exports = async taskData => {\n  const condition = ...;\n  if (!condition) {\n    throw new HeadlessJsTaskError();\n  }\n};\n```",
+      "source_content_hash": "e614b7f03bffbd5f18f062284e1fcc8ed5adc1ed489e35ebf6fbc0e4807e9f99",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_904df6eb"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "If you wish all errors to cause a retry attempt, you will need to catch them and throw the above error.",
+      "source_content_hash": "69f76b6cd72e3b612903fca035e075184d0e06df5f2209c312793880aea26072",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若希望所有錯誤都觸發重試，需捕獲錯誤並拋出上述特定錯誤。"
+      }
+    },
+    {
+      "segment_id": "e779f31e",
+      "source_content": "## Caveats",
+      "source_content_hash": "689cebe2875bcec60d7e6c8dad2aa091dddf7a8bb3c242a652db9a0b62b18235",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 注意事項"
+      }
+    },
+    {
+      "segment_id": "e612e1d0",
+      "source_content": "- By default, your app will crash if you try to run a task while the app is in the foreground. This is to prevent developers from shooting themselves in the foot by doing a lot of work in a task and slowing the UI. You can pass a fourth `boolean` argument to control this behaviour.\n- If you start your service from a `BroadcastReceiver`, make sure to call `HeadlessJsTaskService.acquireWakeLockNow()` before returning from `onReceive()`.",
+      "source_content_hash": "edb2be7804a1f25b629d0f4ceced0a0f5fced82799a6235294d02e6c9629dd95",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 預設情況下，若應用處於前台時嘗試執行任務，應用會崩潰。此設計是為防止開發者因在任務中執行大量工作而拖慢 UI。可透過第四個 `boolean` 參數控制此行為。\n- 若從 `BroadcastReceiver` 啟動服務，請確保在 `onReceive()` 返回前呼叫 `HeadlessJsTaskService.acquireWakeLockNow()`。"
+      }
+    },
+    {
+      "segment_id": "17fd5988",
+      "source_content": "## Example Usage",
+      "source_content_hash": "9c2311a8bfb3d912c0898f3f6eca4f89304790206fe37a9034617dee9d03e41a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用範例"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "Service can be started from Java API. First you need to decide when the service should be started and implement your solution accordingly. Here is an example that reacts to network connection change.",
+      "source_content_hash": "555b91c3659d359bbce628dfb51ef66eac635ff2fec70cc2715f075eea31f6d3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可從 Java API 啟動服務。首先需決定服務啟動時機並實作對應邏輯。以下範例展示如何響應網路連接變化："
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "Following lines shows part of Android manifest file for registering broadcast receiver.",
+      "source_content_hash": "b077160e96be27672e76cd621e379122b208fcd3e51459dee0518e56c0c6146e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下程式碼展示 Android 清單檔案中註冊廣播接收器的部分："
+      }
+    },
+    {
+      "segment_id": "117486ca",
+      "source_content": "```xml\n<receiver android:name=\".NetworkChangeReceiver\" >\n  <intent-filter>\n    <action android:name=\"android.net.conn.CONNECTIVITY_CHANGE\" />\n  </intent-filter>\n</receiver>\n```",
+      "source_content_hash": "5a79e9b8d0fd5f0402bc63a564b151f96bd7411b1a2d590321c509418f18e9c6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_117486ca"
+      }
+    },
+    {
+      "segment_id": "e4d8cd8a",
+      "source_content": "Broadcast receiver then handles intent that was broadcasted in onReceive function. This is a great place to check whether your app is on foreground or not. If app is not on foreground we can prepare our intent to be started, with no information or additional information bundled using `putExtra` (keep in mind bundle can handle only parcelable values). In the end service is started and wakelock is acquired.",
+      "source_content_hash": "6540262a1dc168c6247d9c3b9cd429cebda4f5b090bbba18b24f37096bd95e94",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "廣播接收器在 `onReceive` 函數中處理廣播的 Intent。此處是檢查應用是否處於前台的理想位置。若應用不在前台，可準備要啟動的 Intent（可透過 `putExtra` 綁定附加資訊，注意 Bundle 僅能處理 Parcelable 值）。最後啟動服務並取得喚醒鎖。"
+      }
+    },
+    {
+      "segment_id": "e313eecd",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nimport android.app.ActivityManager;\nimport android.content.BroadcastReceiver;\nimport android.content.Context;\nimport android.content.Intent;\nimport android.net.ConnectivityManager;\nimport android.net.Network;\nimport android.net.NetworkCapabilities;\nimport android.net.NetworkInfo;\nimport android.os.Build;\n\nimport com.facebook.react.HeadlessJsTaskService;\n\npublic class NetworkChangeReceiver extends BroadcastReceiver {\n\n    @Override\n    public void onReceive(final Context context, final Intent intent) {\n        /**\n         This part will be called every time network connection is changed\n         e.g. Connected -> Not Connected\n         **/\n        if (!isAppOnForeground((context))) {\n            /**\n             We will start our service and send extra info about\n             network connections\n             **/\n            boolean hasInternet = isNetworkAvailable(context);\n            Intent serviceIntent = new Intent(context, MyTaskService.class);\n            serviceIntent.putExtra(\"hasInternet\", hasInternet);\n            context.startService(serviceIntent);\n            HeadlessJsTaskService.acquireWakeLockNow(context);\n        }\n    }\n\n    private boolean isAppOnForeground(Context context) {\n        /**\n         We need to check if app is in foreground otherwise the app will crash.\n         http://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not\n         **/\n        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);\n        List<ActivityManager.RunningAppProcessInfo> appProcesses =\n                activityManager.getRunningAppProcesses();\n        if (appProcesses == null) {\n            return false;\n        }\n        final String packageName = context.getPackageName();\n        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {\n            if (appProcess.importance ==\n                    ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&\n                    appProcess.processName.equals(packageName)) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n    public static boolean isNetworkAvailable(Context context) {\n        ConnectivityManager cm = (ConnectivityManager)\n                context.getSystemService(Context.CONNECTIVITY_SERVICE);\n\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\n            Network networkCapabilities = cm.getActiveNetwork();\n\n            if(networkCapabilities == null) {\n                return false;\n            }\n\n            NetworkCapabilities actNw = cm.getNetworkCapabilities(networkCapabilities);\n\n            if(actNw == null) {\n                return false;\n            }\n\n            if(actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {\n                return true;\n            }\n\n            return false;\n        }\n\n        // deprecated in API level 29\n        NetworkInfo netInfo = cm.getActiveNetworkInfo();\n        return (netInfo != null && netInfo.isConnected());\n    }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nimport android.app.ActivityManager\nimport android.app.ActivityManager.RunningAppProcessInfo\nimport android.content.BroadcastReceiver\nimport android.content.Context\nimport android.content.Intent\nimport android.net.ConnectivityManager\nimport android.net.NetworkCapabilities\nimport android.os.Build\nimport com.facebook.react.HeadlessJsTaskService\n\nclass NetworkChangeReceiver : BroadcastReceiver() {\n    override fun onReceive(context: Context, intent: Intent?) {\n        /**\n         * This part will be called every time network connection is changed e.g. Connected -> Not\n         * Connected\n         */\n        if (!isAppOnForeground(context)) {\n            /** We will start our service and send extra info about network connections */\n            val hasInternet = isNetworkAvailable(context)\n            val serviceIntent = Intent(context, MyTaskService::class.java)\n            serviceIntent.putExtra(\"hasInternet\", hasInternet)\n            context.startService(serviceIntent)\n            HeadlessJsTaskService.acquireWakeLockNow(context)\n        }\n    }\n\n    private fun isAppOnForeground(context: Context): Boolean {\n        /**\n         * We need to check if app is in foreground otherwise the app will crash.\n         * http://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not\n         */\n        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager\n        val appProcesses = activityManager.runningAppProcesses ?: return false\n        val packageName: String = context.getPackageName()\n        for (appProcess in appProcesses) {\n            if (appProcess.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&\n                    appProcess.processName == packageName\n            ) {\n                return true\n            }\n        }\n        return false\n    }\n\n    companion object {\n        fun isNetworkAvailable(context: Context): Boolean {\n            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager\n            var result = false\n\n            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\n                val networkCapabilities = cm.activeNetwork ?: return false\n\n                val actNw = cm.getNetworkCapabilities(networkCapabilities) ?: return false\n\n                result =\n                    when {\n                        actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true\n                        actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true\n                        actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true\n                        else -> false\n                    }\n\n                return result\n            } else {\n                cm.run {\n                    // deprecated in API level 29\n                    cm.activeNetworkInfo?.run {\n                        result =\n                            when (type) {\n                                ConnectivityManager.TYPE_WIFI -> true\n                                ConnectivityManager.TYPE_MOBILE -> true\n                                ConnectivityManager.TYPE_ETHERNET -> true\n                                else -> false\n                            }\n                    }\n                }\n            }\n            return result\n        }\n    }\n}\n\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "c42fd7a207304aa1d153e99f50beeaedbc98f272da6a2aa1ea0648c355f5f75b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e313eecd"
+      }
+    },
+    {
+      "segment_id": "4a58e753",
+      "source_content": "[0]: https://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)",
+      "source_content_hash": "1659b7f436009b2de11fcc480264cdf3b55f7c7ef1effd254e9d0808b0fa5f9b",
+      "node_type": "definition",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[0]: https://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.72/headless-js-android.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.399066+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6ed27ec1aee0dd42fdc5c8b6ad8fc898e1426d84ab23d72807cbd7f7ee30c7c4"
+  }
+}

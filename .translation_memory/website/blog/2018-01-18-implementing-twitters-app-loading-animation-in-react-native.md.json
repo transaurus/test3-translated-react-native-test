@@ -1,0 +1,712 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2018-01-18-implementing-twitters-app-loading-animation-in-react-native.md",
+  "source_file_content_hash": "c957fe14ac23dbe1970882a9419780cd606da2f5179e748d064d91b012c9e381",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'Implementing Twitter’s App Loading Animation in React Native'\nauthors: [Eli White]\ntags: [engineering]\n---",
+      "source_content_hash": "d2dba8edaa6488f4c7c69e0d5dc951e9a611ee9cf269b05ff3abdefc51bcd2d5",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "Twitter’s iOS app has a loading animation I quite enjoy.",
+      "source_content_hash": "cc1318bf938e736166bbd08955dab43c57feb2bc597e782de30c916fdbaa7008",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "efb379d7",
+      "source_content": "<img src=\"/blog/assets/loading-screen-01.gif\" style={{float: 'left', paddingRight: 80, paddingBottom: 20}} />",
+      "source_content_hash": "905998a9906f836c42d4d46a42d802cb350b2f6409d296bbecd8626846aea9f5",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Once the app is ready, the Twitter logo delightfully expands, revealing the app.",
+      "source_content_hash": "cbb388b8231d1f4eca7ffafed5b84586bb0a7f4470747e45e7e3e34d5ba47f60",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "I wanted to figure out how to recreate this loading animation with React Native.",
+      "source_content_hash": "53300827270d2064ec014c539b26b5dfeb8575ad175fd97dbf388e34ca907840",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b7cc23c",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 40, width: 80}} />",
+      "source_content_hash": "218997ba14140f21570f539254d59a6b17aae3a3c106cb27df5078aec6ddf0c7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "To understand _how_ to build it, I first had to understand the difference pieces of the loading animation. The easiest way to see the subtlety is to slow it down.",
+      "source_content_hash": "2aa5371461fc784a987a1d4c41d5fef4a8f2de1a1c718d6919e0dda16abb30e3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "09a8fe76",
+      "source_content": "<img src=\"/blog/assets/loading-screen-02.gif\" style={{marginTop: 20, float: 'left', paddingRight: 80, paddingBottom: 20}} />",
+      "source_content_hash": "92745596e458101eb10578c41b5ebc4a3c2a35a446405d4d1b722d5cb119a515",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "There are a few major pieces in this that we will need to figure out how to build.",
+      "source_content_hash": "dce1fa91efbd3ce780d21e0db36781667a8e69dc25eac1a06d5c376cf5e39ade",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1b8c1887",
+      "source_content": "1. Scaling the bird.\n1. As the bird grows, showing the app underneath\n1. Scaling the app down slightly at the end",
+      "source_content_hash": "fcb24977ecb947a9b00a0e9579c82d13d475ba00c7db2168ac207ff902e9b3ca",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "It took me quite a while to figure out how to make this animation.",
+      "source_content_hash": "55d44a94b0f319f95dd3a0f17e9ef32247c120eb20f81a560218da7199cb7ac8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4b1d2d7d",
+      "source_content": "I started with an _incorrect_ assumption that the blue background and Twitter bird were a layer on _top_ of the app and that as the bird grew, it became transparent which revealed the app underneath. This approach doesn’t work because the Twitter bird becoming transparent would show the blue layer, not the app underneath!",
+      "source_content_hash": "9e3129db74ab9186153c930464c3c5ffcbe69484b3a4fe78f716945384f53b8d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "Luckily for you, dear reader, you don’t have to go through the same frustration I did. You get this nice tutorial skipping to the good stuff!",
+      "source_content_hash": "b593a9aad94df3cb710e33622e436a36619562d51ef3c1c9b510758fd57e4434",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2a70bec8",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 40, width: 80}} />",
+      "source_content_hash": "218997ba14140f21570f539254d59a6b17aae3a3c106cb27df5078aec6ddf0c7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f422383e",
+      "source_content": "## The right way",
+      "source_content_hash": "723e32660605eff78e15fe86f08348628eb2a255e5b261b017370be0c87f4431",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "97ae4a01",
+      "source_content": "Before we get to code, it is important to understand how to break this down. To help visualize this effect, I recreated it in [CodePen](https://codepen.io/TheSavior/pen/NXNoJM) (embedded in a few paragraphs) so you can interactively see the different layers.",
+      "source_content_hash": "ef8be023d122fdae0afd50adc95aecdc81c783554edba7e520ed06d68fb08dd6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "100eac36",
+      "source_content": "<img src=\"/blog/assets/loading-screen-03.png\" style={{float: 'left', paddingRight: 80, paddingBottom: 20}} />",
+      "source_content_hash": "af83f74435f2e51142bf705985392f501a21a7f23e5bfbee82a6a85213b05f8b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3cfe6286",
+      "source_content": "There are three main layers to this effect. The first is the blue background layer. Even though this seems to appear on top of the app, it is actually in the back.",
+      "source_content_hash": "7257334767047396d18328ddf109c066281faaa3380740833f9883e7de64ab84",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "We then have a plain white layer. And then lastly, in the very front, is our app.",
+      "source_content_hash": "bde155feb85e40c1401c87eb57d745be5a639331fe4c28b52fef87dd07444d02",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "68123cc1",
+      "source_content": "<hr style={{clear: 'both', marginBottom: 40, width: 80}} />",
+      "source_content_hash": "218997ba14140f21570f539254d59a6b17aae3a3c106cb27df5078aec6ddf0c7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f5276727",
+      "source_content": "<img src=\"/blog/assets/loading-screen-04.png\" style={{float: 'left', paddingRight: 80, paddingBottom: 20}} />",
+      "source_content_hash": "9aac2b4c1000bbdf8e84d90406730e3565e525b33757b68ac952dd2940c39693",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "The main trick to this animation is using the Twitter logo as a `mask` and masking both the app, and the white layer. I won’t go too deep on the details of masking, there are [plenty](https://www.html5rocks.com/en/tutorials/masking/adobe/) of [resources](https://designshack.net/articles/graphics/a-complete-beginners-guide-to-masking-in-photoshop/) [online](https://www.sketchapp.com/docs/shapes/masking/) for that.",
+      "source_content_hash": "e8e99ff9b614a87f5013474eb5c50a3af4c7e4b58a2cd45057fd33a3d84044b6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "The basics of masking in this context are having images where opaque pixels of the mask show the content they are masking whereas transparent pixels of the mask hide the content they are masking.",
+      "source_content_hash": "c26b91955abd7a873c96433d7535195264183d8cd9bf34d8157ddee6d9d2cfed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "We use the Twitter logo as a mask, and having it mask two layers; the solid white layer, and the app layer.",
+      "source_content_hash": "a5647b3ea6d49bbda5257b9c42866671c721386757101da286b79666958bedcb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "To reveal the app, we scale the mask up until it is larger than the entire screen.",
+      "source_content_hash": "3a329e3bb23501e633cd8cfed0cb820662f59980f33b8bfb8550d822fb601a78",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "While the mask is scaling up, we fade in the opacity of the app layer, showing the app and hiding the solid white layer behind it. To finish the effect, we start the app layer at a scale > 1, and scale it down to 1 as the animation is ending. We then hide the non-app layers as they will never be seen again.",
+      "source_content_hash": "7751b9080760c50dbc452070a339463334f4ee6723957ffb71cc68aa222438e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "They say a picture is worth 1,000 words. How many words is an interactive visualization worth? Click through the animation with the “Next Step” button. Showing the layers gives you a side view perspective. The grid is there to help visualize the transparent layers.",
+      "source_content_hash": "ff91f2e1e733344ed53bb292a97f1a0cd048046f66b564314b30ab819f23335b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "60e88cae",
+      "source_content": "<iframe\n  height=\"750\"\n  scrolling=\"no\"\n  title=\"Loading Screen Animation Steps\"\n  src=\"//codepen.io/TheSavior/embed/NXNoJM/?height=265&theme-id=0&default-tab=result&embed-version=2\"\n  frameborder=\"no\"\n  allowFullScreen={true}\n  className=\"codepen\">\n  See the Pen{' '}\n  <a href=\"https://codepen.io/TheSavior/pen/NXNoJM/\">\n    Loading Screen Animation Steps\n  </a>\n  {' '}by Eli White (\n  <a href=\"https://codepen.io/TheSavior\">@TheSavior</a>) on{' '}\n  <a href=\"https://codepen.io\">CodePen</a>.\n</iframe>",
+      "source_content_hash": "c51999c1b0478d6443a1bfdac33eae599aacfe7c48c17d34a5e96f0b29b74e49",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "93028a4e",
+      "source_content": "## Now, for the React Native",
+      "source_content_hash": "0ae59f44d6d7424f539b9a004b2553a8444f27edb23dd35b4416edfb1149b1a4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e8e162a9",
+      "source_content": "Alrighty. Now that we know what we are building and how the animation works, we can get down to the code — the reason you are really here.",
+      "source_content_hash": "a79de0713fe07187550fa06df101712a58c4fefd558779e1e8c0be003412d6ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "The main piece of this puzzle is [MaskedViewIOS](https://reactnative.dev/docs/0.63/maskedviewios), a core React Native component.",
+      "source_content_hash": "4f984f4a7493903a483d78a3b193189fadc10bb22ef35ac726d90bd18f5855e8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這個效果的關鍵在於 [MaskedViewIOS](https://reactnative.dev/docs/0.63/maskedviewios)，這是 React Native 的核心元件之一。"
+      }
+    },
+    {
+      "segment_id": "092b29bb",
+      "source_content": "```jsx\nimport {MaskedViewIOS} from 'react-native';\n\n<MaskedViewIOS maskElement={<Text>Basic Mask</Text>}>\n  <View style={{backgroundColor: 'blue'}} />\n</MaskedViewIOS>;\n```",
+      "source_content_hash": "66eca3beebaf1177c042d961bccb68e2882439dc79148f9ff81aa8f21b079c6d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_092b29bb"
+      }
+    },
+    {
+      "segment_id": "5803caac",
+      "source_content": "`MaskedViewIOS` takes props `maskElement` and `children`. The children are masked by the `maskElement`. Note that the mask doesn’t need to be an image, it can be any arbitrary view. The behavior of the above example would be to render the blue view, but for it to be visible only where the words “Basic Mask” are from the `maskElement`. We just made complicated blue text.",
+      "source_content_hash": "b1d0abd829a6d81bc0a22333cc28597dcb9b4f36aef8b3b128333cebeb765c20",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`MaskedViewIOS` 接受 `maskElement` 和 `children` 這兩個 props。`children` 會被 `maskElement` 遮罩。注意遮罩不必是圖片，它可以是任何視圖元件。上述範例的行為會渲染藍色視圖，但只會在 `maskElement` 的「Basic Mask」文字區域顯示。我們剛剛製作了複雜的藍色文字效果。"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "What we want to do is render our blue layer, and then on top render our masked app and white layers with the Twitter logo.",
+      "source_content_hash": "ce53980703614a9b393a660fc6bfc8b9002a030e2e823aea8458cb871dbb1599",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們要做的是先渲染藍色圖層，然後在上面渲染被 Twitter 標誌遮罩的應用程式和白色圖層。"
+      }
+    },
+    {
+      "segment_id": "59f28e14",
+      "source_content": "```jsx\n{\n  fullScreenBlueLayer;\n}\n<MaskedViewIOS\n  style={{flex: 1}}\n  maskElement={\n    <View style={styles.centeredFullScreen}>\n      <Image source={twitterLogo} />\n    </View>\n  }>\n  {fullScreenWhiteLayer}\n  <View style={{flex: 1}}>\n    <MyApp />\n  </View>\n</MaskedViewIOS>;\n```",
+      "source_content_hash": "daaae5c710ccb3ff6642169fcc622d2f09d43d1b96881fe942aea036262c9b59",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_59f28e14"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "This will give us the layers we see below.",
+      "source_content_hash": "71df2c078342311cfcd87528a1d34bfc9548db1cba2c84b57a64c03ec4920560",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這樣我們就能得到下方顯示的圖層結構。"
+      }
+    },
+    {
+      "segment_id": "f018dbb4",
+      "source_content": "<img src=\"/blog/assets/loading-screen-04.png\" style={{marginLeft: 'auto', marginRight: 'auto', display: 'block'}} />",
+      "source_content_hash": "aa161ff628f44f9825a2e7db2e2beddc1c493521f3b855d4093863c53e8c9f73",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f018dbb4"
+      }
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "## Now for the Animated part",
+      "source_content_hash": "b9e311ce27ad5ee55a7d1a5d79918cdc5229fd99587c24804cdf1c98df65dc6d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 現在進入動畫部分"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "We have all the pieces we need to make this work, the next step is animating them. To make this animation feel good, we will be utilizing React Native’s [Animated](/docs/animated) API.",
+      "source_content_hash": "88a459ee41031614a65c6a42fb159964867fbbdfdf168fa1c9aad8e0c22c856e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們已具備所有必要元件，下一步是讓它們動起來。為了讓動畫效果流暢，我們將使用 React Native 的 [Animated](/docs/animated) API。"
+      }
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "Animated lets us define our animations declaratively in JavaScript. By default, these animations run in JavaScript and tell the native layer what changes to make on every frame. Even though JavaScript will try to update the animation every frame, it will likely not be able to do that fast enough and will cause dropped frames (jank) to occur. Not what we want!",
+      "source_content_hash": "3ace77bc3a864c63cb788785fa08c03e6a2bb1de2ad68a6ea3eb701b8e1b5332",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Animated 讓我們能以宣告式的方式在 JavaScript 中定義動畫。預設情況下，這些動畫會在 JavaScript 中執行，並逐幀通知原生層需要進行的變更。儘管 JavaScript 會嘗試每幀更新動畫，但很可能無法足夠快速地完成，導致掉幀（卡頓）發生。這可不是我們想要的！"
+      }
+    },
+    {
+      "segment_id": "a6c928a1",
+      "source_content": "Animated has special behavior to allow you to get animations without this jank. Animated has a flag called `useNativeDriver` which sends your animation definition from JavaScript to native at the beginning of your animation, allowing the native side to process the updates to your animation without having to go back and forth to JavaScript every frame. The downside of `useNativeDriver` is you can only update a specific set of properties, mostly `transform` and `opacity`. You can’t animate things like background color with `useNativeDriver`, at least not yet — we will add more over time, and of course you can always submit a PR for properties you need for your project, benefitting the whole community 😀.",
+      "source_content_hash": "b9d15c00c724c97cb30bde872c0e09ffd242a446f4136343e1252fee98379e3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Animated 提供特殊行為來避免這種卡頓。它有一個名為 `useNativeDriver` 的標誌，能在動畫開始時將動畫定義從 JavaScript 傳送到原生端，讓原生端處理動畫更新，而無需每幀與 JavaScript 來回溝通。`useNativeDriver` 的缺點是只能更新特定屬性集，主要是 `transform` 和 `opacity`。目前還無法用它來動畫化背景色等屬性——不過未來會陸續增加，當然你也可以提交 PR 來為專案添加所需屬性，讓整個社群受益 😀。"
+      }
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "Since we want this animation to be smooth, we will work within these constraints. For a more in depth look at how `useNativeDriver` works under the hood, check out our [blog post announcing it](/blog/2017/02/14/using-native-driver-for-animated).",
+      "source_content_hash": "16626419f012dc276f3507127539951934d0daf1dbdac142b55cde36930714ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於我們希望動畫流暢，將在這些限制下工作。若想深入了解 `useNativeDriver` 的運作原理，請參閱我們的[發布部落格文章](/blog/2017/02/14/using-native-driver-for-animated)。"
+      }
+    },
+    {
+      "segment_id": "23b96cc0",
+      "source_content": "## Breaking down our animation",
+      "source_content_hash": "a90fd39cef0161338f01067dfe44fca343eab52d6264a204b84645af96e2dab9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 分解我們的動畫"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "There are 4 components to our animation:",
+      "source_content_hash": "700dbc1617fd94263fb267ac99bca14808902635fe18e0c6d8b157797dd79fed",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們的動畫有 4 個組成部分："
+      }
+    },
+    {
+      "segment_id": "a8198b43",
+      "source_content": "1. Enlarge the bird, revealing the app and the solid white layer\n1. Fade in the app\n1. Scale down the app\n1. Hide the white layer and blue layer when it is done",
+      "source_content_hash": "2caca54f6cc345276421695e5358dbd333a542191300cd3058c533dfbad003e9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 放大鳥標誌，逐漸顯示應用程式和純白圖層\n1. 淡入應用程式\n1. 縮小應用程式\n1. 完成後隱藏白色和藍色圖層"
+      }
+    },
+    {
+      "segment_id": "383fbdd2",
+      "source_content": "With Animated, there are two main ways to define your animation. The first is by using `Animated.timing` which lets you say exactly how long your animation will run for, along with an easing curve to smooth out the motion. The other approach is by using the physics based apis such as `Animated.spring`. With `Animated.spring`, you specify parameters like the amount of friction and tension in the spring, and let physics run your animation.",
+      "source_content_hash": "0c42de746c13e4a7e2f61fc55ce03b857c683ae0ed55b73812825c3ce9aeda3c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 Animated 時，有兩種主要方式定義動畫。第一種是使用 `Animated.timing`，可精確設定動畫持續時間和緩動曲線來平滑運動。另一種是使用基於物理的 API 如 `Animated.spring`，透過設定摩擦力和張力等參數，讓物理引擎驅動動畫。"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "We have multiple animations we want to be running at the same time which are all closely related to each other. For example, we want the app to start fading in while the mask is mid-reveal. Because these animations are closely related, we will use `Animated.timing` with a single `Animated.Value`.",
+      "source_content_hash": "494ccb91c3d1812ad948669c576a85ba44132a8069612971d950e3d8b68dde9d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們需要同時運行多個密切相關的動畫。例如，希望在遮罩展開到一半時開始淡入應用程式。由於這些動畫密切相關，我們將使用單一 `Animated.Value` 配合 `Animated.timing` 來實現。"
+      }
+    },
+    {
+      "segment_id": "e478ec2c",
+      "source_content": "`Animated.Value` is a wrapper around a native value that Animated uses to know the state of an animation. You typically want to only have one of these for a complete animation. Most components that use Animated will store the value in state.",
+      "source_content_hash": "1dc3c507324de2fc42a9523f933aa3d37e48f7f8760362dce5593de19cca8007",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`Animated.Value` 是對原生值的包裝，Animated 用它來追蹤動畫狀態。通常一個完整動畫只需一個這樣的實例。多數使用 Animated 的元件會將這個值儲存在狀態中。"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "Since I’m thinking about this animation as steps occurring at different points in time along the complete animation, we will start our `Animated.Value` at 0, representing 0% complete, and end our value at 100, representing 100% complete.",
+      "source_content_hash": "ad282d0dcdc954d5284999e82d150bb268bd3592563857e57ffe31adfeb2fda1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於我將此動畫視為在完整動畫時間軸上不同節點發生的步驟，我們會將 `Animated.Value` 初始設為 0（代表 0% 完成），結束值設為 100（代表 100% 完成）。"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "Our initial component state will be the following.",
+      "source_content_hash": "bae1056b63b9ff959f5329c172fbad6c14829a6d237509c8c7c802a9dba71d3e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們的元件初始狀態如下。"
+      }
+    },
+    {
+      "segment_id": "4fe849d4",
+      "source_content": "```jsx\nstate = {\n  loadingProgress: new Animated.Value(0),\n};\n```",
+      "source_content_hash": "3a9b02e43d0e561f7f32fc9f6618f6fd41d008458967d4d3326e78e62fb9c82b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4fe849d4"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "When we are ready to begin the animation, we tell Animated to animate this value to 100.",
+      "source_content_hash": "5095962830e2a963b0bd97886df1df255108f14c02b98fa00e7a0dd6d146f5c4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當我們準備開始動畫時，我們會告訴 Animated 將這個值動畫化到 100。"
+      }
+    },
+    {
+      "segment_id": "5d30fd9b",
+      "source_content": "```jsx\nAnimated.timing(this.state.loadingProgress, {\n  toValue: 100,\n  duration: 1000,\n  useNativeDriver: true, // This is important!\n}).start();\n```",
+      "source_content_hash": "db5e35bdff46abe0cf7820425a25d7378dd76b0f3b9110e6e0797c3a52071c62",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5d30fd9b"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "I then try to figure out a rough estimate of the different pieces of the animations and the values I want them to have at different stages of the overall animation. Below is a table of the different pieces of the animation, and what I think their values should be at different points as we progress through time.",
+      "source_content_hash": "a039bb5202c528459f5dc3aae5081231dad140522f8741e09a3c220586b640bb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著我嘗試估算動畫的不同部分，以及它們在整體動畫進程中不同階段應該具有的值。以下是一個表格，顯示了動畫的不同部分，以及我認為它們在時間進展過程中應該具有的值。"
+      }
+    },
+    {
+      "segment_id": "008183b0",
+      "source_content": "![](/blog/assets/loading-screen-05.png)",
+      "source_content_hash": "9c45ab3d6ba1b09a1a81363ec24044b5dba92fd3de45789b16c3877f56ef3433",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/blog/assets/loading-screen-05.png)"
+      }
+    },
+    {
+      "segment_id": "0ddaa835",
+      "source_content": "The Twitter bird mask should start at scale 1, and it gets smaller before it shoots up in size. So at 10% through the animation, it should have a scale value of .8 before shooting up to scale 70 at the end. Picking 70 was pretty arbitrary to be honest, it needed to be large enough that the bird fully revealed the screen and 60 wasn’t big enough 😀. Something interesting about this part though is that the higher the number, the faster it will look like it is growing because it has to get there in the same amount of time. This number took some trial and error to make look good with this logo. Logos / devices of different sizes will require this end-scale to be different to ensure the entire screen is revealed.",
+      "source_content_hash": "fbb25988e3df419350a94035fb65e8654fb65aa085c60e6d7ec17c9daf5884a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Twitter 鳥形遮罩應該從縮放比例 1 開始，在放大之前會先變小。因此在動畫進行到 10% 時，它的縮放值應該是 0.8，然後在結束時放大到 70。選擇 70 其實相當隨意，它需要足夠大以確保鳥形完全揭示畫面，而 60 還不夠大 😀。有趣的是，這個數字越大，它看起來增長得越快，因為它必須在相同的時間內達到目標。這個數字經過了一些嘗試和錯誤，才讓它與這個標誌看起來效果良好。不同大小的標誌或設備將需要不同的結束縮放比例，以確保整個畫面被完全揭示。"
+      }
+    },
+    {
+      "segment_id": "fd7ed056",
+      "source_content": "The app should stay opaque for a while, at least through the Twitter logo getting smaller. Based on the official animation, I want to start showing it when the bird is mid way through scaling it up and to fully reveal it pretty quickly. So at 15% we start showing it, and at 30% through the overall animation it is fully visible.",
+      "source_content_hash": "aa72ea79b85f2f413f1c9c79e23bc0f3ad576996458e0d691c29e902ded52907",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "應用程式應該保持不透明一段時間，至少在 Twitter 標誌變小的過程中。根據官方動畫，我希望在鳥形放大到一半時開始顯示它，並在整體動畫進行到 30% 時完全顯示。"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "The app scale starts at 1.1 and scales down to its regular scale by the end of the animation.",
+      "source_content_hash": "9bc4281e4618b88050a2359b0fabcc3bc90cf21b4278e9d6a3c22f37430e8ef4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "應用程式的縮放從 1.1 開始，並在動畫結束時縮小到正常比例。"
+      }
+    },
+    {
+      "segment_id": "89b740fe",
+      "source_content": "## And now, in code.",
+      "source_content_hash": "ce6a6fdfe6b81021d160ac896c43941881c5f1eb4a06b113ddefd3e8e211a469",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 現在，用代碼實現。"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "What we essentially did above is map the values from the animation progress percentage to the values for the individual pieces. We do that with Animated using `.interpolate`. We create 3 different style objects, one for each piece of the animation, using interpolated values based off of `this.state.loadingProgress`.",
+      "source_content_hash": "02d3399edc4d75d67bbbb0e5c770152517c5873818a2a4f20a24c299c011f6da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們上面所做的本質上是將動畫進度百分比的值映射到各個部分的值。我們使用 Animated 的 `.interpolate` 方法來實現這一點。我們創建了三個不同的樣式對象，每個對象對應動畫的一部分，使用基於 `this.state.loadingProgress` 的插值。"
+      }
+    },
+    {
+      "segment_id": "5010ec34",
+      "source_content": "```jsx\nconst loadingProgress = this.state.loadingProgress;\n\nconst opacityClearToVisible = {\n  opacity: loadingProgress.interpolate({\n    inputRange: [0, 15, 30],\n    outputRange: [0, 0, 1],\n    extrapolate: 'clamp',\n    // clamp means when the input is 30-100, output should stay at 1\n  }),\n};\n\nconst imageScale = {\n  transform: [\n    {\n      scale: loadingProgress.interpolate({\n        inputRange: [0, 10, 100],\n        outputRange: [1, 0.8, 70],\n      }),\n    },\n  ],\n};\n\nconst appScale = {\n  transform: [\n    {\n      scale: loadingProgress.interpolate({\n        inputRange: [0, 100],\n        outputRange: [1.1, 1],\n      }),\n    },\n  ],\n};\n```",
+      "source_content_hash": "f2dcd1e8fdcf742c5fc15ca33548923c685f368339f99468bf79566d02d7a678",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5010ec34"
+      }
+    },
+    {
+      "segment_id": "eeeea5ce",
+      "source_content": "Now that we have these style objects, we can use them when rendering the snippet of the view from earlier in the post. Note that only `Animated.View`, `Animated.Text`, and `Animated.Image` are able to use style objects that use `Animated.Value`.",
+      "source_content_hash": "10e3e80edf06e0bd11b3af2376d969b7b9867c4f29934e52b0030a230004c6f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們有了這些樣式對象，可以在渲染文章前面提到的視圖片段時使用它們。注意，只有 `Animated.View`、`Animated.Text` 和 `Animated.Image` 能夠使用包含 `Animated.Value` 的樣式對象。"
+      }
+    },
+    {
+      "segment_id": "ade38aab",
+      "source_content": "```jsx\nconst fullScreenBlueLayer = (\n  <View style={styles.fullScreenBlueLayer} />\n);\nconst fullScreenWhiteLayer = (\n  <View style={styles.fullScreenWhiteLayer} />\n);\n\nreturn (\n  <View style={styles.fullScreen}>\n    {fullScreenBlueLayer}\n    <MaskedViewIOS\n      style={{flex: 1}}\n      maskElement={\n        <View style={styles.centeredFullScreen}>\n          <Animated.Image\n            style={[styles.maskImageStyle, imageScale]}\n            source={twitterLogo}\n          />\n        </View>\n      }>\n      {fullScreenWhiteLayer}\n      <Animated.View\n        style={[opacityClearToVisible, appScale, {flex: 1}]}>\n        {this.props.children}\n      </Animated.View>\n    </MaskedViewIOS>\n  </View>\n);\n```",
+      "source_content_hash": "b1fcc39cef3c26cf6a75411c54cad02da154125c2744284454b6c2847868e8fb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ade38aab"
+      }
+    },
+    {
+      "segment_id": "3cda3ad6",
+      "source_content": "<img src=\"/blog/assets/loading-screen-06.gif\" style={{float: 'left', paddingRight: 80, paddingBottom: 20}} />",
+      "source_content_hash": "d2c3c696ebaf6f0bcecd7868bc1302a3ae6b25f3c6e58e32db2ef8ff389dc17c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3cda3ad6"
+      }
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "Yay! We now have the animation pieces looking like we want. Now we just have to clean up our blue and white layers which will never be seen again.",
+      "source_content_hash": "61d950682e7528e79f46e1a07eafafb8712bafadbd19f0b75e6406da34a9b65c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "太好了！現在我們的動畫部分看起來符合預期。現在我們只需要清理那些永遠不會再看到的藍色和白色圖層。"
+      }
+    },
+    {
+      "segment_id": "d3f13bf4",
+      "source_content": "To know when we can clean them up, we need to know when the animation is complete. Luckily where we call, `Animated.timing` ,`.start` takes an optional callback that runs when the animation is complete.",
+      "source_content_hash": "3577017f141c1470c7538bd19ed6dc661a9714cfcdc95ccd6f847351b251717c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要知道何時可以清理它們，我們需要知道動畫何時完成。幸運的是，當我們調用 `Animated.timing` 時，`.start` 方法接受一個可選的回調函數，該函數會在動畫完成時運行。"
+      }
+    },
+    {
+      "segment_id": "9eaa3064",
+      "source_content": "```jsx\nAnimated.timing(this.state.loadingProgress, {\n  toValue: 100,\n  duration: 1000,\n  useNativeDriver: true,\n}).start(() => {\n  this.setState({\n    animationDone: true,\n  });\n});\n```",
+      "source_content_hash": "29c3527fb3e800b3630c0dacb7b2471f84b4e1f22a63afcf932c00ed22a231bf",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9eaa3064"
+      }
+    },
+    {
+      "segment_id": "9c70c953",
+      "source_content": "Now that we have a value in `state` to know whether we are done with the animation, we can modify our blue and white layers to use that.",
+      "source_content_hash": "6ddbac10fcdc814077fd7e1cf17bdb6c49156b4838b65bf7c3add873cf3b4c4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在我們有了一個 `state` 中的值來判斷動畫是否完成，我們可以修改藍色和白色圖層來使用這個值。"
+      }
+    },
+    {
+      "segment_id": "d5f63a23",
+      "source_content": "```jsx\nconst fullScreenBlueLayer = this.state.animationDone ? null : (\n  <View style={[styles.fullScreenBlueLayer]} />\n);\nconst fullScreenWhiteLayer = this.state.animationDone ? null : (\n  <View style={[styles.fullScreenWhiteLayer]} />\n);\n```",
+      "source_content_hash": "5f9ca304a61ada580d5e15729ab6a707406b4f00159ead4971f8e0884c0914a4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d5f63a23"
+      }
+    },
+    {
+      "segment_id": "f4b938fe",
+      "source_content": "Voila! Our animation now works and we clean up our unused layers once the animation is done. We have built the Twitter app loading animation!",
+      "source_content_hash": "54fae925f01e2a459b9969089a69af186c8dcbc49ce265da9b50975be12ad552",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "瞧！我們的動畫現在可以正常運作，並且在動畫完成後清理了未使用的圖層。我們已經成功構建了 Twitter 應用程式的載入動畫！"
+      }
+    },
+    {
+      "segment_id": "2b20caf3",
+      "source_content": "## But wait, mine doesn’t work!",
+      "source_content_hash": "b7c9652f43e849ce0d2f000df664e3fded018abf1b9a64708ebf5580741a9a5c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 但是等等，我的動畫不起作用！"
+      }
+    },
+    {
+      "segment_id": "52d45a2c",
+      "source_content": "Don’t fret, dear reader. I too hate when guides only give you chunks of the code and don’t give you the completed source.",
+      "source_content_hash": "0dd483501d8a37ee9639a5595192bd7bcd7d306634ec88bba19c6b4ec1bbf888",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "別擔心，親愛的讀者。我也討厭那些只提供代碼片段而不給出完整源碼的指南。"
+      }
+    },
+    {
+      "segment_id": "53e725dc",
+      "source_content": "This component has been published to npm and is on GitHub as [react-native-mask-loader](https://github.com/TheSavior/react-native-mask-loader). To try this out on your phone, it is [available on Expo](https://expo.io/@eliwhite/react-native-mask-loader-example) here:",
+      "source_content_hash": "b207d3b77b3a58a0bfe56ed26caf109665c0ed2a0830f284a135ba21499abaca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這個組件已經發布到 npm，並且在 GitHub 上名為 [react-native-mask-loader](https://github.com/TheSavior/react-native-mask-loader)。如果你想在手機上試試看，可以在 [Expo](https://expo.io/@eliwhite/react-native-mask-loader-example) 上找到它："
+      }
+    },
+    {
+      "segment_id": "1a38265a",
+      "source_content": "<img src=\"/blog/assets/loading-screen-07.png\" style={{marginLeft: 'auto', marginRight: 'auto', display: 'block'}} />",
+      "source_content_hash": "d946c97ba087cdd741f7e00ccef9d505aa1d6fe90e4dea5f8b2760e4efda20a3",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1a38265a"
+      }
+    },
+    {
+      "segment_id": "4b62af77",
+      "source_content": "## More Reading / Extra Credit",
+      "source_content_hash": "4ad2e1032e2cf9494e226ad416a826f897ad5389cf02a598cd63e0e727781a35",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 更多閱讀 / 額外練習"
+      }
+    },
+    {
+      "segment_id": "ae8baca1",
+      "source_content": "1. [This gitbook](https://browniefed.com/react-native-animation-book/) is a great resource to learn more about Animated after you have read the React Native docs.\n1. The actual Twitter animation seems to speed up the mask reveal towards the end. Try modifying the loader to use a different easing function (or a spring!) to better match that behavior.\n1. The current end-scale of the mask is hard coded and likely won’t reveal the entire app on a tablet. Calculating the end scale based on screen size and image size would be an awesome PR.",
+      "source_content_hash": "74a4e67d8ce75393c6c217e404ecabee8c7ccc8f3b4d7d900df9307d9f407039",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. [這本 gitbook](https://browniefed.com/react-native-animation-book/) 是閱讀完 React Native 文件後，深入學習 Animated 的絕佳資源。\n1. 實際的 Twitter 動畫在接近尾聲時似乎會加速遮罩的顯現。嘗試修改加載器，使用不同的緩動函數（或彈簧效果！）以更貼近該行為。\n1. 目前遮罩的最終縮放比例是硬編碼的，在平板上可能無法完整顯現整個應用程式。根據螢幕尺寸和圖片大小計算最終縮放比例，將會是一個很棒的 Pull Request。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2018-01-18-implementing-twitters-app-loading-animation-in-react-native.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.218175+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "c957fe14ac23dbe1970882a9419780cd606da2f5179e748d064d91b012c9e381"
+  }
+}

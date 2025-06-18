@@ -1,0 +1,272 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2017-03-13-better-list-views.md",
+  "source_file_content_hash": "b46d09e3073b10fb62fd797914b35160f79fc8c8676c0d2aeb6110ee6313a911",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Better List Views in React Native\nauthor: Spencer Ahrens\nauthorTitle: Software Engineer at Facebook\nauthorURL: 'https://github.com/sahrens'\nauthorImageURL: 'https://avatars1.githubusercontent.com/u/1509831'\nauthorTwitter: sahrens2012\ntags: [engineering]\n---",
+      "source_content_hash": "1403a6c924a46cc767ead9a8c4d67d165f19ac8b680c67f2a14c127271af9e7c",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Many of you have started playing with some of our new List components already after our [teaser announcement in the community group](https://www.facebook.com/groups/react.native.community/permalink/921378591331053), but we are officially announcing them today! No more `ListView`s or `DataSource`s, stale rows, ignored bugs, or excessive memory consumption - with the latest React Native March 2017 release candidate (`0.43-rc.1`) you can pick from the new suite of components what best fits your use-case, with great perf and feature sets out of the box:",
+      "source_content_hash": "be4773f83c932c785049d6a97b25f3712b55af2d3249b754b82937bf9699935d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "許多開發者已在我們的[社群群組預告貼文](https://www.facebook.com/groups/react.native.community/permalink/921378591331053)後開始試用新的列表元件，而我們今天正式發佈這些元件！不再需要`ListView`或`DataSource`，不再有陳舊的行項目、被忽略的錯誤或過高的記憶體消耗——透過React Native 2017年3月候選版本(`0.43-rc.1`)，您可以從這套新元件中選擇最符合需求的方案，並獲得開箱即用的卓越效能與功能集："
+      }
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "### [`<FlatList>`](/docs/flatlist)",
+      "source_content_hash": "dab9f6f5cd14fe346b684e839c82f81abb2b89d407eb5b56edc74b1ae61ff00d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [`<FlatList>`](/docs/flatlist)"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "This is the workhorse component for simple, performant lists. Provide an array of data and a `renderItem` function and you're good to go:",
+      "source_content_hash": "23c6e9f0b2d590fc29db0dbe3b1640ee0f2dcebc731c8acf62ef672073e0622f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是處理簡單高效列表的核心元件。只需提供資料陣列與`renderItem`函數即可運作："
+      }
+    },
+    {
+      "segment_id": "93be3c14",
+      "source_content": "```\n<FlatList\n  data={[{title: 'Title Text', key: 'item1'}, ...]}\n  renderItem={({item}) => <ListItem title={item.title} />}\n/>\n```",
+      "source_content_hash": "e2da1d4ebd779ba5c780400e1f8e7667b2baf81de0f83c9affe5bd359b1852f8",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93be3c14"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "### [`<SectionList>`](/docs/sectionlist)",
+      "source_content_hash": "8edd101aea698ed52d39bfd14af58d133004223b1697285a9243a5677280e8ec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [`<SectionList>`](/docs/sectionlist)"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "If you want to render a set of data broken into logical sections, maybe with section headers (e.g. in an alphabetical address book), and potentially with heterogeneous data and rendering (such as a profile view with some buttons followed by a composer, then a photo grid, then a friend grid, and finally a list of stories), this is the way to go.",
+      "source_content_hash": "2182c846bedea4cb954b9c212ebaeab777c58c8311a7a073b2aa293dccb7abcf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若需渲染分邏輯區段的資料集（例如通訊錄按字母分區），或需處理異質資料與渲染（如個人檔案頁面含按鈕、編輯區、相片網格、好友網格與動態列表），此元件是最佳選擇。"
+      }
+    },
+    {
+      "segment_id": "15a1fd96",
+      "source_content": "```\n<SectionList\n  renderItem={({item}) => <ListItem title={item.title} />}\n  renderSectionHeader={({section}) => <H1 title={section.key} />}\n  sections={[ // homogeneous rendering between sections\n    {data: [...], key: ...},\n    {data: [...], key: ...},\n    {data: [...], key: ...},\n  ]}\n/>\n\n<SectionList\n  sections={[ // heterogeneous rendering between sections\n    {data: [...], key: ..., renderItem: ...},\n    {data: [...], key: ..., renderItem: ...},\n    {data: [...], key: ..., renderItem: ...},\n  ]}\n/>\n```",
+      "source_content_hash": "b6ab3a656934a7183a287c65d70b17f593bc32e7c1beab76f2d58eaa7f8857c6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_15a1fd96"
+      }
+    },
+    {
+      "segment_id": "c674e260",
+      "source_content": "### [`<VirtualizedList>`](/docs/virtualizedlist)",
+      "source_content_hash": "203e92f606b9038152b29f426d82b965c9a6908861bf1273e81ed8238862d3b4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [`<VirtualizedList>`](/docs/virtualizedlist)"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "The implementation behind the scenes with a more flexible API. Especially handy if your data is not in a plain array (e.g. an immutable list).",
+      "source_content_hash": "773017b2b3ccb96a9eaa741ed11ad788427d5aa275269441eafeee712a874dd6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "底層實作元件，提供更彈性的API。特別適用於非標準陣列資料結構（如不可變列表）。"
+      }
+    },
+    {
+      "segment_id": "cb5b269c",
+      "source_content": "## Features",
+      "source_content_hash": "9eb55e137a031f4b4d166f425f9b2d9183ca01a0ab9de3d390966dacb1e6a038",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 功能特色"
+      }
+    },
+    {
+      "segment_id": "b36c6338",
+      "source_content": "Lists are used in many contexts, so we packed the new components full of features to handle the majority of use cases out of the box:",
+      "source_content_hash": "df5c1e1a40763ac7bf14648ae21ad8d9b12cf10c4898d0135c5e5d4ca4683fdb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "列表應用場景多元，因此我們為新元件內建多種功能以滿足多數需求："
+      }
+    },
+    {
+      "segment_id": "9b797309",
+      "source_content": "- Scroll loading (`onEndReached`).\n- Pull to refresh (`onRefresh` / `refreshing`).\n- [Configurable](https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js) viewability (VPV) callbacks (`onViewableItemsChanged` / `viewabilityConfig`).\n- Horizontal mode (`horizontal`).\n- Intelligent item and section separators.\n- Multi-column support (`numColumns`)\n- `scrollToEnd`, `scrollToIndex`, and `scrollToItem`\n- Better Flow typing.",
+      "source_content_hash": "5cefbc46a3ee61072cddadf7b4f94f642c6f782acf37e54a16a048c30e05b5e8",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 滾動載入 (`onEndReached`)\n- 下拉刷新 (`onRefresh` / `refreshing`)\n- 可配置的[可見度](https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js)回調 (`onViewableItemsChanged` / `viewabilityConfig`)\n- 水平模式 (`horizontal`)\n- 智能項目與區段分隔線\n- 多欄支援 (`numColumns`)\n- `scrollToEnd`、`scrollToIndex`與`scrollToItem`\n- 更完善的Flow類型檢查"
+      }
+    },
+    {
+      "segment_id": "126950d7",
+      "source_content": "### Some Caveats",
+      "source_content_hash": "20f4ae24a5c7e726c9c08711ab41d8bceff706d5154d4117901a96c0e516547f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 注意事項"
+      }
+    },
+    {
+      "segment_id": "180e9ce9",
+      "source_content": "- The internal state of item subtrees is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.\n\n- These components are based on `PureComponent` which means that they will not re-render if `props` remains shallow-equal. Make sure that everything your `renderItem` function depends on directly is passed as a prop that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state. For example:\n\n  ```jsx\n  <FlatList\n    data={this.state.data}\n    renderItem={({item}) => (\n      <MyItem\n        item={item}\n        onPress={() =>\n          this.setState(oldState => ({\n            selected: {\n              // New instance breaks `===`\n              ...oldState.selected, // copy old data\n              [item.key]: !oldState.selected[item.key], // toggle\n            },\n          }))\n        }\n        selected={\n          !!this.state.selected[item.key] // renderItem depends on state\n        }\n      />\n    )}\n    selected={\n      // Can be any prop that doesn't collide with existing props\n      this.state.selected // A change to selected should re-render FlatList\n    }\n  />\n  ```\n\n- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate and momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.\n\n- By default, these new lists look for a `key` prop on each item and use that for the React key. Alternatively, you can provide a custom `keyExtractor` prop.",
+      "source_content_hash": "21cdab6f12f30ea9f01ae6116bd45c3c0a0cbf6074454b0e6103ec71c92453c6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 當項目滾出渲染視窗時，其子樹的內部狀態不會保留。請確保所有資料都儲存在項目資料或外部狀態庫（如Flux、Redux或Relay）中。\n\n- 這些元件基於`PureComponent`，意味著當`props`淺層比對相等時不會重新渲染。請確認`renderItem`函數直接依賴的所有prop在更新後都會改變參照（`!==`），否則UI可能不會響應變更。這包含`data`prop與父元件狀態。例如：\n\n  ```jsx\n  <FlatList\n    data={this.state.data}\n    renderItem={({item}) => (\n      <MyItem\n        item={item}\n        onPress={() =>\n          this.setState(oldState => ({\n            selected: {\n              // 新實例打破`===`比對\n              ...oldState.selected, // 複製舊資料\n              [item.key]: !oldState.selected[item.key], // 切換狀態\n            },\n          }))\n        }\n        selected={\n          !!this.state.selected[item.key] // renderItem依賴於此狀態\n        }\n      />\n    )}\n    selected={\n      // 可為任何不與現有prop衝突的屬性\n      this.state.selected // selected變更應觸發FlatList重繪\n    }\n  />\n  ```\n\n- 為限制記憶體使用並確保滾動流暢，內容會先在螢幕外非同步渲染。這可能導致快速滾動時暫時看到空白內容。此為可依應用需求調整的取捨方案，我們也持續在底層優化此行為。\n\n- 預設情況下，新列表會尋找每個項目的`key`prop作為React key。您也可透過`keyExtractor`prop自訂此行為。"
+      }
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "## Performance",
+      "source_content_hash": "b61a2b644e50e77bcf62c9857199cd063dccceb2c056007c9370ea1a93289c2b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 效能表現"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "Besides simplifying the API, the new list components also have significant performance enhancements, the main one being nearly constant memory usage for any number of rows. This is done by 'virtualizing' elements that are outside of the render window by completely unmounting them from the component hierarchy and reclaiming the JS memory from the react components, along with the native memory from the shadow tree and the UI views. This has a catch which is that internal component state will not be preserved, so **make sure you track any important state outside of the components themselves, e.g. in Relay or Redux or Flux store.**",
+      "source_content_hash": "ca14d5c0cc12a138c88e0906597496b6c4948154a40318dc839e4820f8ddc234",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了簡化 API 之外，新的列表元件還具有顯著的效能提升，主要特點是無論有多少行，記憶體使用量幾乎保持恆定。這是通過「虛擬化」渲染視窗外的元素來實現的，即完全從元件層次結構中卸載它們，並回收 React 元件佔用的 JS 記憶體，以及陰影樹和 UI 視圖佔用的原生記憶體。這有一個注意點，即內部元件狀態將不會被保留，因此**請確保您將任何重要狀態追蹤在元件本身之外，例如在 Relay、Redux 或 Flux 儲存中。**"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "Limiting the render window also reduces the amount of work that needs to be done by React and the native platform, e.g from view traversals. Even if you are rendering the last of a million elements, with these new lists there is no need to iterate through all those elements in order to render. You can even jump to the middle with `scrollToIndex` without excessive rendering.",
+      "source_content_hash": "f4cedf6820c4894f2e11c71fdb5ae594ffb8ae06a7ba85cd731ad12f539c5463",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "限制渲染視窗還減少了 React 和原生平台需要完成的工作量，例如視圖遍歷。即使您正在渲染一百萬個元素中的最後一個，使用這些新列表也無需遍歷所有元素來進行渲染。您甚至可以使用 `scrollToIndex` 直接跳轉到中間，而無需過度渲染。"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "We've also made some improvements with scheduling which should help with application responsiveness. Items at the edge of the render window are rendered infrequently and at a lower priority after any active gestures or animations or other interactions have completed.",
+      "source_content_hash": "ff14c91e46897bb1fbe1fe4979a9a7978e9c4ba05010869b1be1c3b06b2ceaa5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們還對排程進行了一些改進，這應該有助於提升應用程式的響應速度。渲染視窗邊緣的項目會以較低的優先級進行渲染，並且在完成任何手勢、動畫或其他互動後才會進行。"
+      }
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "## Advanced Usage",
+      "source_content_hash": "deafa572541029afe69158a3c361b94b141083fa1daef31cfe3479f241387de6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 進階用法"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "Unlike `ListView`, all items in the render window are re-rendered any time any props change. Often this is fine because the windowing reduces the number of items to a constant number, but if your items are on the complex side, you should make sure to follow React best practices for performance and use `React.PureComponent` and/or `shouldComponentUpdate` as appropriate within your components to limit re-renders of the recursive subtree.",
+      "source_content_hash": "5e75445b3475d7cd8b64c9491e2785e2d0173275982441135fa8a9f0698f9b04",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與 `ListView` 不同，渲染視窗中的所有項目在任何 props 變更時都會重新渲染。通常這沒問題，因為視窗化將項目數量限制為一個常數，但如果您的項目較為複雜，您應該確保遵循 React 的效能最佳實踐，並在元件內部適當使用 `React.PureComponent` 和/或 `shouldComponentUpdate` 來限制遞迴子樹的重新渲染。"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "If you can calculate the height of your rows without rendering them, you can improve the user experience by providing the `getItemLayout` prop. This makes it much smoother to scroll to specific items with e.g. `scrollToIndex`, and will improve the scroll indicator UI because the height of the content can be determined without rendering it.",
+      "source_content_hash": "cd1e04929e1c9073ce1acdb6471aae40d750386bf986c0b6204fe735f5b34b9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您可以在不渲染的情況下計算出行的高度，則可以通過提供 `getItemLayout` prop 來改善用戶體驗。這使得使用例如 `scrollToIndex` 滾動到特定項目更加流暢，並且由於內容的高度可以在不渲染的情況下確定，因此會改善滾動指示器 UI。"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "If you have an alternative data type, like an immutable list, `<VirtualizedList>` is the way to go. It takes a `getItem` prop that lets you return the item data for any given index and has looser flow typing.",
+      "source_content_hash": "4857e57e86be8417999c80ee0b31e01b10d5cadcf5da408362bcf189bff54ba6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您有替代的資料類型，例如不可變列表，`<VirtualizedList>` 是您的最佳選擇。它接受一個 `getItem` prop，讓您可以返回任何給定索引的項目資料，並且具有更寬鬆的 Flow 類型檢查。"
+      }
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "There are also a bunch of parameters you can tweak if you have an unusual use case. For example, you can use `windowSize` to trade off memory usage vs. user experience, `maxToRenderPerBatch` to adjust fill rate vs. responsiveness, `onEndReachedThreshold` to control when scroll loading happens, and more.",
+      "source_content_hash": "d38ba5e92635ca6f24f2186545dea4f69d6e3a1fa86e73c3ea48359d1e71ff6a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您有特殊的使用案例，還可以調整一堆參數。例如，您可以使用 `windowSize` 來權衡記憶體使用量與用戶體驗，使用 `maxToRenderPerBatch` 來調整填充率與響應速度，使用 `onEndReachedThreshold` 來控制滾動加載的時機等等。"
+      }
+    },
+    {
+      "segment_id": "638efb88",
+      "source_content": "## Future Work",
+      "source_content_hash": "76b3a397ba3d8b21743f93f2c78b49154a0c675015ad47b1d1010caf7450bc92",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 未來工作"
+      }
+    },
+    {
+      "segment_id": "10e4f9ca",
+      "source_content": "- Migration of existing surfaces (ultimately deprecation of `ListView`).\n- More features as we see/hear the need (let us know!).\n- Sticky section header support.\n- More performance optimizations.\n- Support functional item components with state.",
+      "source_content_hash": "b112505e8a6585924b830e01fe95f0bc47cb1366d61e6eef8d662e19c1ad2e20",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 遷移現有介面（最終棄用 `ListView`）。\n- 根據需求增加更多功能（請告訴我們！）。\n- 支援黏性區段標頭。\n- 更多效能優化。\n- 支援帶有狀態的功能性項目元件。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2017-03-13-better-list-views.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.241806+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "b46d09e3073b10fb62fd797914b35160f79fc8c8676c0d2aeb6110ee6313a911"
+  }
+}

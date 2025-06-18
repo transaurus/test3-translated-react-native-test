@@ -1,0 +1,632 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/touchablenativefeedback.md",
+  "source_file_content_hash": "d4cd04ba55a67477baf5f1c900829c4f583b2e32ff864cf274aaef9a778598d8",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: touchablenativefeedback\ntitle: TouchableNativeFeedback\n---",
+      "source_content_hash": "3d5794fd0be811938ad2b6342fa982bcd6e8a25a1ce766cec9bad0cb4c7233af",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "f1ef2f7d",
+      "source_content": "> If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.",
+      "source_content_hash": "c9d515386bf9edaef2daf3ce01492fdd7bec1ab2e38aa89fc9046fe60160b994",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 若您需要更全面且具未來兼容性的觸控輸入處理方案，請參閱 [Pressable](pressable.md) API。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "A wrapper for making views respond properly to touches (Android only). On Android this component uses native state drawable to display touch feedback.",
+      "source_content_hash": "c194610cef78b2e16bfd5acb67c2c924a081a28c606dbe3fbf91bf6bed4d28f1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "用於封裝視圖使其正確響應觸控操作的包裝元件（僅限Android）。在Android平台上，此元件使用原生狀態繪製物件來顯示觸控反饋。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "At the moment it only supports having a single View instance as a child node, as it's implemented by replacing that View with another instance of RCTView node with some additional properties set.",
+      "source_content_hash": "07ec19363f5fcbaf7e64fdad2ebb0567268e1074cccdb8578253181ebccab0bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前僅支援單一View實例作為子節點，其實作方式是將該View替換為另一個設定了附加屬性的RCTView節點實例。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Background drawable of native feedback touchable can be customized with `background` property.",
+      "source_content_hash": "5266174e89a2dbbe40a7550ecfed2df71e4a0ad72f0d2ca0d9be4a95be4da5e7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生反饋觸控元件的背景繪製物件可透過`background`屬性進行自訂。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Example",
+      "source_content_hash": "9bf34f44c9d1371f4eda569dfa04ff7830aff81cfa81646e680cef087714cdc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 範例"
+      }
+    },
+    {
+      "segment_id": "41ad46a6",
+      "source_content": "```SnackPlayer name=TouchableNativeFeedback%20Android%20Component%20Example&supportedPlatforms=android\nimport React, {useState} from 'react';\nimport {Text, View, StyleSheet, TouchableNativeFeedback} from 'react-native';\nimport {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';\n\nconst App = () => {\n  const [rippleColor, setRippleColor] = useState(randomHexColor());\n  const [rippleOverflow, setRippleOverflow] = useState(false);\n  return (\n    <SafeAreaProvider>\n      <SafeAreaView style={styles.container}>\n        <TouchableNativeFeedback\n          onPress={() => {\n            setRippleColor(randomHexColor());\n            setRippleOverflow(!rippleOverflow);\n          }}\n          background={TouchableNativeFeedback.Ripple(\n            rippleColor,\n            rippleOverflow,\n          )}>\n          <View style={styles.touchable}>\n            <Text style={styles.text}>TouchableNativeFeedback</Text>\n          </View>\n        </TouchableNativeFeedback>\n      </SafeAreaView>\n    </SafeAreaProvider>\n  );\n};\n\nconst randomHexColor = () => {\n  return '#000000'.replace(/0/g, function () {\n    return Math.round(Math.random() * 16).toString(16);\n  });\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    backgroundColor: 'black',\n    paddingHorizontal: 20,\n  },\n  touchable: {\n    flex: 0.33,\n    justifyContent: 'center',\n    backgroundColor: '#eeeeee',\n    borderColor: 'black',\n    borderWidth: 1,\n  },\n  text: {\n    alignSelf: 'center',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "85333ae4d7aca3b8908ed0059f7e57bc94f6dcf533d682eeced89e447afa967f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41ad46a6"
+      }
+    },
+    {
+      "segment_id": "3fa01396",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 參考文獻"
+      }
+    },
+    {
+      "segment_id": "93028a4e",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 屬性"
+      }
+    },
+    {
+      "segment_id": "58ed925f",
+      "source_content": "### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)",
+      "source_content_hash": "ee2e525ac5a480f6e655889548c3d048cec30b9c6058c0f97fb1212046b51a95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### [TouchableWithoutFeedback 屬性](touchablewithoutfeedback.md#props)"
+      }
+    },
+    {
+      "segment_id": "463ed165",
+      "source_content": "Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).",
+      "source_content_hash": "8377b6302cb614196849fc748f213cb06700ecf624251455f6af4787b0b09ea4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "繼承 [TouchableWithoutFeedback 屬性](touchablewithoutfeedback.md#props)。"
+      }
+    },
+    {
+      "segment_id": "2ff0f46f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "0a103a02",
+      "source_content": "### `background`",
+      "source_content_hash": "6072daa6f3d8395770a481a0141c1d2ce29a3fba488f71635c97dfc559c3a23c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `background`"
+      }
+    },
+    {
+      "segment_id": "8126f763",
+      "source_content": "Determines the type of background drawable that's going to be used to display feedback. It takes an object with `type` property and extra data depending on the `type`. It's recommended to use one of the static methods to generate that dictionary.",
+      "source_content_hash": "dcea5c725d42e96e2961a22b1644f7ff5c93e0477642e04f9070453380b807c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "決定用於顯示反饋的背景繪製物件類型。接收包含`type`屬性的物件，並根據`type`攜帶額外資料。建議使用靜態方法來生成該字典。"
+      }
+    },
+    {
+      "segment_id": "608df66e",
+      "source_content": "| Type               |\n| ------------------ |\n| backgroundPropType |",
+      "source_content_hash": "e38afabdab174bc3277b24fdb5ff0effe9e9b7d6ddb81da07d43bc9784c08b7c",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_608df66e"
+      }
+    },
+    {
+      "segment_id": "945bf499",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "### `useForeground`",
+      "source_content_hash": "438558f5a6edf64192d39d54fde64b3283284846a8c1c0191052c9131b8d9423",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `useForeground`"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "Set to true to add the ripple effect to the foreground of the view, instead of the background. This is useful if one of your child views has a background of its own, or you're e.g. displaying images, and you don't want the ripple to be covered by them.",
+      "source_content_hash": "ca1de290b40ccb4da018a5636ac2d86f243b0629611f56c794d3531771d17969",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "設為true可將漣漪效果添加至視圖前景而非背景。當子視圖已有自身背景或顯示圖片等情境下，此設定可避免漣漪效果被遮蓋。"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "Check TouchableNativeFeedback.canUseNativeForeground() first, as this is only available on Android 6.0 and above. If you try to use this on older versions you will get a warning and fallback to background.",
+      "source_content_hash": "f17da855afb8375fb0c9a5c8464faad865c19e1891d5f04919e6d36742366f37",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "需先檢查TouchableNativeFeedback.canUseNativeForeground()，因該功能僅支援Android 6.0及以上版本。若在舊版系統中使用，將觸發警告並自動回退至背景模式。"
+      }
+    },
+    {
+      "segment_id": "d9b1ca37",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d9b1ca37"
+      }
+    },
+    {
+      "segment_id": "e9ae42a9",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "42a5832e",
+      "source_content": "### `hasTVPreferredFocus` <div class=\"label android\">Android</div>",
+      "source_content_hash": "150ff8f566dfda5efa5e1bb50725f68965c153c2d848fba499785e7df9295a6b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `hasTVPreferredFocus` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "TV preferred focus (see documentation for the View component).",
+      "source_content_hash": "3644936865753bb30530b899f1e2c402425e4cd3f0929e2483b64cf53052116c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "電視首選聚焦（參見View元件文件說明）。"
+      }
+    },
+    {
+      "segment_id": "6206f46b",
+      "source_content": "| Type |\n| ---- |\n| bool |",
+      "source_content_hash": "dde128476af9a278c49a64d4b450194db8f22fe794b18e24b1901bfc0c125e63",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6206f46b"
+      }
+    },
+    {
+      "segment_id": "e55f4c1f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "### `nextFocusDown` <div class=\"label android\">Android</div>",
+      "source_content_hash": "6c0f648a65e640cdf3531c93e81e4e4bf86167850217eced7d4d8a312ba28e5e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusDown` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "TV next focus down (see documentation for the View component).",
+      "source_content_hash": "4a291e3ddf4442c9e8b11f521074ddd6aab29e1fe76740f17c6b6d37920c1a5f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "電視向下聚焦導航（參見View元件文件說明）。"
+      }
+    },
+    {
+      "segment_id": "9a765bfc",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9a765bfc"
+      }
+    },
+    {
+      "segment_id": "43fd0c1b",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "23b96cc0",
+      "source_content": "### `nextFocusForward` <div class=\"label android\">Android</div>",
+      "source_content_hash": "6eacec870a936a6705b4999288a87caa5d5caa4c9d1396f395f94449f5ae86f0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusForward` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "TV next focus forward (see documentation for the View component).",
+      "source_content_hash": "89aa5d7ea7f029bba81a9b46f91a686f965ae0a7baef15e215a32b2c64ef380d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "電視向前聚焦導航（參見View元件文件說明）。"
+      }
+    },
+    {
+      "segment_id": "873a1e9b",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_873a1e9b"
+      }
+    },
+    {
+      "segment_id": "dc45ba24",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a461a67b",
+      "source_content": "### `nextFocusLeft` <div class=\"label android\">Android</div>",
+      "source_content_hash": "1577e315578ad89d5cdb59d09b3dbc72703f411b765251d9d0b700bb8ae13145",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusLeft` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "TV next focus left (see documentation for the View component).",
+      "source_content_hash": "ec00994e59604d7d4e46300653e132f891182cfcefb7810def04966461158686",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "電視向左聚焦導航（參見View元件文件說明）。"
+      }
+    },
+    {
+      "segment_id": "d416f13f",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d416f13f"
+      }
+    },
+    {
+      "segment_id": "ce87f480",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "### `nextFocusRight` <div class=\"label android\">Android</div>",
+      "source_content_hash": "62f0d601a1406d71088f6b2d7686d341b1da264341960f14c72d56f27f3dbb23",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusRight` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "TV next focus right (see documentation for the View component).",
+      "source_content_hash": "020da206b0ba5095fa7117946efb93306b1e6e07cedb2729397d47e4fcebf2b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "電視向右聚焦導航（參見View元件文件說明）。"
+      }
+    },
+    {
+      "segment_id": "5f541006",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5f541006"
+      }
+    },
+    {
+      "segment_id": "c6c98a21",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "b50cf7ff",
+      "source_content": "### `nextFocusUp` <div class=\"label android\">Android</div>",
+      "source_content_hash": "26e8f90af8fafb9d9947e19e5488a2c9d55bef505e8941dfd022e51fbb3711fe",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `nextFocusUp` <div class=\"label android\">Android</div>"
+      }
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "TV next focus up (see documentation for the View component).",
+      "source_content_hash": "38c48e02eb4aaeae7db58f7a06fc5ec99e66878c9435bd0719a601004a24a60d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "電視向上聚焦導航（參見View元件文件說明）。"
+      }
+    },
+    {
+      "segment_id": "1603328c",
+      "source_content": "| Type   |\n| ------ |\n| number |",
+      "source_content_hash": "12a4bc83fc82b49dfcc764424343d9e37b3518d61961aafe9875795611a48eab",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1603328c"
+      }
+    },
+    {
+      "segment_id": "f6a06609",
+      "source_content": "## Methods",
+      "source_content_hash": "f10f482f08112298a7b6d3090f1ea9c2254688471ce31e5da64ed9631f177b5d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 方法"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "### `SelectableBackground()`",
+      "source_content_hash": "bd6793286db36a9bc6d942734548ef2d3ef28700fc8fd855c66388a609314c88",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `SelectableBackground()`"
+      }
+    },
+    {
+      "segment_id": "71969be5",
+      "source_content": "```tsx\nstatic SelectableBackground(\n  rippleRadius: number | null,\n): ThemeAttributeBackgroundPropType;\n```",
+      "source_content_hash": "de5b07f1be20484b99da121fcc739e9fa05bea73f3b0a7a5d9f0e3499b2d296f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_71969be5"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "Creates an object that represents android theme's default background for selectable elements (`?android:attr/selectableItemBackground`). `rippleRadius` parameter controls the radius of the ripple effect.",
+      "source_content_hash": "cda71789fabac207ec11e16be32d5386a4811486fa73fa343ba72dde188f106a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立代表Android主題預設可選元素背景的物件（`?android:attr/selectableItemBackground`）。`rippleRadius`參數控制漣漪效果半徑。"
+      }
+    },
+    {
+      "segment_id": "4b6c0556",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "a75f8411",
+      "source_content": "### `SelectableBackgroundBorderless()`",
+      "source_content_hash": "2508a6e80aa797c74debb592d2c9f4684f962e962bf917eaca815f6c89d7a076",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `SelectableBackgroundBorderless()`"
+      }
+    },
+    {
+      "segment_id": "904df6eb",
+      "source_content": "```tsx\nstatic SelectableBackgroundBorderless(\n  rippleRadius: number | null,\n): ThemeAttributeBackgroundPropType;\n```",
+      "source_content_hash": "9f493f73c8b8f2484cb310119bdf49aa291c3a92c86da25211c61c9b350a0a03",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_904df6eb"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "Creates an object that represent android theme's default background for borderless selectable elements (`?android:attr/selectableItemBackgroundBorderless`). Available on android API level 21+. `rippleRadius` parameter controls the radius of the ripple effect.",
+      "source_content_hash": "7366d94cead480348a46b241a00a1ec37f8527f597dc309f035b564d87ded8b9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立一個物件，表示 Android 主題中無邊框可選元素的預設背景 (`?android:attr/selectableItemBackgroundBorderless`)。需 Android API 等級 21+ 以上支援。`rippleRadius` 參數控制漣漪效果的半徑。"
+      }
+    },
+    {
+      "segment_id": "ef9d3107",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "af250a10",
+      "source_content": "### `Ripple()`",
+      "source_content_hash": "a5a723c215dcb2fcfb6aa0643c82c72bdd1c7b642405ed6516f63475f0f88895",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `Ripple()`"
+      }
+    },
+    {
+      "segment_id": "54dd003b",
+      "source_content": "```tsx\nstatic Ripple(\n  color: ColorValue,\n  borderless: boolean,\n  rippleRadius?: number | null,\n): RippleBackgroundPropType;\n```",
+      "source_content_hash": "a07e7660d92b2db83159b77981d353053bbe035a49ac5bda8a7d20b297944d5f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_54dd003b"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "Creates an object that represents ripple drawable with specified color (as a string). If property `borderless` evaluates to true the ripple will render outside of the view bounds (see native actionbar buttons as an example of that behavior). This background type is available on Android API level 21+.",
+      "source_content_hash": "de75020c5d4a0ed01aec580d3db0fe4a959fd8675f6baa8e1cfcf310ae1e9e53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建立一個物件，表示具有指定顏色（以字串形式）的漣漪繪製效果。若 `borderless` 屬性值為 true，漣漪效果將渲染在視圖邊界之外（參見原生 actionbar 按鈕的行為範例）。此背景類型需 Android API 等級 21+ 以上支援。"
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "**Parameters:**",
+      "source_content_hash": "4cffbfc0f3f64ea67829f54830a99f6c1f41f61e25dba76d3216babd93239d28",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**參數：**"
+      }
+    },
+    {
+      "segment_id": "8ed03d97",
+      "source_content": "| Name         | Type    | Required | Description                                 |\n| ------------ | ------- | -------- | ------------------------------------------- |\n| color        | string  | Yes      | The ripple color                            |\n| borderless   | boolean | Yes      | If the ripple can render outside its bounds |\n| rippleRadius | ?number | No       | controls the radius of the ripple effect    |",
+      "source_content_hash": "095c84d3ae681eae22e51e7901da064bdde99f0fb309d12d2a61810da708ab9f",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8ed03d97"
+      }
+    },
+    {
+      "segment_id": "203a64ec",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "97496aad",
+      "source_content": "### `canUseNativeForeground()`",
+      "source_content_hash": "f7c81f7c5bf65b914a276eddae9669d433730fcfe86a83e974c03a23b3d96280",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### `canUseNativeForeground()`"
+      }
+    },
+    {
+      "segment_id": "ff27b4c2",
+      "source_content": "```tsx\nstatic canUseNativeForeground(): boolean;\n```",
+      "source_content_hash": "a7be6e4f5ff9c7e6427add2c5dff320431a1c7cab09511f98486b08c717ee05a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ff27b4c2"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/touchablenativefeedback.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.058720+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "d4cd04ba55a67477baf5f1c900829c4f583b2e32ff864cf274aaef9a778598d8"
+  }
+}

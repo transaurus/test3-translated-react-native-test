@@ -1,0 +1,422 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/fabric-native-components.md",
+  "source_file_content_hash": "16af1ce1cc5235759965af7fee13211ece81b36db44e751524baf6568d41acfb",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: fabric-native-components-introduction\ntitle: Fabric Native Components Introduction\n---",
+      "source_content_hash": "563bd0189b22a65d5253710bca4e3dce7e781f0791a7bc51e3c6d8bc3a5f89a0",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs';\nimport TabItem from '@theme/TabItem';\nimport constants from '@site/core/TabsConstants';\nimport {FabricNativeComponentsAndroid,FabricNativeComponentsIOS} from './\\_fabric-native-components';",
+      "source_content_hash": "a836ffc59ab10d47c7edb19de9a43fdd31695b0f47bdd03d4fac076a6c079462",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "# Native Components",
+      "source_content_hash": "8229e7eff19d71d5040346e8f0fcbb16763d065346821b7c7c0b8f1f4bf6e274",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 原生元件"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "If you want to build _new_ React Native Components that wrap around a [Host Component](https://reactnative.dev/architecture/glossary#host-view-tree-and-host-view) like a unique kind of [CheckBox](https://developer.android.com/reference/androidx/appcompat/widget/AppCompatCheckBox) on Android, or a [UIButton](https://developer.apple.com/documentation/uikit/uibutton?language=objc) on iOS, you should use a Fabric Native Component.",
+      "source_content_hash": "1896f4a46d7e6fe052521695ea973c55877c905aac8a37747e4464674b36eb81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您需要建立_全新_的 React Native 元件來封裝[宿主元件](https://reactnative.dev/architecture/glossary#host-view-tree-and-host-view)，例如 Android 上特殊的[核取方塊](https://developer.android.com/reference/androidx/appcompat/widget/AppCompatCheckBox)，或 iOS 的[UI按鈕](https://developer.apple.com/documentation/uikit/uibutton?language=objc)，您應該使用 Fabric 原生元件。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "This guide will show you how to build Fabric Native Components, by implementing a web view component. The steps to doing this are:",
+      "source_content_hash": "e79a25743e98049a25d4f9a91745975275bdfe7f27127f2e2c1b52704c105aa8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將透過實作網頁視圖元件，示範如何建立 Fabric 原生元件。具體步驟如下："
+      }
+    },
+    {
+      "segment_id": "84758135",
+      "source_content": "1. Define a JavaScript specification using Flow or TypeScript.\n2. Configure the dependencies management system to generate code from the provided spec and to be auto-linked.\n3. Implement the Native code.\n4. Use the Component in an App.",
+      "source_content_hash": "beabf4be69408d6a73fd46bb4af11d238ee06c1d7b73e0ecc4800318978accc3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 使用 Flow 或 TypeScript 定義 JavaScript 規格\n2. 設定依賴管理系統以根據規格自動生成程式碼並完成連結\n3. 實作原生程式碼\n4. 在應用程式中使用該元件"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "You're going to need a plain template generated application to use the component:",
+      "source_content_hash": "c2116ee769d67f72b3aaaaba8237f01fab9774ab78c1760fd7e6dc779a0faad4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您需要一個基礎模板生成的應用程式來使用此元件："
+      }
+    },
+    {
+      "segment_id": "f2b711c6",
+      "source_content": "```bash\nnpx @react-native-community/cli@latest init Demo --install-pods false\n```",
+      "source_content_hash": "a1d580b0942d8e9c0010712db5ed11f310bfe5c0397ae85c4a21d4329b23f151",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f2b711c6"
+      }
+    },
+    {
+      "segment_id": "3c36424c",
+      "source_content": "## Creating a WebView Component",
+      "source_content_hash": "50d8d4b5a464a64c29a233d1e88e2e135094b9d70d6d37c3358882fcd0c502ae",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 建立網頁視圖元件"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "This guide will show you how to create a Web View component. We will be creating the component by using the Android's [`WebView`](https://developer.android.com/reference/android/webkit/WebView) component, and the iOS [`WKWebView`](https://developer.apple.com/documentation/webkit/wkwebview?language=objc) component.",
+      "source_content_hash": "3009cb10467750434f5c3926aad5f2890c2be8f7dc3fa1a38d84d073c1fedd11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將示範如何建立網頁視圖元件。我們將使用 Android 的[`WebView`](https://developer.android.com/reference/android/webkit/WebView)元件與 iOS 的[`WKWebView`](https://developer.apple.com/documentation/webkit/wkwebview?language=objc)元件來實作。"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "Let's start by creating the folders structure to hold our component's code:",
+      "source_content_hash": "86d722a33e62c086162b81b0058e8444c54eb68c1ed96c9a250e6b7e1013185e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先建立存放元件程式碼的目錄結構："
+      }
+    },
+    {
+      "segment_id": "6543a19e",
+      "source_content": "```bash\nmkdir -p Demo/{specs,android/app/src/main/java/com/webview}\n```",
+      "source_content_hash": "4d9ad4c7b07934341ab0cc40b6a2ca236388888f2bbbf52705d1dd75fc0105bc",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6543a19e"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "This gives you the following layout where you'll working:",
+      "source_content_hash": "b782f951f576ed6b1f6b5282d0d57778f70702104f3a0a9ed6df5efb71ef1041",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您將在此目錄結構下進行開發："
+      }
+    },
+    {
+      "segment_id": "a11df754",
+      "source_content": "```\nDemo\n├── android/app/src/main/java/com/webview\n└── ios\n└── specs\n```",
+      "source_content_hash": "4370db7a58c6ee98e6fc4cbe1aa667362f2d031b5685d3d03d0538783bfed308",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a11df754"
+      }
+    },
+    {
+      "segment_id": "b93ddfac",
+      "source_content": "- The `android/app/src/main/java/com/webview` folder is the folder that will contain our Android code.\n- The `ios` folder is the folder that will contain our iOS code.\n- The `specs` folder is the folder that will contain the Codegen's specification file.",
+      "source_content_hash": "180e24f88eb786ba8566abbbb0bdadd4bacd76ce904637a5054a406f0689a467",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `android/app/src/main/java/com/webview` 目錄存放 Android 程式碼\n- `ios` 目錄存放 iOS 程式碼\n- `specs` 目錄存放 Codegen 規格文件"
+      }
+    },
+    {
+      "segment_id": "11c76fcc",
+      "source_content": "## 1. Define Specification for Codegen",
+      "source_content_hash": "a1c9fc9307e84839a2d4c980dbaaa33f3b40c833003611e8cc05005932e8cc62",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 1. 為 Codegen 定義規格"
+      }
+    },
+    {
+      "segment_id": "98d26038",
+      "source_content": "Your specification must be defined in either [TypeScript](https://www.typescriptlang.org/) or [Flow](https://flow.org/) (see [Codegen](the-new-architecture/what-is-codegen) documentation for more details). This is used by Codegen to generate the C++, Objective-C++ and Java to connect your platform code to the JavaScript runtime that React runs in.",
+      "source_content_hash": "a993794b12564bcf84c58890756ffcd32dd36a66889af24272a8068a6065dc65",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您的規格必須使用 [TypeScript](https://www.typescriptlang.org/) 或 [Flow](https://flow.org/) 定義（詳見 [Codegen](the-new-architecture/what-is-codegen) 文件）。這些規格將被 Codegen 用來生成 C++、Objective-C++ 和 Java 程式碼，以連接您的平台程式碼與 React 運行的 JavaScript 運行環境。"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "The specification file must be named `<MODULE_NAME>NativeComponent.{ts|js}` to work with Codegen. The suffix `NativeComponent` is not only a convention, it is actually used by Codegen to detect a spec file.",
+      "source_content_hash": "98df832b000812b7de93840d75b5712d1c4a8365901bb704b31e48382671907e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "規格文件必須命名為 `<MODULE_NAME>NativeComponent.{ts|js}` 才能與 Codegen 配合使用。後綴 `NativeComponent` 不僅是命名慣例，更是 Codegen 識別規格文件的關鍵字。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "Use this specification for our WebView Component:",
+      "source_content_hash": "21fe2516278e4c1483ea163f780a9fa34cc2b378e447a9810ad8d43f861b2fc6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下是我們網頁視圖元件的規格範例："
+      }
+    },
+    {
+      "segment_id": "ce33792e",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"typescript\">\n\n```typescript title=\"Demo/specs/WebViewNativeComponent.ts\"\nimport type {HostComponent, ViewProps} from 'react-native';\nimport type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';\nimport codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';\n\ntype WebViewScriptLoadedEvent = {\n  result: 'success' | 'error';\n};\n\nexport interface NativeProps extends ViewProps {\n  sourceURL?: string;\n  onScriptLoaded?: BubblingEventHandler<WebViewScriptLoadedEvent> | null;\n}\n\nexport default codegenNativeComponent<NativeProps>(\n  'CustomWebView',\n) as HostComponent<NativeProps>;\n```\n\n</TabItem>\n<TabItem value=\"flow\">\n\n```ts title=\"Demo/RCTWebView/js/RCTWebViewNativeComponent.js\":\n// @flow strict-local\n\nimport type {HostComponent, ViewProps} from 'react-native';\nimport type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';\nimport codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';\n\ntype WebViewScriptLoadedEvent = $ReadOnly<{|\n  result: \"success\" | \"error\",\n|}>;\n\ntype NativeProps = $ReadOnly<{|\n  ...ViewProps,\n  sourceURL?: string;\n  onScriptLoaded?: BubblingEventHandler<WebViewScriptLoadedEvent>?;\n|}>;\n\nexport default (codegenNativeComponent<NativeProps>(\n  'CustomWebView',\n): HostComponent<NativeProps>);\n\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b3911d1bd227349ed2d313516a2e9c2087048da9c456589864956e0bc7796101",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ce33792e"
+      }
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "This specification is composed of three main parts, excluding the imports:",
+      "source_content_hash": "7619223935e7ee148bbcb68f3c5fe7a5f41bf122b46a6aa79985627b1d5f297a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此規格主要包含三個部分（不含導入語句）："
+      }
+    },
+    {
+      "segment_id": "5cb70a3d",
+      "source_content": "- The `WebViewScriptLoadedEvent` is a supporting data type for the data the event needs to pass from native to JavaScript.\n- The `NativeProps` is a definition of the props that we can set on the component.\n- The `codegenNativeComponent` statement allows us to codegenerate the code for the custom component and that defines a name for the component used to match the native implementations.",
+      "source_content_hash": "de6d037a88d0987c08258dd01a1c763db5690b526e100bb4bae941bd14335967",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `WebViewScriptLoadedEvent` 是事件從原生端傳遞至 JavaScript 所需的支援資料型別\n- `NativeProps` 定義了可在元件上設定的屬性\n- `codegenNativeComponent` 語句允許我們為自訂元件生成程式碼，並定義用於匹配原生實作的元件名稱"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "As with Native Modules, you can have multiple specification files in the `specs/` directory. For more information about the types you can use, and the platform types these map to, see the [appendix](appendix.md#codegen-typings).",
+      "source_content_hash": "62d4a1be2ab65ab5b0c6909fc5fe581a2071732855a24ca323d70eb22f0cb484",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與原生模組相同，您可以在 `specs/` 目錄中放置多個規格文件。有關可用型別及其對應平台型別的詳細資訊，請參閱[附錄](appendix.md#codegen-typings)。"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "## 2. Configure Codegen to run",
+      "source_content_hash": "75dea030623d06728e7c03a772e91727de1c668d756e2b639ac7c49e744884b9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 2. 設定 Codegen 執行環境"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "The specification is used by the React Native's Codegen tools to generate platform specific interfaces and boilerplate for us. To do this, Codegen needs to know where to find our specification and what to do with it. Update your `package.json` to include:",
+      "source_content_hash": "1645418783a9ed5516badd421cdc28c8ff131d22d9692958c2cb544e2dfb1d47",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 的 Codegen 工具會使用此規格來生成平台特定介面與樣板程式碼。為此，Codegen 需要知道規格的存放位置與處理方式。請更新您的 `package.json` 包含以下內容："
+      }
+    },
+    {
+      "segment_id": "b27056c4",
+      "source_content": "```json package.json\n    \"start\": \"react-native start\",\n    \"test\": \"jest\"\n  },\n  // highlight-start\n  \"codegenConfig\": {\n    \"name\": \"AppSpec\",\n    \"type\": \"components\",\n    \"jsSrcsDir\": \"specs\",\n    \"android\": {\n      \"javaPackageName\": \"com.webview\"\n    },\n    \"ios\": {\n      \"componentProvider\": {\n        \"CustomWebView\": \"RCTWebView\"\n      }\n    }\n  },\n  // highlight-end\n  \"dependencies\": {\n```",
+      "source_content_hash": "524ee472224ca7d49f175a854a4dcc3f9b1daded63d37b0c16289f46ac65f8f6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b27056c4"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "With everything wired up for Codegen, we need to prepare our native code to hook into our generated code.",
+      "source_content_hash": "720f084c91dedbe3bd9c6bd813257dfc0ad21896b3ac61524794bfd07ed6acee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成 Codegen 的基礎設定後，我們需要準備原生程式碼來對接生成的程式碼。"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "Note that for iOS, we are declaratively mapping the name of the JS component that is exported by the spec (`CustomWebView`) with the iOS class that will implement the component natively.",
+      "source_content_hash": "a803f17edb473ded5911f2420b5e844bb9100389698d25bde9cd18580abdc92e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，對於 iOS 平台，我們需明確將規格導出的 JS 元件名稱（`CustomWebView`）與實現該元件原生功能的 iOS 類別進行映射。"
+      }
+    },
+    {
+      "segment_id": "dd4905a4",
+      "source_content": "## 2. Building your Native Code",
+      "source_content_hash": "279062e3e435e8b39a6b7a148db42df455d10e8c221b3ccec358100eb510b1be",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 2. 建置原生程式碼"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "Now it's time to write the native platform code so that when React requires to render a view, the platform can create the right native view and can render it on screen.",
+      "source_content_hash": "9541e406429f58ae1d1cfae430e1ead09929ea2c93b57543e77cdd139069974d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候撰寫原生平台程式碼，以便當 React 需要渲染視圖時，平台能建立正確的原生視圖並將其渲染到畫面上。"
+      }
+    },
+    {
+      "segment_id": "719d3997",
+      "source_content": "You should work through both the Android and iOS platforms.",
+      "source_content_hash": "119886defe3acc2a5d2e90a5a560768caadb9adcaa7d330a716e8e3a7e28d576",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您需要同時處理 Android 和 iOS 兩個平台。"
+      }
+    },
+    {
+      "segment_id": "94366076",
+      "source_content": ":::note\nThis guide shows you how to create a Native Component that only works with the New Architecture. If you need to support both the New Architecture and the Legacy Architecture, please refer to our [backwards compatibility guide](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md).\n\n:::",
+      "source_content_hash": "84d9e9a8dd359fb0d97b209a623b42f504af828c4c0bf8dd23015134e5cb4414",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n本指南展示如何建立僅適用於新架構的原生元件。若您需要同時支援新架構與舊架構，請參閱我們的[向後相容性指南](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md)。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "bf235780",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n    <TabItem value=\"android\" label=\"Android\">\n        <FabricNativeComponentsAndroid />\n    </TabItem>\n    <TabItem value=\"ios\" label=\"iOS\">\n        <FabricNativeComponentsIOS />\n    </TabItem>\n</Tabs>",
+      "source_content_hash": "1f2b7a0f2de373e414a7bbe2c7cfb8bff38430d58533fadb15e22e48578f6b6e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bf235780"
+      }
+    },
+    {
+      "segment_id": "08f73f73",
+      "source_content": "## 3. Use your Native Component",
+      "source_content_hash": "bfedff93a218b23599af289fd0e91315bc7c95c2c73a62e53291bf065104a97a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 3. 使用您的原生元件"
+      }
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "Finally, you can use the new component in your app. Update your generated `App.tsx` to:",
+      "source_content_hash": "bab80dbbb6d0702143dcb0541258a5ec5deeb61dacbd46a4bb300aef20bc6acf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後，您可以在應用程式中使用新元件。請更新您生成的 `App.tsx` 檔案："
+      }
+    },
+    {
+      "segment_id": "90c0aa8a",
+      "source_content": "```javascript title=\"Demo/App.tsx\"\nimport React from 'react';\nimport {Alert, StyleSheet, View} from 'react-native';\nimport WebView from './specs/WebViewNativeComponent';\n\nfunction App(): React.JSX.Element {\n  return (\n    <View style={styles.container}>\n      <WebView\n        sourceURL=\"https://react.dev/\"\n        style={styles.webview}\n        onScriptLoaded={() => {\n          Alert.alert('Page Loaded');\n        }}\n      />\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    alignContent: 'center',\n  },\n  webview: {\n    width: '100%',\n    height: '100%',\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "8f11c758087061af8941bc4b37873e9fd7868391a4619b6789402608a50a28a3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_90c0aa8a"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "This code creates an app that uses the new `WebView` component we created to load the `react.dev` website.",
+      "source_content_hash": "2580600871d8a1c8b7d0e6f136f6b61e1a3a735a9b92ac59832eecec89b9dfb6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這段程式碼建立了一個應用程式，使用我們創建的 `WebView` 元件來載入 `react.dev` 網站。"
+      }
+    },
+    {
+      "segment_id": "7e563909",
+      "source_content": "The app also shows an alert when the web page is loaded.",
+      "source_content_hash": "c0127e15c5a0137f532f8eff0c60896169a80cfa73afdd79c33ea1e1c8218b83",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當網頁載入完成時，應用程式還會顯示一個警示框。"
+      }
+    },
+    {
+      "segment_id": "bf3eb388",
+      "source_content": "## 4. Run your App using the WebView Component",
+      "source_content_hash": "7e6438ec0f417e4b958ab4874303b2a68839247dd783fb9fb84959863dcc3774",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 4. 使用 WebView 元件執行您的應用程式"
+      }
+    },
+    {
+      "segment_id": "daa03ba9",
+      "source_content": "<Tabs groupId=\"platforms\" queryString defaultValue={constants.defaultPlatform}>\n<TabItem value=\"android\" label=\"Android\">\n```bash\nyarn run android\n```\n</TabItem>\n<TabItem value=\"ios\" label=\"iOS\">\n```bash\nyarn run ios\n```\n</TabItem>\n</Tabs>",
+      "source_content_hash": "3d657984daeedd14a1b0f0d8208a0c5febb35e97bb7796867ac770c6f5befd4d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_daa03ba9"
+      }
+    },
+    {
+      "segment_id": "0576ca11",
+      "source_content": "|                                      Android                                      |                                     iOS                                      |\n| :-------------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |\n| <img style={{ \"max-height\": \"600px\" }} src=\"/docs/assets/webview-android.webp\" /> | <img style={{\"max-height\": \"600px\" }} src=\"/docs/assets/webview-ios.webp\" /> |",
+      "source_content_hash": "3ab0024a21629484d319ec79fd0673921db3ccfdd4be9efd2ab48e77cb861279",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0576ca11"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/fabric-native-components.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.951051+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "16af1ce1cc5235759965af7fee13211ece81b36db44e751524baf6568d41acfb"
+  }
+}

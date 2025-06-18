@@ -1,0 +1,572 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2022-12-13-pointer-events-in-react-native.md",
+  "source_file_content_hash": "571ccf8239bda7729a5e4828f10d1e58c88dab8923284900adf14947a1febb94",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: Pointer Events in React Native\nauthors: [lunaleaps, vincentriemer]\ntags: [announcement]\ndate: 2022-12-13\n---",
+      "source_content_hash": "b5476d358635d5a1fc8081934c4d2e7f5f86c1f7f69352317c4f458b1f305e35",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "# Pointer Events in React Native",
+      "source_content_hash": "24d2aa3e124313ef8cdb4f0ec0dd8aceb089d8fbf9fe99f5b5bba59ff39f7f77",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# React Native 中的 Pointer Events"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Today we are sharing an experimental cross-platform pointer API for React Native. We’ll go over motivations, how it works, and its benefits to React Native users. There are instructions on how to enable and we’re excited to hear your feedback!",
+      "source_content_hash": "128de60f43074a816c66489a606953318f0766d4b345355bc9ed2799fffea2b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "今天我們將分享 React Native 實驗性的跨平台指針 API。我們將探討其動機、運作原理以及對 React Native 使用者的益處。文中包含啟用方法說明，我們期待聽到您的反饋！"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "It’s been over a year since we shared [our many platform vision](https://reactnative.dev/blog/2021/08/26/many-platform-vision) on the wins of building beyond mobile and how it sets a higher bar for all platforms. During this time, we've increased our investments in React Native for VR, Desktop, and Web. With differences in hardware and interactions on these platforms, it raised the question of how React Native should holistically handle input.",
+      "source_content_hash": "0cb0fdeaca12231aeeb7c8dfba5cd0d47fa8a0a727b9850968a92ce36a52d1f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自我們發表[多平台願景](https://reactnative.dev/blog/2021/08/26/many-platform-vision)闡述超越行動端的優勢已逾一年，該願景為所有平台設定了更高標準。這段期間，我們加強了對 VR、桌面端和網頁版 React Native 的投入。這些平台在硬體與互動方式上的差異，引發了 React Native 應如何整體處理輸入的思考。"
+      }
+    },
+    {
+      "segment_id": "e883b2cc",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e883b2cc"
+      }
+    },
+    {
+      "segment_id": "cbe57f9d",
+      "source_content": "### Going Beyond Touch",
+      "source_content_hash": "cdf1b8c5be76e694ab427e695f39695131e12bc86feb7e637af2900dcd7088a9",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 超越觸控"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Desktop and VR have historically relied on mouse and keyboard input where mobile is primarily touch. That narrative has evolved with touch-screen laptops and growing needs to support interactions via keyboard and pen on mobile. All of which the React Native touch event system is not equipped to handle.",
+      "source_content_hash": "b9927e347e2bd4fbde2b7661450fdd6729eef1327e4cfbce6948fa87b8220645",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "桌面端與 VR 長期依賴滑鼠和鍵盤輸入，而行動端主要為觸控。隨著觸控筆電普及，以及行動端對鍵盤和觸控筆支援需求增長，這個敘事正在改變——現有 React Native 觸控事件系統卻無法處理這些輸入方式。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "As a result, users of out-of-tree platforms fork React Native and/or create custom native components and modules to support critical features like hover detection or left-click. This divergence leads to prop redundancy with event handlers serving similar purposes but for different platforms. It adds complexity to the framework and makes code-sharing between platforms tedious. For these reasons, the team was motivated to provide a cross-platform pointer API.",
+      "source_content_hash": "74223abae5cf493d0650c1e79ff44f78db8eebda03155adca1f9fbe04e471e9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此，非官方平台的使用者會分叉 React Native 或建立自訂原生元件，以實現懸停偵測或左鍵點擊等關鍵功能。這種分歧導致屬性重複（相似事件處理器需為不同平台分別實作），增加框架複雜度並使跨平台程式碼共享變得繁瑣。這些問題促使團隊決定提供跨平台指針 API。"
+      }
+    },
+    {
+      "segment_id": "2df4f75f",
+      "source_content": "React Native aims to provide robust and expressive APIs to build for many platforms while maintaining characteristic platform experiences. Designing such an API is challenging yet thankfully there is prior art in the pointer space that React Native can leverage.",
+      "source_content_hash": "afdc9f5c21ec56b7d9963731b40c4a5da710d2117639c8103bd34dd4e05527f3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 旨在提供強大而靈活的 API 來支援多平台開發，同時保持各平台特色體驗。設計此類 API 極具挑戰性，所幸在指針領域已有先例可供參考。"
+      }
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "### Looking to Web",
+      "source_content_hash": "91eb959a93da5630cd0089fd9f0df4edcab0326236620993b92106cfae3c73e8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 借鏡網頁標準"
+      }
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "Web is a platform with similar challenges in scaling to many platforms while also considering future-proof design. The World Wide Web consortium (W3C) is tasked with setting standards and proposals to build a Web that is interoperable amongst different platforms and browsers.",
+      "source_content_hash": "078ebce8e699a5bd25e57a8d0575683a6db62dfa6637c56ecbef464c6c7db781",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "網頁平台同樣面臨擴展至多平台的挑戰，並需兼顧前瞻性設計。萬維網聯盟（W3C）負責制定標準，以建立跨平台、跨瀏覽器的互通性網路環境。"
+      }
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "Most relevant for our needs, the W3C has defined behavior for an abstract form of input, called a pointer. The [Pointer Events](https://www.w3.org/TR/pointerevents3/) specification builds on mouse events and aims to provide a single set of events and interfaces for cross-device pointer input while still allowing for device-specific handling when necessary.",
+      "source_content_hash": "77a9c0c928b3588f57cae6b4aca7ccb279ecd14eef3b7bf327532c8a3bb7e4d4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對我們最相關的是，W3C 定義了抽象輸入形式「指針」的行為規範。[Pointer Events](https://www.w3.org/TR/pointerevents3/) 標準以滑鼠事件為基礎，旨在提供統一的跨裝置指針輸入事件與介面，同時允許必要時的裝置特定處理。"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "Following the Pointer Events specification provides React Native users many benefits. Beyond addressing the problems mentioned earlier, it raises the capabilities of platforms that haven’t historically had to consider multi-input type interactions. Think attaching a bluetooth mouse to your Android phone or the Apple pencil supporting hover on the iPad M2.",
+      "source_content_hash": "57e61d4abf1b44ae6fb3d09c7e1838daff58b219489ed5b0e9e105d29845ecab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "遵循 Pointer Events 標準能為 React Native 使用者帶來多重益處。除了解決前述問題，更能提升傳統上無需考慮多輸入類型的平台能力——例如藍牙滑鼠連接 Android 手機，或 Apple Pencil 在 iPad M2 的懸停支援。"
+      }
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "Being spec-complaint also provides opportunity for knowledge sharing between Web and React Native. Education of Web expectations around Pointer Events can doubly serve React Native developers. However, we also recognize that React Native requirements are different than web and our approach to specifications is best effort with well documented deviations so expectations are clear. There is related work of aligning certain Web standards to [reduce API fragmentation](https://github.com/react-native-community/discussions-and-proposals/pull/496) in accessibility and performance APIs.",
+      "source_content_hash": "3281c10780ae0f57129cfbd4f31eea11999e226755858a9dc84a0689dc56b564",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "符合標準也創造了網頁與 React Native 間的知識共享機會。Pointer Events 的網頁教學可同時服務 React Native 開發者。但我們也認知到 React Native 需求與網頁不同，對標準的實採將採取「盡力而為」原則，並明確記錄差異以釐清預期。相關工作還包括對齊特定網頁標準以[減少 API 碎片化](https://github.com/react-native-community/discussions-and-proposals/pull/496)，涵蓋無障礙與效能 API。"
+      }
+    },
+    {
+      "segment_id": "a1b3d8cb",
+      "source_content": "## Porting Web Platform Tests",
+      "source_content_hash": "ef31a4752547f95380b1e18e42973018e20a444e2e200ce09951061a99738d3f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 移植網頁平台測試"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "While the Pointer Events specification provides interfaces and behavior descriptions of the API, we found it wasn’t specific enough for us to confidently make changes and point to the specification as verification. However, web browsers use another mechanism to ensure compliance and interoperability — the [Web Platform Tests](https://web-platform-tests.org/)!",
+      "source_content_hash": "9d1933e96754cf1dad4b7e2ca80951d5df463070fcb6e980254d8dce44614af3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "雖然 Pointer Events 標準提供了 API 介面與行為描述，我們發現其規範尚不足以作為修改依據。但網頁瀏覽器採用另一種驗證機制確保合規性與互通性——[網頁平台測試（Web Platform Tests）](https://web-platform-tests.org/)！"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "The Web Platform Tests are written to work against the browser’s imperative DOM APIs — unsupported by React Native as it uses its own view primitives. This means that we aren’t able to code-share the tests with browsers and instead have an analogous testing API for React Native that makes it easier to port those Web Platform Tests.",
+      "source_content_hash": "f1662b2f97d795a10f8be2d96d4d7c7e2334be814b347815ece136dcfd18d53a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "網頁平台測試是針對瀏覽器命令式 DOM API 編寫，與 React Native 自有的視圖原語不相容。這意味著我們無法直接共享測試程式碼，而是為 React Native 建立了類比測試 API 來移植這些測試。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "We implemented a new manual testing framework which we are now using for verifying our implementations through RNTester. These tests are tentatively named the RNTester Platform Tests and are still fairly basic. Our implementation provides an API to construct test cases as components themselves which are rendered and where the results are reported solely through the UI.",
+      "source_content_hash": "94337ed3ddfb96dccd8112a90839cc5e082a52e70c1e35d73a14e10d5da2d9e3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們實作了新的手動測試框架，現正透過 RNTester 驗證實作。這些測試暫稱為 RNTester 平台測試，目前仍屬基礎階段。我們的實作提供 API 將測試案例建構為元件本身，其渲染結果完全透過 UI 回報。"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "![GIF showing a side by side comparison of the \"Pointer Events hoverable pointer attributes test\" running in React Native (iOS) on the left, and Web (the original implementation) on the right.](/blog/assets/pointer-events-wpt-demo.gif)",
+      "source_content_hash": "73504c11dfa7eba4eb9f0e12da46e218d74c6841c112dc4703747b9c72406ced",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![GIF 並排顯示「Pointer Events hoverable pointer attributes test」在 React Native (iOS) 左側與 Web (原始實作) 右側的執行對比。](/blog/assets/pointer-events-wpt-demo.gif)"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "These tests will continue to be helpful as we further the completeness of our Pointer Events implementation. These tests will also scale to test Pointer Events implementations on platforms beyond Android and iOS. As the number of tests in our suite increase we will be looking to automate the running of these tests so that we are better equipped to catch regressions in our implementations.",
+      "source_content_hash": "bb0d30eb0a39b512f70dadcb398a187615a2f83495ebfff0077febb1cdba4024",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些測試將持續協助我們完善 Pointer Events 的實作。這些測試也能擴展至 Android 和 iOS 以外的平台驗證 Pointer Events 實作。隨著測試套件數量增加，我們將尋求自動化執行這些測試，以更有效捕捉實作中的回歸問題。"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "## How it works",
+      "source_content_hash": "5ae438610cf16e31eb584a453d76f45d94f6d1bb14751446ac4e99e3e37c33a8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 運作原理"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Much of our Pointer Events implementation builds off existing infrastructure for dispatching touch events. On Android and iOS we leverage the relevant MotionEvent and UITouch events. The general flow of event dispatching is illustrated below.",
+      "source_content_hash": "920575dd5c2451f7bb238d77c3327248e058b51732c124225a98bc350951af19",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們的 Pointer Events 實作大多基於現有觸控事件派發基礎架構。在 Android 和 iOS 上，我們分別利用 MotionEvent 和 UITouch 事件。事件派發的整體流程如下圖所示。"
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "![Diagram of code flow for interpreting Android and iOS UI input events into Pointer Events. On Android, input handlers \"onTouchEvent\" and \"onHoverEvent\" fire \"MotionEvents\" that are interpreted into Pointer Events and through JSI are dispatched to the React renderer. iOS takes a similar path with input handlers \"touchesBegan\", \"touchesMoved\", \"touchesEnded\", and \"hovering\" interpreting \"UITouch\" and \"UIEvent\" into Pointer Events.](/blog/assets/pointer-events-code-flow.png)",
+      "source_content_hash": "975c82c43ec2755aad178527bdec1497c7ad35d9b43fcdab15953a35c6d5fc2d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![將 Android 和 iOS UI 輸入事件轉譯為 Pointer Events 的程式碼流程圖。Android 端，輸入處理器「onTouchEvent」和「onHoverEvent」觸發「MotionEvents」，經解譯為 Pointer Events 後透過 JSI 派發至 React 渲染器。iOS 採取類似路徑，輸入處理器「touchesBegan」、「touchesMoved」、「touchesEnded」和「hovering」將「UITouch」與「UIEvent」解譯為 Pointer Events。](/blog/assets/pointer-events-code-flow.png)"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "Using Android as an example, the general approach to leveraging platform events are:",
+      "source_content_hash": "de421b472c076018826b1dd0d4af6529369900d9484ef49a8dd4bb0bce0d74bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以 Android 為例，運用平台事件的通用方法為："
+      }
+    },
+    {
+      "segment_id": "157c9741",
+      "source_content": "1. Iterate through all pointers of the `MotionEvent` and do a depth-first search to determine the target React view of each pointer and its ancestral path.\n2. Map the category of `MotionEvent` to the relevant pointer events. There is a 1-to-many relationship between `MotionEvent` and `PointerEvent`. In the illustration of their relationship, dotted lines indicate fired events if the pointing device does not support hover.",
+      "source_content_hash": "ebe85aec583a696c5ef7c6928ee7fe60f9700ba5020b2b969125b9a449607296",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 遍歷 `MotionEvent` 的所有指標點，執行深度優先搜索以確定每個指標點對應的 React 視圖及其祖先路徑。\n2. 將 `MotionEvent` 類別映射至相關的 pointer events。`MotionEvent` 與 `PointerEvent` 存在一對多關係。在關係示意圖中，虛線表示若指向裝置不支援懸浮時觸發的事件。"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "![A diagram illustrating the relationship of types of Android MotionEvents into Pointer Events fired. Some pointer events are conditionally fired if pointing device does not support hover. \"ACTION_DOWN\" and \"ACTION_POINTER_DOWN\" fire pointerdown and conditionally fire pointerenter, pointerover. \"ACTION_MOVE\" and \"ACTION_HOVER_MOVE\" fire pointerover, pointermove, pointerout, pointerup. \"ACTION_UP\" and \"ACTION_POINTER_UP\" fire pointerup and conditionally fire pointerout, pointerleave.](/blog/assets/pointer-events-motionevent-relationship.png)",
+      "source_content_hash": "4263c3bd83147bc97a8dd8f699dd329999e9cdd04677324d113e2fb8905573b8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![圖示 Android MotionEvents 類型轉換為觸發 Pointer Events 的關係圖。部分 pointer events 會因指向裝置是否支援懸浮而條件性觸發。「ACTION_DOWN」與「ACTION_POINTER_DOWN」觸發 pointerdown，並條件性觸發 pointerenter、pointerover。「ACTION_MOVE」和「ACTION_HOVER_MOVE」觸發 pointerover、pointermove、pointerout、pointerup。「ACTION_UP」及「ACTION_POINTER_UP」觸發 pointerup，並條件性觸發 pointerout、pointerleave。](/blog/assets/pointer-events-motionevent-relationship.png)"
+      }
+    },
+    {
+      "segment_id": "30193704",
+      "source_content": "1. Build the `PointerEvent` interface with platform details from the `MotionEvent` and cached state of previous interactions. (Ex. [the `button` property](https://w3c.github.io/pointerevents/#the-button-property))\n2. Dispatch the pointer events from Android to React Native’s [core event queue](https://github.com/facebook/react-native/blob/main/ReactCommon/react/renderer/core/EventQueueProcessor.cpp#L20) and leverage JSI to call the [`dispatchEvent`](https://github.com/facebook/react/blob/main/packages/react-native-renderer/src/ReactFabricEventEmitter.js#L83) method in `react-native-renderer` which iterates through the React tree for the bubble and capture phase of the event.",
+      "source_content_hash": "be4f2e2db07d78d980596e1ae064517d04cfd4a18c327cfad7f7ded8608e187e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 使用 `MotionEvent` 的平台細節與先前互動的緩存狀態建構 `PointerEvent` 介面。（例如 [`button` 屬性](https://w3c.github.io/pointerevents/#the-button-property)）\n2. 將 pointer events 從 Android 派發至 React Native 的[核心事件佇列](https://github.com/facebook/react-native/blob/main/ReactCommon/react/renderer/core/EventQueueProcessor.cpp#L20)，並透過 JSI 呼叫 `react-native-renderer` 中的 [`dispatchEvent`](https://github.com/facebook/react/blob/main/packages/react-native-renderer/src/ReactFabricEventEmitter.js#L83) 方法，該方法會遍歷 React 樹以處理事件的冒泡與捕獲階段。"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "## Implementation Progress",
+      "source_content_hash": "65c0510b00ad4c51e73fd6ea4d5925520538c21952e2a0259dd4b636a76cf620",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 實作進度"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "When it comes to our current progress of implementing the Pointer Events specification we’ve focused on a solid baseline implementation of the most common events that handle things like pressing, hovering, and moving.",
+      "source_content_hash": "cd8da279da1442027d31fef8aa824cc136d92c6ba0393b65454c34afdb438755",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前我們在實作 Pointer Events 規範上的進展，主要聚焦於建立按壓、懸浮與移動等常見事件的穩固基礎實作。"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### Events",
+      "source_content_hash": "72199396868f2696502601be6571cf54c5c1a87aeabcd58d3339b626104eecae",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 事件"
+      }
+    },
+    {
+      "segment_id": "ddbffa81",
+      "source_content": "| Implemented    | Work in Progress | Yet to be Implemented |\n| -------------- | ---------------- | --------------------- |\n| onPointerOver  | onPointerCancel  | onClick               |\n| onPointerEnter |                  | onContextMenu         |\n| onPointerDown  |                  | onGotPointerCapture   |\n| onPointerMove  |                  | onLostPointerCapture  |\n| onPointerUp    |                  | onPointerRawUpdate    |\n| onPointerOut   |                  |                       |\n| onPointerLeave |                  |                       |",
+      "source_content_hash": "5ded8dd8c0492545e41c7f553fff64682abd24a92eb901465cabb280f866e9c4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ddbffa81"
+      }
+    },
+    {
+      "segment_id": "0286b5a7",
+      "source_content": ":::info\n\nonPointerCancel has been hooked up to the native platform’s \"cancel\" event but this does not necessarily correspond to when the web platform expects them to fire.\n\n:::",
+      "source_content_hash": "2cbd5891410ab2dc33a8d86173d2678da311939bc1a01fd2deb7cc1687db015a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n\nonPointerCancel 已連結至原生平台的「cancel」事件，但這不一定對應網頁平台預期的觸發時機。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "### Event Properties",
+      "source_content_hash": "a47649490aeb6e06fafdb40c0851a6ac53a52c4a3bcf02e5b4b95e56dc30c0ed",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 事件屬性"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "For each of the events mentioned above we’ve also implemented the majority of the properties expected in the PointerEvent object — though in React Native these are exposed through the `event.nativeEvent` property. You can find an enumeration of all the implemented properties in the [event object’s Flowtype interface definition](https://github.com/facebook/react-native/blob/59ee57352738f030b41589a450209e51e44bbb06/Libraries/Types/CoreEventTypes.js#L175). One notable exception to being completely implemented is the `relatedTarget` property as exposing a native view reference in this ad-hoc manner isn’t trivial.",
+      "source_content_hash": "a6c23f71e320d3c9468763d96267fe6e6939ac7b1443907d2c9e07fc5ab01599",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "針對上述每個事件，我們已實作 PointerEvent 物件預期的大多數屬性——儘管在 React Native 中這些屬性是透過 `event.nativeEvent` 屬性暴露。您可在[事件物件的 Flowtype 介面定義](https://github.com/facebook/react-native/blob/59ee57352738f030b41589a450209e51e44bbb06/Libraries/Types/CoreEventTypes.js#L175)中找到所有已實作屬性的列舉。其中較明顯的未完整實作部分是 `relatedTarget` 屬性，因為以這種非正規方式暴露原生視圖參照並非易事。"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "## Future Work and Exploration",
+      "source_content_hash": "fd6917a171002e17dddee2f6aea1ff35ab74c903fb611f7431e74673498e2343",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 未來工作與探索方向"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "In addition to the events above there are also some other APIs related to Pointer Events. In the future, we plan to be implement these APIs as a part of this effort. These APIs include:",
+      "source_content_hash": "c19f8e460e98e8bc5886b6094d70bd566e05be7cc621eddc5ec4148d15b12664",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了上述事件外，還有一些與 Pointer Events 相關的 API。未來我們計劃將這些 API 納入實作範圍，包括："
+      }
+    },
+    {
+      "segment_id": "2fc7ec55",
+      "source_content": "- Pointer Capture API\n  - Includes the imperative API exposed on element references including `setPointerCapture()`, `releasePointerCapture()`, and `hasPointerCapture()`.\n- `touch-action` style property\n  - The web uses this CSS property to declaratively negotiate gestures between the browser and a website’s own event handling code. In React Native this could be used for negotiating the event handling between a View’s pointer event handlers and a parent ScrollView.\n- `click`, `contextmenu`, `auxclick`\n  - `click` is an abstract definition of interaction that may be triggered through accessibility paradigms or other characteristic platform interactions.",
+      "source_content_hash": "91c0248aa746a0c6ce2a699bfb933b454b4fff3bfdb29fe86abca2f910188c82",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 指標捕獲 API (Pointer Capture API)\n  - 包含透過元素參考暴露的命令式 API，如 `setPointerCapture()`、`releasePointerCapture()` 和 `hasPointerCapture()`。\n- `touch-action` 樣式屬性\n  - 網頁使用此 CSS 屬性來宣告式協調瀏覽器與網站自訂事件處理程式之間的手勢。在 React Native 中，可用於協調 View 的指標事件處理器與父級 ScrollView 之間的事件處理。\n- `click`、`contextmenu`、`auxclick`\n  - `click` 是互動的抽象定義，可能透過無障礙功能模式或其他平台特性互動觸發。"
+      }
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "Another benefit of the native Pointer Events implementation is that it will allow us to revisit and improve various forms of gesture handling currently limited only to touch events and handled in JavaScript by the Responder, Pressability, and PanResponder APIs.",
+      "source_content_hash": "80d1d5ab140179ef3d4e8fa9d165f75df578179bb962ee494e9512b461861046",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生 Pointer Events 實作的另一項優勢是能讓我們重新審視並改進目前僅限觸控事件、且由 JavaScript 中 Responder、Pressability 和 PanResponder API 處理的各種手勢處理方式。"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "Furthermore, we are continuing to explore including an implementation of the `EventTarget` interface for React Native host components (i.e. `add`/`removeEventListener`) which we believe will make possible more user-land abstractions for handling pointer interactions.",
+      "source_content_hash": "67ca99accfed72a81ef250fa1348cdf43272d3fb3c6a7654cdeaed3440f990f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，我們持續探索為 React Native 宿主元件（即 `add`/`removeEventListener`）實作 `EventTarget` 介面，相信這將使處理指標互動的使用者層抽象化更為可能。"
+      }
+    },
+    {
+      "segment_id": "94145a94",
+      "source_content": "## Trying it Out",
+      "source_content_hash": "b3100289b289c2f3b34cf8d4608483a4715f5b0631599df0abc2b0fb7b853db6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 試用方式"
+      }
+    },
+    {
+      "segment_id": "2838eb68",
+      "source_content": "Our Pointer Events implementation is still experimental but we’re interested in getting feedback from the community on what we’ve shared. If you are interested in trying this API you’ll need to enable a couple feature flags:",
+      "source_content_hash": "c119ded2fe4adc238bff766a3e6d4570aa2aac87d7115792694a077f183784cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們的 Pointer Events 實作仍處於實驗階段，但希望獲得社群對現有成果的反饋。若您想試用此 API，需啟用以下功能標記："
+      }
+    },
+    {
+      "segment_id": "42a5832e",
+      "source_content": "### Enable Feature Flags",
+      "source_content_hash": "b3ac2c8e959b6acced395e2fa9ad5d4028f767e3db710c14ace6e7ffc3bb393d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 啟用功能標記"
+      }
+    },
+    {
+      "segment_id": "549cdcf9",
+      "source_content": ":::note\n\nPointer Events are only implemented for the [New Architecture (Fabric)](https://reactnative.dev/docs/the-new-architecture/use-app-template) and are only available for React Native 0.71+ which at the time of writing is a release candidate.\n\n:::",
+      "source_content_hash": "c5613892465a7ac45fdfdb670cfbf4f5c69371a0216ec8136b674cccbaaaf6ab",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n\nPointer Events 目前僅在[新架構 (Fabric)](https://reactnative.dev/docs/the-new-architecture/use-app-template)中實作，且僅支援 React Native 0.71+ 版本（本文撰寫時為候選發布版）。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "e9313fef",
+      "source_content": "In your entry JavaScript file (index.js in the default React Native app template) you’ll need to enable the `shouldEmitW3CPointerEvents` flag for Pointer Events and `shouldPressibilityUseW3CPointerEventsForHover` to use Pointer Events in `Pressability`.",
+      "source_content_hash": "087543a66842439ef4bdea3e8994bc164def789c6eadd1a645b6216de3fe94db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在您的 JavaScript 入口檔案（預設 React Native 應用模板中的 index.js）中，需啟用 `shouldEmitW3CPointerEvents` 標記以使用 Pointer Events，並啟用 `shouldPressibilityUseW3CPointerEventsForHover` 以在 `Pressability` 中使用 Pointer Events。"
+      }
+    },
+    {
+      "segment_id": "342e4d80",
+      "source_content": "```js\nimport ReactNativeFeatureFlags from 'react-native/Libraries/ReactNative/ReactNativeFeatureFlags';\n\n// enable the JS-side of the w3c PointerEvent implementation\nReactNativeFeatureFlags.shouldEmitW3CPointerEvents = () => true;\n\n// enable hover events in Pressibility to be backed by the PointerEvent implementation\nReactNativeFeatureFlags.shouldPressibilityUseW3CPointerEventsForHover =\n  () => true;\n```",
+      "source_content_hash": "520123f067a8401870c43b1bda96c7a3da8c0ba282658333ce1937e468179d50",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_342e4d80"
+      }
+    },
+    {
+      "segment_id": "36d6c3de",
+      "source_content": "### iOS-specific",
+      "source_content_hash": "22aac6e6e08261fc220783730d57d47dd806fa5734b96eed8bccb55d370e8781",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS 專屬設定"
+      }
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "In order to ensure that the pointer events are sent from the native iOS renderer you’ll need to flip a native feature flag in your native app’s initialization code (typically `AppDelegate.mm`).",
+      "source_content_hash": "9a840d48542895e648553dd513eaf2d474ca91296692993fdaa9d6861ef6dd17",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為確保指標事件能從 iOS 原生渲染器發送，您需在原生應用初始化程式碼（通常是 `AppDelegate.mm`）中切換原生功能標記。"
+      }
+    },
+    {
+      "segment_id": "b474abd5",
+      "source_content": "```objc\n#import <React/RCTConstants.h>\n\n// ...\n\n- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions\n{\n    RCTSetDispatchW3CPointerEvents(YES);\n\n    // ...\n}\n```",
+      "source_content_hash": "0407ae7bd0ea93129c7b01eedacc786118577db21ba661597fba58e0d34c9c1b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b474abd5"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "Note that to ensure that the Pointer Event implementation can distinguish between mouse and touch pointers on iOS you need to add [`UIApplicationSupportsIndirectInputEvents`](https://developer.apple.com/documentation/bundleresources/information_property_list/uiapplicationsupportsindirectinputevents) to your Xcode project’s `info.plist`.",
+      "source_content_hash": "bdbd661980e0878fa23d2e1021d3c878c61dde6a37c9c3b8a9a7656b0c3de3a2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，為使 Pointer Events 實作能區分 iOS 上的滑鼠與觸控指標，您需在 Xcode 專案的 `info.plist` 中加入 [`UIApplicationSupportsIndirectInputEvents`](https://developer.com/apple/documentation/bundleresources/information_property_list/uiapplicationsupportsindirectinputevents)。"
+      }
+    },
+    {
+      "segment_id": "a0d0e29e",
+      "source_content": "### Android-specific",
+      "source_content_hash": "de1a06c1a1bc4b7bf9b533dbe0cf93e5ff677223c8ebee39174554d31ba3ee8f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android 專屬設定"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "Similarly to iOS Android has a feature flag that you’ll need to enable in your app’s initialization — typically your `onCreate` for your root React activity or surface.",
+      "source_content_hash": "e0866e527779f83fb7c4930532f14def9e411abb4a36cb500d1d65d7eaafcba2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與 iOS 類似，Android 需在應用初始化時（通常是根 React Activity 或 Surface 的 `onCreate` 方法）啟用功能標記。"
+      }
+    },
+    {
+      "segment_id": "7d56fc4b",
+      "source_content": "```java\nimport com.facebook.react.config.ReactFeatureFlags;\n\n//... somewhere in initialization\n\n@Override\npublic void onCreate() {\n    ReactFeatureFlags.dispatchPointerEvents = true;\n}\n```",
+      "source_content_hash": "037941de67643442d53007b84360286e7159225875f19b1f274f7371ae5c2a59",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7d56fc4b"
+      }
+    },
+    {
+      "segment_id": "ee213c98",
+      "source_content": "### JavaScript",
+      "source_content_hash": "8f810fadd3e98749bdafb9dcf38c96fcdeaba5913cce2b594a61c012c3342552",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### JavaScript 設定"
+      }
+    },
+    {
+      "segment_id": "75daf40d",
+      "source_content": "```js\nfunction onPointerOver(event) {\n  console.log(\n    'Over blue box offset: ',\n    event.nativeEvent.offsetX,\n    event.nativeEvent.offsetY,\n  );\n}\n\n// ... in some component\n<View\n  onPointerOver={onPointerOver}\n  style={{height: 100, width: 100, backgroundColor: 'blue'}}\n/>;\n```",
+      "source_content_hash": "c50ab161f524d4f0d9318077f6fa28317276b267353825de1950dbbce85a4b5f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_75daf40d"
+      }
+    },
+    {
+      "segment_id": "445c72bd",
+      "source_content": "## Feedback Welcome",
+      "source_content_hash": "db29ed5de17612619669a4481cdd5d189b4a05cb922d39ff53b541f3e97ef5b5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 歡迎提供反饋"
+      }
+    },
+    {
+      "segment_id": "9ef42155",
+      "source_content": "Today Pointer Events are used by our VR platform and powering the Oculus Store, but we're also looking for early community feedback on both our approach and what we have for an implementation so far. We are excited to share our further progress with you and if you have questions or thoughts around this work, join us on the [dedicated discussion on Pointer Events](https://github.com/react-native-community/discussions-and-proposals/discussions/557).",
+      "source_content_hash": "63a88947fb63c340c8f744611c1ac93ce0ee68de29922b48c31e132febbc0bfb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前 Pointer Events 已應用於我們的 VR 平台並驅動 Oculus Store，但我們也期待社群對現有實作方法與成果的早期反饋。若您對此工作有任何疑問或想法，歡迎加入[指標事件專屬討論](https://github.com/react-native-community/discussions-and-proposals/discussions/557)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2022-12-13-pointer-events-in-react-native.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.231613+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "571ccf8239bda7729a5e4828f10d1e58c88dab8923284900adf14947a1febb94"
+  }
+}

@@ -1,0 +1,942 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.79/the-new-architecture/pure-cxx-modules.md",
+  "source_file_content_hash": "4f1717446b94ded27d5fd2416b70b9c8aff77bf3ad22f9941c3f2df258852224",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "# Cross-Platform Native Modules (C++)",
+      "source_content_hash": "6228c2baf2a6da50f1ded5a6c3c3436881fe0b0a32b33a1ea8c7334bb4b41500",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 跨平台原生模組 (C++)"
+      }
+    },
+    {
+      "segment_id": "a37198cd",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a37198cd"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "Writing a module in C++ is the best way to share platform-agnostic code between Android and iOS. With pure C++ modules, you can write your logic only once and reuse it right away from all the platforms, without the need of writing platform-specific code.",
+      "source_content_hash": "4a70328fbad748195774c29e2f58eb072c6baa2d0db2a3b80489a9fc823ddd73",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用 C++ 編寫模組是實現 Android 與 iOS 平台無關程式碼共享的最佳方式。透過純 C++ 模組，您只需編寫一次邏輯，即可在所有平台上直接重用，無需編寫平台特定程式碼。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "In this guide, we will go through the creation of a pure C++ Turbo Native Module:",
+      "source_content_hash": "cfc72f5b9165cdcc1468daa20dc398d40f6b7db9c94715d7621e6ca6c76d7378",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南將逐步說明如何建立純 C++ Turbo 原生模組："
+      }
+    },
+    {
+      "segment_id": "abcf54e3",
+      "source_content": "1. Create the JS specs\n2. Configure Codegen to generate the scaffolding\n3. Implement the Native logic\n4. Register the module in the Android and iOS application\n5. Test your changes in JS",
+      "source_content_hash": "1148e42f4115e7ed09e3e75f25019e3c8ab2a09deeaea53e26660239c38d4d96",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 建立 JS 規格文件\n2. 配置 Codegen 生成框架程式碼\n3. 實作原生邏輯\n4. 在 Android 和 iOS 應用中註冊模組\n5. 在 JS 中測試變更"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "The rest of this guide assume that you have created your application running the command:",
+      "source_content_hash": "175aba7b6f3418453240cc38c0045e7d42fa5dddac8568a714443c427a503639",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南後續內容假設您已透過以下指令建立應用程式："
+      }
+    },
+    {
+      "segment_id": "93be3c14",
+      "source_content": "```shell\nnpx @react-native-community/cli@latest init SampleApp --version 0.76.0\n```",
+      "source_content_hash": "65dd5f3a3121f72252a83d1a462fbc88e8fb57c09c344755c3ecf7a86c8b0d64",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_93be3c14"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "## 1. Create the JS specs",
+      "source_content_hash": "9ef44d7a396ac1663d824ecdcb92334a1a03b971f914dbbf54baae2ecebbe2d4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 1. 建立 JS 規格文件"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "Pure C++ Turbo Native Modules are Turbo Native Modules. They need a specification file (also called spec file) so that Codegen can create the scaffolding code for us. The specification file is also what we use to access the Turbo Native Module in JS.",
+      "source_content_hash": "dc29d88db1692b16e61a84b9ea3501c5144ea155aac76d5f9397bc7edbdc01f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "純 C++ Turbo 原生模組屬於 Turbo 原生模組，需要規格文件（spec file）讓 Codegen 能為我們生成框架程式碼。該規格文件也是我們在 JS 中存取 Turbo 原生模組的介面。"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "Spec files need to be written in a typed JS dialect. React Native currently supports Flow or TypeScript.",
+      "source_content_hash": "daf2f24202313759324f7b04635c1ed8855c3d32cd5c784eb7ecce3e614eea26",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "規格文件需使用具型別的 JS 方言撰寫。React Native 目前支援 Flow 或 TypeScript。"
+      }
+    },
+    {
+      "segment_id": "b3f5c97c",
+      "source_content": "1. Inside the root folder of your app, create a new folder called `specs`.\n2. Create a new file called `NativeSampleModule.ts` with the following code:",
+      "source_content_hash": "63baac02b9a6795e62e1fad124dfc3f108c91f974b85181a3c7c377641004c4f",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在應用程式根目錄下建立名為 `specs` 的新資料夾。\n2. 建立名為 `NativeSampleModule.ts` 的新檔案，內容如下："
+      }
+    },
+    {
+      "segment_id": "f79f5ed0",
+      "source_content": ":::warning\nAll Native Turbo Module spec files must have the prefix `Native`, otherwise Codegen will ignore them.\n:::",
+      "source_content_hash": "3b5dc64bacf6dbbd452720ca044c4488c4f297af20a67ab31ac601c16f35e83b",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n所有 Turbo 原生模組規格文件必須以 `Native` 為前綴，否則 Codegen 將忽略它們。\n:::"
+      }
+    },
+    {
+      "segment_id": "d0d484a6",
+      "source_content": "<Tabs groupId=\"tnm-specs\" queryString defaultValue={constants.defaultJavaScriptSpecLanguages} values={constants.javaScriptSpecLanguages}>\n<TabItem value=\"flow\">\n\n```ts title=\"specs/NativeSampleModule.ts\"\n// @flow\nimport type {TurboModule} from 'react-native'\nimport { TurboModuleRegistry } from \"react-native\";\n\nexport interface Spec extends TurboModule {\n  +reverseString: (input: string) => string;\n}\n\nexport default (TurboModuleRegistry.getEnforcing<Spec>(\n  \"NativeSampleModule\"\n): Spec);\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```ts title=\"specs/NativeSampleModule.ts\"\nimport {TurboModule, TurboModuleRegistry} from 'react-native';\n\nexport interface Spec extends TurboModule {\n  readonly reverseString: (input: string) => string;\n}\n\nexport default TurboModuleRegistry.getEnforcing<Spec>(\n  'NativeSampleModule',\n);\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "d572805d87a4abd477eb6fa5d4f87dec2cad19d3c0e1bb28f8d87f35cd2049aa",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d0d484a6"
+      }
+    },
+    {
+      "segment_id": "3ef18741",
+      "source_content": "## 2. Configure Codegen",
+      "source_content_hash": "2fd7af7986eaa16adbf76eaaea41789fdcffdecd01a826c04ca6bb336b6027d8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 2. 配置 Codegen"
+      }
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "The next step is to configure [Codegen](what-is-codegen.md) in your `package.json`. Update the file to include:",
+      "source_content_hash": "387879b933a76f43bc97308c62f88ea477edf66d342d54aa79ecfdf3071f3823",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "下一步是在 `package.json` 中配置 [Codegen](what-is-codegen.md)。更新檔案內容以包含："
+      }
+    },
+    {
+      "segment_id": "bc137a19",
+      "source_content": "```json title=\"package.json\"\n     \"start\": \"react-native start\",\n     \"test\": \"jest\"\n   },\n   // highlight-add-start\n   \"codegenConfig\": {\n     \"name\": \"AppSpecs\",\n     \"type\": \"modules\",\n     \"jsSrcsDir\": \"specs\",\n     \"android\": {\n       \"javaPackageName\": \"com.sampleapp.specs\"\n     }\n   },\n   // highlight-add-end\n   \"dependencies\": {\n```",
+      "source_content_hash": "819ec73606f6d1fc4f3c79ad3376b7c40d1ce6f30abfdee3eb0d3ab12cdaaa1f",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bc137a19"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "This configuration tells Codegen to look for spec files in the `specs` folder. It also instructs Codegen to only generate code for `modules` and to namespace the generated code as `AppSpecs`.",
+      "source_content_hash": "4197c7291ec463311e77ff02c6b17157c2df4ad0b429b2d2b3d96e580b71c82a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此配置指示 Codegen 在 `specs` 資料夾中尋找規格文件，並僅為 `modules` 生成程式碼，同時將生成的程式碼命名空間設為 `AppSpecs`。"
+      }
+    },
+    {
+      "segment_id": "bd30d33e",
+      "source_content": "## 3. Write the Native Code",
+      "source_content_hash": "924612e31bde16402d901992b3db5464beb9c88d913ba44d5599fa49fcd791d4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 3. 編寫原生程式碼"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Writing a C++ Turbo Native Module allows you to share the code between Android an iOS. Therefore we will be writing the code once, and we will look into what changes we need to apply to the platforms so that the C++ code can be picked up.",
+      "source_content_hash": "9e53c6f71a43088bebed33276e04493255d0fc0acf697ef79114837930a00a38",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "編寫 C++ Turbo 原生模組可讓您在 Android 和 iOS 之間共享程式碼。因此我們只需編寫一次程式碼，後續將說明如何調整各平台配置以引入 C++ 程式碼。"
+      }
+    },
+    {
+      "segment_id": "e0019b35",
+      "source_content": "1. Create a folder named `shared` at the same level as the `android` and `ios` folders.\n2. Inside the `shared` folder, create a new file called `NativeSampleModule.h`.\n\n   ```cpp title=\"shared/NativeSampleModule.h\"\n   #pragma once\n\n   #include <AppSpecsJSI.h>\n\n   #include <memory>\n   #include <string>\n\n   namespace facebook::react {\n\n   class NativeSampleModule : public NativeSampleModuleCxxSpec<NativeSampleModule> {\n   public:\n     NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker);\n\n     std::string reverseString(jsi::Runtime& rt, std::string input);\n   };\n\n   } // namespace facebook::react\n\n   ```\n\n3. Inside the `shared` folder, create a new file called `NativeSampleModule.cpp`.\n\n   ```cpp title=\"shared/NativeSampleModule.cpp\"\n   #include \"NativeSampleModule.h\"\n\n   namespace facebook::react {\n\n   NativeSampleModule::NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker)\n       : NativeSampleModuleCxxSpec(std::move(jsInvoker)) {}\n\n   std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string input) {\n     return std::string(input.rbegin(), input.rend());\n   }\n\n   } // namespace facebook::react\n   ```",
+      "source_content_hash": "abd7384c228b54ffbb8266871ff5e335fa6e251f31d01f7f9b52cedf95249753",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在與 `android` 和 `ios` 資料夾同層級處建立名為 `shared` 的資料夾。\n2. 在 `shared` 資料夾中建立名為 `NativeSampleModule.h` 的新檔案。\n\n   ```cpp title=\"shared/NativeSampleModule.h\"\n   #pragma once\n\n   #include <AppSpecsJSI.h>\n\n   #include <memory>\n   #include <string>\n\n   namespace facebook::react {\n\n   class NativeSampleModule : public NativeSampleModuleCxxSpec<NativeSampleModule> {\n   public:\n     NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker);\n\n     std::string reverseString(jsi::Runtime& rt, std::string input);\n   };\n\n   } // namespace facebook::react\n\n   ```\n\n3. 在 `shared` 資料夾中建立名為 `NativeSampleModule.cpp` 的新檔案。\n\n   ```cpp title=\"shared/NativeSampleModule.cpp\"\n   #include \"NativeSampleModule.h\"\n\n   namespace facebook::react {\n\n   NativeSampleModule::NativeSampleModule(std::shared_ptr<CallInvoker> jsInvoker)\n       : NativeSampleModuleCxxSpec(std::move(jsInvoker)) {}\n\n   std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string input) {\n     return std::string(input.rbegin(), input.rend());\n   }\n\n   } // namespace facebook::react\n   ```"
+      }
+    },
+    {
+      "segment_id": "1ecf0882",
+      "source_content": "Let's have a look at the two files we created:",
+      "source_content_hash": "0c68fca02a0fd25322b75bdafb6694553d1eaa364d04c7367a21a7276d16b527",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓我們檢視這兩個新建的檔案："
+      }
+    },
+    {
+      "segment_id": "1fe5236e",
+      "source_content": "- The `NativeSampleModule.h` file is the header file for a Pure C++ TurboModule. The `include` statements make sure that we include the specs that will be created by Codegen and that contains the interface and the base class we need to implement.\n- The module lives in the `facebook::react` namespace to have access to all the types that live in that namespace.\n- The class `NativeSampleModule` is the actual Turbo Native Module class and it extends the `NativeSampleModuleCxxSpec` class which contains some glue code and boilerplate code to let this class behave as a Turbo Native Module.\n- Finally, we have the constructor, that accepts a pointer to the `CallInvoker`, to communicate with JS if needed and the function's prototype we have to implement.",
+      "source_content_hash": "67e729de9a4aa24d45b36160dbf73d18e5da2ed6670fb8adaa683798993495eb",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `NativeSampleModule.h` 檔案是純 C++ TurboModule 的標頭檔。`include` 語句確保我們引入由 Codegen 生成的規範，其中包含需要實作的介面與基礎類別。\n- 該模組位於 `facebook::react` 命名空間中，以存取該命名空間內的所有類型。\n- `NativeSampleModule` 類別是實際的 Turbo Native Module 類別，它繼承自 `NativeSampleModuleCxxSpec` 類別，後者包含一些黏合程式碼與樣板程式碼，使此類別能作為 Turbo Native Module 運作。\n- 最後是建構函式，它接受指向 `CallInvoker` 的指標，以便在需要時與 JS 溝通，以及我們需要實作的函式原型。"
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "The `NativeSampleModule.cpp` file is the actual implementation of our Turbo Native Module and implements the constructor and the method that we declared in the specs.",
+      "source_content_hash": "b79624cf54c22fe1271979524bfe1c8ab09f839b0ae83688abef812047a097da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`NativeSampleModule.cpp` 檔案是我們 Turbo Native Module 的實際實作，實作了在規範中宣告的建構函式與方法。"
+      }
+    },
+    {
+      "segment_id": "73776161",
+      "source_content": "## 4. Register the Module in the platform",
+      "source_content_hash": "c5bf77df8e08679a7ade5b715e78c03a919f50c9969b9c74b97903398ae9b462",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 4. 在平台中註冊模組"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "The next steps will let us register the module in the platform. This is the step that exposes the native code to JS so that the React Native application can finally call the native methods from the JS layer.",
+      "source_content_hash": "39dced8c8e1a43c9dab561c1edeb25d148897c7f781c640d2743e43c69327682",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接下來的步驟將讓我們在平台中註冊模組。這一步驟將原生程式碼暴露給 JS，使 React Native 應用程式最終能從 JS 層呼叫原生方法。"
+      }
+    },
+    {
+      "segment_id": "17b50e81",
+      "source_content": "This is the only time when we will have to write some platform-specific code.",
+      "source_content_hash": "fd5410bfd0e858c4f19545c78ba4ad120cd05251dd868e4f9cf1df0c44ad540c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這是唯一需要撰寫一些平台特定程式碼的時候。"
+      }
+    },
+    {
+      "segment_id": "6ab1b234",
+      "source_content": "### Android",
+      "source_content_hash": "18508687aedd8506ac08685625c58c973d94225f52d4abdd8fc62e581c6da653",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android"
+      }
+    },
+    {
+      "segment_id": "42d9ca67",
+      "source_content": "To make sure that the Android app can effectively build the C++ Turbo Native Module, we need to:",
+      "source_content_hash": "f84e8cd39bfac1a153869ce5325dbe6770146ec8a879dcf5228704e1166e2779",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了確保 Android 應用能有效建置 C++ Turbo Native Module，我們需要："
+      }
+    },
+    {
+      "segment_id": "415dc9ef",
+      "source_content": "1. Create a `CMakeLists.txt` to access our C++ code.\n2. Modify `build.gradle` to point to the newly created `CMakeLists.txt` file.\n3. Create an `OnLoad.cpp` file in our Android app to register the new Turbo Native Module.",
+      "source_content_hash": "cebf0e7a084b9a40312bec718aeaa4ce3e43133d5bee7faa9509f54e164649b5",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 建立 `CMakeLists.txt` 以存取我們的 C++ 程式碼。\n2. 修改 `build.gradle` 以指向新建立的 `CMakeLists.txt` 檔案。\n3. 在 Android 應用中建立 `OnLoad.cpp` 檔案以註冊新的 Turbo Native Module。"
+      }
+    },
+    {
+      "segment_id": "531ec0bb",
+      "source_content": "#### 1. Create the `CMakeLists.txt` file",
+      "source_content_hash": "5662ea3e13ea91c1a4a760b022d69f13011c4064b4c69e27f01addfe4fec1487",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 1. 建立 `CMakeLists.txt` 檔案"
+      }
+    },
+    {
+      "segment_id": "d2a3d4c7",
+      "source_content": "Android uses CMake to build. CMake needs to access the files we defined in our shared folder to be able to build them.",
+      "source_content_hash": "deeb5d0bcc6f78627ce3e6258a66641b547ad24d2ae9efe00550619d4ea133c2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 使用 CMake 進行建置。CMake 需要存取我們在共享資料夾中定義的檔案才能建置它們。"
+      }
+    },
+    {
+      "segment_id": "93fcd90c",
+      "source_content": "1. Create a new folder `SampleApp/android/app/src/main/jni`. The `jni` folder is where the C++ side of Android lives.\n2. Create a `CMakeLists.txt` file and add this context:",
+      "source_content_hash": "f8abdefc4428547f8021feb99b8af348f1d469dd9e190451460f80456b2596ef",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 建立新資料夾 `SampleApp/android/app/src/main/jni`。`jni` 資料夾是 Android 中 C++ 部分所在的位置。\n2. 建立 `CMakeLists.txt` 檔案並加入以下內容："
+      }
+    },
+    {
+      "segment_id": "414aa732",
+      "source_content": "```shell title=\"CMakeLists.txt\"\ncmake_minimum_required(VERSION 3.13)\n\n# Define the library name here.\nproject(appmodules)\n\n# This file includes all the necessary to let you build your React Native application\ninclude(${REACT_ANDROID_DIR}/cmake-utils/ReactNative-application.cmake)\n\n# Define where the additional source code lives. We need to crawl back the jni, main, src, app, android folders\ntarget_sources(${CMAKE_PROJECT_NAME} PRIVATE ../../../../../shared/NativeSampleModule.cpp)\n\n# Define where CMake can find the additional header files. We need to crawl back the jni, main, src, app, android folders\ntarget_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ../../../../../shared)\n```",
+      "source_content_hash": "dcf5e305cb40e05a1af0a3ce83b718fe1aa5e7e6948f4dbf6ea3a06139f44c55",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_414aa732"
+      }
+    },
+    {
+      "segment_id": "e29bd639",
+      "source_content": "The CMake file does the following things:",
+      "source_content_hash": "bcf647cf80712a86e38b3c8500edb14d9c7e35e1dbb5f91697bb89c4c709f69c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "CMake 檔案執行以下操作："
+      }
+    },
+    {
+      "segment_id": "b7b9c9f6",
+      "source_content": "- Defines the `appmodules` library, where all the app C++ code will be included.\n- Loads the base React Native's CMake file.\n- Adds the Module C++ source code that we need to build with the `target_sources` directives. By default React Native will already populate the `appmodules` library with default sources, here we include our custom one. You can see that we need to crawl back from the `jni` folder to the `shared` folder where our C++ Turbo Module lives.\n- Specifies where CMake can find the module header files. Also in this case we need to crawl back from the `jni` folder.",
+      "source_content_hash": "c9d014f3e4a0d75db3ab54cf039f9464db5813094907250804e22b6f9d3a02f7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 定義 `appmodules` 函式庫，所有應用 C++ 程式碼將包含於此。\n- 載入基礎 React Native 的 CMake 檔案。\n- 透過 `target_sources` 指令加入我們需要建置的模組 C++ 原始碼。預設情況下，React Native 會將預設原始碼填入 `appmodules` 函式庫，這裡我們加入自訂的部分。可以看到我們需要從 `jni` 資料夾回溯到 `shared` 資料夾，那裡存放著我們的 C++ Turbo Module。\n- 指定 CMake 可以找到模組標頭檔的位置。同樣在此情況下，我們需要從 `jni` 資料夾回溯。"
+      }
+    },
+    {
+      "segment_id": "4b62f7d8",
+      "source_content": "#### 2. Modify `build.gradle` to include the custom C++ code",
+      "source_content_hash": "da5bd124070a9eb81ab5259fe74e04a6d222fb125c9a37bc04fba714ea197660",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 2. 修改 `build.gradle` 以包含自訂 C++ 程式碼"
+      }
+    },
+    {
+      "segment_id": "4899bc54",
+      "source_content": "Gradle is the tool that orchestrates the Android build. We need to tell it where it can find the `CMake` files to build the Turbo Native Module.",
+      "source_content_hash": "9c3c2296d6f7fe3ea7a3b17fad863f6e5ddc8661fc6bb2a286f33788f9dad685",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Gradle 是協調 Android 建置的工具。我們需要告訴它哪裡可以找到建置 Turbo Native Module 的 `CMake` 檔案。"
+      }
+    },
+    {
+      "segment_id": "458ab9ae",
+      "source_content": "1. Open the `SampleApp/android/app/build.gradle` file.\n2. Add the following block into the Gradle file, within the existent `android` block:",
+      "source_content_hash": "6bf289cb552cf8686cb29dcb029f2df483ec88884d880fd73ffa3f312251a1ee",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `SampleApp/android/app/build.gradle` 檔案。\n2. 在現有的 `android` 區塊內加入以下區塊："
+      }
+    },
+    {
+      "segment_id": "d7631ae3",
+      "source_content": "```diff title=\"android/app/build.gradle\"\n    buildTypes {\n        debug {\n            signingConfig signingConfigs.debug\n        }\n        release {\n            // Caution! In production, you need to generate your own keystore file.\n            // see https://reactnative.dev/docs/signed-apk-android.\n            signingConfig signingConfigs.debug\n            minifyEnabled enableProguardInReleaseBuilds\n            proguardFiles getDefaultProguardFile(\"proguard-android.txt\"), \"proguard-rules.pro\"\n        }\n    }\n\n+   externalNativeBuild {\n+       cmake {\n+           path \"src/main/jni/CMakeLists.txt\"\n+       }\n+   }\n}\n```",
+      "source_content_hash": "d83d1a971f92863b915e240691ab1f71b50d1a6109c4d00605123b220a938066",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d7631ae3"
+      }
+    },
+    {
+      "segment_id": "c277c3c0",
+      "source_content": "This block tells the Gradle file where to look for the CMake file. The path is relative to the folder where the `build.gradle` file lives, so we need to add the path to the `CMakeLists.txt` files in the `jni` folder.",
+      "source_content_hash": "43e69d9a29e595d4b150493ca9fa81a39c73d97e6bee38514523f27d708d40ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此區塊告訴 Gradle 檔案去哪裡尋找 CMake 檔案。路徑相對於 `build.gradle` 檔案所在的資料夾，因此我們需要加入指向 `jni` 資料夾中 `CMakeLists.txt` 檔案的路徑。"
+      }
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "#### 3. Register the new Turbo Native Module",
+      "source_content_hash": "fb1b5da75cbb063706c07df1f917fa141ece1572c6c1a831f2eff780851635fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 3. 註冊新的 Turbo Native Module"
+      }
+    },
+    {
+      "segment_id": "e4945edb",
+      "source_content": "The final step is to register the new C++ Turbo Native Module in the runtime, so that when JS requires the C++ Turbo Native Module, the app knows where to find it and can return it.",
+      "source_content_hash": "dff9d8b9bde91cb699b535261fced22626e417f0d59708cf5f846a842aeb2c95",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是在執行時期註冊新的 C++ Turbo Native Module，這樣當 JS 要求 C++ Turbo Native Module 時，應用程式知道去哪裡找到它並回傳。"
+      }
+    },
+    {
+      "segment_id": "563ec494",
+      "source_content": "1. From the folder `SampleApp/android/app/src/main/jni`, run the following command:",
+      "source_content_hash": "f672e7aadb97ec244456c04b96453ffbd9c7b18faeaaf4a17a6befb1b8e6c283",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 從資料夾 `SampleApp/android/app/src/main/jni` 執行以下命令："
+      }
+    },
+    {
+      "segment_id": "60efc494",
+      "source_content": "```sh\ncurl -O https://raw.githubusercontent.com/facebook/react-native/v0.76.0/packages/react-native/ReactAndroid/cmake-utils/default-app-setup/OnLoad.cpp\n```",
+      "source_content_hash": "bcceb8290a7ce17fdb76b409d5fb325484ba56c1873b8a7067490afdd0aa3c70",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_60efc494"
+      }
+    },
+    {
+      "segment_id": "070cad33",
+      "source_content": "2. Then, modify this file as follows:",
+      "source_content_hash": "f6affc7dd7be6ee72f8669006c5c363bd3d959ddbb6b9188e146ce53ce8ddde2",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 接著，按以下方式修改此檔案："
+      }
+    },
+    {
+      "segment_id": "489cbec9",
+      "source_content": "```diff title=\"android/app/src/main/jni/OnLoad.cpp\"\n#include <DefaultComponentsRegistry.h>\n#include <DefaultTurboModuleManagerDelegate.h>\n#include <autolinking.h>\n#include <fbjni/fbjni.h>\n#include <react/renderer/componentregistry/ComponentDescriptorProviderRegistry.h>\n#include <rncore.h>\n\n+ // Include the NativeSampleModule header\n+ #include <NativeSampleModule.h>\n\n//...\n\nstd::shared_ptr<TurboModule> cxxModuleProvider(\n    const std::string& name,\n    const std::shared_ptr<CallInvoker>& jsInvoker) {\n  // Here you can provide your CXX Turbo Modules coming from\n  // either your application or from external libraries. The approach to follow\n  // is similar to the following (for a module called `NativeCxxModuleExample`):\n  //\n  // if (name == NativeCxxModuleExample::kModuleName) {\n  //   return std::make_shared<NativeCxxModuleExample>(jsInvoker);\n  // }\n\n+  // This code register the module so that when the JS side asks for it, the app can return it\n+  if (name == NativeSampleModule::kModuleName) {\n+    return std::make_shared<NativeSampleModule>(jsInvoker);\n+  }\n\n  // And we fallback to the CXX module providers autolinked\n  return autolinking_cxxModuleProvider(name, jsInvoker);\n}\n\n// leave the rest of the file\n```",
+      "source_content_hash": "047b746627bafc9e2770a299b131ce2356bb17376bd08b5908505edef85f38b3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_489cbec9"
+      }
+    },
+    {
+      "segment_id": "bb5297fc",
+      "source_content": "These steps download the original `OnLoad.cpp` file from React Native, so that we can safely override it to load the C++ Turbo Native Module in the app.",
+      "source_content_hash": "79fd4a9115bc803e2ef85d9a4fa5ae75f1a091350081dc0e05cc2a5405077ac5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些步驟會從 React Native 下載原始的 `OnLoad.cpp` 檔案，以便我們能安全地覆寫它，將 C++ Turbo Native Module 載入應用程式。"
+      }
+    },
+    {
+      "segment_id": "2cfc0629",
+      "source_content": "Once we downloaded the file, we can modify it by:",
+      "source_content_hash": "ef5872bfd34c91c2ee4f4ac07434447b5f7bd4e7c7445322b83f16f9d7a6306f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "下載檔案後，我們可以透過以下方式修改："
+      }
+    },
+    {
+      "segment_id": "0b448c77",
+      "source_content": "- Including the header file that points to our module\n- Registering the Turbo Native Module so that when JS requires it, the app can return it.",
+      "source_content_hash": "8b62bb87cb5314bd109d7e7ca88c7b9903c9fd0183e4038a37a8b6313fb0c529",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 引入指向我們模組的標頭檔\n- 註冊 Turbo Native Module，讓當 JS 需要時，應用程式能回傳它。"
+      }
+    },
+    {
+      "segment_id": "590d1cd9",
+      "source_content": "Now, you can run `yarn android` from the project root to see your app building successfully.",
+      "source_content_hash": "193f1afde429a84dc903a0447ff0f537d70bdfa66d8ac30af6769af92025167e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在，你可以在專案根目錄執行 `yarn android`，確認應用程式能成功建置。"
+      }
+    },
+    {
+      "segment_id": "92505e51",
+      "source_content": "### iOS",
+      "source_content_hash": "b646a613d3c8a9a4ca1214eed895ef4f31b195bbc5c8456c23cc55e60cc49c95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS"
+      }
+    },
+    {
+      "segment_id": "2f8456b2",
+      "source_content": "To make sure that the iOS app can effectively build the C++ Turbo Native Module, we need to:",
+      "source_content_hash": "b8880bd2ba4526191ac576c06c659541b4d1b65d1111fb5dcb53ff0c48649931",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為了確保 iOS 應用程式能有效建置 C++ Turbo Native Module，我們需要："
+      }
+    },
+    {
+      "segment_id": "941578d7",
+      "source_content": "1. Install pods and run Codegen.\n2. Add the `shared` folder to our iOS project.\n3. Register the C++ Turbo Native Module in the application.",
+      "source_content_hash": "25ae3774d360a3cf7fd28a2893ce72d0e11d5cac6504a669bbc07d9a59b4e054",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 安裝 pods 並執行 Codegen。\n2. 將 `shared` 資料夾加入我們的 iOS 專案。\n3. 在應用程式中註冊 C++ Turbo Native Module。"
+      }
+    },
+    {
+      "segment_id": "cc33bff5",
+      "source_content": "#### 1. Install Pods and Run Codegen.",
+      "source_content_hash": "20f38d80ed1b6c2689397eb2f5ac4755e3726374312f5a3f3e828c1c509feaad",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 1. 安裝 Pods 並執行 Codegen"
+      }
+    },
+    {
+      "segment_id": "66e62938",
+      "source_content": "The first step we need to run is the usual steps we run every time we have to prepare our iOS application. CocoaPods is the tool we use to setup and install React Native dependencies and, as part of the process, it will also run Codegen for us.",
+      "source_content_hash": "f03e56daf56ce98169e52bdeb1cbe13d760ea84078047e2550a98fcc48a722b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一步是執行每次準備 iOS 應用程式時的例行步驟。CocoaPods 是我們用來設定和安裝 React Native 相依套件的工具，在此過程中，它也會為我們執行 Codegen。"
+      }
+    },
+    {
+      "segment_id": "525af061",
+      "source_content": "```bash\ncd ios\nbundle install\nbundle exec pod install\n```",
+      "source_content_hash": "b084bf784c587d1511929d5b95f44445cf6c0eb960bab52bc31a315eb61644b5",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_525af061"
+      }
+    },
+    {
+      "segment_id": "a99db0f6",
+      "source_content": "#### 2. Add the shared folder to the iOS project",
+      "source_content_hash": "492c71455d7c76b929c264ea7165dc31db432bcda68c627bcd9282d9b7317e88",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 2. 將 shared 資料夾加入 iOS 專案"
+      }
+    },
+    {
+      "segment_id": "2ab62b74",
+      "source_content": "This step adds the `shared` folder to the project to make it visible to Xcode.",
+      "source_content_hash": "5f38456e3d3b93d61e60fdc407618bf90932efe280f9fbe5a0ed995ea179d51a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此步驟將 `shared` 資料夾加入專案，讓 Xcode 能看見它。"
+      }
+    },
+    {
+      "segment_id": "de4a1d59",
+      "source_content": "1. Open the CocoPods generated Xcode Workspace.",
+      "source_content_hash": "c83b7635912295b99a3a9a5d919c455e6adea670b26c299f83116e8390302512",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 CocoPods 產生的 Xcode Workspace。"
+      }
+    },
+    {
+      "segment_id": "be1986a6",
+      "source_content": "```bash\ncd ios\nopen SampleApp.xcworkspace\n```",
+      "source_content_hash": "ce19de7ef06b4f39cc48212e6e7b52fa20cdeeb0b96aff20603093c1b43c014e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_be1986a6"
+      }
+    },
+    {
+      "segment_id": "efb89515",
+      "source_content": "2. Click on the `SampleApp` project on the left and select `Add files to \"Sample App\"...`.",
+      "source_content_hash": "363888ed20869ed73bbf84e28ecb83ed1e064e9aa58cf9b3a9e0a902c886d551",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "2. 點擊左側的 `SampleApp` 專案，選擇 `Add files to \"Sample App\"...`。"
+      }
+    },
+    {
+      "segment_id": "c2a9a004",
+      "source_content": "![Add Files to Sample App...](/docs/assets/AddFilesToXcode1.png)",
+      "source_content_hash": "f62d0bff5f3d8696dbc021c636d2bd01c484fe712a31378c9efe0b1f118746b1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Add Files to Sample App...](/docs/assets/AddFilesToXcode1.png)"
+      }
+    },
+    {
+      "segment_id": "63aec83f",
+      "source_content": "3. Select the `shared` folder and click on `Add`.",
+      "source_content_hash": "f482f93c29d9baab9410dc7e704c4724b65be5c21753d78aec0b42cd58919e5a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "3. 選擇 `shared` 資料夾並點擊 `Add`。"
+      }
+    },
+    {
+      "segment_id": "e020f7ed",
+      "source_content": "![Add Files to Sample App...](/docs/assets/AddFilesToXcode2.png)",
+      "source_content_hash": "b2c542246fabebcc1863c5e6334290c3f948bebec255f4f45baa8cf2dc06cd8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Add Files to Sample App...](/docs/assets/AddFilesToXcode2.png)"
+      }
+    },
+    {
+      "segment_id": "d83b50df",
+      "source_content": "If you did everything right, your project on the left should look like this:",
+      "source_content_hash": "101b79dac09381cba5e6ae7e74ecad9b6dfbf820f447ead29ad9c9b872c09fb0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果一切正確，左側的專案應如下所示："
+      }
+    },
+    {
+      "segment_id": "b16b56a2",
+      "source_content": "![Xcode Project](/docs/assets/CxxTMGuideXcodeProject.png)",
+      "source_content_hash": "fdacc427be2d61f7162f0445a1449312d71a25301c83513939bec7ca0d55a4ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![Xcode Project](/docs/assets/CxxTMGuideXcodeProject.png)"
+      }
+    },
+    {
+      "segment_id": "638164aa",
+      "source_content": "#### 3. Registering the Cxx Turbo Native Module in your app",
+      "source_content_hash": "586b2254602a2d3018374cb37fae9bbff335a34fcb69e8ae0ea734cf3bd3dcd6",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 3. 在應用程式中註冊 Cxx Turbo Native Module"
+      }
+    },
+    {
+      "segment_id": "9929329e",
+      "source_content": "To register a pure Cxx Turbo Native Module in your app, you need to:",
+      "source_content_hash": "c9cca03af9fce2623eee07e323bc976505b2861c0b5ae23b219beac75bfadfc7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要在應用程式中註冊純 Cxx Turbo Native Module，你需要："
+      }
+    },
+    {
+      "segment_id": "b4cfd882",
+      "source_content": "1. Create a `ModuleProvider` for the Native Module\n2. Configure the `package.json` to associate the JS module name with the ModuleProvider class.",
+      "source_content_hash": "43a30f0ced1e63b9481cd28e5456d4847baeb0986f1d851f8bd44ef223fa5808",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 為 Native Module 建立 `ModuleProvider`\n2. 設定 `package.json`，將 JS 模組名稱與 ModuleProvider 類別關聯。"
+      }
+    },
+    {
+      "segment_id": "7e031d10",
+      "source_content": "The ModuleProvider is an Objective-C++ that glues together the Pure C++ module with the rest of your iOS App.",
+      "source_content_hash": "e4a8c1fab92cee7d5c7d76620f9284a0a84fc292f2511346c9604b4b06a2ad57",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "ModuleProvider 是一個 Objective-C++ 類別，負責將純 C++ 模組與 iOS 應用程式的其他部分連接起來。"
+      }
+    },
+    {
+      "segment_id": "28d66ee4",
+      "source_content": "##### 3.1 Create the ModuleProvider",
+      "source_content_hash": "91b4df10214765aaa2ea8f1f6083351acde6a8064302abc6a1a2d041b1ee6315",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 3.1 建立 ModuleProvider"
+      }
+    },
+    {
+      "segment_id": "13c81e98",
+      "source_content": "1. From Xcode, select the `SampleApp` project and press <kbd>⌘</kbd> + <kbd>N</kbd> to create a new file.\n2. Select the `Cocoa Touch Class` template\n3. Add the name `SampleNativeModuleProvider` (keep the other field as `Subclass of: NSObject` and `Language: Objective-C`)\n4. Click Next to generate the files.\n5. Rename the `SampleNativeModuleProvider.m` to `SampleNativeModuleProvider.mm`. The `mm` extension denotes an Objective-C++ file.\n6. Implement the content of the `SampleNativeModuleProvider.h` with the following:",
+      "source_content_hash": "771a4fc16b3416cc1db5de0aada432694a0116700b4fc75e7c1315fbd1c6b34a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 在 Xcode 中選擇 `SampleApp` 專案，按下 <kbd>⌘</kbd> + <kbd>N</kbd> 建立新檔案。\n2. 選擇 `Cocoa Touch Class` 模板\n3. 輸入名稱 `SampleNativeModuleProvider`（保持其他欄位為 `Subclass of: NSObject` 和 `Language: Objective-C`）\n4. 點擊 Next 產生檔案。\n5. 將 `SampleNativeModuleProvider.m` 重新命名為 `SampleNativeModuleProvider.mm`。`.mm` 副檔名表示這是一個 Objective-C++ 檔案。\n6. 在 `SampleNativeModuleProvider.h` 中實作以下內容："
+      }
+    },
+    {
+      "segment_id": "7971ee1a",
+      "source_content": "```objc title=\"NativeSampleModuleProvider.h\"\n\n#import <Foundation/Foundation.h>\n#import <ReactCommon/RCTTurboModule.h>\n\nNS_ASSUME_NONNULL_BEGIN\n\n@interface NativeSampleModuleProvider : NSObject <RCTModuleProvider>\n\n@end\n\nNS_ASSUME_NONNULL_END\n```",
+      "source_content_hash": "425f454c2f223280b6a148125beb30457473adcaf4385d3955ad1936d994ecce",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7971ee1a"
+      }
+    },
+    {
+      "segment_id": "d8492b16",
+      "source_content": "This declares a `NativeSampleModuleProvider` object that conforms to the `RCTModuleProvider` protocol.",
+      "source_content_hash": "671bccf9935add3c6c4fd5f17913371c0328fe4c3726667f57e9c226b06a75c3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這宣告了一個符合 `RCTModuleProvider` 協議的 `NativeSampleModuleProvider` 物件。"
+      }
+    },
+    {
+      "segment_id": "f6aafc57",
+      "source_content": "7. Implement the content of the `SampleNativeModuleProvider.mm` with the following:",
+      "source_content_hash": "ef26544ca81819f985ac65aa3dbc54a5d4d500b6f137e5d88ac6a9d56009024e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "7. 在 `SampleNativeModuleProvider.mm` 中實作以下內容："
+      }
+    },
+    {
+      "segment_id": "21658060",
+      "source_content": "```objc title=\"NativeSampleModuleProvider.mm\"\n\n#import \"NativeSampleModuleProvider.h\"\n#import <ReactCommon/CallInvoker.h>\n#import <ReactCommon/TurboModule.h>\n#import \"NativeSampleModule.h\"\n\n@implementation NativeSampleModuleProvider\n\n- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:\n    (const facebook::react::ObjCTurboModule::InitParams &)params\n{\n  return std::make_shared<facebook::react::NativeSampleModule>(params.jsInvoker);\n}\n\n@end\n```",
+      "source_content_hash": "e9d7e99e5e1f57bf8cd6fd4ead8905235f140854f52260c9b15679da894174c6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_21658060"
+      }
+    },
+    {
+      "segment_id": "f613e20b",
+      "source_content": "This code implements the `RCTModuleProvider` protocol by creating the pure C++ `NativeSampleModule` when the `getTurboModule:` method is called.",
+      "source_content_hash": "ad624efeb344a5b1c48acc0f6971b59a1531f0347d655db5055b48750dc61388",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此程式碼透過在呼叫 `getTurboModule:` 方法時建立純 C++ 的 `NativeSampleModule`，來實作 `RCTModuleProvider` 協議。"
+      }
+    },
+    {
+      "segment_id": "d89dd60e",
+      "source_content": "##### 3.2 Update the package.json",
+      "source_content_hash": "6f713cad1476676d0c623104d898d1263e00da37aa469437962cbedf70e7f15b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "##### 3.2 更新 package.json"
+      }
+    },
+    {
+      "segment_id": "b0c7a884",
+      "source_content": "The last step consist in updating the `package.json` to tell React Native about the link between the JS specs of the Native Module and the concrete implementation of those spec in native code.",
+      "source_content_hash": "acc9ca07268d36d6f741f4786132c40b5bb4beb894187da169693fe06562aaa3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是更新 `package.json`，告知 React Native 關於原生模組的 JS 規格與原生程式碼具體實現之間的關聯。"
+      }
+    },
+    {
+      "segment_id": "249869cc",
+      "source_content": "Modify the `package.json` as it follows:",
+      "source_content_hash": "ea6a5d11d93ca88262a9d6d7fd0510763e55745fd18f7113c226be378cacb1d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請依照以下方式修改 `package.json`："
+      }
+    },
+    {
+      "segment_id": "dddd618c",
+      "source_content": "```json title=\"package.json\"\n     \"start\": \"react-native start\",\n     \"test\": \"jest\"\n   },\n   \"codegenConfig\": {\n     \"name\": \"AppSpecs\",\n     \"type\": \"modules\",\n     \"jsSrcsDir\": \"specs\",\n     \"android\": {\n       \"javaPackageName\": \"com.sampleapp.specs\"\n     // highlight-add-start\n     },\n     \"ios\": {\n        \"modulesProvider\": {\n          \"NativeSampleModule\":  \"NativeSampleModuleProvider\"\n        }\n     }\n     // highlight-add-end\n   },\n\n   \"dependencies\": {\n```",
+      "source_content_hash": "828de7f8a68cbd07712cf4dc9c825772ed20853f70899fea48b641e848acc139",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_dddd618c"
+      }
+    },
+    {
+      "segment_id": "7ba83bb3",
+      "source_content": "At this point, you need to re-install the pods to make sure that codegen runs again to generate the new files:",
+      "source_content_hash": "cae622c94b4ab562c361e77064190d8dd3a96b56309f28d8e3d5f73090e2dc98",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時需重新安裝 pods，確保 Codegen 再次執行以生成新檔案："
+      }
+    },
+    {
+      "segment_id": "651f93cf",
+      "source_content": "```bash\n# from the ios folder\nbundle exec pod install\nopen SampleApp.xcworkspace\n```",
+      "source_content_hash": "a582060ae68ad917697b77098db4b912e1dadcf14ab3ecb243190e3585d04fd3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_651f93cf"
+      }
+    },
+    {
+      "segment_id": "ce99c217",
+      "source_content": "If you now build your application from Xcode, you should be able to build successfully.",
+      "source_content_hash": "cee838e122ada1ec4b989eefd1ae0bda0035ca02432c47639911928ffc624c68",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若現在透過 Xcode 建置應用程式，應能成功完成建置。"
+      }
+    },
+    {
+      "segment_id": "13d0d6bd",
+      "source_content": "## 5. Testing your Code",
+      "source_content_hash": "b383eeddc2dd4b51717f55307c7a3885a49273ece562be42b5ae48f774085132",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 5. 測試你的程式碼"
+      }
+    },
+    {
+      "segment_id": "51721da5",
+      "source_content": "It's now time to access our C++ Turbo Native Module from JS. To do so, we have to modify the `App.tsx` file to import the Turbo Native Module and to call it in our code.",
+      "source_content_hash": "bd12e4c36b45ed8b495ccfcf58a62017fc81d4e8b6834d464f0966cecab09c1f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在是時候從 JS 端存取我們的 C++ Turbo 原生模組了。為此，我們需修改 `App.tsx` 檔案，導入 Turbo 原生模組並在程式碼中呼叫它。"
+      }
+    },
+    {
+      "segment_id": "43fceca5",
+      "source_content": "1. Open the `App.tsx` file.\n2. Replace the content of the template with the following code:",
+      "source_content_hash": "d1c31350485c69de643e9ed50647943ddb35ca9c42219a142db1c37b1e014690",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 開啟 `App.tsx` 檔案。\n2. 將範本內容替換為以下程式碼："
+      }
+    },
+    {
+      "segment_id": "86df7636",
+      "source_content": "```tsx title=\"App.tsx\"\nimport React from 'react';\nimport {\n  Button,\n  SafeAreaView,\n  StyleSheet,\n  Text,\n  TextInput,\n  View,\n} from 'react-native';\nimport SampleTurboModule from './specs/NativeSampleModule';\n\nfunction App(): React.JSX.Element {\n  const [value, setValue] = React.useState('');\n  const [reversedValue, setReversedValue] = React.useState('');\n\n  const onPress = () => {\n    const revString = SampleTurboModule.reverseString(value);\n    setReversedValue(revString);\n  };\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <View>\n        <Text style={styles.title}>\n          Welcome to C++ Turbo Native Module Example\n        </Text>\n        <Text>Write down here he text you want to revert</Text>\n        <TextInput\n          style={styles.textInput}\n          placeholder=\"Write your text here\"\n          onChangeText={setValue}\n          value={value}\n        />\n        <Button title=\"Reverse\" onPress={onPress} />\n        <Text>Reversed text: {reversedValue}</Text>\n      </View>\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  title: {\n    fontSize: 18,\n    marginBottom: 20,\n  },\n  textInput: {\n    borderColor: 'black',\n    borderWidth: 1,\n    borderRadius: 5,\n    padding: 10,\n    marginTop: 10,\n  },\n});\n\nexport default App;\n```",
+      "source_content_hash": "52e7b971eb9bdfa3fb8598bcc06ef72d196072681d835d7a9a023b2a6663a429",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_86df7636"
+      }
+    },
+    {
+      "segment_id": "6cf42755",
+      "source_content": "The interesting lines in this app are:",
+      "source_content_hash": "2195069c0ce159cb0bebab2ca8496e481979f798359d45117f9f0f66a3da24ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此應用程式中值得注意的關鍵行包括："
+      }
+    },
+    {
+      "segment_id": "1b5ea905",
+      "source_content": "- `import SampleTurboModule from './specs/NativeSampleModule';`: this line imports the Turbo Native Module in the app,\n- `const revString = SampleTurboModule.reverseString(value);` in the `onPress` callback: this is how you can use the Turbo Native Module in your app.",
+      "source_content_hash": "8a4d5f840c872af4d0ac224f0e301f4834f083341a08ac17e9321048d8052405",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `import SampleTurboModule from './specs/NativeSampleModule';`：此行將 Turbo 原生模組導入應用程式，\n- `onPress` 回調函數中的 `const revString = SampleTurboModule.reverseString(value);`：此為在應用程式中使用 Turbo 原生模組的方式。"
+      }
+    },
+    {
+      "segment_id": "712f0d70",
+      "source_content": ":::warning\nFor the sake of this example and to keep it as short as possible, we directly imported the spec file in our app.\nThe best practice in this case is to create a separate file to wrap the specs and use that file into your application.\nThis allows you to prepare the input for the specs and gives you more control over them in JS.\n:::",
+      "source_content_hash": "df3964729870deadc7c48b02f96a45a59137e516175851063c9c1796e0d08492",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n為簡化範例並保持簡潔，我們直接將規格檔案導入應用程式。\n最佳實踐是建立獨立的包裝檔案處理規格，並在應用程式中使用該檔案。\n這能讓你在 JS 端預處理規格的輸入參數並提供更強的控制力。\n:::"
+      }
+    },
+    {
+      "segment_id": "de7b71a3",
+      "source_content": "Congratulations, you wrote your first C++ Turbo Native Module!",
+      "source_content_hash": "ff6c59e4d04385a57a6a256ac796c33f8a53cb485e3e228befae301f2da675da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "恭喜，你已成功撰寫第一個 C++ Turbo 原生模組！"
+      }
+    },
+    {
+      "segment_id": "593608d7",
+      "source_content": "| <center>Android</center>                                                                             | <center>iOS</center>                                                                          |\n| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |\n| <center><img src=\"/docs/assets/CxxGuideAndroidVideo.gif\" alt=\"Android Video\" height=\"600\"/></center> | <center><img src=\"/docs/assets/CxxGuideIOSVideo.gif\" alt=\"iOS video\" height=\"600\" /></center> |",
+      "source_content_hash": "06d12c788cf82b2dff78bad1f799a4115e2be65cb0463575c92f0dfb3d04b603",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_593608d7"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.79/the-new-architecture/pure-cxx-modules.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.001931+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "4f1717446b94ded27d5fd2416b70b9c8aff77bf3ad22f9941c3f2df258852224"
+  }
+}

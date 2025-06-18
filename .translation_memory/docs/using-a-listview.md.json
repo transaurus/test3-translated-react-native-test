@@ -1,0 +1,102 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/using-a-listview.md",
+  "source_file_content_hash": "6dcba57e6ca4845ee8e4679e5a1df4ec3455c39513a2ce1352377defed1647b2",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: using-a-listview\ntitle: Using List Views\n---",
+      "source_content_hash": "120cbe2b72bc6eb791018d51d57219ac43351809504ad0a3152957831b20b3a8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "React Native provides a suite of components for presenting lists of data. Generally, you'll want to use either [FlatList](flatlist.md) or [SectionList](sectionlist.md).",
+      "source_content_hash": "45f6a0645e8b94dfaaf157d971c4e0db6a54688ba6c683a552ab7c2949d4a1f2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 提供了一系列用於展示數據列表的組件。通常情況下，您會希望使用 [FlatList](flatlist.md) 或 [SectionList](sectionlist.md)。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "The `FlatList` component displays a scrolling list of changing, but similarly structured, data. `FlatList` works well for long lists of data, where the number of items might change over time. Unlike the more generic [`ScrollView`](using-a-scrollview.md), the `FlatList` only renders elements that are currently showing on the screen, not all the elements at once.",
+      "source_content_hash": "facfa9ae0e5be16d62170dd37a006aa56b480e01957ff9ed485550ecb6cdb68e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`FlatList` 組件用於顯示可滾動的、結構相似但內容變化的數據列表。`FlatList` 非常適合處理長列表數據，特別是當項目數量可能隨時間變化的情況。與更通用的 [`ScrollView`](using-a-scrollview.md) 不同，`FlatList` 只會渲染當前顯示在屏幕上的元素，而不是一次性渲染所有元素。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The `FlatList` component requires two props: `data` and `renderItem`. `data` is the source of information for the list. `renderItem` takes one item from the source and returns a formatted component to render.",
+      "source_content_hash": "75a95ed7712c775e714d684c80845e471573d42bb9a62bfdbd462f2c5d75717f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`FlatList` 組件需要兩個屬性：`data` 和 `renderItem`。`data` 是列表的數據來源，而 `renderItem` 則從數據源中取出一個項目並返回格式化後的組件進行渲染。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "This example creates a basic `FlatList` of hardcoded data. Each item in the `data` props is rendered as a `Text` component. The `FlatListBasics` component then renders the `FlatList` and all `Text` components.",
+      "source_content_hash": "53dc25e31ae714cdfb61d3b159fffe4756178d3ecfbf14999d6fc7b618a907b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這個範例創建了一個基於硬編碼數據的基本 `FlatList`。`data` 屬性中的每個項目都會被渲染為一個 `Text` 組件。然後 `FlatListBasics` 組件會渲染 `FlatList` 和所有的 `Text` 組件。"
+      }
+    },
+    {
+      "segment_id": "5564d81d",
+      "source_content": "```SnackPlayer name=FlatList%20Basics\nimport React from 'react';\nimport {FlatList, StyleSheet, Text, View} from 'react-native';\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    paddingTop: 22,\n  },\n  item: {\n    padding: 10,\n    fontSize: 18,\n    height: 44,\n  },\n});\n\nconst FlatListBasics = () => {\n  return (\n    <View style={styles.container}>\n      <FlatList\n        data={[\n          {key: 'Devin'},\n          {key: 'Dan'},\n          {key: 'Dominic'},\n          {key: 'Jackson'},\n          {key: 'James'},\n          {key: 'Joel'},\n          {key: 'John'},\n          {key: 'Jillian'},\n          {key: 'Jimmy'},\n          {key: 'Julie'},\n        ]}\n        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}\n      />\n    </View>\n  );\n};\n\nexport default FlatListBasics;\n```",
+      "source_content_hash": "c1ad63a60a81fcc88eb42e5f5085be4ff47d3b528566b4db65946af7ae4e146e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5564d81d"
+      }
+    },
+    {
+      "segment_id": "d3649a1e",
+      "source_content": "If you want to render a set of data broken into logical sections, maybe with section headers, similar to `UITableView`s on iOS, then a [SectionList](sectionlist.md) is the way to go.",
+      "source_content_hash": "c82fe7bce384e3f84a3b52f15dac7783b4f84bc63e8b9bd0c394650365bcdba2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您想要渲染按邏輯分段的數據集，可能需要加上分段標題（類似 iOS 的 `UITableView`），那麼 [SectionList](sectionlist.md) 就是您需要的解決方案。"
+      }
+    },
+    {
+      "segment_id": "c3955998",
+      "source_content": "```SnackPlayer name=SectionList%20Basics\nimport React from 'react';\nimport {SectionList, StyleSheet, Text, View} from 'react-native';\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    paddingTop: 22,\n  },\n  sectionHeader: {\n    paddingTop: 2,\n    paddingLeft: 10,\n    paddingRight: 10,\n    paddingBottom: 2,\n    fontSize: 14,\n    fontWeight: 'bold',\n    backgroundColor: 'rgba(247,247,247,1.0)',\n  },\n  item: {\n    padding: 10,\n    fontSize: 18,\n    height: 44,\n  },\n});\n\nconst SectionListBasics = () => {\n  return (\n    <View style={styles.container}>\n      <SectionList\n        sections={[\n          {title: 'D', data: ['Devin', 'Dan', 'Dominic']},\n          {\n            title: 'J',\n            data: [\n              'Jackson',\n              'James',\n              'Jillian',\n              'Jimmy',\n              'Joel',\n              'John',\n              'Julie',\n            ],\n          },\n        ]}\n        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}\n        renderSectionHeader={({section}) => (\n          <Text style={styles.sectionHeader}>{section.title}</Text>\n        )}\n        keyExtractor={item => `basicListEntry-${item}`}\n      />\n    </View>\n  );\n};\n\nexport default SectionListBasics;\n```",
+      "source_content_hash": "5bb9a1f6359e39ac3497100d5d8b9c8dc4fcbbd66ae0a4062635674bf1a61633",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c3955998"
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "One of the most common uses for a list view is displaying data that you fetch from a server. To do that, you will need to [learn about networking in React Native](network.md).",
+      "source_content_hash": "3a8ea3b476c871b2d9362fbb58dd29d48fe7fd03b840b38751e4cb718ffbba93",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "列表視圖最常見的用途之一是顯示從服務器獲取的數據。要實現這一點，您需要 [學習 React Native 中的網絡請求](network.md)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/using-a-listview.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.190341+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "6dcba57e6ca4845ee8e4679e5a1df4ec3455c39513a2ce1352377defed1647b2"
+  }
+}

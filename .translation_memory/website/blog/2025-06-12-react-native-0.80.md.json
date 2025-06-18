@@ -1,0 +1,916 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2025-06-12-react-native-0.80.md",
+  "source_file_content_hash": "d07d7b122ea5741a7b9699fcbbe7f4b9bc39e3555abb0fbfaa90a713fffc1206",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: 'React Native 0.80 - React 19.1, JS API Changes, Freezing Legacy Arch and much more'\nauthors: [hezi, fabriziocucci, gabrieldonadel, chrfalch]\ntags: [engineering]\ndate: 2025-06-12T16:01\n---",
+      "source_content_hash": "d3d58fca411d8c7e620724e104c384c8b56b3f9b9eb4746807d2085376ec7344",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "# React Native 0.80 - React 19.1, JS API Changes, Freezing Legacy Arch and much more",
+      "source_content_hash": "d7327013715c6c812d7f35b6b89ea12ca32577db6c0006d7d2b0bed30de752f5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# React Native 0.80 - React 19.1、JS API 變更、凍結舊版架構與更多更新"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Today we are excited to release React Native 0.80!",
+      "source_content_hash": "3df366319cdf09bcbafc39387b0b9f04dbe5bde4adf0474d0f4cc7cc7802cc6e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們很高興宣布推出 React Native 0.80！"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "This release brings the version of React we ship inside React Native to the latest stable available: 19.1.0.",
+      "source_content_hash": "180aefff184f44206adcea04059ebc56fb147d3bb4e30596fe00913c4bab51b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本將 React Native 內建的 React 版本更新至最新穩定版：19.1.0。"
+      }
+    },
+    {
+      "segment_id": "ad8fd492",
+      "source_content": "We’re also shipping a series of stability improvements to our JS API: deep imports will now fire a warning and we’re offering a new opt-in Strict TypeScript API which offers types that are more accurate and safer to use.",
+      "source_content_hash": "8cc1cb22746bf78f519eeb3b19313ef69e83a8845b1afb6359fd8a809a085daa",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們也針對 JS API 進行了一系列穩定性改進：深度導入現在會觸發警告，並提供新的選擇性 Strict TypeScript API，提供更精確且更安全的型別。"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Moreover, the Legacy Architecture of React Native is now officially frozen, and you’ll start seeing warnings for APIs that will stop working once we fully sunset the Legacy Architecture.",
+      "source_content_hash": "6244d6d08f97c740a92c5566d0ce89c6aebbe8ff3bb2c8695f291b4f4130c60e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，React Native 的舊版架構現已正式凍結，您將開始看到針對即將在舊版架構完全淘汰後停止運作的 API 所發出的警告。"
+      }
+    },
+    {
+      "segment_id": "d350c018",
+      "source_content": "### Highlights",
+      "source_content_hash": "73100819f100dc497ad3fa8c4ba12309543c4bd89b7e70ea09a95fe6796994fa",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點更新"
+      }
+    },
+    {
+      "segment_id": "3b695c37",
+      "source_content": "- [JavaScript deep imports deprecation](/blog/2025/06/12/react-native-0.80#javascript-deep-imports-deprecation)\n- [Legacy Architecture Freezing & Warnings](/blog/2025/06/12/react-native-0.80#legacy-architecture-freezing--warnings)\n- [React 19.1.0](/blog/2025/06/12/react-native-0.80#react-1910)\n- [Experimental - React Native iOS dependencies are now prebuilt](/blog/2025/06/12/react-native-0.80#experimental---react-native-ios-dependencies-are-now-prebuilt)",
+      "source_content_hash": "e4459f89eeee05f73645ff5b9d36b5564f6b58d5ca02c8f8acd13b4e8804edd4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [JavaScript 深度導入棄用](/blog/2025/06/12/react-native-0.80#javascript-deep-imports-deprecation)\n- [舊版架構凍結與警告](/blog/2025/06/12/react-native-0.80#legacy-architecture-freezing--warnings)\n- [React 19.1.0](/blog/2025/06/12/react-native-0.80#react-1910)\n- [實驗性功能 - React Native iOS 相依項現已預先建置](/blog/2025/06/12/react-native-0.80#experimental---react-native-ios-dependencies-are-now-prebuilt)"
+      }
+    },
+    {
+      "segment_id": "c0bf612b",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c0bf612b"
+      }
+    },
+    {
+      "segment_id": "fa430ad4",
+      "source_content": "## Highlights",
+      "source_content_hash": "f5aedb14b6b9da4899c54cdf031961cfbda60d336dc60afdb5e12f0b83945e84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重點更新詳情"
+      }
+    },
+    {
+      "segment_id": "f2f30ae8",
+      "source_content": "### JavaScript deep imports deprecation",
+      "source_content_hash": "ac8bdfee987836a2a7a28a5a5c5e71ee9ed26e631281c022f4906f56e02dca05",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### JavaScript 深度導入棄用"
+      }
+    },
+    {
+      "segment_id": "dfe931a2",
+      "source_content": "In this release, we are making moves to improve and stabilize React Native's public JavaScript API. The first step towards this is better scoping of which of our APIs are importable by apps and frameworks. In line with this, we are formally deprecating deep imports from React Native ([see RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)), and are introducing warnings via ESLint and the JS console.",
+      "source_content_hash": "05d73f11a8db3ed25c01658bb27c8f2347100f47f207759e62a6b77361fcdc71",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此版本中，我們採取措施改進並穩定 React Native 的公開 JavaScript API。第一步是更好地界定哪些 API 可供應用程式和框架導入。為此，我們正式棄用 React Native 的深度導入（[參閱 RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)），並透過 ESLint 和 JS 控制台引入警告。"
+      }
+    },
+    {
+      "segment_id": "4daf5cdd",
+      "source_content": "These warnings are scoped to imports from within your project's source code, and can be [opted out from](/docs/strict-typescript-api). However, please bear in mind that we aim to remove deep imports from React Native's API in a future release, and these should instead be updated to the root import.",
+      "source_content_hash": "ad5c9e4d468027970bd004996b3c6bd85224569d16170a3c2cd31b9ac11930ff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這些警告僅針對專案原始碼中的導入，並可[選擇退出](/docs/strict-typescript-api)。但請注意，我們計劃在未來的版本中移除 React Native API 的深度導入，應將其更新為根目錄導入。"
+      }
+    },
+    {
+      "segment_id": "ef6eebef",
+      "source_content": "```js\n// Before - import from subpath\nimport {Alert} from 'react-native/Libraries/Alert/Alert';\n\n// After - import from `react-native`\nimport {Alert} from 'react-native';\n```",
+      "source_content_hash": "345fafbfe16a33845a4b4a841e7dc384596bf943419f8bc025eff9cd92621d64",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ef6eebef"
+      }
+    },
+    {
+      "segment_id": "1042b50d",
+      "source_content": "Some APIs are not exported at root, and will become unavailable without deep imports. This is intentional, in order to reduce the overall surface area of React Native's API. We have an open [feedback thread](https://github.com/react-native-community/discussions-and-proposals/discussions/893) for user issues, and will be working with the community to finalize which APIs we export over (at least) the next two React Native releases. Please share your feedback!",
+      "source_content_hash": "18368e244b3ed1c22607d819cf55b36ef05229b1e5b82dba95a463b599b3f79b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "部分 API 未在根目錄導出，且將在沒有深度導入的情況下變得不可用。這是刻意為之，目的是減少 React Native API 的整體表面積。我們有一個開放的[意見回饋討論串](https://github.com/react-native-community/discussions-and-proposals/discussions/893)供使用者提出問題，並將與社群合作在（至少）接下來的兩個 React Native 版本中最終確定導出的 API。請分享您的意見！"
+      }
+    },
+    {
+      "segment_id": "aa1e7006",
+      "source_content": "Learn more about this change in our dedicated post: [Moving Towards a Stable JavaScript API](/blog/2025/06/12/moving-towards-a-stable-javascript-api).",
+      "source_content_hash": "090784d2dfc0fb540e301ba0f86470d82d8d0c9d75eb8c4bfec30e830e592469",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "了解更多關於此變更的詳細資訊，請參閱我們的專文：[邁向穩定的 JavaScript API](/blog/2025/06/12/moving-towards-a-stable-javascript-api)。"
+      }
+    },
+    {
+      "segment_id": "f44c1398",
+      "source_content": "#### Opt-in Strict TypeScript API",
+      "source_content_hash": "97f3eac0934ba6213199e1bdffc48d3dbaf6d495ee1e6cad145ef0987e627445",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 選擇性 Strict TypeScript API"
+      }
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "With the above redefinition of the exports in our public API, we're also shipping a new set of TypeScript types for the `react-native` package in 0.80, which we're calling the Strict TypeScript API.",
+      "source_content_hash": "7ee42254b002a528deb18fb9ba0ff64b5f12f2fd4ba1cd7d6cf1803fcb4f6c83",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "隨著上述公開 API 導出的重新定義，我們也在 0.80 版本中為 `react-native` 套件提供了一組新的 TypeScript 型別，稱為 Strict TypeScript API。"
+      }
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "Opting into the Strict TypeScript API is a preview of our future, stable JavaScript API for React Native. These new types are:",
+      "source_content_hash": "c0f1dedcd09e24f1407e7c4cedde5e2c916af12b01918e17b134f6d45d7b1df7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "選擇啟用 Strict TypeScript API 是對 React Native 未來穩定 JavaScript API 的預覽。這些新型別具有以下特點："
+      }
+    },
+    {
+      "segment_id": "310e47b7",
+      "source_content": "1. **Generated directly from our source code** — improving coverage and correctness, so you can expect stronger compatibility guarantees.\n2. **Restricted to React Native's index file** — more tightly defining our public API, and meaning we won't break the API when making internal file changes.",
+      "source_content_hash": "24d6a3be6615a276512c63788e13e311ce61c07d8fd0cf7e1af45e1335462d5a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. **直接從原始碼生成** — 提高覆蓋率和正確性，因此您可以期待更強的相容性保證。\n2. **限制於 React Native 的索引檔案** — 更嚴格地定義我們的公開 API，意味著在進行內部檔案變更時不會破壞 API。"
+      }
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "We're shipping these alongside our existing types, meaning you can choose to migrate when ready. Also, if you're using standard React Native APIs, a lot of apps should validate with **no changes**. We strongly encourage early adopters and newly created apps to opt in via your `tsconfig.json` file.",
+      "source_content_hash": "3438027c0f9a634769165c7f447c086cb553be45167f99bd76f58a27b255d435",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們將這些型別與現有型別一同發布，意味著您可以選擇在準備好時遷移。此外，如果您使用標準的 React Native API，許多應用程式應該**無需變更**即可通過驗證。我們強烈鼓勵早期採用者和新建立的應用程式透過 `tsconfig.json` 檔案選擇啟用。"
+      }
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "When the community is ready, the Strict TypeScript API will become our default API in future — synchronized with deep imports removal.",
+      "source_content_hash": "12869a32dd486897626134c6d430d8c37a6590d179840930868f7f7e71518c59",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當社群準備就緒時，Strict TypeScript API 將在未來成為我們的預設 API — 與深度導入移除同步進行。"
+      }
+    },
+    {
+      "segment_id": "40158b4b",
+      "source_content": "Learn more about this change in our dedicated post: [Moving Towards a Stable JavaScript API](/blog/2025/06/12/moving-towards-a-stable-javascript-api).",
+      "source_content_hash": "090784d2dfc0fb540e301ba0f86470d82d8d0c9d75eb8c4bfec30e830e592469",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "進一步了解此變更，請參閱我們的專文：[邁向穩定的 JavaScript API](/blog/2025/06/12/moving-towards-a-stable-javascript-api)。"
+      }
+    },
+    {
+      "segment_id": "c431704b",
+      "source_content": "### Legacy Architecture Freezing & Warnings",
+      "source_content_hash": "0ec1735281569bed0ecbf3e091546bf59154bba85c08f893d5004b8dc899fc81",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 舊版架構凍結與警告"
+      }
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "The New Architecture of React Native is the default choice [since version 0.76](/blog/2024/10/23/the-new-architecture-is-here) and we’ve been reading [success stories](https://blog.kraken.com/product/engineering/how-kraken-fixed-performance-issues-via-incremental-adoption-of-the-react-native-new-architecture) of projects and tools that greatly benefit from it.",
+      "source_content_hash": "6dac364fffebd5592a318e3b1474a9ccde6b7174d4aabadc17f2cae13a19ff74",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "自 [0.76 版本](/blog/2024/10/23/the-new-architecture-is-here) 起，React Native 的新架構已成為預設選擇，我們也讀到許多 [成功案例](https://blog.kraken.com/product/engineering/how-kraken-fixed-performance-issues-via-incremental-adoption-of-the-react-native-new-architecture)，顯示專案與工具能從中獲得顯著效益。"
+      }
+    },
+    {
+      "segment_id": "531437ca",
+      "source_content": "[We recently shared](https://github.com/reactwg/react-native-new-architecture/discussions/290) that we now consider the Legacy Architecture as frozen. We won’t be developing new bugfixes or features in the Legacy Architecture anymore and we will stop testing the Legacy Architecture while working on a release.",
+      "source_content_hash": "c54e16a0a98902c8eaea43403346f37def5b7c8022a4ba65af59687d5ee9bc94",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[我們近期說明](https://github.com/reactwg/react-native-new-architecture/discussions/290)，現已將舊版架構視為凍結狀態。我們將不再為舊版架構開發新的錯誤修正或功能，且在版本發布過程中也不再測試舊版架構。"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "In order to smooth the migration, we are still allowing users to opt-out of the New Architecture if you’re experiencing bugs or regressions.",
+      "source_content_hash": "fedf87a4a03210c0fd9be095ffcf26707c942389e9cc3246b37e2bb489cf7dc8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為使遷移過程更順暢，若您遇到錯誤或回歸問題，仍可選擇退出新架構。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "However shipping two architectures with React Native is a huge challenge, which impacts runtime performance, app size and maintenance of our codebase.",
+      "source_content_hash": "200f7453aceff8c2bc4c9a207fb1caa023e4f01fe20318d276a5400bf71c6d67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，在 React Native 中同時維護兩種架構是極大的挑戰，會影響運行效能、應用程式大小及程式碼庫的維護。"
+      }
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "That’s why we’ll eventually have to sunset the Legacy Architecture at some point in the future.",
+      "source_content_hash": "c920b5e38516bad5120f8be8c9312a77c9d1f4dfc9e8ac3afc96cfc3ceaac9ca",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "因此，我們最終必須在未來某個時間點淘汰舊版架構。"
+      }
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "In 0.80, we’ve added a series of warnings that will pop-up in React Native DevTools to warn you if you’re using APIs that won’t work in the New Architecture.",
+      "source_content_hash": "41af16f700fa15d583a63c98c64ff73a38116b17743420f5f130079496a8c053",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.80 版本中，我們新增了一系列警告，當您使用在新架構中無法運作的 API 時，這些警告會出現在 React Native DevTools 中。"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "We recommend you to not ignore those warnings and to consider migrating your apps & libraries to the New Architecture to be ready for the future.",
+      "source_content_hash": "aa93ac627dddafecf6e9e9ba66fa79e8f1519d9b4ec1edd8426d23d11617252a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "建議您不要忽略這些警告，並考慮將應用程式與函式庫遷移至新架構，以迎接未來的變化。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "![legacy architecture warnings](/blog/assets/0.80-legacy-arch-warnings.png)",
+      "source_content_hash": "ac6aa96d546e30135d5578497b36732b3cf900683193af15065819b3dd1e0ce3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![舊版架構警告](/blog/assets/0.80-legacy-arch-warnings.png)"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "You can learn more about those changes in the talk \"Life After Legacy: The New Architecture Future\" [we recently presented at App.js](https://www.youtube.com/live/K2JTTKpptGs?si=tRkT535f0GzguVGt&t=9011).",
+      "source_content_hash": "8a03e3ce049109b391318c2810660303fcd6c56a881d5db7daa239cca3f6314a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在我們近期於 App.js 發表的演講「[Life After Legacy: The New Architecture Future](https://www.youtube.com/live/K2JTTKpptGs?si=tRkT535f0GzguVGt&t=9011)」中，進一步了解這些變更。"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### React 19.1.0",
+      "source_content_hash": "c2695c1e6dcff50cf572e3a26de883bf8604307863b2291f6d200c7ef7006f10",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### React 19.1.0"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "This release of React Native ships with the latest React stable: 19.1.0",
+      "source_content_hash": "81febcc9a62eb3ff143144e98c6a55881daae10f8f1037634fd9b49922aa4f9b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本的 React Native 搭載了最新的 React 穩定版：19.1.0。"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "You can read about all the new features and bugfixes introduced in React 19.1.0 in the [release description](https://github.com/facebook/react/releases/tag/v19.1.0).",
+      "source_content_hash": "f6572dcaf1067ac5b472bc04bcebf8686f38890006aa23f8a9489c0b7f12781d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以在 [發布說明](https://github.com/facebook/react/releases/tag/v19.1.0) 中閱讀 React 19.1.0 的所有新功能與錯誤修正。"
+      }
+    },
+    {
+      "segment_id": "dccb94f8",
+      "source_content": ":::warning\n\nOne notable feature of React 19.1.0 is the implementation and improvements of owner stacks. This is a development only feature that should help you identify which component is responsible for a specific error.\n\nHowever, we are aware that owner stacks are not working as expected in React Native if you use the `@babel/plugin-transform-function-name` Babel plugin, which is enabled by default in the React Native Babel Preset. We will be shipping a fix for this in a future release of React Native.\n\n:::",
+      "source_content_hash": "3cb958c18f40b23877fc4be0fc4089a4e2fa91ad8b17b500bba84fe3e26257a9",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::warning\n\nReact 19.1.0 的一個重要功能是實現並改進了擁有者堆疊（owner stacks）。這是一項僅在開發階段使用的功能，可協助您識別導致特定錯誤的元件。\n\n然而，我們注意到，若您使用預設啟用的 `@babel/plugin-transform-function-name` Babel 插件（React Native Babel Preset 的一部分），擁有者堆疊在 React Native 中可能無法如預期運作。我們將在未來的 React Native 版本中修正此問題。\n\n:::"
+      }
+    },
+    {
+      "segment_id": "5baf88e2",
+      "source_content": "### Experimental - React Native iOS dependencies are now prebuilt",
+      "source_content_hash": "ce657fcc359bfbc54c5cd8c3378b612e7ce067f3816c06f4936616f7ce5bdab0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 實驗性功能 - React Native iOS 相依項現已預先建置"
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "If you’re building a React Native iOS app, you probably noticed that the first native build will take some time: a couple of minutes or even longer on older machines. That’s because we need to compile the whole React Native iOS code plus all of its dependencies.",
+      "source_content_hash": "aafe4f13bfad06ab3aee5b6aed784fd5b00b80c5bebb3b7826fde3c15f18dc4d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您曾建置 React Native iOS 應用程式，可能注意到首次原生建置會耗費一些時間：在較舊的機器上可能需要幾分鐘甚至更久。這是因為我們需要編譯整個 React Native iOS 程式碼及其所有相依項。"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "Over the last weeks we’ve been experimenting with prebuilding some of the React Native core for iOS, similarly to what happens on Android, to reduce the build time when you’re first running a React Native app.",
+      "source_content_hash": "6783639a37db7f47549184644b88543e0265d36ff92e1d38a01be63d94b5ae3b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "過去幾週，我們一直在實驗預先建置部分 React Native iOS 核心程式碼，類似於 Android 的做法，以減少首次運行 React Native 應用程式時的建置時間。"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "React Native 0.80 is the first release that can ship part of React Native for iOS as a prebuild to help reduce build times.",
+      "source_content_hash": "4d29acb7515bf74e0ea9628efa8825b46cca70ff45c6fef1d70d7c8466c2bb4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.80 是首個能將部分 iOS 版 React Native 以預先建置形式發布的版本，有助於縮短建置時間。"
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "During the release process of React Native, we are producing an XCFramework called `ReactNativeDependencies.xcframework` that is a prebuilt version of only the 3rd party dependencies React Native depends on.",
+      "source_content_hash": "092a077a98777d03ef3bc42ca1b51630c044d8af6b5fa44cb3d8cb7784b281cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React Native 的發布過程中，我們會產生一個名為 `ReactNativeDependencies.xcframework` 的 XCFramework，這是僅包含 React Native 所依賴的第三方相依項的預先建置版本。"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "We experimented and benchmarked how much time this initial prebuild for iOS is saving and, in our benchmarks, run on an M4 machine, iOS builds are roughly 12% faster with the prebuild rather than by building from source.",
+      "source_content_hash": "d4ebbed1a42edddd8051324b67d4cb6216e2ca42dc178de68d192b15570ea576",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們實驗並測試了此 iOS 預先建置功能節省的時間。根據我們的基準測試（在 M4 機器上運行），使用預先建置的 iOS 建置速度比從原始碼建置快約 12%。"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "From our experience, we also observed that several bug reports from users are caused by build issues related with React Native’s 3rd party dependencies (example [#39568](https://github.com/facebook/react-native/issues/39568)).\nPrebuilding the 3rd party dependencies allows us to build them for you, so that you won’t face these build issues anymore.",
+      "source_content_hash": "2054ca4b8518a22f4fe33dc4a1a007655634a8154150657d87e35fcfc5b8bd5c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "根據我們的經驗，我們也觀察到許多使用者的錯誤報告是由於 React Native 第三方依賴項的建置問題所導致（例如 [#39568](https://github.com/facebook/react-native/issues/39568)）。\n預先建置這些第三方依賴項讓我們能為您處理建置過程，從而避免這些建置問題的發生。"
+      }
+    },
+    {
+      "segment_id": "7bc8bb24",
+      "source_content": "Note that we are not pre-building the whole React Native: we are only pre-building the libraries Meta does not directly control, such as Folly and GLog.",
+      "source_content_hash": "5e7fbe94cdf63684f0f6831fa2025ba814f969aa8fde053ccab7dab4d444ced8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意，我們並非預先建置整個 React Native：僅預先建置 Meta 未直接控制的函式庫，例如 Folly 和 GLog。"
+      }
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "In a future release, we will also ship the rest of React Native core as a prebuild.",
+      "source_content_hash": "7912828a63786fe60b8c4b1a25a7f045ca1b1dcfb950636df284460fb5e227db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在未來的版本中，我們也將把 React Native 核心的其餘部分以預建置形式發布。"
+      }
+    },
+    {
+      "segment_id": "8172a0a5",
+      "source_content": "#### How to use them",
+      "source_content_hash": "480537074a373613ac4846d7345fc8ccb873dce8b8df49604768debaf1aed09c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 如何使用此功能"
+      }
+    },
+    {
+      "segment_id": "1b4de6df",
+      "source_content": "This feature is still experimental, so it is not turned on by default.",
+      "source_content_hash": "2fedbc0d5e50f312ec3909f77b20c514b16c32d0b2b6c739ada13c8d65622319",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此功能目前仍處於實驗階段，因此預設為關閉狀態。"
+      }
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "If you want to use them, you can install your pods by adding the `RCT_USE_RN_DEP` env variable:",
+      "source_content_hash": "32cb481666e16c6cb74363364e5e98b4d3176e407b0da8335defefe5cf7c9611",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若想啟用此功能，您可透過添加 `RCT_USE_RN_DEP` 環境變數來安裝 pods："
+      }
+    },
+    {
+      "segment_id": "1a63b635",
+      "source_content": "```bash\nRCT_USE_RN_DEP=1 bundle exec pod install\n```",
+      "source_content_hash": "4a0f09670c09c25263dc6998b5814cb14282a127e08e9810df7235cf270c7116",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "b6152880",
+      "source_content": "Alternatively, if you want to enable it for all the developers working on that, you can modify your Podfile like this:",
+      "source_content_hash": "3f3fedbf9509d79dfd15a48eefdc52cf07d716d91b402f91d329ebaae7d3b6b2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "或者，若想為所有開發成員啟用此功能，可修改 Podfile 如下："
+      }
+    },
+    {
+      "segment_id": "4e583d18",
+      "source_content": "```diff\nif linkage != nil\n  Pod::UI.puts \"Configuring Pod with #{linkage}ally linked Frameworks\".green\n  use_frameworks! :linkage => linkage.to_sym\nend\n\n+ENV[‘`RCT_USE_RN_DEP`’] = ‘1’\n\ntarget 'HelloWorld' do\n  config = use_native_modules!\n```",
+      "source_content_hash": "84b86d45713621012851172fcbe068b87919cceab17deec9bef4a2cf9047803e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Please, report any issue that the prebuilds might cause to you and to your app in [this discussion](https://github.com/react-native-community/discussions-and-proposals/discussions/912). We are committed to looking into them and making sure that tier usage is transparent to your app.",
+      "source_content_hash": "04a2958bea7f548ec8f8be69e137f73b13e20e381dafd0867023e748473b02ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請將預建置可能導致的任何問題回報至[此討論串](https://github.com/react-native-community/discussions-and-proposals/discussions/912)。我們將全力調查這些問題，確保此功能對您的應用程式完全透明。"
+      }
+    },
+    {
+      "segment_id": "fff17ff8",
+      "source_content": "## Other Changes",
+      "source_content_hash": "bfd3af914d85d7736427d98e8aec4e511a4981dd6aa299b377cd9d278b658a75",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 其他變更"
+      }
+    },
+    {
+      "segment_id": "734d40d8",
+      "source_content": "### Android - Smaller APK size thanks to IPO",
+      "source_content_hash": "f40b973d6337f430805e237a5d3b0f8ec25f3bd93046aecdf1638fd21ccbb000",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android - 透過 IPO 實現更小的 APK 體積"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "This release ships with significant size reduction for all the Android apps built with React Native. Starting in 0.80, we enabled [Interprocedural Optimization](https://en.wikipedia.org/wiki/Interprocedural_optimization) for both React Native and Hermes builds.",
+      "source_content_hash": "10153b9609cfb2a57888b063f0bbf359c0c10fdecdd75d1b7033d81aed165224",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此版本為所有使用 React Native 建置的 Android 應用程式帶來顯著的體積縮減。從 0.80 開始，我們為 React Native 和 Hermes 建置啟用了[程序間優化](https://en.wikipedia.org/wiki/Interprocedural_optimization)。"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "This resulted in a saving of ~1Mb for all the Android apps.",
+      "source_content_hash": "084d34c0bcf0fb040ae10eb0609634ba5884c01316838a332cf2624c685e6dbe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這項變更為所有 Android 應用節省了約 1MB 的空間。"
+      }
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "![android apk size comparison](/blog/assets/0.80-android-apk-size.png)",
+      "source_content_hash": "7a84a607e4f532ccd651290670144539608ab6677a8e6a443a589890fe10c285",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![android apk 體積比較](/blog/assets/0.80-android-apk-size.png)"
+      }
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "You will get this size win by updating your React Native version to 0.80 and there are no further changes required to your project.",
+      "source_content_hash": "8f30547c5fae40311fc4144f3f8e821306284d53faab396804a0f3a02387530a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "只需將 React Native 版本升級至 0.80 即可獲得此體積優化，無需對專案進行其他修改。"
+      }
+    },
+    {
+      "segment_id": "671cbf7c",
+      "source_content": "### New App Screen redesign",
+      "source_content_hash": "0cb91cd768cdb532995e890efe34af30ea0ff87ba5ae981646324ee6fc402133",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 新應用程式畫面重新設計"
+      }
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "If you’re not using Expo but you’re using the Community CLI & Template, in this version we've moved the New App Screen into its [own package](https://www.npmjs.com/package/@react-native/new-app-screen) and given it a fresh coat of paint. This reduces initial code boilerplate when you create a new app with the Community Template, and also provides a better experience when viewed on larger screens.",
+      "source_content_hash": "366da2595b8ef3db8da8059f29f5ecad4bbb4a4a8b146e69b02bcda305874f5c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您未使用 Expo 而是採用 Community CLI 與模板，在此版本中我們已將新應用程式畫面移至[獨立套件](https://www.npmjs.com/package/@react-native/new-app-screen)並進行了視覺翻新。這減少了使用 Community 模板建立新應用時的初始樣板程式碼，同時為大螢幕設備提供更佳的使用體驗。"
+      }
+    },
+    {
+      "segment_id": "63565425",
+      "source_content": "![New App Screen redesign](/blog/assets/0.80-new-community-template-landing.jpg)",
+      "source_content_hash": "8a61fbf097436de43fdc2330ed40087c6f0c2728aecea8fa2aa6b49e6579831a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![新應用程式畫面重新設計](/blog/assets/0.80-new-community-template-landing.jpg)"
+      }
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### Notice about JSC community support",
+      "source_content_hash": "e93534ffad0d3d37f73e0e9a0d2672c11e64d6c74eb3abae8979f8393cb389c1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 關於 JSC 社群支援的公告"
+      }
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "React Native 0.80 is the last version of React Native to offer first party JSC support. The support for JSC will be offered via the community maintained package `@react-native-community/javascriptcore`.",
+      "source_content_hash": "60276c31709a9c3a0f1494257a8d8e237149d5d3c217ab67a46ba03947c2aeeb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.80 是最後一個提供官方 JSC 支援的版本。後續 JSC 支援將由社群維護的套件 `@react-native-community/javascriptcore` 提供。"
+      }
+    },
+    {
+      "segment_id": "6f08f877",
+      "source_content": "In case you missed the announcement, you can [read more about it here](/blog/2025/04/08/react-native-0.79#jsc-moving-to-community-package)",
+      "source_content_hash": "f115358e3a5e5c751a6119f4c07937d2782e9dfd2df021e7014e7e547693a9ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您錯過了先前的公告，可[在此閱讀詳細內容](/blog/2025/04/08/react-native-0.79#jsc-moving-to-community-package)"
+      }
+    },
+    {
+      "segment_id": "f6a06609",
+      "source_content": "## Breaking Changes",
+      "source_content_hash": "6a4297b42b0b29e55855cf0faf314d1530c723b32d0c36f53badc540b403b6b2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重大變更"
+      }
+    },
+    {
+      "segment_id": "3f77c6a0",
+      "source_content": "### Added `\"exports\"` field on main package",
+      "source_content_hash": "0d2610721857dc7dc1a7b5a355e0a3a6335a5f370e14d2a7ff7f2f4c781c1485",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在主套件新增 `\"exports\"` 欄位"
+      }
+    },
+    {
+      "segment_id": "39f476dc",
+      "source_content": "As part of our JS Stable API changes, we've introduced an [`\"exports\"` field](https://nodejs.org/api/packages.html#package-entry-points) on the `package.json` manifest of `react-native`.",
+      "source_content_hash": "f59345dd076f3d95246b87138f2c59cc657f2c831f2f21e5523b842e3285b4da",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "作為 JS 穩定 API 變更的一部分，我們在 `react-native` 的 `package.json` 清單中引入了 [`\"exports\"` 欄位](https://nodejs.org/api/packages.html#package-entry-points)。"
+      }
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "In 0.80, this mapping continues to expose **all JavaScript subpaths** by default, and therefore should not be a major breaking change. At the same time, this may subtly affect how modules within the `react-native` package are resolved:",
+      "source_content_hash": "09739f51eabc461e62c8c0134696cb55eb4dd16f091e04606d02293fe0b3e28f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 0.80 版本中，此映射預設仍會暴露**所有 JavaScript 子路徑**，因此不應造成重大相容性問題。但同時，這可能會微妙地影響 `react-native` 套件內模組的解析方式："
+      }
+    },
+    {
+      "segment_id": "35b64b93",
+      "source_content": "- Under Metro, [platform-specific extensions](https://metrobundler.dev/docs/package-exports#replacing-platform-specific-extensions) will not be automatically expanded against `\"exports\"` matches. We've provided a number of shim modules to accommodate this ([#50426](https://github.com/facebook/react-native/pull/50426)).\n- Under Jest, the ability to mock deep imports may be altered, which may require updating tests.",
+      "source_content_hash": "1908883f67f189fe139c8adeec371c5c2e9a3acfe9ecac025172d046d2247fd1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在 Metro 下，[平台特定擴展](https://metrobundler.dev/docs/package-exports#replacing-platform-specific-extensions)不會自動針對 `\"exports\"` 匹配進行擴展。我們已提供多個墊片模組來適應此變更（[#50426](https://github.com/facebook/react-native/pull/50426)）。\n- 在 Jest 下，模擬深度導入的功能可能會受到影響，這可能需要更新測試案例。"
+      }
+    },
+    {
+      "segment_id": "a6b29dc7",
+      "source_content": "### Other Breaking Changes",
+      "source_content_hash": "39a3fee4305e149be253dd5d52033d827569d41d307326f83607c634f65347a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 其他重大變更"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "This list contains a series of other breaking changes we suspect could have a minor impact to your product code and are worth noting:",
+      "source_content_hash": "7b75ab9eff1bf3808903441fab49c245b46e644afb3373782c1868f9909a0860",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "以下清單列舉了我們認為可能對您的產品代碼產生輕微影響、值得注意的其他重大變更："
+      }
+    },
+    {
+      "segment_id": "445c72bd",
+      "source_content": "### JS",
+      "source_content_hash": "18182518cfe3332806e88fcda3c59843f21c18cfeefb3c8e86888144ac5e865f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### JavaScript"
+      }
+    },
+    {
+      "segment_id": "4568158b",
+      "source_content": "- We bumped `eslint-plugin-react-hooks` from v4.6.0 to v5.2.0 (see full [changelog here](https://github.com/facebook/react/blob/main/packages/eslint-plugin-react-hooks/CHANGELOG.md)). The `react-hooks` lint rules may produce new error signals which you will have to fix or suppress",
+      "source_content_hash": "ddaf511c8d5eab21e78d19ce1b10b6fd8f67b28165accfaf0e07f6acde38b509",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 我們將 `eslint-plugin-react-hooks` 從 v4.6.0 升級至 v5.2.0（完整[變更記錄在此](https://github.com/facebook/react/blob/main/packages/eslint-plugin-react-hooks/CHANGELOG.md)）。`react-hooks` 的 lint 規則可能會產生新的錯誤提示，您需要修復或抑制這些錯誤。"
+      }
+    },
+    {
+      "segment_id": "1297ec42",
+      "source_content": "### Android",
+      "source_content_hash": "18508687aedd8506ac08685625c58c973d94225f52d4abdd8fc62e581c6da653",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Android"
+      }
+    },
+    {
+      "segment_id": "81826f21",
+      "source_content": "- This release bumps the Kotlin version shipped with React Native to version 2.1.20. Kotlin 2.1 introduces new language features in preview that you can start using in your modules/components. You can read more about it in [the official release notes](https://kotlinlang.org/docs/whatsnew21.html).\n- We deleted the `StandardCharsets` class. It has been deprecated since 0.73. You should use the `java.nio.charset.StandardCharsets` class instead.\n- We made several classes internal. Those classes are not part of the public API and should not be accessed. We already notified or submitted patches to the affected libraries:\n  - `com.facebook.react.fabric.StateWrapperImpl`\n  - `com.facebook.react.modules.core.ChoreographerCompat`\n  - `com.facebook.react.modules.common.ModuleDataCleaner`\n- We migrated several classes from Java to Kotlin. If you’re using those classes, the nullability and types of some parameter changed so you might need to adjust your code:\n  - All the classes inside `com.facebook.react.devsupport`\n  - `com.facebook.react.bridge.ColorPropConverter`\n  - `com.facebook.react.views.textinput.ReactEditText`\n  - `com.facebook.react.views.textinput.ReactTextInputManager`",
+      "source_content_hash": "f0dd58b2df048769f9e3ba3edb07be718dc21b64af724a8a2a576eaed5328fe7",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 此版本將 React Native 內建的 Kotlin 版本升級至 2.1.20。Kotlin 2.1 引入了預覽版的新語言功能，您可以在模組/元件中開始使用。詳細資訊請參閱[官方發布說明](https://kotlinlang.org/docs/whatsnew21.html)。\n- 我們移除了 `StandardCharsets` 類別。該類別自 0.73 版起已被棄用，您應改用 `java.nio.charset.StandardCharsets` 類別。\n- 我們將多個類別標記為內部使用。這些類別不屬於公共 API，不應直接存取。我們已通知或提交修補程式至受影響的函式庫：\n  - `com.facebook.react.fabric.StateWrapperImpl`\n  - `com.facebook.react.modules.core.ChoreographerCompat`\n  - `com.facebook.react.modules.common.ModuleDataCleaner`\n- 我們將多個類別從 Java 遷移至 Kotlin。如果您使用這些類別，部分參數的可空性和類型已變更，可能需要調整您的代碼：\n  - `com.facebook.react.devsupport` 下的所有類別\n  - `com.facebook.react.bridge.ColorPropConverter`\n  - `com.facebook.react.views.textinput.ReactEditText`\n  - `com.facebook.react.views.textinput.ReactTextInputManager`"
+      }
+    },
+    {
+      "segment_id": "3bff4086",
+      "source_content": "### iOS",
+      "source_content_hash": "b646a613d3c8a9a4ca1214eed895ef4f31b195bbc5c8456c23cc55e60cc49c95",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### iOS"
+      }
+    },
+    {
+      "segment_id": "3bb47db3",
+      "source_content": "- We deleted the `RCTFloorPixelValue` field from RCTUtils.h - The `RCTFloorPixelValue` method was not used in React Native and we removed it altogether.",
+      "source_content_hash": "1aa917e753829175d7d0db688c4f184731935a74785a662532711eaee6403215",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 我們移除了 RCTUtils.h 中的 `RCTFloorPixelValue` 欄位 - `RCTFloorPixelValue` 方法在 React Native 中未被使用，因此我們將其完全刪除。"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "Further smaller breaking changes are listed [in the CHANGELOG for 0.80](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800).",
+      "source_content_hash": "716ca08a5670aa606ffbb10a5351eeb014ee2125c2f73cbbd3d9995e2af27e67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多較小的重大變更請參閱 [0.80 版的變更記錄](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800)。"
+      }
+    },
+    {
+      "segment_id": "e29294bd",
+      "source_content": "## Acknowledgements",
+      "source_content_hash": "1ef93036e7583a5c0bf23fede1d8c1545de1509c0759adabe508e64b182adc00",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 致謝"
+      }
+    },
+    {
+      "segment_id": "ebfad7e4",
+      "source_content": "React Native 0.80 contains over 1167 commits from 127 contributors. Thanks for all your hard work!",
+      "source_content_hash": "2ac2fcdb29ad6def618768efed9d31ef5d5b73c1ddba994f55a54156d70633d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 0.80 包含了來自 127 位貢獻者的超過 1167 次提交。感謝所有人的辛勤付出！"
+      }
+    },
+    {
+      "segment_id": "5e8be3d7",
+      "source_content": "<!--alex ignore special white-->",
+      "source_content_hash": "6a0701b9994ab83fa7331f0d528b328b0921aa721e941c93407723de41faebd5",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "90c4b96b",
+      "source_content": "We want to send a special thank you to those community members that shipped significant contributions in this release:",
+      "source_content_hash": "4cc28d5185bb5519335d3a5b34c39cd164b5cdf375bbef14d9ba68862176ded1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們要特別感謝在此版本中做出重大貢獻的社群成員："
+      }
+    },
+    {
+      "segment_id": "7425ba22",
+      "source_content": "- [Christian Falch](https://github.com/chrfalch) for the work on the iOS prebuilds for React Native Dependencies\n- [Iwo Plaza](https://x.com/iwoplaza), [Jakub Piasecki](https://x.com/breskin67), and [Dawid Małecki](https://github.com/coado) for their work on the Strict TypeScript API.",
+      "source_content_hash": "906e55fdcd91db7e6f31dd63932cace37571419aa351f10436ab45ca79daf2c1",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Christian Falch](https://github.com/chrfalch) 為 React Native 依賴項的 iOS 預建置工作\n- [Iwo Plaza](https://x.com/iwoplaza)、[Jakub Piasecki](https://x.com/breskin67) 和 [Dawid Małecki](https://github.com/coado) 對嚴格 TypeScript API 的貢獻"
+      }
+    },
+    {
+      "segment_id": "af834e0d",
+      "source_content": "Moreover, we also want to thank the additional authors that worked on documenting features in this release post:",
+      "source_content_hash": "aac6b9d8280eda8c650a5c10b5b9c68b106c0afc9ce40e2e0e532b8e2734460b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此外，我們也要感謝為此版本發布文檔撰寫功能的額外作者："
+      }
+    },
+    {
+      "segment_id": "0d2c50e6",
+      "source_content": "- [Riccardo Cipolleschi](https://github.com/cipolleschi) for authoring the part related to iOS prebuilds for React Native Dependencies.\n- [Alex Hunt](https://x.com/huntie) for Deep imports deprecation, Opt-in Strict TypeScript API, New App Screen redesign.\n- [Nicola Corti](https://x.com/cortinico) for the Legacy Architecture Freezing & Warnings.",
+      "source_content_hash": "79c52fb9eb83847107986ee267baa4c07e8d768b84aab516b6d206711e27bb08",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [Riccardo Cipolleschi](https://github.com/cipolleschi) 撰寫了關於 React Native 依賴項 iOS 預建置的部分\n- [Alex Hunt](https://x.com/huntie) 負責深度導入棄用、嚴格 TypeScript API 選用、新應用畫面重新設計\n- [Nicola Corti](https://x.com/cortinico) 處理舊版架構凍結與警告"
+      }
+    },
+    {
+      "segment_id": "3079a4d2",
+      "source_content": "## Upgrade to 0.80",
+      "source_content_hash": "17834d01d27ee6c4511e4706085f70d9a0063b4aca1a1557d30e3c19c33cc655",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 升級至 0.80"
+      }
+    },
+    {
+      "segment_id": "e4945edb",
+      "source_content": "Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.",
+      "source_content_hash": "0638260e20da230691670b567610c6c2be87ab53adb865a0f30305b52bfbd5c7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請使用 [React Native 升級助手](https://react-native-community.github.io/upgrade-helper/) 查看現有專案在 React Native 版本間的代碼變更，並參閱升級文件。"
+      }
+    },
+    {
+      "segment_id": "9ede513a",
+      "source_content": "To create a new project:",
+      "source_content_hash": "556b556603ebc735e5193d4598f99a66d8ca11d2cbdc58dd6e21bac27a143f9c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若要建立新專案："
+      }
+    },
+    {
+      "segment_id": "49be422b",
+      "source_content": "If you use Expo, React Native 0.80 will be supported in a canary release of the Expo SDK. Instructions on how to use React Native 0.80 in Expo are also available [in a dedicated blogpost](https://expo.dev/changelog/react-native-80).",
+      "source_content_hash": "cee71e8b714a68ddd91449115d67b98c32e5da6801e225844151eade6957758f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您使用 Expo，React Native 0.80 將在 Expo SDK 的 Canary 版本中獲得支援。關於如何在 Expo 中使用 React Native 0.80 的詳細說明，亦可參閱[專屬部落格文章](https://expo.dev/changelog/react-native-80)。"
+      }
+    },
+    {
+      "segment_id": "59b0808a",
+      "source_content": ":::info\n\n0.80 is now the latest stable version of React Native and 0.77.x moves to unsupported. For more information see React Native's support policy. We aim to publish a final end-of-life update of 0.77 in the near future.\n\n:::",
+      "source_content_hash": "5bf3a6818acd33c4a575ec18e5a9be2db9b4e89efce942525c62e37e30ed42f3",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info\n\n0.80 版現為 React Native 的最新穩定版本，0.77.x 版將轉為不受支援狀態。更多資訊請參閱 React Native 的支援政策。我們預計在近期發布 0.77 版的最終終止支援更新。\n\n:::"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2025-06-12-react-native-0.80.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.242868+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "d07d7b122ea5741a7b9699fcbbe7f4b9bc39e3555abb0fbfaa90a713fffc1206"
+  }
+}

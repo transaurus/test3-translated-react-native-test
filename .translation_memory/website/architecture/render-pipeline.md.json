@@ -1,0 +1,708 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "architecture/render-pipeline.md",
+  "source_file_content_hash": "777656ca3afad3cd448a555faa9b725a186497d1d66cf64a67a2794747063f59",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: render-pipeline\ntitle: Render, Commit, and Mount\n---",
+      "source_content_hash": "7f619bf32692fa40693a2eb65c6addfa49987d98b02d59e2b0eb5de2d0585100",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import FabricWarning from './\\_fabric-warning.mdx';",
+      "source_content_hash": "a168f9bd30da9cdf9bd0e17ed1ea4be8bece553316bc143cb70869369fde84bc",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<FabricWarning />",
+      "source_content_hash": "4c8a380c6cadf80af09be6749221fcde360be9284e0671cfa791434949c8b3d2",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "The React Native renderer goes through a sequence of work to render React logic to a [host platform](architecture-glossary.md#host-platform). This sequence of work is called the render pipeline and occurs for initial renders and updates to the UI state. This document goes over the render pipeline and how it differs in those scenarios.",
+      "source_content_hash": "8d8b161a06de36bc34a083d3686606fda1a55a7813d340812e36f9c4ed515a2b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "The render pipeline can be broken into three general phases:",
+      "source_content_hash": "3bdd0f790ab917fe80c6157d9b818dda4bf6b6dcd48b51e86980c91be37904f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9e760345",
+      "source_content": "1. **Render:** React executes product logic which creates a [React Element Trees](architecture-glossary.md#react-element-tree-and-react-element) in JavaScript. From this tree, the renderer creates a [React Shadow Tree](architecture-glossary.md#react-shadow-tree-and-react-shadow-node) in C++.\n2. **Commit**: After a React Shadow Tree is fully created, the renderer triggers a commit. This **promotes** both the React Element Tree and the newly created React Shadow Tree as the “next tree” to be mounted. This also schedules calculation of its layout information.\n3. **Mount:** The React Shadow Tree, now with the results of layout calculation, is transformed into a [Host View Tree](architecture-glossary.md#host-view-tree-and-host-view).",
+      "source_content_hash": "bd0c4921a8cefc710df5ead2193f427269c8b6c97aa52936223f173f20542acf",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e83bca52",
+      "source_content": "> The phases of the render pipeline may occur on different threads. Refer to the [Threading Model](threading-model) doc for more detail.",
+      "source_content_hash": "9807c7a6a73e6f9e1c175da4e10fc6a00294d90b6aecae0426227eb9a14581cd",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "![React Native renderer Data flow](/docs/assets/Architecture/renderer-pipeline/data-flow.jpg)",
+      "source_content_hash": "db30a763654c089633f72bb8807799d14fbcda46c521f90383251b68728f5546",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "fb3d50cd",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "95b38f97",
+      "source_content": "## Initial Render",
+      "source_content_hash": "9a5c52ebd17768576f34454c0550afc604e5484e77a5443f6210dd43d94b2409",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "Imagine you want to render the following:",
+      "source_content_hash": "0d0df6b6f7056e5da5c21b827bce4614daf302ddebb8dc8a196357febaf987f6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "15a1fd96",
+      "source_content": "```jsx\nfunction MyComponent() {\n  return (\n    <View>\n      <Text>Hello, World</Text>\n    </View>\n  );\n}\n\n// <MyComponent />\n```",
+      "source_content_hash": "3d09790cb2e13d62b51076bbbf0babb788d3b6d3449c45fac78d6578e2ffcaac",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "In the example above, `<MyComponent />` is a [React Element](architecture-glossary.md#react-element-tree-and-react-element). React recursively reduces this _React Element_ to a terminal [React Host Component](architecture-glossary.md#react-host-components-or-host-components) by invoking it (or its `render` method if implemented with a JavaScript class) until every _React Element_ cannot be reduced any further. Now you have a _React Element Tree_ of [React Host Components](architecture-glossary.md#react-host-components-or-host-components).",
+      "source_content_hash": "ead90bf8298d731c00a2c81667fda3985e5b0b790b0321d21164ce33a676691b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d04259b",
+      "source_content": "### Phase 1. Render",
+      "source_content_hash": "67af222b76636e60605320b602c4814c9e8e4fd871cef7c1c5545ea5dff74047",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "![Phase one: render](/docs/assets/Architecture/renderer-pipeline/phase-one-render.png)",
+      "source_content_hash": "9528619b335ce043832d62c5437e67bbb48ee83b6566a1f11bfdaac9ee8134ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "During this process of element reduction, as each _React Element_ is invoked, the renderer also synchronously creates a [React Shadow Node](architecture-glossary.md#react-shadow-tree-and-react-shadow-node). This happens only for _React Host Components_, not for [React Composite Components](architecture-glossary.md#react-composite-components). In the example above, the `<View>` leads to the creation of a `ViewShadowNode` object, and the\n`<Text>` leads to the creation of a `TextShadowNode` object. Notably, there is never a _React Shadow Node_ that directly represents `<MyComponent>`.",
+      "source_content_hash": "65724ac30e2601f91ef335333441e7503b9577f4cfb62821a31d64c0c3e8d371",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "29528c8d",
+      "source_content": "Whenever React creates a parent-child relationship between two _React Element Nodes_, the renderer creates the same relationship between the corresponding _React Shadow Nodes_. This is how the _React Shadow Tree_ is assembled.",
+      "source_content_hash": "8844a27eadaa1635ed88d5f4e70a53bc01ea0def06cd7842b0b9250437db548e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c504c207",
+      "source_content": "**Additional Details**",
+      "source_content_hash": "cc99db4fd3d05733822eef35fccde0564b305f5f556693d62e0ea6005dfd3864",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "310e47b7",
+      "source_content": "- The operations (creation of _React Shadow Node_, creation of parent-child relationship between two _React Shadow Nodes_) are synchronous and thread-safe operations that are executed from React (JavaScript) into the renderer (C++), usually on the JavaScript thread.\n- The _React Element Tree_ (and its constituent _React Element Nodes_) do not exist indefinitely. It is a temporal representation materialized by “fibers” in React. Each “fiber” that represents a host component stores a C++ pointer to the _React Shadow Node_, made possible by JSI. [Learn more about “fibers” in this document.](https://github.com/acdlite/react-fiber-architecture#what-is-a-fiber)\n- The _React Shadow Tree_ is immutable. In order to update any _React Shadow Node_, the renderer creates a new _React Shadow Tree_. However, the renderer provides cloning operations to make state updates more performant (see [React State Updates](render-pipeline#react-state-updates) for more details).",
+      "source_content_hash": "3f1c9cf7e58428c73b7fed88d3b3ebc2e840c1f450ed4fb59f4813037b6cb5d0",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "In the example above, the result of the render phase looks like this:",
+      "source_content_hash": "84fb834b58419b7f0ca075ec7e521058830b799d7b5bd9e63e4c51ce82924f12",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "![Step one](/docs/assets/Architecture/renderer-pipeline/render-pipeline-1.png)",
+      "source_content_hash": "fedff749fb282f3ae757db084677cf8601abf64416c54e39b9b097b8f09ef138",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "After the _React Shadow Tree_ is complete, the renderer triggers a commit of the _React Element Tree_.",
+      "source_content_hash": "ec45b31a680f82784561052e2e98d71b0ffdf95e68b8cb4ee6a2650150cfe1bc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9e95fc4a",
+      "source_content": "### Phase 2. Commit",
+      "source_content_hash": "b2992f6d8e47b1d842c4d4ea70d15959bfa5aa5b1ae6efb89523f5bf8f4b267d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "![Phase two: commit](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)",
+      "source_content_hash": "28a0bc1e6018696586e856b375a2df60d0db9686985471461220170e75a70825",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "The commit phase consists of two operations: _Layout Calculation_ and _Tree Promotion_.",
+      "source_content_hash": "d3a2b9fe5385460fb38597e3b4dfdc5139ced5d9ac8d912876fc72a45c2c3f4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4bd3cfc",
+      "source_content": "- **Layout Calculation:** This operation calculates the position and size of each _React Shadow Node_. In React Native, this involves invoking Yoga to calculate the layout of each _React Shadow Node_. The actual calculation requires each _React Shadow Node_’s styles which originate from a _React Element_ in JavaScript. It also requires the layout constraints of the root of the _React Shadow Tree_, which determines the amount of available space that the resulting nodes can occupy.",
+      "source_content_hash": "b37c776cc5cc4f8b8537544dace932019ea5e265a1ccd6f32bad2e9e71991156",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e7772088",
+      "source_content": "![Step two](/docs/assets/Architecture/renderer-pipeline/render-pipeline-2.png)",
+      "source_content_hash": "de410a5eacfd747f2cffe867482db7e1c438f5db79fc74634370de215c620319",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "69c1f590",
+      "source_content": "- **Tree Promotion (New Tree → Next Tree):** This operation promotes the new _React Shadow Tree_ as the “next tree” to be mounted. This promotion indicates that the new _React Shadow Tree_ has all the information to be mounted and represents the latest state of the _React Element Tree_. The “next tree” mounts on the next “tick” of the UI Thread.",
+      "source_content_hash": "2282f752c6bacda18df52dd0bdebbb79714d3c8157a9927d55642badb37ac62a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f01228d3",
+      "source_content": "**Additional Details**",
+      "source_content_hash": "cc99db4fd3d05733822eef35fccde0564b305f5f556693d62e0ea6005dfd3864",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "caffd879",
+      "source_content": "- These operations are asynchronously executed on a background thread.\n- Majority of layout calculation executes entirely within C++. However, the layout calculation of some components depend on the _host platform_ (e.g. `Text`, `TextInput`, etc.). Size and position of text is specific to each _host platform_ and needs to be calculated on the _host platform_ layer. For this purpose, Yoga invokes a function defined in the _host platform_ to calculate the component’s layout.",
+      "source_content_hash": "b99d5962aa788c513ed207a1acd514707c0bdd189ffe35c86184a0fb9b2f933b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "### Phase 3. Mount",
+      "source_content_hash": "11b053a393fd210d2fc7488e59e211a32f7fd7597ff616a7c22b63ee496f0b39",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "![Phase three: mount](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)",
+      "source_content_hash": "891dbd321482dd55b39989c7885ee68f0f24fa5e9779f04c7ac51e315d4764a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "The mount phase transforms the _React Shadow Tree_ (which now contains data from layout calculation) into a _Host_ _View Tree_ with rendered pixels on the screen. As a reminder, the _React Element Tree_ looks like this:",
+      "source_content_hash": "ac57e2a0905911b888243a8e49da6a6e4da0399a9a2fcb3ae6adbe580c8b4194",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8c3563d3",
+      "source_content": "```jsx\n<View>\n  <Text>Hello, World</Text>\n</View>\n```",
+      "source_content_hash": "48d9023ebb0c909f0954501a8435beca297826045a73a1ee30595f694bb3e998",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "At a high level, React Native renderer creates a corresponding [Host View](architecture-glossary.md#host-view-tree-and-host-view) for each _React Shadow Node_ and mounts it on screen. In the example above, the renderer creates an instance of `android.view.ViewGroup` for the `<View>` and `android.widget.TextView` for `<Text>` and populates it with “Hello World”. Similarly for iOS a `UIView` is created and text is populated with a call to `NSLayoutManager`. Each host view is then configured to use props from its React Shadow Node, and its size and position is configured using the calculated layout information.",
+      "source_content_hash": "85ee23279a0603fef265dd80f84e0fdba47e81aeccd548aab0caf596183613cc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "![Step two](/docs/assets/Architecture/renderer-pipeline/render-pipeline-3.png)",
+      "source_content_hash": "d20748557f662192832835abc32f14c109f0673e45ad997d525d410b0b7044ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "In more detail, the mounting phase consists of these three steps:",
+      "source_content_hash": "d14e89a1c10395905d68bdd3d01cea1d2b1ae3e281766b25fffd714b7156c864",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cfea4c31",
+      "source_content": "- **Tree Diffing:** This step computes the diff between the “previously rendered tree” and the “next tree” entirely in C++. The result is a list of atomic mutation operations to be performed on host views (e.g. `createView`, `updateView`, `removeView`, `deleteView`, etc). This step is also where the React Shadow Tree is flattened to avoid creating unnecessary host views. See [View Flattening](view-flattening) for details about this algorithm.\n- **Tree Promotion (Next Tree → Rendered Tree)**: This step atomically promotes the “next tree” to “previously rendered tree” so that the next mount phase computes a diff against the proper tree.\n- **View Mounting**: This step applies the atomic mutation operations onto corresponding host views. This step executes in the _host platform_ on UI thread.",
+      "source_content_hash": "42bb490fa766a105ec71a7f8a82ffc7380814f4c7bce8db9e3c6f4fc57f7ef6e",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "**Additional Details**",
+      "source_content_hash": "cc99db4fd3d05733822eef35fccde0564b305f5f556693d62e0ea6005dfd3864",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "936011bd",
+      "source_content": "- The operations are synchronously executed on UI thread. If the commit phase executes on background thread, the mounting phase is scheduled for the next “tick” of UI thread. On the other hand, if the commit phase executes on UI thread, mounting phase executes synchronously on the same thread.\n- Scheduling, implementation, and execution of the mounting phase heavily depends on the _host platform_. For example, the renderer architecture of the mounting layer currently differs between Android and iOS.\n- During the initial render, the “previously rendered tree” is empty. As such, the tree diffing step will result in a list of mutation operations that consists only of creating views, setting props, and adding views to each other. Tree diffing becomes more important for performance when processing [React State Updates](#react-state-updates).\n- In current production tests, a _React Shadow Tree_ typically consists of about 600-1000 _React Shadow Nodes_ (before view flattening), the trees get reduced to ~200 nodes after view flattening. On iPad or desktop apps, this quantity may increase 10-fold.",
+      "source_content_hash": "1f2808bc1aef99cf57816b6c70abbb085c8587a7e8479ce28f80e202c40902ba",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "04837130",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d1f76d04",
+      "source_content": "## React State Updates",
+      "source_content_hash": "8d54f5e7c12d9b181127ec3e3b43344ec4f5ae5721767eeb80abf184f29c6757",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "Let’s explore each phase of the render pipeline when the state of a _React Element Tree_ is updated. Let’s say, you’ve rendered the following component in an initial render:",
+      "source_content_hash": "ab817224cfb0cf811d72a4c93f21377e5795cbd78e0744f6fc79e252f2c5ceec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "83537d8d",
+      "source_content": "```jsx\nfunction MyComponent() {\n  return (\n    <View>\n      <View\n        style={{backgroundColor: 'red', height: 20, width: 20}}\n      />\n      <View\n        style={{backgroundColor: 'blue', height: 20, width: 20}}\n      />\n    </View>\n  );\n}\n```",
+      "source_content_hash": "f1803899670bd4432cf0eaddb5d0e4b4ac97e1d6d023eb97c5eac4c979728433",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c364340c",
+      "source_content": "Applying what was described in the [Initial Render](#initial-render) section, you would expect the following trees to be created:",
+      "source_content_hash": "92bfa3bd1965dd9b7efb4ebe45fcfa4f08c92653c33d47b6d5cf7a7f936fe578",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "![Render pipeline 4](/docs/assets/Architecture/renderer-pipeline/render-pipeline-4.png)",
+      "source_content_hash": "cc2d3e279db784df7fdbe9319f55bde35a771e75f0c70062a666d4e74ff47012",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "692c6053",
+      "source_content": "Notice that **Node 3** maps to a host view with a **red background**, and **Node 4** maps to a host view with a **blue background**. Assume that as the result of a state update in JavaScript product logic, the background of the first nested `<View>` changes from `'red'` to `'yellow'`. This is what the new _React Element Tree_ might look:",
+      "source_content_hash": "fc9513bd80657cc78dc46b8a95c3a253615421d1d0284cfaa1ed31a25a1d508e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "601bdf38",
+      "source_content": "```jsx\n<View>\n  <View\n    style={{backgroundColor: 'yellow', height: 20, width: 20}}\n  />\n  <View\n    style={{backgroundColor: 'blue', height: 20, width: 20}}\n  />\n</View>\n```",
+      "source_content_hash": "f17eb110e4bddf848b2b4c9f8bbcf2cb2bd0c132dad6338a4eaf17b89c5bb11d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "**How is this update processed by React Native?**",
+      "source_content_hash": "b52e291967b4fa79d770f3f4349d3f1ec3f50072f8514f26f37a30a989682375",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "When a state update occurs, the renderer needs to conceptually update the _React Element Tree_ in order to update the host views that are already mounted. But in order to preserve thread safety, both the _React Element Tree_ as well as the _React Shadow Tree_ must be immutable. This means that instead of mutating the current _React Element Tree_ and _React Shadow Tree_, React must create a new copy of each tree which incorporates the new props, styles, and children.",
+      "source_content_hash": "683e65d898bc72dc650386eee0e16d65ab3362da300388b6269a51404e744446",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ad3e22c6",
+      "source_content": "Let’s explore each phase of the render pipeline during a state update.",
+      "source_content_hash": "9ea30379a7fcfe8c11d019e2d436c84e9547d35088f65ee4eaadf8ae72403a2a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "671cbf7c",
+      "source_content": "### Phase 1. Render",
+      "source_content_hash": "67af222b76636e60605320b602c4814c9e8e4fd871cef7c1c5545ea5dff74047",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "![Phase one: render](/docs/assets/Architecture/renderer-pipeline/phase-one-render.png)",
+      "source_content_hash": "9528619b335ce043832d62c5437e67bbb48ee83b6566a1f11bfdaac9ee8134ec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "63565425",
+      "source_content": "When React creates a new _React Element Tree_ that incorporates the new state, it must clone every _React Element_ and _React Shadow Node_ that is impacted by the change. After cloning, the new _React Shadow Tree_ is committed.",
+      "source_content_hash": "08783144d645a28fb9caeed8f3f6dda7d109eddff185c8c5728cb648e64355db",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1496ef51",
+      "source_content": "React Native renderer leverages structural sharing to minimize the overhead of immutability. When a _React Element_ is cloned to include the new state, every _React Element_ that is on the path up to the root is cloned. **React will only clone a React Element if it requires an update to its props, style, or children.** Any _React Elements_ that are unchanged by the state update are shared by the old and new trees.",
+      "source_content_hash": "7892fbfc0b668d63476b13d7014745d5ecf10fec1b6b248c209b144c05014a57",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "In the above example, React creates the new tree using these operations:",
+      "source_content_hash": "9a221faccf104ef0f5f1c2f9aceb83904aece14153a0201594e176c0f6ce28ad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0c315794",
+      "source_content": "1. CloneNode(**Node 3**, `{backgroundColor: 'yellow'}`) → **Node 3'**\n2. CloneNode(**Node 2**) → **Node 2'**\n3. AppendChild(**Node 2'**, **Node 3'**)\n4. AppendChild(**Node 2'**, **Node 4**)\n5. CloneNode(**Node 1**) → **Node 1'**\n6. AppendChild(**Node 1'**, **Node 2'**)",
+      "source_content_hash": "297338b85a1201d3a6f2de75f1356d7fe4e8015aa4cfc2d438ec1ddca9827c41",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b08ad0b4",
+      "source_content": "After these operations, **Node 1'** represents the root of the new _React Element Tree_. Let's assign **T** to the “previously rendered tree” and **T'** to the “new tree”:",
+      "source_content_hash": "8ff4e0bfd5e279fe233c8f21c3f2397531ac0b738bfec5c0ed910f14c83ffd23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成這些操作後，**節點 1'** 代表新的 _React 元素樹_ 的根節點。我們將 **T** 指定為「先前渲染的樹」，**T'** 指定為「新樹」："
+      }
+    },
+    {
+      "segment_id": "d636abf8",
+      "source_content": "![Render pipeline 5](/docs/assets/Architecture/renderer-pipeline/render-pipeline-5.png)",
+      "source_content_hash": "422c3a03f69e42851372e38880a6f652cee082b8c7130e340dc16cd337329713",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![渲染管線 5](/docs/assets/Architecture/renderer-pipeline/render-pipeline-5.png)"
+      }
+    },
+    {
+      "segment_id": "99840f13",
+      "source_content": "Notice how **T** and **T'** both share **Node 4**. Structural sharing improves performance and reduces memory usage.",
+      "source_content_hash": "fc57fe047979c7c09e1501b845643e92f9c0b1c1ab7c8cfb701eda94591bc1b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "請注意 **T** 和 **T'** 如何共享 **節點 4**。結構共享提升了效能並降低了記憶體使用量。"
+      }
+    },
+    {
+      "segment_id": "a6b29dc7",
+      "source_content": "### Phase 2. Commit",
+      "source_content_hash": "b2992f6d8e47b1d842c4d4ea70d15959bfa5aa5b1ae6efb89523f5bf8f4b267d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 階段 2. 提交"
+      }
+    },
+    {
+      "segment_id": "dc72fd20",
+      "source_content": "![Phase two: commit](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)",
+      "source_content_hash": "28a0bc1e6018696586e856b375a2df60d0db9686985471461220170e75a70825",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![階段二：提交](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)"
+      }
+    },
+    {
+      "segment_id": "674abb31",
+      "source_content": "After React creates the new _React Element Tree_ and _React Shadow Tree_, it must commit them.",
+      "source_content_hash": "8cf48168f81cb01e19ee6885e4a0c56d3644a32fce2ed29f37c878ac227d0926",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 React 建立新的 _React 元素樹_ 和 _React 影子樹_ 後，必須提交它們。"
+      }
+    },
+    {
+      "segment_id": "4568158b",
+      "source_content": "- **Layout Calculation:** Similar to Layout Calculation during [Initial Render](#initial-render). One important difference is that layout calculation may cause shared _React Shadow Nodes_ to be cloned. This can happen because if the parent of a shared _React Shadow Node_ incurs a layout change, the layout of the shared _React Shadow Node_ may also change.\n- **Tree Promotion (New Tree → Next Tree):** Similar to Tree Promotion during [Initial Render](#initial-render).",
+      "source_content_hash": "796bd7d544c8ad48ff298f692549818a3436264a80f9e0513c3f90e8201b47f9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **佈局計算：** 與[初始渲染](#initial-render)期間的佈局計算類似。一個重要區別是，佈局計算可能導致共享的 _React 影子節點_ 被克隆。這可能發生在共享的 _React 影子節點_ 的父節點發生佈局變更時，共享的 _React 影子節點_ 的佈局也可能隨之改變。\n- **樹晉升（新樹 → 下一棵樹）：** 與[初始渲染](#initial-render)期間的樹晉升類似。"
+      }
+    },
+    {
+      "segment_id": "61282bab",
+      "source_content": "### Phase 3. Mount",
+      "source_content_hash": "11b053a393fd210d2fc7488e59e211a32f7fd7597ff616a7c22b63ee496f0b39",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 階段 3. 掛載"
+      }
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "![Phase three: mount](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)",
+      "source_content_hash": "891dbd321482dd55b39989c7885ee68f0f24fa5e9779f04c7ac51e315d4764a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![階段三：掛載](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)"
+      }
+    },
+    {
+      "segment_id": "fc7b5b3c",
+      "source_content": "- **Tree Promotion (Next Tree → Rendered Tree)**: This step atomically promotes the “next tree” to “previously rendered tree” so that the next mount phase computes a diff against the proper tree.\n- **Tree Diffing:** This step computes the diff between the “previously rendered tree” (**T**) and the “next tree” (**T'**). The result is a list of atomic mutation operations to be performed on _host views_.\n  - In the above example, the operations consist of: `UpdateView(**Node 3**, {backgroundColor: 'yellow'})`\n  - The diff can be calculated for any currently mounted tree with any new tree. The renderer can skip some intermediate versions of the tree.\n- **View Mounting**: This step applies the atomic mutation operations onto corresponding _host views_. In the above example, only the `backgroundColor` of **View 3** will be updated (to yellow).",
+      "source_content_hash": "ba8f947e9e9807a8cf98d80af97175cb406d5af2a84e5481811c7dead996a260",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **樹晉升（下一棵樹 → 渲染的樹）：** 此步驟原子性地將「下一棵樹」晉升為「先前渲染的樹」，以便下一個掛載階段能針對正確的樹計算差異。\n- **樹差異計算：** 此步驟計算「先前渲染的樹」（**T**）與「下一棵樹」（**T'**）之間的差異。結果是一系列要在 _宿主視圖_ 上執行的原子性變更操作。\n  - 在上述範例中，操作包括：`UpdateView(**節點 3**, {backgroundColor: 'yellow'})`\n  - 差異可以針對任何當前掛載的樹與任何新樹進行計算。渲染器可以跳過某些中間版本的樹。\n- **視圖掛載：** 此步驟將原子性變更操作應用到對應的 _宿主視圖_ 上。在上述範例中，只有 **視圖 3** 的 `backgroundColor` 會被更新（變為黃色）。"
+      }
+    },
+    {
+      "segment_id": "6fad5db5",
+      "source_content": "![Render pipeline 6](/docs/assets/Architecture/renderer-pipeline/render-pipeline-6.png)",
+      "source_content_hash": "0598fdd0c81cdb1a07ad3938617d839f75cb4836263c8713828b5fb08eaeb1b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![渲染管線 6](/docs/assets/Architecture/renderer-pipeline/render-pipeline-6.png)"
+      }
+    },
+    {
+      "segment_id": "0e7eccf0",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "---"
+      }
+    },
+    {
+      "segment_id": "17fd5988",
+      "source_content": "## React Native Renderer State Updates",
+      "source_content_hash": "8d9ea18436dc7c6e1e296fc8a16becd644763f2b0c9084c154ac9fb6efffa760",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## React Native 渲染器狀態更新"
+      }
+    },
+    {
+      "segment_id": "3208eb29",
+      "source_content": "For most information in the _Shadow Tree_, React is the single owner and single source of truth. All data originates from React and there is a single-direction flow of data.",
+      "source_content_hash": "6653460ee77e2f8389563fdfe6e981eb32877fc00ef3fbe26436bedee1351170",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於 _影子樹_ 中的大多數資訊，React 是唯一的擁有者和單一真實來源。所有資料都源自 React，並且資料流是單向的。"
+      }
+    },
+    {
+      "segment_id": "38f964f1",
+      "source_content": "However, there is one exception and important mechanism: components in C++ can contain state that is not directly exposed to JavaScript, and JavaScript is not the source of truth. C++ and _Host Platform_ control this _C++ State_. Generally, this is only relevant if you are developing a complicated _Host Component_ that needs _C++ State_. The vast majority of _Host Components_ do not need this functionality.",
+      "source_content_hash": "a21c35134e5d27ed59f866d546bb50d3d4a6bafc799567e70cd3759ac3372a2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然而，有一個例外且重要的機制：C++ 中的元件可以包含不直接暴露給 JavaScript 的狀態，且 JavaScript 不是其真實來源。C++ 和 _宿主平台_ 控制這個 _C++ 狀態_。通常，這僅在開發需要 _C++ 狀態_ 的複雜 _宿主元件_ 時才相關。絕大多數的 _宿主元件_ 不需要此功能。"
+      }
+    },
+    {
+      "segment_id": "b4204c03",
+      "source_content": "For example, `ScrollView` uses this mechanism to let the renderer know what the current offset is. The update is triggered from the _host platform_, specifically from the host view that represents the `ScrollView` component. The information about offset is used in an API like [measure](https://reactnative.dev/docs/direct-manipulation#measurecallback). Since this update stems from the host platform, and does not affect the React Element Tree, this state data is held by _C++ State_.",
+      "source_content_hash": "55a61e0eda9a7281a74a03ba79c27a06b5f795c41e26c3b2c7c0c4025abfac10",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，`ScrollView` 使用此機制讓渲染器知道當前的偏移量。更新由 _宿主平台_ 觸發，具體來自代表 `ScrollView` 元件的宿主視圖。偏移量資訊用於像 [measure](https://reactnative.dev/docs/direct-manipulation#measurecallback) 這樣的 API。由於此更新源自宿主平台，且不影響 React 元素樹，此狀態資料由 _C++ 狀態_ 持有。"
+      }
+    },
+    {
+      "segment_id": "e6ac016e",
+      "source_content": "Conceptually, _C++ State_ updates are similar to the [React State Updates](render-pipeline#react-state-updates) described above.\nWith two important differences:",
+      "source_content_hash": "03925df5161d56aa6663617c9c028f1abd4075b28506709d82d0d0f221f414fe",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "概念上，_C++ 狀態_ 更新與上述的 [React 狀態更新](render-pipeline#react-state-updates) 類似。\n但有兩個重要區別："
+      }
+    },
+    {
+      "segment_id": "7cfc0291",
+      "source_content": "1. They skip the “render phase” since React is not involved.\n2. The updates can originate and happen on any thread, including the main thread.",
+      "source_content_hash": "1f445a39e82b54ee32e78bd2b33afc39b1457fd37be1d84f333d3d04df3c2795",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 它們跳過「渲染階段」，因為 React 不參與其中。\n2. 更新可以源自並發生在任何執行緒上，包括主執行緒。"
+      }
+    },
+    {
+      "segment_id": "97496aad",
+      "source_content": "### Phase 2. Commit",
+      "source_content_hash": "b2992f6d8e47b1d842c4d4ea70d15959bfa5aa5b1ae6efb89523f5bf8f4b267d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 階段 2. 提交"
+      }
+    },
+    {
+      "segment_id": "af834e0d",
+      "source_content": "![Phase two: commit](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)",
+      "source_content_hash": "28a0bc1e6018696586e856b375a2df60d0db9686985471461220170e75a70825",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![階段二：提交](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)"
+      }
+    },
+    {
+      "segment_id": "d75361e3",
+      "source_content": "When performing a _C++ State_ update, a block of code requests an update of a `ShadowNode` (**N**) to set _C++ State_ to value **S**. React Native renderer will repeatedly attempt to get the latest committed version of **N**, clone it with a new state **S**, and commit **N’** to the tree. If React, or another _C++ State_ update, has performed another commit during this time, the _C++ State_ commit will fail and the renderer will retry the _C++ State_ update many times until a commit succeeds. This prevents source-of-truth collisions and races.",
+      "source_content_hash": "24df4b1a39afb9d9a3b0d2ca69e10878aea9becd680756b70a295253496daed8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當執行 _C++ 狀態_ 更新時，一段程式碼會請求更新 `ShadowNode` (**N**) 以將 _C++ 狀態_ 設為值 **S**。React Native 渲染器會反覆嘗試取得 **N** 的最新提交版本，將其克隆為帶有新狀態 **S** 的 **N'**，並將 **N'** 提交至樹中。若在此期間 React 或其他 _C++ 狀態_ 更新已執行其他提交，則 _C++ 狀態_ 提交將失敗，渲染器會多次重試 _C++ 狀態_ 更新，直到提交成功為止。此機制可避免來源真實性衝突與競爭條件。"
+      }
+    },
+    {
+      "segment_id": "3e795db3",
+      "source_content": "### Phase 3. Mount",
+      "source_content_hash": "11b053a393fd210d2fc7488e59e211a32f7fd7597ff616a7c22b63ee496f0b39",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 階段 3. 掛載"
+      }
+    },
+    {
+      "segment_id": "5eedf0a1",
+      "source_content": "![Phase three: mount](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)",
+      "source_content_hash": "891dbd321482dd55b39989c7885ee68f0f24fa5e9779f04c7ac51e315d4764a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![第三階段：掛載](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)"
+      }
+    },
+    {
+      "segment_id": "e4945edb",
+      "source_content": "The _Mount Phase_ is practically identical to the [Mount Phase of React State Updates](#react-state-updates). The renderer still needs to recompute layout, perform a tree diff, etc. See the sections above for details.",
+      "source_content_hash": "4897b097f50823bfbfb9d5240a3c6f2f462a37b8d05c2fe9d502a1df899aad52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "_掛載階段_ 在實務上與 [React 狀態更新的掛載階段](#react-state-updates) 完全相同。渲染器仍需重新計算佈局、執行樹差異比對等操作。詳情請參閱前述章節。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-architecture/render-pipeline.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.192301+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "777656ca3afad3cd448a555faa9b725a186497d1d66cf64a67a2794747063f59"
+  }
+}

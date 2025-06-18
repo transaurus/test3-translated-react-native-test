@@ -1,0 +1,492 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "../docs/react-native-devtools.md",
+  "source_file_content_hash": "8b63788a0b7b02581baab3daf0475da316b000188d0a7e8252099f1fb48b3236",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: react-native-devtools\ntitle: React Native DevTools\n---",
+      "source_content_hash": "01775e0956f8144f6aa37607e5ad4122fb8a63482ed1222f876fde217b4d7aa8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "React Native DevTools is our modern debugging experience for React Native. Purpose-built from the ground up, it aims to be fundamentally more integrated, correct, and reliable than previous debugging methods.",
+      "source_content_hash": "ca4b08793d92eaf529915bf4afe7ed780cfb6a9b65783c2372f7fbd9fe49d99b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native DevTools 是我們專為 React Native 打造的現代化除錯體驗。從底層重新設計，旨在比以往的除錯方法更深度整合、更準確可靠。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "![React Native DevTools opened to the \"Welcome\" pane](/docs/assets/debugging-rndt-welcome.jpg)",
+      "source_content_hash": "4d3e990f75522daa9b864ff35494b37fdb5150a7d95ba453843d7f776879de9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React Native DevTools 開啟至「歡迎」面板](/docs/assets/debugging-rndt-welcome.jpg)"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "React Native DevTools is designed for debugging React app concerns, and not to replace native tools. If you want to inspect React Native’s underlying platform layers (for example, while developing a Native Module), please use the debugging tools available in Android Studio and Xcode (see [Debugging Native Code](/docs/debugging-native-code)).",
+      "source_content_hash": "071d9ba4a4cf0ed90b75fab43888bfd8e608c8f3dd4dabbd194b6f64c9f3b57f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native DevTools 專注於 React 應用層面的除錯，並非用來取代原生工具。若需檢查 React Native 底層平台（例如開發原生模組時），請使用 Android Studio 和 Xcode 的除錯工具（參閱[原生程式碼除錯](/docs/debugging-native-code)）。"
+      }
+    },
+    {
+      "segment_id": "899bc9b4",
+      "source_content": "<details>\n<summary>**💡 Compatibility** — released in 0.76</summary>\n\nReact Native DevTools supports all React Native apps running Hermes. It replaces the previous Flipper, Experimental Debugger, and Hermes debugger (Chrome) frontends.\n\nIt is not possible to set up React Native DevTools with any older versions of React Native.\n\n- **Chrome Browser DevTools — unsupported**\n  - Connecting to React Native via `chrome://inspect` is no longer supported. Features may not work correctly, as the latest versions of Chrome DevTools (which are built to match the latest browser capabilities and APIs) have not been tested, and this frontend lacks our customisations. Instead, we ship a supported version with React Native DevTools.\n- **Visual Studio Code — unsupported** (pre-existing)\n  - Third party extensions such as [Expo Tools](https://github.com/expo/vscode-expo) and [Radon IDE](https://ide.swmansion.com/) may have improved compatibility, but are not directly supported by the React team.\n\n</details>",
+      "source_content_hash": "1d3139a26a059db706213fff95c0413d679fdf43006e520fbc083148b3f89379",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_899bc9b4"
+      }
+    },
+    {
+      "segment_id": "358a309f",
+      "source_content": "<details>\n<summary>**💡 Feedback & FAQs**</summary>\n\nWe want the tooling you use to debug React across all platforms to be reliable, familiar, simple, and cohesive. All the features described on this page are built with these principles in mind, and we also want to offer more capabilities in future.\n\nWe are actively iterating on the future of React Native DevTools, and have created a centralized [GitHub discussion](https://github.com/react-native-community/discussions-and-proposals/discussions/819) to keep track of issues, frequently asked questions, and feedback.\n\n</details>",
+      "source_content_hash": "0717727b4a5edde9c8b0db6295eaeccef0d1ac085099eeab8524d8157064c4dd",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_358a309f"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "## Core features",
+      "source_content_hash": "aa1dd44f7c6c154ca359c60449597f7a14e8dcdd565ff4fd68573a1622404731",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 核心功能"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "React Native DevTools is based on the Chrome DevTools frontend. If you have a web development background, its features should be familiar. As a starting point, we recommend browsing the [Chrome DevTools docs](https://developer.chrome.com/docs/devtools) which contain full guides as well as video resources.",
+      "source_content_hash": "49255bcd162724658143d4accc1aaaa03b971aa74a2bf12cea9117a9faeb6662",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native DevTools 基於 Chrome DevTools 前端架構。若您有網頁開發背景，會對其功能感到熟悉。建議先瀏覽[Chrome DevTools 文件](https://developer.chrome.com/docs/devtools)，內含完整指南與影音資源。"
+      }
+    },
+    {
+      "segment_id": "782c902a",
+      "source_content": "### Console",
+      "source_content_hash": "6a39ef2fa8d1d82057caab0893082e857e87d54eeee0364e4dd163645458cf57",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 主控台"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "![A series of logs React Native DevTools Sources view, alongside a device](/docs/assets/debugging-rndt-console.jpg)",
+      "source_content_hash": "44dd36951002254e04f1e5e69144d975c3aa4464571485b03facddbd1b39b45f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React Native DevTools 原始碼視圖中的日誌序列與裝置並列顯示](/docs/assets/debugging-rndt-console.jpg)"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "The Console panel allows you to view and filter messages, evaluate JavaScript, inspect object properties, and more.",
+      "source_content_hash": "c60bc265df19ce7ef0bcdd5f4c09afc506d894d2bff9baf1a4a2456a51f9ae23",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "主控台面板可檢視/過濾訊息、執行 JavaScript、檢查物件屬性等。"
+      }
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "[Console features reference | Chrome DevTools](https://developer.chrome.com/docs/devtools/console/reference)",
+      "source_content_hash": "bd1a16a3044d14a33507df24f434325a934d1ddfb5e5a90aa85734f6656e94dc",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[主控台功能參考 | Chrome DevTools](https://developer.chrome.com/docs/devtools/console/reference)"
+      }
+    },
+    {
+      "segment_id": "c674e260",
+      "source_content": "#### Useful tips",
+      "source_content_hash": "11717e7b2bdf381e4c91b04e468b7c6bf6d0c48f9c7be8f86d40ef6485ab4d27",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 實用技巧"
+      }
+    },
+    {
+      "segment_id": "40251870",
+      "source_content": "- If your app has a lot of logs, use the filter box or change the log levels that are shown.\n- Watch values over time with [Live Expressions](https://developer.chrome.com/docs/devtools/console/live-expressions).\n- Persist messages across reloads with [Preserve Logs](https://developer.chrome.com/docs/devtools/console/reference#persist).\n- Use <kbd>Ctrl</kbd> + <kbd>L</kbd> to clear the console view.",
+      "source_content_hash": "aa2d5b3ddd2d55dc3cbbbaa439481fb89490faa7bf0952df09861094741bfe36",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 若應用日誌過多，請使用過濾框或調整顯示的日誌層級\n- 透過[即時運算式](https://developer.chrome.com/docs/devtools/console/live-expressions)持續監控數值變化\n- 使用[保留日誌](https://developer.chrome.com/docs/devtools/console/reference#persist)功能在重新載入時保持訊息\n- 快捷鍵 <kbd>Ctrl</kbd> + <kbd>L</kbd> 可清除主控台視圖"
+      }
+    },
+    {
+      "segment_id": "af52d59d",
+      "source_content": "### Sources & breakpoints",
+      "source_content_hash": "c4ef2af3b93feb829a123ddc8c11035ff8a70156c9cb9f96e2b72eaf342ae11c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 原始碼與中斷點"
+      }
+    },
+    {
+      "segment_id": "4d52a261",
+      "source_content": "![A paused breakpoint in the React Native DevTools Sources view, alongside a device](/docs/assets/debugging-rndt-sources-paused-with-device.jpg)",
+      "source_content_hash": "764e2c76a482bc7d86914383b899cfd92efbf0fd7557aea3575c74149d60d7be",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![React Native DevTools 原始碼視圖中暫停的中斷點與裝置並列顯示](/docs/assets/debugging-rndt-sources-paused-with-device.jpg)"
+      }
+    },
+    {
+      "segment_id": "23dfb152",
+      "source_content": "The Sources panel allows you to view the source files in your app and register breakpoints. Use a breakpoint to define a line of code where your app should pause — allowing you to inspect the live state of the program and incrementally step through code.",
+      "source_content_hash": "0a8397741001fe88cd5a872e73bea38302a98ebe0df29a9d20436472f48f2d6b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原始碼面板可檢視應用原始檔並設置中斷點。中斷點能指定程式暫停執行的程式碼行，讓您檢查即時狀態並逐步執行。"
+      }
+    },
+    {
+      "segment_id": "1131ef75",
+      "source_content": "[Pause your code with breakpoints | Chrome DevTools](https://developer.chrome.com/docs/devtools/javascript/breakpoints)",
+      "source_content_hash": "78b4ed4a090f8cb1ea9dfa40904f80065f19c037b11532ea51f947b6be1809e9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[使用中斷點暫停程式碼 | Chrome DevTools](https://developer.chrome.com/docs/devtools/javascript/breakpoints)"
+      }
+    },
+    {
+      "segment_id": "3a4225d7",
+      "source_content": ":::tip\n\n#### Mini-guide\n\nBreakpoints are a fundamental tool in your debugging toolkit!\n\n1. Navigate to a source file using the sidebar or <kbd>Cmd ⌘</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd>.\n2. Click in the line number column next to a line of code to add a breakpoint.\n3. Use the navigation controls at the top right to [step through code](https://developer.chrome.com/docs/devtools/javascript/reference#stepping) when paused.\n\n:::",
+      "source_content_hash": "e21460a43d4b006f497c3e49253751e23a78839461d79282fee0682299542c85",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n\n#### 迷你指南\n\n中斷點是除錯工具的核心！\n\n1. 透過側邊欄或快捷鍵 <kbd>Cmd ⌘</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd> 導覽至原始檔\n2. 點擊程式碼行號旁的行號欄設置中斷點\n3. 暫停時使用右上角導覽控制[逐步執行](https://developer.chrome.com/docs/devtools/javascript/reference#stepping)\n\n:::"
+      }
+    },
+    {
+      "segment_id": "b1cbdb65",
+      "source_content": "#### Useful tips",
+      "source_content_hash": "11717e7b2bdf381e4c91b04e468b7c6bf6d0c48f9c7be8f86d40ef6485ab4d27",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 實用技巧"
+      }
+    },
+    {
+      "segment_id": "caffd879",
+      "source_content": "- A \"Paused in Debugger\" overlay will appear when your app is paused. Tap it to resume.\n- Pay attention to the right hand side panels when on a breakpoint, which allow you to inspect the current scope and call stack, and set watch expressions.\n- Use a `debugger;` statement to quickly set a breakpoint from your text editor. This will reach the device immediately via Fast Refresh.\n- There are multiple kinds of breakpoints! For example, [Conditional Breakpoints and Logpoints](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview).",
+      "source_content_hash": "30d8b80e64d3814517061c349b26627d7d0ed4a2b2601cc7c8d8346c0719ba03",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 程式暫停時會顯示「除錯器中暫停」疊層，點擊即可繼續\n- 中斷點時注意右側面板，可檢查當前作用域、呼叫堆疊及設置監控運算式\n- 使用 `debugger;` 語句快速從編輯器設置中斷點，透過快速重新整理立即生效\n- 中斷點有多種類型！例如[條件中斷點與日誌點](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview)"
+      }
+    },
+    {
+      "segment_id": "8a9b6c26",
+      "source_content": "### Memory",
+      "source_content_hash": "9f45f92daa911bb246ba6b728e704413030a5f00d239e7a94637245ce72ac10c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 記憶體"
+      }
+    },
+    {
+      "segment_id": "a1fa5396",
+      "source_content": "![Inspecting a heap snapshot in the Memory panel](/docs/assets/debugging-rndt-memory.jpg)",
+      "source_content_hash": "6dafb4b99345cf791b07da9f36ca83c010a79f8f845f84e3f8e111e8c68672ea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![在記憶體面板檢查堆快照](/docs/assets/debugging-rndt-memory.jpg)"
+      }
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "The Memory panel allows you to take a heap snapshot and view the memory usage of your JavaScript code over time.",
+      "source_content_hash": "ead33c451036f15545685ca33af33486c2bf1e51886610a2403c932ac4cf8078",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "記憶體面板可擷取堆快照，檢視 JavaScript 程式碼隨時間變化的記憶體使用狀況。"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "[Record heap snapshots | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)",
+      "source_content_hash": "8ba00582cdcd43ca53ddbbb6a8e83bf9feffbd922d702abb30b90ca276beb820",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[記錄堆快照 | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)"
+      }
+    },
+    {
+      "segment_id": "90d35b51",
+      "source_content": "#### Useful tips",
+      "source_content_hash": "11717e7b2bdf381e4c91b04e468b7c6bf6d0c48f9c7be8f86d40ef6485ab4d27",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 實用技巧"
+      }
+    },
+    {
+      "segment_id": "2fc7ec55",
+      "source_content": "- Use <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> to filter for specific objects in the heap.\n- Taking an [allocation timeline report](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler) can be useful to see memory usage over time as a graph, to identify possible memory leaks.",
+      "source_content_hash": "16f782ed23a1d200cb6c8abc6927ff21b8e74a297ef32604f3f0a9f0d9684369",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 使用 <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> 在堆積中篩選特定物件。\n- 建立[記憶體分配時間軸報告](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler)有助於以圖表形式觀察記憶體使用隨時間變化，識別可能的記憶體洩漏。"
+      }
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "## React DevTools features",
+      "source_content_hash": "6c8cea9298d9f02caa47930566011e49bae444c5dd3d5634da807fcc9a33b991",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## React DevTools 功能"
+      }
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "In the integrated Components and Profiler panels, you'll find all the features of the [React DevTools](https://react.dev/learn/react-developer-tools) browser extension. These work seamlessly in React Native DevTools.",
+      "source_content_hash": "c1702e4bcbfcb88e0f6fc40b83c5fa4302de68691330f048ae9653f6ccfb8899",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在整合的「元件」與「效能分析器」面板中，您可找到[React DevTools](https://react.dev/learn/react-developer-tools)瀏覽器擴充功能的所有功能。這些功能在 React Native DevTools 中能無縫運作。"
+      }
+    },
+    {
+      "segment_id": "e06c002e",
+      "source_content": "### React Components",
+      "source_content_hash": "ab47cf7b5fcaf32469970fdc5f46cc36152ab0ab236cdf6667e547ab7e175787",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### React 元件"
+      }
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "![Selecting and locating elements using the React Components panel](/docs/assets/debugging-rndt-react-components.gif)",
+      "source_content_hash": "7f91b19635665fe2e01d75d76dec2d2cd3adec32fef3c089381cf78ef2fda1b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![使用 React 元件面板選取與定位元素](/docs/assets/debugging-rndt-react-components.gif)"
+      }
+    },
+    {
+      "segment_id": "d79a4831",
+      "source_content": "The React Components panel allows you to inspect and update the rendered React component tree.",
+      "source_content_hash": "808ca4378ca5d0a0c0d792aef87b71c877f5543f496e49f99cb84771f1f9e123",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React 元件面板讓您能檢查並更新渲染的 React 元件樹。"
+      }
+    },
+    {
+      "segment_id": "dea0598f",
+      "source_content": "- Hover or select an element in DevTools to highlight it on device.\n- To locate an element in DevTools, click the top-left \"Select element\" button, then tap any element in the app.",
+      "source_content_hash": "ae286e5c61f6ce925774ec8ac2cd9b1a013392f48c6ef046cddb9960a3c23325",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在 DevTools 中懸停或選取元素，即可在裝置上高亮顯示該元素。\n- 若要在 DevTools 中定位元素，點擊左上角的「選取元素」按鈕，然後點擊應用中的任意元素。"
+      }
+    },
+    {
+      "segment_id": "1f4b3b94",
+      "source_content": "#### Useful tips",
+      "source_content_hash": "11717e7b2bdf381e4c91b04e468b7c6bf6d0c48f9c7be8f86d40ef6485ab4d27",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "#### 實用技巧"
+      }
+    },
+    {
+      "segment_id": "2270deb6",
+      "source_content": "- Props and state on a component can be viewed and modified at runtime using the right hand panel.\n- Components optimized with [React Compiler](https://react.dev/learn/react-compiler) will be annotated with a \"Memo ✨\" badge.",
+      "source_content_hash": "03bfcfb48e73f924dbebaeef51d4180cd44bbc5c2649b0afe00254ff67830e43",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 可透過右側面板查看並修改元件運行時的 props 與 state。\n- 使用 [React Compiler](https://react.dev/learn/react-compiler) 優化的元件會標註「Memo ✨」徽章。"
+      }
+    },
+    {
+      "segment_id": "95f2feab",
+      "source_content": ":::tip\n\n#### Protip: Highlight re-renders\n\nRe-renders can be a significant contributor to performance issues in React apps. DevTools can highlight component re-renders as they happen.\n\n- To enable, click the View Settings (`⚙︎`) icon and check \"Highlight updates when components render\".\n\n![Location of the \"highlight updates\" setting, next to a recording of the live render overlay](/docs/assets/debugging-rndt-highlight-renders.gif)\n\n:::",
+      "source_content_hash": "fac4ab204f69696086eef7272afef4c0d877a7e190900e3695f2ec09c1f40629",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::tip\n\n#### 專業技巧：高亮重新渲染\n\n重新渲染可能是 React 應用效能問題的主要成因。DevTools 能在元件重新渲染時高亮顯示。\n\n- 啟用方式：點擊檢視設定圖標（`⚙︎`）並勾選「元件渲染時高亮更新」。\n\n![「高亮更新」設定位置，旁邊是即時渲染疊加層的錄製畫面](/docs/assets/debugging-rndt-highlight-renders.gif)\n\n:::"
+      }
+    },
+    {
+      "segment_id": "ed644f52",
+      "source_content": "### React Profiler",
+      "source_content_hash": "240af119acf7d70628a4e8765c8d2ae3143eabdf005e3805b20304ea3759b166",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### React 效能分析器"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "![A profile rendered as a flame graph](/docs/assets/debugging-rndt-react-profiler.jpg)",
+      "source_content_hash": "9d5bb5bfd875b67ef54b795daa0911e7b8914bebaaef50d624b98a1ccc2fa5e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![以火焰圖形式呈現的效能分析結果](/docs/assets/debugging-rndt-react-profiler.jpg)"
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "The React Profiler panel allows you to record performance profiles to understand the timing of component renders and React commits.",
+      "source_content_hash": "b05e68787e6b2ebf0104d93018d4971499c263ee06b3fa0a92c380d9ca709edd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React 效能分析器面板讓您能錄製效能分析檔案，了解元件渲染與 React 提交階段的時間分佈。"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "For more info, see the [original 2018 guide](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data) (note that parts of this may be outdated).",
+      "source_content_hash": "949243ae8cce818ba79e0cdeeb1d89fd493397b381cf4f64719c5f2b74e374f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多資訊請參閱[2018年原始指南](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data)（請注意部分內容可能已過時）。"
+      }
+    },
+    {
+      "segment_id": "c766290e",
+      "source_content": "## Reconnecting DevTools",
+      "source_content_hash": "87142e18fa998af980711ca9bec5ae21d6bf253e5499331e9ff26ef138ec0ffb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 重新連接 DevTools"
+      }
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "Occasionally, DevTools might disconnect from the target device. This can happen if:",
+      "source_content_hash": "f1f03f7aeb48ea939f967384d5d375588d31a13b944dfb19e318d3917bcf6c45",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時 DevTools 可能會與目標裝置斷開連接。可能原因包括："
+      }
+    },
+    {
+      "segment_id": "ecba4df2",
+      "source_content": "- The app is closed.\n- The app is rebuilt (a new native build is installed).\n- The app has crashed on the native side.\n- The dev server (Metro) is quit.\n- A physical device is disconnected.",
+      "source_content_hash": "97d68c29ae5d71d64fbd32669eeca585cccd34b1a19fa8f6704f61acb7145854",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 應用程式關閉。\n- 應用程式重新建置（安裝了新的原生建置版本）。\n- 應用程式在原生端崩潰。\n- 開發伺服器（Metro）停止運行。\n- 實體裝置斷開連接。"
+      }
+    },
+    {
+      "segment_id": "8664ed0b",
+      "source_content": "On disconnect, a dialog will be shown with the message \"Debugging connection was closed\".",
+      "source_content_hash": "1547177caf56649c0bec9c54e411d8239649da3ccf00ca64bf10fd548b313a5e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "斷開連接時，會顯示「偵錯連線已關閉」的對話框。"
+      }
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "![A reconnect dialog shown when a device is disconnected](/docs/assets/debugging-reconnect-menu.jpg)",
+      "source_content_hash": "aa287e00da7e2ae301f6862b8bde857dae85d87573882cc0b194a395c416b1d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![裝置斷開連接時顯示的重新連接對話框](/docs/assets/debugging-reconnect-menu.jpg)"
+      }
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "From here, you can either:",
+      "source_content_hash": "21a088d0de8a50729b72470a4f7fe311c26c3e3b0309d698aaf90b9584c7c462",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時您可以選擇："
+      }
+    },
+    {
+      "segment_id": "739843fe",
+      "source_content": "- **Dismiss**: Select the close (`×`) icon or click outside the dialog to return to the DevTools UI in the last state before disconnection.\n- **Reconnect**: Select \"Reconnect DevTools\", having addressed the reason for disconnection.",
+      "source_content_hash": "de6c663a6fa5e3569a6e4772735060f73bd6427348088231003e8cc952e4f395",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **關閉**：點擊關閉圖標（`×`）或對話框外部，返回斷開連接前的最後狀態。\n- **重新連接**：選擇「重新連接 DevTools」，並已解決斷開連接的原因。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/current/react-native-devtools.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.199344+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "8b63788a0b7b02581baab3daf0475da316b000188d0a7e8252099f1fb48b3236"
+  }
+}

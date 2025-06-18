@@ -1,0 +1,122 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.78/the-new-architecture/direct-manipulation.md",
+  "source_file_content_hash": "2822d9d96cc14e0f4a1297ffaeab860e974e4e412677a8db79e2ad62445094bf",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: direct-manipulation-new-architecture\ntitle: Direct Manipulation\n---",
+      "source_content_hash": "b19ac3e732d684a0dc1c6e50d848e010b3c2805dc8d485204bb5efe334177d6c",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4d1292be"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "It is sometimes necessary to make changes directly to a component without using state/props to trigger a re-render of the entire subtree. When using React in the browser for example, you sometimes need to directly modify a DOM node, and the same is true for views in mobile apps. `setNativeProps` is the React Native equivalent to setting properties directly on a DOM node.",
+      "source_content_hash": "577faaa9a3f6d1f05309f1a294fc6850d7e9a8221360cdcef69842c1a0adb4f0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時需要直接修改元件而不透過 state/props 觸發整個子樹重新渲染。例如在瀏覽器中使用 React 時，您可能需要直接操作 DOM 節點，這同樣適用於行動應用中的視圖。`setNativeProps` 就是 React Native 中相當於直接設置 DOM 節點屬性的方法。"
+      }
+    },
+    {
+      "segment_id": "6cae1da3",
+      "source_content": ":::caution\nUse `setNativeProps` when frequent re-rendering creates a performance bottleneck!\n\nDirect manipulation will not be a tool that you reach for frequently. You will typically only be using it for creating continuous animations to avoid the overhead of rendering the component hierarchy and reconciling many views.\n`setNativeProps` is imperative and stores state in the native layer (DOM, UIView, etc.) and not within your React components, which makes your code more difficult to reason about.\n\nBefore you use it, try to solve your problem with `setState` and [`shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#shouldcomponentupdate-in-action).\n:::",
+      "source_content_hash": "57531cddea9c1882bfe115d78d3ad61fd7387899cfbdeebe2d1aaf9d832bd5e6",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::caution\n請在頻繁重新渲染導致效能瓶頸時使用 `setNativeProps`！\n\n直接操作不應是您經常使用的工具。通常僅在創建連續動畫以避免渲染元件層級和協調多個視圖的開銷時使用。\n`setNativeProps` 是命令式的，它將狀態儲存在原生層（DOM、UIView 等）而非您的 React 元件中，這會使您的程式碼更難追蹤。\n\n在使用前，請先嘗試用 `setState` 和 [`shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#shouldcomponentupdate-in-action) 解決問題。\n:::"
+      }
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "## setNativeProps to edit TextInput value",
+      "source_content_hash": "a6ecb0bf6b078449562269350493d598fe80994e8847b5d630206c1bc565e81e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 setNativeProps 編輯 TextInput 值"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "Another very common use case of `setNativeProps` is to edit the value of the TextInput. The `controlled` prop of TextInput can sometimes drop characters when the `bufferDelay` is low and the user types very quickly. Some developers prefer to skip this prop entirely and instead use `setNativeProps` to directly manipulate the TextInput value when necessary.",
+      "source_content_hash": "33146c87f354e31c08464f553b7424e09ec19819db117c2bd0417c992fe79995",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個常見的 `setNativeProps` 使用情境是編輯 TextInput 的值。當 `bufferDelay` 設得較低且用戶輸入速度極快時，TextInput 的 `controlled` 屬性有時會漏掉字元。部分開發者會選擇完全跳過這個屬性，改在必要時直接用 `setNativeProps` 操作 TextInput 的值。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "For example, the following code demonstrates editing the input when you tap a button:",
+      "source_content_hash": "ee3426efa13bb2be6c86c8dc236aaed3bff462641f2fd0ac2f1153f4a3afb32e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，以下程式碼示範點擊按鈕時編輯輸入框："
+      }
+    },
+    {
+      "segment_id": "0dc46dba",
+      "source_content": "<Tabs groupId=\"language\" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>\n<TabItem value=\"javascript\">\n\n```SnackPlayer name=setNativeProps%20on%20TextInput&ext=js\nimport React from 'react';\nimport {useCallback, useRef} from 'react';\nimport {\n  StyleSheet,\n  TextInput,\n  Text,\n  TouchableOpacity,\n  View,\n} from 'react-native';\n\nconst App = () => {\n  const inputRef = useRef(null);\n  const editText = useCallback(() => {\n    inputRef.current.setNativeProps({text: 'Edited Text'});\n  }, []);\n\n  return (\n    <View style={styles.container}>\n      <TextInput ref={inputRef} style={styles.input} />\n      <TouchableOpacity onPress={editText}>\n        <Text>Edit text</Text>\n      </TouchableOpacity>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  input: {\n    height: 50,\n    width: 200,\n    marginHorizontal: 20,\n    borderWidth: 1,\n    borderColor: '#ccc',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"typescript\">\n\n```SnackPlayer name=Clear%20text&ext=tsx\nimport React from 'react';\nimport {useCallback, useRef} from 'react';\nimport {\n  StyleSheet,\n  TextInput,\n  Text,\n  TouchableOpacity,\n  View,\n} from 'react-native';\n\nconst App = () => {\n  const inputRef = useRef<TextInput>(null);\n  const editText = useCallback(() => {\n    inputRef.current?.setNativeProps({text: 'Edited Text'});\n  }, []);\n\n  return (\n    <View style={styles.container}>\n      <TextInput ref={inputRef} style={styles.input} />\n      <TouchableOpacity onPress={editText}>\n        <Text>Edit text</Text>\n      </TouchableOpacity>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n  input: {\n    height: 50,\n    width: 200,\n    marginHorizontal: 20,\n    borderWidth: 1,\n    borderColor: '#ccc',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "e58d41ad6352d31db319586c864d18296eabea454cc11fd54fe4b5c04c1cfa50",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_0dc46dba"
+      }
+    },
+    {
+      "segment_id": "f38d1cb0",
+      "source_content": "You can use the [`clear`](../textinput#clear) method to clear the `TextInput` which clears the current input text using the same approach.",
+      "source_content_hash": "f135d9b038987cd5d69cf63ec74bf863181c4d8bdfe8820e7dd893fd4acbd614",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以使用 [`clear`](../textinput#clear) 方法來清空 `TextInput`，該方法採用相同途徑清除當前輸入文字。"
+      }
+    },
+    {
+      "segment_id": "47516512",
+      "source_content": "## Avoiding conflicts with the render function",
+      "source_content_hash": "4b1062a450ccdab28a3d40906335dede03ed3a455504ef9a41d39e7008de550e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 避免與渲染函數衝突"
+      }
+    },
+    {
+      "segment_id": "6fc234cf",
+      "source_content": "If you update a property that is also managed by the render function, you might end up with some unpredictable and confusing bugs because anytime the component re-renders and that property changes, whatever value was previously set from `setNativeProps` will be completely ignored and overridden.",
+      "source_content_hash": "948e74227a9a95bf9f8a7692aee2183766ac79f362026ec2ce76f16b25ab499a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您更新的屬性同時被渲染函數管理，可能會導致不可預測且難以排查的錯誤，因為每當元件重新渲染且該屬性變更時，先前透過 `setNativeProps` 設置的值將被完全忽略並覆寫。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.78/the-new-architecture/direct-manipulation.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.903246+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "2822d9d96cc14e0f4a1297ffaeab860e974e4e412677a8db79e2ad62445094bf"
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.71/handling-touches.md",
+  "source_file_content_hash": "939a5cb47036d4ad12719fe488bafd7c4ee5d6da8752077599bc594139fdea44",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: handling-touches\ntitle: Handling Touches\n---",
+      "source_content_hash": "2496ba1c91057ade93f2181297b43bc1d1c4f1096a7ae9c334ae13073d2b43e8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Users interact with mobile apps mainly through touch. They can use a combination of gestures, such as tapping on a button, scrolling a list, or zooming on a map. React Native provides components to handle all sorts of common gestures, as well as a comprehensive [gesture responder system](gesture-responder-system.md) to allow for more advanced gesture recognition, but the one component you will most likely be interested in is the basic Button.",
+      "source_content_hash": "e06175913458c95f435586487f9c50f5b545b803fac17354ab78292d3c8bebb3",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用者主要透過觸控與行動應用程式互動。他們可以組合多種手勢操作，例如點擊按鈕、滾動列表或縮放地圖。React Native 提供了處理各種常見手勢的元件，以及一套完整的[手勢回應系統](gesture-responder-system.md)來實現進階手勢識別功能，但開發者最常使用的基礎元件仍是按鈕(Button)。"
+      }
+    },
+    {
+      "segment_id": "cc3c868d",
+      "source_content": "## Displaying a basic button",
+      "source_content_hash": "d329f4898da20748e6f1af03a8866dc888bfb550b548be24645b860eede04b4f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 顯示基礎按鈕"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "[Button](button.md) provides a basic button component that is rendered nicely on all platforms. The minimal example to display a button looks like this:",
+      "source_content_hash": "5aee6156252056ff1ac90d75a9627726a8b8c25b052de9092a06c14814e37cc9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "[按鈕元件](button.md)提供了能在所有平台完美渲染的基礎按鈕。最簡範例如下："
+      }
+    },
+    {
+      "segment_id": "ee201347",
+      "source_content": "```tsx\n<Button\n  onPress={() => {\n    console.log('You tapped the button!');\n  }}\n  title=\"Press Me\"\n/>\n```",
+      "source_content_hash": "6630bcc1e65ddf435811a93dce0aa85b69a9a455902f9ae85a6db1a1590c4ba2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ee201347"
+      }
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "This will render a blue label on iOS, and a blue rounded rectangle with light text on Android. Pressing the button will call the \"onPress\" function, which in this case displays an alert popup. If you like, you can specify a \"color\" prop to change the color of your button.",
+      "source_content_hash": "133a86a10d843c86d97c8367a0725b495b668dfb7bac98539c86c3c110ae7b2e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在iOS上會渲染藍色文字標籤，在Android上則會顯示藍色圓角矩形與淺色文字。點擊按鈕將觸發\"onPress\"函數，本例中會顯示警示彈窗。您可透過\"color\"屬性來自訂按鈕顏色。"
+      }
+    },
+    {
+      "segment_id": "2fdadb08",
+      "source_content": "![](/docs/assets/Button.png)",
+      "source_content_hash": "f28c7264653ac159418ea07d292587afaeb2ce5125bb1100081587cd64bf0638",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![](/docs/assets/Button.png)"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "Go ahead and play around with the `Button` component using the example below. You can select which platform your app is previewed in by clicking on the toggle in the bottom right and then clicking on \"Tap to Play\" to preview the app.",
+      "source_content_hash": "94075238c90194b1718ce00641af61fbaffe40cb16ef6caaf61f10097fe384ee",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可透過下方範例實際操作按鈕元件。點擊右下角切換鈕選擇預覽平台，再點擊\"Tap to Play\"即可預覽應用效果。"
+      }
+    },
+    {
+      "segment_id": "08021a08",
+      "source_content": "```SnackPlayer name=Button%20Basics\nimport React, {Component} from 'react';\nimport {Alert, Button, StyleSheet, View} from 'react-native';\n\nexport default class ButtonBasics extends Component {\n  _onPressButton() {\n    Alert.alert('You tapped the button!');\n  }\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <View style={styles.buttonContainer}>\n          <Button onPress={this._onPressButton} title=\"Press Me\" />\n        </View>\n        <View style={styles.buttonContainer}>\n          <Button\n            onPress={this._onPressButton}\n            title=\"Press Me\"\n            color=\"#841584\"\n          />\n        </View>\n        <View style={styles.alternativeLayoutButtonContainer}>\n          <Button onPress={this._onPressButton} title=\"This looks great!\" />\n          <Button onPress={this._onPressButton} title=\"OK!\" color=\"#841584\" />\n        </View>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n  buttonContainer: {\n    margin: 20,\n  },\n  alternativeLayoutButtonContainer: {\n    margin: 20,\n    flexDirection: 'row',\n    justifyContent: 'space-between',\n  },\n});\n```",
+      "source_content_hash": "4f6ae86c5660a54fd738faf242aa5277b09ae1b47d5e204d680c25dcd2008366",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_08021a08"
+      }
+    },
+    {
+      "segment_id": "daed5acb",
+      "source_content": "## Touchables",
+      "source_content_hash": "24c5bf05d711121513d9795f2d80b7662bcc97eaa1118f58bdeae1701eef4d31",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 可觸控元件"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "If the basic button doesn't look right for your app, you can build your own button using any of the \"Touchable\" components provided by React Native. These components provide the capability to capture tapping gestures and can display feedback when a gesture is recognized. However, these components do not provide any default styling, so you will need to do a bit of work to get them looking nice in your app.",
+      "source_content_hash": "cc94b15520e14344a89e74114063faae9db480cf42af2d9bd46bd9fe9caeeea9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若基礎按鈕不符合您的應用風格，可以使用React Native提供的各種\"Touchable\"觸控元件來自訂按鈕。這些元件能捕捉點擊手勢並在識別時提供視覺回饋，但需自行設計樣式。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Which \"Touchable\" component you use will depend on what kind of feedback you want to provide:",
+      "source_content_hash": "6834d6c046bd7a19ff7af4bcac12ad554d533894fa3e5643ffabd23c774b68f4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "根據所需回饋效果選擇適當元件："
+      }
+    },
+    {
+      "segment_id": "ca1573da",
+      "source_content": "- Generally, you can use [**TouchableHighlight**](touchablehighlight.md) anywhere you would use a button or link on web. The view's background will be darkened when the user presses down on the button.\n\n- You may consider using [**TouchableNativeFeedback**](touchablenativefeedback.md) on Android to display ink surface reaction ripples that respond to the user's touch.\n\n- [**TouchableOpacity**](touchableopacity.md) can be used to provide feedback by reducing the opacity of the button, allowing the background to be seen through while the user is pressing down.\n\n- If you need to handle a tap gesture but you don't want any feedback to be displayed, use [**TouchableWithoutFeedback**](touchablewithoutfeedback.md).",
+      "source_content_hash": "4b4972c877001c80e3535876ab0f72afcb321a971979775c15b6934724422441",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 通用場景可使用[**可觸控高亮**](touchablehighlight.md)，類似網頁按鈕/連結，按壓時會加深背景色\n- Android平台建議使用[**原生觸控回饋**](touchablenativefeedback.md)呈現材質設計的波紋效果\n- [**可觸控透明度**](touchableopacity.md)透過降低透明度顯示背景，提供按壓反饋\n- 若需處理點擊事件但不需要視覺回饋，請使用[**無反饋觸控**](touchablewithoutfeedback.md)"
+      }
+    },
+    {
+      "segment_id": "2547a6bb",
+      "source_content": "In some cases, you may want to detect when a user presses and holds a view for a set amount of time. These long presses can be handled by passing a function to the `onLongPress` props of any of the \"Touchable\" components.",
+      "source_content_hash": "262e60404b5f4af084478210bf0952e674da5ed84dd1c87f3713068e862b287e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "某些情境需偵測長按手勢，所有\"Touchable\"元件都支援透過`onLongPress`屬性處理長按事件。"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "Let's see all of these in action:",
+      "source_content_hash": "e6c2dcd4150c1f60fb490ef58671b4b6fcd9bd5d29b03e2ed4561db2c2d78ad5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "實際操作範例："
+      }
+    },
+    {
+      "segment_id": "f8065412",
+      "source_content": "```SnackPlayer name=Touchables\nimport React, {Component} from 'react';\nimport {\n  Alert,\n  Platform,\n  StyleSheet,\n  Text,\n  TouchableHighlight,\n  TouchableOpacity,\n  TouchableNativeFeedback,\n  TouchableWithoutFeedback,\n  View,\n} from 'react-native';\n\nexport default class Touchables extends Component {\n  _onPressButton() {\n    Alert.alert('You tapped the button!');\n  }\n\n  _onLongPressButton() {\n    Alert.alert('You long-pressed the button!');\n  }\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <TouchableHighlight onPress={this._onPressButton} underlayColor=\"white\">\n          <View style={styles.button}>\n            <Text style={styles.buttonText}>TouchableHighlight</Text>\n          </View>\n        </TouchableHighlight>\n        <TouchableOpacity onPress={this._onPressButton}>\n          <View style={styles.button}>\n            <Text style={styles.buttonText}>TouchableOpacity</Text>\n          </View>\n        </TouchableOpacity>\n        <TouchableNativeFeedback\n          onPress={this._onPressButton}\n          background={\n            Platform.OS === 'android'\n              ? TouchableNativeFeedback.SelectableBackground()\n              : undefined\n          }>\n          <View style={styles.button}>\n            <Text style={styles.buttonText}>\n              TouchableNativeFeedback{' '}\n              {Platform.OS !== 'android' ? '(Android only)' : ''}\n            </Text>\n          </View>\n        </TouchableNativeFeedback>\n        <TouchableWithoutFeedback onPress={this._onPressButton}>\n          <View style={styles.button}>\n            <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>\n          </View>\n        </TouchableWithoutFeedback>\n        <TouchableHighlight\n          onPress={this._onPressButton}\n          onLongPress={this._onLongPressButton}\n          underlayColor=\"white\">\n          <View style={styles.button}>\n            <Text style={styles.buttonText}>Touchable with Long Press</Text>\n          </View>\n        </TouchableHighlight>\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    paddingTop: 60,\n    alignItems: 'center',\n  },\n  button: {\n    marginBottom: 30,\n    width: 260,\n    alignItems: 'center',\n    backgroundColor: '#2196F3',\n  },\n  buttonText: {\n    textAlign: 'center',\n    padding: 20,\n    color: 'white',\n  },\n});\n```",
+      "source_content_hash": "f246dbda4923e255c5efaa540ec57605d4693c484bf533b3d4ab34671fb31e82",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f8065412"
+      }
+    },
+    {
+      "segment_id": "a75f8411",
+      "source_content": "## Scrolling and swiping",
+      "source_content_hash": "8d216468d0839f045bcc1d54fd49441075db174250dc168b942618229c3a2920",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 滾動與滑動手勢"
+      }
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "Gestures commonly used on devices with touchable screens include swipes and pans. These allow the user to scroll through a list of items, or swipe through pages of content. For these, check out the [ScrollView](scrollview.md) Core Component.",
+      "source_content_hash": "d2ce9b54856783790cef4fea05c9c2337a747de87fb774b05928982d6ea8b405",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "觸控裝置常見的滑動手勢可用於滾動列表或切換頁面，請參考核心元件[滾動視圖](scrollview.md)。"
+      }
+    },
+    {
+      "segment_id": "8d279c43",
+      "source_content": "## Known issues",
+      "source_content_hash": "4cecb6da2e40cc04ae6e30cf3f1e7cbd0703e50078cb7c162c0ca14c29be5058",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 已知問題"
+      }
+    },
+    {
+      "segment_id": "b7b9c9f6",
+      "source_content": "- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162): The touch area never extends past the parent view bounds and on Android negative margin is not supported.",
+      "source_content_hash": "093142bd91b38fb106cbfab8e1ad4ab3233ec8d5dd51086c1443cd34bc63a22a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162)：觸控區域不會超出父視圖邊界，且Android不支援負邊距"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.71/handling-touches.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.486675+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "939a5cb47036d4ad12719fe488bafd7c4ee5d6da8752077599bc594139fdea44"
+  }
+}

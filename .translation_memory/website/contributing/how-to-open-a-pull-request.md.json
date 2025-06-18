@@ -1,0 +1,490 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "contributing/how-to-open-a-pull-request.md",
+  "source_file_content_hash": "999eccac89b0d6073260fcbac4671c1aa701328205e0c954fb85f622c671fa3e",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: How to Open a Pull Request\n---",
+      "source_content_hash": "1cb259eb7587cb68ff1f14f0f157044a940ed308a98b0f20ae4aa338ec753e7b",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "These instructions provide the step-by-step process to set up your machine to make contributions to the core React Native repository, and create your first pull request.",
+      "source_content_hash": "dec0c7f8fb40a5269c2c482ab1e4b1d804e304deb1f4780b649c1bd72036c2de",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a703643c",
+      "source_content": "## Prologue: Getting Ready",
+      "source_content_hash": "d141adf8dfbab2b44e041af13fb8bc4a45c0534b602d1e64628f606d6d975af1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "You will need a few tools and dependencies in order to build and develop for React Native. These are covered as part of the [Environment Setup](/docs/environment-setup) guide under the \"Building Projects with Native Code\" section.",
+      "source_content_hash": "a052665b5f456b05ff45f792edf70a65bf68c35830cadc1adb6da065bf7cb8ab",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "In order to accept your pull request, we need you to submit a [Contributor License Agreement (CLA)](/contributing/contribution-license-agreement). You only need to do this once to work on any of Meta's open source projects. It only takes a minute, so you can do it while you wait for your dependencies to install.",
+      "source_content_hash": "bb0e916991e2bee26cfe4fe534b5dff98088e497fdcb03c4d52117f2a30cce81",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Chapter I: Welcome to Open Source",
+      "source_content_hash": "2a67f6d5df9cc1e5397c6db3a09e2a10e54b108e7c7cba4acb0bad0f76211ea2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e14c9928",
+      "source_content": "### 1. Install `git`",
+      "source_content_hash": "12a4e09cc236264420e23f7f9b1eed0fd71f18210b9e6c05c1525209f72e2ebf",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "42ad8e83",
+      "source_content": "The React Native source code is hosted on GitHub. You can interact with the git version control through the `git` command line program. We recommend you follow [GitHub's instructions](https://help.github.com/articles/set-up-git/) to set up git on your machine.",
+      "source_content_hash": "76abf9576d38dc82d69396e5ae6c67f9fece579b6c3057c624feafcc765b954f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "aee0e40d",
+      "source_content": "### 2. Get the source code",
+      "source_content_hash": "990e9e12753274f0cafb4af437947ced44821ea71b9cb5d0d4f7bc8d87f2bd85",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f5f6d2ce",
+      "source_content": "While you can browse the source code for React Native on [GitHub](https://github.com/facebook/react-native), we recommend you set up a fork on your local machine.",
+      "source_content_hash": "88d59a8ff19aa0bfcfdb7ab136d07d8c3ccfd0cdea2a8e53216270b3cf9b03bd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1b8c1887",
+      "source_content": "1. Go to https://github.com/facebook/react-native.\n2. Click on \"Fork\" button on the upper right.\n3. When asked, select your username as the host for this fork.",
+      "source_content_hash": "84da152d9117c735fb132199c320b6f652b3c9ef3231879b067fd29d49d82fd3",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a76548f8",
+      "source_content": "You will now have a fork of React Native on GitHub at https://github.com/your_username/react-native. Next, you will grab a copy of the source code for your local machine. Open a shell and type the following commands:",
+      "source_content_hash": "cc6cc9355aada2d348895fd80b19e0f3351bf3abf468743f12de454114dd1e4f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0c911872",
+      "source_content": "```bash\ngit clone https://github.com/facebook/react-native.git\ncd react-native\ngit remote add fork https://github.com/your_username/react-native.git\n```",
+      "source_content_hash": "41c1498be183136d2816b51ba3c2846763f8d27ef3721c1d4fac37fdda55f4f0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "26b47687",
+      "source_content": ":::note\nIf the above seems new to you, do not be scared. You can access a shell through the Terminal application on macOS and Linux, or PowerShell on Windows.\n:::",
+      "source_content_hash": "92644756cfd04bb983f34d4f39c0ae864eefc0b26ee76a4e63cd530bb46d144f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "A new `react-native` directory will be created with the contents of the core React Native repository. This directory is actually a clone of the React Native git repository. It is set up with two remotes:",
+      "source_content_hash": "05d97d99c2ff94f59e51ec58f672eedbdd3ff827e5cd89c8e8e7a66d65fadc6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8a01ee7b",
+      "source_content": "- `origin` for the upstream https://github.com/facebook/react-native repository\n- `fork` for the fork of React Native on your own GitHub account.",
+      "source_content_hash": "262f81d4305ce3b223b0a28258543e1cdbfb4d9296be521b24ae3ee6baf0b485",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "54268405",
+      "source_content": "### 3. Create a branch",
+      "source_content_hash": "bc067317d66ba028b2233ea606601b46440857cf0765facd201062bf73291af0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8af76f3d",
+      "source_content": "We recommend creating a new branch in your fork to keep track of your changes:",
+      "source_content_hash": "80394fcc6de162bf9da6525676e6ef9d77706fca5c39ee29c1c9b634550b3104",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "48ec8149",
+      "source_content": "```bash\ngit checkout --branch my_feature_branch --track origin/main\n```",
+      "source_content_hash": "24e33ba9ec273d4d88fbdd715a9f13cf6bb6bc630865f1a74d45c69d13a083e2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "cb5b269c",
+      "source_content": "## Chapter II: Implementing your Changes",
+      "source_content_hash": "db2d0d5255a6479c85a997a55b4587d83c8b7f7710f29441fcba8113abbb3c5a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "60410af6",
+      "source_content": "### 1. Install dependencies",
+      "source_content_hash": "12304283e7ee5a53efdb372d2f2a580c4904e212b284b0821fdae95f603263a5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b9aaa519",
+      "source_content": "React Native is a JavaScript monorepo managed by [Yarn Workspaces (Yarn Classic)](https://classic.yarnpkg.com/lang/en/docs/workspaces/).",
+      "source_content_hash": "844655650f3932326ab470eb3e9f80898239ad5a3308b49b7e53cc9d6914d096",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "Run a project-level install:",
+      "source_content_hash": "7d538fa2d349b3485a3b5adbd025a1d9dc295df5c122b6fd612b4183fc7e977d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3c08ed05",
+      "source_content": "```sh\nyarn\n```",
+      "source_content_hash": "2ec25c1eaaf2f3b87e6dc4591ed3986cef16efb1e148ae12dbfd208709a29293",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "79ad944d",
+      "source_content": "You will also need to build the `react-native-codegen` package once:",
+      "source_content_hash": "e524993869cb6999629c3ed6cdc9a6fab74490253d43f46b3c18e3eed9fc5dc0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5d4925eb",
+      "source_content": "```sh\nyarn --cwd packages/react-native-codegen build\n```",
+      "source_content_hash": "3c179b9cdaf3590eea477fa060e52c16913a7fae0e8efb1ab93ddad2dff1bd3d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ee8401db",
+      "source_content": "### 2. Make changes to the code",
+      "source_content_hash": "95260aacaf2057117419eea24ba03eee7f91f6ee77eab99b03f9e1f58566559a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "147e8550",
+      "source_content": "You can now open the project using your code editor of choice. [Visual Studio Code](https://code.visualstudio.com/) is popular with JavaScript developers, and recommended if you are making general changes to React Native.",
+      "source_content_hash": "5db60bfb6b43e3a92e69d9eb368c80b5d2390a09f237cec5dca33c341ab08b67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "883231d4",
+      "source_content": "IDE project configurations:",
+      "source_content_hash": "5e58ea4857471133ea63449e0d703a500535650d03e36cdab31186e1f47199a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4fe53981",
+      "source_content": "- **VS Code**: Open the `react-native.code-workspace` file. This should open with extension recommendations, and configure the Flow Language Service and other editor settings correctly.\n- **Android Studio**: Open the repo root folder (containing the `.idea` config directory).\n- **Xcode**: Open `packages/rn-tester/RNTesterPods.xcworkspace`.",
+      "source_content_hash": "02fc69b39533e5fa7735c89b7a6622653bc609a51f32dc87c14267781391394c",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2fd0be2a",
+      "source_content": "### 3. Run your changes",
+      "source_content_hash": "3cf8603452e8a42cda45621a1adfe906ce6f85f4db8a8293ca5c74a2788f6e1c",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6270d577",
+      "source_content": "The package rn-tester can be used to run and validate your changes. You can learn more in [RNTester readme](https://github.com/facebook/react-native/blob/main/packages/rn-tester/README.md).",
+      "source_content_hash": "a7b02bb92128f81a7d4553ee9b3632921dabc3067f610114307f0f00d921591f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "### 4. Test your changes",
+      "source_content_hash": "797a607e59af02a26e781d99e8b08bf3e75bc8e3843e5e0a8b010030c9910c2d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "Make sure your changes are correct and do not introduce any test failures. You can learn more in [Running and Writing Tests](/contributing/how-to-run-and-write-tests).",
+      "source_content_hash": "bd5e8890ef4847071ace29265982bac20910fb7d617cdbaae5904e5ba86b031a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "### 5. Lint your code",
+      "source_content_hash": "56ca798b2cd2098e6120fa90ac7db53d12f2d7b277f6f88da0d387e59b32e1d4",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "We understand it can take a while to ramp up and get a sense of the style followed for each of the languages in use in the core React Native repository. Developers should not need to worry about minor nits, so whenever possible, we use tools that automate the process of rewriting your code to follow conventions.",
+      "source_content_hash": "48f7b36c5c55e08cd75bb0132bf4aa60f64a9799908a3a98020a882ae53aa730",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "For example, we use [Prettier](https://prettier.io/) to format our JavaScript code. This saves you time and energy as you can let Prettier fix up any formatting issues automatically through its editor integrations, or by manually running `yarn run prettier`.",
+      "source_content_hash": "bd20e583a1d11fe574de7913168027e19abdf7f60903e3b2408dbbc9a9df2f6b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "We also use a linter to catch styling issues that may exist in your code. You can check the status of your code styling by running `yarn run lint`.",
+      "source_content_hash": "cc41a27928528ad733c0f4fad7647cb2284577ec72213449e40d1ead315a2684",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "To learn more about coding conventions, refer to the [Coding Style guide](/contributing/how-to-contribute-code#coding-style).",
+      "source_content_hash": "e459590bd8aa110db1360e513c982ece0a417ac4aa7d7528132cb2fd03780b52",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f8edb6d2",
+      "source_content": "### 6. View your changes",
+      "source_content_hash": "d9385523b6746d871f986802009907e65a645b6eabeb779441f9d5c74e4e88b7",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "Many popular editors integrate with source control in some way. You can also use `git status` and `git diff` on the command line to keep track of what has changed.",
+      "source_content_hash": "52f84506565736b5ed851477263119452ae159fd2faa12d0b1d6e365d36ba979",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a138e327",
+      "source_content": "## Chapter III: Proposing your Changes",
+      "source_content_hash": "669feab5fbd2a53ba9bf7412b644e5126a13e9105f2cef2b060b79d3152d1e79",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "71169a2d",
+      "source_content": "### 1. Commit your changes",
+      "source_content_hash": "e0a6d1376bea7c263bfe31f381ecdaea1fea0fbca053940dca95b861ac6acd2d",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "Make sure to add your changes to version control using `git`:",
+      "source_content_hash": "6f876ee9d980033f4b9a8ef42ea081fc96f20239ffd77252fffa14e491424b82",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c4c0fc07",
+      "source_content": "```bash\ngit add <filename>\ngit commit -m <message>\n```",
+      "source_content_hash": "06dc1c6b0c67cff72e7fd0b72152dfcf2e775dc26ea270434218c96e35aa8942",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "6693c38c",
+      "source_content": "You can use a short descriptive sentence as your commit message.",
+      "source_content_hash": "5cfb473f03557eb49d99fccfeb21c590d641103efcd7cb914667fc525b25f882",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "da9f1cf7",
+      "source_content": ":::note\nWorried about writing good git commit messages? Do not fret. Later, when your pull request is merged, all your commits will be squashed into a single commit. It is your pull request description which will be used to populate the message for this squashed commit.\n:::",
+      "source_content_hash": "bf094b00056a99b9f1f4c569f8e94a35bb28b345375746bca77ae6abbe448f1d",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "This guide covers enough information to help you along with your first contribution. GitHub has several resources to help you get started with git:",
+      "source_content_hash": "0a844f12cf98512d4a2519eef1019779cb9c6a0cbe1387d085ea4bc6321f9ca4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "bcc700e8",
+      "source_content": "- [Using Git](https://help.github.com/en/categories/using-git)\n- [The GitHub Flow](https://guides.github.com/introduction/flow/)",
+      "source_content_hash": "7257350ced192e782c41b54fe194567b1a569a6371db7033d1dcd5399cd118cd",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "64d57278",
+      "source_content": "### 2. Push your changes to GitHub",
+      "source_content_hash": "0a680c18f5caa4f35c3cfa62fbdf7e2bfee6cd645f74d523c621e0dc2aee3c0f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5f82a1e9",
+      "source_content": "Once your changes have been commited to version control, you can push them to GitHub.",
+      "source_content_hash": "72cd4d3ed8c4f2133d02f90fc1a0b843250d076b3c3356a055d1de1b2b4bd633",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1ae0b80d",
+      "source_content": "```bash\ngit push fork <my_feature_branch>\n```",
+      "source_content_hash": "19124d28ace20b6edaf38f1edd24ca43bbb2aa8d004ae5e5fb10ecfe59075fc0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f45239ba",
+      "source_content": "If all goes well, you will see a message encouraging you to open a pull request:",
+      "source_content_hash": "1b253ddf7116d12f664c55208ffcd669d32660842a975c31d7c6e09dc2f9f7c5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "136818ce",
+      "source_content": "```\nremote:\nremote: Create a pull request for 'your_feature_branch' on GitHub by visiting:\nremote:      https://github.com/your_username/react-native/pull/new/your_feature_branch\nremote:\n```",
+      "source_content_hash": "9dad0449c7735931ae9a3410b619e2606c77101a4d3305f6a3daf13ae37382fd",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "Visit the provided URL to proceed to the next step.",
+      "source_content_hash": "ada204b5348bff65aff08857a496c65965df27a9d084f719af2c2c8cdc87b248",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "734d40d8",
+      "source_content": "### 3. Create your pull request",
+      "source_content_hash": "cfface1881f1a72ec1d3f05c5b759a39d282b3b098eee2ec64d57f83a712d477",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9e90a9b3",
+      "source_content": "You are almost there! The next step is to fill out the pull request. Use a descriptive title that is not too long. Then, make sure to fill out all of the fields provided by the default pull request template:",
+      "source_content_hash": "e5345605df47a6a7a8a418fa2b6dd9bf8ba413edf14835d4a1cdb1228997ec44",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d3939446",
+      "source_content": "- **Summary:** Use this field to provide your motivation for sending this pull request. What are you fixing?\n- **[Changelog](/contributing/changelogs-in-pull-requests):** Help release maintainers write release notes by providing a short description of what will be changed should the pull request get merged.\n- **Test Plan:** Let reviewers know how you tested your changes. Did you consider any edge cases? Which steps did you follow to make sure your changes have the desired effect? See [What is a Test Plan?](https://medium.com/@martinkonicek/what-is-a-test-plan-8bfc840ec171) to learn more.",
+      "source_content_hash": "734e988575d59ad550891c1ba1b42d01dadbdb4e4f6cfb55c9459d788468ee6b",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3cd8185f",
+      "source_content": "### 4. Review and address feedback",
+      "source_content_hash": "b06e7009adfcc3b4364be2996e771afa1658ac901b9c462da92bea80dac39811",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3e8f45da",
+      "source_content": "Keep an eye on any comments and review feedback left on your pull request on GitHub. Maintainers will do their best to provide constructive, actionable feedback to help get your changes ready to be merged into the core React Native repository.",
+      "source_content_hash": "4879a493eb8bd2eca36d90f3e61da4782793904a2bb738526b43d95ba9bab1bf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs-contributing/how-to-open-a-pull-request.md",
+  "last_updated_timestamp": "2025-06-18T17:57:14.896709+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

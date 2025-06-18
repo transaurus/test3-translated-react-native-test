@@ -1,0 +1,490 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/datepickerios.md",
+  "source_file_content_hash": "e11939e943e85b4e50e8ebf68f670ef02be2d843cbeb6827268c4d544a22f424",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: datepickerios\ntitle: '🚧 DatePickerIOS'\n---",
+      "source_content_hash": "1c8f9bf99d10026ac20c9b47e6696ccfb4060d9853def8a9e7348bc06a3ed360",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "0aed60180598135363f970d0b23d8d7665430a4b05f703a572a064dbbca30b07",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e7ec881c",
+      "source_content": "> **Deprecated.** Use one of the [community packages](https://reactnative.directory/?search=datepicker) instead.",
+      "source_content_hash": "78c98b0efad84c1a59f5b1bb902ab87516167f56491a3ac695686050623375e1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "Use `DatePickerIOS` to render a date/time picker (selector) on iOS. This is a controlled component, so you must hook in to the `onDateChange` callback and update the `date` prop in order for the component to update, otherwise the user's change will be reverted immediately to reflect `props.date` as the source of truth.",
+      "source_content_hash": "011b3690f5e6bdc6086fecbb2a1f7e3e88c25a511b3e042afc792f0b58d4da12",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9fcbdce9",
+      "source_content": "### Example",
+      "source_content_hash": "b9b5449b4e5cc2bf7390d309862a49a3dbf04030ec7257d36932125bd4e08256",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "899bc9b4",
+      "source_content": "<Tabs groupId=\"syntax\" queryString defaultValue={constants.defaultSyntax} values={constants.syntax}>\n<TabItem value=\"functional\">\n\n```SnackPlayer name=DatePickerIOS&supportedPlatforms=ios\nimport React, {useState} from 'react';\nimport {DatePickerIOS, View, StyleSheet} from 'react-native';\n\nconst App = () => {\n\n  const [chosenDate, setChosenDate] = useState(new Date());\n\n  return (\n    <View style={styles.container}>\n      <DatePickerIOS\n        date={chosenDate}\n        onDateChange={setChosenDate}\n      />\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n});\n\nexport default App;\n```\n\n</TabItem>\n<TabItem value=\"classical\">\n\n```SnackPlayer name=DatePickerIOS&supportedPlatforms=ios\nimport React, {Component} from 'react';\nimport {DatePickerIOS, View, StyleSheet} from 'react-native';\n\nexport default class App extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {chosenDate: new Date()};\n\n    this.setDate = this.setDate.bind(this);\n  }\n\n  setDate(newDate) {\n    this.setState({chosenDate: newDate});\n  }\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <DatePickerIOS\n          date={this.state.chosenDate}\n          onDateChange={this.setDate}\n        />\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n});\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "7520d8006392bd366731a3ee7c98089d3cc85d348d2bc798619baa9df8f9dc00",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "be625c00",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3a8d2b95",
+      "source_content": "# Reference",
+      "source_content_hash": "7f466000063da6e2b641eee17b52fffbcef1717169b55b58c4543dc0dc23ea11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "## Props",
+      "source_content_hash": "5b94a6cc928a22f2ff71078f7462cd97dbe259a0c4d1877ab3afc2a92dded915",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "Inherits [View Props](view.md#props).",
+      "source_content_hash": "92663e4e638bb7bf1f20b2b7e96351439d8233a54bc376d32894734371c149cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e33a2404",
+      "source_content": "### `date`",
+      "source_content_hash": "d93b35bfd7e0ea20107eafef5d3780042565d7fc13493d2113c7b5fed1c77438",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "82e90254",
+      "source_content": "The currently selected date.",
+      "source_content_hash": "89b9ab8bcae63b7519f32ff2391fae451441b93dc3c608ab989c0ad3cea5cda0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99ff7312",
+      "source_content": "| Type | Required |\n| ---- | -------- |\n| Date | Yes      |",
+      "source_content_hash": "04f60722fb407598e463a5e3ff94bbf292268fdd93da1a938f7a5f00f0fc3c94",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4c30a6aa",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "54bafb10",
+      "source_content": "### `onChange`",
+      "source_content_hash": "92a82b3aafe067a055cf8fef12dc8fa687f79be589007ce08daaa1fd1cbdbcc1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "Date change handler.",
+      "source_content_hash": "289d035f82c3c720ee808d437de064619d584a505e1b301c4d28b2dfc2490262",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "0e80209e",
+      "source_content": "This is called when the user changes the date or time in the UI. The first and only argument is an Event. For getting the date the picker was changed to, use onDateChange instead.",
+      "source_content_hash": "4050167754b887ccc1c22d263e9d98fbe1ddbdf4320ec1843cb919ccea26e004",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6206f46b",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | No       |",
+      "source_content_hash": "4b227dce485eb3acf2210e92dc43e6c17bfd9a8a426c263983afb55fd8ada437",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e55f4c1f",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "48155948",
+      "source_content": "### `onDateChange`",
+      "source_content_hash": "663f6556c5ce28e97cd6c9eb2c9d5c353aef7d07d925cc6afaba242edabb04f2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1958bc43",
+      "source_content": "Date change handler.",
+      "source_content_hash": "289d035f82c3c720ee808d437de064619d584a505e1b301c4d28b2dfc2490262",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a8610918",
+      "source_content": "This is called when the user changes the date or time in the UI. The first and only argument is a Date object representing the new date and time.",
+      "source_content_hash": "74c2898491670843b9cfc9e46ce67dcff0c161e2baf9fb46e90b9e99745fd4a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4fdeb798",
+      "source_content": "| Type     | Required |\n| -------- | -------- |\n| function | Yes      |",
+      "source_content_hash": "b8efdc3ebb570e54d65022bcfbe09d44d5d47f72768095186658c7adfe6706b4",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "18fa676c",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2bb63d77",
+      "source_content": "### `maximumDate`",
+      "source_content_hash": "53f67ef43a5c3e81cb4307c1119061c446f49649c49d88c8411ae3b14c3da94b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "Maximum date.",
+      "source_content_hash": "8bcd4ba133029d95fde9ba1de9102c9578a1196e83aecb14e66bafc75916f217",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "Restricts the range of possible date/time values.",
+      "source_content_hash": "2ebeba74a658218b9d3b27a358035f4ff3546b74225faf30423fcc20d1780e8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e0a862e3",
+      "source_content": "| Type | Required |\n| ---- | -------- |\n| Date | No       |",
+      "source_content_hash": "02330966ef5b7ce0f2c92e49f484a0a5f1bf6e42b3879006cca659c66b896490",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e77cf7c6",
+      "source_content": "Example with `maximumDate` set to December 31, 2017:",
+      "source_content_hash": "05bb80b67de48e113d219920b65b46a649faeab29d63eb6c878e75318519f3fd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "82025b2f",
+      "source_content": "<center><img src=\"/docs/assets/DatePickerIOS/maximumDate.gif\" width=\"360\"></img></center>",
+      "source_content_hash": "d5a338ad27edd78dd280a6f05f0041c01862ab2444814b3caf0eefb48868a3d7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "9f823c77",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "af843cee",
+      "source_content": "### `minimumDate`",
+      "source_content_hash": "d68fdbfed8a16cd896b2829ac4ee8d300beba6208461d70cd50354b06aa94c8a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "681ef526",
+      "source_content": "Minimum date.",
+      "source_content_hash": "9d824abd2f38361f5d1809946abbf8124276c0ecab0b54c855836800c5bca64e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "be17ccc3",
+      "source_content": "Restricts the range of possible date/time values.",
+      "source_content_hash": "2ebeba74a658218b9d3b27a358035f4ff3546b74225faf30423fcc20d1780e8e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5f541006",
+      "source_content": "| Type | Required |\n| ---- | -------- |\n| Date | No       |",
+      "source_content_hash": "02330966ef5b7ce0f2c92e49f484a0a5f1bf6e42b3879006cca659c66b896490",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4c787c52",
+      "source_content": "See [`maximumDate`](#maximumdate) for an example image.",
+      "source_content_hash": "8c5903ede859443dd9d314931d96740472fc72df3e1d2c5d44e2d65240cefc56",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c66a3543",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c6b2ca77",
+      "source_content": "### `minuteInterval`",
+      "source_content_hash": "17c353f4784be1b733729884b634087d91e915bc492656c6932cb1dafb078396",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dce16ab4",
+      "source_content": "The interval at which minutes can be selected.",
+      "source_content_hash": "6c1d28beb5d7398ef8e3dd28d4fa67b04c532f9c717258b6e61ada0f51a6d0a9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "03a09291",
+      "source_content": "| Type                                       | Required |\n| ------------------------------------------ | -------- |\n| enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30) | No       |",
+      "source_content_hash": "64c96971464a10487e415ca95a5dd849f9ec1d89d36e242d665c27ccbc6804ac",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "6b40e7a2",
+      "source_content": "Example with `minuteInterval` set to `10`:",
+      "source_content_hash": "e50fc8869b0f148ab087101aafae61662f472f13b9885bd33af5537474e06757",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "99b5b1ae",
+      "source_content": "<center><img src=\"/docs/assets/DatePickerIOS/minuteInterval.png\" width=\"360\"></img></center>",
+      "source_content_hash": "3fbefce01e859a6f9579d606deda90d08f89cecba42ccd73abc366a424bab1af",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d619fa73",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "6ffd1ebe",
+      "source_content": "### `mode`",
+      "source_content_hash": "e119c00249bb0d4cddef9324e35a218ff6cf0202830a870cc9193d5c4d65d709",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "The date picker mode.",
+      "source_content_hash": "ef9d0fa67cbd41717434ea1e7cf07667bece2a7d62d2ee433dad30e9cbf55847",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "41321865",
+      "source_content": "| Type                                          | Required |\n| --------------------------------------------- | -------- |\n| enum('date', 'time', 'datetime', 'countdown') | No       |",
+      "source_content_hash": "e74c08e801bcb8559c19876c46ab27f5ef878e939d82951166f276c3a08a1994",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "39c48ff7",
+      "source_content": "Example with `mode` set to `date`, `time`, and `datetime`: ![](/docs/assets/DatePickerIOS/mode.png)",
+      "source_content_hash": "cb814d290b4e9e826634cf72e53df9f9c35cbf13bd2509e8221373b7c3c0fdcb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "7b35e1b7",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "61282bab",
+      "source_content": "### `locale`",
+      "source_content_hash": "25800bfc129d42c93aa6a34b01da6ff0278b4a206a2b87a3a9ef38c0f26e5352",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "The locale for the date picker. Value needs to be a [Locale ID](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html).",
+      "source_content_hash": "afaa1cdc5dbe7ec3c333d37f9a2aca03543317a8ae346f45a76f7f5ccee57c5b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "24128ec4",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| String | No       |",
+      "source_content_hash": "4ea9aa02deceff7998bf61f7cb70761d83d30e7de8d6f73cc627081802f1e00d",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "dfdfd869",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c6d75762",
+      "source_content": "### `timeZoneOffsetInMinutes`",
+      "source_content_hash": "cca906935fdffc0b261bbc5828f580aec8d04eb2f011a57e011e581dec07b265",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c5e0bb3d",
+      "source_content": "Timezone offset in minutes.",
+      "source_content_hash": "361da538727bab877897875c203cf8191a66563a0bf58407ecc0eb926c6179a1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2c67ca5",
+      "source_content": "By default, the date picker will use the device's timezone. With this parameter, it is possible to force a certain timezone offset. For instance, to show times in Pacific Standard Time, pass -7 \\* 60.",
+      "source_content_hash": "7c16b100b6f643ab8b19e8c89c9a3517ae4647a3ef23a130cc23149ab435a71a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "18e9d1c5",
+      "source_content": "| Type   | Required |\n| ------ | -------- |\n| number | No       |",
+      "source_content_hash": "c8a5e6c9c0127030da37905d262418717a88cb12dd3260aac291a34077974ecb",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "06b779bf",
+      "source_content": "---",
+      "source_content_hash": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b",
+      "node_type": "thematicBreak",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "428f235a",
+      "source_content": "### `initialDate`",
+      "source_content_hash": "c99e5217c4887237121c345ced04a1c528b0aa09149e9b95da4b2d36f4802f7e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dad05c50",
+      "source_content": "Provides an initial value that will change when the user starts selecting a date. It is useful for use-cases where you do not want to deal with listening to events and updating the date prop to keep the controlled state in sync. The controlled state has known bugs which causes it to go out of sync with native. The initialDate prop is intended to allow you to have native be source of truth.",
+      "source_content_hash": "2b81bcab70ab15f0b0f1db2c6ea3c9df0cec1b2371b4050e8d6392c5e6f23f30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f791c9dc",
+      "source_content": "| Type | Required |\n| ---- | -------- |\n| Date | No       |",
+      "source_content_hash": "02330966ef5b7ce0f2c92e49f484a0a5f1bf6e42b3879006cca659c66b896490",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {}
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/datepickerios.md",
+  "last_updated_timestamp": "2025-06-18T17:57:13.940762+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {}
+}

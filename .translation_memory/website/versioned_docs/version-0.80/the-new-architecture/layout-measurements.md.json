@@ -1,0 +1,152 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.80/the-new-architecture/layout-measurements.md",
+  "source_file_content_hash": "365824681639e120336c096b41b02aef324f3ba824f9920dad367d877733f300",
+  "segments": [
+    {
+      "segment_id": "76e4a56a",
+      "source_content": "# Measuring the Layout",
+      "source_content_hash": "7720c8242866ce3130d5693a30a7fd449c0ad3f4a6cb87c1bb48f6e8fff5863a",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "# 測量佈局"
+      }
+    },
+    {
+      "segment_id": "faebdc62",
+      "source_content": "Sometimes, you need to measure the current layout to apply some changes to the overall layout or to make decisions and call some specific logic.",
+      "source_content_hash": "5ac8f441115cd27e2fac25dd6080caf40274d2fd0094f783b40f90bf997f0a30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "有時，您需要測量當前的佈局，以便對整體佈局進行調整或根據測量結果執行特定邏輯。"
+      }
+    },
+    {
+      "segment_id": "e7ec8f99",
+      "source_content": "React Native provides some native methods to know what are the measurements of the views.",
+      "source_content_hash": "46d22e78e7b488302944be394f2b8b4a372c94c0ca5ebc407af3c6e671351167",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 提供了一些原生方法來獲取視圖的尺寸資訊。"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "The best way to invoke those methods is in a `useLayoutEffect` hook: this will give you the most recent values for those measurements and it will let you apply changes in the same frame when the measurements are computed.",
+      "source_content_hash": "deccaf2f2ceca4c0f29251c5df6a57cfefdd7328868627d1306a9a0ef73ffa84",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "調用這些方法的最佳時機是在 `useLayoutEffect` 鉤子中：這將提供最新的測量值，並允許您在同一幀中應用變更。"
+      }
+    },
+    {
+      "segment_id": "53eaf0e1",
+      "source_content": "Typical code will look like this:",
+      "source_content_hash": "3a5b5a0ed7080492a0babf49e2c01a43102f719975e81da3a82b50527cba45b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "典型程式碼如下："
+      }
+    },
+    {
+      "segment_id": "43a8bc7e",
+      "source_content": "```tsx\nfunction AComponent(children) {\n  const targetRef = React.useRef(null)\n\n  useLayoutEffect(() => {\n    targetRef.current?.measure((x, y, width, height, pageX, pageY) => {\n      //do something with the measurements\n    });\n  }, [ /* add dependencies here */]);\n\n  return (\n    <View ref={targetRef}>\n     {children}\n    <View />\n  );\n}\n```",
+      "source_content_hash": "22a2e094f007261cea3a29d2cf9bcc3867a192ad5d736eb3f798456112c5a795",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_43a8bc7e"
+      }
+    },
+    {
+      "segment_id": "57971bfb",
+      "source_content": ":::note\nThe methods described here are available on most of the default components provided by React Native. However, they are _not_ available on composite components that aren't directly backed by a native view. This will generally include most components that you define in your own app.\n:::",
+      "source_content_hash": "565661c9c6be937e8992a53f8d2868db7b6aabfad0e14dfa9e85ad080beab701",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note\n此處描述的方法適用於 React Native 提供的大多數預設元件。但對於未直接由原生視圖支持的複合元件（通常是您應用中自定義的元件），這些方法可能無法使用。\n:::"
+      }
+    },
+    {
+      "segment_id": "0037ff70",
+      "source_content": "## measure(callback)",
+      "source_content_hash": "16c29042c9dc8866e0089b68c5f6174277bc7de756636713091fc2a4fd8d8ab5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## measure(callback)"
+      }
+    },
+    {
+      "segment_id": "bdc231b1",
+      "source_content": "Determines the location on screen (`x` and `y`), `width`, and `height` in the viewport of the given view. Returns the values via an async callback. If successful, the callback will be called with the following arguments:",
+      "source_content_hash": "8559c89ec148da19191b32cd5f1ba30970144dd12a98e14bb52e3c1e135ef524",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測量指定視圖在視窗中的位置（`x` 和 `y`）、寬度（`width`）和高度（`height`）。結果通過異步回調返回，成功時回調參數包括："
+      }
+    },
+    {
+      "segment_id": "5d66c9dc",
+      "source_content": "- `x`: the `x` coordinate of the origin (top-left corner) of the measured view in the viewport.\n- `y`: the `y` coordinate of the origin (top-left corner) of the measured view in the viewport.\n- `width`: the `width` of the view.\n- `height`: the `height` of the view.\n- `pageX`: the `x` coordinate of the view in the viewport (typically the whole screen).\n- `pageY`: the `y` coordinate of the view in the viewport (typically the whole screen).",
+      "source_content_hash": "f273a5165fbe86311f372e9133182aaa17cb8d32d7048e28a4ce2d055dcc22f9",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `x`: 被測量視圖左上角在視窗中的 x 座標\n- `y`: 被測量視圖左上角在視窗中的 y 座標\n- `width`: 視圖的寬度\n- `height`: 視圖的高度\n- `pageX`: 視圖在整個視窗中的 x 絕對座標（通常是整個屏幕）\n- `pageY`: 視圖在整個視窗中的 y 絕對座標（通常是整個屏幕）"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "Also the `width` and `height` returned by `measure()` are the `width` and `height` of the component in the viewport.",
+      "source_content_hash": "9f51b6cb88eb1775d001eca8a9f4aa14d2a1171aeaaf7851d2228cab82862ed9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意：`measure()` 返回的 `width` 和 `height` 是元件在視窗中的實際尺寸。"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "## measureInWindow(callback)",
+      "source_content_hash": "e8f0b03f9dfd773aad70f97feccfbf8ac74e8603387cbcf8f36cfabe5564e756",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## measureInWindow(callback)"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "Determines the location (`x` and `y`) of the given view in the window and returns the values via an async callback. If the React root view is embedded in another native view, this will give you the absolute coordinates. If successful, the callback will be called with the following arguments:",
+      "source_content_hash": "27480612b3b18880ded040285988165b1ee3b28ddc5a68edbc3db430e835f20a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "測量指定視圖在當前視窗中的絕對位置（`x` 和 `y`），結果通過異步回調返回。當 React 根視圖嵌入其他原生視圖時，此方法可獲取絕對座標。成功時回調參數包括："
+      }
+    },
+    {
+      "segment_id": "40251870",
+      "source_content": "- `x`: the `x` coordinate of the view in the current window.\n- `y`: the `y` coordinate of the view in the current window.\n- `width`: the `width` of the view.\n- `height`: the `height` of the view.",
+      "source_content_hash": "07422b2cdf026585391dfaea56ee7f3f562f180f3c2ed2bf86bca0eb2bb42ac4",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `x`: 視圖在當前視窗中的 x 座標\n- `y`: 視圖在當前視窗中的 y 座標\n- `width`: 視圖的寬度\n- `height`: 視圖的高度"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.80/the-new-architecture/layout-measurements.md",
+  "last_updated_timestamp": "2025-06-18T18:19:08.072387+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "365824681639e120336c096b41b02aef324f3ba824f9920dad367d877733f300"
+  }
+}

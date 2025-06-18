@@ -1,0 +1,1332 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.76/legacy/native-modules-android.md",
+  "source_file_content_hash": "692dd69f9f284f072e01155ae770cef80f1c2617f1115748011d390bda97587d",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: native-modules-android\ntitle: Android Native Modules\n---",
+      "source_content_hash": "1ed25f3402e58f4b39541c1223975f4b41c15d168bf28a9664c115c040cc040b",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import NativeDeprecated from '@site/versioned_docs/version-0.76/the-new-architecture/\\_markdown_native_deprecation.mdx'\nimport Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';",
+      "source_content_hash": "116cde2d0b99cb3cd291fac778b6d585c3e2e535081b878cbf2006bb7be497d9",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "efb379d7",
+      "source_content": "<NativeDeprecated />",
+      "source_content_hash": "1680a0727658899157f198b9f9f0a950c884554cdfaa045c2229262db270638c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "8ac585fb",
+      "source_content": "Welcome to Native Modules for Android. Please start by reading the [Native Modules Intro](native-modules-intro) for an intro to what native modules are.",
+      "source_content_hash": "881288c7aa2c1e67c5eb1ee7eeea60cb2facb2fa66885014d4d4ab4c6061735d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ba4f48ff",
+      "source_content": "## Create a Calendar Native Module",
+      "source_content_hash": "97c3c41ec1481e8f2efc837967c6740843b2f448b96ac6bb2671d0f4f4168108",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "In the following guide you will create a native module, `CalendarModule`, that will allow you to access Android’s calendar APIs from JavaScript. By the end, you will be able to call `CalendarModule.createCalendarEvent('Dinner Party', 'My House');` from JavaScript, invoking a Java/Kotlin method that creates a calendar event.",
+      "source_content_hash": "dccccfee35518a18dbbb93e0b939be7fcad8b619fa94527c46fd9cdd2fea1b47",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3daf1b88",
+      "source_content": "### Setup",
+      "source_content_hash": "8896b8d3db53502f4fd604d42db230e8aa1df8a01474b979920665ef08680a11",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f6168993",
+      "source_content": "To get started, open up the Android project within your React Native application in Android Studio. You can find your Android project here within a React Native app:",
+      "source_content_hash": "242e5498fe443d880bcae2ec4bf6263c71263630d52669de1989b8da703cf971",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1485a88b",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-android-open-project.png\" width=\"500\" alt=\"Image of opening up an Android project within a React Native app inside of Android Studio.\" />\n  <figcaption>Image of where you can find your Android project</figcaption>\n</figure>",
+      "source_content_hash": "558ebc5868a71173d73da86834e3296c74f5093c3720675ed69a9865659d42ff",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ccc88b4c",
+      "source_content": "We recommend using Android Studio to write your native code. Android studio is an IDE built for Android development and using it will help you resolve minor issues like code syntax errors quickly.",
+      "source_content_hash": "191ee9877ceff5c9f6c544e74d3ab651200c0c470e91cc0b9e25ff0b8937661b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d9172fa4",
+      "source_content": "We also recommend enabling [Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html) to speed up builds as you iterate on Java/Kotlin code.",
+      "source_content_hash": "b8cdb120bca7fad2b6d6fa8c81cdaded724f51d311e18bdc0f2d5f07388514e4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d06306f7",
+      "source_content": "### Create A Custom Native Module File",
+      "source_content_hash": "95029a895786d60005bdc3ad402a7c4b91beccbfc5289c927a57249c4e4d0400",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "73ab96a3",
+      "source_content": "The first step is to create the (`CalendarModule.java` or `CalendarModule.kt`) Java/Kotlin file inside `android/app/src/main/java/com/your-app-name/` folder (the folder is the same for both Kotlin and Java). This Java/Kotlin file will contain your native module Java/Kotlin class.",
+      "source_content_hash": "54c0c55701d9add183e276ef24cf87f531bdc2bf8d4f449beb86ead40ba51bf7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d0d484a6",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-android-add-class.png\" width=\"700\" alt=\"Image of adding a class called CalendarModule.java within the Android Studio.\" />\n  <figcaption>Image of how to add the CalendarModuleClass</figcaption>\n</figure>",
+      "source_content_hash": "84bcef451290deaeb06a84d56e4a133d15f22c85915787e46ea69548a7f0f68e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c3a738de",
+      "source_content": "Then add the following content:",
+      "source_content_hash": "ef5ec94e755f476f8ce107e785add2743f716e639d8102c4e4c5a76f844ede0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d1ce550c",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npackage com.your-apps-package-name; // replace your-apps-package-name with your app’s package name\nimport com.facebook.react.bridge.NativeModule;\nimport com.facebook.react.bridge.ReactApplicationContext;\nimport com.facebook.react.bridge.ReactContext;\nimport com.facebook.react.bridge.ReactContextBaseJavaModule;\nimport com.facebook.react.bridge.ReactMethod;\nimport java.util.Map;\nimport java.util.HashMap;\n\npublic class CalendarModule extends ReactContextBaseJavaModule {\n   CalendarModule(ReactApplicationContext context) {\n       super(context);\n   }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\npackage com.your-apps-package-name; // replace your-apps-package-name with your app’s package name\nimport com.facebook.react.bridge.NativeModule\nimport com.facebook.react.bridge.ReactApplicationContext\nimport com.facebook.react.bridge.ReactContext\nimport com.facebook.react.bridge.ReactContextBaseJavaModule\nimport com.facebook.react.bridge.ReactMethod\n\nclass CalendarModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {...}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "b684262f2c97e49d24db298a3dd5f77bf43fe5c4bd636bdec2b50e5197afffbd",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "As you can see, your `CalendarModule` class extends the `ReactContextBaseJavaModule` class. For Android, Java/Kotlin native modules are written as classes that extend `ReactContextBaseJavaModule` and implement the functionality required by JavaScript.",
+      "source_content_hash": "de4eae07c300be28726c8b0871226775abbc7a10eb390851d5e84788602d9ef7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ca53c348",
+      "source_content": "> It is worth noting that technically Java/Kotlin classes only need to extend the `BaseJavaModule` class or implement the `NativeModule` interface to be considered a Native Module by React Native.",
+      "source_content_hash": "5ed3887da97cd579880b3f25aa31e344561dc645ebd29e55eb6e2716937396fd",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "d9049a4b",
+      "source_content": "> However we recommend that you use `ReactContextBaseJavaModule`, as shown above. `ReactContextBaseJavaModule` gives access to the `ReactApplicationContext` (RAC), which is useful for Native Modules that need to hook into activity lifecycle methods. Using `ReactContextBaseJavaModule` will also make it easier to make your native module type-safe in the future. For native module type-safety, which is coming in future releases, React Native looks at each native module's JavaScript spec and generates an abstract base class that extends `ReactContextBaseJavaModule`.",
+      "source_content_hash": "b34a797c3035e06e53d9fa69abac42188f2e5c00641ffd8af07e0781027707c8",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a4bf4268",
+      "source_content": "### Module Name",
+      "source_content_hash": "535e22a3cee7c1631af0bbe2b975b5b3919ea4d0e8297e269353bf08531eeea1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec619944",
+      "source_content": "All Java/Kotlin native modules in Android need to implement the `getName()` method. This method returns a string, which represents the name of the native module. The native module can then be accessed in JavaScript using its name. For example, in the below code snippet, `getName()` returns `\"CalendarModule\"`.",
+      "source_content_hash": "6aff7da05157b866460bff01f5423c183d1aafaee2f81dcd835cdcf545e585ad",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "46cf9aca",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n// add to CalendarModule.java\n@Override\npublic String getName() {\n   return \"CalendarModule\";\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n// add to CalendarModule.kt\noverride fun getName() = \"CalendarModule\"\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "942fc0c7e23e1d5a984c2ebe89626ad2e6a1506ed2dbae6caeb4e7ad64194b13",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a81544fd",
+      "source_content": "The native module can then be accessed in JS like this:",
+      "source_content_hash": "11a5586eff83af4e4903fba2504166652331e1ce7a8c3024a3f68f8cbaa59d41",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "03a9ab41",
+      "source_content": "```tsx\nconst {CalendarModule} = ReactNative.NativeModules;\n```",
+      "source_content_hash": "92648fcb3428dd61c85f39f81f5343689f6a7163f1967f31da60cc5ea097634a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7974af84",
+      "source_content": "### Export a Native Method to JavaScript",
+      "source_content_hash": "864ba940629abb5df2dd11a3969e53bf2fa778778da537d82267c199aa9cc1e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "44aaa880",
+      "source_content": "Next you will need to add a method to your native module that will create calendar events and can be invoked in JavaScript. All native module methods meant to be invoked from JavaScript must be annotated with `@ReactMethod`.",
+      "source_content_hash": "ff8e4f3b71d07e4579858f565d4df0555f7de5113d2cabb5e89389871eb14501",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "Set up a method `createCalendarEvent()` for `CalendarModule` that can be invoked in JS through `CalendarModule.createCalendarEvent()`. For now, the method will take in a name and location as strings. Argument type options will be covered shortly.",
+      "source_content_hash": "fde9e1b8aec71cbb4bc167bc932f35b2863e8f44b9da2eb6d8d59c627fef117f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e193342d",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@ReactMethod\npublic void createCalendarEvent(String name, String location) {\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n@ReactMethod fun createCalendarEvent(name: String, location: String) {}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "a34a332504cc2ff45501ad911b808beae4f0a9103efcc822383cf991821e11df",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "bb1346b6",
+      "source_content": "Add a debug log in the method to confirm it has been invoked when you call it from your application. Below is an example of how you can import and use the [Log](https://developer.android.com/reference/android/util/Log) class from the Android util package:",
+      "source_content_hash": "2754e0afc9da4d7c02414247ebe363ae7fffa87b62998fe995fa03e7be569eb7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b1edb09b",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nimport android.util.Log;\n\n@ReactMethod\npublic void createCalendarEvent(String name, String location) {\n   Log.d(\"CalendarModule\", \"Create event called with name: \" + name\n   + \" and location: \" + location);\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nimport android.util.Log\n\n@ReactMethod\nfun createCalendarEvent(name: String, location: String) {\n    Log.d(\"CalendarModule\", \"Create event called with name: $name and location: $location\")\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "7d562fe3828437f095c06553ae22e377b6f400359f450c8564116ad4551b528b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "827eb9a3",
+      "source_content": "Once you finish implementing the native module and hook it up in JavaScript, you can follow [these steps](https://developer.android.com/studio/debug/am-logcat.html) to view the logs from your app.",
+      "source_content_hash": "012da0e61dbbdb76b99b27c2668c53f126978fcac2781f8f1c1ed5f7e03300a0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "完成原生模組的實作並在 JavaScript 中掛接後，您可以按照[這些步驟](https://developer.android.com/studio/debug/am-logcat.html)查看應用程式的日誌記錄。"
+      }
+    },
+    {
+      "segment_id": "6ffd1ebe",
+      "source_content": "### Synchronous Methods",
+      "source_content_hash": "6f28ad99495bf5215a6bcbb07f2e1b39d6b79a78f221e767c63a9f028a441d6e",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 同步方法"
+      }
+    },
+    {
+      "segment_id": "89cf7bac",
+      "source_content": "You can pass `isBlockingSynchronousMethod = true` to a native method to mark it as a synchronous method.",
+      "source_content_hash": "5e1a057c9859c16c9fc303e89aec0d661176beb032895bfda6ce6e0d7dfbf82c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可以將 `isBlockingSynchronousMethod = true` 傳遞給原生方法，將其標記為同步方法。"
+      }
+    },
+    {
+      "segment_id": "d2038b1b",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@ReactMethod(isBlockingSynchronousMethod = true)\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n@ReactMethod(isBlockingSynchronousMethod = true)\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "559f39d4d4d3d810268c876ab23dde05df0485635d7a238a78e9512a60511ecd",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d2038b1b"
+      }
+    },
+    {
+      "segment_id": "b27c61de",
+      "source_content": "At the moment, we do not recommend this, since calling methods synchronously can have strong performance penalties and introduce threading-related bugs to your native modules. Additionally, please note that if you choose to enable `isBlockingSynchronousMethod`, your app can no longer use the Google Chrome debugger. This is because synchronous methods require the JS VM to share memory with the app. For the Google Chrome debugger, React Native runs inside the JS VM in Google Chrome, and communicates asynchronously with the mobile devices via WebSockets.",
+      "source_content_hash": "691f9e204c62777a17487637b9ffd5ed7dc912f23864cfc0c2e5f7367afc97e7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "目前我們不建議這樣做，因為同步調用方法可能會導致嚴重的效能損失，並在您的原生模組中引入與線程相關的錯誤。此外，請注意，如果您選擇啟用 `isBlockingSynchronousMethod`，您的應用程式將無法再使用 Google Chrome 調試器。這是因為同步方法要求 JS VM 與應用程式共享記憶體。對於 Google Chrome 調試器，React Native 在 Google Chrome 的 JS VM 中運行，並通過 WebSockets 與移動設備進行異步通信。"
+      }
+    },
+    {
+      "segment_id": "de588fa2",
+      "source_content": "### Register the Module (Android Specific)",
+      "source_content_hash": "9634fe3d7a4b782363ae28d936479bdfccff9eb553986af5376e638532b97e4f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 註冊模組（Android 專屬）"
+      }
+    },
+    {
+      "segment_id": "3799844b",
+      "source_content": "Once a native module is written, it needs to be registered with React Native. In order to do so, you need to add your native module to a `ReactPackage` and register the `ReactPackage` with React Native. During initialization, React Native will loop over all packages, and for each `ReactPackage`, register each native module within.",
+      "source_content_hash": "60389ccb1799d83a546a29b05f54ccd6c597b486a1140cf4d6f76ee80cbec4dd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "編寫完原生模組後，需要將其註冊到 React Native 中。為此，您需要將原生模組添加到 `ReactPackage` 中，並將 `ReactPackage` 註冊到 React Native。在初始化過程中，React Native 會遍歷所有包，並為每個 `ReactPackage` 註冊其中的每個原生模組。"
+      }
+    },
+    {
+      "segment_id": "015c0c6e",
+      "source_content": "React Native invokes the method `createNativeModules()` on a `ReactPackage` in order to get the list of native modules to register. For Android, if a module is not instantiated and returned in createNativeModules it will not be available from JavaScript.",
+      "source_content_hash": "edc4bac337317ef5516184a61806a3ea62b3f340594d631f7410aa441ef3ba4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 調用 `ReactPackage` 上的 `createNativeModules()` 方法來獲取要註冊的原生模組列表。對於 Android，如果模組未在 createNativeModules 中實例化並返回，則它將無法從 JavaScript 中使用。"
+      }
+    },
+    {
+      "segment_id": "6e5d54a8",
+      "source_content": "To add your Native Module to `ReactPackage`, first create a new Java/Kotlin Class named (`MyAppPackage.java` or `MyAppPackage.kt`) that implements `ReactPackage` inside the `android/app/src/main/java/com/your-app-name/` folder:",
+      "source_content_hash": "c1c4e62577d83d569a846dbc75c30648b01ed36fd9535cdb45985a099b105935",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要將您的原生模組添加到 `ReactPackage`，首先在 `android/app/src/main/java/com/your-app-name/` 文件夾中創建一個新的 Java/Kotlin 類，名為 (`MyAppPackage.java` 或 `MyAppPackage.kt`)，並實現 `ReactPackage`："
+      }
+    },
+    {
+      "segment_id": "48249e3c",
+      "source_content": "Then add the following content:",
+      "source_content_hash": "ef5ec94e755f476f8ce107e785add2743f716e639d8102c4e4c5a76f844ede0c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "然後添加以下內容："
+      }
+    },
+    {
+      "segment_id": "48e2392c",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npackage com.your-app-name; // replace your-app-name with your app’s name\nimport com.facebook.react.ReactPackage;\nimport com.facebook.react.bridge.NativeModule;\nimport com.facebook.react.bridge.ReactApplicationContext;\nimport com.facebook.react.uimanager.ViewManager;\n\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.List;\n\npublic class MyAppPackage implements ReactPackage {\n\n   @Override\n   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {\n       return Collections.emptyList();\n   }\n\n   @Override\n   public List<NativeModule> createNativeModules(\n           ReactApplicationContext reactContext) {\n       List<NativeModule> modules = new ArrayList<>();\n\n       modules.add(new CalendarModule(reactContext));\n\n       return modules;\n   }\n\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\npackage com.your-app-name // replace your-app-name with your app’s name\n\nimport android.view.View\nimport com.facebook.react.ReactPackage\nimport com.facebook.react.bridge.NativeModule\nimport com.facebook.react.bridge.ReactApplicationContext\nimport com.facebook.react.uimanager.ReactShadowNode\nimport com.facebook.react.uimanager.ViewManager\n\nclass MyAppPackage : ReactPackage {\n\n    override fun createViewManagers(\n        reactContext: ReactApplicationContext\n    ): MutableList<ViewManager<View, ReactShadowNode<*>>> = mutableListOf()\n\n    override fun createNativeModules(\n        reactContext: ReactApplicationContext\n    ): MutableList<NativeModule> = listOf(CalendarModule(reactContext)).toMutableList()\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "915493861544f610b96628dc4f5ae64578b38cd3447d37a2683e099e16a81f03",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_48e2392c"
+      }
+    },
+    {
+      "segment_id": "f50056c0",
+      "source_content": "This file imports the native module you created, `CalendarModule`. It then instantiates `CalendarModule` within the `createNativeModules()` function and returns it as a list of `NativeModules` to register. If you add more native modules down the line, you can also instantiate them and add them to the list returned here.",
+      "source_content_hash": "e647afd579055cea7e88755bcdc05dbacf37464ffb35b8fcd1b5e0bff023be4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此文件導入您創建的原生模組 `CalendarModule`。然後在 `createNativeModules()` 函數中實例化 `CalendarModule`，並將其作為 `NativeModules` 列表返回以進行註冊。如果您後續添加更多原生模組，也可以實例化它們並將其添加到這裡返回的列表中。"
+      }
+    },
+    {
+      "segment_id": "cdfc2b0c",
+      "source_content": "> It is worth noting that this way of registering native modules eagerly initializes all native modules when the application starts, which adds to the startup time of an application. You can use [TurboReactPackage](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/TurboReactPackage.java) as an alternative. Instead of `createNativeModules`, which return a list of instantiated native module objects, TurboReactPackage implements a `getModule(String name, ReactApplicationContext rac)` method that creates the native module object, when required. TurboReactPackage is a bit more complicated to implement at the moment. In addition to implementing a `getModule()` method, you have to implement a `getReactModuleInfoProvider()` method, which returns a list of all the native modules the package can instantiate along with a function that instantiates them, example [here](https://github.com/facebook/react-native/blob/8ac467c51b94c82d81930b4802b2978c85539925/ReactAndroid/src/main/java/com/facebook/react/CoreModulesPackage.java#L86-L165). Again, using TurboReactPackage will allow your application to have a faster startup time, but it is currently a bit cumbersome to write. So proceed with caution if you choose to use TurboReactPackages.",
+      "source_content_hash": "15878c527d417ef968312909771fe487a3431fb24db141998be4eae620fbd9ba",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 值得注意的是，這種註冊原生模組的方式會在應用程式啟動時急切地初始化所有原生模組，這會增加應用程式的啟動時間。您可以改用 [TurboReactPackage](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/TurboReactPackage.java)。與 `createNativeModules` 返回實例化的原生模組對象列表不同，TurboReactPackage 實現了一個 `getModule(String name, ReactApplicationContext rac)` 方法，該方法在需要時創建原生模組對象。目前 TurboReactPackage 的實現稍微複雜一些。除了實現 `getModule()` 方法外，您還需要實現一個 `getReactModuleInfoProvider()` 方法，該方法返回包可以實例化的所有原生模組的列表以及實例化它們的函數，示例[在此](https://github.com/facebook/react-native/blob/8ac467c51b94c82d81930b4802b2978c85539925/ReactAndroid/src/main/java/com/facebook/react/CoreModulesPackage.java#L86-L165)。再次強調，使用 TurboReactPackage 可以讓您的應用程式啟動時間更快，但目前編寫起來有點麻煩。因此，如果您選擇使用 TurboReactPackages，請謹慎行事。"
+      }
+    },
+    {
+      "segment_id": "6085c028",
+      "source_content": "To register the `CalendarModule` package, you must add `MyAppPackage` to the list of packages returned in ReactNativeHost's `getPackages()` method. Open up your `MainApplication.java` or `MainApplication.kt` file, which can be found in the following path: `android/app/src/main/java/com/your-app-name/`.",
+      "source_content_hash": "ceaf70e412678f68d84b27fb622ac206b0bb9e34c59b29333cc8f5263c494757",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要註冊 `CalendarModule` 包，您必須將 `MyAppPackage` 添加到 ReactNativeHost 的 `getPackages()` 方法返回的包列表中。打開您的 `MainApplication.java` 或 `MainApplication.kt` 文件，該文件可以在以下路徑中找到：`android/app/src/main/java/com/your-app-name/`。"
+      }
+    },
+    {
+      "segment_id": "216a8ee1",
+      "source_content": "Locate ReactNativeHost’s `getPackages()` method and add your package to the packages list `getPackages()` returns:",
+      "source_content_hash": "92fbd8895934a0acfcd4d66bc0650ba6a8dee653e4d56eeae7a9fdb79ec7846a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "找到 ReactNativeHost 的 `getPackages()` 方法，並將您的包添加到 `getPackages()` 返回的包列表中："
+      }
+    },
+    {
+      "segment_id": "7178860a",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@Override\nprotected List<ReactPackage> getPackages() {\n    List<ReactPackage> packages = new PackageList(this).getPackages();\n    // Packages that cannot be autolinked yet can be added manually here, for example:\n    // packages.add(new MyReactNativePackage());\n    packages.add(new MyAppPackage());\n    return packages;\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\noverride fun getPackages(): List<ReactPackage> =\n    PackageList(this).packages.apply {\n        // Packages that cannot be autolinked yet can be added manually here, for example:\n        // add(MyReactNativePackage())\n        add(MyAppPackage())\n    }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "29f0249cb52773b90ac85f8a0c868d3616034a601ff0f36b8374bec5839014a4",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7178860a"
+      }
+    },
+    {
+      "segment_id": "a01e2096",
+      "source_content": "You have now successfully registered your native module for Android!",
+      "source_content_hash": "54641d0b62b10d9b7df4c9aa105b19e058846937c4b22cd7386cd824f6856952",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您現在已成功為 Android 註冊了您的原生模組！"
+      }
+    },
+    {
+      "segment_id": "fd59095d",
+      "source_content": "### Test What You Have Built",
+      "source_content_hash": "3f0c4f1fc52afff46cfc52dffc7acf3c521bd37cda9420d3121127b52cfdd941",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 測試您構建的內容"
+      }
+    },
+    {
+      "segment_id": "c2a9a004",
+      "source_content": "At this point, you have set up the basic scaffolding for your native module in Android. Test that out by accessing the native module and invoking its exported method in JavaScript.",
+      "source_content_hash": "96f487fc3da09b00b705730b1173320078086edf0ad2782986c6bbeebe1625e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "至此，您已為 Android 原生模組建立了基本框架。請透過 JavaScript 存取原生模組並呼叫其導出方法來進行測試。"
+      }
+    },
+    {
+      "segment_id": "b2ffb658",
+      "source_content": "Find a place in your application where you would like to add a call to the native module’s `createCalendarEvent()` method. Below is an example of a component, `NewModuleButton` you can add in your app. You can invoke the native module inside `NewModuleButton`'s `onPress()` function.",
+      "source_content_hash": "f05b6ec11d48d4446a712ebc464146f360d1a07762c3a7908d68c81aab17428c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在應用程式中找到您想呼叫原生模組 `createCalendarEvent()` 方法的位置。以下是一個可新增至應用程式的元件範例 `NewModuleButton`，您可以在 `NewModuleButton` 的 `onPress()` 函式中呼叫原生模組。"
+      }
+    },
+    {
+      "segment_id": "7650124c",
+      "source_content": "```tsx\nimport React from 'react';\nimport {NativeModules, Button} from 'react-native';\n\nconst NewModuleButton = () => {\n  const onPress = () => {\n    console.log('We will invoke the native module here!');\n  };\n\n  return (\n    <Button\n      title=\"Click to invoke your native module!\"\n      color=\"#841584\"\n      onPress={onPress}\n    />\n  );\n};\n\nexport default NewModuleButton;\n```",
+      "source_content_hash": "5037818d596e58ffc48bf629b4929448abe2805fea309e60a3604c98d332a20a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_7650124c"
+      }
+    },
+    {
+      "segment_id": "d6c9e4cd",
+      "source_content": "In order to access your native module from JavaScript you need to first import `NativeModules` from React Native:",
+      "source_content_hash": "c5bb7523528cce1783372b5827d37efba60e85b4e11ebcede92543a47e112066",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要從 JavaScript 存取您的原生模組，首先需要從 React Native 導入 `NativeModules`："
+      }
+    },
+    {
+      "segment_id": "4761324d",
+      "source_content": "```tsx\nimport {NativeModules} from 'react-native';\n```",
+      "source_content_hash": "c18416dd4cb5159434e6e8d68908d0643248b0f813567fc319148fdd078e02fa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4761324d"
+      }
+    },
+    {
+      "segment_id": "a30b7214",
+      "source_content": "You can then access the `CalendarModule` native module off of `NativeModules`.",
+      "source_content_hash": "b0d5c05b785a38b266814f38124e8e71e4e6fd79553c840042687652e65e60f9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著您可從 `NativeModules` 取得 `CalendarModule` 原生模組。"
+      }
+    },
+    {
+      "segment_id": "8996d346",
+      "source_content": "```tsx\nconst {CalendarModule} = NativeModules;\n```",
+      "source_content_hash": "3850d7ebec19964abaeff2e48e32f9956736e1a7639a98681befa67c013155db",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_8996d346"
+      }
+    },
+    {
+      "segment_id": "f10c482a",
+      "source_content": "Now that you have the CalendarModule native module available, you can invoke your native method `createCalendarEvent()`. Below it is added to the `onPress()` method in `NewModuleButton`:",
+      "source_content_hash": "ec877e303da618b24e0a91d587ed3807cd84465ab1dac11926309f572a3df234",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您已擁有可用的 CalendarModule 原生模組，可以呼叫您的原生方法 `createCalendarEvent()`。以下將其新增至 `NewModuleButton` 的 `onPress()` 方法中："
+      }
+    },
+    {
+      "segment_id": "14ea483b",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEvent('testName', 'testLocation');\n};\n```",
+      "source_content_hash": "2ad59890fbce19a243fa4b8eb1805e98e135a4a5659c31ab6d1cb2d8e3d30f18",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_14ea483b"
+      }
+    },
+    {
+      "segment_id": "eb398072",
+      "source_content": "The final step is to rebuild the React Native app so that you can have the latest native code (with your new native module!) available. In your command line, where the react native application is located, run the following:",
+      "source_content_hash": "e5d0bab2a6a6354c8cf13543d4789782fafc1bec57a5c9b7742eb7f1a1acd1cf",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "最後一步是重新建置 React Native 應用程式，以便獲取包含新原生模組的最新原生程式碼。在 react native 應用程式所在的命令列中執行以下指令："
+      }
+    },
+    {
+      "segment_id": "264732cd",
+      "source_content": "<Tabs groupId=\"package-manager\" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>\n<TabItem value=\"npm\">\n\n```shell\nnpm run android\n```\n\n</TabItem>\n<TabItem value=\"yarn\">\n\n```shell\nyarn android\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "125e80eaca8b887feb300b80c068f98e165ca26cc245fa95be2ce55824934e31",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_264732cd"
+      }
+    },
+    {
+      "segment_id": "06d2929c",
+      "source_content": "### Building as You Iterate",
+      "source_content_hash": "023694aebbf85105acf692f14bd437f086879afcdf126bd4524d8fed34148618",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 迭代開發時的建置流程"
+      }
+    },
+    {
+      "segment_id": "323eea94",
+      "source_content": "As you work through these guides and iterate on your native module, you will need to do a native rebuild of your application to access your most recent changes from JavaScript. This is because the code that you are writing sits within the native part of your application. While React Native’s metro bundler can watch for changes in JavaScript and rebuild on the fly for you, it will not do so for native code. So if you want to test your latest native changes you need to rebuild by using the above command.",
+      "source_content_hash": "ab0fb3abc7a4f9efe64fa9403c0ec4c4443c87cd8048199643f4de85db22b19e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當您遵循本指南迭代開發原生模組時，需要對應用程式進行原生重建才能從 JavaScript 存取最新變更。這是因為您編寫的程式碼位於應用程式的原生部分。雖然 React Native 的 metro 打包工具能監控 JavaScript 變更並即時重建，但不會對原生程式碼執行此操作。因此若要測試最新的原生變更，需使用上述指令重新建置。"
+      }
+    },
+    {
+      "segment_id": "cdf3379b",
+      "source_content": "### Recap✨",
+      "source_content_hash": "54a95b8ff951707f63d5b3ee0373787b585205c0e960fd7544f1de8cc8ed53b1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 重點回顧✨"
+      }
+    },
+    {
+      "segment_id": "249869cc",
+      "source_content": "You should now be able to invoke your `createCalendarEvent()` method on your native module in the app. In our example this occurs by pressing the `NewModuleButton`. You can confirm this by viewing the log you set up in your `createCalendarEvent()` method. You can follow [these steps](https://developer.android.com/studio/debug/am-logcat.html) to view ADB logs in your app. You should then be able to search for your `Log.d` message (in our example “Create event called with name: testName and location: testLocation”) and see your message logged each time you invoke your native module method.",
+      "source_content_hash": "221aae29a554215cb37dbf0148f1328ec4aa2301cdc0d3f1dc70e0d52b7bc85e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您現在應該能在應用程式中呼叫原生模組的 `createCalendarEvent()` 方法。在我們的範例中，透過點擊 `NewModuleButton` 觸發此操作。您可以檢視在 `createCalendarEvent()` 方法中設定的日誌來確認。請遵循[這些步驟](https://developer.android.com/studio/debug/am-logcat.html)查看應用程式中的 ADB 日誌。接著搜尋您的 `Log.d` 訊息（範例中為「Create event called with name: testName and location: testLocation」），即可在每次呼叫原生模組方法時看到對應的日誌訊息。"
+      }
+    },
+    {
+      "segment_id": "f4a2aa9f",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-android-logs.png\" width=\"1000\" alt=\"Image of logs.\" />\n  <figcaption>Image of ADB logs in Android Studio</figcaption>\n</figure>",
+      "source_content_hash": "5ad720b7913004cb2ba4358afbd03ddd7f0a44df7022493323a18d61bd4c8a06",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f4a2aa9f"
+      }
+    },
+    {
+      "segment_id": "fe2c7f95",
+      "source_content": "At this point you have created an Android native module and invoked its native method from JavaScript in your React Native application. You can read on to learn more about things like argument types available to a native module method and how to setup callbacks and promises.",
+      "source_content_hash": "4fca7ff53d2c328602da698cf54cae8f1337c60439edae279ff46864aabbf19e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "至此，您已建立 Android 原生模組，並從 React Native 應用程式的 JavaScript 端呼叫其原生方法。您可以繼續閱讀以了解更多資訊，例如原生模組方法可用的參數類型，以及如何設定回調函式與 Promise。"
+      }
+    },
+    {
+      "segment_id": "99b95415",
+      "source_content": "## Beyond a Calendar Native Module",
+      "source_content_hash": "492204cf2514a418a3520f39a76da9d65ea49f19499cf3849aadd4c9aa772344",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 日曆原生模組的進階應用"
+      }
+    },
+    {
+      "segment_id": "1e46ce2f",
+      "source_content": "### Better Native Module Export",
+      "source_content_hash": "59ca05bfa2a6e9ba68a290e975dbf9af7af91269bd76d9136ba13c739f9852e5",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 優化原生模組導出方式"
+      }
+    },
+    {
+      "segment_id": "fee14fdc",
+      "source_content": "Importing your native module by pulling it off of `NativeModules` like above is a bit clunky.",
+      "source_content_hash": "e8680bcf2221d1c0b95ed0a7a03c2033db79708ed35b24d72446b90e26367e57",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "像上述那樣從 `NativeModules` 提取原生模組的導入方式稍顯笨拙。"
+      }
+    },
+    {
+      "segment_id": "77f0732d",
+      "source_content": "To save consumers of your native module from needing to do that each time they want to access your native module, you can create a JavaScript wrapper for the module. Create a new JavaScript file named `CalendarModule.js` with the following content:",
+      "source_content_hash": "77544f615276b511c3bb9cc69f48567cad8d0e13fcd3197a8e083cadf72d757a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為避免模組使用者每次存取時都需要重複此操作，您可以為模組建立 JavaScript 封裝層。建立名為 `CalendarModule.js` 的新 JavaScript 檔案，內容如下："
+      }
+    },
+    {
+      "segment_id": "b96a7fc8",
+      "source_content": "```tsx\n/**\n* This exposes the native CalendarModule module as a JS module. This has a\n* function 'createCalendarEvent' which takes the following parameters:\n\n* 1. String name: A string representing the name of the event\n* 2. String location: A string representing the location of the event\n*/\nimport {NativeModules} from 'react-native';\nconst {CalendarModule} = NativeModules;\nexport default CalendarModule;\n```",
+      "source_content_hash": "d71b8bdf0f4cebe9b37e424119729a1c48d234723e2fbbf0b49e7ed49da5f116",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_b96a7fc8"
+      }
+    },
+    {
+      "segment_id": "158df793",
+      "source_content": "This JavaScript file also becomes a good location for you to add any JavaScript side functionality. For example, if you use a type system like TypeScript you can add type annotations for your native module here. While React Native does not yet support Native to JS type safety, all your JS code will be type safe. Doing so will also make it easier for you to switch to type-safe native modules down the line. Below is an example of adding type safety to the CalendarModule:",
+      "source_content_hash": "5ec4697112fee4e63edf7290a7366d52423165256f25788ac7939acd8812daff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此 JavaScript 檔案也是新增 JavaScript 端功能的理想位置。例如若您使用 TypeScript 等類型系統，可在此為原生模組添加類型註解。雖然 React Native 尚未支援原生到 JS 的類型安全，但所有 JS 程式碼都將具備類型安全。這樣做也能讓您更輕鬆地在未來轉換至類型安全的原生模組。以下是為 CalendarModule 添加類型安全的範例："
+      }
+    },
+    {
+      "segment_id": "d68d5d0e",
+      "source_content": "```tsx\n/**\n * This exposes the native CalendarModule module as a JS module. This has a\n * function 'createCalendarEvent' which takes the following parameters:\n *\n * 1. String name: A string representing the name of the event\n * 2. String location: A string representing the location of the event\n */\nimport {NativeModules} from 'react-native';\nconst {CalendarModule} = NativeModules;\ninterface CalendarInterface {\n  createCalendarEvent(name: string, location: string): void;\n}\nexport default CalendarModule as CalendarInterface;\n```",
+      "source_content_hash": "fa20e7a24d29eae1cae3fc9728480a5e6a01205320a2cec46a19edec2cc00a7c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d68d5d0e"
+      }
+    },
+    {
+      "segment_id": "a2532daf",
+      "source_content": "In your other JavaScript files you can access the native module and invoke its method like this:",
+      "source_content_hash": "9637b438efa41a306771fe33c09ad9b50fad124596511080680554364ee9e22a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在其他 JavaScript 檔案中，您可以這樣存取原生模組並呼叫其方法："
+      }
+    },
+    {
+      "segment_id": "4de0f839",
+      "source_content": "```tsx\nimport CalendarModule from './CalendarModule';\nCalendarModule.createCalendarEvent('foo', 'bar');\n```",
+      "source_content_hash": "e7728dcf33250183c2db12c1f2f3ef4e0a2f9dbdf6add9ee4d5e696e3ccf315a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_4de0f839"
+      }
+    },
+    {
+      "segment_id": "dc53e8c3",
+      "source_content": "> This assumes that the place you are importing `CalendarModule` is in the same hierarchy as `CalendarModule.js`. Please update the relative import as necessary.",
+      "source_content_hash": "d4aca554a572391a857391f7cfbf6ddcf28971e854a70688e8ac81d213ed03f1",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 此範例假設導入 `CalendarModule` 的位置與 `CalendarModule.js` 處於相同目錄層級。請根據實際情況調整相對導入路徑。"
+      }
+    },
+    {
+      "segment_id": "381a5950",
+      "source_content": "### Argument Types",
+      "source_content_hash": "40bd87407b8ee98e082e5d23479cbfc7847ec40786ccecdc762ff9e6302e2fec",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 參數類型"
+      }
+    },
+    {
+      "segment_id": "1e0d7fbe",
+      "source_content": "When a native module method is invoked in JavaScript, React Native converts the arguments from JS objects to their Java/Kotlin object analogues. So for example, if your Java Native Module method accepts a double, in JS you need to call the method with a number. React Native will handle the conversion for you. Below is a list of the argument types supported for native module methods and the JavaScript equivalents they map to.",
+      "source_content_hash": "fd6a870a2bf9470a504473feb9cee15e4afee397d3a819cccd05a05a16eeda1c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 JavaScript 呼叫原生模組方法時，React Native 會將參數從 JS 物件轉換為對應的 Java/Kotlin 物件。舉例來說，若您的 Java 原生模組方法接收 double 類型，在 JS 中需用數字呼叫該方法。React Native 會自動處理轉換。以下是原生模組方法支援的參數類型及其對應的 JavaScript 等效類型清單："
+      }
+    },
+    {
+      "segment_id": "cd5595fd",
+      "source_content": "| Java          | Kotlin        | JavaScript |\n| ------------- | ------------- | ---------- |\n| Boolean       | Boolean       | ?boolean   |\n| boolean       |               | boolean    |\n| Double        | Double        | ?number    |\n| double        |               | number     |\n| String        | String        | string     |\n| Callback      | Callback      | Function   |\n| Promise       | Promise       | Promise    |\n| ReadableMap   | ReadableMap   | Object     |\n| ReadableArray | ReadableArray | Array      |",
+      "source_content_hash": "5d2fcb9831b4abdadcbed0e92b73abffc98cc9e59c0a2d74d3e7d9ac12e23e53",
+      "node_type": "table",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cd5595fd"
+      }
+    },
+    {
+      "segment_id": "5319e1bd",
+      "source_content": "> The following types are currently supported but will not be supported in TurboModules. Please avoid using them:\n>\n> - Integer Java/Kotlin -> ?number\n> - Float Java/Kotlin -> ?number\n> - int Java -> number\n> - float Java -> number",
+      "source_content_hash": "67e1f428e6ad6119e661eb1b4ec0b2e4385d32bff02c06fb3693015665203bc2",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 以下類型目前雖受支援，但 TurboModules 將不再支援，請避免使用：\n>\n> - Integer Java/Kotlin -> ?number\n> - Float Java/Kotlin -> ?number\n> - int Java -> number\n> - float Java -> number"
+      }
+    },
+    {
+      "segment_id": "46a44d60",
+      "source_content": "For argument types not listed above, you will need to handle the conversion yourself. For example, in Android, `Date` conversion is not supported out of the box. You can handle the conversion to the `Date` type within the native method yourself like so:",
+      "source_content_hash": "d1bd2c52956530f2774b4a43c8d2b2ebe54044e383ac37b92c670ce19301ca62",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於未列出的參數類型，您需自行處理轉換。例如在 Android 中，`Date` 類型的轉換並未內建支援。您可以在原生方法中自行處理轉換為 `Date` 類型，如下所示："
+      }
+    },
+    {
+      "segment_id": "d2cf81d1",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n    String dateFormat = \"yyyy-MM-dd\";\n    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);\n    Calendar eStartDate = Calendar.getInstance();\n    try {\n        eStartDate.setTime(sdf.parse(startDate));\n    }\n\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n    val dateFormat = \"yyyy-MM-dd\"\n    val sdf = SimpleDateFormat(dateFormat, Locale.US)\n    val eStartDate = Calendar.getInstance()\n    try {\n        sdf.parse(startDate)?.let {\n            eStartDate.time = it\n        }\n    }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "03fd87e40d106c74e3fa2b8bbf2baa7af329251d6490be7471f56fee96d149b3",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_d2cf81d1"
+      }
+    },
+    {
+      "segment_id": "dd33c745",
+      "source_content": "### Exporting Constants",
+      "source_content_hash": "4d42b2cda7ed644a929f1c7e1dd1606fbaaa3e68e9a000c7d416a03658c87078",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 導出常數"
+      }
+    },
+    {
+      "segment_id": "e548f48f",
+      "source_content": "A native module can export constants by implementing the native method `getConstants()`, which is available in JS. Below you will implement `getConstants()` and return a Map that contains a `DEFAULT_EVENT_NAME` constant you can access in JavaScript:",
+      "source_content_hash": "99144fa7acbd3b8928e7ab2bf9c9a75b8365c54b2f8936dea3f0f11a35f0067a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組可透過實作 `getConstants()` 原生方法來導出常數供 JS 使用。以下將實作 `getConstants()` 並返回包含 `DEFAULT_EVENT_NAME` 常數的 Map，該常數可在 JavaScript 中存取："
+      }
+    },
+    {
+      "segment_id": "6390496b",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@Override\npublic Map<String, Object> getConstants() {\n   final Map<String, Object> constants = new HashMap<>();\n   constants.put(\"DEFAULT_EVENT_NAME\", \"New Event\");\n   return constants;\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\noverride fun getConstants(): MutableMap<String, Any> =\n    hashMapOf(\"DEFAULT_EVENT_NAME\" to \"New Event\")\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "185356973e056cf0b1860bdccd4c054a94650e543f19ee1d7c226aac21649d1b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6390496b"
+      }
+    },
+    {
+      "segment_id": "d5059db6",
+      "source_content": "The constant can then be accessed by invoking `getConstants` on the native module in JS:",
+      "source_content_hash": "78250417ddfd37f0ce5e61853a4e17fa4aab1d176e6d23ad5b4993dade6d5a43",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著可透過在 JS 中呼叫原生模組的 `getConstants` 來存取常數："
+      }
+    },
+    {
+      "segment_id": "9ba63803",
+      "source_content": "```tsx\nconst {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();\nconsole.log(DEFAULT_EVENT_NAME);\n```",
+      "source_content_hash": "91bbde8ddec29d3097e966bf200780dec41b64799046cdfb208974558d4a2016",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_9ba63803"
+      }
+    },
+    {
+      "segment_id": "50cd4f87",
+      "source_content": "Technically it is possible to access constants exported in `getConstants()` directly off the native module object. This will no longer be supported with TurboModules, so we encourage the community to switch to the above approach to avoid necessary migration down the line.",
+      "source_content_hash": "2470efa573be76e83948a00e0f542acc2f3a67c48e90e6b8905813cb6c3d0cf0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "技術上可直接從原生模組物件存取透過 `getConstants()` 導出的常數。但 TurboModules 將不再支援此方式，因此我們建議社群改用上述方法以避免後續遷移。"
+      }
+    },
+    {
+      "segment_id": "cdf12573",
+      "source_content": "> That currently constants are exported only at initialization time, so if you change getConstants values at runtime it won't affect the JavaScript environment. This will change with Turbomodules. With Turbomodules, `getConstants()` will become a regular native module method, and each invocation will hit the native side.",
+      "source_content_hash": "0e98da5bb199bcfcf3ee1004f880b011f9fb28b9ec7b8bd9d5c13b6fbaba0299",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 請注意目前常數僅在初始化時導出，若在運行時修改 getConstants 的值，不會影響 JavaScript 環境。此行為將在 Turbomodules 中改變。屆時 `getConstants()` 將成為常規原生模組方法，每次呼叫都會觸達原生端。"
+      }
+    },
+    {
+      "segment_id": "b7644a77",
+      "source_content": "### Callbacks",
+      "source_content_hash": "4cc466bab636a8f5da822ff96924fc13ddef00e02129dac068cee7f16c16ab84",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 回調函數"
+      }
+    },
+    {
+      "segment_id": "b5bd7d92",
+      "source_content": "Native modules also support a unique kind of argument: a callback. Callbacks are used to pass data from Java/Kotlin to JavaScript for asynchronous methods. They can also be used to asynchronously execute JavaScript from the native side.",
+      "source_content_hash": "8baa654141b6359823fb0a140ef48c88f45aea876a896dee59431bdba1de2b4e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組還支援一種特殊參數：回調函數。回調用於在非同步方法中將資料從 Java/Kotlin 傳遞至 JavaScript，也可用於從原生端非同步執行 JavaScript。"
+      }
+    },
+    {
+      "segment_id": "eed7cff5",
+      "source_content": "In order to create a native module method with a callback, first import the `Callback` interface, and then add a new parameter to your native module method of type `Callback`. There are a couple of nuances with callback arguments that will soon be lifted with TurboModules. First off, you can only have two callbacks in your function arguments- a successCallback and a failureCallback. In addition, the last argument to a native module method call, if it's a function, is treated as the successCallback, and the second to last argument to a native module method call, if it's a function, is treated as the failure callback.",
+      "source_content_hash": "9a4e1ab439288ebcafd1ca1a7845f776d926789b2b69d534348e58da6a7f4047",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "要建立帶回調的原生模組方法，需先導入 `Callback` 介面，然後在原生模組方法中添加類型為 `Callback` 的新參數。回調參數有幾個 TurboModules 即將解除的限制：首先，函數參數中最多只能有兩個回調——successCallback 和 failureCallback。此外，若原生模組方法呼叫的最後一個參數是函數，它會被視為 successCallback；倒數第二個參數若是函數，則被視為 failureCallback。"
+      }
+    },
+    {
+      "segment_id": "ba03b068",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nimport com.facebook.react.bridge.Callback;\n\n@ReactMethod\npublic void createCalendarEvent(String name, String location, Callback callBack) {\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nimport com.facebook.react.bridge.Callback\n\n@ReactMethod fun createCalendarEvent(name: String, location: String, callback: Callback) {}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "d1e9e70e4c2aa4667c334776bc3654194cf153b139bd24ac14c09f04eb74b15f",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ba03b068"
+      }
+    },
+    {
+      "segment_id": "0e5d7420",
+      "source_content": "You can invoke the callback in your Java/Kotlin method, providing whatever data you want to pass to JavaScript. Please note that you can only pass serializable data from native code to JavaScript. If you need to pass back a native object you can use `WriteableMaps`, if you need to use a collection use `WritableArrays`. It is also important to highlight that the callback is not invoked immediately after the native function completes. Below the ID of an event created in an earlier call is passed to the callback.",
+      "source_content_hash": "ee0e3c6618f96672bb99be974bc87c842482a7e4ab9a58bc121b3e8e1ef645d2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "您可在 Java/Kotlin 方法中呼叫回調，傳遞任何想送至 JavaScript 的資料。請注意只能從原生代碼傳遞可序列化資料至 JavaScript。若需傳回原生物件，可使用 `WriteableMaps`；若需使用集合，則用 `WritableArrays`。另需強調回調不會在原生函數完成後立即觸發。以下範例將先前呼叫中建立的事件 ID 傳遞給回調："
+      }
+    },
+    {
+      "segment_id": "bc851dca",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n  @ReactMethod\n   public void createCalendarEvent(String name, String location, Callback callBack) {\n       Integer eventId = ...\n       callBack.invoke(eventId);\n   }\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n  @ReactMethod\n  fun createCalendarEvent(name: String, location: String, callback: Callback) {\n      val eventId = ...\n      callback.invoke(eventId)\n  }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "542ea387e8afebe86725d34ab33484a698192933d2d98af447148126f405254d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bc851dca"
+      }
+    },
+    {
+      "segment_id": "5e9040ec",
+      "source_content": "This method could then be accessed in JavaScript using:",
+      "source_content_hash": "32d31a7eb8d446c15b6119341fa98a863281abba51204b55e4c3a3849b7ca103",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著可在 JavaScript 中透過以下方式存取此方法："
+      }
+    },
+    {
+      "segment_id": "a2c4e1d4",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEvent(\n    'Party',\n    'My House',\n    eventId => {\n      console.log(`Created a new event with id ${eventId}`);\n    },\n  );\n};\n```",
+      "source_content_hash": "f0ee817156d71c67d2ee2ff1d82e98045d1da3c505f63282839ded23925276b3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a2c4e1d4"
+      }
+    },
+    {
+      "segment_id": "907baf3f",
+      "source_content": "Another important detail to note is that a native module method can only invoke one callback, one time. This means that you can either call a success callback or a failure callback, but not both, and each callback can only be invoked at most one time. A native module can, however, store the callback and invoke it later.",
+      "source_content_hash": "811503e67c366f3515f0de1d2833845053272abb0b0e3479c2f3eee8532873e1",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一重要細節是：原生模組方法只能呼叫一次回調。這意味著您只能呼叫成功回調或失敗回調其中之一，且每個回調最多只能觸發一次。不過原生模組可儲存回調並稍後觸發。"
+      }
+    },
+    {
+      "segment_id": "a10f4259",
+      "source_content": "There are two approaches to error handling with callbacks. The first is to follow Node’s convention and treat the first argument passed to the callback as an error object.",
+      "source_content_hash": "97b5d558447c79bcd1ee56a6163b4be9242b9801bfbb9520c4ccc1c63be4c2ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "回調的錯誤處理有兩種方式。第一種是遵循 Node 慣例，將傳遞給回調的第一個參數視為錯誤物件。"
+      }
+    },
+    {
+      "segment_id": "5629df1a",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n  @ReactMethod\n   public void createCalendarEvent(String name, String location, Callback callBack) {\n       Integer eventId = ...\n       callBack.invoke(null, eventId);\n   }\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n  @ReactMethod\n  fun createCalendarEvent(name: String, location: String, callback: Callback) {\n      val eventId = ...\n      callback.invoke(null, eventId)\n  }\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "e429c4acd079e9c44af8272e0dd4e6d0d59143fd0630b81212a410ad9004739e",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_5629df1a"
+      }
+    },
+    {
+      "segment_id": "57163c70",
+      "source_content": "In JavaScript, you can then check the first argument to see if an error was passed through:",
+      "source_content_hash": "89a74f5b431b98bdea0aff8ad6eb38f38dca28752dc5824dbed3e1bc00a41725",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在 JavaScript 中，您可以檢查第一個參數來判斷是否有錯誤傳回："
+      }
+    },
+    {
+      "segment_id": "82b3aa4f",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEvent(\n    'testName',\n    'testLocation',\n    (error, eventId) => {\n      if (error) {\n        console.error(`Error found! ${error}`);\n      }\n      console.log(`event id ${eventId} returned`);\n    },\n  );\n};\n```",
+      "source_content_hash": "52456611a8db3eab680d3711fd3045cec0f5c300b59263dae9a74a5d09f3963a",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_82b3aa4f"
+      }
+    },
+    {
+      "segment_id": "568179b3",
+      "source_content": "Another option is to use an onSuccess and onFailure callback:",
+      "source_content_hash": "d58170a3b8e6f3b79a3f5d06483d3f9d3b87621349a1b0d9a4037c9bbe0aec34",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個選項是使用 onSuccess 和 onFailure 回調函數："
+      }
+    },
+    {
+      "segment_id": "51210880",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@ReactMethod\npublic void createCalendarEvent(String name, String location, Callback myFailureCallback, Callback mySuccessCallback) {\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n@ReactMethod\n  fun createCalendarEvent(\n      name: String,\n      location: String,\n      myFailureCallback: Callback,\n      mySuccessCallback: Callback\n  ) {}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "6099f8c0aeb51a1b4cd5ca7bf8d299c0e1e56ee0805eec641583bd545a0185c7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_51210880"
+      }
+    },
+    {
+      "segment_id": "d27371fb",
+      "source_content": "Then in JavaScript you can add a separate callback for error and success responses:",
+      "source_content_hash": "3bbee119c5f101832cabc187311219aa4de74e70a4fdb35c3e0a465944d81481",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "接著在 JavaScript 中，您可以為錯誤和成功回應分別添加回調函數："
+      }
+    },
+    {
+      "segment_id": "2ae0569c",
+      "source_content": "```tsx\nconst onPress = () => {\n  CalendarModule.createCalendarEvent(\n    'testName',\n    'testLocation',\n    error => {\n      console.error(`Error found! ${error}`);\n    },\n    eventId => {\n      console.log(`event id ${eventId} returned`);\n    },\n  );\n};\n```",
+      "source_content_hash": "aa5c87dfdeb7954497d89b95fc6442ff56d4dc2cb546f30fcf41e63ee126ab5c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_2ae0569c"
+      }
+    },
+    {
+      "segment_id": "2c3117df",
+      "source_content": "### Promises",
+      "source_content_hash": "8a88424a61003ba7aed1aafe60c95d8cff33b622390be28d59d2d5d0a8d09b5b",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### Promise"
+      }
+    },
+    {
+      "segment_id": "3780eb14",
+      "source_content": "Native modules can also fulfill a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), which can simplify your JavaScript, especially when using ES2016's [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax. When the last parameter of a native module Java/Kotlin method is a Promise, its corresponding JS method will return a JS Promise object.",
+      "source_content_hash": "a30616fea1a1a0dd0877a971881da03ad964b082186d715be7c6fab48852d1f5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組也可以實現 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，這能簡化您的 JavaScript 程式碼，特別是當使用 ES2016 的 [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) 語法時。當原生模組 Java/Kotlin 方法的最後一個參數是 Promise 時，其對應的 JS 方法將回傳一個 JS Promise 物件。"
+      }
+    },
+    {
+      "segment_id": "cfa0fec5",
+      "source_content": "Refactoring the above code to use a promise instead of callbacks looks like this:",
+      "source_content_hash": "a8b089a1e8e253f053b237f5cef56bd20ca06e6da66318533accce3cf1842c3a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "將上述程式碼重構為使用 promise 而非回調函數的範例如下："
+      }
+    },
+    {
+      "segment_id": "14d70e86",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nimport com.facebook.react.bridge.Promise;\n\n@ReactMethod\npublic void createCalendarEvent(String name, String location, Promise promise) {\n    try {\n        Integer eventId = ...\n        promise.resolve(eventId);\n    } catch(Exception e) {\n        promise.reject(\"Create Event Error\", e);\n    }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nimport com.facebook.react.bridge.Promise\n\n@ReactMethod\nfun createCalendarEvent(name: String, location: String, promise: Promise) {\n    try {\n        val eventId = ...\n        promise.resolve(eventId)\n    } catch (e: Throwable) {\n        promise.reject(\"Create Event Error\", e)\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "9b3c5c55fb106ef48e9096d38650163640d7406de5e89af582f061777b6e31f6",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_14d70e86"
+      }
+    },
+    {
+      "segment_id": "3fb60d02",
+      "source_content": "> Similar to callbacks, a native module method can either reject or resolve a promise (but not both) and can do so at most once. This means that you can either call a success callback or a failure callback, but not both, and each callback can only be invoked at most one time. A native module can, however, store the callback and invoke it later.",
+      "source_content_hash": "a7f339736168c98ace085b20b4aa9e8fed688edf9a463d4a4ea565b10d893e1d",
+      "node_type": "blockquote",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "> 與回調函數類似，原生模組方法可以拒絕（reject）或解決（resolve）一個 promise（但不能同時進行），且最多只能執行一次。這表示您只能呼叫成功回調或失敗回調其中之一，且每個回調最多只能被呼叫一次。不過，原生模組可以儲存回調並稍後再呼叫。"
+      }
+    },
+    {
+      "segment_id": "e0b67011",
+      "source_content": "The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:",
+      "source_content_hash": "ae8e05cb99e731d66d7994116580ef4c9eb076a0bb2c49c4429af1f22a587380",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此方法的 JavaScript 對應部分會回傳一個 Promise。這意味著您可以在 async 函數中使用 `await` 關鍵字來呼叫它並等待其結果："
+      }
+    },
+    {
+      "segment_id": "a5ef3b1b",
+      "source_content": "```tsx\nconst onSubmit = async () => {\n  try {\n    const eventId = await CalendarModule.createCalendarEvent(\n      'Party',\n      'My House',\n    );\n    console.log(`Created a new event with id ${eventId}`);\n  } catch (e) {\n    console.error(e);\n  }\n};\n```",
+      "source_content_hash": "d2eb4b80ca70e4ce4a1a8fc4489cc83119ca91e4b5607fea1d841e3b76a95ace",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a5ef3b1b"
+      }
+    },
+    {
+      "segment_id": "09fde125",
+      "source_content": "The reject method takes different combinations of the following arguments:",
+      "source_content_hash": "cfa89394538407f6a0403571ff49e06f3c13f1dcee367298cf8f97da6065f5ba",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "reject 方法接受以下參數的組合："
+      }
+    },
+    {
+      "segment_id": "36b93525",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nString code, String message, WritableMap userInfo, Throwable throwable\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\ncode: String, message: String, userInfo: WritableMap, throwable: Throwable\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "68124cb35ba9d95194a87432e0178a8a5b702e005f1475b745b22dd36f65b8c7",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_36b93525"
+      }
+    },
+    {
+      "segment_id": "3c16a1f5",
+      "source_content": "For more detail, you can find the `Promise.java` interface [here](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/Promise.java). If `userInfo` is not provided, ReactNative will set it to null. For the rest of the parameters React Native will use a default value. The `message` argument provides the error `message` shown at the top of an error call stack. Below is an example of the error message shown in JavaScript from the following reject call in Java/Kotlin.",
+      "source_content_hash": "f85068947a986fdf6a0d73c33081acc0b497492ccacca674611598dd22dad638",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "更多細節，您可以參考 [Promise.java](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/Promise.java) 介面。如果未提供 `userInfo`，React Native 會將其設為 null。對於其餘參數，React Native 會使用預設值。`message` 參數提供了錯誤呼叫堆疊頂部顯示的錯誤 `message`。以下是 Java/Kotlin 中 reject 呼叫在 JavaScript 中顯示的錯誤訊息範例。"
+      }
+    },
+    {
+      "segment_id": "e04563fb",
+      "source_content": "Java/Kotlin reject call:",
+      "source_content_hash": "4b52f4db952ee4deae7807f97a5a1f0ae276a254ff22ecc26cae30bc755417c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Java/Kotlin 的 reject 呼叫："
+      }
+    },
+    {
+      "segment_id": "1d42f0b8",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\npromise.reject(\"Create Event error\", \"Error parsing date\", e);\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\npromise.reject(\"Create Event error\", \"Error parsing date\", e)\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "400bb3b7a72d1f7455448efd1fbe2cd7e7d9cf99fd135c1753d48e27f6957214",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1d42f0b8"
+      }
+    },
+    {
+      "segment_id": "63defcb3",
+      "source_content": "Error message in React Native App when promise is rejected:",
+      "source_content_hash": "a1a75b39100a21044e3625f668671b694cfb75dd4f04cc688aa5de4117ec3f8f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當 promise 被拒絕時，React Native 應用中顯示的錯誤訊息："
+      }
+    },
+    {
+      "segment_id": "cfcf3fde",
+      "source_content": "<figure>\n  <img src=\"/docs/assets/native-modules-android-errorscreen.png\" width=\"200\" alt=\"Image of error message in React Native app.\" />\n  <figcaption>Image of error message</figcaption>\n</figure>",
+      "source_content_hash": "a277229e262e845d42ac85112c4115caa9dd3b30c39f6147f9bfa9255f67a314",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_cfcf3fde"
+      }
+    },
+    {
+      "segment_id": "c77b71c6",
+      "source_content": "### Sending Events to JavaScript",
+      "source_content_hash": "712b1fde653207eba21d9c96f9ff49f503c7560fb7fcda23554b9b041197474f",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 傳送事件至 JavaScript"
+      }
+    },
+    {
+      "segment_id": "5c50226f",
+      "source_content": "Native modules can signal events to JavaScript without being invoked directly. For example, you might want to signal to JavaScript a reminder that a calendar event from the native Android calendar app will occur soon. The easiest way to do this is to use the `RCTDeviceEventEmitter` which can be obtained from the `ReactContext` as in the code snippet below.",
+      "source_content_hash": "586611f83649996c0bfbb2dec06ecdac03b6502437f50a3c984a181b60aed6f8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "原生模組可以在未被直接呼叫的情況下向 JavaScript 發出事件訊號。例如，您可能希望向 JavaScript 發出訊號，提醒原生 Android 日曆應用中的日曆事件即將發生。最簡單的方法是使用 `RCTDeviceEventEmitter`，可以從 `ReactContext` 中取得，如下方程式碼片段所示。"
+      }
+    },
+    {
+      "segment_id": "1eb7e1bf",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n...\nimport com.facebook.react.modules.core.DeviceEventManagerModule;\nimport com.facebook.react.bridge.WritableMap;\nimport com.facebook.react.bridge.Arguments;\n...\nprivate void sendEvent(ReactContext reactContext,\n                      String eventName,\n                      @Nullable WritableMap params) {\n reactContext\n     .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)\n     .emit(eventName, params);\n}\n\nprivate int listenerCount = 0;\n\n@ReactMethod\npublic void addListener(String eventName) {\n  if (listenerCount == 0) {\n    // Set up any upstream listeners or background tasks as necessary\n  }\n\n  listenerCount += 1;\n}\n\n@ReactMethod\npublic void removeListeners(Integer count) {\n  listenerCount -= count;\n  if (listenerCount == 0) {\n    // Remove upstream listeners, stop unnecessary background tasks\n  }\n}\n...\nWritableMap params = Arguments.createMap();\nparams.putString(\"eventProperty\", \"someValue\");\n...\nsendEvent(reactContext, \"EventReminder\", params);\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\n...\nimport com.facebook.react.bridge.WritableMap\nimport com.facebook.react.bridge.Arguments\nimport com.facebook.react.modules.core.DeviceEventManagerModule\n...\n\nprivate fun sendEvent(reactContext: ReactContext, eventName: String, params: WritableMap?) {\n    reactContext\n      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)\n      .emit(eventName, params)\n}\n\nprivate var listenerCount = 0\n\n@ReactMethod\nfun addListener(eventName: String) {\n  if (listenerCount == 0) {\n    // Set up any upstream listeners or background tasks as necessary\n  }\n\n  listenerCount += 1\n}\n\n@ReactMethod\nfun removeListeners(count: Int) {\n  listenerCount -= count\n  if (listenerCount == 0) {\n    // Remove upstream listeners, stop unnecessary background tasks\n  }\n}\n...\nval params = Arguments.createMap().apply {\n    putString(\"eventProperty\", \"someValue\")\n}\n...\nsendEvent(reactContext, \"EventReminder\", params)\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "9bf3d490e60fcbcf54c8da5bbcc9721f78de7fa6c1df2f84a7e4151de4a5b3c1",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_1eb7e1bf"
+      }
+    },
+    {
+      "segment_id": "d543066f",
+      "source_content": "JavaScript modules can then register to receive events by `addListener` on the [NativeEventEmitter](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/EventEmitter/NativeEventEmitter.js) class.",
+      "source_content_hash": "f528c6dc85a1c42554ee3810d41a1f0d7b2348b0b0d64aa0dde546a0b807ed32",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "JavaScript 模組可以透過 [NativeEventEmitter](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/EventEmitter/NativeEventEmitter.js) 類別的 `addListener` 來註冊接收事件。"
+      }
+    },
+    {
+      "segment_id": "026402b3",
+      "source_content": "```tsx\nimport {NativeEventEmitter, NativeModules} from 'react-native';\n...\nuseEffect(() => {\n    const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);\n    let eventListener = eventEmitter.addListener('EventReminder', event => {\n      console.log(event.eventProperty) // \"someValue\"\n    });\n\n    // Removes the listener once unmounted\n    return () => {\n      eventListener.remove();\n    };\n  }, []);\n```",
+      "source_content_hash": "83dacb31510e4b9920c08aec20e3d3804e2c8836cec7c8922ed1888059e78fa3",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_026402b3"
+      }
+    },
+    {
+      "segment_id": "48627e95",
+      "source_content": "### Getting Activity Result from startActivityForResult",
+      "source_content_hash": "1152d1c61db5e58a5823d15b1b47f52d86eae497c95bb9ffb506b9531e01d5a8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 從 startActivityForResult 取得活動結果"
+      }
+    },
+    {
+      "segment_id": "c9c79d22",
+      "source_content": "You'll need to listen to `onActivityResult` if you want to get results from an activity you started with `startActivityForResult`. To do this, you must extend `BaseActivityEventListener` or implement `ActivityEventListener`. The former is preferred as it is more resilient to API changes. Then, you need to register the listener in the module's constructor like so:",
+      "source_content_hash": "9a6be0fa436c16c7900c5f0ec6a526cf2a9b3faba58f3435e96aa3aa09187681",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果您想從透過 `startActivityForResult` 啟動的活動中取得結果，您需要監聽 `onActivityResult`。為此，您必須擴展 `BaseActivityEventListener` 或實作 `ActivityEventListener`。前者更為推薦，因為它對 API 變更更具彈性。接著，您需要在模組的建構函式中註冊監聽器，如下所示："
+      }
+    },
+    {
+      "segment_id": "6bd02f52",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nreactContext.addActivityEventListener(mActivityResultListener);\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nreactContext.addActivityEventListener(mActivityResultListener);\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "4027ace359dd4d419a96688b28ae3c922aa6a2ad4108e0b9276cc416bda13842",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_6bd02f52"
+      }
+    },
+    {
+      "segment_id": "c6d5ef99",
+      "source_content": "Now you can listen to `onActivityResult` by implementing the following method:",
+      "source_content_hash": "d44aeacabe45279469d4628a852eca3c864a858a17a30864e4fa85acda59bb75",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在您可以透過實作以下方法來監聽 `onActivityResult`："
+      }
+    },
+    {
+      "segment_id": "42357f87",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@Override\npublic void onActivityResult(\n final Activity activity,\n final int requestCode,\n final int resultCode,\n final Intent intent) {\n // Your logic here\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\noverride fun onActivityResult(\n    activity: Activity?,\n    requestCode: Int,\n    resultCode: Int,\n    intent: Intent?\n) {\n    // Your logic here\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "363206c17045c861afcdc6c596debb2cd84f25d1a08d293e1e7685df905b7b82",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_42357f87"
+      }
+    },
+    {
+      "segment_id": "976d945d",
+      "source_content": "Let's implement a basic image picker to demonstrate this. The image picker will expose the method `pickImage` to JavaScript, which will return the path of the image when called.",
+      "source_content_hash": "04e9cac3ae61111b939409c419be87847344010dc0c6cf1d02ab93f88d44edfb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "讓我們實作一個基本的圖片選擇器來示範這一點。圖片選擇器將向 JavaScript 公開 `pickImage` 方法，呼叫時會回傳圖片的路徑。"
+      }
+    },
+    {
+      "segment_id": "c20f491d",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```kotlin\npublic class ImagePickerModule extends ReactContextBaseJavaModule {\n\n  private static final int IMAGE_PICKER_REQUEST = 1;\n  private static final String E_ACTIVITY_DOES_NOT_EXIST = \"E_ACTIVITY_DOES_NOT_EXIST\";\n  private static final String E_PICKER_CANCELLED = \"E_PICKER_CANCELLED\";\n  private static final String E_FAILED_TO_SHOW_PICKER = \"E_FAILED_TO_SHOW_PICKER\";\n  private static final String E_NO_IMAGE_DATA_FOUND = \"E_NO_IMAGE_DATA_FOUND\";\n\n  private Promise mPickerPromise;\n\n  private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {\n\n    @Override\n    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent intent) {\n      if (requestCode == IMAGE_PICKER_REQUEST) {\n        if (mPickerPromise != null) {\n          if (resultCode == Activity.RESULT_CANCELED) {\n            mPickerPromise.reject(E_PICKER_CANCELLED, \"Image picker was cancelled\");\n          } else if (resultCode == Activity.RESULT_OK) {\n            Uri uri = intent.getData();\n\n            if (uri == null) {\n              mPickerPromise.reject(E_NO_IMAGE_DATA_FOUND, \"No image data found\");\n            } else {\n              mPickerPromise.resolve(uri.toString());\n            }\n          }\n\n          mPickerPromise = null;\n        }\n      }\n    }\n  };\n\n  ImagePickerModule(ReactApplicationContext reactContext) {\n    super(reactContext);\n\n    // Add the listener for `onActivityResult`\n    reactContext.addActivityEventListener(mActivityEventListener);\n  }\n\n  @Override\n  public String getName() {\n    return \"ImagePickerModule\";\n  }\n\n  @ReactMethod\n  public void pickImage(final Promise promise) {\n    Activity currentActivity = getCurrentActivity();\n\n    if (currentActivity == null) {\n      promise.reject(E_ACTIVITY_DOES_NOT_EXIST, \"Activity doesn't exist\");\n      return;\n    }\n\n    // Store the promise to resolve/reject when picker returns data\n    mPickerPromise = promise;\n\n    try {\n      final Intent galleryIntent = new Intent(Intent.ACTION_PICK);\n\n      galleryIntent.setType(\"image/*\");\n\n      final Intent chooserIntent = Intent.createChooser(galleryIntent, \"Pick an image\");\n\n      currentActivity.startActivityForResult(chooserIntent, IMAGE_PICKER_REQUEST);\n    } catch (Exception e) {\n      mPickerPromise.reject(E_FAILED_TO_SHOW_PICKER, e);\n      mPickerPromise = null;\n    }\n  }\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nclass ImagePickerModule(reactContext: ReactApplicationContext) :\n    ReactContextBaseJavaModule(reactContext) {\n\n    private var pickerPromise: Promise? = null\n\n    private val activityEventListener =\n        object : BaseActivityEventListener() {\n            override fun onActivityResult(\n                activity: Activity?,\n                requestCode: Int,\n                resultCode: Int,\n                intent: Intent?\n            ) {\n                if (requestCode == IMAGE_PICKER_REQUEST) {\n                    pickerPromise?.let { promise ->\n                        when (resultCode) {\n                            Activity.RESULT_CANCELED ->\n                                promise.reject(E_PICKER_CANCELLED, \"Image picker was cancelled\")\n                            Activity.RESULT_OK -> {\n                                val uri = intent?.data\n\n                                uri?.let { promise.resolve(uri.toString())}\n                                    ?: promise.reject(E_NO_IMAGE_DATA_FOUND, \"No image data found\")\n                            }\n                        }\n\n                        pickerPromise = null\n                    }\n                }\n            }\n        }\n\n    init {\n        reactContext.addActivityEventListener(activityEventListener)\n    }\n\n    override fun getName() = \"ImagePickerModule\"\n\n    @ReactMethod\n    fun pickImage(promise: Promise) {\n        val activity = currentActivity\n\n        if (activity == null) {\n            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, \"Activity doesn't exist\")\n            return\n        }\n\n        pickerPromise = promise\n\n        try {\n            val galleryIntent = Intent(Intent.ACTION_PICK).apply { type = \"image\\/*\" }\n\n            val chooserIntent = Intent.createChooser(galleryIntent, \"Pick an image\")\n\n            activity.startActivityForResult(chooserIntent, IMAGE_PICKER_REQUEST)\n        } catch (t: Throwable) {\n            pickerPromise?.reject(E_FAILED_TO_SHOW_PICKER, t)\n            pickerPromise = null\n        }\n    }\n\n    companion object {\n        const val IMAGE_PICKER_REQUEST = 1\n        const val E_ACTIVITY_DOES_NOT_EXIST = \"E_ACTIVITY_DOES_NOT_EXIST\"\n        const val E_PICKER_CANCELLED = \"E_PICKER_CANCELLED\"\n        const val E_FAILED_TO_SHOW_PICKER = \"E_FAILED_TO_SHOW_PICKER\"\n        const val E_NO_IMAGE_DATA_FOUND = \"E_NO_IMAGE_DATA_FOUND\"\n    }\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "1cc5b4c552b9b8761125a0fd8a36d55596eef545d78afebeae4372c1336312b3",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c20f491d"
+      }
+    },
+    {
+      "segment_id": "6452e8f4",
+      "source_content": "### Listening to Lifecycle Events",
+      "source_content_hash": "06970a9ef57bc5222809fa5a1c6a24774f21585af901ac5583d5e588021320a2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 監聽生命週期事件"
+      }
+    },
+    {
+      "segment_id": "ff1740b6",
+      "source_content": "Listening to the activity's LifeCycle events such as `onResume`, `onPause` etc. is very similar to how `ActivityEventListener` was implemented. The module must implement `LifecycleEventListener`. Then, you need to register a listener in the module's constructor like so:",
+      "source_content_hash": "5ee973a5ebd8f2b1598f6f6b231cc92be8cff0b764d09965feb4b7c85c4fa59f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "監聽活動的生命週期事件（如 `onResume`、`onPause` 等）的實現方式與 `ActivityEventListener` 類似。模組必須實作 `LifecycleEventListener`，然後在模組的建構函式中註冊監聽器，如下所示："
+      }
+    },
+    {
+      "segment_id": "ce96bd7c",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\nreactContext.addLifecycleEventListener(this);\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\nreactContext.addLifecycleEventListener(this)\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "ce7d261746e91ce86c47e692053ae5fc2090bc9cf436dca7b52076d48a0ac7bf",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_ce96bd7c"
+      }
+    },
+    {
+      "segment_id": "dffdb620",
+      "source_content": "Now you can listen to the activity's LifeCycle events by implementing the following methods:",
+      "source_content_hash": "06fe5f7c531dc7a0592b17d51807fd9bc8463204ec5c8e85bfdc8d3ff07b386f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在，您可以通過實作以下方法來監聽活動的生命週期事件："
+      }
+    },
+    {
+      "segment_id": "01bc36c5",
+      "source_content": "<Tabs groupId=\"android-language\" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>\n<TabItem value=\"java\">\n\n```java\n@Override\npublic void onHostResume() {\n   // Activity `onResume`\n}\n@Override\npublic void onHostPause() {\n   // Activity `onPause`\n}\n@Override\npublic void onHostDestroy() {\n   // Activity `onDestroy`\n}\n```\n\n</TabItem>\n<TabItem value=\"kotlin\">\n\n```kotlin\noverride fun onHostResume() {\n    // Activity `onResume`\n}\n\noverride fun onHostPause() {\n    // Activity `onPause`\n}\n\noverride fun onHostDestroy() {\n    // Activity `onDestroy`\n}\n```\n\n</TabItem>\n</Tabs>",
+      "source_content_hash": "3021ce222efbd33bf9334f76567744f0ce45b16f78a8c479fd1f012577d97b23",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_01bc36c5"
+      }
+    },
+    {
+      "segment_id": "e2603a25",
+      "source_content": "### Threading",
+      "source_content_hash": "9aae4255ed6ac7efaa3db4ed4d34fec1866e777d8a297655c52c6b6bcaf99609",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 執行緒處理"
+      }
+    },
+    {
+      "segment_id": "93bd4d5a",
+      "source_content": "To date, on Android, all native module async methods execute on one thread. Native modules should not have any assumptions about what thread they are being called on, as the current assignment is subject to change in the future. If a blocking call is required, the heavy work should be dispatched to an internally managed worker thread, and any callbacks distributed from there.",
+      "source_content_hash": "5fcfc97dd852b10db1063511a611747834a77139baa45d6793590ec8f2798462",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "截至目前，在 Android 上，所有原生模組的非同步方法都在單一執行緒上執行。原生模組不應對其被呼叫的執行緒做出任何假設，因為當前的分配方式可能在未來發生變化。如果需要進行阻塞呼叫，繁重的工作應分派到內部管理的工作執行緒，並從那裡分發任何回調。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.76/legacy/native-modules-android.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.653121+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "692dd69f9f284f072e01155ae770cef80f1c2617f1115748011d390bda97587d"
+  }
+}

@@ -1,0 +1,586 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/native-components-ios.md",
+  "source_file_content_hash": "04d31f15a54eec9206c15f5b24bc2fb4523d1b681a65b8e9d22f7deca12248be",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: native-components-ios\ntitle: iOS Native UI Components\n---",
+      "source_content_hash": "d1d0e836fb21942902c9aa3ac1f90acfe139c188e8208a5ae96f7e79e80cd2d8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4d1292be",
+      "source_content": "import NativeDeprecated from './the-new-architecture/\\_markdown_native_deprecation.mdx'",
+      "source_content_hash": "0e53d2663ca7ee44056ad6b215d06a3e68169fbc99f17fbeb99e4507b2894124",
+      "node_type": "mdxjsEsm",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "37387e33",
+      "source_content": "<NativeDeprecated />",
+      "source_content_hash": "1680a0727658899157f198b9f9f0a950c884554cdfaa045c2229262db270638c",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "There are tons of native UI widgets out there ready to be used in the latest apps - some of them are part of the platform, others are available as third-party libraries, and still more might be in use in your very own portfolio. React Native has several of the most critical platform components already wrapped, like `ScrollView` and `TextInput`, but not all of them, and certainly not ones you might have written yourself for a previous app. Fortunately, we can wrap up these existing components for seamless integration with your React Native application.",
+      "source_content_hash": "538787c38c889e971a3c753c17ab28c853efa9e6168d25e25d6efe0cabcbdab4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Like the native module guide, this too is a more advanced guide that assumes you are somewhat familiar with iOS programming. This guide will show you how to build a native UI component, walking you through the implementation of a subset of the existing `MapView` component available in the core React Native library.",
+      "source_content_hash": "1bdadbcf15354ab4d58f58109dd1edf8a8fa4a45feb4bf828e5be3bc4976b530",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## iOS MapView example",
+      "source_content_hash": "d43d32c1a486674a228d472e8910a45e2669255a082390eb64294e7d04d1c742",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Let's say we want to add an interactive Map to our app - might as well use [`MKMapView`](https://developer.apple.com/library/prerelease/mac/documentation/MapKit/Reference/MKMapView_Class/index.html), we only need to make it usable from JavaScript.",
+      "source_content_hash": "d25a07d056b1cfa7a3502bfcf0bd46198ea98dcb893723b4654c5a087e9fdcf5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "Native views are created and manipulated by subclasses of `RCTViewManager`. These subclasses are similar in function to view controllers, but are essentially singletons - only one instance of each is created by the bridge. They expose native views to the `RCTUIManager`, which delegates back to them to set and update the properties of the views as necessary. The `RCTViewManager`s are also typically the delegates for the views, sending events back to JavaScript via the bridge.",
+      "source_content_hash": "69d536e80a5fd2d3a472052652ce8e3a45b0b63f2401a97e532eadb8b1331990",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "To expose a view you can:",
+      "source_content_hash": "12a03e90311a994b7cce144a9c8397ed7b1f5295aaa489adc30fde480a3d39b7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "da23c906",
+      "source_content": "- Subclass `RCTViewManager` to create a manager for your component.\n- Add the `RCT_EXPORT_MODULE()` marker macro.\n- Implement the `-(UIView *)view` method.",
+      "source_content_hash": "e8a66e44729f8842f811fff5419ab812e2be802699c50d4ce7e874011ecf3382",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a89b882e",
+      "source_content": "```objectivec title='RNTMapManager.m'\n#import <MapKit/MapKit.h>\n\n#import <React/RCTViewManager.h>\n\n@interface RNTMapManager : RCTViewManager\n@end\n\n@implementation RNTMapManager\n\nRCT_EXPORT_MODULE(RNTMap)\n\n- (UIView *)view\n{\n  return [[MKMapView alloc] init];\n}\n\n@end\n```",
+      "source_content_hash": "2c54c862428a1899c77e3f0cf56eba014e3026e087b2f2722d9930f1d431521b",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "80e5ac71",
+      "source_content": ":::note\nDo not attempt to set the `frame` or `backgroundColor` properties on the `UIView` instance that you expose through the `-view` method.\nReact Native will overwrite the values set by your custom class in order to match your JavaScript component's layout props.\nIf you need this granularity of control it might be better to wrap the `UIView` instance you want to style in another `UIView` and return the wrapper `UIView` instead.\nSee [Issue 2948](https://github.com/facebook/react-native/issues/2948) for more context.\n:::",
+      "source_content_hash": "d84dd024ce173b3d54a171357def731d99d6480ad3d9cba87fd1290ccb5f398a",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "17bc5bbf",
+      "source_content": ":::info\nIn the example above, we prefixed our class name with `RNT`. Prefixes are used to avoid name collisions with other frameworks.\nApple frameworks use two-letter prefixes, and React Native uses `RCT` as a prefix. In order to avoid name collisions, we recommend using a three-letter prefix other than `RCT` in your own classes.\n:::",
+      "source_content_hash": "2f5d246104c240a2fffb51849023ad1ad06b197ae93dd1108b412ff7edd4fa61",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e536ea0d",
+      "source_content": "Then you need a little bit of JavaScript to make this a usable React component:",
+      "source_content_hash": "528c8a9470322b3bfca2a2b5fef83e0ac18973adb4ecec486e25a7ecc5520394",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "3c08ed05",
+      "source_content": "```jsx title='MapView.js'\nimport {requireNativeComponent} from 'react-native';\n\n// requireNativeComponent automatically resolves 'RNTMap' to 'RNTMapManager'\nmodule.exports = requireNativeComponent('RNTMap');\n```",
+      "source_content_hash": "a2954a7fd48097a1ac494d90abfb71af9452a8cbf39140e6aabe9f2981a1f0f2",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "1d510af2",
+      "source_content": "```jsx title='MyApp.js'\nimport MapView from './MapView.js';\n\n...\n\nrender() {\n  return <MapView style={{ flex: 1 }} />;\n}\n```",
+      "source_content_hash": "b6602d6ca7580116d191a914921076091a319c7fc0641e6c027f623b8f4b8e84",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "afa378f7",
+      "source_content": "Make sure to use `RNTMap` here. We want to require the manager here, which will expose the view of our manager for use in JavaScript.",
+      "source_content_hash": "8318a3ccd0b760b95a8a0b44697e55fc565e730866cd6013222f82347f64c008",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "084f365a",
+      "source_content": ":::note\nWhen rendering, don't forget to stretch the view, otherwise you'll be staring at a blank screen.\n:::",
+      "source_content_hash": "5903c7bcde5cc5230b5b2fd140ded502b95ca4313e65478f63c147884aee5b90",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "092b29bb",
+      "source_content": "```jsx\n  render() {\n    return <MapView style={{flex: 1}} />;\n  }\n```",
+      "source_content_hash": "97c69b60e1d74f3b5b0a49a709ea9dcae68cf2a728ba792e1f015b9a877f550d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "This is now a fully-functioning native map view component in JavaScript, complete with pinch-zoom and other native gesture support. We can't really control it from JavaScript yet, though :(",
+      "source_content_hash": "90869685c32f22257bcf89b93ae3dcacefd6e78eefcabe8737628c91e5c4adc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "## Properties",
+      "source_content_hash": "899ecb557156d36aac98f2082474f5ea1e01af3d4a611b79b00dab2a3116aab2",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "The first thing we can do to make this component more usable is to bridge over some native properties. Let's say we want to be able to disable zooming and specify the visible region. Disabling zoom is a boolean, so we add this one line:",
+      "source_content_hash": "882aaa4a610195b95a8992c74db574d3470faf889890e1ae0623470274e9b6cd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "59f28e14",
+      "source_content": "```objectivec title='RNTMapManager.m'\nRCT_EXPORT_VIEW_PROPERTY(zoomEnabled, BOOL)\n```",
+      "source_content_hash": "690ca9c1117d0fc267eec873204892071d5cafbd83f2ee0d4b0242de6ea547aa",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "2822251a",
+      "source_content": "Note that we explicitly specify the type as `BOOL` - React Native uses `RCTConvert` under the hood to convert all sorts of different data types when talking over the bridge, and bad values will show convenient \"RedBox\" errors to let you know there is an issue ASAP. When things are straightforward like this, the whole implementation is taken care of for you by this macro.",
+      "source_content_hash": "4dc2c9e8dd9a48107f99c23c1f3e32612df298ec51808622910924a05ca3db07",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "25212439",
+      "source_content": "Now to actually disable zooming, we set the property in JS:",
+      "source_content_hash": "e36c52d12370de33acdecdb8c709a0c807824f078d0a631199f6fbb676ae184a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cae897fb",
+      "source_content": "```jsx title='MyApp.js'\n<MapView zoomEnabled={false} style={{flex: 1}} />\n```",
+      "source_content_hash": "64bb57019dcc637b396fb48e805cb7b9431187b0c4be2f8a1d072c436a30e90c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4be28ed1",
+      "source_content": "To document the properties (and which values they accept) of our MapView component we'll add a wrapper component and document the interface with React `PropTypes`:",
+      "source_content_hash": "c69bac4aa9971f6dea2a4c10c333bacb2565ffaf5db6b437b2c3f4d9b95c9c67",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9873cf8",
+      "source_content": "```jsx title='MapView.js'\nimport PropTypes from 'prop-types';\nimport React from 'react';\nimport {requireNativeComponent} from 'react-native';\n\nclass MapView extends React.Component {\n  render() {\n    return <RNTMap {...this.props} />;\n  }\n}\n\nMapView.propTypes = {\n  /**\n   * A Boolean value that determines whether the user may use pinch\n   * gestures to zoom in and out of the map.\n   */\n  zoomEnabled: PropTypes.bool,\n};\n\nvar RNTMap = requireNativeComponent('RNTMap');\n\nmodule.exports = MapView;\n```",
+      "source_content_hash": "c38196fb4d2c8178a895c9541525a62d351f06dd70c07a70517c789612251916",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "Now we have a nicely documented wrapper component to work with.",
+      "source_content_hash": "ca4548d29662c66740a8df8bf572aa7cbb206f154a70d8c7bd29cc13346dfe93",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "5c7d994c",
+      "source_content": "Next, let's add the more complex `region` prop. We start by adding the native code:",
+      "source_content_hash": "660ea142e6b18ff40b3d29b8d8a659241838c68b5291193012799a80e0d7a712",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "f2f9d525",
+      "source_content": "```objectivec title='RNTMapManager.m'\nRCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)\n{\n  [view setRegion:json ? [RCTConvert MKCoordinateRegion:json] : defaultView.region animated:YES];\n}\n```",
+      "source_content_hash": "b9514b0e5996c473a06fed0ee70f7e12e1bbb6bde017bcf526bdca46feef37a7",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "Ok, this is more complicated than the `BOOL` case we had before. Now we have a `MKCoordinateRegion` type that needs a conversion function, and we have custom code so that the view will animate when we set the region from JS. Within the function body that we provide, `json` refers to the raw value that has been passed from JS. There is also a `view` variable which gives us access to the manager's view instance, and a `defaultView` that we use to reset the property back to the default value if JS sends us a null sentinel.",
+      "source_content_hash": "5fa44e7bf8fd0ecd573f4bcfa4e9f3e238cdbac347304addd3467b9bb10c449a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "You could write any conversion function you want for your view - here is the implementation for `MKCoordinateRegion` via a category on `RCTConvert`. It uses an already existing category of ReactNative `RCTConvert+CoreLocation`:",
+      "source_content_hash": "ed7cffed85808c701966ccad1151af3f2e9d47474ee5c941dc70967fc74fee9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "e481745b",
+      "source_content": "```objectivec title='RNTMapManager.m'\n#import \"RCTConvert+Mapkit.h\"\n```",
+      "source_content_hash": "33d41e9eeacc1c629ad0880ce0e2252f7d7ec91732f762f4e231228597add372",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "3ad9440a",
+      "source_content": "```objectivec title='RCTConvert+Mapkit.h'\n#import <MapKit/MapKit.h>\n#import <React/RCTConvert.h>\n#import <CoreLocation/CoreLocation.h>\n#import <React/RCTConvert+CoreLocation.h>\n\n@interface RCTConvert (Mapkit)\n\n+ (MKCoordinateSpan)MKCoordinateSpan:(id)json;\n+ (MKCoordinateRegion)MKCoordinateRegion:(id)json;\n\n@end\n\n@implementation RCTConvert(MapKit)\n\n+ (MKCoordinateSpan)MKCoordinateSpan:(id)json\n{\n  json = [self NSDictionary:json];\n  return (MKCoordinateSpan){\n    [self CLLocationDegrees:json[@\"latitudeDelta\"]],\n    [self CLLocationDegrees:json[@\"longitudeDelta\"]]\n  };\n}\n\n+ (MKCoordinateRegion)MKCoordinateRegion:(id)json\n{\n  return (MKCoordinateRegion){\n    [self CLLocationCoordinate2D:json],\n    [self MKCoordinateSpan:json]\n  };\n}\n\n@end\n```",
+      "source_content_hash": "2cc31b1c48e3920feb2376982e18d1b7b0e3a685f72ec1a3d0928d5c83cb0acb",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "4e2e17c5",
+      "source_content": "These conversion functions are designed to safely process any JSON that the JS might throw at them by displaying \"RedBox\" errors and returning standard initialization values when missing keys or other developer errors are encountered.",
+      "source_content_hash": "b1532430afb6745e78087631c353a21d9bc6763d6fd4ea34179a0ab08c1ba62e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "b49a7009",
+      "source_content": "To finish up support for the `region` prop, we need to document it in `propTypes`:",
+      "source_content_hash": "60dfe980ec7747db484b124fd8339d0e02a858db19668bf15957b5a1bb0d1a6c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "768336f1",
+      "source_content": "```jsx title='MapView.js'\nMapView.propTypes = {\n  /**\n   * A Boolean value that determines whether the user may use pinch\n   * gestures to zoom in and out of the map.\n   */\n  zoomEnabled: PropTypes.bool,\n\n  /**\n   * The region to be displayed by the map.\n   *\n   * The region is defined by the center coordinates and the span of\n   * coordinates to display.\n   */\n  region: PropTypes.shape({\n    /**\n     * Coordinates for the center of the map.\n     */\n    latitude: PropTypes.number.isRequired,\n    longitude: PropTypes.number.isRequired,\n\n    /**\n     * Distance between the minimum and the maximum latitude/longitude\n     * to be displayed.\n     */\n    latitudeDelta: PropTypes.number.isRequired,\n    longitudeDelta: PropTypes.number.isRequired,\n  }),\n};\n```",
+      "source_content_hash": "9476890138be09194c656022dd1d4ddc9fe54743370ba4a221e7b8444f0b231d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "daad2e28",
+      "source_content": "```jsx title='MyApp.js'\nrender() {\n  var region = {\n    latitude: 37.48,\n    longitude: -122.16,\n    latitudeDelta: 0.1,\n    longitudeDelta: 0.1,\n  };\n  return (\n    <MapView\n      region={region}\n      zoomEnabled={false}\n      style={{ flex: 1 }}\n    />\n  );\n}\n```",
+      "source_content_hash": "a9b0b3407566decc998788d5230998aeda9f39a77c23d243247306df3903187e",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "ba12acea",
+      "source_content": "Here you can see that the shape of the region is explicit in the JS documentation.",
+      "source_content_hash": "1fa262ad1ed577f74c389d5f75cff98c29b37f25926e6af4f05fe9c616ffa0d0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "2f833a4d",
+      "source_content": "## Events",
+      "source_content_hash": "f4776ba3d0fd53ce403170cc2d8cca7a2863d1d0adf8a34232db931e60e91830",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "dfb6fc67",
+      "source_content": "So now we have a native map component that we can control freely from JS, but how do we deal with events from the user, like pinch-zooms or panning to change the visible region?",
+      "source_content_hash": "309c5c77e7bd593bedad1141c50e5893b91f70543ee5b1f222e509c94e702a5a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "80dbdeb8",
+      "source_content": "Until now we've only returned a `MKMapView` instance from our manager's `-(UIView *)view` method. We can't add new properties to `MKMapView` so we have to create a new subclass from `MKMapView` which we use for our View. We can then add a `onRegionChange` callback on this subclass:",
+      "source_content_hash": "d733cc59b66c42ad39e72cbffad928e36b8048cbb030e16bdf7f3dd879e887ef",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4f217d4a",
+      "source_content": "```objectivec title='RNTMapView.h'\n#import <MapKit/MapKit.h>\n\n#import <React/RCTComponent.h>\n\n@interface RNTMapView: MKMapView\n\n@property (nonatomic, copy) RCTBubblingEventBlock onRegionChange;\n\n@end\n```",
+      "source_content_hash": "058df5ded59725a0b247ac8d86d3019b72293f4a9cc1706f6113068878a5c8f4",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "7b9b1777",
+      "source_content": "```objectivec title='RNTMapView.m'\n#import \"RNTMapView.h\"\n\n@implementation RNTMapView\n\n@end\n```",
+      "source_content_hash": "7a66953caf33d4c9fafde8eb9722abf63467a5f81e079ca5a54edc0b572354e6",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "f50056c0",
+      "source_content": "Note that all `RCTBubblingEventBlock` must be prefixed with `on`. Next, declare an event handler property on `RNTMapManager`, make it a delegate for all the views it exposes, and forward events to JS by calling the event handler block from the native view.",
+      "source_content_hash": "73406ef74bd9a8395d4a34d6a696fa161364b4f510576250e9778fe00440261f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "a3c4300b",
+      "source_content": "```objectivec {9,17,31-48} title='RNTMapManager.m'\n#import <MapKit/MapKit.h>\n#import <React/RCTViewManager.h>\n\n#import \"RNTMapView.h\"\n#import \"RCTConvert+Mapkit.h\"\n\n@interface RNTMapManager : RCTViewManager <MKMapViewDelegate>\n@end\n\n@implementation RNTMapManager\n\nRCT_EXPORT_MODULE()\n\nRCT_EXPORT_VIEW_PROPERTY(zoomEnabled, BOOL)\nRCT_EXPORT_VIEW_PROPERTY(onRegionChange, RCTBubblingEventBlock)\n\nRCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)\n{\n  [view setRegion:json ? [RCTConvert MKCoordinateRegion:json] : defaultView.region animated:YES];\n}\n\n- (UIView *)view\n{\n  RNTMapView *map = [RNTMapView new];\n  map.delegate = self;\n  return map;\n}\n\n#pragma mark MKMapViewDelegate\n\n- (void)mapView:(RNTMapView *)mapView regionDidChangeAnimated:(BOOL)animated\n{\n  if (!mapView.onRegionChange) {\n    return;\n  }\n\n  MKCoordinateRegion region = mapView.region;\n  mapView.onRegionChange(@{\n    @\"region\": @{\n      @\"latitude\": @(region.center.latitude),\n      @\"longitude\": @(region.center.longitude),\n      @\"latitudeDelta\": @(region.span.latitudeDelta),\n      @\"longitudeDelta\": @(region.span.longitudeDelta),\n    }\n  });\n}\n@end\n```",
+      "source_content_hash": "ee9a366ed68d334e031a283eba5fe0170fb82328cf4e007fa3056480e1b90345",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "c9f6a516",
+      "source_content": "In the delegate method `-mapView:regionDidChangeAnimated:` the event handler block is called on the corresponding view with the region data. Calling the `onRegionChange` event handler block results in calling the same callback prop in JavaScript. This callback is invoked with the raw event, which we typically process in the wrapper component to simplify the API:",
+      "source_content_hash": "3b684c9499c9319940165e1d56a08971946023c1cbea9f78990e652d962b6237",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4aede6b2",
+      "source_content": "```jsx title='MapView.js'\nclass MapView extends React.Component {\n  _onRegionChange = (event) => {\n    if (!this.props.onRegionChange) {\n      return;\n    }\n\n    // process raw event...\n    this.props.onRegionChange(event.nativeEvent);\n  };\n  render() {\n    return (\n      <RNTMap\n        {...this.props}\n        onRegionChange={this._onRegionChange}\n      />\n    );\n  }\n}\nMapView.propTypes = {\n  /**\n   * Callback that is called continuously when the user is dragging the map.\n   */\n  onRegionChange: PropTypes.func,\n  ...\n};\n```",
+      "source_content_hash": "a34f04f8661b5f03b917b4701b6ab5b8873edea12d09bdd71920f5f98b7cc20c",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "e85c5032",
+      "source_content": "```jsx title='MyApp.js'\nclass MyApp extends React.Component {\n  onRegionChange(event) {\n    // Do stuff with event.region.latitude, etc.\n  }\n\n  render() {\n    var region = {\n      latitude: 37.48,\n      longitude: -122.16,\n      latitudeDelta: 0.1,\n      longitudeDelta: 0.1,\n    };\n    return (\n      <MapView\n        region={region}\n        zoomEnabled={false}\n        onRegionChange={this.onRegionChange}\n      />\n    );\n  }\n}\n```",
+      "source_content_hash": "f48f46855a99a79a91f5c17c67006f199191d9a640c3dafd75192e0545140bae",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "34416204",
+      "source_content": "## Handling multiple native views",
+      "source_content_hash": "a6620c2fc897c2de85e21533ff9a987f161e0565a9231eec00f0e21e33b1cb60",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "4bfb1f31",
+      "source_content": "A React Native view can have more than one child view in the view tree eg.",
+      "source_content_hash": "c76e60720278f27f3618118bc3e4ad38deffedc9b8b9440845adc5515c07b9e5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {}
+    },
+    {
+      "segment_id": "253b84c5",
+      "source_content": "```jsx\n<View>\n  <MyNativeView />\n  <MyNativeView />\n  <Button />\n</View>\n```",
+      "source_content_hash": "4c2316d40d4a3f8cb537e21330485def58b938a5564bd3a8b0afe423ff992de1",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {}
+    },
+    {
+      "segment_id": "fe2c7f95",
+      "source_content": "In this example, the class `MyNativeView` is a wrapper for a `NativeComponent` and exposes methods, which will be called on the iOS platform. `MyNativeView` is defined in `MyNativeView.ios.js` and contains proxy methods of `NativeComponent`.",
+      "source_content_hash": "ef6091c618a118314a7ec8824379f6265c0ea6e10f762a8d8bf7cb4436d8bc18",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在此範例中，`MyNativeView` 類別是 `NativeComponent` 的封裝元件，並公開了將在 iOS 平台上呼叫的方法。`MyNativeView` 定義於 `MyNativeView.ios.js` 檔案中，包含了 `NativeComponent` 的代理方法。"
+      }
+    },
+    {
+      "segment_id": "79496df8",
+      "source_content": "When the user interacts with the component, like clicking the button, the `backgroundColor` of `MyNativeView` changes. In this case `UIManager` would not know which `MyNativeView` should be handled and which one should change `backgroundColor`. Below you will find a solution to this problem:",
+      "source_content_hash": "1b646c312ed47976a6a8c72d332690a65d9cf4ac4def7fcbd42f6118e35be103",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當使用者與元件互動時（例如點擊按鈕），`MyNativeView` 的 `backgroundColor` 會隨之改變。此時 `UIManager` 無法判斷應處理哪個 `MyNativeView` 或變更哪個元件的 `backgroundColor`。以下提供解決此問題的方法："
+      }
+    },
+    {
+      "segment_id": "c9affc65",
+      "source_content": "```jsx\n<View>\n  <MyNativeView ref={this.myNativeReference} />\n  <MyNativeView ref={this.myNativeReference2} />\n  <Button\n    onPress={() => {\n      this.myNativeReference.callNativeMethod();\n    }}\n  />\n</View>\n```",
+      "source_content_hash": "82848427d6fdbfa36cecc1584b2e5786ee037097dbcef9debb1b373ffaf39eae",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c9affc65"
+      }
+    },
+    {
+      "segment_id": "9150ec12",
+      "source_content": "Now the above component has a reference to a particular `MyNativeView` which allows us to use a specific instance of `MyNativeView`. Now the button can control which `MyNativeView` should change its `backgroundColor`. In this example let's assume that `callNativeMethod` changes `backgroundColor`.",
+      "source_content_hash": "d2c3e196395cf25bf7849582b34894f3f440d09f2975525cc2b2a193457889c6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "現在上述元件已持有特定 `MyNativeView` 的參照，使我們能操作具體的 `MyNativeView` 實例。按鈕可據此控制哪個 `MyNativeView` 應變更其 `backgroundColor`。此範例假設 `callNativeMethod` 會改變 `backgroundColor`。"
+      }
+    },
+    {
+      "segment_id": "bb97a0c5",
+      "source_content": "```jsx title='MyNativeView.ios.js'\nclass MyNativeView extends React.Component {\n  callNativeMethod = () => {\n    UIManager.dispatchViewManagerCommand(\n      ReactNative.findNodeHandle(this),\n      UIManager.getViewManagerConfig('RNCMyNativeView').Commands\n        .callNativeMethod,\n      [],\n    );\n  };\n\n  render() {\n    return <NativeComponent ref={NATIVE_COMPONENT_REF} />;\n  }\n}\n```",
+      "source_content_hash": "79579a1787213b969c72e5939fa7b31ef38b5742dfb740199ae48d59a5b00282",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bb97a0c5"
+      }
+    },
+    {
+      "segment_id": "9f46c1b6",
+      "source_content": "`callNativeMethod` is our custom iOS method which for example changes the `backgroundColor` which is exposed through `MyNativeView`. This method uses `UIManager.dispatchViewManagerCommand` which needs 3 parameters:",
+      "source_content_hash": "8335379b993884b29eba568966c232821402ca68454b251f5c751b7eb53d2128",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`callNativeMethod` 是我們自訂的 iOS 方法，例如透過 `MyNativeView` 公開的變更 `backgroundColor` 功能。該方法使用需傳入 3 個參數的 `UIManager.dispatchViewManagerCommand`："
+      }
+    },
+    {
+      "segment_id": "0f46bc6c",
+      "source_content": "- `(nonnull NSNumber \\*)reactTag`  -  id of react view.\n- `commandID:(NSInteger)commandID`  -  Id of the native method that should be called\n- `commandArgs:(NSArray<id> \\*)commandArgs`  -  Args of the native method that we can pass from JS to native.",
+      "source_content_hash": "5b14384401e459899c7456322613114aca65ab96f26d467065455985aaa1f201",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `(nonnull NSNumber \\*)reactTag`  -  React 視圖的識別碼\n- `commandID:(NSInteger)commandID`  -  應呼叫的原生方法 ID\n- `commandArgs:(NSArray<id> \\*)commandArgs`  -  可從 JS 傳遞至原生的方法參數"
+      }
+    },
+    {
+      "segment_id": "f412e370",
+      "source_content": "```objectivec title='RNCMyNativeViewManager.m'\n#import <React/RCTViewManager.h>\n#import <React/RCTUIManager.h>\n#import <React/RCTLog.h>\n\nRCT_EXPORT_METHOD(callNativeMethod:(nonnull NSNumber*) reactTag) {\n    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {\n        NativeView *view = viewRegistry[reactTag];\n        if (!view || ![view isKindOfClass:[NativeView class]]) {\n            RCTLogError(@\"Cannot find NativeView with tag #%@\", reactTag);\n            return;\n        }\n        [view callNativeMethod];\n    }];\n\n}\n```",
+      "source_content_hash": "394f17130fc07c0e4efb257732ff68e7b4bd356437b1fba9faf6e6049579f45d",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_f412e370"
+      }
+    },
+    {
+      "segment_id": "f894b163",
+      "source_content": "Here the `callNativeMethod` is defined in the `RNCMyNativeViewManager.m` file and contains only one parameter which is `(nonnull NSNumber*) reactTag`. This exported function will find a particular view using `addUIBlock` which contains the `viewRegistry` parameter and returns the component based on `reactTag` allowing it to call the method on the correct component.",
+      "source_content_hash": "55e737795d8da6ea58795521571333b6d3f17f33f6d3a3d0d722933c81045fe4",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此處 `callNativeMethod` 定義於 `RNCMyNativeViewManager.m` 檔案，僅包含 `(nonnull NSNumber*) reactTag` 單一參數。此匯出函式會透過內含 `viewRegistry` 參數的 `addUIBlock` 查找特定視圖，並依據 `reactTag` 回傳對應元件，從而確保方法能正確呼叫至目標元件。"
+      }
+    },
+    {
+      "segment_id": "6bb40e64",
+      "source_content": "## Styles",
+      "source_content_hash": "5b02d6bf8ef465e835b342640643b7750a9ea3438fd8edc249bd14ae2b8c9f13",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 樣式處理"
+      }
+    },
+    {
+      "segment_id": "40e5a2ef",
+      "source_content": "Since all our native react views are subclasses of `UIView`, most style attributes will work like you would expect out of the box. Some components will want a default style, however, for example `UIDatePicker` which is a fixed size. This default style is important for the layout algorithm to work as expected, but we also want to be able to override the default style when using the component. `DatePickerIOS` does this by wrapping the native component in an extra view, which has flexible styling, and using a fixed style (which is generated with constants passed in from native) on the inner native component:",
+      "source_content_hash": "6f2f1dd3ba7c816dc7ba6650cc60dd1bb40204d80af446007972216837dcf5d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於所有原生 React 視圖皆繼承自 `UIView`，多數樣式屬性皆能如預期運作。但部分元件（如固定尺寸的 `UIDatePicker`）需預設樣式。此預設樣式對佈局演算法至關重要，同時也需保留覆寫預設樣式的彈性。`DatePickerIOS` 的實作方式是將原生元件包裹於具彈性樣式的額外視圖中，並對內部原生元件套用透過原生常數生成的固定樣式："
+      }
+    },
+    {
+      "segment_id": "07bba194",
+      "source_content": "```jsx title='DatePickerIOS.ios.js'\nimport { UIManager } from 'react-native';\nvar RCTDatePickerIOSConsts = UIManager.RCTDatePicker.Constants;\n...\n  render: function() {\n    return (\n      <View style={this.props.style}>\n        <RCTDatePickerIOS\n          ref={DATEPICKER}\n          style={styles.rkDatePickerIOS}\n          ...\n        />\n      </View>\n    );\n  }\n});\n\nvar styles = StyleSheet.create({\n  rkDatePickerIOS: {\n    height: RCTDatePickerIOSConsts.ComponentHeight,\n    width: RCTDatePickerIOSConsts.ComponentWidth,\n  },\n});\n```",
+      "source_content_hash": "ae48dbffcee8c92ca19093de143fef9a0deafaa964d8ee739579017e5c1992d0",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_07bba194"
+      }
+    },
+    {
+      "segment_id": "b136c0e9",
+      "source_content": "The `RCTDatePickerIOSConsts` constants are exported from native by grabbing the actual frame of the native component like so:",
+      "source_content_hash": "bb3b60ff1a08a60f002c649e1e142283aee34204f15974f3ae4d57fe4928a67a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`RCTDatePickerIOSConsts` 常數是從原生端匯出的，其透過擷取原生元件的實際框架尺寸來實現："
+      }
+    },
+    {
+      "segment_id": "bd020e3f",
+      "source_content": "```objectivec title='RCTDatePickerManager.m'\n- (NSDictionary *)constantsToExport\n{\n  UIDatePicker *dp = [[UIDatePicker alloc] init];\n  [dp layoutIfNeeded];\n\n  return @{\n    @\"ComponentHeight\": @(CGRectGetHeight(dp.frame)),\n    @\"ComponentWidth\": @(CGRectGetWidth(dp.frame)),\n    @\"DatePickerModes\": @{\n      @\"time\": @(UIDatePickerModeTime),\n      @\"date\": @(UIDatePickerModeDate),\n      @\"datetime\": @(UIDatePickerModeDateAndTime),\n    }\n  };\n}\n```",
+      "source_content_hash": "4638ba2c1f2e289eef04ab2a8424f0074442b6263cb9c2c8e130e7326e1e6383",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_bd020e3f"
+      }
+    },
+    {
+      "segment_id": "13ccbdec",
+      "source_content": "This guide covered many of the aspects of bridging over custom native components, but there is even more you might need to consider, such as custom hooks for inserting and laying out subviews. If you want to go even deeper, check out the [source code](https://github.com/facebook/react-native/blob/0.70-stable/React/Views) of some of the implemented components.",
+      "source_content_hash": "4bd38b24675717192299592a560f8a3525baffd8739f60658d3ff581eaaf21c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "本指南涵蓋了自訂原生元件橋接的多個面向，但仍有更多進階考量（例如插入與佈局子視圖的鉤子）。若需深入探討，建議參考[實作元件的原始碼](https://github.com/facebook/react-native/blob/0.70-stable/React/Views)。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/native-components-ios.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.298393+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "04d31f15a54eec9206c15f5b24bc2fb4523d1b681a65b8e9d22f7deca12248be"
+  }
+}

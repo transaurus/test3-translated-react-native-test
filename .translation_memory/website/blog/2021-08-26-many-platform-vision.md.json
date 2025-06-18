@@ -1,0 +1,362 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "blog/2021-08-26-many-platform-vision.md",
+  "source_file_content_hash": "48e532364c9a6c67f6d81f5aa35a8110e0867924b5025fec92d2eaf5141955de",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\ntitle: React Native's Many Platform Vision\nauthors: [abernathyca, Eli White, lunaleaps, yungsters]\ntags: [announcement]\n---",
+      "source_content_hash": "756ed16f1d4077c26073c44be49f23c8c50889f5609b671360b24bf017540264",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "6ef78e84",
+      "source_content": "React Native has been very successful at raising the bar for mobile development, both at Facebook and elsewhere in the industry. As we interact with computers in new ways and as new devices are invented, we want React Native to be there for everyone. Although React Native was originally created to build mobile apps, we believe that focusing on many platforms and building to each platform’s strengths and constraints has a symbiotic effect. We have seen huge benefits when we extended this technology to desktop and virtual reality, and we're excited to share what this means for the future of React Native.",
+      "source_content_hash": "8fdd5be92b812ea13dbcce73d558bd4c7cf50ebde6f8e10ccca50c6fe5e5a0cb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 在提升移動開發標準方面取得了巨大成功，無論是在 Facebook 內部還是在整個行業中。隨著我們以新的方式與計算機互動以及新設備的發明，我們希望 React Native 能夠為所有人服務。儘管 React Native 最初是為構建移動應用而創建的，但我們相信，專注於多平台並根據每個平台的優勢和限制進行開發具有共生效應。我們已經看到了將這項技術擴展到桌面和虛擬現實所帶來的巨大好處，並且我們很高興分享這對 React Native 的未來意味著什麼。"
+      }
+    },
+    {
+      "segment_id": "a2752550",
+      "source_content": "<!--truncate-->",
+      "source_content_hash": "f5cded2aa7e288e395fe4f67f9dabda2281904b2f5358d07302b3aa8be0acdfa",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a2752550"
+      }
+    },
+    {
+      "segment_id": "8a5f6a7b",
+      "source_content": "## Respecting the Platform",
+      "source_content_hash": "3eeca2c5327223074ee66979985f183f55d69b39a7cbbbb098cdfb07627bcacb",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 尊重平台特性"
+      }
+    },
+    {
+      "segment_id": "180bddb1",
+      "source_content": "Our first guiding principle is [to match the expectations people have for each platform](https://reactnative.dev/blog/2020/07/17/react-native-principles#native-experience). Android users expect accessible apps using TalkBack. Navigation should work the way it does in other Android apps. A button should look and feel the way buttons look and feel on Android. It should not look and feel like an iOS button. Although we seek to offer a consistent cross-platform developer experience, we resist the temptation to sacrifice users’ expectations.",
+      "source_content_hash": "c4e3fa26f6bbdaf52ee2c79bfbdbea15527d61d44e4fe6b715cf1faae99598c0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們的第一指導原則是[符合人們對每個平台的期望](https://reactnative.dev/blog/2020/07/17/react-native-principles#native-experience)。Android 用戶期望使用 TalkBack 的可訪問應用。導航應以其他 Android 應用中的方式工作。按鈕的外觀和感覺應與 Android 上的按鈕一致，而不是像 iOS 按鈕那樣。儘管我們尋求提供一致的跨平台開發體驗，但我們抵制犧牲用戶期望的誘惑。"
+      }
+    },
+    {
+      "segment_id": "cf898102",
+      "source_content": "We believe that React Native enables developers to meet users’ expectations while also gaining the benefits of a better developer experience. In this section, we share the following:",
+      "source_content_hash": "01abc556cf718e3bd000f634723d9626a13e66c8411e6c3a5c6491201f5d6329",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "我們相信，React Native 使開發人員能夠滿足用戶的期望，同時也能獲得更好的開發體驗的好處。在本節中，我們分享以下內容："
+      }
+    },
+    {
+      "segment_id": "84758135",
+      "source_content": "1. By embracing platform constraints, we actually improve the experience on other platforms.\n2. We can learn from institutional knowledge to build higher level cross-platform abstractions.\n3. Other players on each platform inspire us to build better developer and user experiences.",
+      "source_content_hash": "233d569bebe27c471e012f4bb620a737ec4d7e6469e488c41a4ef4c013da1616",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 通過擁抱平台限制，我們實際上改善了其他平台上的體驗。\n2. 我們可以從機構知識中學習，以構建更高層次的跨平台抽象。\n3. 每個平台上的其他參與者激勵我們構建更好的開發者和用戶體驗。"
+      }
+    },
+    {
+      "segment_id": "418617bd",
+      "source_content": "### Embracing Platform Constraints",
+      "source_content_hash": "6b973b3a529e53393f157949bce719b2795bea501da9a49e03ac0752999081d0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 擁抱平台限制"
+      }
+    },
+    {
+      "segment_id": "29e01ec2",
+      "source_content": "<!-- alex ignore easy -->",
+      "source_content_hash": "11e8b45de97a443842b7a58919a4903dd1d75f585154591d379d00327d7aa2cd",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_29e01ec2"
+      }
+    },
+    {
+      "segment_id": "f2c2bdd0",
+      "source_content": "Specific device hardware or user expectations impose unique constraints and requirements. As an example, memory is typically more constrained on Android and VR headsets than on iOS, macOS, and Windows. As another example, users expect mobile apps to start up almost instantaneously, but they are less frustrated when desktop apps take longer to start up. **We have found that by approaching these problems with React Native, we can more easily borrow lessons learned and code written for one platform, and apply them to other platforms.**",
+      "source_content_hash": "1a23d26d282fe788f18162ecf5918ca04e27a28e24d1e74bbaacdf2f2e8c0777",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "特定的設備硬件或用戶期望會帶來獨特的限制和要求。例如，Android 和 VR 頭戴設備的內存通常比 iOS、macOS 和 Windows 更受限。另一個例子是，用戶期望移動應用幾乎立即啟動，但對桌面應用啟動時間較長則不太沮喪。**我們發現，通過使用 React Native 解決這些問題，我們可以更容易地借鑒一個平台的經驗和代碼，並將其應用於其他平台。**"
+      }
+    },
+    {
+      "segment_id": "358a309f",
+      "source_content": "<figure>\n  <img src=\"/blog/assets/many-platform-vision-facebook-dating.png\" alt=\"Screenshot of Facebook Dating on mobile\" />\n  <figcaption>\n    React Native and Relay power over 1000 Facebook surfaces on Android and iOS.\n  </figcaption>\n</figure>",
+      "source_content_hash": "2a2b33167d0522033596ccf1d5d8583330f0985bbeb5713841a0b99860b93ab0",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_358a309f"
+      }
+    },
+    {
+      "segment_id": "7499a4e7",
+      "source_content": "For example, React Native relies on an optimization known as “view flattening” which is critical for reducing memory usage on Android. We never built this optimization for iOS because it does not bear the same memory constraints. Over the past few years as we built our new cross-platform renderer, we had to reimplement “view flattening”. But this time, it was written in C++ instead of platform-specific Java. Trying out this same optimization on iOS was now only a matter of flipping a switch. In the production Facebook app, we observed that this improved performance on iOS! We likely never would have built this for iOS, but our investment on Android was able to benefit our investment on iOS.",
+      "source_content_hash": "b27f594d72eba22906f4e4b5e3f2d8acdd48a5249d2d10fc4961c13ac1fb4394",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，React Native 依賴於一種稱為「視圖扁平化」的優化，這對於減少 Android 上的內存使用至關重要。我們從未為 iOS 構建這種優化，因為它沒有相同的內存限制。在過去幾年中，當我們構建新的跨平台渲染器時，我們不得不重新實現「視圖扁平化」。但這次，它是用 C++ 而不是平台特定的 Java 編寫的。在 iOS 上嘗試這種優化現在只需切換一個開關。在 Facebook 的生產應用中，我們觀察到這提高了 iOS 上的性能！我們可能永遠不會為 iOS 構建這個功能，但我們在 Android 上的投資能夠惠及 iOS。"
+      }
+    },
+    {
+      "segment_id": "109ace10",
+      "source_content": "### Learning from Institutional Knowledge",
+      "source_content_hash": "b60716d5c8adc221bf5e8801f3ac565d8a14cacfdc3109c0554a52e3f8dc91d1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 從機構知識中學習"
+      }
+    },
+    {
+      "segment_id": "135468ee",
+      "source_content": "One of the reasons that React Native was originally created was to reduce engineering silos. There is a tendency for Android engineers to be siloed from iOS engineers working on the same product. Android engineers review code for Android engineers and attend Android meetups and conferences. iOS engineers review code for iOS engineers and attend iOS meetups and conferences. Engineers working on different platforms bring unique domain and institutional knowledge about how to build great product experiences.",
+      "source_content_hash": "bf5e3dd162504116ce365bec36d00aa40dd0b1b771046eedbbf757e4e15b28cd",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React Native 最初創建的原因之一是減少工程孤島。Android 工程師往往與從事同一產品的 iOS 工程師隔離。Android 工程師為 Android 工程師審查代碼並參加 Android 會議和聚會。iOS 工程師為 iOS 工程師審查代碼並參加 iOS 會議和聚會。從事不同平台的工程師帶來了關於如何構建優秀產品體驗的獨特領域和機構知識。"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "One of the best outcomes of cross-platform frameworks like React Native is how they bring together engineers with vastly different domain expertise. **We believe that by targeting more platforms, we can accelerate cross-pollination of institutional knowledge between platform experts.**",
+      "source_content_hash": "88526360495a82d9892d01d27daacdd01961e9cdfd6169fc19fa906dc9113c9e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "像 React Native 這樣的跨平台框架的最佳成果之一是如何將具有完全不同領域專業知識的工程師聚集在一起。**我們相信，通過針對更多平台，我們可以加速平台專家之間機構知識的交叉傳播。**"
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "As an example, the accessibility abstractions in React Native are influenced by how Android, iOS, and web each approach accessibility in different ways. This enabled us to build a common interface that improves how accessibility hints are handled on both mobile platforms.",
+      "source_content_hash": "18123b31616edc834134365ebc93fb4c95ad49bf3811046bae39418a5850965f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "例如，React Native 中的可訪問性抽象受到 Android、iOS 和網頁各自以不同方式處理可訪問性的影響。這使我們能夠構建一個通用接口，改進移動平台上可訪問性提示的處理方式。"
+      }
+    },
+    {
+      "segment_id": "95e9ba12",
+      "source_content": "As another example, our research into user perception of speed on the web led to concurrent features like Suspense. Over the past year, these features were vetted by the new [Facebook.com](https://facebook.com/) website. Now with our new renderer, these features are making their way to React Native and influencing how we design event scheduling and priorities. The React team’s investment into improving the web experience is benefiting React Native for native platforms.",
+      "source_content_hash": "618a543a19683af43fc29a20c9309105109a5692434a9dd7006e7ce60cdf9067",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一個例子是，我們對網頁上用戶速度感知的研究導致了像 Suspense 這樣的並發功能。在過去一年中，這些功能由新的 [Facebook.com](https://facebook.com/) 網站進行了驗證。現在，隨著我們的新渲染器，這些功能正在進入 React Native，並影響我們如何設計事件調度和優先級。React 團隊在改善網頁體驗方面的投資正在惠及原生平台的 React Native。"
+      }
+    },
+    {
+      "segment_id": "8bddee80",
+      "source_content": "### Competition Drives Innovation",
+      "source_content_hash": "650f5b306e3c459fb90d5717c6ea072aa231275adfbe132229b982264d16af01",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 競爭驅動創新"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "In addition to domain-specific engineers and meetups and conferences, each platform also brings other unique players solving similar problems. On the web, React (which directly powers React Native) frequently draws inspiration from other open source web frameworks like [Vue](https://vuejs.org/), [Preact](https://preactjs.com/), and [Svelte](https://svelte.dev/). On mobile, React Native has been inspired by other open source mobile frameworks, and we have been learning from other mobile frameworks built inside Facebook.",
+      "source_content_hash": "7b72b53f5410711e6583f59769aa994090269b1b6cbba0ea56ec7dfc7c1ff222",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除了領域特定的工程師、聚會和會議外，每個平台還有其他獨特的參與者在解決相似的問題。在網頁端，React（直接驅動React Native的框架）經常從其他開源網頁框架如[Vue](https://vuejs.org/)、[Preact](https://preactjs.com/)和[Svelte](https://svelte.dev/)中汲取靈感。在移動端，React Native也受到其他開源移動框架的啟發，同時我們也從Facebook內部開發的其他移動框架中學習。"
+      }
+    },
+    {
+      "segment_id": "e0247800",
+      "source_content": "<!-- alex ignore special -->",
+      "source_content_hash": "25029133bf249455e2166cbcf17baa87e5e0db12773db0cc46a6adb38caae8f0",
+      "node_type": "comment",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_e0247800"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "**We believe that competition leads to better outcomes for everyone in the long run.** By studying what makes other players on each platform great, we can learn lessons that may apply to other platforms. For example, the race to simplify complex websites influenced the development of React and gave React Native a head start to offer a declarative framework for mobile apps. The demand for faster iteration cycles and build times for the web also led to the development of Fast Refresh which significantly benefited React Native. Similarly, performance optimizations in our internal mobile frameworks — especially around data fetching and parallelization — challenged us to improve React Native in a way that has also influenced React when we built the new [Facebook.com](https://facebook.com/) website.",
+      "source_content_hash": "e8a17f428e7ddd77d1b8af63703c6892c406419fc4585a157092436c34b065a7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**我們相信，競爭最終會為所有人帶來更好的結果。**通過研究每個平台上其他優秀參與者的成功之處，我們可以學到可能適用於其他平台的經驗。例如，簡化複雜網站的競賽影響了React的發展，並讓React Native在為移動應用提供聲明式框架方面佔得先機。對更快迭代周期和構建時間的需求也促成了Fast Refresh的開發，這極大地惠及了React Native。同樣地，我們內部移動框架中的性能優化——特別是在數據獲取和並行化方面——促使我們改進React Native，這些改進在我們構建新的[Facebook.com](https://facebook.com/)網站時也影響了React。"
+      }
+    },
+    {
+      "segment_id": "c7ecf06f",
+      "source_content": "<figure>\n  <img src=\"/blog/assets/many-platform-vision-facebook-website.png\" alt=\"Screenshot of the Facebook.com website\" />\n  <figcaption>\n    React and Relay powers the <a href=\"https://facebook.com/\">Facebook.com</a> website.\n  </figcaption>\n</figure>",
+      "source_content_hash": "ec30282df289b7dae84928b90dbabb603b52acc1b513066717782ce44c912416",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_c7ecf06f"
+      }
+    },
+    {
+      "segment_id": "e912d935",
+      "source_content": "## Expanding to New Platforms",
+      "source_content_hash": "d83da372defecb0ad5f2660f6247beb9b11ef689370684e36673828d66cd8b21",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 擴展至新平台"
+      }
+    },
+    {
+      "segment_id": "8b2a52b1",
+      "source_content": "React and React Native are at a turning point. React has [started the road to a React 18 release](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html), and [the new React Native renderer is now fully powering the Facebook mobile apps](https://twitter.com/reactnative/status/1415099806507167745). Our team has grown substantially this year in order to support the growing adoption at Facebook. Teams developing on other platforms have noticed the adoption and see the opportunity for them to also reap the benefits of React Native.",
+      "source_content_hash": "717f35bae4ca37cbeb9803cf553de33286751394ad85b8c0cb40f4b8635aca22",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "React和React Native正處於一個轉折點。React已經[開始了React 18的發布之路](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html)，而[新的React Native渲染器現在已全面支持Facebook移動應用](https://twitter.com/reactnative/status/1415099806507167745)。今年我們的團隊大幅擴張，以支持Facebook內部日益增長的採用率。其他平台的開發團隊注意到了這一趨勢，並看到了他們也能從React Native中受益的機會。"
+      }
+    },
+    {
+      "segment_id": "5dae11e3",
+      "source_content": "**For the past year, we have been partnering with Microsoft and the Messenger team to create a truly native video calling experience on Windows and macOS.** Due to the high scrutiny that we place on startup time for mobile apps, our initial implementation of desktop video calling using React Native completely blew away the performance of the Electron implementation that it replaced. For the first couple weeks of building this experience, we recorded videos of us resizing a window with multiple live video calls and marveled at the smooth frame rates.",
+      "source_content_hash": "5d56a59c27e6cb676665541c172e9b8ab7ed191004b0774f5ddd53d51a7de4d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**過去一年，我們與微軟和Messenger團隊合作，在Windows和macOS上打造真正原生的視頻通話體驗。**由於我們對移動應用的啟動時間有極高的要求，我們使用React Native實現的桌面視頻通話初始版本完全超越了它所取代的Electron實現的性能。在構建這一體驗的頭幾周，我們錄製了調整窗口大小並同時進行多個實時視頻通話的視頻，並對流暢的幀率感到驚嘆。"
+      }
+    },
+    {
+      "segment_id": "0bb95128",
+      "source_content": "Building for desktop has been very exciting for us. We have taken what we know about building mobile experiences and applied them to desktop with eyes wide open. We’ve expanded our horizons with multiple child windows, menu bars, system trays, and more. As we continue collaborating on new desktop Messenger features, we expect to find opportunities that influence how we build on web and mobile. If you want to stay up to date, our desktop collaboration work is taking place [on GitHub](https://github.com/microsoft/react-native-windows).",
+      "source_content_hash": "617b9f246fcf649862f2f10418aa022b62f04b954304b43d145d1065de85beea",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "為桌面平台開發對我們來說非常令人興奮。我們將在移動平台上的經驗應用到桌面平台，並保持開放的態度。我們通過多個子窗口、菜單欄、系統托盤等擴展了視野。隨著我們繼續合作開發新的桌面Messenger功能，我們預計會發現影響我們在網頁和移動平台上構建方式的機會。如果你想了解最新動態，我們的桌面合作項目正在[GitHub](https://github.com/microsoft/react-native-windows)上進行。"
+      }
+    },
+    {
+      "segment_id": "3a0902ca",
+      "source_content": "<figure>\n  <img src=\"/blog/assets/many-platform-vision-messenger-desktop.png\" alt=\"Screenshot of the Messenger app on macOS\" />\n  <figcaption>\n    React Native powers Video Calling in Messenger for Windows and macOS.\n  </figcaption>\n</figure>",
+      "source_content_hash": "d95e8c5ac5b10d687a9be8bdf7b66e5189ac35c170dbcb72ea4953658315783d",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_3a0902ca"
+      }
+    },
+    {
+      "segment_id": "6cc549f2",
+      "source_content": "**We are also partnering more closely with [Facebook Reality Labs](https://tech.fb.com/ar-vr/) to understand how React is uniquely positioned to deliver virtual reality experiences on Oculus.** Building experiences in VR with React Native will be particularly interesting because of tighter memory constraints and user sensitivity to interaction latency.",
+      "source_content_hash": "7ed645caf0ed5dfcbb8db5fd5a2b8f3c5eb198dc1b73e4455b577fe818817e51",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "**我們也與[Facebook Reality Labs](https://tech.fb.com/ar-vr/)更緊密地合作，以了解React如何獨特地定位於在Oculus上提供虛擬現實體驗。**使用React Native構建VR體驗將特別有趣，因為內存限制更嚴格且用戶對交互延遲更敏感。"
+      }
+    },
+    {
+      "segment_id": "d0dd855b",
+      "source_content": "Similar to how we approach React Native for mobile, we will be validating our technology at Facebook scale before we share anything publicly. A lot is still changing and we still have many questions. We want to have confidence that the technology is production-ready and reliable before sharing with the community.",
+      "source_content_hash": "02d2f514aaa5efd1daf089c111ea35d2b0b376635db839da16187294b87f4be2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "與我們在移動平台上處理React Native的方式類似，我們將在Facebook的規模上驗證我們的技術，然後再公開分享任何內容。許多事情仍在變化，我們仍有許多問題。我們希望在與社區分享之前，對技術的生產就緒性和可靠性有足夠的信心。"
+      }
+    },
+    {
+      "segment_id": "7736989b",
+      "source_content": "Although most of the development for VR will still be internal, we hope to share more as soon as we can. We also anticipate that improvements to React Native for VR will surface in open source. For example, we anticipate that projects to reduce memory usage for VR use cases will also reduce memory usage for React Native on mobile and desktop experiences.",
+      "source_content_hash": "fea42d404157b1748e25e81040c96fd581aa21ff973e0328250108d4c99accbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "儘管VR的大部分開發仍將在內部進行，但我們希望盡快分享更多信息。我們也預計，針對VR用例的React Native改進將在開源中體現。例如，我們預計減少VR用例內存使用的項目也將減少React Native在移動和桌面體驗中的內存使用。"
+      }
+    },
+    {
+      "segment_id": "41b1e179",
+      "source_content": "<figure>\n  <img src=\"/blog/assets/many-platform-vision-oculus-home.png\" alt=\"Screenshot of Oculus Home in virtual reality\" />\n  <figcaption>\n    React and Relay power the Oculus Home and many other virtual reality experiences.\n  </figcaption>\n</figure>",
+      "source_content_hash": "b960c4b90fb79ab5feb8982c0a8c5f80406a7e98e11e4df7376d2208b2c1b53b",
+      "node_type": "mdxJsxFlowElement",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_41b1e179"
+      }
+    },
+    {
+      "segment_id": "74dd7937",
+      "source_content": "When we reflect back on how the industry has adopted React, there has always been an appetite in the community for React on more platforms. Even before we announced React Native to the community, Netflix had already been crafting Gibbon, their custom renderer for building TV experiences with React. And before Facebook started building Messenger for desktop, [Microsoft was already using React to build native desktop experiences in Office and Windows 10](https://www.youtube.com/watch?v=IUMWFExtDSg&t=382s).",
+      "source_content_hash": "00bb608fe24c265cb136beb8cdd964d0b73526f98d5dd2daa23976a0e034b10d",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "當我們回顧行業如何採用React時，社區中一直存在對React在更多平台上運行的渴望。甚至在我們向社區宣布React Native之前，Netflix就已經在打造Gibbon，這是他們用React構建電視體驗的自定義渲染器。在Facebook開始構建桌面版Messenger之前，[微軟已經在使用React為Office和Windows 10構建原生桌面體驗](https://www.youtube.com/watch?v=IUMWFExtDSg&t=382s)。"
+      }
+    },
+    {
+      "segment_id": "ec8ed2a1",
+      "source_content": "## Summary",
+      "source_content_hash": "30ac03ff33731529441be8fbe52a3bd0d4c5ec830e806d54692168ebb7f98ada",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 總結"
+      }
+    },
+    {
+      "segment_id": "51867d16",
+      "source_content": "In summary, our vision is to expand React Native's reach beyond mobile and we've already started by partnering with desktop and VR teams at Facebook. We know that when we embrace the platform constraints of each platform, learn from institutional knowledge, and gather inspiration from other players, it benefits every platform in the ecosystem. And most importantly, in doing so, we stay true to [our guiding principles](https://reactnative.dev/blog/2020/07/17/react-native-principles).",
+      "source_content_hash": "963ef5a50e842b6a14fdcfd8e8a60cdaa78b718ab72d672f0fb24b7e5e56942e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "總而言之，我們的願景是將 React Native 的應用範圍擴展至行動裝置以外的平台，並已開始與 Facebook 的桌面和 VR 團隊展開合作。我們深知，當我們擁抱每個平台的限制、學習機構知識，並從其他參與者中汲取靈感時，整個生態系統中的每個平台都將受益。最重要的是，在此過程中，我們始終堅守[我們的指導原則](https://reactnative.dev/blog/2020/07/17/react-native-principles)。"
+      }
+    },
+    {
+      "segment_id": "785750ac",
+      "source_content": "We are excited about what's to come as we continue to explore what many platforms unlocks for React Native. Connect with us ([@reactnative](https://twitter.com/reactnative)) for more updates and share your thoughts!",
+      "source_content_hash": "8a445d4f7bb085d7e120b7a81eb9d7184c77bf0b7792480296a8058d0d4f1aff",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於未來，我們充滿期待，將持續探索多平台為 React Native 帶來的可能性。歡迎與我們聯繫 ([@reactnative](https://twitter.com/reactnative)) 以獲取更多更新並分享您的想法！"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-blog/2021-08-26-many-platform-vision.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.212194+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "48e532364c9a6c67f6d81f5aa35a8110e0867924b5025fec92d2eaf5141955de"
+  }
+}

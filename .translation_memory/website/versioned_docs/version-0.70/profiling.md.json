@@ -1,0 +1,592 @@
+{
+  "source_file_path_relative_to_docusaurus_root": "versioned_docs/version-0.70/profiling.md",
+  "source_file_content_hash": "f5090b436985ee5545e18c5b940dfc91efd6f29b5d049833f82b355d357cd521",
+  "segments": [
+    {
+      "segment_id": "58cfcc64",
+      "source_content": "---\nid: profiling\ntitle: Profiling\n---",
+      "source_content_hash": "c9d662f6d07010d60a35582dde7c6c4b79deb75e2491c08e0dcc3da3e08d96c8",
+      "node_type": "yaml",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_58cfcc64"
+      }
+    },
+    {
+      "segment_id": "bb42506b",
+      "source_content": "Use the built-in profiler to get detailed information about work done in the JavaScript thread and main thread side-by-side. Access it by selecting Perf Monitor from the Debug menu.",
+      "source_content_hash": "1922a0a39d08bcdffd58a2617df74830e70aa4a4ef93d5a98432e2f8d219905a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "使用內建的效能分析工具來獲取 JavaScript 執行緒與主執行緒工作的詳細並列資訊。透過從 Debug 選單中選擇「Perf Monitor」來存取該功能。"
+      }
+    },
+    {
+      "segment_id": "3fbbcc07",
+      "source_content": "For iOS, Instruments is an invaluable tool, and on Android you should learn to use [`systrace`](profiling.md#profiling-android-ui-performance-with-systrace).",
+      "source_content_hash": "2cca4676f0a6428a464cfa9ff9dd1a6619a66d14d971164f424486adc3630e0b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "對於 iOS 來說，Instruments 是不可或缺的工具；而在 Android 上，你應該學習使用 [`systrace`](profiling.md#profiling-android-ui-performance-with-systrace)。"
+      }
+    },
+    {
+      "segment_id": "7e5c5a39",
+      "source_content": "But first, [**make sure that Development Mode is OFF!**](performance.md#running-in-development-mode-devtrue) You should see `__DEV__ === false, development-level warning are OFF, performance optimizations are ON` in your application logs.",
+      "source_content_hash": "60ad5789e85ae4dde43e0bbb4f6dadb4911abfb7603e6869c071e44285a104e0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "但首先，[**請確保開發者模式已關閉！**](performance.md#running-in-development-mode-devtrue) 你應該在應用程式日誌中看到 `__DEV__ === false, development-level warning are OFF, performance optimizations are ON`。"
+      }
+    },
+    {
+      "segment_id": "8d66f911",
+      "source_content": "Another way to profile JavaScript is to use the Chrome profiler while debugging. This won't give you accurate results as the code is running in Chrome but will give you a general idea of where bottlenecks might be. Run the profiler under Chrome's `Performance` tab. A flame graph will appear under `User Timing`. To view more details in tabular format, click at the `Bottom Up` tab below and then select `DedicatedWorker Thread` at the top left menu.",
+      "source_content_hash": "3c567ac5571e102ede7e6a01045ecbf9ecee385a5bb8ccf8f9cb9503c1620ee8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "另一種分析 JavaScript 效能的方式是在除錯時使用 Chrome 的效能分析工具。雖然程式碼是在 Chrome 中執行，結果不會完全準確，但仍能大致指出可能的效能瓶頸所在。在 Chrome 的「Performance」分頁下執行分析工具，火焰圖會出現在「User Timing」下方。若要查看更詳細的表格數據，點擊下方的「Bottom Up」分頁，然後從左上角選單選擇「DedicatedWorker Thread」。"
+      }
+    },
+    {
+      "segment_id": "70153c6e",
+      "source_content": "## Profiling Android UI Performance with `systrace`",
+      "source_content_hash": "7f9d844e8556e35b737bac69b3a059c3fa15e7c1e268cf5ee3d049cfd19fc9e3",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 使用 `systrace` 分析 Android UI 效能"
+      }
+    },
+    {
+      "segment_id": "86b54d44",
+      "source_content": "Android supports 10k+ different phones and is generalized to support software rendering: the framework architecture and need to generalize across many hardware targets unfortunately means you get less for free relative to iOS. But sometimes, there are things you can improve -- and many times it's not native code's fault at all!",
+      "source_content_hash": "12546cddd3fdaa7a5f90d21aba2774c620a1b75f99b48fc71102b340e5976988",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "Android 支援上萬種不同的手機型號，並普遍採用軟體渲染：這樣的框架架構與對多種硬體目標的通用性，意味著相較於 iOS，你能獲得的免費優化較少。但有時仍有改進空間——而且很多時候問題並非出在原生程式碼！"
+      }
+    },
+    {
+      "segment_id": "39b3772c",
+      "source_content": "The first step for debugging this jank is to answer the fundamental question of where your time is being spent during each 16ms frame. For that, we'll be using a standard Android profiling tool called `systrace`.",
+      "source_content_hash": "022bdf1955da6f96642b4c00aeb49a8a0fafb6e288eafc49afd9c51df0d275b0",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "偵測卡頓的第一步，是回答一個基本問題：在每個 16 毫秒的影格中，時間都花在哪裡？為此，我們將使用一個標準的 Android 效能分析工具 `systrace`。"
+      }
+    },
+    {
+      "segment_id": "1acb9a05",
+      "source_content": "`systrace` is a standard Android marker-based profiling tool (and is installed when you install the Android platform-tools package). Profiled code blocks are surrounded by start/end markers which are then visualized in a colorful chart format. Both the Android SDK and React Native framework provide standard markers that you can visualize.",
+      "source_content_hash": "38a969879437851987ad05a519ce524acc34c8702d6c21c585756d4aa2744dec",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "`systrace` 是標準的 Android 基於標記的效能分析工具（安裝 Android platform-tools 套件時會一併安裝）。被分析的程式碼區塊會被開始/結束標記包圍，並以彩色圖表形式視覺化呈現。Android SDK 和 React Native 框架都提供了可視覺化的標準標記。"
+      }
+    },
+    {
+      "segment_id": "63622bf0",
+      "source_content": "### 1. Collecting a trace",
+      "source_content_hash": "34b749242bc328500f138a5c4399886231a17573de09171b2bdefd70649e5fd0",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 1. 收集追蹤記錄"
+      }
+    },
+    {
+      "segment_id": "98cfbd53",
+      "source_content": "First, connect a device that exhibits the stuttering you want to investigate to your computer via USB and get it to the point right before the navigation/animation you want to profile. Run `systrace` as follows:",
+      "source_content_hash": "75424670205563cfe6e94338167c560f8fcba01c35c374282b63eb722811c2ce",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "首先，透過 USB 將出現卡頓問題的裝置連接到電腦，並讓它進入你想要分析的導航/動畫操作前的狀態。執行以下 `systrace` 指令："
+      }
+    },
+    {
+      "segment_id": "a89b882e",
+      "source_content": "```shell\n$ <path_to_android_sdk>/platform-tools/systrace/systrace.py --time=10 -o trace.html sched gfx view -a <your_package_name>\n```",
+      "source_content_hash": "725ae8df8f50ef34a9d567b585c71b5610cc0d1991973729b62e0dd55df66ade",
+      "node_type": "code",
+      "translatable": false,
+      "translations": {
+        "zh-hant": "@@untranslatable_placeholder_a89b882e"
+      }
+    },
+    {
+      "segment_id": "26524352",
+      "source_content": "A quick breakdown of this command:",
+      "source_content_hash": "b7937e5f5c14f0fa2b74a11ac044181579133e4a99019d18700677c7d8866dfb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "快速說明此指令的各部分："
+      }
+    },
+    {
+      "segment_id": "86b525ab",
+      "source_content": "- `time` is the length of time the trace will be collected in seconds\n- `sched`, `gfx`, and `view` are the android SDK tags (collections of markers) we care about: `sched` gives you information about what's running on each core of your phone, `gfx` gives you graphics info such as frame boundaries, and `view` gives you information about measure, layout, and draw passes\n- `-a <your_package_name>` enables app-specific markers, specifically the ones built into the React Native framework. `your_package_name` can be found in the `AndroidManifest.xml` of your app and looks like `com.example.app`",
+      "source_content_hash": "e4663c402fbeb3fadb87a9922e70dfd4021fd6ac2f053f68f171463ba9ddc435",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- `time` 是追蹤記錄收集的時間長度（秒）\n- `sched`、`gfx` 和 `view` 是我們關注的 Android SDK 標記集合：`sched` 提供手機各核心的執行資訊，`gfx` 提供圖形相關資訊（如影格邊界），`view` 則提供測量、佈局和繪製階段的資訊\n- `-a <your_package_name>` 啟用應用程式專屬標記，特別是 React Native 框架內建的標記。`your_package_name` 可在你應用的 `AndroidManifest.xml` 中找到，格式類似 `com.example.app`"
+      }
+    },
+    {
+      "segment_id": "517051a7",
+      "source_content": "Once the trace starts collecting, perform the animation or interaction you care about. At the end of the trace, systrace will give you a link to the trace which you can open in your browser.",
+      "source_content_hash": "141cbd7bb3cfca506f1f195ade8c1aa0452f14fc2c9e66840106d7f4115af0c8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "開始收集追蹤記錄後，執行你關注的動畫或互動操作。追蹤結束時，systrace 會提供一個可在瀏覽器中開啟的追蹤記錄連結。"
+      }
+    },
+    {
+      "segment_id": "80d9e13c",
+      "source_content": "### 2. Reading the trace",
+      "source_content_hash": "9351e22393e97b451e211a5db06d4d46228769b3cefbecee6bce63299fac3ea8",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 2. 解讀追蹤記錄"
+      }
+    },
+    {
+      "segment_id": "33331f27",
+      "source_content": "After opening the trace in your browser (preferably Chrome), you should see something like this:",
+      "source_content_hash": "ce609233fe618a4fc7dd01d5c5a20357c977666130a59feda11c30a59c82bab6",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在瀏覽器（建議使用 Chrome）中開啟追蹤記錄後，你應該會看到類似以下的內容："
+      }
+    },
+    {
+      "segment_id": "50746522",
+      "source_content": "![Example](/docs/assets/SystraceExample.png)",
+      "source_content_hash": "32283acbb921f6cdb1467958317c5d59dac532984997e568563c35103d25737b",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![範例](/docs/assets/SystraceExample.png)"
+      }
+    },
+    {
+      "segment_id": "73f75a5c",
+      "source_content": ":::note[Hint]\nUse the WASD keys to strafe and zoom.\n:::",
+      "source_content_hash": "107e2d2da458b04ce9a3f7384f8df5c747fafa557c0cae4f5ad38d6b20618c0f",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::note[提示]\n使用 WASD 鍵來平移和縮放。\n:::"
+      }
+    },
+    {
+      "segment_id": "a9d49f92",
+      "source_content": "If your trace .html file isn't opening correctly, check your browser console for the following:",
+      "source_content_hash": "21dd5f7d57872ed36dea0c5d13b2655cd70263648ad95a6267714f000c011fdb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你的追蹤 .html 檔案無法正確開啟，請檢查瀏覽器控制台是否有以下錯誤："
+      }
+    },
+    {
+      "segment_id": "a44047a5",
+      "source_content": "![ObjectObserveError](/docs/assets/ObjectObserveError.png)",
+      "source_content_hash": "3b35b13f3e29ec891d54c95e3a3435964d585c3b18efc6b4000eb267fedae5d7",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![ObjectObserveError](/docs/assets/ObjectObserveError.png)"
+      }
+    },
+    {
+      "segment_id": "f7ef78f9",
+      "source_content": "Since `Object.observe` was deprecated in recent browsers, you may have to open the file from the Google Chrome Tracing tool. You can do so by:",
+      "source_content_hash": "012334763da24e2f9fa9cc13c079af898084aacc209fc40a916ab6c2743306d9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "由於 `Object.observe` 在較新的瀏覽器中已被棄用，你可能需要透過 Google Chrome Tracing 工具來開啟檔案。操作步驟如下："
+      }
+    },
+    {
+      "segment_id": "157c9741",
+      "source_content": "- Opening tab in chrome `chrome://tracing`\n- Selecting load\n- Selecting the html file generated from the previous command.",
+      "source_content_hash": "2f4aad0f50472a14f011a9a8a2b163dfe7b29d8ab1a18662ef172ae921fc1a0a",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 在 Chrome 中開啟分頁 `chrome://tracing`\n- 選擇「載入」\n- 選擇上一步指令生成的 html 檔案"
+      }
+    },
+    {
+      "segment_id": "7cde057a",
+      "source_content": ":::info[Enable VSync highlighting]\nCheck this checkbox at the top right of the screen to highlight the 16ms frame boundaries:\n\n![Enable VSync Highlighting](/docs/assets/SystraceHighlightVSync.png)\n\nYou should see zebra stripes as in the screenshot above. If you don't, try profiling on a different device: Samsung has been known to have issues displaying vsyncs while the Nexus series is generally pretty reliable.\n:::",
+      "source_content_hash": "929f69671b07d514e486eeb4d8b43b8e526b57d17698d7e3531b514bb9117c44",
+      "node_type": "containerDirective",
+      "translatable": true,
+      "translations": {
+        "zh-hant": ":::info[啟用垂直同步高亮顯示]\n勾選畫面右上角的這個核取方塊，以高亮顯示16毫秒的幀邊界：\n\n![啟用垂直同步高亮顯示](/docs/assets/SystraceHighlightVSync.png)\n\n你應該會看到如上截圖中的斑馬條紋。如果沒有，請嘗試在其他裝置上進行分析：已知三星裝置在顯示垂直同步時會有問題，而Nexus系列通常較為可靠。\n:::"
+      }
+    },
+    {
+      "segment_id": "8c6d7ee7",
+      "source_content": "### 3. Find your process",
+      "source_content_hash": "15867e7572b1502d336cb5ff6b0400b3da5858c8f624ad6429578c67c10cb1cc",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 3. 找到你的進程"
+      }
+    },
+    {
+      "segment_id": "06e24cc0",
+      "source_content": "Scroll until you see (part of) the name of your package. In this case, I was profiling `com.facebook.adsmanager`, which shows up as `book.adsmanager` because of silly thread name limits in the kernel.",
+      "source_content_hash": "e714d0873dd6095274851f9ffe439ab6f0eaf18e9b2e1cabf344f36d86fac2ac",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "滾動直到看到你的套件名稱（部分）。在這個例子中，我正在分析`com.facebook.adsmanager`，由於核心中的執行緒名稱限制，它顯示為`book.adsmanager`。"
+      }
+    },
+    {
+      "segment_id": "7f71ff2a",
+      "source_content": "On the left side, you'll see a set of threads which correspond to the timeline rows on the right. There are a few threads we care about for our purposes: the UI thread (which has your package name or the name UI Thread), `mqt_js`, and `mqt_native_modules`. If you're running on Android 5+, we also care about the Render Thread.",
+      "source_content_hash": "6ba31173c3e9af51b6759395a91180948034d8dc3b1e3be51cb225ec7a0b0e6f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在左側，你會看到一組執行緒，對應右側的時間軸行。我們關注的幾個執行緒包括：UI執行緒（顯示你的套件名稱或UI Thread）、`mqt_js`和`mqt_native_modules`。如果你在Android 5+上運行，還需要關注Render Thread。"
+      }
+    },
+    {
+      "segment_id": "76dbcc76",
+      "source_content": "- **UI Thread.** This is where standard android measure/layout/draw happens. The thread name on the right will be your package name (in my case book.adsmanager) or UI Thread. The events that you see on this thread should look something like this and have to do with `Choreographer`, `traversals`, and `DispatchUI`:\n\n  ![UI Thread Example](/docs/assets/SystraceUIThreadExample.png)\n\n- **JS Thread.** This is where JavaScript is executed. The thread name will be either `mqt_js` or `<...>` depending on how cooperative the kernel on your device is being. To identify it if it doesn't have a name, look for things like `JSCall`, `Bridge.executeJSCall`, etc:\n\n  ![JS Thread Example](/docs/assets/SystraceJSThreadExample.png)\n\n- **Native Modules Thread.** This is where native module calls (e.g. the `UIManager`) are executed. The thread name will be either `mqt_native_modules` or `<...>`. To identify it in the latter case, look for things like `NativeCall`, `callJavaModuleMethod`, and `onBatchComplete`:\n\n  ![Native Modules Thread Example](/docs/assets/SystraceNativeModulesThreadExample.png)\n\n- **Bonus: Render Thread.** If you're using Android L (5.0) and up, you will also have a render thread in your application. This thread generates the actual OpenGL commands used to draw your UI. The thread name will be either `RenderThread` or `<...>`. To identify it in the latter case, look for things like `DrawFrame` and `queueBuffer`:\n\n  ![Render Thread Example](/docs/assets/SystraceRenderThreadExample.png)",
+      "source_content_hash": "5c50798273c4107a9b7da05e65d2fa2bb029cb239e10f96e2967bdb0d30f5995",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- **UI執行緒。** 這是標準Android測量/佈局/繪製發生的地方。右側的執行緒名稱會是你的套件名稱（在我的例子中是book.adsmanager）或UI Thread。你在這個執行緒上看到的事件應該與`Choreographer`、`traversals`和`DispatchUI`有關：\n\n  ![UI執行緒範例](/docs/assets/SystraceUIThreadExample.png)\n\n- **JS執行緒。** 這是執行JavaScript的地方。執行緒名稱會是`mqt_js`或`<...>`，取決於你的裝置核心是否合作。如果沒有名稱，可以尋找`JSCall`、`Bridge.executeJSCall`等來識別它：\n\n  ![JS執行緒範例](/docs/assets/SystraceJSThreadExample.png)\n\n- **原生模組執行緒。** 這是執行原生模組呼叫（例如`UIManager`）的地方。執行緒名稱會是`mqt_native_modules`或`<...>`。在後者的情況下，可以尋找`NativeCall`、`callJavaModuleMethod`和`onBatchComplete`來識別它：\n\n  ![原生模組執行緒範例](/docs/assets/SystraceNativeModulesThreadExample.png)\n\n- **額外：Render執行緒。** 如果你使用Android L（5.0）及以上版本，你的應用中還會有一個Render執行緒。這個執行緒生成用於繪製UI的實際OpenGL命令。執行緒名稱會是`RenderThread`或`<...>`。在後者的情況下，可以尋找`DrawFrame`和`queueBuffer`來識別它：\n\n  ![Render執行緒範例](/docs/assets/SystraceRenderThreadExample.png)"
+      }
+    },
+    {
+      "segment_id": "2e771fd0",
+      "source_content": "## Identifying a culprit",
+      "source_content_hash": "5ae3d5eb153ae9bfb8536f22b815c17856390eac1d317abb17fd8f7cc9a572c1",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 識別問題所在"
+      }
+    },
+    {
+      "segment_id": "0750bfa1",
+      "source_content": "A smooth animation should look something like the following:",
+      "source_content_hash": "535e8f59d95895af4af7c3df31723d255c340842ebd4e52c0ed77d30bc2de53a",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "流暢的動畫應該看起來像這樣："
+      }
+    },
+    {
+      "segment_id": "86348f98",
+      "source_content": "![Smooth Animation](/docs/assets/SystraceWellBehaved.png)",
+      "source_content_hash": "8423d3aadaea737a63d275558d3b2656c908fcbe9d121d0f241474bdf7e98f53",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![流暢的動畫](/docs/assets/SystraceWellBehaved.png)"
+      }
+    },
+    {
+      "segment_id": "6b77b644",
+      "source_content": "Each change in color is a frame -- remember that in order to display a frame, all our UI work needs to be done by the end of that 16ms period. Notice that no thread is working close to the frame boundary. An application rendering like this is rendering at 60 FPS.",
+      "source_content_hash": "a1f7e4650334818cf6b2bb1a5a94d45020d5dcb8f8c641c8994391e9c9087dbb",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "每個顏色的變化代表一幀——記住，為了顯示一幀，我們所有的UI工作需要在16毫秒的週期內完成。注意沒有任何執行緒的工作接近幀邊界。這樣渲染的應用是以60 FPS運行的。"
+      }
+    },
+    {
+      "segment_id": "a311e967",
+      "source_content": "If you noticed chop, however, you might see something like this:",
+      "source_content_hash": "dabcd1472b5877f66fe6c9bbae2d7e7f3b6f76fbf147aa0894d3af7284afd27e",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "如果你注意到卡頓，可能會看到這樣的情況："
+      }
+    },
+    {
+      "segment_id": "eb51d107",
+      "source_content": "![Choppy Animation from JS](/docs/assets/SystraceBadJS.png)",
+      "source_content_hash": "d791fef74cf2d5bdae6aea3f4a73ce6f387fabfdc87a769e238d68eb7d912aa2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![JS導致的卡頓動畫](/docs/assets/SystraceBadJS.png)"
+      }
+    },
+    {
+      "segment_id": "1862c5fe",
+      "source_content": "Notice that the JS thread is executing almost all the time, and across frame boundaries! This app is not rendering at 60 FPS. In this case, **the problem lies in JS**.",
+      "source_content_hash": "15d3e97d62379f9cfdca095866a11cf339a67b34d7ad32bbe90ba36534ebad11",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意JS執行緒幾乎一直在執行，並且跨越了幀邊界！這個應用沒有以60 FPS渲染。在這種情況下，**問題出在JS**。"
+      }
+    },
+    {
+      "segment_id": "6ca4479f",
+      "source_content": "You might also see something like this:",
+      "source_content_hash": "d28c59eb479b6ca7dd2e80f37590e37a01364bc7bf2cacb050c3007a02857956",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "你也可能會看到這樣的情況："
+      }
+    },
+    {
+      "segment_id": "a2c0166e",
+      "source_content": "![Choppy Animation from UI](/docs/assets/SystraceBadUI.png)",
+      "source_content_hash": "32815d264cc45fa3847835f9f56cdc92c6024e50fa47393da4f2bb95bf912b06",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![UI導致的卡頓動畫](/docs/assets/SystraceBadUI.png)"
+      }
+    },
+    {
+      "segment_id": "c1eaf30b",
+      "source_content": "In this case, the UI and render threads are the ones that have work crossing frame boundaries. The UI that we're trying to render on each frame is requiring too much work to be done. In this case, **the problem lies in the native views being rendered**.",
+      "source_content_hash": "10c0132a343bd0b37dbdff362ccbbaae0deb4f383052bad140c015776f9e5d30",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "在這種情況下，UI和Render執行緒的工作跨越了幀邊界。我們試圖在每一幀渲染的UI需要完成太多工作。在這種情況下，**問題出於正在渲染的原生視圖**。"
+      }
+    },
+    {
+      "segment_id": "f0984c2a",
+      "source_content": "At this point, you'll have some very helpful information to inform your next steps.",
+      "source_content_hash": "eb0dcc25b301fc77dfe7b181fb2ab77580590aa9a1cd931af8729322e3bde080",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "此時，你已經獲得了一些非常有用的信息來指導下一步操作。"
+      }
+    },
+    {
+      "segment_id": "56bc971f",
+      "source_content": "## Resolving JavaScript issues",
+      "source_content_hash": "fdb72062e93ccc3992d64a070ae4c2bc3d5d237bd9bd603f34034eba8e7cfd17",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 解決 JavaScript 問題"
+      }
+    },
+    {
+      "segment_id": "0801d969",
+      "source_content": "If you identified a JS problem, look for clues in the specific JS that you're executing. In the scenario above, we see `RCTEventEmitter` being called multiple times per frame. Here's a zoom-in of the JS thread from the trace above:",
+      "source_content_hash": "91ae7103d0bd65fe875c104f19d0b52a3ac0e04493849edc55c929f4b57f86c9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若您確認問題出在 JavaScript 端，請從執行的具體 JS 程式碼中尋找線索。在上述情境中，我們觀察到每幀多次呼叫 `RCTEventEmitter`。以下是從前述追蹤記錄中放大檢視的 JS 執行緒："
+      }
+    },
+    {
+      "segment_id": "3c19e221",
+      "source_content": "![Too much JS](/docs/assets/SystraceBadJS2.png)",
+      "source_content_hash": "6b12f759d7c77611e52ee3305eb9a0dc6a1a9320455f41d5eb5cafbf0b073d3f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![過多的 JS 執行](/docs/assets/SystraceBadJS2.png)"
+      }
+    },
+    {
+      "segment_id": "d21af28f",
+      "source_content": "This doesn't seem right. Why is it being called so often? Are they actually different events? The answers to these questions will probably depend on your product code. And many times, you'll want to look into [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate).",
+      "source_content_hash": "4972800eb6dbd9e70fe17ad211160b3cf28a449272245d43277124c08020c2ae",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "這顯然不合理。為何它被如此頻繁地呼叫？這些真的是不同的事件嗎？答案通常取決於您的產品程式碼。多數情況下，您需要檢視 [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate) 的實作。"
+      }
+    },
+    {
+      "segment_id": "f8614e13",
+      "source_content": "## Resolving native UI Issues",
+      "source_content_hash": "efc6c61bb563d7aa9a33d416fc26ae46e75c138d90be6064ca938100c6f20021",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "## 解決原生 UI 問題"
+      }
+    },
+    {
+      "segment_id": "396efb28",
+      "source_content": "If you identified a native UI problem, there are usually two scenarios:",
+      "source_content_hash": "570c14628f0e695a1239fb87a22494083ec77a1b7c10b2cbbcb2d3438f36ace9",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若問題出在原生的 UI 端，通常有兩種情境："
+      }
+    },
+    {
+      "segment_id": "10e4f9ca",
+      "source_content": "1. the UI you're trying to draw each frame involves too much work on the GPU, or\n2. You're constructing new UI during the animation/interaction (e.g. loading in new content during a scroll).",
+      "source_content_hash": "3c64001c8f587db170765642c1e8ec804441b76ee11279c2113b71d72ce0bec6",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "1. 每幀繪製的 UI 在 GPU 上負荷過重，或\n2. 您在動畫/互動過程中動態建立新 UI（例如在滾動時載入新內容）。"
+      }
+    },
+    {
+      "segment_id": "ed644f52",
+      "source_content": "### Too much GPU work",
+      "source_content_hash": "899d075b69db03cb8bc0bced362c3d680a5e26d4b4a5e905e7b348d4fbfa8831",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### GPU 負載過高"
+      }
+    },
+    {
+      "segment_id": "b9331170",
+      "source_content": "In the first scenario, you'll see a trace that has the UI thread and/or Render Thread looking like this:",
+      "source_content_hash": "ad15d74f034bc541acad936841b7c9c9f264a7b60f9d26ae3b132a1d7f657dc2",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第一種情境下，您會看到追蹤記錄中 UI 執行緒和/或渲染執行緒呈現如下狀態："
+      }
+    },
+    {
+      "segment_id": "8fcdd6d4",
+      "source_content": "![Overloaded GPU](/docs/assets/SystraceBadUI.png)",
+      "source_content_hash": "5c376602cfbd23a6ba3bd735e62adbaa60a42139d7d658b735ff593a61a234d5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![GPU 超載](/docs/assets/SystraceBadUI.png)"
+      }
+    },
+    {
+      "segment_id": "53aa2b95",
+      "source_content": "Notice the long amount of time spent in `DrawFrame` that crosses frame boundaries. This is time spent waiting for the GPU to drain its command buffer from the previous frame.",
+      "source_content_hash": "08246d54507c21b9fe3ca74b4e11ae0191543eb9bf2866f240b67c5653172380",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "注意 `DrawFrame` 耗費大量時間且跨越幀邊界。這段時間是 GPU 在處理前一幀指令緩衝的等待時間。"
+      }
+    },
+    {
+      "segment_id": "9c9e2b64",
+      "source_content": "To mitigate this, you should:",
+      "source_content_hash": "fa2a34625022454c725970ae106b284dc2eba7de4ef98f91a49ba6393049ba31",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "緩解方法包括："
+      }
+    },
+    {
+      "segment_id": "6409152f",
+      "source_content": "- investigate using `renderToHardwareTextureAndroid` for complex, static content that is being animated/transformed (e.g. the `Navigator` slide/alpha animations)\n- make sure that you are **not** using `needsOffscreenAlphaCompositing`, which is disabled by default, as it greatly increases the per-frame load on the GPU in most cases.",
+      "source_content_hash": "0e3656c26e4b115016b81262839fe45636031a9197805070d0e69893bc843818",
+      "node_type": "list",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "- 對複雜但靜態的動畫/變形內容（如 `Navigator` 的滑動/透明度動畫）使用 `renderToHardwareTextureAndroid`\n- 確認未啟用預設關閉的 `needsOffscreenAlphaCompositing`，此功能在多數情況下會大幅增加 GPU 每幀負載"
+      }
+    },
+    {
+      "segment_id": "14bc6b75",
+      "source_content": "If these don't help and you want to dig deeper into what the GPU is actually doing, you can check out [Tracer for OpenGL ES](http://www.androiddocs.com/tools/help/gltracer.html).",
+      "source_content_hash": "ad3d4685c4b48b585a7bac0df934a215393f70dc3582928c7832f7249ce39d84",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "若仍無法解決，可透過 [Tracer for OpenGL ES](http://www.androiddocs.com/tools/help/gltracer.html) 深入分析 GPU 實際運作情況。"
+      }
+    },
+    {
+      "segment_id": "5dba1427",
+      "source_content": "### Creating new views on the UI thread",
+      "source_content_hash": "1b2fa5deef0ae500ee8c6543a540f0b74f37574447e4f6e349ecc24b3bd02331",
+      "node_type": "heading",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "### 在 UI 執行緒建立新視圖"
+      }
+    },
+    {
+      "segment_id": "534ac82e",
+      "source_content": "In the second scenario, you'll see something more like this:",
+      "source_content_hash": "91e268d5291405f73efc69f8046069aa7af7dc3b2ab28106ce7b2ec00829ed2f",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "第二種情境的追蹤記錄會呈現如下模式："
+      }
+    },
+    {
+      "segment_id": "a9c2a503",
+      "source_content": "![Creating Views](/docs/assets/SystraceBadCreateUI.png)",
+      "source_content_hash": "018ec175d9fc7710562f140b56c811b8961163cdb3159e648d4504c79be0db8c",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "![建立視圖的效能瓶頸](/docs/assets/SystraceBadCreateUI.png)"
+      }
+    },
+    {
+      "segment_id": "cfeb9eb1",
+      "source_content": "Notice that first the JS thread thinks for a bit, then you see some work done on the native modules thread, followed by an expensive traversal on the UI thread.",
+      "source_content_hash": "adf9016fd3717365c77b8a651bfd69fae34a55152912c3af7151dd99af9462a8",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "可見 JS 執行緒先進行運算，接著原生模組執行緒處理工作，最後 UI 執行緒執行昂貴的遍歷操作。"
+      }
+    },
+    {
+      "segment_id": "f7e6e884",
+      "source_content": "There isn't a quick way to mitigate this unless you're able to postpone creating new UI until after the interaction, or you are able to simplify the UI you're creating. The react native team is working on an infrastructure level solution for this that will allow new UI to be created and configured off the main thread, allowing the interaction to continue smoothly.",
+      "source_content_hash": "9935982fa189cb62602c2a5139300b49b23a761919e10d4331af0fdec84899a5",
+      "node_type": "paragraph",
+      "translatable": true,
+      "translations": {
+        "zh-hant": "除非能延遲建立新 UI 至互動結束後，或簡化新建 UI 的複雜度，否則目前無快速解決方案。React Native 團隊正在開發基礎架構層級的解決方案，將允許在非主執行緒建立與配置新 UI，從而保持互動流暢性。"
+      }
+    }
+  ],
+  "target_i18n_subpath": "docusaurus-plugin-content-docs/version-0.70/profiling.md",
+  "last_updated_timestamp": "2025-06-18T18:19:07.270480+00:00",
+  "schema_version": "1.0",
+  "translated_versions": {
+    "zh-hant": "f5090b436985ee5545e18c5b940dfc91efd6f29b5d049833f82b355d357cd521"
+  }
+}
