@@ -117,7 +117,7 @@ const config: Config = {
       },
     },
   },
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'ignore',
   presets: [
     [
       '@docusaurus/preset-classic',
